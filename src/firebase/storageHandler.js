@@ -4,7 +4,7 @@ import firebaseConfig from "./config.js";
 
 // for npm
 import { initializeApp } from 'firebase/app'
-import { getStorage,uploadBytes ,getDownloadURL } from "firebase/storage";
+import { getStorage,uploadBytes ,getDownloadURL,deleteObject,ref,listAll } from "firebase/storage";
 
 
 export class FBStorage {

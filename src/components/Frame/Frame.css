@@ -1,0 +1,25 @@
+.menu-side{
+    height: calc(100vh - 58px) !important;
+}
+
+.menu-lower{
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+}
+
+.function-area{
+    width: 100%;
+    height: calc(100vh - 58px);
+    overflow-y: auto;
+    background-color: #f5f5f5;
+}
+
+.top-menu{
+    display: flex;
+    flex-direction: row;
+}
+
+.avatar{
+    float: right;
+}
