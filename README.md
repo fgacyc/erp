@@ -12,3 +12,5 @@ yarn add firebase
 ```bash
 $ yarn add react-router-dom
 ```
+
+https://react-chartjs-2.js.org/examples/vertical-bar-chart/

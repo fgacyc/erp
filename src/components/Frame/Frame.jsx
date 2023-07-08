@@ -119,6 +119,19 @@ export default  function  Frame(){
                                 <MenuItem key='2_1_1'>Menu 4</MenuItem>
                             </MenuItemGroup>
                         </SubMenu>
+                        <SubMenu
+                            key='4'
+                            title={
+                                <>
+                                    <IconBug /> Recruitment
+                                </>
+                            }
+                        >
+                            <MenuItem key='recruitment_data'>Recruitment Data</MenuItem>
+                            <MenuItem key='pre-screening'>Pre-screening</MenuItem>
+                            <MenuItem key='interview'>Interview</MenuItem>
+                            <MenuItem key='evaluation'>Evaluation</MenuItem>
+                        </SubMenu>
                     </Menu>
                 </div>
                 <div className='function-area'>

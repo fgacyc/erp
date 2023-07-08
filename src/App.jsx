@@ -1,17 +1,23 @@
-import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import {BrowserRouter as Router, Routes, Route, useNavigate} from 'react-router-dom';
 import Frame from "./components/Frame/Frame.jsx";
 import Login from "./components/Login/Login.jsx";
 import "./App.css";
+import Discussion from "./components/Discussion/Discussion.jsx";
+import { useEffect } from 'react';
 
 function App() {
+
+
+
     return (
         <Router>
             <Routes>
-                <Route path="/login" element={<Login/>} />
-                <Route path="/" element={<Frame/>} />
-                <Route path="/dashboard" element={<Frame/>} />
-                <Route path="/members" element={<Frame/>} />
-                <Route path="/attendance" element={<Frame/>} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/" element={<Frame />} />
+                <Route path="/dashboard" element={<Frame />} />
+                <Route path="/members" element={<Frame />} />
+                <Route path="/attendance" element={<Frame />} />
+                <Route path="/discussion" element={<Discussion />} />
                 {/*<Route path="/signUp" element={<SignUp/>} />*/}
                 {/*<Route path="/home/search" element={<Home/>} />*/}
                 {/*<Route path="/home" element={<Home/>} />*/}
