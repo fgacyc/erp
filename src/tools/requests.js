@@ -1,4 +1,4 @@
-import {hostURL} from "../config.js";
+import {hostURL} from "src/config.js";
 async function fetchRequest(method,url,data){
     let options ={
         method : method,
