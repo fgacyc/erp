@@ -1,6 +1,6 @@
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import Frame from "./components/Frame/Frame.jsx";
-import Login from "./components/Login/Login.jsx";
+import Login from "./pages/Login/Login.jsx";
 import "./App.css";
 
 function App() {
