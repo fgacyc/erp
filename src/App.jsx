@@ -1,5 +1,5 @@
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
-import Frame from "./components/Frame/Frame.jsx";
+import Frame from "./pages/Frame/Frame.jsx";
 import Login from "./pages/Login/Login.jsx";
 import "./App.css";
 import Recruitment_Submission from "./pages/Recruitment/SubmissionPage/Recruitment_Submission.jsx";

@@ -8,12 +8,12 @@ const MenuItemGroup = Menu.ItemGroup;
 const MenuItem = Menu.Item;
 const SubMenu = Menu.SubMenu;
 
-import Dashboard from "../Dashboard/Dashboard.jsx";
-import Members from "../Members/Members.jsx";
-import Attendance from "../Attendance/Attendance.jsx";
-import Recruitment_Submission from "../../pages/Recruitment/SubmissionPage/Recruitment_Submission.jsx";
+import Dashboard from "../../components/Dashboard/Dashboard.jsx";
+import Members from "../../components/Members/Members.jsx";
+import Attendance from "../../components/Attendance/Attendance.jsx";
+import Recruitment_Submission from "../Recruitment/SubmissionPage/Recruitment_Submission.jsx";
 import {login} from "../../tools/auth.js";
-import PreScreening_table from "../../pages/Recruitment/PreScreeningPage/PreScreening_table.jsx";
+import PreScreening_table from "../Recruitment/PreScreeningPage/PreScreening_table.jsx";
 
 export default  function  Frame(){
     const [functionArea, setFunctionArea ] = useState( <Dashboard/> );
