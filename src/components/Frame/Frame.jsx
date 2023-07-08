@@ -1,5 +1,5 @@
 import {Avatar, Menu} from '@arco-design/web-react';
-import {IconApps, IconBug, IconBulb, IconUserAdd} from '@arco-design/web-react/icon';
+import {IconApps, IconBug, IconBulb, IconUser, IconUserAdd} from '@arco-design/web-react/icon';
 import "./Frame.css"
 import StatusContainer from "../../StatusContainer.js";
 import {useLocation, useNavigate} from "react-router-dom";
@@ -11,9 +11,12 @@ const SubMenu = Menu.SubMenu;
 import Dashboard from "../Dashboard/Dashboard.jsx";
 import Members from "../Members/Members.jsx";
 import Attendance from "../Attendance/Attendance.jsx";
+import Recruitment_Submission from "../../pages/Recruitment/SubmissionPage/Recruitment_Submission.jsx";
+import {login} from "../../tools/auth.js";
 
 export default  function  Frame(){
     const [functionArea, setFunctionArea ] = useState( <Dashboard/> );
+    const [user, setUser] = useState(null);
     const navigate = useNavigate();
 
 
@@ -26,20 +29,25 @@ export default  function  Frame(){
 
     const path = useLocation().pathname;
     useEffect(() => {
-        let isLoggedIn = localStorage.getItem('cyc-auth');
-        if(isLoggedIn !== "true") navigate("/login");
-
-        if(StatusContainer.currentUser === undefined){
-            StatusContainer.currentUser = JSON.parse(localStorage.getItem("cyc-user-data"));
+        let account = JSON.parse(localStorage.getItem("cyc-acc"));
+        if(account === null) {
+            navigate("/login");
+            return;
+        }else{
+            login(account[0],account[1]).then((res)=>{
+                if(res.status){
+                    //console.log(res.result);
+                    setUser(res.result);
+                }else{
+                    navigate("/login");
+                }
+            })
         }
-
-
-        // console.log(path);
+        console.log(path);
         if(path === "/dashboard") setFunctionArea(<Dashboard/>);
         else if(path === "/members") setFunctionArea(<Members/>);
         else if(path === "/attendance") setFunctionArea(<Attendance/>);
-        // else if(path === "/cooperation") setFunctionArea("Cooperation");
-        // else setFunctionArea("Home");
+        else if (path === "/recruitment_add_recruiter") setFunctionArea(<Recruitment_Submission/>);
     }, [path]);
 
 
@@ -74,7 +82,7 @@ export default  function  Frame(){
                     <MenuItem key='5' className={"avatar"}>
                         <Avatar style={{ backgroundColor: '#3370ff' }}>
                             {
-                                StatusContainer.currentUser.full_name.charAt(0).toUpperCase()
+                                user === null ? "" : user.full_name.charAt(0).toUpperCase()
                             }
                         </Avatar>
                     </MenuItem>

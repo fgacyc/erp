@@ -4,6 +4,7 @@ import { Input, Button } from '@arco-design/web-react';
 import "./Login.css";
 import {getReq} from "../../tools/requests.js";
 import StatusContainer from "../../StatusContainer.js";
+import {login} from "../../tools/auth.js";
 
 export default function Login() {
     const navigate = useNavigate();
@@ -33,14 +34,12 @@ export default function Login() {
         // let authStatus = localStorage.getItem('cyc-auth');
         // if (authStatus === 'true') navigate("/")
 
-        let router = "/dev/auth";
-        let res =await getReq(router + "?CYC_ID=" + CYC_ID + "&password=" + password);
+
+        let res =await login(CYC_ID,password)
         if (res.status){
-            console.log(res);
-            navigateLogin();
-            StatusContainer.currentUser =   res.result;
-            localStorage.setItem('cyc-auth', 'true');
-            localStorage.setItem("cyc-user-data",JSON.stringify(res.result))
+            //console.log(res);
+            navigate('/')
+            localStorage.setItem('cyc-acc', JSON.stringify([CYC_ID,password]));
         }else{
             alert("Login failed");
         }

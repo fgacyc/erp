@@ -1,5 +1,7 @@
-import {hostURL} from "../../tools/config.js";
+
 // import {getTimeStamp} from "../../tools/dateTime.js";
+import {hostURL} from "../../../config.js";
+
 export default async function postRecruiter(name, phone, email, pastoral_team, department1){
     const router = "/recruiter"
     let data = {
