@@ -1,5 +1,5 @@
 import {Avatar, Menu} from '@arco-design/web-react';
-import { IconApps, IconBug, IconBulb } from '@arco-design/web-react/icon';
+import {IconApps, IconBug, IconBulb, IconUserAdd} from '@arco-design/web-react/icon';
 import "./Frame.css"
 import StatusContainer from "../../StatusContainer.js";
 import {useLocation, useNavigate} from "react-router-dom";
@@ -28,6 +28,10 @@ export default  function  Frame(){
     useEffect(() => {
         let isLoggedIn = localStorage.getItem('cyc-auth');
         if(isLoggedIn !== "true") navigate("/login");
+
+        if(StatusContainer.currentUser === undefined){
+            StatusContainer.currentUser = JSON.parse(localStorage.getItem("cyc-user-data"));
+        }
 
 
         // console.log(path);
@@ -124,6 +128,21 @@ export default  function  Frame(){
                                 <MenuItem key='2_1_0'>Menu 3</MenuItem>
                                 <MenuItem key='2_1_1'>Menu 4</MenuItem>
                             </MenuItemGroup>
+                        </SubMenu>
+                        <SubMenu
+                            key='3'
+                            title={
+                                <>
+                                    <IconUserAdd /> Recruitment
+                                </>
+                            }
+                        >
+                            <MenuItem key='recruitment_dashboard'>Dashboard</MenuItem>
+                            <MenuItem key='recruitment_add_recruiter'>Add Recruiter</MenuItem>
+                            <MenuItem key='recruitment_pre_screening'>Pre-screening</MenuItem>
+                            <MenuItem key='recruitment_interview'>Interview</MenuItem>
+                            <MenuItem key='recruitment_evaluation'>Evaluation</MenuItem>
+                            <MenuItem key='recruitment_offer'>Offer</MenuItem>
                         </SubMenu>
                     </Menu>
                 </div>

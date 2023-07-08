@@ -40,6 +40,7 @@ export default function Login() {
             navigateLogin();
             StatusContainer.currentUser =   res.result;
             localStorage.setItem('cyc-auth', 'true');
+            localStorage.setItem("cyc-user-data",JSON.stringify(res.result))
         }else{
             alert("Login failed");
         }
