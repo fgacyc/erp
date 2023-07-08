@@ -12,7 +12,9 @@
     width: 100%;
     height: calc(100vh - 58px);
     overflow-y: auto;
-    background-color: #f5f5f5;
+    background-color: #f8f9fa;
+    box-sizing: border-box;
+    /*padding: 20px 15%;*/
 }
 
 .top-menu{
