@@ -1,37 +1,23 @@
-import { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import { Input, Button, Spin } from '@arco-design/web-react';
-import {hostURL} from "../../config.js";
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Input, Button } from '@arco-design/web-react';
 import "./Login.css";
 import {getReq} from "../../tools/requests.js";
+import StatusContainer from "../../StatusContainer.js";
 
 export default function Login() {
-    const url = hostURL;
-    const formId = useParams().formID;
     const navigate = useNavigate();
 
     let isLoggedIn = localStorage.getItem('cyc-auth');
-    const [isLoading, setIsLoading] = useState(true);
 
-    const [email, setEmail] = useState('');
     const [CYC_ID, setCYC_ID] = useState(0);
     const [password, setPassword] = useState('');
 
-    // useEffect(() => {
-    //     navigateLogin();
-    //     setIsLoading(false);
-    // }, []);
 
-    function LoadingIndicator() {
-        return (
-            <div className='container'>
-                <Spin dot />
-            </div>
-        )
-    }
 
     function navigateLogin() {
         isLoggedIn = localStorage.getItem('cyc-auth');
+        navigate('/')
 
 
         // if (isLoggedIn === 'true' && formId) {
@@ -44,15 +30,15 @@ export default function Login() {
 
     async function handleLogin(e) {
         e.preventDefault();
-        let authStatus = localStorage.getItem('cyc-auth');
-        if (authStatus === 'true') navigate("/")
+        // let authStatus = localStorage.getItem('cyc-auth');
+        // if (authStatus === 'true') navigate("/")
 
         let router = "/dev/auth";
         let res =await getReq(router + "?CYC_ID=" + CYC_ID + "&password=" + password);
         if (res.status){
             console.log(res);
             navigateLogin();
-            //currentUser = res.result;
+            StatusContainer.currentUser =   res.result;
             localStorage.setItem('cyc-auth', 'true');
         }else{
             alert("Login failed");

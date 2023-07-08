@@ -15,7 +15,9 @@ import Attendance from "../Attendance/Attendance.jsx";
 export default  function  Frame(){
     const [functionArea, setFunctionArea ] = useState( <Dashboard/> );
     const navigate = useNavigate();
-    if(!StatusContainer.currentUser) navigate("/login");
+
+
+
 
     function onClickMenuItem(key) {
         // console.log(key);
@@ -24,7 +26,11 @@ export default  function  Frame(){
 
     const path = useLocation().pathname;
     useEffect(() => {
-        console.log(path);
+        let isLoggedIn = localStorage.getItem('cyc-auth');
+        if(isLoggedIn !== "true") navigate("/login");
+
+
+        // console.log(path);
         if(path === "/dashboard") setFunctionArea(<Dashboard/>);
         else if(path === "/members") setFunctionArea(<Members/>);
         else if(path === "/attendance") setFunctionArea(<Attendance/>);
@@ -64,7 +70,7 @@ export default  function  Frame(){
                     <MenuItem key='5' className={"avatar"}>
                         <Avatar style={{ backgroundColor: '#3370ff' }}>
                             {
-                                StatusContainer.currentUser.user_name.charAt(0).toUpperCase()
+                                StatusContainer.currentUser.full_name.charAt(0).toUpperCase()
                             }
                         </Avatar>
                     </MenuItem>
