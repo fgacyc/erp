@@ -1,6 +1,7 @@
 
 // import {getTimeStamp} from "../../tools/dateTime.js";
 import {hostURL} from "../../../config.js";
+import {postReq} from "../../../tools/requests.js";
 
 export default async function postRecruiter(name, phone, email, pastoral_team, department1){
     const router = "/recruiter"
@@ -12,14 +13,7 @@ export default async function postRecruiter(name, phone, email, pastoral_team, d
         "ministry": department1,
     }
     console.log(data)
-    let options = {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    }
-    let res = await fetch(hostURL + router, options)
-    let result = await res.json()
-    console.log(result)
+
+    let res = await postReq(router, data)
+    console.log(res)
 }

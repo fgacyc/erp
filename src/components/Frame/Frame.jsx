@@ -79,13 +79,11 @@ export default  function  Frame(){
                     <MenuItem key='2'>Solution</MenuItem>
                     <MenuItem key='3'>Cloud Service</MenuItem>
                     <MenuItem key='4'>Cooperation</MenuItem>
-                    <MenuItem key='5' className={"avatar"}>
-                        <Avatar style={{ backgroundColor: '#3370ff' }}>
-                            {
-                                user === null ? "" : user.full_name.charAt(0).toUpperCase()
-                            }
-                        </Avatar>
-                    </MenuItem>
+                    <Avatar style={{ backgroundColor: '#3370ff' }} className={"avatar"}>
+                        {
+                            user === null ? "" : user.full_name.charAt(0).toUpperCase()
+                        }
+                    </Avatar>
                 </Menu>
             </div>
             <div className='menu-lower'>
@@ -96,47 +94,47 @@ export default  function  Frame(){
                         defaultOpenKeys={['0']}
                         defaultSelectedKeys={['0_1']}
                     >
-                        <SubMenu
-                            key='0'
-                            title={
-                                <>
-                                    <IconApps /> Member
-                                </>
-                            }
-                        >
-                            <MenuItem key='dashboard' >Dashboard</MenuItem>
-                            <MenuItem key='members'>Members</MenuItem>
-                            <MenuItem key='attendance'>Attendance</MenuItem>
-                        </SubMenu>
-                        <SubMenu
-                            key='1'
-                            title={
-                                <>
-                                    <IconBug /> Navigation 2
-                                </>
-                            }
-                        >
-                            <MenuItem key='1_0'>Menu 1</MenuItem>
-                            <MenuItem key='1_1'>Menu 2</MenuItem>
-                            <MenuItem key='1_2'>Menu 3</MenuItem>
-                        </SubMenu>
-                        <SubMenu
-                            key='2'
-                            title={
-                                <>
-                                    <IconBulb /> Navigation 3
-                                </>
-                            }
-                        >
-                            <MenuItemGroup key='2_0' title='Menu Group 1'>
-                                <MenuItem key='2_0_0'>Menu 1</MenuItem>
-                                <MenuItem key='2_0_1'>Menu 2</MenuItem>
-                            </MenuItemGroup>
-                            <MenuItemGroup key='2_1' title='Menu Group 1'>
-                                <MenuItem key='2_1_0'>Menu 3</MenuItem>
-                                <MenuItem key='2_1_1'>Menu 4</MenuItem>
-                            </MenuItemGroup>
-                        </SubMenu>
+                    {/*    <SubMenu*/}
+                    {/*        key='0'*/}
+                    {/*        title={*/}
+                    {/*            <>*/}
+                    {/*                <IconApps /> Member*/}
+                    {/*            </>*/}
+                    {/*        }*/}
+                    {/*    >*/}
+                    {/*        <MenuItem key='dashboard' >Dashboard</MenuItem>*/}
+                    {/*        <MenuItem key='members'>Members</MenuItem>*/}
+                    {/*        <MenuItem key='attendance'>Attendance</MenuItem>*/}
+                    {/*    </SubMenu>*/}
+                    {/*    <SubMenu*/}
+                    {/*        key='1'*/}
+                    {/*        title={*/}
+                    {/*            <>*/}
+                    {/*                <IconBug /> Navigation 2*/}
+                    {/*            </>*/}
+                    {/*        }*/}
+                    {/*    >*/}
+                    {/*        <MenuItem key='1_0'>Menu 1</MenuItem>*/}
+                    {/*        <MenuItem key='1_1'>Menu 2</MenuItem>*/}
+                    {/*        <MenuItem key='1_2'>Menu 3</MenuItem>*/}
+                    {/*    </SubMenu>*/}
+                    {/*    <SubMenu*/}
+                    {/*        key='2'*/}
+                    {/*        title={*/}
+                    {/*            <>*/}
+                    {/*                <IconBulb /> Navigation 3*/}
+                    {/*            </>*/}
+                    {/*        }*/}
+                    {/*    >*/}
+                    {/*        <MenuItemGroup key='2_0' title='Menu Group 1'>*/}
+                    {/*            <MenuItem key='2_0_0'>Menu 1</MenuItem>*/}
+                    {/*            <MenuItem key='2_0_1'>Menu 2</MenuItem>*/}
+                    {/*        </MenuItemGroup>*/}
+                    {/*        <MenuItemGroup key='2_1' title='Menu Group 1'>*/}
+                    {/*            <MenuItem key='2_1_0'>Menu 3</MenuItem>*/}
+                    {/*            <MenuItem key='2_1_1'>Menu 4</MenuItem>*/}
+                    {/*        </MenuItemGroup>*/}
+                    {/*    </SubMenu>*/}
                         <SubMenu
                             key='3'
                             title={
@@ -145,12 +143,12 @@ export default  function  Frame(){
                                 </>
                             }
                         >
-                            <MenuItem key='recruitment_dashboard'>Dashboard</MenuItem>
+                            <MenuItem key='recruitment_dashboard' disabled>Dashboard</MenuItem>
                             <MenuItem key='recruitment_add_recruiter'>Add Recruiter</MenuItem>
-                            <MenuItem key='recruitment_pre_screening'>Pre-screening</MenuItem>
-                            <MenuItem key='recruitment_interview'>Interview</MenuItem>
-                            <MenuItem key='recruitment_evaluation'>Evaluation</MenuItem>
-                            <MenuItem key='recruitment_offer'>Offer</MenuItem>
+                            <MenuItem key='recruitment_pre_screening' disabled>Pre-screening</MenuItem>
+                            <MenuItem key='recruitment_interview' disabled>Interview</MenuItem>
+                            <MenuItem key='recruitment_evaluation' disabled>Evaluation</MenuItem>
+                            <MenuItem key='recruitment_offer' disabled>Offer</MenuItem>
                         </SubMenu>
                     </Menu>
                 </div>

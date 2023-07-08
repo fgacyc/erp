@@ -3,6 +3,7 @@ import {department_options, pastoral_team_options} from "./options.js";
 import {useState} from "react";
 import valid from "./valid.js";
 import postRecruiter from "./postRequest.js";
+import "./Recruitment_Submission.css"
 
 export  default  function  Recruitment_Submission()  {
     const [name, setName] = useState('');
@@ -24,10 +25,14 @@ export  default  function  Recruitment_Submission()  {
 
     const  con_style  =  {
         width:  '100%',
+        height: '100%',
         display:  'flex',
         flexDirection:  'column',
         justifyContent:  'center',
         alignItems:  'center',
+        backgroundColor: 'white',
+        margin: 5,
+        boxSizing: 'border-box',
     }
 
     const  submit  =  ()  =>  {
@@ -38,7 +43,7 @@ export  default  function  Recruitment_Submission()  {
 
 
     return  (
-        <div style={con_style}>
+        <div className="recruitment-con_style">
             <Space direction='vertical' size={"large"} style={{width:"95%",maxWidth:600}}>
                 <h1>Submission form</h1>
 

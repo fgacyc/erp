@@ -1,0 +1,12 @@
+
+.recruitment-con_style {
+    width: calc(100% - 10px);
+    height: calc(100% - 10px);
+    display: flex;
+    flex-direction: column;
+    justify-content:  center;
+    align-items: center;
+    background-color: white;
+    margin: 5px;
+    box-sizing: border-box;
+}
