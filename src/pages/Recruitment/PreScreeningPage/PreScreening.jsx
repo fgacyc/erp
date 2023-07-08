@@ -2,26 +2,24 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import {
     Comment, List, Avatar, Button, Input, Descriptions,
-    Popconfirm, BackTop
+    Popconfirm
 } from '@arco-design/web-react';
-import {hostURL} from "../../../config.js";
-import {putReq} from "../../../tools/requests.js";
+import {getReq, putReq} from "../../../tools/requests.js";
 import {capitalFirstLetter} from "../../../tools/string.js";
 import "./pre-screening.css";
 
 export default function PreScreening() {
     const RID = useParams().RID || '64a792fbe3a86cdad7522be7';
-    const url = hostURL + "/dev";
+
     const [userDatas, setUserDatas] = useState(null);
     const [commentText, setCommentText] = useState('');
     const [isButtonClicked, setIsButtonClicked] = useState(false);
 
+
     useEffect(() => {
-        fetch(url + `/recruiter/${RID}`)
-            .then(res => res.json())
-            .then(data => {
-                setUserDatas(data);
-            });
+        getReq( `/recruiter/${RID}`).then((res) => {
+            setUserDatas(res);
+        });
     }, [])
 
     const handleStatus = (status) => {
