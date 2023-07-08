@@ -1,7 +1,5 @@
 
-// import {getTimeStamp} from "../../tools/dateTime.js";
-import {hostURL} from "../../../config.js";
-import {postReq} from "../../../tools/requests.js";
+import {postReq} from "/src/tools/requests.js";
 
 export default async function postRecruiter(name, phone, email, pastoral_team, department1){
     const router = "/recruiter"

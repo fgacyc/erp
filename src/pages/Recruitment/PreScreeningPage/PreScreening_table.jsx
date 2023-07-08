@@ -142,7 +142,7 @@ export  default  function PreScreening_table(){
     const navigate =  useNavigate();
 
     useEffect(() => {
-        let url =   "/dev/recruiters?account=admin&password=admin";
+        let url =   "/recruiters?account=admin&password=admin";
         getReq(url).then((data) => {
             // console.log(data);
             setAllData(addKeys(data));
