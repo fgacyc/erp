@@ -55,7 +55,6 @@ export default  function  Frame(){
                     <MenuItem
                         key='0'
                         style={{ padding: 0, marginRight: 38, }}
-                        disabled
                     >
                         <div
                             style={{
@@ -63,7 +62,7 @@ export default  function  Frame(){
                                 height: 30,
                             }}
                         >
-                            <img src={"CYC_Logo_black_x120.png"} alt={"logo"}
+                            <img src={"/CYC_Logo_black_x120.png"} alt={"logo"}
                                  style={{
                                      width: 80,
                                      height: 30,
@@ -139,9 +138,10 @@ export default  function  Frame(){
                                 </>
                             }
                         >
-                            <MenuItem key='recruitment_dashboard' disabled>Dashboard</MenuItem>
+                            <MenuItem key='recruitment_dashboard'>Dashboard</MenuItem>
                             <MenuItem key='recruitment_add_recruiter'>Add Recruiter</MenuItem>
                             <MenuItem key='recruitment_pre_screening'>Pre-screening</MenuItem>
+                            <MenuItem key='recruitment_pre_appointment' disabled>Appointment</MenuItem>
                             <MenuItem key='recruitment_interview' disabled>Interview</MenuItem>
                             <MenuItem key='recruitment_evaluation' disabled>Evaluation</MenuItem>
                             <MenuItem key='recruitment_offer' disabled>Offer</MenuItem>

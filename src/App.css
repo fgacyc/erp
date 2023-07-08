@@ -3,3 +3,10 @@ body{
     padding: 0;
   overflow: hidden;
 }
+
+
+.app-component{
+    margin: 5px;
+    width: calc(100% - 10px);
+    height: calc(100% - 10px);
+}
