@@ -1,13 +1,14 @@
 import {useEffect, useState} from "react";
-import {getReq} from "../../tools/requests.js";
 import { Table} from "@arco-design/web-react";
-import {addKeys} from "../TablePage/tableTools.js";
-import {capitalFirstLetter} from "../../tools/string.js";
 import {useNavigate} from "react-router-dom";
+import {getReq} from "../../../tools/requests.js";
+import {addKeys} from "../../../tools/tableTools.js";
+import {capitalFirstLetter} from "../../../tools/string.js";
+import "./pre-screening.css"
 
 
 
-export  default  function PreScreening1(){
+export  default  function PreScreening_table(){
     const [allData, setAllData] = useState([]);
     const [data, setData] = useState(allData);
     const [pagination, setPagination] = useState({
@@ -141,7 +142,7 @@ export  default  function PreScreening1(){
     const navigate =  useNavigate();
 
     useEffect(() => {
-        let url =   "/recruiters?account=admin&password=admin";
+        let url =   "/dev/recruiters?account=admin&password=admin";
         getReq(url).then((data) => {
             // console.log(data);
             setAllData(addKeys(data));
@@ -164,7 +165,7 @@ export  default  function PreScreening1(){
 
 
     return(
-        <div>
+        <div className="pre-screening-table-con">
             {
                 data &&
                 <Table
@@ -187,7 +188,7 @@ export  default  function PreScreening1(){
                     onRow={(record) => {
                         return {
                             onClick: () => {
-                                navigate(`/pre-screening/${record._id}`);
+                                navigate(`/recruitment_pre_screening/${record._id}`);
                                 // console.log(record._id)
                             }
                         }

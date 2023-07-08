@@ -1,16 +1,17 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { hostURL } from "../../tools/config.js";
-import { capitalFirstLetter } from "../../tools/string.js";
 import {
     Comment, List, Avatar, Button, Input, Descriptions,
     Popconfirm, BackTop
 } from '@arco-design/web-react';
-import {getReq, putReq} from "../../tools/requests.js";
+import {hostURL} from "../../../config.js";
+import {putReq} from "../../../tools/requests.js";
+import {capitalFirstLetter} from "../../../tools/string.js";
+import "./pre-screening.css";
 
 export default function PreScreening() {
     const RID = useParams().RID || '64a792fbe3a86cdad7522be7';
-    const url = hostURL;
+    const url = hostURL + "/dev";
     const [userDatas, setUserDatas] = useState(null);
     const [commentText, setCommentText] = useState('');
     const [isButtonClicked, setIsButtonClicked] = useState(false);
@@ -81,10 +82,7 @@ export default function PreScreening() {
         (userDatas && userDatas.pre_screening && userDatas.pre_screening.status !== null);
 
     return (
-        <div style={{
-            height: "100vh", display: "flex", flexDirection: "column",
-            justifyContent: "space-between"
-        }}>
+        <div className="pre-screening-con">
             <div style={{ position: "relative", overflow: "auto" }}>
                 <div style={{
                     display: "flex", flexDirection: "column", alignItems: "center",

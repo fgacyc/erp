@@ -1,0 +1,24 @@
+.pre-screening-table-con{
+    background-color: #fff;
+    margin: 5px;
+    width: calc(100% - 10px);
+    height: calc(100% - 10px);
+}
+
+/**
+style={{
+            height: "100vh", display: "flex", flexDirection: "column",
+            justifyContent: "space-between"
+        }}
+
+ */
+
+.pre-screening-con{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: calc(100% - 10px);
+    background-color: #fff;
+    margin: 5px;
+    width: calc(100% - 10px);
+}

@@ -2,7 +2,7 @@ import {Avatar, Menu} from '@arco-design/web-react';
 import {IconApps, IconBug, IconBulb, IconUser, IconUserAdd} from '@arco-design/web-react/icon';
 import "./Frame.css"
 import StatusContainer from "../../StatusContainer.js";
-import {useLocation, useNavigate} from "react-router-dom";
+import {Outlet, useLocation, useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 const MenuItemGroup = Menu.ItemGroup;
 const MenuItem = Menu.Item;
@@ -13,6 +13,7 @@ import Members from "../Members/Members.jsx";
 import Attendance from "../Attendance/Attendance.jsx";
 import Recruitment_Submission from "../../pages/Recruitment/SubmissionPage/Recruitment_Submission.jsx";
 import {login} from "../../tools/auth.js";
+import PreScreening_table from "../../pages/Recruitment/PreScreeningPage/PreScreening_table.jsx";
 
 export default  function  Frame(){
     const [functionArea, setFunctionArea ] = useState( <Dashboard/> );
@@ -43,11 +44,6 @@ export default  function  Frame(){
                 }
             })
         }
-        console.log(path);
-        if(path === "/dashboard") setFunctionArea(<Dashboard/>);
-        else if(path === "/members") setFunctionArea(<Members/>);
-        else if(path === "/attendance") setFunctionArea(<Attendance/>);
-        else if (path === "/recruitment_add_recruiter") setFunctionArea(<Recruitment_Submission/>);
     }, [path]);
 
 
@@ -145,7 +141,7 @@ export default  function  Frame(){
                         >
                             <MenuItem key='recruitment_dashboard' disabled>Dashboard</MenuItem>
                             <MenuItem key='recruitment_add_recruiter'>Add Recruiter</MenuItem>
-                            <MenuItem key='recruitment_pre_screening' disabled>Pre-screening</MenuItem>
+                            <MenuItem key='recruitment_pre_screening'>Pre-screening</MenuItem>
                             <MenuItem key='recruitment_interview' disabled>Interview</MenuItem>
                             <MenuItem key='recruitment_evaluation' disabled>Evaluation</MenuItem>
                             <MenuItem key='recruitment_offer' disabled>Offer</MenuItem>
@@ -153,7 +149,7 @@ export default  function  Frame(){
                     </Menu>
                 </div>
                 <div className='function-area'>
-                    {functionArea}
+                    <Outlet />
                 </div>
             </div>
         </div>
