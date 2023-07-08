@@ -9,6 +9,7 @@ const MenuItem = Menu.Item;
 const SubMenu = Menu.SubMenu;
 
 import {login} from "../../tools/auth.js";
+import {AvatarMenu} from "../AvatarMenu/AvatarMenu.jsx";
 
 export default  function  Frame(){
     const [user, setUser] = useState(null);
@@ -68,11 +69,7 @@ export default  function  Frame(){
                     <MenuItem key='2'>Solution</MenuItem>
                     <MenuItem key='3'>Cloud Service</MenuItem>
                     <MenuItem key='4'>Cooperation</MenuItem>
-                    <Avatar style={{ backgroundColor: '#3370ff' }} className={"avatar"}>
-                        {
-                            user === null ? "" : user.full_name.charAt(0).toUpperCase()
-                        }
-                    </Avatar>
+                    <AvatarMenu user={user}/>
                 </Menu>
             </div>
             <div className='menu-lower'>
