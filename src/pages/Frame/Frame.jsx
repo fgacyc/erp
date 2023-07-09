@@ -46,7 +46,7 @@ export default  function  Frame(){
     return (
         <div className={"container"}>
             <div className='menu-demo'>
-                <Menu mode='horizontal' defaultSelectedKeys={['1']} className={"top-menu"}>
+                <Menu mode='horizontal' defaultSelectedKeys={['1']} className={"top-menu"}  >
                     <MenuItem
                         key='0'
                         style={{ padding: 0, marginRight: 38, }}
@@ -77,7 +77,8 @@ export default  function  Frame(){
                     <Menu onClickMenuItem={onClickMenuItem}
                         style={{ width: 200, height: '100%' }}
                         hasCollapseButton
-                        defaultOpenKeys={['0']}
+                        // defaultOpenKeys={['3']}
+                        autoOpen
                         defaultSelectedKeys={['0_1']}
                     >
                     {/*    <SubMenu*/}

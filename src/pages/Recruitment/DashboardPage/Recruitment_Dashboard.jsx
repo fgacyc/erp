@@ -24,8 +24,76 @@ ChartJS.register(
     Legend
 );
 import "./recruitment_dashboard.css";
+import {getReq} from "../../../tools/requests.js";
+import {getTotals} from "./dataCalculate.js";
+
+let barChartTempData =[
+        {
+            label: 'Wonderkids',
+            data: [700, 0, 0],
+            backgroundColor: '#722ED1',
+        },
+        {
+            label: 'Heart',
+            data: [0, 100, 0],
+            backgroundColor: '#722ED1',
+        },
+        {
+            label: 'Move',
+            data: [0, 100, 0],
+            backgroundColor: '#F5319D',
+        },
+        {
+            label: 'Force',
+            data: [0, 100, 0],
+            backgroundColor: '#FADC19',
+        },
+        {
+            label: 'Voice',
+            data: [0, 100, 0],
+            backgroundColor: '#9FDB1D',
+        },
+        {
+            label: 'Mind',
+            data: [0, 100, 0],
+            backgroundColor: '#3491FA',
+        },
+        {
+            label: 'YP Zone',
+            data: [0, 0, 100],
+            backgroundColor: '#722ED1',
+        },
+        {
+            label: 'Pro Family',
+            data: [0, 0, 100],
+            backgroundColor: '#F5319D',
+        },
+        {
+            label: 'Young Dreamer',
+            data: [0, 0, 100],
+            backgroundColor: '#FADC19',
+        },
+        {
+            label: 'Joshua Zone',
+            data: [0, 0, 100],
+            backgroundColor: '#9FDB1D',
+        },
+    ]
 
 export default function Recruitment_Dashboard() {
+    const [allData, setAllData] = useState(null);
+    const [totals, setTotals] = useState([0,0,0]);
+    const [barChartData, setBarChartData] = useState(barChartTempData);
+
+    useEffect(() => {
+        getReq(`/recruiters?account=admin&password=admin`).then((res) => {
+            setAllData(res);
+            setTotals(getTotals(res));
+        });
+    }, []);
+
+
+
     const colors = ['#722ED1', '#F5319D', '#FADC19', '#9FDB1D', '#E0FF40', '#40E0FF', '#3491FA', '#4080FF', '#FF5F40'];
 
     const pastoral_team = {
@@ -151,58 +219,7 @@ export default function Recruitment_Dashboard() {
 
     const data = {
         labels,
-        datasets: [
-            {
-                label: 'Wonderkids',
-                data: [700, 0, 0],
-                backgroundColor: '#722ED1',
-            },
-            {
-                label: 'Heart',
-                data: [0, 100, 0],
-                backgroundColor: '#722ED1',
-            },
-            {
-                label: 'Move',
-                data: [0, 100, 0],
-                backgroundColor: '#F5319D',
-            },
-            {
-                label: 'Force',
-                data: [0, 100, 0],
-                backgroundColor: '#FADC19',
-            },
-            {
-                label: 'Voice',
-                data: [0, 100, 0],
-                backgroundColor: '#9FDB1D',
-            },
-            {
-                label: 'Mind',
-                data: [0, 100, 0],
-                backgroundColor: '#3491FA',
-            },
-            {
-                label: 'YP Zone',
-                data: [0, 0, 100],
-                backgroundColor: '#722ED1',
-            },
-            {
-                label: 'Pro Family',
-                data: [0, 0, 100],
-                backgroundColor: '#F5319D',
-            },
-            {
-                label: 'Young Dreamer',
-                data: [0, 0, 100],
-                backgroundColor: '#FADC19',
-            },
-            {
-                label: 'Joshua Zone',
-                data: [0, 0, 100],
-                backgroundColor: '#9FDB1D',
-            },
-        ],
+        datasets:  barChartData
     };
 
     const data_pie = {
@@ -243,7 +260,7 @@ export default function Recruitment_Dashboard() {
                                 }} />
                                 <Space style={{ display: 'flex', flexDirection: "column", alignItems: "center" }}>
                                     <Typography.Text>Total Applicants</Typography.Text>
-                                    <Typography.Text style={{ fontWeight: 600 }}>999</Typography.Text>
+                                    <Typography.Text style={{ fontWeight: 600 }}>{totals[0]}</Typography.Text>
                                 </Space>
                             </Space>
                         </Card>
@@ -260,7 +277,7 @@ export default function Recruitment_Dashboard() {
                                 }} />
                                 <Space style={{ display: 'flex', flexDirection: "column", alignItems: "center" }}>
                                     <Typography.Text>Total Pending</Typography.Text>
-                                    <Typography.Text style={{ fontWeight: 600 }}>999</Typography.Text>
+                                    <Typography.Text style={{ fontWeight: 600 }}>{totals[1]}</Typography.Text>
                                 </Space>
                             </Space>
                         </Card>
@@ -277,7 +294,7 @@ export default function Recruitment_Dashboard() {
                                 }} />
                                 <Space style={{ display: 'flex', flexDirection: "column", alignItems: "center" }}>
                                     <Typography.Text>Total Pass</Typography.Text>
-                                    <Typography.Text style={{ fontWeight: 600 }}>999</Typography.Text>
+                                    <Typography.Text style={{ fontWeight: 600 }}>{totals[2]}</Typography.Text>
                                 </Space>
                             </Space>
                         </Card>

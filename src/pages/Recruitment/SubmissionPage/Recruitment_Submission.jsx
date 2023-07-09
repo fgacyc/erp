@@ -1,5 +1,5 @@
 import {Button, Cascader, Input, Space} from "@arco-design/web-react";
-import {department_options, pastoral_team_options} from "./options.js";
+import {department_options, pastoral_team_options} from "../../data/ministry_options.js";
 import {useState} from "react";
 import valid from "./valid.js";
 import postRecruiter from "./postRequest.js";
