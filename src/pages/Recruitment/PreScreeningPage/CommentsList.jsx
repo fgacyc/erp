@@ -4,8 +4,7 @@ import {useEffect, useState} from "react";
 import {getReq} from "../../../tools/requests.js";
 
 function PreScreeningComment({item}){
-    let [CYC_ID ,psw] = getAccAndPsw();
-    let [username, setUsername] = useState("A");
+    let [username, setUsername] = useState("");
 
     function setCommentUserName(data){
         if(data.username === null){
@@ -16,7 +15,7 @@ function PreScreeningComment({item}){
     }
 
     useEffect(()=>{
-        let router = `/auth/names?CYC_ID=${CYC_ID}&password=${psw}`;
+        let router = `/auth/names?CYC_ID=${item.CYC_ID}`;
         getReq(router).then((res)=>{
              console.log(res)
             if(res.status){
