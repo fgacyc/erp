@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import {
-    Comment, List, Avatar, Button, Input, Descriptions,
+    Comment, Button, Input, Descriptions,
     Popconfirm
 } from '@arco-design/web-react';
 import {getReq, putReq} from "../../../tools/requests.js";
 import {capitalFirstLetter} from "../../../tools/string.js";
 import "./pre-screening.css";
+import PreScreeningCommentsList from "./CommentsList.jsx";
+import {getAccAndPsw} from "../../../tools/auth.js";
 
 export default function PreScreening() {
     const RID = useParams().RID || '64a792fbe3a86cdad7522be7';
@@ -14,12 +16,15 @@ export default function PreScreening() {
     const [userDatas, setUserDatas] = useState(null);
     const [commentText, setCommentText] = useState('');
     const [isButtonClicked, setIsButtonClicked] = useState(false);
+    const [userCYC_ID, setUserCYC_ID] = useState(null);
 
 
     useEffect(() => {
         getReq( `/recruiter/${RID}`).then((res) => {
             setUserDatas(res);
         });
+        setUserCYC_ID(getAccAndPsw()[0])
+
     }, [])
 
     const handleStatus = (status) => {
@@ -55,7 +60,7 @@ export default function PreScreening() {
         let comment = {
             "timestamp": getTimeStamp(),
             "comment": commentText,
-            "user": "cyc0110000"
+            "CYC_ID": userCYC_ID,
         };
 
         setUserDatas((userDatas) => ({
@@ -83,8 +88,7 @@ export default function PreScreening() {
         <div className="pre-screening-con">
             <div style={{ position: "relative", overflow: "auto" }}>
                 <div style={{
-                    display: "flex", flexDirection: "column", alignItems: "center",
-                    border: "1px solid #e5e6eb", padding: "15px"
+                    display: "flex", flexDirection: "column", alignItems: "center", padding: "15px"
                 }}>
                     {userDatas && (
                         <div>
@@ -163,31 +167,7 @@ export default function PreScreening() {
                 </div>
 
                 <div style={{ position: 'relative', padding: '8px 12px' }}>
-                    {userDatas && (
-                        <List
-                            bordered={false}
-                            header={<span>{userDatas.pre_screening.comments.length} comments</span>}
-                        >
-                            {userDatas.pre_screening.comments
-                                .slice()
-                                .reverse()
-                                .map((item, index) => {
-                                    return (
-                                        <List.Item key={index}>
-                                            <Comment
-                                                align='right'
-                                                author={item.user}
-                                                avatar={
-                                                    <Avatar style={{ backgroundColor: '#14a9f8' }}>C</Avatar>
-                                                }
-                                                content={item.comment}
-                                                datetime={new Date(item.timestamp * 1000).toLocaleString()}
-                                            />
-                                        </List.Item>
-                                    );
-                                })}
-                        </List>
-                    )}
+                    {userDatas && <PreScreeningCommentsList userDatas={userDatas} />}
                 </div>
             </div>
             <Comment
