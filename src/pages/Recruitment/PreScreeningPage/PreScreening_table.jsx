@@ -2,10 +2,12 @@ import {useEffect, useRef, useState} from "react";
 import {Table, Input, Button} from "@arco-design/web-react";
 import {useNavigate} from "react-router-dom";
 import {getReq} from "../../../tools/requests.js";
-import {addKeys, filterDataByPermissions} from "../../../tools/tableTools.js";
+import {addKeys, downloadTableData, filterDataByPermissions} from "../../../tools/tableTools.js";
 import {capitalFirstLetter} from "../../../tools/string.js";
 import "./pre-screening.css"
 import {IconDownload, IconSearch} from "@arco-design/web-react/icon";
+
+
 
 
 
@@ -185,6 +187,10 @@ export  default  function PreScreening_table(){
 
     }, []);
 
+    function  handleDownload(){
+        downloadTableData(allData)
+    }
+
 
     function onChangeTable(pagination) {
         const { current, pageSize } = pagination;
@@ -200,7 +206,10 @@ export  default  function PreScreening_table(){
 
     return(
         <div className="pre-screening-table-con">
-            <Button type='secondary' icon={<IconDownload />} className="pre_screening-download-btn">Download</Button>
+            <Button type='secondary' icon={<IconDownload />}
+                    className="pre_screening-download-btn"
+                    onClick={handleDownload}
+            >Download</Button>
             {
                 data &&
                 <Table

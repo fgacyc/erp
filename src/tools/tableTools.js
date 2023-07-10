@@ -1,4 +1,5 @@
 import {getStaffInfoLocal} from "./auth.js";
+import { saveAs } from 'file-saver';
 
 export function addKeys(array){
     return array.map((item, index) => {
@@ -23,4 +24,49 @@ export async function filterDataByPermissions(data){
     }
 
     return data.filter(item => item.info.pastoral_team[1] === position_name[1])
+}
+
+export async function downloadTableData(data){
+    let tableDataList = [];
+    tableDataList.push("Name, Phone, Email, Pastoral Team, Pastoral Zone, Team, Department, Ministry")
+
+    data.forEach(item => {
+        let name = item.info.name;
+        let phone = item.info.phone;
+        let email = item.info.email;
+        let pastoral_team = item.info.pastoral_team[0];
+        let pastoral_zone = item.info.pastoral_team[1];
+        let team= item.info.ministry[0];
+        let department = item.info.ministry[1];
+        let ministry = item.info.ministry[2];
+        tableDataList.push(`${name}, ${phone}, ${email}, ${pastoral_team}, ${pastoral_zone}, ${team}, ${department}, ${ministry}`)
+    });
+
+    let staffInfo =await getStaffInfoLocal();
+    let position_name = staffInfo.position.name ;
+
+    if (position_name === undefined){
+        position_name = ["recruitment_data"]
+    } else if(typeof position_name  === "string"){
+        position_name = [position_name]
+    }
+
+    let file_name = position_name.join("_") ;
+
+    let tableDataString = tableDataList.join("\n");
+    downloadCSVData(tableDataString,file_name);
+}
+
+
+
+export function downloadData(data,file_name){
+    // let blob = new Blob(["Hello, world!"], {type: "text/plain;charset=utf-8"});
+    let blob = new Blob([data], {type: "text/plain;charset=utf-8"});
+    saveAs(blob, file_name);
+}
+
+export function downloadCSVData(data,file_name){
+    // let blob = new Blob(["Hello, world!"], {type: "text/plain;charset=utf-8"});
+    let blob = new Blob([data], {type: "text/plain;charset=utf-8"});
+    saveAs(blob, `${file_name}.csv`);
 }
