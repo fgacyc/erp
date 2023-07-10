@@ -2,7 +2,7 @@ import {useEffect, useRef, useState} from "react";
 import {Table, Input, Button} from "@arco-design/web-react";
 import {useNavigate} from "react-router-dom";
 import {getReq} from "../../../tools/requests.js";
-import {addKeys} from "../../../tools/tableTools.js";
+import {addKeys, filterDataByPermissions} from "../../../tools/tableTools.js";
 import {capitalFirstLetter} from "../../../tools/string.js";
 import "./pre-screening.css"
 import {IconDownload, IconSearch} from "@arco-design/web-react/icon";
@@ -176,8 +176,11 @@ export  default  function PreScreening_table(){
         let url =   "/recruiters?account=admin&password=admin";
         getReq(url).then((data) => {
             // console.log(data);
-            setAllData(addKeys(data));
-            setPagination((pagination) => ({ ...pagination, total: data.length }));
+            let validData = addKeys(data)
+            filterDataByPermissions(validData).then((permissionData) => {
+                setAllData(permissionData);
+                setPagination((pagination) => ({ ...pagination, total: permissionData.length }));
+            });
         });
 
     }, []);
