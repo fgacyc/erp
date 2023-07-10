@@ -36,3 +36,6 @@ style={{
     }
 }
 
+.pointer-cursor{
+    cursor: pointer;
+}

@@ -1,14 +1,12 @@
 import {useEffect, useRef, useState} from "react";
-import {Table, Input, Button} from "@arco-design/web-react";
+import {Table, Input, Button, Space} from "@arco-design/web-react";
 import {useNavigate} from "react-router-dom";
-import {getReq} from "../../../tools/requests.js";
+import {getReq, putReq} from "../../../tools/requests.js";
 import {addKeys, downloadTableData, filterDataByPermissions} from "../../../tools/tableTools.js";
 import {capitalFirstLetter} from "../../../tools/string.js";
 import "./pre-screening.css"
 import {IconDownload, IconSearch} from "@arco-design/web-react/icon";
-
-
-
+import {getTimeStamp} from "../../../tools/datetime.js";
 
 
 export  default  function PreScreening_table(){
@@ -24,6 +22,33 @@ export  default  function PreScreening_table(){
     });
     const [loading, setLoading] = useState(false);
     const inputRef = useRef(null);
+
+    const handleStatus = (status,RID) => {
+        const pre_screening_status = status ? "pre-accepted" : "pre-rejected";
+
+        const time = getTimeStamp();
+
+        const pre_screening = {
+            status: pre_screening_status,
+            pre_screening_time: time,
+        }
+
+        putReq(`/application/${RID}`, pre_screening).then((res) => {
+            let newData = allData.map((item) => {
+                if (item._id === RID) {
+                    item.application.status = pre_screening_status;
+                    //console.log(item)
+                }
+
+                return item;
+            });
+            setAllData(newData);
+        });
+    }
+
+    function goToPreScreeningPage(record) {
+        navigate(`/recruitment_pre_screening/${record._id}`);
+    }
 
     const columns = [
         {
@@ -57,6 +82,11 @@ export  default  function PreScreening_table(){
                     setTimeout(() => inputRef.current.focus(), 150);
                 }
             },
+            render: (col, record) => (
+                <span onClick={()=> goToPreScreeningPage(record)} className="pointer-cursor">
+                   {record.info.name}
+               </span>
+            )
         },
         {
             title: 'Pastoral Team',
@@ -82,7 +112,9 @@ export  default  function PreScreening_table(){
             onFilter: (value, row) =>row.info.pastoral_team[0] === value,
             filterMultiple: true,
             render: (col, record) => (
-                <span>{capitalFirstLetter(record.info.pastoral_team[0])}</span>
+                <span onClick={()=> goToPreScreeningPage(record)} className="pointer-cursor">
+                    {capitalFirstLetter(record.info.pastoral_team[0])}
+                </span>
             )
         },
         {
@@ -131,9 +163,12 @@ export  default  function PreScreening_table(){
             },
             filterMultiple: true,
             render: (col, record) => (
-                <span>{capitalFirstLetter(record.info.pastoral_team[1])}</span>
+                <span onClick={()=> goToPreScreeningPage(record)} className="pointer-cursor">
+                    {capitalFirstLetter(record.info.pastoral_team[1])}
+                </span>
             )
-        },{
+        },
+        {
             title: 'Status',
             dataIndex: 'pre_screening.status',
             filters: [
@@ -155,7 +190,7 @@ export  default  function PreScreening_table(){
             },
             filterMultiple: false,
             render: (col, record) => (
-                <span>
+                <span onClick={()=> goToPreScreeningPage(record)}>
                     {
                         record.pre_screening.status === null &&
                         <span style={{color: "black"}}>Pending</span>
@@ -170,6 +205,25 @@ export  default  function PreScreening_table(){
                     }
                 </span>
             )
+        },
+        {
+            title: 'Operation',
+            dataIndex: 'op',
+            render: (_, record) => (
+                <Space>
+                    <Button onClick={(e) =>{
+                        handleStatus(true,record._id)
+                    }
+                    } type='secondary' status='success'>
+                    Pass
+                    </Button>
+                    <Button onClick={(e) => {
+                        handleStatus(false,record._id)
+                    }} type='secondary' status='warning'>
+                        Next time
+                    </Button>
+                </Space>
+            ),
         }
     ];
     const navigate =  useNavigate();
@@ -185,7 +239,7 @@ export  default  function PreScreening_table(){
             });
         });
 
-    }, []);
+    }, [allData]);
 
     function  handleDownload(){
         downloadTableData(allData)
@@ -229,14 +283,14 @@ export  default  function PreScreening_table(){
                             {paginationNode}
                         </div>
                     )}
-                    onRow={(record) => {
-                        return {
-                            onClick: () => {
-                                navigate(`/recruitment_pre_screening/${record._id}`);
-                                // console.log(record._id)
-                            }
-                        }
-                    }}
+                    // onRow={(record) => {
+                    //     return {
+                    //         onClick: () => {
+                    //             navigate(`/recruitment_pre_screening/${record._id}`);
+                    //             //window.open(`/recruitment_pre_screening/${record._id}`, "_blank")
+                    //         }
+                    //     }
+                    // }}
                 />
             }
         </div>

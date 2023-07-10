@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams} from "react-router-dom";
 import {
     Comment, Button, Input, Descriptions,
     Popconfirm
@@ -9,6 +9,7 @@ import {capitalFirstLetter} from "../../../tools/string.js";
 import "./pre-screening.css";
 import PreScreeningCommentsList from "./CommentsList.jsx";
 import {getAccAndPsw} from "../../../tools/auth.js";
+import {getTimeStamp} from "../../../tools/datetime.js";
 
 export default function PreScreening() {
     const RID = useParams().RID || '64a792fbe3a86cdad7522be7';
@@ -27,7 +28,7 @@ export default function PreScreening() {
 
     }, [])
 
-    const handleStatus = (status) => {
+     const handleStatus = (status) => {
         const pre_screening_status = status ? "pre-accepted" : "pre-rejected";
 
         const time = getTimeStamp();
@@ -75,11 +76,6 @@ export default function PreScreening() {
             setCommentText('');
         });
     };
-
-    function getTimeStamp() {
-        let timestamp = Date.now()
-        return Math.floor(timestamp / 1000)
-    }
 
     const isButtonDisabled = isButtonClicked ||
         (userDatas && userDatas.pre_screening && userDatas.pre_screening.status !== null);

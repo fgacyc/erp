@@ -18,7 +18,7 @@ export default  function  Frame(){
             let StaffInfoLocalExist = await ifStaffInfoLocalExist();
             let loginStatus = await getLoginStatus();
             if (!StaffInfoLocalExist || !loginStatus) navigate("/login")
-            navigate("/recruitment_dashboard")
+            //navigate("/recruitment_dashboard")
         }
         checkLogin();
     }, []);
@@ -54,7 +54,7 @@ export default  function  Frame(){
                     </MenuItem>
                     <MenuItem key='1'>Home</MenuItem>
                     <MenuItem key='2'>Solution</MenuItem>
-                    <MenuItem key='3'>Cloud Service</MenuItem>
+                    <MenuItem key='3'>Service</MenuItem>
                     <MenuItem key='4'>Cooperation</MenuItem>
                     <AvatarMenu/>
                 </Menu>

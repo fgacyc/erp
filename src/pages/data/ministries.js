@@ -1,95 +1,56 @@
-
-
-export  const pastoral_team_options = [
-    {
-        value:"wonderkids",
-        label:"Wonder Kids",
-        children: [
-            {
-                value:"wonderkids",
-                label:"Wonder Kids"
-            }
+let department ={
+    "people_experience": {
+        "people": [
+            "usher",
+            "security"
+        ],
+        "general_affair": [
+            "admin",
+            "lounge",
+            "shuttle"
+        ],
+        "technology": [
+            "software development",
+            "project management"
         ]
     },
-    {
-        value:"young_warrior",
-        label:"Young Warrior",
-        children: [
-            {
-                value:"heart",
-                label:"Heart"
-            },
-            {
-                value:"move",
-                label:"Move"
-            },
-            {
-                value:"force",
-                label:"Force"
-            },
-            {
-                value:"voice",
-                label:"Voice"
-            },
-            {
-                value:"mind",
-                label:"Mind"
-            }
+    "communication": {
+        "social_media": [
+            "content creation",
+            "editorial"
+        ],
+        "design": [
+            "graphic design",
+            "multimedia design"
+        ],
+        "photography": [
+            "photography"
         ]
     },
-    {
-        value:"general_service",
-        label:"General Service",
-        children: [
-            {
-                value:"yp_zone",
-                label:"YP Zone"
-            },
-            {
-                value:"pro_family",
-                label:"Pro Family"
-            },
-            {
-                value:"young_dreamer",
-                label:"Young Dreamer"
-            },
-            {
-                value:"joshua_zone",
-                label:"Joshua Zone"
-            }
+    "creative": {
+        "production": [
+            "stage management",
+            "multimedia",
+            "sound",
+            "lighting",
+            "translation"
+        ],
+        "arts": [
+            "dance",
+            "fashion&image",
+            "drama"
+        ],
+        "worship": [
+            "vocal",
+            "musician"
         ]
     },
-    {
-        value:"others",
-        label:"Others",
-        children: [
-            {
-                value: "serdang",
-                label: "Serdang"
-            },
-            {
-                value: "kepong",
-                label: "Kepong"
-            },
-            {
-                value: "usj",
-                label: "USJ"
-            },
-            {
-                value: "setapak",
-                label: "Setapak"
-            },
-            {
-                value: "sg_long",
-                label: "Sg Long"
-            },
-            {
-                value: "seremban",
-                label: "Seremban"
-            }
+    "wonderkids": {
+        "wonderkids": [
+            "children minister"
         ]
     }
-];
+}
 
 
 export const department_options = [

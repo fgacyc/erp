@@ -1,4 +1,4 @@
-import {pastoral_team_options} from "./ministry_options.js";
+
 
 let pastoral_teams = {
     "wonderkids": [
@@ -27,7 +27,7 @@ let pastoral_teams = {
     ]
 }
 
-let pastoral_team_options = [
+export  const pastoral_team_options = [
     {
         value:"wonderkids",
         label:"Wonder Kids",
@@ -117,7 +117,6 @@ let pastoral_team_options = [
         ]
     }
 ];
-
 
 export function findPastoralTeam(name){
     name = name.toLowerCase();
