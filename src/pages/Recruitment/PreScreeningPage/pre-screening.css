@@ -24,6 +24,10 @@ style={{
     border: 1px solid rgb(229, 230, 235);
 }
 
+.pre_screening-download-btn{
+    float: right;
+    margin: 10px 0;
+}
 
 @media screen and (max-width: 768px) {
     .pre-screening-table-con{
@@ -32,3 +36,4 @@ style={{
         height: 100%;
     }
 }
+

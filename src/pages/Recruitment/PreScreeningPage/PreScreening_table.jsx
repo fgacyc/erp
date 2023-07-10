@@ -1,10 +1,11 @@
-import {useEffect, useState} from "react";
-import { Table} from "@arco-design/web-react";
+import {useEffect, useRef, useState} from "react";
+import {Table, Input, Button} from "@arco-design/web-react";
 import {useNavigate} from "react-router-dom";
 import {getReq} from "../../../tools/requests.js";
 import {addKeys} from "../../../tools/tableTools.js";
 import {capitalFirstLetter} from "../../../tools/string.js";
 import "./pre-screening.css"
+import {IconDownload, IconSearch} from "@arco-design/web-react/icon";
 
 
 
@@ -20,10 +21,40 @@ export  default  function PreScreening_table(){
         pageSizeChangeResetCurrent: true,
     });
     const [loading, setLoading] = useState(false);
+    const inputRef = useRef(null);
+
     const columns = [
         {
             title: 'Name',
             dataIndex: 'info.name',
+            sorter: (a, b) => a.info.name.localeCompare(b.info.name),
+            filterIcon: <IconSearch />,
+            filterDropdown: ({ filterKeys, setFilterKeys, confirm }) => {
+                return (
+                    <div className='arco-table-custom-filter'>
+                        <Input.Search
+                            ref={inputRef}
+                            searchButton
+                            placeholder='Please enter a name'
+                            value={filterKeys[0] || ''}
+                            onChange={(value) => {
+                                setFilterKeys(value ? [value] : []);
+                            }}
+                            onSearch={() => {
+                                confirm();
+                            }}
+                        />
+                    </div>
+                );
+            },
+            onFilter: (value, row) => {
+                return  row.info.name.toLowerCase().includes(value.toLowerCase());
+            },
+            onFilterDropdownVisibleChange: (visible) => {
+                if (visible) {
+                    setTimeout(() => inputRef.current.focus(), 150);
+                }
+            },
         },
         {
             title: 'Pastoral Team',
@@ -166,6 +197,7 @@ export  default  function PreScreening_table(){
 
     return(
         <div className="pre-screening-table-con">
+            <Button type='secondary' icon={<IconDownload />} className="pre_screening-download-btn">Download</Button>
             {
                 data &&
                 <Table
