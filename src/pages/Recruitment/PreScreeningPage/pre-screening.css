@@ -17,10 +17,10 @@ style={{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: calc(100% - 10px);
+    height: calc(100% - 15px);
     background-color: #fff;
     margin: 5px;
-    width: calc(100% - 10px);
+    width: calc(100% - 15px);
     border: 1px solid rgb(229, 230, 235);
 }
 

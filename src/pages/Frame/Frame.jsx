@@ -1,18 +1,18 @@
-import {Avatar, Menu} from '@arco-design/web-react';
-import {IconApps, IconBug, IconBulb, IconUser, IconUserAdd} from '@arco-design/web-react/icon';
+import { Menu} from '@arco-design/web-react';
+import {IconUserAdd} from '@arco-design/web-react/icon';
 import "./Frame.css"
-import StatusContainer from "../../StatusContainer.js";
 import {Outlet, useLocation, useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
-const MenuItemGroup = Menu.ItemGroup;
+import {getUserNameFromUserData, login} from "../../tools/auth.js";
+import {AvatarMenu} from "../AvatarMenu/AvatarMenu.jsx";
+
+// const MenuItemGroup = Menu.ItemGroup;
 const MenuItem = Menu.Item;
 const SubMenu = Menu.SubMenu;
 
-import {login} from "../../tools/auth.js";
-import {AvatarMenu} from "../AvatarMenu/AvatarMenu.jsx";
-
 export default  function  Frame(){
     const [user, setUser] = useState(null);
+    const [username, setUsername] = useState(null);
     const navigate = useNavigate();
 
 
@@ -28,12 +28,12 @@ export default  function  Frame(){
         let account = JSON.parse(localStorage.getItem("cyc-acc"));
         if(account === null) {
             navigate("/login");
-            return;
         }else{
             login(account[0],account[1]).then((res)=>{
                 if(res.status){
-                    //console.log(res.result);
-                    setUser(res.result);
+                    setUser(res.data);
+                    setUsername(getUserNameFromUserData(res))
+                    console.log(getUserNameFromUserData(res))
                 }else{
                     navigate("/login");
                 }
@@ -69,7 +69,7 @@ export default  function  Frame(){
                     <MenuItem key='2'>Solution</MenuItem>
                     <MenuItem key='3'>Cloud Service</MenuItem>
                     <MenuItem key='4'>Cooperation</MenuItem>
-                    <AvatarMenu user={user}/>
+                    <AvatarMenu username={username}/>
                 </Menu>
             </div>
             <div className='menu-lower'>

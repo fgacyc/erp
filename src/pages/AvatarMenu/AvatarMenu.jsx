@@ -3,7 +3,7 @@ import "./avatarMenu.css"
 import {useNavigate} from "react-router-dom";
 
 
-export  function AvatarMenu({user}){
+export  function AvatarMenu({username}){
     const navigate = useNavigate();
 
     function logout(){
@@ -28,7 +28,7 @@ export  function AvatarMenu({user}){
             <Dropdown droplist={dropList} position='bl' trigger='click'>
                 <Avatar style={{ backgroundColor: '#3370ff' }} className={"avatar"}>
                     {
-                        user === null ? "" : user.full_name.charAt(0).toUpperCase()
+                        username === null ? "" : username.charAt(0).toUpperCase()
                     }
                 </Avatar>
             </Dropdown>
