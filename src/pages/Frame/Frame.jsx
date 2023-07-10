@@ -33,7 +33,7 @@ export default  function  Frame(){
             login(account[0],account[1]).then((res)=>{
                 if(res.status){
                     //console.log(res.result);
-                    setUser(res.result);
+                    setUser(res.data);
                 }else{
                     navigate("/login");
                 }
