@@ -39,7 +39,8 @@ function PreScreeningComment({item}){
             // author={item.CYC_ID === getAccAndPsw()[0] ? "You" : username}
             author={username}
             avatar={
-                <Avatar style={{ backgroundColor: '#14a9f8' }}>{username.charAt(0).toUpperCase()}</Avatar>
+                // <Avatar style={{ backgroundColor: '#14a9f8' }}>{username.charAt(0).toUpperCase()}</Avatar>
+                <Avatar style={{ backgroundColor: '#14a9f8' }}>C</Avatar>
             }
             // content={JSON.stringify(item)}
             content={item.comment}

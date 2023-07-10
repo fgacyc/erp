@@ -8,13 +8,8 @@ import PreScreening from "./pages/Recruitment/PreScreeningPage/PreScreening.jsx"
 import Recruitment_Dashboard from "./pages/Recruitment/DashboardPage/Recruitment_Dashboard.jsx";
 
 function App() {
-    // const [ifMobile, setIfMobile] = useState(false);
-    //
-    // useEffect(() => {
-    //     if (window.innerWidth < 768) {
-    //         setIfMobile(true);
-    //     }
-    // }, []);
+
+
 
     return (
         <>

@@ -12,6 +12,7 @@
     "@arco-design/web-react": "^2.46.2",
     "chart.js": "^4.3.0",
     "firebase": "^9.19.1",
+    "idb-keyval": "^6.2.1",
     "react": "^18.2.0",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.2.0",

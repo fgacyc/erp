@@ -1,7 +1,26 @@
-import {getReq} from "./requests.js";
-export async function login(CYC_ID, password){
+import {getReq, putReq} from "./requests.js";
+import {get, set} from "idb-keyval";
+
+export async function login(CYC_ID, password,rememberMe){
     let router = "/auth";
-    return  await getReq(router + "?CYC_ID=" + CYC_ID + "&password=" + password);
+    let res =  await getReq(router + "?CYC_ID=" + CYC_ID + "&password=" + password);  // 1. get data from server
+
+    if (res.status){
+        res.data.login_status = true;
+        let store = await  setStaffInfoLocal(res.data); // 2. set login status and store data to local
+
+        if (rememberMe) await updateRecentLogin();
+
+        if (store){
+            window.location.href = "/";
+            return true
+        }else{
+            console.log("store failed")
+            return false
+        }
+    }else{
+        return false
+    }
 }
 
 
@@ -27,20 +46,63 @@ export async function getUerName(CYC_ID){
     }
 }
 
-export  function getUserNameFromUserData(res){
-   if (res.status){
-       if(res.data.username === null){
-           return res.data.full_name
-       }else{
-           return res.data.username
-       }
-   }
-}
 
-export  function getUserNameFromUserData1(data){
+export async  function getUserNameFromUserData(){
+    let data = await getStaffInfoLocal();
     if(data.username === null){
         return data.full_name
     }else{
         return data.username
     }
 }
+
+export async function ifStaffInfoLocalExist(){
+    let res  = await  get('staff')
+    return !!res;
+}
+
+export  async  function getLoginStatus(){
+    let res  = await  get('staff')
+    if (res){
+        return res.login_status;
+    }else{
+        return false
+    }
+}
+
+export  async  function setStaffInfoLocal(data){
+    try {
+        await set('staff', data)
+        return true
+    }
+    catch (err) {
+        console.log(err)
+        return false
+    }
+}
+
+export  async  function getStaffInfoLocal(){
+    return await get('staff');
+}
+
+
+export  async function updateStaffInfoLocal(data){
+    let old = await getStaffInfoLocal();
+    let new_data = Object.assign(old, data);
+    await setStaffInfoLocal(new_data);
+}
+
+export  async function getRecentLogin(){
+    let info = await getStaffInfoLocal();
+    let CYC_ID = info.CYC_ID;
+    let res =await getReq(`/auth/recent_login?CYC_ID=${CYC_ID}`)
+    console.log(res)
+}
+
+export async function updateRecentLogin(){
+    let info = await getStaffInfoLocal();
+    let CYC_ID = info.CYC_ID;
+    let res =await putReq(`/auth/recent_login?CYC_ID=${CYC_ID}`,{})
+    console.log(res)
+}
+

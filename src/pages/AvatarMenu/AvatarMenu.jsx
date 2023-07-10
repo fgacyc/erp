@@ -1,14 +1,23 @@
 import {Avatar, Dropdown, Menu} from "@arco-design/web-react";
 import "./avatarMenu.css"
 import {useNavigate} from "react-router-dom";
+import {useEffect, useState} from "react";
+import {getUserNameFromUserData, updateStaffInfoLocal} from "../../tools/auth.js";
 
 
-export  function AvatarMenu({username}){
+export  function AvatarMenu(){
     const navigate = useNavigate();
+    const [username, setUsername] = useState(null);
 
-    function logout(){
-        localStorage.removeItem("cyc-acc");
-        navigate("/login");
+    useEffect(()=>{
+        getUserNameFromUserData().then((res)=>{
+            setUsername(res);
+        })
+    },[])
+
+    async function logout(){
+        await updateStaffInfoLocal({login_status: false})
+        navigate("/login")
     }
 
     function  handleMenuClick(key){

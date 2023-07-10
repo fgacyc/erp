@@ -1,46 +1,32 @@
-import { Menu} from '@arco-design/web-react';
+import {Menu} from '@arco-design/web-react';
 import {IconUserAdd} from '@arco-design/web-react/icon';
 import "./Frame.css"
-import {Outlet, useLocation, useNavigate} from "react-router-dom";
-import {useEffect, useState} from "react";
-import {getUserNameFromUserData, login} from "../../tools/auth.js";
-import {AvatarMenu} from "../AvatarMenu/AvatarMenu.jsx";
-
-// const MenuItemGroup = Menu.ItemGroup;
+import {Outlet, useNavigate} from "react-router-dom";
+import {useEffect} from "react";
+const MenuItemGroup = Menu.ItemGroup;
 const MenuItem = Menu.Item;
 const SubMenu = Menu.SubMenu;
 
+import {getLoginStatus, getStaffInfoLocal, ifStaffInfoLocalExist, login} from "../../tools/auth.js";
+import {AvatarMenu} from "../AvatarMenu/AvatarMenu.jsx";
+
 export default  function  Frame(){
-    const [user, setUser] = useState(null);
-    const [username, setUsername] = useState(null);
     const navigate = useNavigate();
 
-
+    useEffect( () => {
+        async function checkLogin(){
+            let StaffInfoLocalExist = await ifStaffInfoLocalExist();
+            let loginStatus = await getLoginStatus();
+            if (!StaffInfoLocalExist || !loginStatus) navigate("/login")
+        }
+        checkLogin();
+    }, []);
 
 
     function onClickMenuItem(key) {
         // console.log(key);
         navigate("/" + key);
     }
-
-    const path = useLocation().pathname;
-    useEffect(() => {
-        let account = JSON.parse(localStorage.getItem("cyc-acc"));
-        if(account === null) {
-            navigate("/login");
-        }else{
-            login(account[0],account[1]).then((res)=>{
-                if(res.status){
-                    setUser(res.data);
-                    setUsername(getUserNameFromUserData(res))
-                    console.log(getUserNameFromUserData(res))
-                }else{
-                    navigate("/login");
-                }
-            })
-        }
-    }, [path]);
-
 
 
     return (
@@ -69,7 +55,7 @@ export default  function  Frame(){
                     <MenuItem key='2'>Solution</MenuItem>
                     <MenuItem key='3'>Cloud Service</MenuItem>
                     <MenuItem key='4'>Cooperation</MenuItem>
-                    <AvatarMenu username={username}/>
+                    <AvatarMenu/>
                 </Menu>
             </div>
             <div className='menu-lower'>

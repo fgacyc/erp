@@ -1,45 +1,29 @@
-import { useState } from 'react';
+import {useEffect, useState} from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Input, Button } from '@arco-design/web-react';
+import {Input, Button, Checkbox} from '@arco-design/web-react';
 import "./Login.css";
-import {getReq} from "../../tools/requests.js";
-import StatusContainer from "../../StatusContainer.js";
 import {login} from "../../tools/auth.js";
+
+
 
 export default function Login() {
     const navigate = useNavigate();
 
-    let isLoggedIn = localStorage.getItem('cyc-auth');
-
     const [CYC_ID, setCYC_ID] = useState(0);
     const [password, setPassword] = useState('');
+    const [rememberMe, setRememberMe] = useState(false);
+
+    useEffect(() => {
+
+    }, []);
 
 
-
-    function navigateLogin() {
-        isLoggedIn = localStorage.getItem('cyc-auth');
-        navigate('/')
-
-
-        // if (isLoggedIn === 'true' && formId) {
-        //     navigate(`/form/${formId}`)
-        // } else if (isLoggedIn === 'true') {
-        //     // navigate('/table')
-        //     navigate('/submission')
-        // }
-    }
 
     async function handleLogin(e) {
         e.preventDefault();
-        // let authStatus = localStorage.getItem('cyc-auth');
-        // if (authStatus === 'true') navigate("/")
-
-
-        let res =await login(CYC_ID,password)
-        if (res.status){
-            //console.log(res);
+        let res =await login(CYC_ID,password,rememberMe);
+        if (res){
             navigate('/')
-            localStorage.setItem('cyc-acc', JSON.stringify([CYC_ID,password]));
         }else{
             alert("Login failed");
         }
@@ -58,13 +42,17 @@ export default function Login() {
                         onChange={setCYC_ID}
                         placeholder='Enter CYC ID' />
                     <Input.Password
-                        style={{ width: 350, marginBottom: 30 }}
+                        style={{ width: 350, marginBottom: 15 }}
                         placeholder="Enter password"
                         value={password}
                         onChange={setPassword}
                         type="password"
                         autoComplete='on'
                     />
+                    <Checkbox
+                        style={{ width: 350, marginBottom: 20 }}
+                        onChange={setRememberMe}
+                    >Remember me</Checkbox>
                     <Button type="primary" htmlType="submit">
                         Log In
                     </Button>
