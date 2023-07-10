@@ -1,0 +1,22 @@
+/*
+style={{ display: "flex", justifyContent: "center", paddingTop: 30, paddingBottom: 15 }}
+*/
+
+
+.recruitment-dashboard-con .left-side{
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    height: 100%;
+}
+
+.recruitment-dashboard-con .left-side .upper{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.recruitment-dashboard-con .right-side{
+    width: 40%;
+    height: 100%;
+}

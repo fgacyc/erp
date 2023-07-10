@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-
-import { Card, Typography, Space, Cascader, DatePicker } from '@arco-design/web-react';
+import "./recruitment_dashboard.css"
+import { Card, Typography, Space, Cascader } from '@arco-design/web-react';
 import { IconUserGroup, IconCalendarClock, IconCheck } from '@arco-design/web-react/icon';
 import {
     Chart as ChartJS,
@@ -382,121 +382,110 @@ export default function Recruitment_Dashboard() {
 
     return (
         <div className="recruitment-dashboard-con app-component">
-            <div style={{ display: "flex", justifyContent: "center", paddingTop: 30, paddingBottom: 15 }}>
-                <div style={{ display: "flex", flexDirection: "column", justifyContent: "space-between" }} >
-                    <div style={{ display: "flex" }}>
-                        <Card
-                            hoverable>
-                            <Space style={{
-                                display: 'flex',
-                                justifyContent: 'center',
-                            }}>
-                                <IconUserGroup style={{
-                                    width: "36px", height: "36px", backgroundColor: colors[0], borderRadius: "100%", padding: "10px",
-                                    marginRight: "2px"
-                                }} />
-                                <Space style={{ display: 'flex', flexDirection: "column", alignItems: "center" }}>
-                                    <Typography.Text>Total Applicants</Typography.Text>
-                                    <Typography.Text style={{ fontWeight: 600 }}>{totals[0]}</Typography.Text>
-                                </Space>
-                            </Space>
-                        </Card>
+           <div style={{display:"flex"}}>
+               <div className="left-side">
+                   <div  className="upper" >
+                       <Card
+                           hoverable>
+                           <Space style={{
+                               display: 'flex',
+                               justifyContent: 'center'
+                           }}>
+                               <IconUserGroup style={{
+                                   width: "36px", height: "36px", backgroundColor: colors[0], borderRadius: "100%", padding: "10px",
+                                   marginRight: "2px"
+                               }} />
+                               <Space style={{ display: 'flex', flexDirection: "column", alignItems: "center" }}>
+                                   <Typography.Text>Total Applicants</Typography.Text>
+                                   <Typography.Text style={{ fontWeight: 600 }}>{totals[0]}</Typography.Text>
+                               </Space>
+                           </Space>
+                       </Card>
 
-                        <Card
-                            hoverable>
-                            <Space style={{
-                                display: 'flex',
-                                justifyContent: 'center',
-                            }}>
-                                <IconCalendarClock style={{
-                                    width: "36px", height: "36px", backgroundColor: colors[1], borderRadius: "100%", padding: "10px",
-                                    marginRight: "2px"
-                                }} />
-                                <Space style={{ display: 'flex', flexDirection: "column", alignItems: "center" }}>
-                                    <Typography.Text>Total Pending</Typography.Text>
-                                    <Typography.Text style={{ fontWeight: 600 }}>{totals[1]}</Typography.Text>
-                                </Space>
-                            </Space>
-                        </Card>
+                       <Card
+                           hoverable>
+                           <Space style={{
+                               display: 'flex',
+                               justifyContent: 'center',
+                           }}>
+                               <IconCalendarClock style={{
+                                   width: "36px", height: "36px", backgroundColor: colors[1], borderRadius: "100%", padding: "10px",
+                                   marginRight: "2px"
+                               }} />
+                               <Space style={{ display: 'flex', flexDirection: "column", alignItems: "center" }}>
+                                   <Typography.Text>Total Pending</Typography.Text>
+                                   <Typography.Text style={{ fontWeight: 600 }}>{totals[1]}</Typography.Text>
+                               </Space>
+                           </Space>
+                       </Card>
 
-                        <Card
-                            hoverable>
-                            <Space style={{
-                                display: 'flex',
-                                justifyContent: 'center',
-                            }}>
-                                <IconCheck style={{
-                                    width: "36px", height: "36px", backgroundColor: colors[2], borderRadius: "100%", padding: "10px",
-                                    marginRight: "2px"
-                                }} />
-                                <Space style={{ display: 'flex', flexDirection: "column", alignItems: "center" }}>
-                                    <Typography.Text>Total Pass</Typography.Text>
-                                    <Typography.Text style={{ fontWeight: 600 }}>{totals[2]}</Typography.Text>
-                                </Space>
-                            </Space>
-                        </Card>
-                    </div>
-                    <Card
-                        hoverable>
-                        <Space>
-                            <Typography.Text style={{ fontWeight: 600 }}>Pastoral Team Summary</Typography.Text>
-                            <Cascader
-                                placeholder='Select Pastoral Team'
-                                style={{ width: 300, marginLeft: "10px" }}
-                                options={options_bar}
-                                changeOnSelect
-                                allowClear
-                                showSearch
-                                onChange={(value, option) => {
-                                    const pastoral_team_value = value.length > 1 ? value[1] : value[0];
-                                    setBarChartLabels(barChartLabel[pastoral_team_value]);
-                                    setBarChartData(allBarChartData[pastoral_team_value]);
+                       <Card
+                           hoverable>
+                           <Space style={{
+                               display: 'flex',
+                               justifyContent: 'center',
+                           }}>
+                               <IconCheck style={{
+                                   width: "36px", height: "36px", backgroundColor: colors[2], borderRadius: "100%", padding: "10px",
+                                   marginRight: "2px"
+                               }} />
+                               <Space style={{ display: 'flex', flexDirection: "column", alignItems: "center" }}>
+                                   <Typography.Text>Total Pass</Typography.Text>
+                                   <Typography.Text style={{ fontWeight: 600 }}>{totals[2]}</Typography.Text>
+                               </Space>
+                           </Space>
+                       </Card>
+                   </div>
+                   <Card
+                       hoverable>
+                       <Space>
+                           <Typography.Text style={{ fontWeight: 600 }}>Pastoral Team Summary</Typography.Text>
+                           <Cascader
+                               placeholder='Select Pastoral Team'
+                               style={{ width: 300, marginLeft: "10px"}}
+                               options={options_bar}
+                               changeOnSelect
+                               allowClear
+                               showSearch
+                               onChange={(value, option) => {
+                                   const pastoral_team_value = value.length > 1 ? value[1] : value[0];
+                                   setBarChartLabels(barChartLabel[pastoral_team_value]);
+                                   setBarChartData(allBarChartData[pastoral_team_value]);
 
-                                }}
-                            />
-                        </Space>
-                        {barChartLabels && barChartData && <Bar options={options_chart} data={barchart_data} />}
-                    </Card>
-                </div >
-                <Card style={{
-                    display: "flex", flexDirection: "column", alignItems: "center",
-                    justifyContent: "center"
-                }}
-                    hoverable>
-                    <Space style={{
-                        display: "flex", flexDirection: "column", alignItems: "flex-start",
-                    }}>
-                        <Typography.Text style={{ fontWeight: 600 }}>Ministry Application Summary</Typography.Text>
-                        <Cascader
-                            placeholder='Select Team'
-                            style={{ width: 350, margin: "10px 0px" }}
-                            options={options_pie}
-                            changeOnSelect
-                            allowClear
-                            showSearch
-                            onChange={(value, option) => {
-                                let ministry_value = value.length > 1 ? value[1] : value[0];
-                                setPieChartLabels(pieChartLabel[ministry_value]);
-                                setPieChartData(allPieChartData[ministry_value]);
-                            }}
-                        />
-                    </Space>
-                    <Doughnut data={data_pie} />
-                </Card>
-            </div>
-            {/*<Card style={{*/}
-            {/*    display: "flex", flexDirection: "column"*/}
-            {/*}}*/}
-            {/*    hoverable>*/}
-            {/*    <Space>*/}
-            {/*        <Typography.Text style={{ fontWeight: 600 }}>Application</Typography.Text>*/}
-            {/*        <DatePicker*/}
-            {/*            style={{ width: 300, marginLeft: "10px" }}*/}
-            {/*            defaultValue={Date.now()}*/}
-            {/*            // onChange={onChange}*/}
-            {/*        />*/}
-            {/*    </Space>*/}
-            {/*</Card>*/}
+                               }}
+                           />
+                       </Space>
+                       {barChartLabels && barChartData && <Bar options={options_chart} data={barchart_data} />}
+                   </Card>
+               </div >
+               <div className="right-side">
+                   <Card style={{
+                       display: "flex", flexDirection: "column", alignItems: "center",
+                       justifyContent: "center"
+                   }}
+                         hoverable>
+                       <Space style={{
+                           display: "flex", flexDirection: "column", alignItems: "flex-start",
+                       }}>
+                           <Typography.Text style={{ fontWeight: 600 }}>Ministry Application Summary</Typography.Text>
+                           <Cascader
+                               placeholder='Select Team'
+                               style={{ width: 350, margin: "10px 0px" }}
+                               options={options_pie}
+                               changeOnSelect
+                               allowClear
+                               showSearch
+                               onChange={(value, option) => {
+                                   let ministry_value = value.length > 1 ? value[1] : value[0];
+                                   setPieChartLabels(pieChartLabel[ministry_value]);
+                                   setPieChartData(allPieChartData[ministry_value]);
+                               }}
+                           />
+                       </Space>
+                       <Doughnut data={data_pie} />
+                   </Card>
+               </div>
+           </div>
         </div>
     )
 }

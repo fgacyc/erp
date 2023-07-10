@@ -7,7 +7,7 @@ const MenuItemGroup = Menu.ItemGroup;
 const MenuItem = Menu.Item;
 const SubMenu = Menu.SubMenu;
 
-import {getLoginStatus, getStaffInfoLocal, ifStaffInfoLocalExist, login} from "../../tools/auth.js";
+import {getLoginStatus, ifStaffInfoLocalExist} from "../../tools/auth.js";
 import {AvatarMenu} from "../AvatarMenu/AvatarMenu.jsx";
 
 export default  function  Frame(){
@@ -18,6 +18,7 @@ export default  function  Frame(){
             let StaffInfoLocalExist = await ifStaffInfoLocalExist();
             let loginStatus = await getLoginStatus();
             if (!StaffInfoLocalExist || !loginStatus) navigate("/login")
+            navigate("/recruitment_dashboard")
         }
         checkLogin();
     }, []);
