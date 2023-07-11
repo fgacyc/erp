@@ -1,4 +1,5 @@
 import {postReq, putReq} from "../../../tools/requests.js";
+
 export  async function postRecruiter(name, phone, email, pastoral_team, department1){
     const router = "/recruiter"
     let data = {
@@ -8,7 +9,7 @@ export  async function postRecruiter(name, phone, email, pastoral_team, departme
         "pastoral_team": pastoral_team,
         "ministry": department1,
     }
-    console.log(data)
+    //console.log(data)
 
     let res = await postReq(router, data)
     console.log(res)
@@ -23,8 +24,8 @@ export async function updateRecruiter(RID,name, phone, email, pastoral_team, dep
         "pastoral_team": pastoral_team,
         "ministry": department1,
     }
-    console.log(data)
-    let res = await putReq(router, data)
+    //console.log(data)
+    let res =await putReq(router, data)
     console.log(res)
-    return res
+    return res;
 }

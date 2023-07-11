@@ -239,7 +239,7 @@ export  default  function PreScreening_table(){
     function geUserData(){
         let url =   "/recruiters?account=admin&password=admin";
         getReq(url).then((data) => {
-            console.log(data);
+            // console.log(data);
             let validData = addKeys(data)
             filterDataByPermissions(validData).then((permissionData) => {
                 setAllData(permissionData);
