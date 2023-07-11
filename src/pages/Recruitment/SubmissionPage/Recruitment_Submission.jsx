@@ -1,10 +1,10 @@
 import {Button, Cascader, Input, Space} from "@arco-design/web-react";
-import {department_options} from "../../data/ministries.js";
+import {department_options} from "../../../data/ministries.js";
 import {useState} from "react";
 import valid from "./valid.js";
-import postRecruiter from "./postRequest.js";
+import {postRecruiter} from "./postRequest.js";
 import "./Recruitment_Submission.css"
-import {pastoral_team_options} from "../../data/pastoral_teams.js";
+import {pastoral_team_options} from "../../../data/pastoral_teams.js";
 
 export  default  function  Recruitment_Submission()  {
     const [name, setName] = useState('');

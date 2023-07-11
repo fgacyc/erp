@@ -10,6 +10,8 @@ import "./pre-screening.css";
 import PreScreeningCommentsList from "./CommentsList.jsx";
 import {getAccAndPsw} from "../../../tools/auth.js";
 import {getTimeStamp} from "../../../tools/datetime.js";
+import {IconEdit} from "@arco-design/web-react/icon";
+import CandidateModal from "../../../components/UI_Modal/CandidateModal.jsx";
 
 export default function PreScreening() {
     const RID = useParams().RID || '64a792fbe3a86cdad7522be7';
@@ -18,15 +20,23 @@ export default function PreScreening() {
     const [commentText, setCommentText] = useState('');
     const [isButtonClicked, setIsButtonClicked] = useState(false);
     const [userCYC_ID, setUserCYC_ID] = useState(null);
+    const [visible, setVisible] = useState(false);
+
+    function getUserData(){
+        getReq( `/recruiter/${RID}`).then((res) => {
+            setUserDatas(res);
+            setUserCYC_ID(res.CYC_ID)
+        });
+    }
 
 
     useEffect(() => {
-        getReq( `/recruiter/${RID}`).then((res) => {
-            setUserDatas(res);
-        });
-        setUserCYC_ID(getAccAndPsw()[0])
-
+        getUserData();
     }, [])
+
+    useEffect(() => {
+        getUserData();
+    }, [visible]);
 
      const handleStatus = (status) => {
         const pre_screening_status = status ? "pre-accepted" : "pre-rejected";
@@ -89,7 +99,8 @@ export default function PreScreening() {
                     {userDatas && (
                         <div>
                             <div className="arco-descriptions-title" style={{ textAlign: "center", marginBottom: "25px" }}>
-                                Candidate Information
+                                <span style={{marginRight:10}}>Candidate Information</span>
+                                <IconEdit style={{cursor:"pointer"}} onClick={() => setVisible(true)}  />
                             </div>
                             <Descriptions
                                 column={1}
@@ -182,6 +193,9 @@ export default function PreScreening() {
                     </div>
                 }
             />
+            {
+                userDatas && <CandidateModal recruiter={userDatas} visible={visible} setVisible={setVisible} />
+            }
         </div>
     )
 }

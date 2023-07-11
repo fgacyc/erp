@@ -21,10 +21,14 @@ export  default  function PreScreening_table(){
         pageSizeChangeResetCurrent: true,
     });
     const [loading, setLoading] = useState(false);
+    const [clickOption, setClickOption] = useState(false);
+
     const inputRef = useRef(null);
 
     const handleStatus = (status,RID) => {
         const pre_screening_status = status ? "pre-accepted" : "pre-rejected";
+
+        setClickOption(!clickOption)
 
         const time = getTimeStamp();
 
@@ -232,18 +236,26 @@ export  default  function PreScreening_table(){
     ];
     const navigate =  useNavigate();
 
-    useEffect(() => {
+    function geUserData(){
         let url =   "/recruiters?account=admin&password=admin";
         getReq(url).then((data) => {
-            // console.log(data);
+            console.log(data);
             let validData = addKeys(data)
             filterDataByPermissions(validData).then((permissionData) => {
                 setAllData(permissionData);
                 setPagination((pagination) => ({ ...pagination, total: permissionData.length }));
             });
         });
+    }
 
-    }, [allData]);
+
+    useEffect(() => {
+        geUserData();
+    }, []);
+
+    useEffect(() => {
+        geUserData();
+    }, [clickOption]);
 
     function  handleDownload(){
         downloadTableData(allData)
@@ -287,14 +299,6 @@ export  default  function PreScreening_table(){
                             {paginationNode}
                         </div>
                     )}
-                    // onRow={(record) => {
-                    //     return {
-                    //         onClick: () => {
-                    //             navigate(`/recruitment_pre_screening/${record._id}`);
-                    //             //window.open(`/recruitment_pre_screening/${record._id}`, "_blank")
-                    //         }
-                    //     }
-                    // }}
                 />
             }
         </div>
