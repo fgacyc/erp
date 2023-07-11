@@ -11,3 +11,7 @@ body{
     height: calc(100% - 30px);
     background-color: #fff;
 }
+
+.full-screen-app-component{
+    height: calc(100% - 70px);
+}

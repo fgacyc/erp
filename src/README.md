@@ -1,6 +1,5 @@
-import UI_Breadcrumb from "../../../components/UI-Breadcrumb/UI-Breadcrumb.jsx";
-import "./recruitment_appointment.css"
-
+# App-component
+```jsx
 export default function Recruitment_Appointment() {
     const breadcrumbItems = [
         {
@@ -23,3 +22,4 @@ export default function Recruitment_Appointment() {
         </>
     )
 }
+```

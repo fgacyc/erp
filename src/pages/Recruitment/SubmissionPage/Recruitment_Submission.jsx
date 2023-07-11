@@ -59,7 +59,7 @@ export  default  function  Recruitment_Submission()  {
     return  (
         <>
             <UI_Breadcrumb items={breadcrumbItems}/>
-        <div className="app-component recruitment-con_style">
+        <div className="app-component full-screen-app-component">
             <Space direction='vertical' size={"large"}  className="recruitment-container">
                 <div style={divStyle}>
                     <p>Name:</p>
