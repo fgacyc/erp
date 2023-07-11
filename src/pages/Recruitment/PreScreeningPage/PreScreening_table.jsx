@@ -169,6 +169,10 @@ export  default  function PreScreening_table(){
             )
         },
         {
+            title: 'Ministry',
+            dataIndex: 'info.ministry[2]',
+        },
+        {
             title: 'Status',
             dataIndex: 'pre_screening.status',
             filters: [
