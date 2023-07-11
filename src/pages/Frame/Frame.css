@@ -21,3 +21,37 @@
     display: flex;
     flex-direction: row;
 }
+
+.head-menu-logo-con{
+    width: 80px;
+    height: 30px;
+}
+
+.head-menu-logo{
+    width: 100px;
+    position: relative;
+    top:5px;
+}
+
+.head-bar-btns{
+    display: inline-block;
+    float: right;
+    line-height: 40px;
+}
+
+.head-bar-btn {
+    margin-right: 15px;
+    color: #4E5969 !important;
+    background-color: white !important;
+    border: 1px solid #f2f3f5 !important;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.head-bar-btn:hover{
+    background-color:#f2f3f5 !important;
+}
+
+.head-bar-btn:active{
+    background-color: #e5e6eb  !important;
+}

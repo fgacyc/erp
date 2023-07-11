@@ -1,5 +1,5 @@
-import {Menu} from '@arco-design/web-react';
-import {IconUserAdd} from '@arco-design/web-react/icon';
+import {Button, Menu} from '@arco-design/web-react';
+import {IconPlus, IconUserAdd} from '@arco-design/web-react/icon';
 import "./Frame.css"
 import {Outlet, useNavigate} from "react-router-dom";
 import {useEffect} from "react";
@@ -9,6 +9,7 @@ const SubMenu = Menu.SubMenu;
 
 import {getLoginStatus, ifStaffInfoLocalExist} from "../../tools/auth.js";
 import {AvatarMenu} from "../../components/UI_AvatarMenu/AvatarMenu.jsx";
+import HeadBarBtns from "./HeadBarBtns.jsx";
 
 export default  function  Frame(){
     const navigate = useNavigate();
@@ -36,27 +37,17 @@ export default  function  Frame(){
                 <Menu mode='horizontal' defaultSelectedKeys={['1']} className={"top-menu"}  >
                     <MenuItem
                         key='0'
-                        style={{ padding: 0, marginRight: 38, }}
+                        style={{ padding: 0, marginLeft:0,marginRight: 38, }}
                     >
-                        <div
-                            style={{
-                                width: 80,
-                                height: 30,
-                            }}
-                        >
-                            <img src={"/CYC_Logo_black_x120.png"} alt={"logo"}
-                                 style={{
-                                     width: 80,
-                                     height: 30,
-                                 }}
-                            />
+                        <div className="head-menu-logo-con">
+                            <img src={"/CYC_Logo_black_x120.png"} alt={"logo"} className="head-menu-logo"/>
                         </div>
                     </MenuItem>
                     <MenuItem key='1'>Home</MenuItem>
                     <MenuItem key='2'>Solution</MenuItem>
                     <MenuItem key='3'>Service</MenuItem>
                     <MenuItem key='4'>Cooperation</MenuItem>
-                    <AvatarMenu/>
+                    <HeadBarBtns/>
                 </Menu>
             </div>
             <div className='menu-lower'>

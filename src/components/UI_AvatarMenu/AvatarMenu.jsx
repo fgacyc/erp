@@ -2,7 +2,7 @@ import {Avatar, Dropdown, Menu} from "@arco-design/web-react";
 import "./avatarMenu.css"
 import {useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
-import {getUserNameFromUserData, updateStaffInfoLocal} from "../../tools/auth.js";
+import {getUserNameFromUserData} from "../../tools/auth.js";
 import {goToProfile, logout} from "./avatarFuncs.js";
 
 
