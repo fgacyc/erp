@@ -396,7 +396,7 @@ export default function Recruitment_Dashboard() {
                                    marginRight: "2px"
                                }} />
                                <Space style={{ display: 'flex', flexDirection: "column", alignItems: "center" }}>
-                                   <Typography.Text>Total Applicants</Typography.Text>
+                                   <Typography.Text>Applicants</Typography.Text>
                                    <Typography.Text style={{ fontWeight: 600 }}>{totals[0]}</Typography.Text>
                                </Space>
                            </Space>
@@ -413,12 +413,11 @@ export default function Recruitment_Dashboard() {
                                    marginRight: "2px"
                                }} />
                                <Space style={{ display: 'flex', flexDirection: "column", alignItems: "center" }}>
-                                   <Typography.Text>Total Pending</Typography.Text>
+                                   <Typography.Text>Pending</Typography.Text>
                                    <Typography.Text style={{ fontWeight: 600 }}>{totals[1]}</Typography.Text>
                                </Space>
                            </Space>
                        </Card>
-
                        <Card
                            hoverable>
                            <Space style={{
@@ -430,8 +429,24 @@ export default function Recruitment_Dashboard() {
                                    marginRight: "2px"
                                }} />
                                <Space style={{ display: 'flex', flexDirection: "column", alignItems: "center" }}>
-                                   <Typography.Text>Total Pass</Typography.Text>
+                                   <Typography.Text>Pre-Pass</Typography.Text>
                                    <Typography.Text style={{ fontWeight: 600 }}>{totals[2]}</Typography.Text>
+                               </Space>
+                           </Space>
+                       </Card>
+                       <Card
+                           hoverable>
+                           <Space style={{
+                               display: 'flex',
+                               justifyContent: 'center',
+                           }}>
+                               <IconCheck style={{
+                                   width: "36px", height: "36px", backgroundColor: "#d8e2dc", borderRadius: "100%", padding: "10px",
+                                   marginRight: "2px"
+                               }} />
+                               <Space style={{ display: 'flex', flexDirection: "column", alignItems: "center" }}>
+                                   <Typography.Text>Pass</Typography.Text>
+                                   <Typography.Text style={{ fontWeight: 600 }}>{totals[3]}</Typography.Text>
                                </Space>
                            </Space>
                        </Card>
