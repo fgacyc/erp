@@ -7,7 +7,7 @@ import {capitalFirstLetter} from "../../../tools/string.js";
 import "./pre-screening.css"
 import {IconDownload, IconSearch} from "@arco-design/web-react/icon";
 import {getTimeStamp} from "../../../tools/datetime.js";
-import UI_Breadcrumb from "../../../components/UI-Breadcrumb/UI-Breadcrumb.jsx";
+import UI_Breadcrumb from "../../../components/UI_Breadcrumb/UI_Breadcrumb.jsx";
 
 
 export  default  function PreScreening_table(){

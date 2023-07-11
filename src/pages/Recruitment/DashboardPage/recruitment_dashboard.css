@@ -20,3 +20,24 @@ style={{ display: "flex", justifyContent: "center", paddingTop: 30, paddingBotto
     width: 40%;
     height: 100%;
 }
+
+.recruitment-dashboard-con {
+    height: calc(100% - 70px);
+    background-color: white;
+    border-radius: 5px;
+}
+
+.recruitment-dashboard-card{
+    flex: 1;
+}
+
+.recruitment-dashboard-card-icon {
+    width: 30%;
+    height: 100%;
+    max-width: 36px;
+    max-height: 36px;
+    border-radius: 100%;
+    padding: 10px;
+    margin-right: 2px;
+}
+

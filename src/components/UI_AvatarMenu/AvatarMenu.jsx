@@ -3,6 +3,7 @@ import "./avatarMenu.css"
 import {useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {getUserNameFromUserData, updateStaffInfoLocal} from "../../tools/auth.js";
+import {goToProfile, logout} from "./avatarFuncs.js";
 
 
 export  function AvatarMenu(){
@@ -15,20 +16,21 @@ export  function AvatarMenu(){
         })
     },[])
 
-    async function logout(){
-        await updateStaffInfoLocal({login_status: false})
-        navigate("/login")
-    }
+
 
     function  handleMenuClick(key){
         if (key === "1"){
+            goToProfile();
+        }
+        else if (key === "2"){
             logout();
         }
     }
 
     const dropList = (
         <Menu onClickMenuItem={handleMenuClick} >
-            <Menu.Item key='1'>Log out</Menu.Item>
+            <Menu.Item key='1'>Profile</Menu.Item>
+            <Menu.Item key='2'>Log out</Menu.Item>
         </Menu>
     );
 

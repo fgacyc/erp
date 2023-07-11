@@ -8,7 +8,7 @@ const MenuItem = Menu.Item;
 const SubMenu = Menu.SubMenu;
 
 import {getLoginStatus, ifStaffInfoLocalExist} from "../../tools/auth.js";
-import {AvatarMenu} from "../AvatarMenu/AvatarMenu.jsx";
+import {AvatarMenu} from "../../components/UI_AvatarMenu/AvatarMenu.jsx";
 
 export default  function  Frame(){
     const navigate = useNavigate();

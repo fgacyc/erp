@@ -6,10 +6,10 @@ body{
 
 
 .app-component{
-    margin: 15px;
+    margin: 10px 15px 0 15px;
     width: calc(100% - 30px);
-    height: calc(100% - 30px);
     background-color: #fff;
+    border-radius: 5px;
 }
 
 .full-screen-app-component{

@@ -26,7 +26,7 @@ ChartJS.register(
 import "./recruitment_dashboard.css";
 import { getReq } from "../../../tools/requests.js";
 import { getInfoCount, getTotals } from "./dataCalculate.js";
-import UI_Breadcrumb from "../../../components/UI-Breadcrumb/UI-Breadcrumb.jsx";
+import UI_Breadcrumb from "../../../components/UI_Breadcrumb/UI_Breadcrumb.jsx";
 
 export default function Recruitment_Dashboard() {
     const [allData, setAllData] = useState(null);
@@ -401,16 +401,13 @@ export default function Recruitment_Dashboard() {
            <div style={{display:"flex"}}>
                <div className="left-side">
                    <div  className="upper" >
-                       <Card
+                       <Card className="recruitment-dashboard-card"
                            hoverable>
                            <Space style={{
                                display: 'flex',
                                justifyContent: 'center'
                            }}>
-                               <IconUserGroup style={{
-                                   width: "36px", height: "36px", backgroundColor: colors[0], borderRadius: "100%", padding: "10px",
-                                   marginRight: "2px"
-                               }} />
+                               <IconUserGroup style={{backgroundColor: colors[0]}} className="recruitment-dashboard-card-icon" />
                                <Space style={{ display: 'flex', flexDirection: "column", alignItems: "center" }}>
                                    <Typography.Text>Applicants</Typography.Text>
                                    <Typography.Text style={{ fontWeight: 600 }}>{totals[0]}</Typography.Text>
@@ -418,48 +415,39 @@ export default function Recruitment_Dashboard() {
                            </Space>
                        </Card>
 
-                       <Card
+                       <Card className="recruitment-dashboard-card"
                            hoverable>
                            <Space style={{
                                display: 'flex',
                                justifyContent: 'center',
                            }}>
-                               <IconCalendarClock style={{
-                                   width: "36px", height: "36px", backgroundColor: colors[1], borderRadius: "100%", padding: "10px",
-                                   marginRight: "2px"
-                               }} />
+                               <IconCalendarClock  style={{backgroundColor: colors[1]}} className="recruitment-dashboard-card-icon"  />
                                <Space style={{ display: 'flex', flexDirection: "column", alignItems: "center" }}>
                                    <Typography.Text>Pending</Typography.Text>
                                    <Typography.Text style={{ fontWeight: 600 }}>{totals[1]}</Typography.Text>
                                </Space>
                            </Space>
                        </Card>
-                       <Card
+                       <Card className="recruitment-dashboard-card"
                            hoverable>
                            <Space style={{
                                display: 'flex',
                                justifyContent: 'center',
                            }}>
-                               <IconCheck style={{
-                                   width: "36px", height: "36px", backgroundColor: colors[2], borderRadius: "100%", padding: "10px",
-                                   marginRight: "2px"
-                               }} />
+                               <IconCheck  style={{backgroundColor: colors[2]}} className="recruitment-dashboard-card-icon"  />
                                <Space style={{ display: 'flex', flexDirection: "column", alignItems: "center" }}>
                                    <Typography.Text>Pre-Pass</Typography.Text>
                                    <Typography.Text style={{ fontWeight: 600 }}>{totals[2]}</Typography.Text>
                                </Space>
                            </Space>
                        </Card>
-                       <Card
+                       <Card className="recruitment-dashboard-card"
                            hoverable>
                            <Space style={{
                                display: 'flex',
                                justifyContent: 'center',
                            }}>
-                               <IconCheck style={{
-                                   width: "36px", height: "36px", backgroundColor: "#d8e2dc", borderRadius: "100%", padding: "10px",
-                                   marginRight: "2px"
-                               }} />
+                               <IconCheck style={{backgroundColor: "#d8e2dc"}} className="recruitment-dashboard-card-icon"  />
                                <Space style={{ display: 'flex', flexDirection: "column", alignItems: "center" }}>
                                    <Typography.Text>Pass</Typography.Text>
                                    <Typography.Text style={{ fontWeight: 600 }}>{totals[3]}</Typography.Text>
@@ -473,7 +461,6 @@ export default function Recruitment_Dashboard() {
                            <Typography.Text style={{ fontWeight: 600 }}>Pastoral Team Summary</Typography.Text>
                            <Cascader
                                placeholder='Select Pastoral Team'
-                               style={{ width: 300, marginLeft: "10px"}}
                                options={options_bar}
                                changeOnSelect
                                allowClear
@@ -496,12 +483,12 @@ export default function Recruitment_Dashboard() {
                    }}
                          hoverable>
                        <Space style={{
-                           display: "flex", flexDirection: "column", alignItems: "flex-start",
+                           display: "flex", flexDirection: "column", alignItems: "center",
                        }}>
                            <Typography.Text style={{ fontWeight: 600 }}>Ministry Application Summary</Typography.Text>
                            <Cascader
-                               placeholder='Select Team'
-                               style={{ width: 350, margin: "10px 0px" }}
+                               placeholder='Select Ministry Team'
+                               style={{ marginTop : 10}}
                                options={options_pie}
                                changeOnSelect
                                allowClear
@@ -513,7 +500,7 @@ export default function Recruitment_Dashboard() {
                                }}
                            />
                        </Space>
-                       <Doughnut data={data_pie} />
+                       <Doughnut data={data_pie} style={{marginTop:10}} />
                    </Card>
                </div>
            </div>

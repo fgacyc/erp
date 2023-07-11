@@ -5,7 +5,7 @@ import valid from "./valid.js";
 import {postRecruiter} from "./postRequest.js";
 import "./Recruitment_Submission.css"
 import {pastoral_team_options} from "../../../data/pastoral_teams.js";
-import UI_Breadcrumb from "../../../components/UI-Breadcrumb/UI-Breadcrumb.jsx";
+import UI_Breadcrumb from "../../../components/UI_Breadcrumb/UI_Breadcrumb.jsx";
 
 export  default  function  Recruitment_Submission()  {
     const [name, setName] = useState('');
