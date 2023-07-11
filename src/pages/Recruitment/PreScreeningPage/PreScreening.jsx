@@ -8,7 +8,7 @@ import {getReq, putReq} from "../../../tools/requests.js";
 import {capitalFirstLetter} from "../../../tools/string.js";
 import "./pre-screening.css";
 import PreScreeningCommentsList from "./CommentsList.jsx";
-import {getAccAndPsw} from "../../../tools/auth.js";
+import {getAccAndPsw, getCurrentUserCYCID} from "../../../tools/auth.js";
 import {getTimeStamp} from "../../../tools/datetime.js";
 import {IconEdit} from "@arco-design/web-react/icon";
 import CandidateModal from "../../../components/UI_Modal/CandidateModal.jsx";
@@ -25,18 +25,26 @@ export default function PreScreening() {
     function getUserData(){
         getReq( `/recruiter/${RID}`).then((res) => {
             setUserDatas(res);
-            setUserCYC_ID(res.CYC_ID)
         });
     }
 
 
+
     useEffect(() => {
         getUserData();
+        getCurrentUserCYCID().then((res) => {
+            setUserCYC_ID(res);
+        });
     }, [])
 
     useEffect(() => {
         getUserData();
     }, [visible]);
+
+
+
+
+
 
      const handleStatus = (status) => {
         const pre_screening_status = status ? "pre-accepted" : "pre-rejected";
@@ -73,6 +81,7 @@ export default function PreScreening() {
             "comment": commentText,
             "CYC_ID": userCYC_ID,
         };
+        //console.log(comment)
 
         setUserDatas((userDatas) => ({
             ...userDatas,
@@ -85,6 +94,7 @@ export default function PreScreening() {
         putReq(`/comments/${RID}`, comment).then((res) => {
             setCommentText('');
         });
+
     };
 
     const isButtonDisabled = isButtonClicked ||

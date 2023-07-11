@@ -106,3 +106,7 @@ export async function updateRecentLogin(){
     console.log(res)
 }
 
+export async function getCurrentUserCYCID(){
+    let info = await getStaffInfoLocal();
+    return info.CYC_ID;
+}

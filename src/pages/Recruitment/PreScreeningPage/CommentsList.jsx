@@ -16,13 +16,6 @@ function PreScreeningComment({item}){
 
     useEffect(()=>{
         let router = `/auth/names?CYC_ID=${item.CYC_ID}`;
-        // let [acc, psw] = getAccAndPsw();
-        // if(acc === item.CYC_ID) {
-        //     getCurrentUser().then((res) => {
-        //         setCommentUserName(getUserNameFromUserData1(res))
-        //         return;
-        //     })
-        // }
         getReq(router).then((res)=>{
              //console.log(res)
             if(res.status){
@@ -39,8 +32,8 @@ function PreScreeningComment({item}){
             // author={item.CYC_ID === getAccAndPsw()[0] ? "You" : username}
             author={username}
             avatar={
-                // <Avatar style={{ backgroundColor: '#14a9f8' }}>{username.charAt(0).toUpperCase()}</Avatar>
-                <Avatar style={{ backgroundColor: '#14a9f8' }}>C</Avatar>
+                <Avatar style={{ backgroundColor: '#14a9f8' }}>{username.charAt(0).toUpperCase()}</Avatar>
+                //<Avatar style={{ backgroundColor: '#14a9f8' }}>C</Avatar>
             }
             // content={JSON.stringify(item)}
             content={item.comment}
@@ -50,21 +43,34 @@ function PreScreeningComment({item}){
 }
 
 export default  function PreScreeningCommentsList({userDatas}){
+
+
+    useEffect(() => {
+        let target = document.getElementById("comment-list-bottom");
+        target.scrollIntoView({
+            behavior: 'smooth',
+        })
+    }, [userDatas]);
+
+
     return (
-        <List
-            bordered={false}
-            header={<span>{userDatas.pre_screening.comments.length} comments</span>}
-        >
-            {userDatas.pre_screening.comments
-                .slice()
-                .reverse()
-                .map((item, index) => {
-                    return (
-                        <List.Item key={index}>
-                            <PreScreeningComment item={item}/>
-                        </List.Item>
-                    );
-                })}
-        </List>
+        <div>
+            <List
+                bordered={false}
+                header={<span>{userDatas.pre_screening.comments.length} comments</span>}
+            >
+                {userDatas.pre_screening.comments
+                    // .slice()
+                    // .reverse()
+                    .map((item, index) => {
+                        return (
+                            <List.Item key={index}>
+                                <PreScreeningComment item={item}/>
+                            </List.Item>
+                        );
+                    })}
+            </List>
+            <div id="comment-list-bottom"></div>
+        </div>
     )
 }
