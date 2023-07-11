@@ -14,3 +14,6 @@ $ yarn add react-router-dom
 ```
 
 https://react-chartjs-2.js.org/examples/vertical-bar-chart/
+
+
+Arco line color: #F2F3F5

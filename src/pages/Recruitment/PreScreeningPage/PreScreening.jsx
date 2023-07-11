@@ -11,7 +11,7 @@ import PreScreeningCommentsList from "./CommentsList.jsx";
 import { getCurrentUserCYCID} from "../../../tools/auth.js";
 import {getTimeStamp} from "../../../tools/datetime.js";
 import {IconEdit} from "@arco-design/web-react/icon";
-import CandidateModal from "../../../components/UI_Modal/CandidateModal.jsx";
+import CandidateModal from "../../../components/UI_Modal/CandidateModal/CandidateModal.jsx";
 
 export default function PreScreening() {
     const RID = useParams().RID || '64a792fbe3a86cdad7522be7';

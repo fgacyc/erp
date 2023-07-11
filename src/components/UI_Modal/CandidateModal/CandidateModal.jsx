@@ -1,9 +1,9 @@
 import {Modal, Button, Input, Message} from '@arco-design/web-react';
 import {useState} from "react";
-import Ministry_Cascader from "../UI_Cascader/Ministry_Cascader.jsx";
-import Pastoral_Cascader from "../UI_Cascader/Pastoral_Cascader.jsx";
-import {updateRecruiter} from "../../pages/Recruitment/SubmissionPage/postRequest.js";
-import valid from "../../pages/Recruitment/SubmissionPage/valid.js";
+import Ministry_Cascader from "../../UI_Cascader/Ministry_Cascader.jsx";
+import Pastoral_Cascader from "../../UI_Cascader/Pastoral_Cascader.jsx";
+import {updateRecruiter} from "../../../pages/Recruitment/SubmissionPage/postRequest.js";
+import valid from "../../../pages/Recruitment/SubmissionPage/valid.js";
 
 function CandidateModalInput({tip,value,setValue}) {
     return(

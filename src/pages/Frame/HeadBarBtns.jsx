@@ -11,8 +11,11 @@ import {
 import {Button} from "@arco-design/web-react";
 import "./Frame.css"
 import {useState} from "react";
+import NotificationModal from "../../components/UI_Modal/NotificationModal/NotificationModal.jsx";
 
 export default function HeadBarBtns(){
+    const [notificationModalVisible, setNotificationModalVisible] = useState(false);
+
     const [ifDarkTheme, setIfDarkTheme] = useState(false);
 
     function changeTheme(){
@@ -23,7 +26,10 @@ export default function HeadBarBtns(){
             document.body.setAttribute('arco-theme', 'dark');
             setIfDarkTheme(true);
         }
+    }
 
+    function showNotificationModal(){
+        setNotificationModalVisible(!notificationModalVisible);
     }
 
 
@@ -38,8 +44,9 @@ export default function HeadBarBtns(){
                 :<Button shape='circle' type='primary' icon={<IconMoon />} className="head-bar-btn" onClick={changeTheme}/>
             }
             <Button shape='circle' type='primary' icon={<IconSettings />} className="head-bar-btn"  />
-            <Button shape='circle' type='primary' icon={<IconNotification />} className="head-bar-btn" />
+            <Button shape='circle' type='primary' icon={<IconNotification />} className="head-bar-btn" onClick={showNotificationModal}/>
             <AvatarMenu/>
+            <NotificationModal visible={notificationModalVisible} setVisible={setNotificationModalVisible}/>
         </span>
     )
 }
