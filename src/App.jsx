@@ -6,6 +6,7 @@ import Recruitment_Submission from "./pages/Recruitment/SubmissionPage/Recruitme
 import PreScreening_table from "./pages/Recruitment/PreScreeningPage/PreScreening_table.jsx";
 import PreScreening from "./pages/Recruitment/PreScreeningPage/PreScreening.jsx";
 import Recruitment_Dashboard from "./pages/Recruitment/DashboardPage/Recruitment_Dashboard.jsx";
+import Recruitment_Appointment from "./pages/Recruitment/Appointment/Recruitment_Appointment.jsx";
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
                             <Route path="/recruitment_add_candidate" element={<Recruitment_Submission/>} />
                             <Route path="/recruitment_pre_screening" element={<PreScreening_table/>} />
                             <Route path="/recruitment_pre_screening/:RID" element={<PreScreening/>} />
+                            <Route path="/recruitment_pre_appointment" element={<Recruitment_Appointment/>} />
                         </Route>
                     </Routes>
             </Router>

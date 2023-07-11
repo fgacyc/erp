@@ -6,7 +6,8 @@ body{
 
 
 .app-component{
-    margin: 5px;
-    width: calc(100% - 10px);
-    height: calc(100% - 10px);
+    margin: 15px;
+    width: calc(100% - 30px);
+    height: calc(100% - 30px);
+    background-color: #fff;
 }

@@ -6,25 +6,18 @@ const BreadcrumbItem = Breadcrumb.Item;
 export  default  function UI_Breadcrumb({items}) {
     // const navigate = useNavigate();
 
-    items = [
-        {
-            name: "Home",
-            link: "/recruitment_dashboard"
-        },
-        {
-            name: "Pre-Screening",
-            link: "/recruitment_pre_screening"
-        }
-    ]
-
     return (
-        <Breadcrumb>
-            <BreadcrumbItem>
-                <IconHome/>
+        <Breadcrumb style={{marginLeft:15,marginTop:10}}>
+            <BreadcrumbItem href="/">
+                <IconHome style={{ fontSize: '16px' }} />
             </BreadcrumbItem>
             {
                 items.map((item, index) => {
-                    return <BreadcrumbItem key={index} >{item.name}</BreadcrumbItem>
+                    if(item.clickable){
+                        return <BreadcrumbItem key={index} href={item.link}>{item.name}</BreadcrumbItem>
+                    }else{
+                        return <BreadcrumbItem key={index} >{item.name}</BreadcrumbItem>
+                    }
                 })
             }
         </Breadcrumb>

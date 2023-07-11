@@ -5,6 +5,7 @@ import valid from "./valid.js";
 import {postRecruiter} from "./postRequest.js";
 import "./Recruitment_Submission.css"
 import {pastoral_team_options} from "../../../data/pastoral_teams.js";
+import UI_Breadcrumb from "../../../components/UI-Breadcrumb/UI-Breadcrumb.jsx";
 
 export  default  function  Recruitment_Submission()  {
     const [name, setName] = useState('');
@@ -42,10 +43,24 @@ export  default  function  Recruitment_Submission()  {
         alert('Success');
     };
 
+    const breadcrumbItems = [
+        {
+            name: "Recruitment",
+            link: "/",
+            clickable: false
+        },
+        {
+            name: "Add Candidate",
+            link: "/recruitment_add_candidate",
+            clickable: true
+        }
+    ]
 
     return  (
-        <div className="recruitment-con_style">
-            <Space direction='vertical' size={"large"} style={{width:"95%",maxWidth:600}}>
+        <>
+            <UI_Breadcrumb items={breadcrumbItems}/>
+        <div className="app-component recruitment-con_style">
+            <Space direction='vertical' size={"large"}  className="recruitment-container">
                 <div style={divStyle}>
                     <p>Name:</p>
                     <Input  allowClear placeholder='Please Enter your name' type="text" onChange={s => setName(s)}/>
@@ -96,5 +111,6 @@ export  default  function  Recruitment_Submission()  {
                     Submit</Button>
             </Space>
         </div>
+        </>
     )
 }

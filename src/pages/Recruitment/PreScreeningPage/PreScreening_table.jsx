@@ -7,6 +7,7 @@ import {capitalFirstLetter} from "../../../tools/string.js";
 import "./pre-screening.css"
 import {IconDownload, IconSearch} from "@arco-design/web-react/icon";
 import {getTimeStamp} from "../../../tools/datetime.js";
+import UI_Breadcrumb from "../../../components/UI-Breadcrumb/UI-Breadcrumb.jsx";
 
 
 export  default  function PreScreening_table(){
@@ -272,35 +273,50 @@ export  default  function PreScreening_table(){
         }, 300);
     }
 
+    const breadcrumbItems = [
+        {
+            name: "Recruitment",
+            link: "/",
+            clickable: false
+        },
+        {
+            name: "Pre-Screening",
+            link: "/recruitment_pre_screening",
+            clickable: true
+        }
+    ]
 
 
     return(
-        <div className="pre-screening-table-con">
-            <Button type='secondary' icon={<IconDownload />}
-                    className="pre_screening-download-btn"
-                    onClick={handleDownload}
-            >Download</Button>
-            {
-                data &&
-                <Table
-                    loading={loading}
-                    columns={columns}
-                    data={allData}
-                    pagination={pagination}
-                    onChange={onChangeTable}
-                    renderPagination={(paginationNode) => (
-                        <div
-                            style={{
-                                display: 'flex',
-                                justifyContent: 'space-between',
-                                marginTop: 10,
-                            }}
-                        >
-                            {paginationNode}
-                        </div>
-                    )}
-                />
-            }
-        </div>
+        <>
+            <UI_Breadcrumb items={breadcrumbItems}/>
+            <div className="app-component pre-screening-table-con">
+                <Button type='secondary' icon={<IconDownload />}
+                        className="pre_screening-download-btn"
+                        onClick={handleDownload}
+                >Download</Button>
+                {
+                    data &&
+                    <Table
+                        loading={loading}
+                        columns={columns}
+                        data={allData}
+                        pagination={pagination}
+                        onChange={onChangeTable}
+                        renderPagination={(paginationNode) => (
+                            <div
+                                style={{
+                                    display: 'flex',
+                                    justifyContent: 'space-between',
+                                    marginTop: 10,
+                                }}
+                            >
+                                {paginationNode}
+                            </div>
+                        )}
+                    />
+                }
+            </div>
+        </>
     )
 }

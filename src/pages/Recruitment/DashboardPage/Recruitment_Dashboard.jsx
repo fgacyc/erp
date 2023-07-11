@@ -26,6 +26,7 @@ ChartJS.register(
 import "./recruitment_dashboard.css";
 import { getReq } from "../../../tools/requests.js";
 import { getInfoCount, getTotals } from "./dataCalculate.js";
+import UI_Breadcrumb from "../../../components/UI-Breadcrumb/UI-Breadcrumb.jsx";
 
 export default function Recruitment_Dashboard() {
     const [allData, setAllData] = useState(null);
@@ -380,7 +381,22 @@ export default function Recruitment_Dashboard() {
         ],
     };
 
+    const breadcrumbItems = [
+        {
+            name: "Recruitment",
+            link: "/",
+            clickable: false
+        },
+        {
+            name: "Dashboard",
+            link: "/recruitment_dashboard",
+            clickable: true
+        }
+    ]
+
     return (
+        <>
+        <UI_Breadcrumb items={breadcrumbItems}/>
         <div className="recruitment-dashboard-con app-component">
            <div style={{display:"flex"}}>
                <div className="left-side">
@@ -502,5 +518,6 @@ export default function Recruitment_Dashboard() {
                </div>
            </div>
         </div>
+        </>
     )
 }
