@@ -45,14 +45,6 @@ function PreScreeningComment({item}){
 export default  function PreScreeningCommentsList({userDatas}){
 
 
-    useEffect(() => {
-        let target = document.getElementById("comment-list-bottom");
-        target.scrollIntoView({
-            behavior: 'smooth',
-        })
-    }, [userDatas]);
-
-
     return (
         <div>
             <List

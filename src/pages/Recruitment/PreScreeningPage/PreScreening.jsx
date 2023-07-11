@@ -8,7 +8,7 @@ import {getReq, putReq} from "../../../tools/requests.js";
 import {capitalFirstLetter} from "../../../tools/string.js";
 import "./pre-screening.css";
 import PreScreeningCommentsList from "./CommentsList.jsx";
-import {getAccAndPsw, getCurrentUserCYCID} from "../../../tools/auth.js";
+import { getCurrentUserCYCID} from "../../../tools/auth.js";
 import {getTimeStamp} from "../../../tools/datetime.js";
 import {IconEdit} from "@arco-design/web-react/icon";
 import CandidateModal from "../../../components/UI_Modal/CandidateModal.jsx";
@@ -38,7 +38,9 @@ export default function PreScreening() {
     }, [])
 
     useEffect(() => {
-        getUserData();
+        if(!visible){
+            getUserData();
+        }
     }, [visible]);
 
 
@@ -69,9 +71,15 @@ export default function PreScreening() {
         });
     }
 
-    const handleComment = (e) => {
-        e.preventDefault();
+    function commentScrollToBottom() {
+        let target = document.getElementById("comment-list-bottom");
+        target.scrollIntoView({
+            behavior: 'smooth',
+        })
+    }
 
+
+    function sendComment(){
         if (commentText.trim() === '') {
             return;
         }
@@ -94,7 +102,20 @@ export default function PreScreening() {
         putReq(`/comments/${RID}`, comment).then((res) => {
             setCommentText('');
         });
+    }
 
+    const handleComment = (e) => {
+        e.preventDefault();
+        commentScrollToBottom();
+        sendComment();
+    };
+
+    const handleKeyDown = (event) => {
+        if (event.ctrlKey && event.key === 'Enter') {
+            event.preventDefault();
+            commentScrollToBottom();
+            sendComment();
+        }
     };
 
     const isButtonDisabled = isButtonClicked ||
@@ -199,6 +220,7 @@ export default function PreScreening() {
                             placeholder='Write a comment ...'
                             value={commentText}
                             onChange={(value, e) => setCommentText(value)}
+                            onKeyDown={handleKeyDown}
                         />
                     </div>
                 }

@@ -118,7 +118,7 @@ export default  function  Frame(){
                             }
                         >
                             <MenuItem key='recruitment_dashboard'>Dashboard</MenuItem>
-                            <MenuItem key='recruitment_add_recruiter'>Add Recruiter</MenuItem>
+                            <MenuItem key='recruitment_add_candidate'>Add Candidate</MenuItem>
                             <MenuItem key='recruitment_pre_screening'>Pre-screening</MenuItem>
                             <MenuItem key='recruitment_pre_appointment' disabled>Appointment</MenuItem>
                             <MenuItem key='recruitment_interview' disabled>Interview</MenuItem>

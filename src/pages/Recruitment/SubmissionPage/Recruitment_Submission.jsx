@@ -46,8 +46,6 @@ export  default  function  Recruitment_Submission()  {
     return  (
         <div className="recruitment-con_style">
             <Space direction='vertical' size={"large"} style={{width:"95%",maxWidth:600}}>
-                <h1>Submission form</h1>
-
                 <div style={divStyle}>
                     <p>Name:</p>
                     <Input  allowClear placeholder='Please Enter your name' type="text" onChange={s => setName(s)}/>
@@ -76,7 +74,7 @@ export  default  function  Recruitment_Submission()  {
                 </div>
 
                 <div style={divStyle}>
-                    <p>Department1:</p>
+                    <p>Ministry:</p>
                     <Cascader
                         changeOnSelect
                         placeholder='Click to expand'

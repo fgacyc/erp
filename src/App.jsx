@@ -18,7 +18,7 @@ function App() {
                         <Route path="/login" element={<Login/>} />
                         <Route path="/" element={<Frame/>} >
                             <Route path="/recruitment_dashboard" element={<Recruitment_Dashboard/>} />
-                            <Route path="/recruitment_add_recruiter" element={<Recruitment_Submission/>} />
+                            <Route path="/recruitment_add_candidate" element={<Recruitment_Submission/>} />
                             <Route path="/recruitment_pre_screening" element={<PreScreening_table/>} />
                             <Route path="/recruitment_pre_screening/:RID" element={<PreScreening/>} />
                         </Route>
