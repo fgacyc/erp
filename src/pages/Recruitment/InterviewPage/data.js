@@ -23,6 +23,8 @@ const appointmentTimes = {
 };
 
 export function getAppointmentTimesString(value){
+    if(!value) return ;
+
     value = value.toString();
     let general = appointmentTimes.general;
     let dance = appointmentTimes.dance;

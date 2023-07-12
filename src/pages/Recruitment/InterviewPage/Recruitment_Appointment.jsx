@@ -7,6 +7,7 @@ import {filterDataHaveAppoint, getAppointTimes} from "./data.js";
 import CandidateModal from "../../../components/UI_Modal/CandidateModal/CandidateModal.jsx";
 import "./recruitment-appo.css"
 import {useNavigate} from "react-router-dom";
+import {putReq} from "../../../tools/requests.js";
 
 export default function Recruitment_Appointment() {
     const breadcrumbItems = [
@@ -40,7 +41,11 @@ export default function Recruitment_Appointment() {
     }
 
     function startInterview(record){
-        navigate(`/recruitment_interview/form/${record._id}/1`);
+        let RID = record._id;
+        // log the start time
+        putReq(`/interview/start_time/${RID}`)
+        navigate(`/recruitment_interview/form/${RID}/1`);
+
     }
 
     const columns  = [

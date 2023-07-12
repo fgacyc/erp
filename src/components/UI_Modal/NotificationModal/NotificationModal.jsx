@@ -7,7 +7,7 @@ export  default  function NotificationModal({visible, setVisible}){
 
     function  initModalPosition(){
         let screenWidth = window.innerWidth;
-        console.log(screenWidth)
+        //console.log(screenWidth)
         let modalWidth = 400;
         let rightVal = screenWidth /2 - modalWidth / 2 - 15;
         setRightVal(rightVal);

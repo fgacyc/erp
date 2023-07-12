@@ -1,16 +1,17 @@
 import UI_Breadcrumb from "../../../components/UI_Breadcrumb/UI_Breadcrumb.jsx";
 import {Link, useNavigate, useParams} from "react-router-dom";
-import {Button, Cascader, Select, Steps} from "@arco-design/web-react";
+import {Button, Cascader, Input, Message, Result, Select, Steps} from "@arco-design/web-react";
 import {useState} from "react";
 import {generalQuestions} from "./generalQuestions.js";
 import QuestionGroup from "./QuestionGroup.jsx";
 import {people_experience_specific_questions,
     creative_team_specific_questions,
     communication_specific_questions} from "./specificQuestions.js";
+import {postReq} from "../../../tools/requests.js";
 
 const Option = Select.Option;
 const Step = Steps.Step;
-
+const TextArea = Input.TextArea;
 
 export default function Interview_form() {
     const breadcrumbItems = [
@@ -25,14 +26,13 @@ export default function Interview_form() {
             clickable: true
         }
     ]
-    const {RID,partID} = useParams();
-
-    const  [interviewers, setInterviewers] = useState([]);
-    const [QAs, setQAs] = useState({});
+    let {RID,partID} = useParams();
+    const  [interviewers, setInterviewers] = useState(null);
+    const [QAs, setQAs] = useState([]);
+    const [freeQAs, setFreeQAs] = useState("");
+    const [ifSubmitted, setIfSubmitted] = useState(false);
 
     const navigate = useNavigate();
-
-
 
 
     const conStyle = {
@@ -50,6 +50,10 @@ export default function Interview_form() {
         specificQuestions = creative_team_specific_questions;
     }else if (team === 'Communication') {
         specificQuestions = communication_specific_questions;
+    }
+
+    function backToInterViewTable(){
+        navigate(`/recruitment_interview`);
     }
 
     let options = [
@@ -71,16 +75,36 @@ export default function Interview_form() {
         }
     ]
 
-    function goToNextPart(){
-        navigate(`/recruitment_interview/form/${RID}/${parseInt(partID)+1}`);
+    function goToNextPart(num){
+        partID  =    parseInt(partID);
+        console.log(QAs)
+
+        if(num ===1){
+            if (partID === 4) return;
+            navigate(`/recruitment_interview/form/${RID}/${parseInt(partID)+1}`);
+        }else{
+            if (partID === 1) return;
+            navigate(`/recruitment_interview/form/${RID}/${parseInt(partID)-1}`);
+        }
     }
 
-    function submitHandler(){
-        // console.log(QAs);
-        // console.log(interviewers);
-        // console.log(ministryID);
-        // console.log(formID);
-        //postScorecard(formID,ministryID,  interviewers, QAs);
+    async function submitHandler(){
+        if(!interviewers){
+            Message.warning('Please select interviewers');
+            return;
+        }
+
+        let data = {
+            interviewers: interviewers,
+            answers : QAs,
+        }
+
+        let res =await postReq(`/interview/answers/${RID}`,data)
+
+        if(res.status){
+            setIfSubmitted(true);
+            console.log(res)
+        }
     }
 
 
@@ -117,7 +141,67 @@ export default function Interview_form() {
                         })}
                     </div>
                 }
-                <Button type='primary' style={{width:100, position:"absolute",bottom:10, right:100}} onClick={goToNextPart}>Next</Button>
+                {
+                    partID === '3' &&
+                    <div style={{ display: "flex",justifyItems:"center" }}>
+                        <TextArea
+                            onChange={
+                                (val)=>{
+                                    setQAs({...QAs, ["freeQAs"]:val})
+                                }
+                            }
+                            placeholder='Please enter ...'
+                            style={{
+                                width: "80%",
+                                resize: "none",
+                                margin:"50px auto"
+                        }}
+                            autoSize={{ minRows: 20}}
+                            // onChange={onChangeHandler}
+                        />
+                    </div>
+                }
+                {
+                    partID === '4' &&
+                        <div style={{ display: "flex",flexDirection:"column",alignItems:"center",justifyItems:"center" }}>
+                            <div style={{margin:"30px 0 10px 0"}}>Interviewers</div>
+                            <Select
+                                mode='multiple'
+                                placeholder='Please select'
+                                style={{ width: 600 }}
+                                defaultValue={[]}
+                                allowClear
+                                onChange={list => setInterviewers(list)}
+                            >
+                                {options.map((option,index) => (
+                                    <Option key={index} value={option.value}>
+                                        {option.label}
+                                    </Option>
+                                ))}
+                            </Select>
+                            {
+                                ifSubmitted &&
+                                <Result
+                                    style={{marginTop:70}}
+                                    status='success'
+                                    title='Submission Success'
+                                    subTitle='Recruitment form has been submitted successfully.'
+                                    extra={[
+                                        <Button key='back' type='primary' onClick={backToInterViewTable}>
+                                            Back
+                                        </Button>,
+                                    ]}
+                                ></Result>
+                            }
+                    </div>
+                }
+                <Button type='primary' style={{width:100, position:"absolute",bottom:10, left:100}} onClick={()=>goToNextPart(-1)}>Previous </Button>
+                {
+                    partID !== '4'
+                    ?  <Button type='primary' style={{width:100, position:"absolute",bottom:10, right:100}} onClick={()=>goToNextPart(1)}>Next</Button>
+                    :  <Button type='primary' style={{width:100, position:"absolute",bottom:10, right:100}} onClick={submitHandler}>Submit</Button>
+                }
+
 
                 {/*<div style={conStyle}>*/}
                 {/*    <div>*/}
