@@ -1,7 +1,7 @@
 export function filterEvaluationData(data) {
     let dataFilter = []
     for (let item of data) {
-        if (item.interview.ministry.questions !== null) {
+        if (item.interview.status ===  true) {
             dataFilter.push(item);
         }
     }

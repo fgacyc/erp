@@ -96,12 +96,41 @@ export default function Recruitment_Appointment() {
         {
             title: "Date time",
             dataIndex: 'appointment.ministry.appointment_time',
+            filterMultiple: false,
             render: (text, record) => (
                 <span >
                     {getAppointTimes(record)}
                 </span>
             )
-        },
+        }
+        ,
+        {
+            title: "Status",
+            dataIndex: 'interview.status',
+            filters: [
+                {
+                    text:  "Pending",
+                    value: false ,
+                },
+                {
+                    text:  "Interviewed",
+                    value:  true,
+                }
+            ],
+            onFilter: (value, row) =>{
+                return row.interview.status === value
+            },
+            filterMultiple: false,
+            render: (text, record) => (
+                <span >
+                    { record.interview.status === true
+                        ? <span style={{color:"green"}}>Interviewed</span>
+                        : <span >Pending</span>
+                    }
+                </span>
+            )
+        }
+        ,
         {
             title: 'Operation',
             dataIndex: 'op',

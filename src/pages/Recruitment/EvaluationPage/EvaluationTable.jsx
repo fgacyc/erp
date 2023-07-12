@@ -6,6 +6,8 @@ import CandidateModal from "../../../components/UI_Modal/CandidateModal/Candidat
 import {useNavigate} from "react-router-dom";
 import {addKeys} from "../../../tools/tableTools.js";
 import {IconSearch} from "@arco-design/web-react/icon";
+import {filterDataHaveAppoint} from "../InterviewPage/data.js";
+import {filterEvaluationData} from "./data.js";
 
 export default function Recruitment_Evaluation_Table() {
     const breadcrumbItems = [
@@ -29,8 +31,8 @@ export default function Recruitment_Evaluation_Table() {
 
     useEffect(() => {
         getAllUsers().then((res) => {
-            //let filterData = filterDataHaveAppoint(res);
-            setUserData(addKeys(res));
+            let filterData = filterEvaluationData(res);
+            setUserData(addKeys(filterData));
         });
     }, []);
 
