@@ -36,8 +36,15 @@ export default function Recruitment_Evaluation_Table() {
         setVisible(true);
     }
 
-    function startInterview(record){
+    function startEvaluation(record){
         navigate(`/recruitment_evaluation/form/${record._id}`);
+    }
+
+    function getPassStatus(record){
+        let applicationStatus = record.application.status;
+        if(applicationStatus === "accepted") return "accepted";
+        else if(applicationStatus === "rejected") return "rejected";
+        else return "pending";
     }
 
     const columns  = [
@@ -56,10 +63,25 @@ export default function Recruitment_Evaluation_Table() {
             dataIndex: 'info.ministry[2]',
         },
         {
+            title: 'Status',
+            render: (_, record) => (
+                <span>
+                   {getPassStatus(record) === "accepted" &&
+                       <span style={{color:"green"}}>Accepted</span>}
+                    {getPassStatus(record) === "rejected" &&
+                        <span style={{color:"red"}}>Rejected</span>}
+                    {getPassStatus(record) === "pending" &&
+                        <span>Pending</span>}
+                </span>
+            )
+        },
+        {
             title: 'Operation',
             dataIndex: 'op',
             render: (_, record) => (
-                <Button onClick={()=>startInterview(record)} type='primary'>
+                <Button onClick={()=>startEvaluation(record)} type='primary'
+                       // disabled={record.application.status==="accepted" ||record.application.status==="rejected" }
+                >
                     Evaluate
                 </Button>
             ),
