@@ -10,6 +10,7 @@ const SubMenu = Menu.SubMenu;
 import {getLoginStatus, ifStaffInfoLocalExist} from "../../tools/auth.js";
 import {AvatarMenu} from "../../components/UI_AvatarMenu/AvatarMenu.jsx";
 import HeadBarBtns from "./HeadBarBtns.jsx";
+import {ifShowPreScreening} from "./AuthorityDetection.js";
 
 export default  function  Frame(){
     const navigate = useNavigate();

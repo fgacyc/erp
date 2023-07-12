@@ -80,8 +80,9 @@ export default function Evaluation_Page() {
                             {
                                 showBack ?<Button type="primary" style={{width:100}} onClick={()=>navigate("/recruitment_evaluation")}>Back</Button>
                                 :<div>
-                                    <Button type="secondary" style={{width:100,marginRight:10}} onClick={()=>confirmSubmit("rejected")}>Next Time</Button>
-                                    <Button type="primary" style={{width:100}}  onClick={()=>confirmSubmit("accepted")}>Pass</Button>
+                                    <Button status='danger' style={{width:100,marginRight:10}} onClick={()=>confirmSubmit("rejected")}>Next Time</Button>
+                                    <Button status='warning' style={{width:100,marginRight:10}}  onClick={()=>confirmSubmit("accepted")}>KIV</Button>
+                                    <Button type="primary" style={{width:100}}  onClick={()=>confirmSubmit("kiv")}>Pass</Button>
                                 </div>
                             }
                         </Space>
@@ -116,15 +117,18 @@ export default function Evaluation_Page() {
 
                         <div>
                             <h2>Pre-Screening</h2>
-                            <List bordered={false} header={<span>2 comments</span>}>
-                                {comments!==null && comments.map((item, index) => {
-                                    return (
-                                        <List.Item key={index}>
-                                            <PreScreeningComment item={item} index={index} />
-                                        </List.Item>
-                                    );
-                                })}
-                            </List>
+                            {
+                                comments !== null &&
+                                <List bordered={false} header={<span>{comments.length} comments</span>}>
+                                    {comments.map((item, index) => {
+                                        return (
+                                            <List.Item key={index}>
+                                                <PreScreeningComment item={item} index={index}/>
+                                            </List.Item>
+                                        );
+                                    })}
+                                </List>
+                            }
                         </div>
 
                     </Space>
