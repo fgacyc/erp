@@ -309,6 +309,7 @@ export  default  function PreScreening_table(){
                                     display: 'flex',
                                     justifyContent: 'space-between',
                                     marginTop: 10,
+                                    float: 'right',
                                 }}
                             >
                                 {paginationNode}

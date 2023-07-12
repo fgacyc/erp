@@ -49,6 +49,7 @@ export default function Recruitment_Evaluation_Table() {
         let applicationStatus = record.application.status;
         if(applicationStatus === "accepted") return "accepted";
         else if(applicationStatus === "rejected") return "rejected";
+        else if(applicationStatus === "kiv") return "kiv";
         else return "pending";
     }
 
@@ -97,6 +98,24 @@ export default function Recruitment_Evaluation_Table() {
         },
         {
             title: 'Status',
+            filters: [
+                {
+                    text:  "Pending",
+                    value: "pre-accepted" ,
+                },
+                {
+                    text:  "KIV",
+                    value: "kiv" ,
+                },
+                {
+                    text:  "Rejected",
+                    value:  "rejected",
+                }
+            ],
+            onFilter: (value, row) =>{
+                return  row.application.status === value
+            },
+            filterMultiple: false,
             render: (_, record) => (
                 <span>
                    {getPassStatus(record) === "accepted" &&
@@ -105,6 +124,8 @@ export default function Recruitment_Evaluation_Table() {
                         <span style={{color:"red"}}>Rejected</span>}
                     {getPassStatus(record) === "pending" &&
                         <span>Pending</span>}
+                    {getPassStatus(record) === "kiv" &&
+                        <span style={{color:"orange"}}>KIV</span>}
                 </span>
             )
         },
