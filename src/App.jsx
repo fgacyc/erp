@@ -11,6 +11,7 @@ import Profile from "./pages/Profile/Profile.jsx";
 import Interview_form from "./pages/Recruitment/InterviewPage/Interview_form.jsx";
 import Recruitment_Evaluation_Table from "./pages/Recruitment/EvaluationPage/EvaluationTable.jsx";
 import Evaluation_Page from "./pages/Recruitment/EvaluationPage/EvaluationPage.jsx";
+import Registration from './pages/Registration/Registration.jsx';
 
 function App() {
 
@@ -31,6 +32,7 @@ function App() {
                             <Route path="/recruitment_evaluation" element={<Recruitment_Evaluation_Table/>} />
                             <Route path="/recruitment_evaluation/form/:RID" element={<Evaluation_Page/>} />
                         </Route>
+                        <Route path="/registration" element={<Registration/>} />
                         <Route path="/profile" element={<Profile/>} />
                         <Route path="*" element={<Login/>} />
                     </Routes>

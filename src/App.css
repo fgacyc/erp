@@ -15,3 +15,9 @@ body{
 .full-screen-app-component{
     height: calc(100% - 70px);
 }
+
+@media screen and (max-width: 768px) {
+  body {
+    overflow: auto;
+  }
+}
