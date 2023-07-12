@@ -3,7 +3,7 @@ import {Avatar, Comment, List} from "@arco-design/web-react";
 import {useEffect, useState} from "react";
 import {getReq} from "../../../tools/requests.js";
 
-function PreScreeningComment({item}){
+export function PreScreeningComment({item}){
     let [username, setUsername] = useState("");
 
     function setCommentUserName(data){
