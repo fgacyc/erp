@@ -8,7 +8,7 @@ export default function Recruitment_Appointment() {
             clickable: false
         },
         {
-            name: "Appointment",
+            name: "Evaluation",
             link: "/recruitment_pre_appointment",
             clickable: true
         }
