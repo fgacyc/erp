@@ -59,47 +59,6 @@ export default  function  Frame(){
                         autoOpen
                         defaultSelectedKeys={['0_1']}
                     >
-                    {/*    <SubMenu*/}
-                    {/*        key='0'*/}
-                    {/*        title={*/}
-                    {/*            <>*/}
-                    {/*                <IconApps /> Member*/}
-                    {/*            </>*/}
-                    {/*        }*/}
-                    {/*    >*/}
-                    {/*        <MenuItem key='dashboard' >Dashboard</MenuItem>*/}
-                    {/*        <MenuItem key='members'>Members</MenuItem>*/}
-                    {/*        <MenuItem key='attendance'>Attendance</MenuItem>*/}
-                    {/*    </SubMenu>*/}
-                    {/*    <SubMenu*/}
-                    {/*        key='1'*/}
-                    {/*        title={*/}
-                    {/*            <>*/}
-                    {/*                <IconBug /> Navigation 2*/}
-                    {/*            </>*/}
-                    {/*        }*/}
-                    {/*    >*/}
-                    {/*        <MenuItem key='1_0'>Menu 1</MenuItem>*/}
-                    {/*        <MenuItem key='1_1'>Menu 2</MenuItem>*/}
-                    {/*        <MenuItem key='1_2'>Menu 3</MenuItem>*/}
-                    {/*    </SubMenu>*/}
-                    {/*    <SubMenu*/}
-                    {/*        key='2'*/}
-                    {/*        title={*/}
-                    {/*            <>*/}
-                    {/*                <IconBulb /> Navigation 3*/}
-                    {/*            </>*/}
-                    {/*        }*/}
-                    {/*    >*/}
-                    {/*        <MenuItemGroup key='2_0' title='Menu Group 1'>*/}
-                    {/*            <MenuItem key='2_0_0'>Menu 1</MenuItem>*/}
-                    {/*            <MenuItem key='2_0_1'>Menu 2</MenuItem>*/}
-                    {/*        </MenuItemGroup>*/}
-                    {/*        <MenuItemGroup key='2_1' title='Menu Group 1'>*/}
-                    {/*            <MenuItem key='2_1_0'>Menu 3</MenuItem>*/}
-                    {/*            <MenuItem key='2_1_1'>Menu 4</MenuItem>*/}
-                    {/*        </MenuItemGroup>*/}
-                    {/*    </SubMenu>*/}
                         <SubMenu
                             key='3'
                             title={
@@ -111,10 +70,8 @@ export default  function  Frame(){
                             <MenuItem key='recruitment_dashboard'>Dashboard</MenuItem>
                             <MenuItem key='recruitment_add_candidate'>Add Candidate</MenuItem>
                             <MenuItem key='recruitment_pre_screening'>Pre-screening</MenuItem>
-                            <MenuItem key='recruitment_pre_appointment'>Appointment</MenuItem>
-                            <MenuItem key='recruitment_interview' disabled>Interview</MenuItem>
-                            <MenuItem key='recruitment_evaluation' disabled>Evaluation</MenuItem>
-                            <MenuItem key='recruitment_offer' disabled>Offer</MenuItem>
+                            <MenuItem key='recruitment_interview'>Interview</MenuItem>
+                            <MenuItem key='recruitment_evaluation'>Evaluation</MenuItem>
                         </SubMenu>
                     </Menu>
                 </div>

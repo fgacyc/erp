@@ -14,7 +14,8 @@ import {IconEdit} from "@arco-design/web-react/icon";
 import CandidateModal from "../../../components/UI_Modal/CandidateModal/CandidateModal.jsx";
 
 export default function PreScreening() {
-    const RID = useParams().RID || '64a792fbe3a86cdad7522be7';
+    //const RID = useParams().RID || '64a792fbe3a86cdad7522be7';
+    const RID = useParams().RID
 
     const [userDatas, setUserDatas] = useState(null);
     const [commentText, setCommentText] = useState('');

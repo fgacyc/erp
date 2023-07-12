@@ -1,5 +1,4 @@
 import UI_Breadcrumb from "../../../components/UI_Breadcrumb/UI_Breadcrumb.jsx";
-import "./recruitment_appointment.css"
 
 export default function Recruitment_Appointment() {
     const breadcrumbItems = [
@@ -9,8 +8,8 @@ export default function Recruitment_Appointment() {
             clickable: false
         },
         {
-            name: "Appointment",
-            link: "/recruitment_pre_appointment",
+            name: "Evaluation",
+            link: "/recruitment_evaluation",
             clickable: true
         }
     ]
@@ -18,7 +17,7 @@ export default function Recruitment_Appointment() {
         <>
             <UI_Breadcrumb items={breadcrumbItems}/>
             <div className="app-component full-screen-app-component">
-                <div></div>
+                <h1>evaluation</h1>
             </div>
         </>
     )

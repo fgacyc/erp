@@ -8,6 +8,7 @@ import "./pre-screening.css"
 import {IconDownload, IconSearch} from "@arco-design/web-react/icon";
 import {getTimeStamp} from "../../../tools/datetime.js";
 import UI_Breadcrumb from "../../../components/UI_Breadcrumb/UI_Breadcrumb.jsx";
+import {getAllUsers} from "../../../tools/DB.js";
 
 
 export  default  function PreScreening_table(){
@@ -238,8 +239,7 @@ export  default  function PreScreening_table(){
     const navigate =  useNavigate();
 
     function geUserData(){
-        let url =   "/recruiters?account=admin&password=admin";
-        getReq(url).then((data) => {
+        getAllUsers().then((data) => {
             // console.log(data);
             let validData = addKeys(data)
             filterDataByPermissions(validData).then((permissionData) => {
