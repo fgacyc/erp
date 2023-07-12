@@ -4,6 +4,7 @@ import {getAllUsers} from "../../../tools/DB.js";
 import {Button, Table} from "@arco-design/web-react";
 import CandidateModal from "../../../components/UI_Modal/CandidateModal/CandidateModal.jsx";
 import {useNavigate} from "react-router-dom";
+import {addKeys} from "../../../tools/tableTools.js";
 
 export default function Recruitment_Evaluation_Table() {
     const breadcrumbItems = [
@@ -27,7 +28,7 @@ export default function Recruitment_Evaluation_Table() {
     useEffect(() => {
         getAllUsers().then((res) => {
             //let filterData = filterDataHaveAppoint(res);
-            setUserData(res);
+            setUserData(addKeys(res));
         });
     }, []);
 
