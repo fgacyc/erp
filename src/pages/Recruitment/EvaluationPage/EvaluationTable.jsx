@@ -1,10 +1,11 @@
 import UI_Breadcrumb from "../../../components/UI_Breadcrumb/UI_Breadcrumb.jsx";
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import {getAllUsers} from "../../../tools/DB.js";
-import {Button, Table} from "@arco-design/web-react";
+import {Button, Input, Table} from "@arco-design/web-react";
 import CandidateModal from "../../../components/UI_Modal/CandidateModal/CandidateModal.jsx";
 import {useNavigate} from "react-router-dom";
 import {addKeys} from "../../../tools/tableTools.js";
+import {IconSearch} from "@arco-design/web-react/icon";
 
 export default function Recruitment_Evaluation_Table() {
     const breadcrumbItems = [
@@ -24,6 +25,7 @@ export default function Recruitment_Evaluation_Table() {
     const [visible, setVisible] = useState(false);
 
     const navigate = useNavigate();
+    const inputRef = useRef(null);
 
     useEffect(() => {
         getAllUsers().then((res) => {
@@ -53,6 +55,34 @@ export default function Recruitment_Evaluation_Table() {
             title: 'Name',
             dataIndex: 'info.name',
             className: "name-column",
+            sorter: (a, b) => a.info.name.localeCompare(b.info.name),
+            filterIcon: <IconSearch />,
+            filterDropdown: ({ filterKeys, setFilterKeys, confirm }) => {
+                return (
+                    <div className='arco-table-custom-filter'>
+                        <Input.Search
+                            ref={inputRef}
+                            searchButton
+                            placeholder='Please enter a name'
+                            value={filterKeys[0] || ''}
+                            onChange={(value) => {
+                                setFilterKeys(value ? [value] : []);
+                            }}
+                            onSearch={() => {
+                                confirm();
+                            }}
+                        />
+                    </div>
+                );
+            },
+            onFilter: (value, row) => {
+                return  row.info.name.toLowerCase().includes(value.toLowerCase());
+            },
+            onFilterDropdownVisibleChange: (visible) => {
+                if (visible) {
+                    setTimeout(() => inputRef.current.focus(), 150);
+                }
+            },
             onCell: (record) => {
                 return {
                     onClick: () => {showCandidateModal(record)}

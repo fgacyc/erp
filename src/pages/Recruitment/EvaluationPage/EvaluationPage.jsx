@@ -81,8 +81,8 @@ export default function Evaluation_Page() {
                                 showBack ?<Button type="primary" style={{width:100}} onClick={()=>navigate("/recruitment_evaluation")}>Back</Button>
                                 :<div>
                                     <Button status='danger' style={{width:100,marginRight:10}} onClick={()=>confirmSubmit("rejected")}>Next Time</Button>
-                                    <Button status='warning' style={{width:100,marginRight:10}}  onClick={()=>confirmSubmit("accepted")}>KIV</Button>
-                                    <Button type="primary" style={{width:100}}  onClick={()=>confirmSubmit("kiv")}>Pass</Button>
+                                    <Button status='warning' style={{width:100,marginRight:10}}  onClick={()=>confirmSubmit("kiv")}>KIV</Button>
+                                    <Button type="primary" style={{width:100}}  onClick={()=>confirmSubmit("accepted")}>Pass</Button>
                                 </div>
                             }
                         </Space>
