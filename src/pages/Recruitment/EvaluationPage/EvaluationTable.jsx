@@ -30,7 +30,7 @@ export default function Recruitment_Evaluation_Table() {
 
     useEffect(() => {
         filterData().then((filterData) => {
-            setUserData(filterData);
+            setUserData(addKeys(filterData));
         });
     }, []);
 
