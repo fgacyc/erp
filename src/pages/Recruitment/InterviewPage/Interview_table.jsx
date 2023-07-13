@@ -11,7 +11,7 @@ import {putReq} from "../../../tools/requests.js";
 import {IconSearch} from "@arco-design/web-react/icon";
 import {set} from "idb-keyval";
 
-export default function InterviewPage() {
+export default function Interview_table() {
     const breadcrumbItems = [
         {
             name: "Recruitment",
@@ -39,7 +39,7 @@ export default function InterviewPage() {
 
     async function filterData(){
         let allUser = await  getAllUsers();
-        return await filterDataHaveAppoint(allUser);
+        return await filterDataHaveAppoint(allUser); // have appointment
     }
 
     function showCandidateModal(record){
@@ -135,9 +135,10 @@ export default function InterviewPage() {
             filterMultiple: false,
             render: (text, record) => (
                 <span >
-                    { record.interview.status === true
-                        ? <span style={{color:"green"}}>Interviewed</span>
-                        : <span >Pending</span>
+                    { record.interview.status === true && <span style={{color:"green"}}>Interviewed</span> }
+                    {
+                        // Pending  // submit form
+                        // Not confirmed // not submit form // appointment time and questions both null
                     }
                 </span>
             )

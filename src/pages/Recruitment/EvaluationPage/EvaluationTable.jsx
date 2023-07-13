@@ -37,7 +37,7 @@ export default function Recruitment_Evaluation_Table() {
 
     async function filterData(){
         let allUser = await  getAllUsers();
-        return await filterEvaluationData(allUser);
+        return await filterEvaluationData(allUser);  //interview.status is ture
     }
 
     function showCandidateModal(record){

@@ -97,7 +97,7 @@ export default function Registration() {
                     <Cascader
                         changeOnSelect
                         placeholder='please select a ministry'
-                        expandTrigger='hover'
+                        // expandTrigger='hover'
                         options={department_options}
                         allowClear
                         onChange={(value, option) => {
