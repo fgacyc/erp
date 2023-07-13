@@ -3,7 +3,7 @@ import "./recruitment_appointment.css"
 import {useEffect, useRef, useState} from "react";
 import {getAllUsers} from "../../../tools/DB.js";
 import {Button, Input, Table} from "@arco-design/web-react";
-import {filterDataHaveAppoint, getAppointTimes} from "./data.js";
+import {filterDataHaveAppoint, getAppointTimes, recruiterInterviewStatus} from "./data.js";
 import CandidateModal from "../../../components/UI_Modal/CandidateModal/CandidateModal.jsx";
 import "./recruitment-appo.css"
 import {useNavigate} from "react-router-dom";
@@ -39,7 +39,7 @@ export default function Interview_table() {
 
     async function filterData(){
         let allUser = await  getAllUsers();
-        return await filterDataHaveAppoint(allUser); // have appointment
+        return await filterDataHaveAppoint(allUser); // pre_screening.status is ture
     }
 
     function showCandidateModal(record){
@@ -113,6 +113,7 @@ export default function Interview_table() {
                 <span >
                     {getAppointTimes(record)}
                 </span>
+
             )
         }
         ,
@@ -122,24 +123,26 @@ export default function Interview_table() {
             filters: [
                 {
                     text:  "Pending",
-                    value: false ,
+                    value: "Pending" ,
                 },
                 {
                     text:  "Interviewed",
-                    value:  true,
+                    value:  "Interviewed",
+                },
+                {
+                    text:  "Not appointed",
+                    value:  "Not appointed",
                 }
             ],
             onFilter: (value, row) =>{
-                return row.interview.status === value
+                return recruiterInterviewStatus(row) === value
             },
             filterMultiple: false,
             render: (text, record) => (
                 <span >
-                    { record.interview.status === true && <span style={{color:"green"}}>Interviewed</span> }
-                    {
-                        // Pending  // submit form
-                        // Not confirmed // not submit form // appointment time and questions both null
-                    }
+                { recruiterInterviewStatus(record) === "Interviewed" && <span style={{color:"green"}}>Interviewed</span> }
+                    { recruiterInterviewStatus(record) === "Pending" && <span>Pending</span> }
+                    { recruiterInterviewStatus(record) === "Not appointed" && <span style={{color:"grey"}}>Not appointed</span> }
                 </span>
             )
         }
@@ -148,9 +151,13 @@ export default function Interview_table() {
             title: 'Operation',
             dataIndex: 'op',
             render: (_, record) => (
-                <Button onClick={()=>startInterview(record)} type='primary'>
-                    Start
-                </Button>
+                <span>
+                    { recruiterInterviewStatus(record) === "Not appointed"
+                        ? <Button type='primary' disabled>Start</Button>
+                        : <Button onClick={()=>startInterview(record)} type='primary' >Start</Button>
+                    }
+                </span>
+
             ),
         },
     ];

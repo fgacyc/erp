@@ -43,7 +43,8 @@ export default function Evaluation_Page() {
         });
 
         getReq(`/interview/answers/${RID}`).then((res) => {
-            setQAs(chooseQAs(res));
+            setQAs(res.ministry.questions);
+            // console.log(res.ministry.questions)
         });
 
     }, []);
@@ -86,25 +87,44 @@ export default function Evaluation_Page() {
                     <Space direction='vertical' size='large' style={{ overflowY: 'auto', marginTop: "24px", width: "100%" }}>
                         { QAs !== null &&
                             <div>
+                                {/*<div>*/}
+                                {/*    <h2>General Questions</h2>*/}
+                                {/*    { Object.entries(QAs).map(([key, value]) => {*/}
+                                {/*        if (key.slice(0, 1) === "g")*/}
+                                {/*            return <Card title={formatQuestions(key)} key={key}> {value} </Card>*/}
+                                {/*    })}*/}
+                                {/*</div>*/}
                                 <div>
                                     <h2>General Questions</h2>
-                                    { Object.entries(QAs).map(([key, value]) => {
-                                        if (key.slice(0, 1) === "g")
-                                            return <Card title={formatQuestions(key)} key={key}> {value} </Card>
+                                    {  QAs.map((item, index) => {
+                                        if(item.type === "general"){
+                                            return  <Card title={item.question} key={index}>
+                                                <div style={{marginBottom:10}}>
+                                                    <span style={{fontWeight:"bold"}}>Candidate Answer:</span>
+                                                    <span>{item.candidate} </span>
+                                                </div>
+                                                <div >
+                                                    <span style={{fontWeight:"bold"}}>Interviewer Remark: </span>
+                                                    <span>{item.interviewer}</span>
+                                                </div>
+                                            </Card>
+                                        }
                                     })}
                                 </div>
                                 <div>
                                     <h2>Specific Questions</h2>
-                                    { Object.entries(QAs).map(([key, value]) => {
-                                        if (key.slice(0, 1) === "s")
-                                            return <Card title={formatQuestions(key)} key={key}> {value} </Card>
+                                    {  QAs.map((item, index) => {
+                                        if(item.type !== "general" && item.type !== "freeQ&As"){
+                                            return  <Card title={item.question} key={index}> {item.candidate} </Card>
+                                        }
                                     })}
                                 </div>
                                 <div>
                                     <h2>Q&A</h2>
-                                    { Object.entries(QAs).map(([key, value]) => {
-                                        if (key.slice(0, 1) === "f")
-                                            return <Card title={"Free Q&A section"} key={key}> {value} </Card>
+                                    {  QAs.map((item, index) => {
+                                        if(item.type === "freeQ&As"){
+                                            return  <Card title={item.question} key={index}> {item.interviewer} </Card>
+                                        }
                                     })}
                                 </div>
                             </div>

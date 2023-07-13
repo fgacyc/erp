@@ -108,6 +108,10 @@ export default function Recruitment_Evaluation_Table() {
                     value: "pre-accepted" ,
                 },
                 {
+                    text:  "Accepted",
+                    value: "accepted" ,
+                },
+                {
                     text:  "KIV",
                     value: "kiv" ,
                 },

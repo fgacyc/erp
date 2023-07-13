@@ -4,7 +4,7 @@ export async function filterDataHaveAppoint(data){
     data = await filterByPermission(data)
     let result = [];
     for(let i=0;i<data.length;i++){
-        if(data[i].appointment){
+        if(data[i].pre_screening.status === true){
             data[i].key = i;
             result.push(data[i]);
         }
@@ -64,6 +64,10 @@ export function getAppointmentTimesString(value){
 }
 
 export function  getAppointTimes(record) {
+    if(!record.appointment){
+        return  "N/A"
+    }
+
     let timestamp = record.appointment.ministry.appointment_time * 1000;
 
     const date = new Date(timestamp);
@@ -76,4 +80,16 @@ export function  getAppointTimes(record) {
 
     const formattedTime = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
     return formattedTime;
+}
+
+export function recruiterInterviewStatus(record){
+    if(record.interview.status === true){
+        return "Interviewed"
+    }
+    else  if(record.appointment && record.interview.status ===false){
+        return "Pending"
+    }
+    else  if(!record.appointment && record.interview.status ===false){
+        return "Not appointed"
+    }
 }
