@@ -2,32 +2,34 @@ import { Menu} from '@arco-design/web-react';
 import {IconUserAdd} from '@arco-design/web-react/icon';
 import "./Frame.css"
 import {Outlet, useNavigate} from "react-router-dom";
-import {useEffect} from "react";
-//const MenuItemGroup = Menu.ItemGroup;
+import {useEffect, useState} from "react";
 const MenuItem = Menu.Item;
 const SubMenu = Menu.SubMenu;
-
 import {getLoginStatus, ifStaffInfoLocalExist} from "../../tools/auth.js";
-//import {AvatarMenu} from "../../components/UI_AvatarMenu/AvatarMenu.jsx";
 import HeadBarBtns from "./HeadBarBtns.jsx";
 import UI_FloatingHelpMenu from "../../components/UI_Menu/UI_FloatingHelpMenu/UI_FloatingHelpMenu.jsx";
-//import {ifShowPreScreening} from "./AuthorityDetection.js";
+import {menuPermission} from "./AuthorityDetection.js";
+
 
 export default  function  Frame(){
     const navigate = useNavigate();
+    const [tabs, setTabs] = useState(null);
 
     useEffect( () => {
-        async function checkLogin(){
-            let StaffInfoLocalExist = await ifStaffInfoLocalExist();
-            let loginStatus = await getLoginStatus();
-            if (!StaffInfoLocalExist || !loginStatus) navigate("/login")
-            else{
-                navigate("/recruitment_dashboard")
-            }
-        }
         checkLogin();
+        menuPermission().then((res) => {
+            setTabs(res);
+        });
     }, []);
 
+    async function checkLogin(){
+        let StaffInfoLocalExist = await ifStaffInfoLocalExist();
+        let loginStatus = await getLoginStatus();
+        if (!StaffInfoLocalExist || !loginStatus) navigate("/login")
+        else{
+            navigate("/recruitment_dashboard")
+        }
+    }
 
     function onClickMenuItem(key) {
         // console.log(key);
@@ -65,17 +67,19 @@ export default  function  Frame(){
                     >
                         <SubMenu
                             key='3'
-                            title={
-                                <>
-                                    <IconUserAdd /> Recruitment
-                                </>
-                            }
+                            title={<><IconUserAdd /> Recruitment</>}
                         >
                             <MenuItem key='recruitment_dashboard'>Dashboard</MenuItem>
                             <MenuItem key='recruitment_add_candidate'>Add Candidate</MenuItem>
-                            <MenuItem key='recruitment_pre_screening'>Pre-screening</MenuItem>
-                            <MenuItem key='recruitment_interview'>Interview</MenuItem>
-                            <MenuItem key='recruitment_evaluation'>Evaluation</MenuItem>
+                            { tabs && tabs.recruitment_pre_screening &&
+                                <MenuItem key='recruitment_pre_screening'>Pre-screening</MenuItem>
+                            }
+                            { tabs && tabs.recruitment_interview &&
+                                <MenuItem key='recruitment_interview'>Interview</MenuItem>
+                            }
+                            { tabs && tabs.recruitment_evaluation &&
+                                <MenuItem key='recruitment_evaluation'>Evaluation</MenuItem>
+                            }
                         </SubMenu>
                     </Menu>
                 </div>
