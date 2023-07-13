@@ -93,3 +93,8 @@ export function recruiterInterviewStatus(record){
         return "Not appointed"
     }
 }
+
+// pad 0 to the left of the number
+export function pad(num) {
+    return ("0"+num).slice(-2);
+}

@@ -21,6 +21,7 @@ export default function Evaluation_Page() {
     const [comments, setComments] = useState(null);
     const [QAs, setQAs] = useState(null);
     const [showBack, setShowBack] = useState(false);
+    const [AISummary, setAISummary] = useState(null);
 
     const RID =   useParams().RID;
     const navigate = useNavigate();
@@ -45,6 +46,12 @@ export default function Evaluation_Page() {
         getReq(`/interview/answers/${RID}`).then((res) => {
             setQAs(res.ministry.questions);
             // console.log(res.ministry.questions)
+        });
+
+        getReq(`/performance/${RID}`).then((res) => {
+            if(res.status === "success"){
+                setAISummary(res.data);
+            }
         });
 
     }, []);
@@ -85,6 +92,12 @@ export default function Evaluation_Page() {
                     </Affix>
 
                     <Space direction='vertical' size='large' style={{ overflowY: 'auto', marginTop: "24px", width: "100%" }}>
+                        { AISummary !== null &&
+                            <div>
+                                <h2>AI Summary</h2>
+                                <p>{AISummary}</p>
+                            </div>
+                        }
                         { QAs !== null &&
                             <div>
                                 {/*<div>*/}

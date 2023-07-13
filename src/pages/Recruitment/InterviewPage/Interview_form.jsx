@@ -10,12 +10,40 @@ import {getReq, postReq} from "../../../tools/requests.js";
 import {get} from "idb-keyval";
 import QuestionGroup1 from "./QuestionGroup1.jsx";
 import "./recruitment-appo.css"
+import {pad} from "./data.js";
 
 const Option = Select.Option;
 const Step = Steps.Step;
 const TextArea = Input.TextArea;
 
+const CountdownTimer = () => {
+    const [countdown, setCountdown] = useState(15 * 60); // 初始倒计时为15分钟
 
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setCountdown(prevCountdown => prevCountdown - 1);
+        }, 1000);
+
+        return () => clearInterval(timer); // 组件卸载时清除计时器
+
+    }, []);
+
+    // 将倒计时的分钟和秒数格式化为字符串
+    const formatTime = () => {
+        const minutes = Math.floor(countdown / 60);
+        const seconds = countdown % 60;
+        return `${pad(minutes)}:${pad(seconds)}`;
+    };
+
+    return (
+        <div style={{position: "absolute",top:20,right:40}}>
+            {countdown >= 600 && <p>{formatTime()}</p>}
+            {countdown < 600 && countdown> 300 && <p style={{color:"orange"}}>{formatTime()}</p>}
+            {countdown <= 300 && countdown> 0 && <p style={{color:"red"}}>{formatTime()}</p>}
+            {countdown <= 0 && <p style={{color:"red"}}>Time's up!</p>}
+        </div>
+    );
+};
 
 export default function Interview_form() {
     const breadcrumbItems = [
@@ -48,13 +76,12 @@ export default function Interview_form() {
             setMinistry(res.info.ministry[2]);
             setQAs(res.interview.ministry.questions);
         })
-
     }, []);
 
     useEffect(() => {
         ministry && getReq(`/interviewers/${ministry}`).then((res) => {
             setInterviewers(res.data);
-            console.log(res.data)
+            // console.log(res.data)
         })
     }, [ministry]);
 
@@ -62,32 +89,19 @@ export default function Interview_form() {
         let target, btnLeft, btnRight;
         if(partID === "1" || partID === "2"){
             target = document.getElementById("interview-form");
-            //btnLeft = document.getElementById("interview-btn-left");
-            //btnRight = document.getElementById("interview-btn-right");
         }else{
             return;
         }
         if (partID === "1"){
             target.classList.remove("full-screen-app-component")
             target.classList.add("long-screen-app-component")
-            //btnLeft.classList.add("interview-btns-left-page1")
-            //btnRight.classList.add("interview-btns-right-page1")
         }else if (partID === "2"){
             let target = document.getElementById("interview-form");
             target.classList.remove("long-screen-app-component")
             target.classList.add("full-screen-app-component")
-            //btnLeft.classList.remove("interview-btns-left-page1")
-            //btnRight.classList.remove("interview-btns-right-page1")
         }
     }, [partID]);
 
-
-    const conStyle = {
-        width: "100%",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-    }
 
 
     function backToInterViewTable(){
@@ -145,6 +159,7 @@ export default function Interview_form() {
             <UI_Breadcrumb items={breadcrumbItems}/>
             <div className="app-component full-screen-app-component" style={{position:"relative"}} id="interview-form">
                 <div style={{height:30}}></div>
+                <CountdownTimer  />
                 <Steps current={parseInt(partID)} style={{ maxWidth: 780, margin: '0 auto' }}>
                     <Step title='General Questions' />
                     {/*<Step title='Specific Questions' />*/}
