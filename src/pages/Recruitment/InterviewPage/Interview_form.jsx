@@ -162,7 +162,7 @@ export default function Interview_form() {
                             }
                         })}
                         {QAs.map((question, index) => {
-                            if(question.type !== "general"){
+                            if(question.type !== "general" && question.type !== "freeQ&As"){
                                 return (
                                     <QuestionGroup1 questions={QAs} setQuestions={setQAs} key={index} id={index}/>
                                 )
