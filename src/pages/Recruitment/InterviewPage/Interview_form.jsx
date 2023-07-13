@@ -1,11 +1,7 @@
 import UI_Breadcrumb from "../../../components/UI_Breadcrumb/UI_Breadcrumb.jsx";
-import {Link, useNavigate, useParams} from "react-router-dom";
+import { useNavigate, useParams} from "react-router-dom";
 import {Button, Cascader, Input, Message, Result, Select, Steps} from "@arco-design/web-react";
 import {useEffect, useState} from "react";
-import QuestionGroup from "./QuestionGroup.jsx";
-import {people_experience_specific_questions,
-    creative_team_specific_questions,
-    communication_specific_questions} from "./specificQuestions.js";
 import {getReq, postReq} from "../../../tools/requests.js";
 import {get} from "idb-keyval";
 import QuestionGroup1 from "./QuestionGroup1.jsx";
@@ -86,7 +82,7 @@ export default function Interview_form() {
     }, [ministry]);
 
     useEffect(() => {
-        let target, btnLeft, btnRight;
+        let target;
         if(partID === "1" || partID === "2"){
             target = document.getElementById("interview-form");
         }else{

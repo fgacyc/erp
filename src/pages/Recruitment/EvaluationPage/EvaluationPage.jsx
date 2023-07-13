@@ -26,15 +26,8 @@ export default function Evaluation_Page() {
     const RID =   useParams().RID;
     const navigate = useNavigate();
 
-    function chooseQAs(data){
-        return data.ministry.questions;
-    }
 
-    function formatQuestions(question){
-        let items = question.split("-");
-        items.shift();
-        return items.join(" ");
-    }
+
 
     useEffect(() => {
         getReq(`/comments/${RID}`).then((res) => {

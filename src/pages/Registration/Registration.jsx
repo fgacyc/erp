@@ -4,7 +4,7 @@ import { Form, Input, Button, Message, Cascader, Typography } from '@arco-design
 import { department_options } from '../../data/ministries';
 import { postReq } from '../../tools/requests';
 const FormItem = Form.Item;
-const { Title, Paragraph, Text } = Typography;
+const { Title, Paragraph } = Typography;
 
 export default function Registration() {
     const [form] = Form.useForm();
@@ -100,7 +100,7 @@ export default function Registration() {
                         // expandTrigger='hover'
                         options={department_options}
                         allowClear
-                        onChange={(value, option) => {
+                        onChange={(value) => {
                             setMinistry(value);
                         }}
                     />
