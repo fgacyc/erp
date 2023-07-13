@@ -10,7 +10,7 @@ import {useNavigate} from "react-router-dom";
 import {putReq} from "../../../tools/requests.js";
 import {IconSearch} from "@arco-design/web-react/icon";
 
-export default function Recruitment_Appointment() {
+export default function InterviewPage() {
     const breadcrumbItems = [
         {
             name: "Recruitment",
@@ -31,11 +31,15 @@ export default function Recruitment_Appointment() {
     const inputRef = useRef(null);
 
     useEffect(() => {
-        getAllUsers().then((res) => {
-            let filterData = filterDataHaveAppoint(res);
-            setUserData(filterData);
+        filterData().then((res) => {
+            setUserData(res);
         });
     }, []);
+
+    async function filterData(){
+        let allUser = await  getAllUsers();
+        return await filterDataHaveAppoint(allUser);
+    }
 
     function showCandidateModal(record){
         setCurrentCandidate(record);

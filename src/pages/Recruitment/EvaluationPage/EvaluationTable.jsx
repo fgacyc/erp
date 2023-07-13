@@ -29,11 +29,16 @@ export default function Recruitment_Evaluation_Table() {
     const inputRef = useRef(null);
 
     useEffect(() => {
-        getAllUsers().then((res) => {
-            let filterData = filterEvaluationData(res);
-            setUserData(addKeys(filterData));
+        filterData().then((filterData) => {
+            setUserData(filterData);
         });
     }, []);
+
+
+    async function filterData(){
+        let allUser = await  getAllUsers();
+        return await filterEvaluationData(allUser);
+    }
 
     function showCandidateModal(record){
         setCurrentCandidate(record);

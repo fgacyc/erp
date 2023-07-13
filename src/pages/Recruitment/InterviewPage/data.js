@@ -1,4 +1,7 @@
-export function filterDataHaveAppoint(data){
+import {getStaffInfoLocal} from "../../../tools/auth.js";
+
+export async function filterDataHaveAppoint(data){
+    data = await filterByPermission(data)
     let result = [];
     for(let i=0;i<data.length;i++){
         if(data[i].appointment){
@@ -7,6 +10,20 @@ export function filterDataHaveAppoint(data){
         }
     }
     //console.log(result)
+    return  result;
+}
+
+export async function  filterByPermission(data){
+    let staff = await getStaffInfoLocal();
+    let scope = staff.ministry[0].scope;
+    let result = [];
+    for(let i=0;i<data.length;i++){
+        let ministry = data[i].info.ministry[2];
+        if (scope.includes(ministry)) {
+            result.push(data[i]);
+        }
+    }
+    // console.log(result)
     return result
 }
 
