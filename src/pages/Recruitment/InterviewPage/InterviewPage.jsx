@@ -9,6 +9,7 @@ import "./recruitment-appo.css"
 import {useNavigate} from "react-router-dom";
 import {putReq} from "../../../tools/requests.js";
 import {IconSearch} from "@arco-design/web-react/icon";
+import {set} from "idb-keyval";
 
 export default function InterviewPage() {
     const breadcrumbItems = [
@@ -48,9 +49,16 @@ export default function InterviewPage() {
 
     function startInterview(record){
         let RID = record._id;
-        // log the start time
-        putReq(`/interview/start_time/${RID}`)
-        navigate(`/recruitment_interview/form/${RID}/1`);
+        Promise.all([
+            putReq(`/interview/start_time/${RID}`),
+            set("current_candidate", record)
+        ])
+        .then(() => {
+            navigate(`/recruitment_interview/form/${RID}/1`);
+        })
+        .catch((error) => {
+            console.error(error);
+        });
 
     }
 

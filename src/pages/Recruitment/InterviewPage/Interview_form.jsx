@@ -1,17 +1,21 @@
 import UI_Breadcrumb from "../../../components/UI_Breadcrumb/UI_Breadcrumb.jsx";
 import {Link, useNavigate, useParams} from "react-router-dom";
 import {Button, Cascader, Input, Message, Result, Select, Steps} from "@arco-design/web-react";
-import {useState} from "react";
-import {generalQuestions} from "./generalQuestions.js";
+import {useEffect, useState} from "react";
 import QuestionGroup from "./QuestionGroup.jsx";
 import {people_experience_specific_questions,
     creative_team_specific_questions,
     communication_specific_questions} from "./specificQuestions.js";
-import {postReq} from "../../../tools/requests.js";
+import {getReq, postReq} from "../../../tools/requests.js";
+import {get} from "idb-keyval";
+import QuestionGroup1 from "./QuestionGroup1.jsx";
+import "./recruitment-appo.css"
 
 const Option = Select.Option;
 const Step = Steps.Step;
 const TextArea = Input.TextArea;
+
+
 
 export default function Interview_form() {
     const breadcrumbItems = [
@@ -27,12 +31,55 @@ export default function Interview_form() {
         }
     ]
     let {RID,partID} = useParams();
-    const  [interviewers, setInterviewers] = useState(null);
+
     const [QAs, setQAs] = useState([]);
     const [freeQAs, setFreeQAs] = useState("");
     const [ifSubmitted, setIfSubmitted] = useState(false);
-
     const navigate = useNavigate();
+    const [ministry, setMinistry] = useState(null);
+
+    const [interviewers, setInterviewers] = useState(null);
+    const  [currentInterviewers, setCurrentInterviewers] = useState(null);
+    const [ifDisabledSubmit, setIfDisabledSubmit] = useState(false);
+
+    useEffect(() => {
+        get("current_candidate").then((res) => {
+            // console.log(res)
+            setMinistry(res.info.ministry[2]);
+            setQAs(res.interview.ministry.questions);
+        })
+
+    }, []);
+
+    useEffect(() => {
+        ministry && getReq(`/interviewers/${ministry}`).then((res) => {
+            setInterviewers(res.data);
+            console.log(res.data)
+        })
+    }, [ministry]);
+
+    useEffect(() => {
+        let target, btnLeft, btnRight;
+        if(partID === "1" || partID === "2"){
+            target = document.getElementById("interview-form");
+            //btnLeft = document.getElementById("interview-btn-left");
+            //btnRight = document.getElementById("interview-btn-right");
+        }else{
+            return;
+        }
+        if (partID === "1"){
+            target.classList.remove("full-screen-app-component")
+            target.classList.add("long-screen-app-component")
+            //btnLeft.classList.add("interview-btns-left-page1")
+            //btnRight.classList.add("interview-btns-right-page1")
+        }else if (partID === "2"){
+            let target = document.getElementById("interview-form");
+            target.classList.remove("long-screen-app-component")
+            target.classList.add("full-screen-app-component")
+            //btnLeft.classList.remove("interview-btns-left-page1")
+            //btnRight.classList.remove("interview-btns-right-page1")
+        }
+    }, [partID]);
 
 
     const conStyle = {
@@ -42,38 +89,10 @@ export default function Interview_form() {
         alignItems: "center",
     }
 
-    const team = 'People Experience';
-    let specificQuestions = [];
-    if (team === 'People Experience') {
-        specificQuestions = people_experience_specific_questions;
-    }else if (team === 'Creative Team') {
-        specificQuestions = creative_team_specific_questions;
-    }else if (team === 'Communication') {
-        specificQuestions = communication_specific_questions;
-    }
 
     function backToInterViewTable(){
         navigate(`/recruitment_interview`);
     }
-
-    let options = [
-        {
-            value: 100,
-            label: 'interviewer1',
-        },
-        {
-            value: 101,
-            label: 'interviewer2',
-        },
-        {
-            value: 102,
-            label: 'interviewer3',
-        },
-        {
-            value: 103,
-            label: 'interviewer4',
-        }
-    ]
 
     function goToNextPart(num){
         partID  =    parseInt(partID);
@@ -87,32 +106,44 @@ export default function Interview_form() {
             navigate(`/recruitment_interview/form/${RID}/${parseInt(partID)-1}`);
         }
     }
+    function addFreeQAs(){
+        let newQAs = QAs;
+        newQAs.push({
+            type: "freeQ&As",
+            interviewer: freeQAs,
+        })
+        setQAs(newQAs);
+    }
 
     async function submitHandler(){
-        if(!interviewers){
+        if(!currentInterviewers){
             Message.warning('Please select interviewers');
             return;
         }
+        addFreeQAs();
 
         let data = {
-            interviewers: interviewers,
-            answers : QAs,
+            interviewers: currentInterviewers,
+            questions : QAs,
         }
+
+        // console.log(data)
+        // return;
 
         let res =await postReq(`/interview/answers/${RID}`,data)
 
         if(res.status){
             setIfSubmitted(true);
+            setIfDisabledSubmit(true);
             console.log(res)
         }
     }
 
 
-
     return (
         <>
             <UI_Breadcrumb items={breadcrumbItems}/>
-            <div className="app-component full-screen-app-component" style={{position:"relative"}}>
+            <div className="app-component full-screen-app-component" style={{position:"relative"}} id="interview-form">
                 <div style={{height:30}}></div>
                 <Steps current={parseInt(partID)} style={{ maxWidth: 780, margin: '0 auto' }}>
                     <Step title='General Questions' />
@@ -123,33 +154,27 @@ export default function Interview_form() {
                 {
                     partID === '1' &&
                     <div>
-                        {generalQuestions.map((question, index) => {
-                            return (
-                                <QuestionGroup question={question} id={index + 1} type="g" key={index} QAs={QAs} setQAs={setQAs} />
-                            )
+                        {QAs.map((question, index) => {
+                            if(question.type === "general"){
+                                return (
+                                    <QuestionGroup1 questions={QAs} setQuestions={setQAs} key={index} id={index}/>
+                                )
+                            }
                         })}
-
+                        {QAs.map((question, index) => {
+                            if(question.type !== "general"){
+                                return (
+                                    <QuestionGroup1 questions={QAs} setQuestions={setQAs} key={index} id={index}/>
+                                )
+                            }
+                        })}
                     </div>
                 }
                 {
                     partID === '2' &&
-                    <div>
-                        {specificQuestions.map((question, index) => {
-                            return (
-                                <QuestionGroup question={question} id={index + 1} type="s" key={index} QAs={QAs} setQAs={setQAs}  />
-                            )
-                        })}
-                    </div>
-                }
-                {
-                    partID === '3' &&
                     <div style={{ display: "flex",justifyItems:"center" }}>
                         <TextArea
-                            onChange={
-                                (val)=>{
-                                    setQAs({...QAs, ["freeQAs"]:val})
-                                }
-                            }
+                            onChange={setFreeQAs}
                             placeholder='Please enter ...'
                             style={{
                                 width: "80%",
@@ -157,12 +182,11 @@ export default function Interview_form() {
                                 margin:"50px auto"
                         }}
                             autoSize={{ minRows: 20}}
-                            // onChange={onChangeHandler}
                         />
                     </div>
                 }
                 {
-                    partID === '4' &&
+                    partID === '3' &&
                         <div style={{ display: "flex",flexDirection:"column",alignItems:"center",justifyItems:"center" }}>
                             <div style={{margin:"30px 0 10px 0"}}>Interviewers</div>
                             <Select
@@ -171,11 +195,14 @@ export default function Interview_form() {
                                 style={{ width: 600 }}
                                 defaultValue={[]}
                                 allowClear
-                                onChange={list => setInterviewers(list)}
+                                onChange={list => setCurrentInterviewers(list)}
                             >
-                                {options.map((option,index) => (
-                                    <Option key={index} value={option.value}>
-                                        {option.label}
+                                {interviewers && interviewers.map((interviewer,index) => (
+                                    <Option key={index} value={interviewer.CYC_ID}>
+                                        {interviewer.username
+                                            ? interviewer.username
+                                            : interviewer.full_name
+                                        }
                                     </Option>
                                 ))}
                             </Select>
@@ -195,45 +222,19 @@ export default function Interview_form() {
                             }
                     </div>
                 }
-                <Button type='primary' style={{width:100, position:"absolute",bottom:10, left:100}} onClick={()=>goToNextPart(-1)}>Previous </Button>
+                <Button type='primary'
+                        className="interview-btns interview-btns-left" id={"interview-btn-left"}
+                        onClick={()=>goToNextPart(-1)}>Previous </Button>
                 {
-                    partID !== '4'
-                    ?  <Button type='primary' style={{width:100, position:"absolute",bottom:10, right:100}} onClick={()=>goToNextPart(1)}>Next</Button>
-                    :  <Button type='primary' style={{width:100, position:"absolute",bottom:10, right:100}} onClick={submitHandler}>Submit</Button>
+                    partID !== '3'
+                    ?  <Button type='primary'
+                               className="interview-btns interview-btns-right" id={"interview-btn-right"}
+                               onClick={()=>goToNextPart(1)}>Next</Button>
+                    :  <Button type='primary'
+                               disabled={ifDisabledSubmit}
+                               className="interview-btns interview-btns-right"
+                               onClick={submitHandler}>Submit</Button>
                 }
-
-
-                {/*<div style={conStyle}>*/}
-                {/*    <div>*/}
-                {/*        <h1>Interviewers</h1>*/}
-                {/*        <Select*/}
-                {/*            mode='multiple'*/}
-                {/*            placeholder='Please select'*/}
-                {/*            style={{ width: 345 }}*/}
-                {/*            defaultValue={[]}*/}
-                {/*            allowClear*/}
-                {/*            onChange={list => setInterviewers(list)}*/}
-                {/*        >*/}
-                {/*            {options.map((option,index) => (*/}
-                {/*                <Option key={index} value={option.value}>*/}
-                {/*                    {option.label}*/}
-                {/*                </Option>*/}
-                {/*            ))}*/}
-                {/*        </Select>*/}
-                {/*    </div>*/}
-
-
-
-                    {/*<div>*/}
-                {/*        <h1>Specific Questions Part</h1>*/}
-                {/*        {specificQuestions.map((question, index) => {*/}
-                {/*            return (*/}
-                {/*                <QuestionGroup question={question} id={index + 1} type="s" key={index} QAs={QAs} setQAs={setQAs}  />*/}
-                {/*            )*/}
-                {/*        })}*/}
-                {/*    </div>*/}
-                {/*    <Button type='primary' style={{width:600,margin:30}} onClick={submitHandler}>Submit</Button>*/}
-                {/*</div>*/}
             </div>
         </>
     )

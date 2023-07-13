@@ -1,3 +1,32 @@
 .name-column{
     cursor: pointer;
 }
+
+.long-screen-app-component{
+    padding-bottom:80px;
+}
+
+.interview-btns{
+    width: 100px;
+    position: absolute;
+    bottom: 10px;
+}
+
+
+
+.interview-btns-left{
+    left: 100px;
+}
+
+
+.interview-btns-right{
+    right: 100px;
+}
+
+.interview-btns-left-page1{
+    margin-bottom: 25px;
+}
+
+.interview-btns-right-page1{
+    margin-bottom: 25px;
+}

@@ -15,6 +15,10 @@ export async function filterDataHaveAppoint(data){
 
 export async function  filterByPermission(data){
     let staff = await getStaffInfoLocal();
+    if ( staff.role === "super_admin" ){
+        return data;
+    }
+
     let scope = staff.ministry[0].scope;
     let result = [];
     for(let i=0;i<data.length;i++){
