@@ -3,14 +3,15 @@ import {IconUserAdd} from '@arco-design/web-react/icon';
 import "./Frame.css"
 import {Outlet, useNavigate} from "react-router-dom";
 import {useEffect} from "react";
-const MenuItemGroup = Menu.ItemGroup;
+//const MenuItemGroup = Menu.ItemGroup;
 const MenuItem = Menu.Item;
 const SubMenu = Menu.SubMenu;
 
 import {getLoginStatus, ifStaffInfoLocalExist} from "../../tools/auth.js";
-import {AvatarMenu} from "../../components/UI_AvatarMenu/AvatarMenu.jsx";
+//import {AvatarMenu} from "../../components/UI_AvatarMenu/AvatarMenu.jsx";
 import HeadBarBtns from "./HeadBarBtns.jsx";
-import {ifShowPreScreening} from "./AuthorityDetection.js";
+import UI_FloatingHelpMenu from "../../components/UI_Menu/UI_FloatingHelpMenu/UI_FloatingHelpMenu.jsx";
+//import {ifShowPreScreening} from "./AuthorityDetection.js";
 
 export default  function  Frame(){
     const navigate = useNavigate();
@@ -20,7 +21,9 @@ export default  function  Frame(){
             let StaffInfoLocalExist = await ifStaffInfoLocalExist();
             let loginStatus = await getLoginStatus();
             if (!StaffInfoLocalExist || !loginStatus) navigate("/login")
-            //navigate("/recruitment_dashboard")
+            else{
+                navigate("/recruitment_dashboard")
+            }
         }
         checkLogin();
     }, []);
@@ -80,6 +83,7 @@ export default  function  Frame(){
                     <Outlet />
                 </div>
             </div>
+            <UI_FloatingHelpMenu/>
         </div>
     );
 }

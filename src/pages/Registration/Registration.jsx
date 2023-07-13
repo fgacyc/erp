@@ -53,6 +53,8 @@ export default function Registration() {
                             }
                         ],
                     }
+                    // console.log(registration_data)
+                    // return;
 
                     postReq('/interviewer', registration_data).then((res) => {
                         if (res.status) {

@@ -1,4 +1,4 @@
-import {AvatarMenu} from "../../components/UI_AvatarMenu/AvatarMenu.jsx";
+import {AvatarMenu} from "../../components/UI_Menu/UI_AvatarMenu/AvatarMenu.jsx";
 import {
     IconLanguage,
     IconMoon,
