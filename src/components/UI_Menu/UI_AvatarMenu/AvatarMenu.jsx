@@ -23,6 +23,9 @@ export  function AvatarMenu(){
             goToProfile();
         }
         else if (key === "2"){
+            navigate("/settings")
+        }
+        else if (key === "3"){
             logout();
         }
     }
@@ -30,7 +33,8 @@ export  function AvatarMenu(){
     const dropList = (
         <Menu onClickMenuItem={handleMenuClick} >
             <Menu.Item key='1'>Profile</Menu.Item>
-            <Menu.Item key='2'>Log out</Menu.Item>
+            <Menu.Item key='2'>Settings</Menu.Item>
+            <Menu.Item key='3'>Log out</Menu.Item>
         </Menu>
     );
 

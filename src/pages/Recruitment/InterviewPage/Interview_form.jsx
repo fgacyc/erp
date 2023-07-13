@@ -116,7 +116,7 @@ export default function Interview_form() {
                 <div style={{height:30}}></div>
                 <Steps current={parseInt(partID)} style={{ maxWidth: 780, margin: '0 auto' }}>
                     <Step title='General Questions' />
-                    <Step title='Specific Questions' />
+                    {/*<Step title='Specific Questions' />*/}
                     <Step title='Q&A' />
                     <Step title='Finish' />
                 </Steps>

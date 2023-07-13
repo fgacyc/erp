@@ -12,6 +12,7 @@ import Interview_form from "./pages/Recruitment/InterviewPage/Interview_form.jsx
 import Recruitment_Evaluation_Table from "./pages/Recruitment/EvaluationPage/EvaluationTable.jsx";
 import Evaluation_Page from "./pages/Recruitment/EvaluationPage/EvaluationPage.jsx";
 import Registration from './pages/Registration/Registration.jsx';
+import SettingsPage from "./pages/Settings/SettingsPage.jsx";
 
 function App() {
 
@@ -34,6 +35,7 @@ function App() {
                         </Route>
                         <Route path="/registration" element={<Registration/>} />
                         <Route path="/profile" element={<Profile/>} />
+                        <Route path="/settings" element={<SettingsPage/>} />
                         <Route path="*" element={<Login/>} />
                     </Routes>
             </Router>

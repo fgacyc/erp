@@ -26,12 +26,7 @@ export default function Evaluation_Page() {
     const navigate = useNavigate();
 
     function chooseQAs(data){
-        if(data.transfer.questions !== null){
-            return data.transfer.questions;
-        }
-        else{
-            return data.ministry.questions;
-        }
+        return data.ministry.questions;
     }
 
     function formatQuestions(question){
