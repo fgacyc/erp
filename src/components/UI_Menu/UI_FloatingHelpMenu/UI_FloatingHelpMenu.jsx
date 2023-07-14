@@ -1,6 +1,15 @@
 import { useState } from 'react';
 import { Menu, Trigger } from '@arco-design/web-react';
-import {IconMessage, IconClose, IconBug, IconBulb, IconQuestion, IconBook, IconFile} from '@arco-design/web-react/icon';
+import {
+    IconMessage,
+    IconClose,
+    IconBug,
+    IconBulb,
+    IconQuestion,
+    IconBook,
+    IconFile,
+    IconCompass
+} from '@arco-design/web-react/icon';
 const MenuItem = Menu.Item;
 import "./UI_FloatingHelpMenu.css"
 import {useNavigate} from "react-router-dom";
@@ -28,6 +37,9 @@ export default function UI_FloatingHelpMenu() {
         }else if(key === "3"){
             window.open("https://drive.google.com/drive/folders/14sulRff83Fq2i_GnP1kGPZ3DLDyZSyb2?usp=sharing", "_blank");
         }
+        else if(key === "4"){
+            window.open("https://github.com/users/yuenci/projects/8/views/1", "_blank");
+        }
 
     }
 
@@ -51,6 +63,10 @@ export default function UI_FloatingHelpMenu() {
                 <MenuItem key='3'>
                     <IconFile />
                     Tutorial
+                </MenuItem>
+                <MenuItem key={'4'}>
+                    <IconCompass />
+                    Progress
                 </MenuItem>
             </Menu>
         );
