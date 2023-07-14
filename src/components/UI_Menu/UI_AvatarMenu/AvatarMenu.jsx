@@ -20,10 +20,10 @@ export  function AvatarMenu(){
 
     function  handleMenuClick(key){
         if (key === "1"){
-            goToProfile();
+            //goToProfile();
         }
         else if (key === "2"){
-            navigate("/settings")
+            //navigate("/settings")
         }
         else if (key === "3"){
             logout();
