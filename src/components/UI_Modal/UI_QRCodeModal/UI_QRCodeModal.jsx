@@ -32,9 +32,8 @@ export function UI_QRCodeModal({ministry,RID ,visible, setVisible}){
     }
 
     function generateURL(date,RID){
-        let url = `https://fgacyc.com/serve/appointment/${date}/${RID}`
-        console.log(url);
-        return url;
+        // console.log(url);
+        return `https://fgacyc.com/serve/appointment/${date}/${RID}`;
     }
 
     function handleClick(date){

@@ -65,6 +65,7 @@ export default function Interview_form() {
     const [interviewers, setInterviewers] = useState(null);
     const  [currentInterviewers, setCurrentInterviewers] = useState(null);
     const [ifDisabledSubmit, setIfDisabledSubmit] = useState(false);
+    const [disabledPrevious, setDisabledPrevious] = useState(false);
 
     useEffect(() => {
         get("current_candidate").then((res) => {
@@ -91,10 +92,12 @@ export default function Interview_form() {
         if (partID === "1"){
             target.classList.remove("full-screen-app-component")
             target.classList.add("long-screen-app-component")
+            setDisabledPrevious(true);
         }else if (partID === "2"){
             let target = document.getElementById("interview-form");
             target.classList.remove("long-screen-app-component")
             target.classList.add("full-screen-app-component")
+            setDisabledPrevious(false);
         }
     }, [partID]);
 
@@ -235,6 +238,7 @@ export default function Interview_form() {
                 }
                 <Button type='primary'
                         className="interview-btns interview-btns-left" id={"interview-btn-left"}
+                        disabled={disabledPrevious}
                         onClick={()=>goToNextPart(-1)}>Previous </Button>
                 {
                     partID !== '3'
