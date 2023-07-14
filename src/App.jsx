@@ -33,12 +33,10 @@ function App() {
                             <Route path="/recruitment_evaluation" element={<Recruitment_Evaluation_Table/>} />
                             <Route path="/recruitment_evaluation/form/:RID" element={<Evaluation_Page/>} />
                         </Route>
+                        <Route path="/registration" element={<Registration/>} />
                         <Route path="/profile" element={<Profile/>} />
                         <Route path="/settings" element={<SettingsPage/>} />
-
-                        {/*for mobile temp*/}
-                        <Route path="/registration" element={<Registration/>} />
-
+                        <Route path="/testing" element={<Testing/>} />
                         <Route path="*" element={<Login/>} />
                     </Routes>
             </Router>
