@@ -10,6 +10,7 @@ import {useNavigate} from "react-router-dom";
 import {putReq} from "../../../tools/requests.js";
 import {IconSearch} from "@arco-design/web-react/icon";
 import {set} from "idb-keyval";
+import {UI_QRCodeModal} from "../../../components/UI_Modal/UI_QRCodeModal/UI_QRCodeModal.jsx";
 
 export default function Interview_table() {
     const breadcrumbItems = [
@@ -27,6 +28,7 @@ export default function Interview_table() {
     const [userData, setUserData] = useState(null);
     const [currentCandidate, setCurrentCandidate] = useState(null);
     const [visible, setVisible] = useState(false);
+    const [QRCodeModalVisible, setQRCodeModalVisible] = useState(false);
 
     const navigate = useNavigate();
     const inputRef = useRef(null);
@@ -60,6 +62,11 @@ export default function Interview_table() {
             console.error(error);
         });
 
+    }
+
+    function showQRCodeModal(record){
+        setCurrentCandidate(record);
+        setQRCodeModalVisible(true);
     }
 
     const columns  = [
@@ -153,8 +160,12 @@ export default function Interview_table() {
             render: (_, record) => (
                 <span>
                     { recruiterInterviewStatus(record) === "Not appointed"
-                        ? <Button type='primary' disabled>Start</Button>
-                        : <Button onClick={()=>startInterview(record)} type='primary' >Start</Button>
+                        ? <span>
+                            <Button type='outline' onClick={()=> showQRCodeModal(record)}>Schedule</Button>
+                        </span>
+                        : <Button onClick={()=>startInterview(record)} type='primary'
+                            style={{width: 93}}
+                        >Start</Button>
                     }
                 </span>
 
@@ -175,7 +186,13 @@ export default function Interview_table() {
                 }
             </div>
             {
-                currentCandidate && <CandidateModal visible={visible} setVisible={setVisible} recruiter={currentCandidate}/>
+                currentCandidate &&
+                <div>
+                    <CandidateModal visible={visible} setVisible={setVisible} recruiter={currentCandidate}/>
+                    <UI_QRCodeModal ministry={currentCandidate.info.ministry[2]}
+                                    RID = {currentCandidate._id}
+                                    visible={QRCodeModalVisible} setVisible={setQRCodeModalVisible} />
+                </div>
             }
         </>
     )

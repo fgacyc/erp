@@ -26,6 +26,13 @@ export  default function GithubReportModal({type,visible,setVisible}) {
         });
     }
 
+    function  cancelIssue() {
+        setVisible(false);
+        setTitle("");
+        setContent("");
+    }
+
+
 
     return(
         <Modal
@@ -45,7 +52,7 @@ export  default function GithubReportModal({type,visible,setVisible}) {
             onOk={() => {
                 submitIssue()
             }}
-            onCancel={() => setVisible(false)}
+            onCancel={() => cancelIssue()}
             autoFocus={false}
             focusLock={true}
         >
