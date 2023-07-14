@@ -1,6 +1,6 @@
 # App-component
 ```jsx
-export default function Recruitment_Appointment() {
+export default function Interview_table() {
     const breadcrumbItems = [
         {
             name: "Recruitment",
@@ -17,7 +17,7 @@ export default function Recruitment_Appointment() {
         <>
             <UI_Breadcrumb items={breadcrumbItems}/>
             <div className="app-component full-screen-app-component">
-                <h1>Recruitment_Appointment</h1>
+                <h1>Interview_table</h1>
             </div>
         </>
     )

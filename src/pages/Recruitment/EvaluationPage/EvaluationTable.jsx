@@ -6,7 +6,6 @@ import CandidateModal from "../../../components/UI_Modal/CandidateModal/Candidat
 import {useNavigate} from "react-router-dom";
 import {addKeys} from "../../../tools/tableTools.js";
 import {IconSearch} from "@arco-design/web-react/icon";
-import {filterDataHaveAppoint} from "../InterviewPage/data.js";
 import {filterEvaluationData} from "./data.js";
 
 export default function Recruitment_Evaluation_Table() {
@@ -30,11 +29,16 @@ export default function Recruitment_Evaluation_Table() {
     const inputRef = useRef(null);
 
     useEffect(() => {
-        getAllUsers().then((res) => {
-            let filterData = filterEvaluationData(res);
+        filterData().then((filterData) => {
             setUserData(addKeys(filterData));
         });
     }, []);
+
+
+    async function filterData(){
+        let allUser = await  getAllUsers();
+        return await filterEvaluationData(allUser);  //interview.status is ture
+    }
 
     function showCandidateModal(record){
         setCurrentCandidate(record);
@@ -102,6 +106,10 @@ export default function Recruitment_Evaluation_Table() {
                 {
                     text:  "Pending",
                     value: "pre-accepted" ,
+                },
+                {
+                    text:  "Accepted",
+                    value: "accepted" ,
                 },
                 {
                     text:  "KIV",

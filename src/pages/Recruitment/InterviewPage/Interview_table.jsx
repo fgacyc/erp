@@ -3,14 +3,15 @@ import "./recruitment_appointment.css"
 import {useEffect, useRef, useState} from "react";
 import {getAllUsers} from "../../../tools/DB.js";
 import {Button, Input, Table} from "@arco-design/web-react";
-import {filterDataHaveAppoint, getAppointTimes} from "./data.js";
+import {filterDataHaveAppoint, getAppointTimes, recruiterInterviewStatus} from "./data.js";
 import CandidateModal from "../../../components/UI_Modal/CandidateModal/CandidateModal.jsx";
 import "./recruitment-appo.css"
 import {useNavigate} from "react-router-dom";
 import {putReq} from "../../../tools/requests.js";
 import {IconSearch} from "@arco-design/web-react/icon";
+import {set} from "idb-keyval";
 
-export default function Recruitment_Appointment() {
+export default function Interview_table() {
     const breadcrumbItems = [
         {
             name: "Recruitment",
@@ -31,11 +32,15 @@ export default function Recruitment_Appointment() {
     const inputRef = useRef(null);
 
     useEffect(() => {
-        getAllUsers().then((res) => {
-            let filterData = filterDataHaveAppoint(res);
-            setUserData(filterData);
+        filterData().then((res) => {
+            setUserData(res);
         });
     }, []);
+
+    async function filterData(){
+        let allUser = await  getAllUsers();
+        return await filterDataHaveAppoint(allUser); // pre_screening.status is ture
+    }
 
     function showCandidateModal(record){
         setCurrentCandidate(record);
@@ -44,9 +49,16 @@ export default function Recruitment_Appointment() {
 
     function startInterview(record){
         let RID = record._id;
-        // log the start time
-        putReq(`/interview/start_time/${RID}`)
-        navigate(`/recruitment_interview/form/${RID}/1`);
+        Promise.all([
+            putReq(`/interview/start_time/${RID}`),
+            set("current_candidate", record)
+        ])
+        .then(() => {
+            navigate(`/recruitment_interview/form/${RID}/1`);
+        })
+        .catch((error) => {
+            console.error(error);
+        });
 
     }
 
@@ -101,6 +113,7 @@ export default function Recruitment_Appointment() {
                 <span >
                     {getAppointTimes(record)}
                 </span>
+
             )
         }
         ,
@@ -110,23 +123,26 @@ export default function Recruitment_Appointment() {
             filters: [
                 {
                     text:  "Pending",
-                    value: false ,
+                    value: "Pending" ,
                 },
                 {
                     text:  "Interviewed",
-                    value:  true,
+                    value:  "Interviewed",
+                },
+                {
+                    text:  "Not appointed",
+                    value:  "Not appointed",
                 }
             ],
             onFilter: (value, row) =>{
-                return row.interview.status === value
+                return recruiterInterviewStatus(row) === value
             },
             filterMultiple: false,
             render: (text, record) => (
                 <span >
-                    { record.interview.status === true
-                        ? <span style={{color:"green"}}>Interviewed</span>
-                        : <span >Pending</span>
-                    }
+                { recruiterInterviewStatus(record) === "Interviewed" && <span style={{color:"green"}}>Interviewed</span> }
+                    { recruiterInterviewStatus(record) === "Pending" && <span>Pending</span> }
+                    { recruiterInterviewStatus(record) === "Not appointed" && <span style={{color:"grey"}}>Not appointed</span> }
                 </span>
             )
         }
@@ -135,9 +151,13 @@ export default function Recruitment_Appointment() {
             title: 'Operation',
             dataIndex: 'op',
             render: (_, record) => (
-                <Button onClick={()=>startInterview(record)} type='primary'>
-                    Start
-                </Button>
+                <span>
+                    { recruiterInterviewStatus(record) === "Not appointed"
+                        ? <Button type='primary' disabled>Start</Button>
+                        : <Button onClick={()=>startInterview(record)} type='primary' >Start</Button>
+                    }
+                </span>
+
             ),
         },
     ];

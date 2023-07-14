@@ -1,7 +1,7 @@
 import {useEffect, useRef, useState} from "react";
 import {Table, Input, Button, Space} from "@arco-design/web-react";
 import {useNavigate} from "react-router-dom";
-import {getReq, putReq} from "../../../tools/requests.js";
+import { putReq} from "../../../tools/requests.js";
 import {addKeys, downloadTableData, filterDataByPermissions} from "../../../tools/tableTools.js";
 import {capitalFirstLetter} from "../../../tools/string.js";
 import "./pre-screening.css"
@@ -221,13 +221,13 @@ export  default  function PreScreening_table(){
             dataIndex: 'op',
             render: (_, record) => (
                 <Space>
-                    <Button onClick={(e) =>{
+                    <Button onClick={() =>{
                         handleStatus(true,record._id)
                     }
                     } type='secondary' status='success'>
                     Pass
                     </Button>
-                    <Button onClick={(e) => {
+                    <Button onClick={() => {
                         handleStatus(false,record._id)
                     }} type='secondary' status='warning'>
                         Next time

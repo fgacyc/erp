@@ -1,4 +1,4 @@
-import {Button, Cascader, Input, Space} from "@arco-design/web-react";
+import {Button, Cascader, Input, Message, Space} from "@arco-design/web-react";
 import {department_options} from "../../../data/ministries.js";
 import {useState} from "react";
 import valid from "./valid.js";
@@ -39,8 +39,13 @@ export  default  function  Recruitment_Submission()  {
 
     const  submit  =  ()  =>  {
         if(!valid(name, phone, email, pastoral_team, department1)) return;
-        postRecruiter(name, phone, email, pastoral_team, department1);
-        alert('Success');
+        postRecruiter(name, phone, email, pastoral_team, department1).then((res) => {
+            if(res.status === "success"){
+                Message.success('Successfully submitted');
+            }else {
+                Message.error('Failed to submit: ' + res.error);
+            }
+        });
     };
 
     const breadcrumbItems = [

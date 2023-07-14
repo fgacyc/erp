@@ -4,7 +4,7 @@ import { Form, Input, Button, Message, Cascader, Typography } from '@arco-design
 import { department_options } from '../../data/ministries';
 import { postReq } from '../../tools/requests';
 const FormItem = Form.Item;
-const { Title, Paragraph, Text } = Typography;
+const { Title, Paragraph } = Typography;
 
 export default function Registration() {
     const [form] = Form.useForm();
@@ -53,6 +53,8 @@ export default function Registration() {
                             }
                         ],
                     }
+                    // console.log(registration_data)
+                    // return;
 
                     postReq('/interviewer', registration_data).then((res) => {
                         if (res.status) {
@@ -95,10 +97,10 @@ export default function Registration() {
                     <Cascader
                         changeOnSelect
                         placeholder='please select a ministry'
-                        expandTrigger='hover'
+                        // expandTrigger='hover'
                         options={department_options}
                         allowClear
-                        onChange={(value, option) => {
+                        onChange={(value) => {
                             setMinistry(value);
                         }}
                     />

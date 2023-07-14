@@ -1,12 +1,33 @@
-export function filterDataHaveAppoint(data){
+import {getStaffInfoLocal} from "../../../tools/auth.js";
+
+export async function filterDataHaveAppoint(data){
+    data = await filterByPermission(data)
     let result = [];
     for(let i=0;i<data.length;i++){
-        if(data[i].appointment){
+        if(data[i].pre_screening.status === true){
             data[i].key = i;
             result.push(data[i]);
         }
     }
     //console.log(result)
+    return  result;
+}
+
+export async function  filterByPermission(data){
+    let staff = await getStaffInfoLocal();
+    if ( staff.role === "super_admin" ){
+        return data;
+    }
+
+    let scope = staff.ministry[0].scope;
+    let result = [];
+    for(let i=0;i<data.length;i++){
+        let ministry = data[i].info.ministry[2];
+        if (scope.includes(ministry)) {
+            result.push(data[i]);
+        }
+    }
+    // console.log(result)
     return result
 }
 
@@ -43,10 +64,36 @@ export function getAppointmentTimesString(value){
 }
 
 export function  getAppointTimes(record) {
-    let appointment = record.appointment;
-    if(appointment.transfer.created !== null){
-        return getAppointmentTimesString(appointment.transfer.appointment_time)
-    }else{
-        return getAppointmentTimesString(appointment.ministry.appointment_time)
+    if(!record.appointment){
+        return  "N/A"
     }
+
+    let timestamp = record.appointment.ministry.appointment_time * 1000;
+
+    const date = new Date(timestamp);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    const seconds = String(date.getSeconds()).padStart(2, '0');
+
+    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+}
+
+export function recruiterInterviewStatus(record){
+    if(record.interview.status === true){
+        return "Interviewed"
+    }
+    else  if(record.appointment && record.interview.status ===false){
+        return "Pending"
+    }
+    else  if(!record.appointment && record.interview.status ===false){
+        return "Not appointed"
+    }
+}
+
+// pad 0 to the left of the number
+export function pad(num) {
+    return ("0"+num).slice(-2);
 }

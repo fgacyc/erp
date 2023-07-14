@@ -13,6 +13,7 @@ export  async function postRecruiter(name, phone, email, pastoral_team, departme
 
     let res = await postReq(router, data)
     console.log(res)
+    return res;
 }
 
 export async function updateRecruiter(RID,name, phone, email, pastoral_team, department1){

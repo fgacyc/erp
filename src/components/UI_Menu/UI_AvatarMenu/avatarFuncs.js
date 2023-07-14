@@ -1,4 +1,4 @@
-import {updateStaffInfoLocal} from "../../tools/auth.js";
+import {updateStaffInfoLocal} from "../../../tools/auth.js";
 export  function logout(){
     updateStaffInfoLocal({login_status: false}).then((res)=>{
         // /login
