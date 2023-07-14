@@ -13,6 +13,7 @@ import Recruitment_Evaluation_Table from "./pages/Recruitment/EvaluationPage/Eva
 import Evaluation_Page from "./pages/Recruitment/EvaluationPage/EvaluationPage.jsx";
 import Registration from './pages/Registration/Registration.jsx';
 import SettingsPage from "./pages/Settings/SettingsPage.jsx";
+import Testing from "./pages/Testing/Testing.jsx";
 
 function App() {
 
