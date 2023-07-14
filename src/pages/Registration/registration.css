@@ -19,3 +19,7 @@
     text-align: left !important;
     width: 150px !important;
 }
+
+.arco-col-5{
+    flex: none !important;
+}
