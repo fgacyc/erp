@@ -11,12 +11,14 @@ import {
 import {Button} from "@arco-design/web-react";
 import "../../../pages/Frame/Frame.css"
 import {useState} from "react";
-import NotificationModal from "../../UI_Modal/NotificationModal/NotificationModal.jsx";
+import NotificationModal from "../../UI_Modal/UI_NotificationModal/NotificationModal.jsx";
+import UI_SearchModal from "../../UI_Modal/UI_SearchModal/UI_SearchModal.jsx";
 
 export default function HeadBarBtns(){
     const [notificationModalVisible, setNotificationModalVisible] = useState(false);
-
     const [ifDarkTheme, setIfDarkTheme] = useState(false);
+    const [showSearchModal, setShowSearchModal] = useState(false);
+    const [ifNewNotification, setIfNewNotification] = useState(false);
 
     function changeTheme(){
         if(ifDarkTheme){
@@ -36,7 +38,9 @@ export default function HeadBarBtns(){
 
     return (
         <span className="head-bar-btns">
-            <Button shape='circle' type='primary' icon={<IconSearch />} className="head-bar-btn" />
+            <Button shape='circle' type='primary' icon={<IconSearch />} className="head-bar-btn"
+                //onClick={() => setShowSearchModal(true)}
+            />
             <Button shape='circle' type='primary' icon={<IconLanguage />} className="head-bar-btn" />
             {
                 ifDarkTheme
@@ -50,9 +54,14 @@ export default function HeadBarBtns(){
             <Button shape='circle' type='primary' icon={<IconSettings />} className="head-bar-btn"  />
             <Button shape='circle' type='primary' icon={<IconNotification />} className="head-bar-btn"
                     //onClick={showNotificationModal}
-            />
+            >
+                {ifNewNotification && <div className="notification-dot"></div>}
+            </Button>
             <AvatarMenu/>
+
+
             <NotificationModal visible={notificationModalVisible} setVisible={setNotificationModalVisible}/>
+            <UI_SearchModal visible={showSearchModal} setVisible={setShowSearchModal}/>
         </span>
     )
 }

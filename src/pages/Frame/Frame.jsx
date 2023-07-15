@@ -5,7 +5,7 @@ import {Outlet, useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 const MenuItem = Menu.Item;
 const SubMenu = Menu.SubMenu;
-import {getLoginStatus, ifStaffInfoLocalExist} from "../../tools/auth.js";
+import {getLoginStatus, ifCurrentUserIsSuperAdmin, ifStaffInfoLocalExist} from "../../tools/auth.js";
 import HeadBarBtns from "../../components/UI_Menu/UI_HeaderBarMenu/HeadBarBtns.jsx";
 import UI_FloatingHelpMenu from "../../components/UI_Menu/UI_FloatingHelpMenu/UI_FloatingHelpMenu.jsx";
 import {menuPermission} from "./AuthorityDetection.js";
@@ -27,8 +27,8 @@ export default  function  Frame(){
         let loginStatus = await getLoginStatus();
         if (!StaffInfoLocalExist || !loginStatus) navigate("/login")
         else{
-            navigate("/recruitment_dashboard")
-            // navigate("/recruitment_interview/form/64a792fae3a86cdad7522bd7/1")
+            //navigate("/recruitment_dashboard")
+            navigate("/recruitment_interview")
         }
     }
 

@@ -2,7 +2,7 @@ import UI_Breadcrumb from "../../../components/UI_Breadcrumb/UI_Breadcrumb.jsx";
 import {useEffect, useRef, useState} from "react";
 import {getAllUsers} from "../../../tools/DB.js";
 import {Button, Input, Table} from "@arco-design/web-react";
-import CandidateModal from "../../../components/UI_Modal/CandidateModal/CandidateModal.jsx";
+import CandidateModal from "../../../components/UI_Modal/UI_CandidateModal/CandidateModal.jsx";
 import {useNavigate} from "react-router-dom";
 import {addKeys} from "../../../tools/tableTools.js";
 import {IconSearch} from "@arco-design/web-react/icon";

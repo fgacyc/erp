@@ -14,7 +14,7 @@ const MenuItem = Menu.Item;
 import "./UI_FloatingHelpMenu.css"
 import {useNavigate} from "react-router-dom";
 import {sendAIssue} from "../../../tools/github.js";
-import GithubReportModal from "../../UI_Modal/GithubReportModal.jsx";
+import GithubReportModal from "../../UI_Modal/UI_GithubReportModal/GithubReportModal.jsx";
 
 export default function UI_FloatingHelpMenu() {
     const [bugModalVisible, setBugModalVisible] = useState(false);
