@@ -1,0 +1,15 @@
+.breadcrumb-con{
+    margin: 0 15px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+.breadcrumb-icon-file{
+    font-size: 16px;
+    position: relative;
+    top: 4px;
+    margin-left: 19px;
+    color: rgb(134,144,156);
+    cursor: pointer;
+}
+

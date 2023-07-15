@@ -163,7 +163,7 @@ export function  getEvaluationRatio(usersData){
         else if(user.application.status === "accepted") pass ++;
         else if((user.interview && user.interview.status === true)) notEvaluation ++;
     }
-    console.log(notEvaluation,nextTime,kiv,pass)
+    // console.log(notEvaluation,nextTime,kiv,pass)
 
     return {
         labels: ['Not Evaluation', 'Next time', 'KIV',"Pass"],

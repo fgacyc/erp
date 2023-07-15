@@ -315,7 +315,7 @@ export default function Recruitment_Dashboard() {
 
     useEffect(() => {
         if (!evaluation_pie) return;
-        console.log(evaluation_pie.datasets[0].data.toString())
+        //console.log(evaluation_pie.datasets[0].data.toString())
     }, [evaluation_pie]);
 
     const data_pie = {
