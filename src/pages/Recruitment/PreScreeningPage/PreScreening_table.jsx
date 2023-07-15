@@ -14,14 +14,14 @@ import {getAllUsers} from "../../../tools/DB.js";
 export  default  function PreScreening_table(){
     const [allData, setAllData] = useState([]);
     const [data, setData] = useState(allData);
-    const [pagination, setPagination] = useState({
-        sizeCanChange: true,
-        showTotal: true,
-        total: 0,
-        pageSize: 10,
-        current: 1,
-        pageSizeChangeResetCurrent: true,
-    });
+    // const [pagination, setPagination] = useState({
+    //     sizeCanChange: true,
+    //     showTotal: true,
+    //     total: 0,
+    //     pageSize: 10,
+    //     current: 1,
+    //     pageSizeChangeResetCurrent: true,
+    // });
     const [loading, setLoading] = useState(false);
     const [clickOption, setClickOption] = useState(false);
 
@@ -177,6 +177,34 @@ export  default  function PreScreening_table(){
         {
             title: 'Ministry',
             dataIndex: 'info.ministry[2]',
+            sorter: (a, b) => a.info.ministry[2].localeCompare(b.info.ministry[2]),
+            filterIcon: <IconSearch />,
+            filterDropdown: ({ filterKeys, setFilterKeys, confirm }) => {
+                return (
+                    <div className='arco-table-custom-filter'>
+                        <Input.Search
+                            ref={inputRef}
+                            searchButton
+                            placeholder='Please enter a nimisitry'
+                            value={filterKeys[0] || ''}
+                            onChange={(value) => {
+                                setFilterKeys(value ? [value] : []);
+                            }}
+                            onSearch={() => {
+                                confirm();
+                            }}
+                        />
+                    </div>
+                );
+            },
+            onFilter: (value, row) => {
+                return  row.info.ministry[2].toLowerCase().includes(value.toLowerCase());
+            },
+            onFilterDropdownVisibleChange: (visible) => {
+                if (visible) {
+                    setTimeout(() => inputRef.current.focus(), 150);
+                }
+            },
         },
         {
             title: 'Status',
@@ -244,7 +272,7 @@ export  default  function PreScreening_table(){
             let validData = addKeys(data)
             filterDataByPermissions(validData).then((permissionData) => {
                 setAllData(permissionData);
-                setPagination((pagination) => ({ ...pagination, total: permissionData.length }));
+                //setPagination((pagination) => ({ ...pagination, total: permissionData.length }));
             });
         });
     }
@@ -263,15 +291,15 @@ export  default  function PreScreening_table(){
     }
 
 
-    function onChangeTable(pagination) {
-        const { current, pageSize } = pagination;
-        setLoading(true);
-        setTimeout(() => {
-            setData(allData.slice((current - 1) * pageSize, current * pageSize));
-            setPagination((pagination) => ({ ...pagination, current, pageSize }));
-            setLoading(false);
-        }, 300);
-    }
+    // function onChangeTable(pagination) {
+    //     const { current, pageSize } = pagination;
+    //     setLoading(true);
+    //     setTimeout(() => {
+    //         setData(allData.slice((current - 1) * pageSize, current * pageSize));
+    //         setPagination((pagination) => ({ ...pagination, current, pageSize }));
+    //         setLoading(false);
+    //     }, 300);
+    // }
 
     const breadcrumbItems = [
         {
@@ -301,20 +329,20 @@ export  default  function PreScreening_table(){
                         loading={loading}
                         columns={columns}
                         data={allData}
-                        pagination={pagination}
-                        onChange={onChangeTable}
-                        renderPagination={(paginationNode) => (
-                            <div
-                                style={{
-                                    display: 'flex',
-                                    justifyContent: 'space-between',
-                                    marginTop: 10,
-                                    float: 'right',
-                                }}
-                            >
-                                {paginationNode}
-                            </div>
-                        )}
+                        //pagination={pagination}
+                        //onChange={onChangeTable}
+                        // renderPagination={(paginationNode) => (
+                        //     <div
+                        //         style={{
+                        //             display: 'flex',
+                        //             justifyContent: 'space-between',
+                        //             marginTop: 10,
+                        //             float: 'right',
+                        //         }}
+                        //     >
+                        //         {paginationNode}
+                        //     </div>
+                        // )}
                     />
                 }
             </div>
