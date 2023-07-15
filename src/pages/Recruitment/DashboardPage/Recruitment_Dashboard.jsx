@@ -313,10 +313,6 @@ export default function Recruitment_Dashboard() {
         datasets: barChartData
     };
 
-    useEffect(() => {
-        if (!evaluation_pie) return;
-        //console.log(evaluation_pie.datasets[0].data.toString())
-    }, [evaluation_pie]);
 
     const data_pie = {
         labels: pieChartLabels,
@@ -371,7 +367,7 @@ export default function Recruitment_Dashboard() {
                                changeOnSelect
                                allowClear
                                showSearch
-                               onChange={(value, option) => {
+                               onChange={(value) => {
                                    const pastoral_team_value = value.length > 1 ? value[1] : value[0];
                                    setBarChartLabels(barChartLabel[pastoral_team_value]);
                                    setBarChartData(allBarChartData[pastoral_team_value]);

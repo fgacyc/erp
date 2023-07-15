@@ -1,7 +1,7 @@
 import {Input, Modal} from "@arco-design/web-react";
 import {IconBulb, IconExclamationCircle} from "@arco-design/web-react/icon";
 import {useState} from "react";
-import {sendAIssue} from "../../tools/github.js";
+import {sendAIssue} from "../../../tools/github.js";
 const TextArea = Input.TextArea;
 
 export  default function GithubReportModal({type,visible,setVisible}) {

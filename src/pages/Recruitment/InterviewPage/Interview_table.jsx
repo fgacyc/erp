@@ -4,7 +4,7 @@ import {useEffect, useRef, useState} from "react";
 import {getAllUsers} from "../../../tools/DB.js";
 import {Button, Input, Table} from "@arco-design/web-react";
 import {filterDataHaveAppoint, getAppointTimes, recruiterInterviewStatus} from "./data.js";
-import CandidateModal from "../../../components/UI_Modal/CandidateModal/CandidateModal.jsx";
+import CandidateModal from "../../../components/UI_Modal/UI_CandidateModal/CandidateModal.jsx";
 import "./recruitment-appo.css"
 import {useNavigate} from "react-router-dom";
 import {putReq} from "../../../tools/requests.js";
