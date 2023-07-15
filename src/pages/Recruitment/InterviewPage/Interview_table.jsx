@@ -11,8 +11,9 @@ import {putReq} from "../../../tools/requests.js";
 import {IconCalendar, IconDownload, IconSearch} from "@arco-design/web-react/icon";
 import {set} from "idb-keyval";
 import {UI_QRCodeModal} from "../../../components/UI_Modal/UI_QRCodeModal/UI_QRCodeModal.jsx";
-import { getDateTimeFilterData} from "../EvaluationPage/data.js";
+import {getAppoInsightData, getDateTimeFilterData} from "../EvaluationPage/data.js";
 import {ifCurrentUserIsSuperAdmin} from "../../../tools/auth.js";
+import UI_InterviewAppoInsight from "../../../components/UI_Modal/UI_InterviewAppoInsight/UI_InterviewAppoInsight.jsx";
 
 export default function Interview_table() {
     const breadcrumbItems = [
@@ -33,6 +34,8 @@ export default function Interview_table() {
     const [QRCodeModalVisible, setQRCodeModalVisible] = useState(false);
     const [dateTimeFilterData, setDateTimeFilterData] = useState(null);
     const [ifShowInsightBtn, setIfShowInsightBtn] = useState(false);
+    const [insightModalVisible, setInsightModalVisible] = useState(false);
+    const [insightData, setInsightData] = useState(null);
 
     const navigate = useNavigate();
     const inputRef = useRef(null);
@@ -41,6 +44,7 @@ export default function Interview_table() {
         filterData().then((res) => {
             setUserData(res);
             setDateTimeFilterData(getDateTimeFilterData(res));
+            setInsightData(getAppoInsightData(res));
         });
 
         detectIfShowInsightBtn();
@@ -82,6 +86,8 @@ export default function Interview_table() {
         setCurrentCandidate(record);
         setQRCodeModalVisible(true);
     }
+
+
 
     const columns  = [
         {
@@ -227,7 +233,7 @@ export default function Interview_table() {
                 {ifShowInsightBtn &&
                     <Button type='secondary' icon={<IconCalendar />}
                             className="pre_screening-download-btn"
-                        // onClick={handleDownload}
+                        onClick={()=>{setInsightModalVisible(true)}}
                     >Appointment Time Insight</Button>
                 }
                 {
@@ -246,6 +252,7 @@ export default function Interview_table() {
                                     visible={QRCodeModalVisible} setVisible={setQRCodeModalVisible} />
                 </div>
             }
+            <UI_InterviewAppoInsight  visible={insightModalVisible} setVisible={setInsightModalVisible} insightData={insightData} />
         </>
     )
 }
