@@ -11,6 +11,7 @@ import {putReq} from "../../../tools/requests.js";
 import {IconSearch} from "@arco-design/web-react/icon";
 import {set} from "idb-keyval";
 import {UI_QRCodeModal} from "../../../components/UI_Modal/UI_QRCodeModal/UI_QRCodeModal.jsx";
+import { getDateTimeFilterData} from "../EvaluationPage/data.js";
 
 export default function Interview_table() {
     const breadcrumbItems = [
@@ -29,6 +30,7 @@ export default function Interview_table() {
     const [currentCandidate, setCurrentCandidate] = useState(null);
     const [visible, setVisible] = useState(false);
     const [QRCodeModalVisible, setQRCodeModalVisible] = useState(false);
+    const [dateTimeFilterData, setDateTimeFilterData] = useState(null);
 
     const navigate = useNavigate();
     const inputRef = useRef(null);
@@ -36,6 +38,7 @@ export default function Interview_table() {
     useEffect(() => {
         filterData().then((res) => {
             setUserData(res);
+            setDateTimeFilterData(getDateTimeFilterData(res));
         });
     }, []);
 
@@ -143,7 +146,11 @@ export default function Interview_table() {
         {
             title: "Date time",
             dataIndex: 'appointment.ministry.appointment_time',
-            filterMultiple: false,
+            filters: dateTimeFilterData,
+            onFilter: (value, row) =>{
+                return  getAppointTimes(row) === value
+            },
+            filterMultiple: true,
             render: (text, record) => (
                 <span >
                     {getAppointTimes(record)}
