@@ -111,6 +111,34 @@ export default function Interview_table() {
         {
             title: 'Ministry',
             dataIndex: 'info.ministry[2]',
+            sorter: (a, b) => a.info.ministry[2].localeCompare(b.info.ministry[2]),
+            filterIcon: <IconSearch />,
+            filterDropdown: ({ filterKeys, setFilterKeys, confirm }) => {
+                return (
+                    <div className='arco-table-custom-filter'>
+                        <Input.Search
+                            ref={inputRef}
+                            searchButton
+                            placeholder='Please enter a nimisitry'
+                            value={filterKeys[0] || ''}
+                            onChange={(value) => {
+                                setFilterKeys(value ? [value] : []);
+                            }}
+                            onSearch={() => {
+                                confirm();
+                            }}
+                        />
+                    </div>
+                );
+            },
+            onFilter: (value, row) => {
+                return  row.info.ministry[2].toLowerCase().includes(value.toLowerCase());
+            },
+            onFilterDropdownVisibleChange: (visible) => {
+                if (visible) {
+                    setTimeout(() => inputRef.current.focus(), 150);
+                }
+            },
         },
         {
             title: "Date time",
