@@ -53,3 +53,16 @@
     width: 15px;
     height: 15px;
 }
+
+.notification-dot{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: red;
+    border: 1px solid white;
+    box-sizing: border-box;
+    transition: all 0.3s ease-in-out;
+}

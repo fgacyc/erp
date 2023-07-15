@@ -18,6 +18,7 @@ export default function HeadBarBtns(){
     const [notificationModalVisible, setNotificationModalVisible] = useState(false);
     const [ifDarkTheme, setIfDarkTheme] = useState(false);
     const [showSearchModal, setShowSearchModal] = useState(false);
+    const [ifNewNotification, setIfNewNotification] = useState(false);
 
     function changeTheme(){
         if(ifDarkTheme){
@@ -52,9 +53,13 @@ export default function HeadBarBtns(){
             }
             <Button shape='circle' type='primary' icon={<IconSettings />} className="head-bar-btn"  />
             <Button shape='circle' type='primary' icon={<IconNotification />} className="head-bar-btn"
-                    //onClick={showNotificationModal}
-            />
+                    onClick={showNotificationModal}
+            >
+                <div className="notification-dot"></div>
+            </Button>
             <AvatarMenu/>
+
+
             <NotificationModal visible={notificationModalVisible} setVisible={setNotificationModalVisible}/>
             <UI_SearchModal visible={showSearchModal} setVisible={setShowSearchModal}/>
         </span>
