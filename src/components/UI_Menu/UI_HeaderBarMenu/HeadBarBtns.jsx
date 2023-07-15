@@ -55,7 +55,7 @@ export default function HeadBarBtns(){
             <Button shape='circle' type='primary' icon={<IconNotification />} className="head-bar-btn"
                     onClick={showNotificationModal}
             >
-                <div className="notification-dot"></div>
+                {ifNewNotification && <div className="notification-dot"></div>}
             </Button>
             <AvatarMenu/>
 

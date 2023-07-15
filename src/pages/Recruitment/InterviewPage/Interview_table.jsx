@@ -8,10 +8,11 @@ import CandidateModal from "../../../components/UI_Modal/UI_CandidateModal/Candi
 import "./recruitment-appo.css"
 import {useNavigate} from "react-router-dom";
 import {putReq} from "../../../tools/requests.js";
-import {IconSearch} from "@arco-design/web-react/icon";
+import {IconCalendar, IconDownload, IconSearch} from "@arco-design/web-react/icon";
 import {set} from "idb-keyval";
 import {UI_QRCodeModal} from "../../../components/UI_Modal/UI_QRCodeModal/UI_QRCodeModal.jsx";
 import { getDateTimeFilterData} from "../EvaluationPage/data.js";
+import {ifCurrentUserIsSuperAdmin} from "../../../tools/auth.js";
 
 export default function Interview_table() {
     const breadcrumbItems = [
@@ -31,6 +32,7 @@ export default function Interview_table() {
     const [visible, setVisible] = useState(false);
     const [QRCodeModalVisible, setQRCodeModalVisible] = useState(false);
     const [dateTimeFilterData, setDateTimeFilterData] = useState(null);
+    const [ifShowInsightBtn, setIfShowInsightBtn] = useState(false);
 
     const navigate = useNavigate();
     const inputRef = useRef(null);
@@ -40,7 +42,16 @@ export default function Interview_table() {
             setUserData(res);
             setDateTimeFilterData(getDateTimeFilterData(res));
         });
+
+        detectIfShowInsightBtn();
     }, []);
+
+
+    function  detectIfShowInsightBtn(){
+        ifCurrentUserIsSuperAdmin().then((res) => {
+            setIfShowInsightBtn(res);
+        });
+    }
 
     async function filterData(){
         let allUser = await  getAllUsers();
@@ -213,6 +224,12 @@ export default function Interview_table() {
         <>
             <UI_Breadcrumb items={breadcrumbItems}/>
             <div className="app-component full-screen-app-component">
+                {ifShowInsightBtn &&
+                    <Button type='secondary' icon={<IconCalendar />}
+                            className="pre_screening-download-btn"
+                        // onClick={handleDownload}
+                    >Appointment Time Insight</Button>
+                }
                 {
                     userData &&
                     <Table
