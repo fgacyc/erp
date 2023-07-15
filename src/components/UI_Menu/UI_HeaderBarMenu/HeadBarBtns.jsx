@@ -39,7 +39,7 @@ export default function HeadBarBtns(){
     return (
         <span className="head-bar-btns">
             <Button shape='circle' type='primary' icon={<IconSearch />} className="head-bar-btn"
-                onClick={() => setShowSearchModal(true)}
+                //onClick={() => setShowSearchModal(true)}
             />
             <Button shape='circle' type='primary' icon={<IconLanguage />} className="head-bar-btn" />
             {
@@ -53,7 +53,7 @@ export default function HeadBarBtns(){
             }
             <Button shape='circle' type='primary' icon={<IconSettings />} className="head-bar-btn"  />
             <Button shape='circle' type='primary' icon={<IconNotification />} className="head-bar-btn"
-                    onClick={showNotificationModal}
+                    //onClick={showNotificationModal}
             >
                 {ifNewNotification && <div className="notification-dot"></div>}
             </Button>
