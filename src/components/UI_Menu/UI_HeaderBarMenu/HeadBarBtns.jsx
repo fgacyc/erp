@@ -1,4 +1,4 @@
-import {AvatarMenu} from "../../components/UI_Menu/UI_AvatarMenu/AvatarMenu.jsx";
+import {AvatarMenu} from "../UI_AvatarMenu/AvatarMenu.jsx";
 import {
     IconLanguage,
     IconMoon,
@@ -9,9 +9,9 @@ import {
     IconSun
 } from "@arco-design/web-react/icon";
 import {Button} from "@arco-design/web-react";
-import "./Frame.css"
+import "../../../pages/Frame/Frame.css"
 import {useState} from "react";
-import NotificationModal from "../../components/UI_Modal/NotificationModal/NotificationModal.jsx";
+import NotificationModal from "../../UI_Modal/NotificationModal/NotificationModal.jsx";
 
 export default function HeadBarBtns(){
     const [notificationModalVisible, setNotificationModalVisible] = useState(false);
@@ -40,11 +40,17 @@ export default function HeadBarBtns(){
             <Button shape='circle' type='primary' icon={<IconLanguage />} className="head-bar-btn" />
             {
                 ifDarkTheme
-                ? <Button shape='circle' type='primary' icon={<IconSun />} className="head-bar-btn" onClick={changeTheme}/>
-                :<Button shape='circle' type='primary' icon={<IconMoon />} className="head-bar-btn" onClick={changeTheme}/>
+                ? <Button shape='circle' type='primary' icon={<IconSun />} className="head-bar-btn"
+                          //onClick={changeTheme}
+                    />
+                :<Button shape='circle' type='primary' icon={<IconMoon />} className="head-bar-btn"
+                         //onClick={changeTheme}
+                    />
             }
             <Button shape='circle' type='primary' icon={<IconSettings />} className="head-bar-btn"  />
-            <Button shape='circle' type='primary' icon={<IconNotification />} className="head-bar-btn" onClick={showNotificationModal}/>
+            <Button shape='circle' type='primary' icon={<IconNotification />} className="head-bar-btn"
+                    //onClick={showNotificationModal}
+            />
             <AvatarMenu/>
             <NotificationModal visible={notificationModalVisible} setVisible={setNotificationModalVisible}/>
         </span>
