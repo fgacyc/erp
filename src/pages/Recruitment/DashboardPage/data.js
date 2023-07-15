@@ -163,7 +163,7 @@ export function  getEvaluationRatio(usersData){
         else if(user.application.status === "accepted") pass ++;
         else if((user.interview && user.interview.status === true)) notEvaluation ++;
     }
-    console.log( [notEvaluation, nextTime,kiv,pass])
+    console.log(notEvaluation,nextTime,kiv,pass)
 
     return {
         labels: ['Not Evaluation', 'Next time', 'KIV',"Pass"],
@@ -191,12 +191,13 @@ export function getRecruiterRatio(usersData){
     }
     let pending = all - passed - rejected - KIV;
 
+
     return {
         labels: ['Pending', 'Pass', 'KIV', 'Next time'],
         datasets: [
             {
                 label: '# of Votes',
-                data: [pending,passed, KIV, rejected, ],
+                data: [pending,passed, KIV, rejected],
                 backgroundColor: color,
                 borderWidth: 1,
             },

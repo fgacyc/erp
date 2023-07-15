@@ -282,7 +282,7 @@ export default function Recruitment_Dashboard() {
             setPre_screening_pie(getPreScreeningRatio(res));
             setInterview_pie(getInterviewRatio(res));
             setEvaluation_pie(getEvaluationRatio(res));
-            console.log(getRecruiterRatio(res))
+            //console.log(getRecruiterRatio(res))
             setRecruiter_pie(getRecruiterRatio(res));
         });
     }, []);
@@ -312,6 +312,11 @@ export default function Recruitment_Dashboard() {
         labels: barChartLabels,
         datasets: barChartData
     };
+
+    useEffect(() => {
+        if (!evaluation_pie) return;
+        console.log(evaluation_pie.datasets[0].data.toString())
+    }, [evaluation_pie]);
 
     const data_pie = {
         labels: pieChartLabels,
@@ -391,7 +396,10 @@ export default function Recruitment_Dashboard() {
 
                         </div>
                         <div className="smallPie">
-                            <Typography.Text style={{ fontWeight: 600 }}>Evaluation</Typography.Text>
+                            { evaluation_pie!==null && evaluation_pie.datasets[0].data.toString() ==="0,0,0,0"
+                                ? <Typography.Text style={{ fontWeight: 600 }}>Evaluation(Not Started)</Typography.Text>
+                                : <Typography.Text style={{ fontWeight: 600 }}>Evaluation</Typography.Text>
+                            }
                             {pre_screening_pie &&
                                 <Pie data={evaluation_pie} />
                             }
