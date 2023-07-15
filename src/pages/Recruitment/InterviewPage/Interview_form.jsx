@@ -6,7 +6,7 @@ import {getReq, postReq} from "../../../tools/requests.js";
 import {get} from "idb-keyval";
 import QuestionGroup1 from "./QuestionGroup1.jsx";
 import "./recruitment-appo.css"
-import {pad} from "./data.js";
+import {pad, tableDataString} from "./data.js";
 
 const Option = Select.Option;
 const Step = Steps.Step;
@@ -61,7 +61,7 @@ export default function Interview_form() {
     const [ifSubmitted, setIfSubmitted] = useState(false);
     const navigate = useNavigate();
     const [ministry, setMinistry] = useState(null);
-
+    const [candidate, setCandidate] = useState(null);
     const [interviewers, setInterviewers] = useState(null);
     const  [currentInterviewers, setCurrentInterviewers] = useState(null);
     const [ifDisabledSubmit, setIfDisabledSubmit] = useState(false);
@@ -72,6 +72,7 @@ export default function Interview_form() {
             // console.log(res)
             setMinistry(res.info.ministry[2]);
             setQAs(res.interview.ministry.questions);
+            setCandidate(res.info);
         })
     }, []);
 
@@ -187,16 +188,29 @@ export default function Interview_form() {
                 {
                     partID === '2' &&
                     <div style={{ display: "flex",justifyItems:"center" }}>
-                        <TextArea
-                            onChange={setFreeQAs}
-                            placeholder='Please enter ...'
-                            style={{
-                                width: "80%",
-                                resize: "none",
-                                margin:"50px auto"
-                        }}
-                            autoSize={{ minRows: 20}}
-                        />
+                        { candidate.ministry[2] === "vocal" ?
+                            <TextArea
+                                onChange={setFreeQAs}
+                                placeholder='Please enter ...'
+                                style={{
+                                    width: "80%",
+                                    resize: "none",
+                                    margin:"50px auto"
+                                }}
+                                autoSize={{ minRows: 20}}
+                                value={tableDataString}
+                            />
+                            :<TextArea
+                                onChange={setFreeQAs}
+                                placeholder='Please enter ...'
+                                style={{
+                                    width: "80%",
+                                    resize: "none",
+                                    margin:"50px auto"
+                                }}
+                                autoSize={{ minRows: 20}}
+                            />
+                        }
                     </div>
                 }
                 {

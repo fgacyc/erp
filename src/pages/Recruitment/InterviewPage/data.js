@@ -90,3 +90,18 @@ export function recruiterInterviewStatus(record){
 export function pad(num) {
     return ("0"+num).slice(-2);
 }
+
+
+export  const tableDataString = `
+    item: [star 1-5][Remarks]
+    Pitch 音准:[ ][ ]
+    Pronunciation 咬字&发音:[ ][ ]
+    Tone 腔调:[ ][ ]
+    Beat 节拍:[ ][ ]
+    Projection 音量:[ ][ ]
+    Breathing 气息:[ ][ ]
+    Grooving 乐感:[ ][ ]
+    Range 音域:[ ][ ]
+    Attitude 态度:[ ][ ]
+    Appearance 外形/外在表现:[ ][ ]
+   `
