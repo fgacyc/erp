@@ -82,7 +82,13 @@ function interviewInfo(statusID,recruiter){
             let appointmentTime = getDateString(recruiter.appointment.ministry.appointment_time * 1000)
             return `[Waiting for interview], Made appointment at ${interviewCreated}, Schedule Interview at ${appointmentTime}`
         }else{
-            return "[Waiting for appointment for interview]"
+            if (recruiter.email.appointment.send.status){
+                let appointmentEmailTime = getDateString(recruiter.email.appointment.send.timestamp * 1000)
+                return `[Waiting for appointment for interview], ✅Appointment email has been sent at ${appointmentEmailTime}`
+            }else{
+                return `[Waiting for appointment for interview], ❌Appointment email has not been sent `
+            }
+
         }
     }
     else if(statusID >= 2){
