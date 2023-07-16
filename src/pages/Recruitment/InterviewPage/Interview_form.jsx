@@ -1,12 +1,13 @@
 import UI_Breadcrumb from "../../../components/UI_Breadcrumb/UI_Breadcrumb.jsx";
 import { useNavigate, useParams} from "react-router-dom";
-import {Button, Input, Message, Result, Select, Steps} from "@arco-design/web-react";
+import {Button, Card, Input, Message, Result, Select, Steps} from "@arco-design/web-react";
 import {useEffect, useState} from "react";
 import {getReq, postReq} from "../../../tools/requests.js";
 import {get} from "idb-keyval";
 import QuestionGroup1 from "./QuestionGroup1.jsx";
 import "./recruitment-appo.css"
 import {pad, tableDataString} from "./data.js";
+import VocalRatingTable from "./VocalRatingTable.jsx";
 
 const Option = Select.Option;
 const Step = Steps.Step;
@@ -66,6 +67,7 @@ export default function Interview_form() {
     const  [currentInterviewers, setCurrentInterviewers] = useState(null);
     const [ifDisabledSubmit, setIfDisabledSubmit] = useState(false);
     const [disabledPrevious, setDisabledPrevious] = useState(false);
+    const [vocalRatingForm, setVocalRatingForm] = useState(null);
 
     useEffect(() => {
         get("current_candidate").then((res) => {
@@ -74,6 +76,7 @@ export default function Interview_form() {
             setQAs(res.interview.ministry.questions);
             setCandidate(res.info);
         })
+        initVocalRatingForm();
     }, []);
 
     useEffect(() => {
@@ -129,12 +132,23 @@ export default function Interview_form() {
         setQAs(newQAs);
     }
 
+    function addVocalRating(){
+        if (candidate.ministry[2] !== "vocal") return;
+        let newQAs = QAs;
+        newQAs.push({
+            type: "vocalRating",
+            interviewer: vocalRatingForm,
+        })
+        setQAs(newQAs);
+    }
+
     async function submitHandler(){
         if(!currentInterviewers){
             Message.warning('Please select interviewers');
             return;
         }
         addFreeQAs();
+        addVocalRating();
 
         let data = {
             interviewers: currentInterviewers,
@@ -151,6 +165,14 @@ export default function Interview_form() {
             setIfDisabledSubmit(true);
             console.log(res)
         }
+    }
+
+    function initVocalRatingForm(){
+        let vocalRatingForm = {
+             "stars" :  Array(10).fill(0),
+             "remarks" : Array(10).fill("")
+        };
+        setVocalRatingForm(vocalRatingForm);
     }
 
 
@@ -189,17 +211,19 @@ export default function Interview_form() {
                     partID === '2' &&
                     <div style={{ display: "flex",justifyItems:"center" }}>
                         { candidate.ministry[2] === "vocal" ?
-                            <TextArea
-                                onChange={setFreeQAs}
-                                placeholder='Please enter ...'
-                                style={{
-                                    width: "80%",
-                                    resize: "none",
-                                    margin:"50px auto"
-                                }}
-                                autoSize={{ minRows: 20}}
-                                value={tableDataString}
-                            />
+                            <div style={{width: "80%",height:400,margin:"50px auto"}}>
+                                <TextArea
+                                    onChange={setFreeQAs}
+                                    placeholder='Please enter ...'
+                                    style={{
+                                        resize: "none"
+                                    }}
+                                    autoSize={{ minRows: 10}}
+                                />
+                                <Card>
+                                    <VocalRatingTable vocalRatingForm={vocalRatingForm} setVocalRatingForm={setVocalRatingForm} />
+                                </Card>
+                            </div>
                             :<TextArea
                                 onChange={setFreeQAs}
                                 placeholder='Please enter ...'

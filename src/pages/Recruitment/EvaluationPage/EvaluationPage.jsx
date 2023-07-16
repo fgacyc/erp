@@ -5,6 +5,7 @@ import {useNavigate, useParams} from "react-router-dom";
 import {getReq, putReq} from "../../../tools/requests.js";
 import {PreScreeningComment} from "../PreScreeningPage/CommentsList.jsx";
 import UI_ConfirmModal from "../../../components/UI_Modal/UI_ConfirmModal/UI_ConfirmModal.jsx";
+import VocalRatingTable from "../InterviewPage/VocalRatingTable.jsx";
 export default function Evaluation_Page() {
     const breadcrumbItems = [
         {
@@ -22,6 +23,8 @@ export default function Evaluation_Page() {
     const [QAs, setQAs] = useState(null);
     const [showBack, setShowBack] = useState(false);
     const [AISummary, setAISummary] = useState(null);
+    const [ifVocal, setIfVocal] = useState(false);
+    const [vocalRatingForm, setVocalRatingForm] = useState(null);
 
     const RID =   useParams().RID;
     const navigate = useNavigate();
@@ -37,8 +40,10 @@ export default function Evaluation_Page() {
         });
 
         getReq(`/interview/answers/${RID}`).then((res) => {
-            setQAs(res.ministry.questions);
+            let qes =res.ministry.questions;
+            setQAs(qes);
             // console.log(res.ministry.questions)
+            ifCandidateVocal(qes);
         });
 
         getReq(`/performance/${RID}`).then((res) => {
@@ -48,6 +53,16 @@ export default function Evaluation_Page() {
         });
 
     }, []);
+
+    function  ifCandidateVocal(QAs){
+        for (let item of QAs){
+            if(item.type === "vocalRating"){
+                setIfVocal(true);
+                setVocalRatingForm(item.interviewer);
+                return;
+            }
+        }
+    }
 
     function confirmSubmit(status){
         // accepted  / rejected
@@ -133,6 +148,12 @@ export default function Evaluation_Page() {
                                         }
                                     })}
                                 </div>
+                            </div>
+                        }
+                        {ifVocal &&
+                            <div>
+                                <h2>Praise & Worship Audition From</h2>
+                                <VocalRatingTable vocalRatingForm={vocalRatingForm} setVocalRatingForm={setVocalRatingForm}/>
                             </div>
                         }
 
