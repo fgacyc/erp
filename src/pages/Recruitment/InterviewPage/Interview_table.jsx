@@ -193,7 +193,7 @@ export default function Interview_table() {
                     value:  "Interviewed",
                 },
                 {
-                    text:  "Not appointed",
+                    text:  "Not Scheduled",
                     value:  "Not appointed",
                 }
             ],
@@ -205,7 +205,7 @@ export default function Interview_table() {
                 <span >
                 { recruiterInterviewStatus(record) === "Interviewed" && <span style={{color:"green"}}>Interviewed</span> }
                     { recruiterInterviewStatus(record) === "Pending" && <span>Pending</span> }
-                    { recruiterInterviewStatus(record) === "Not appointed" && <span style={{color:"grey"}}>Not appointed</span> }
+                    { recruiterInterviewStatus(record) === "Not appointed" && <span style={{color:"grey"}}>Not Scheduled</span> }
                 </span>
             )
         }
