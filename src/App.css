@@ -22,3 +22,9 @@ body{
   }
 }
 
+
+.arco-steps-item-description{
+    /*#*/
+    word-wrap:break-word !important;
+    width: 400px !important;
+}
