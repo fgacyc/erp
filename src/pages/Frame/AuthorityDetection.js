@@ -26,6 +26,17 @@ function recruitmentItemsPermission(staff,permission) {
     }
 
     if("position" in staff){
+        if(staff.position.level === "pastoral_team_leader" || staff.position.level === "pastoral_zone_leader"){ // pastoral team leader or pastoral zone leader
+            if(staff.hasOwnProperty("ministry") && staff.ministry[0].ministry === "interviewer"){ //interviewer
+                permission.recruitment_pre_screening = true;
+                permission.recruitment_interview = true;
+                permission.recruitment_evaluation = true;
+                return permission;
+            }
+        }
+    }
+
+    if("position" in staff){
         if (Object.keys(staff.position).length === 0) { //no position
             permission.recruitment_pre_screening = false;
             permission.recruitment_interview = false;
