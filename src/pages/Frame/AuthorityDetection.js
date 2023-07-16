@@ -12,22 +12,13 @@ export async function menuPermission(){
 
 
 function recruitmentItemsPermission(staff,permission) {
-    console.log(staff, "✅")
-
-     permission = {
-         ...permission,
+    permission = {
+        ...permission,
         "recruitment_dashboard": true,
         "recruitment_add_candidate": true
     }
 
     if (staff.role === "super_admin") {
-        permission.recruitment_pre_screening = true;
-        permission.recruitment_interview = true;
-        permission.recruitment_evaluation = true;
-        return permission;
-    }
-
-    if(staff.CYC_ID === 38){
         permission.recruitment_pre_screening = true;
         permission.recruitment_interview = true;
         permission.recruitment_evaluation = true;
@@ -40,16 +31,7 @@ function recruitmentItemsPermission(staff,permission) {
             permission.recruitment_interview = false;
             permission.recruitment_evaluation = false;
             return permission;
-        }
-        // else if (staff.ministry[0].ministry === "interviewer"){ // pastoral team leader and interviewer is the same
-        //     if (staff.position.level === "pastoral_team_leader" || staff.position.level === "pastoral_zone_leader"){
-        //         permission.recruitment_pre_screening = true;
-        //         permission.recruitment_interview = true;
-        //         permission.recruitment_evaluation = true;
-        //         return permission;
-        //     }
-        // }
-        else if (staff.position.level === "pastoral_team_leader" || staff.position.level === "pastoral_zone_leader") { //pastoral team leader or pastoral zone leader
+        }else if (staff.position.level === "pastoral_team_leader" || staff.position.level === "pastoral_zone_leader") { //pastoral team leader or pastoral zone leader
             permission.recruitment_pre_screening = true;
             permission.recruitment_interview = false;
             permission.recruitment_evaluation = false;

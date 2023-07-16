@@ -14,6 +14,8 @@ import {UI_QRCodeModal} from "../../../components/UI_Modal/UI_QRCodeModal/UI_QRC
 import {getAppoInsightData, getDateTimeFilterData} from "../EvaluationPage/data.js";
 import {ifCurrentUserIsSuperAdmin} from "../../../tools/auth.js";
 import UI_InterviewAppoInsight from "../../../components/UI_Modal/UI_InterviewAppoInsight/UI_InterviewAppoInsight.jsx";
+import UI_InterviewAppoInsight1
+    from "../../../components/UI_Modal/UI_InterviewAppoInsight/UI_InterviewAppoInsight1.jsx";
 
 export default function Interview_table() {
     const breadcrumbItems = [

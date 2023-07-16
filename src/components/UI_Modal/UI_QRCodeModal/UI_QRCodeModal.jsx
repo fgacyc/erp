@@ -1,4 +1,4 @@
-import {Button, Modal} from "@arco-design/web-react";
+import {Button, Card, Modal, Typography} from "@arco-design/web-react";
 import {QRCodeSVG} from 'qrcode.react';
 
 import {useEffect, useState} from "react";
@@ -57,6 +57,7 @@ export function UI_QRCodeModal({ministry,RID ,visible, setVisible}){
                     <div>{capitalFirstLetter(ministry)}</div>
                     <div style={{fontSize: 16}}
                     >{currentDate}</div>
+
                 </div>
                 <div className="qrcode-modal-btns-con">
                     {
@@ -72,6 +73,9 @@ export function UI_QRCodeModal({ministry,RID ,visible, setVisible}){
                     }
                 </div>
             </div>
+            <Card style={{marginTop:15}}>
+                <Typography.Paragraph copyable  >{URL}</Typography.Paragraph>
+            </Card>
         </Modal>
     )
 }
