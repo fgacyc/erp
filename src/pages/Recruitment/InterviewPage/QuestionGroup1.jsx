@@ -1,5 +1,6 @@
 import { Input,  } from '@arco-design/web-react';
 const TextArea = Input.TextArea;
+import  "./recruitment-appo.css"
 export  default function QuestionGroup1({questions,setQuestions,id}){
     let question = questions[id];
 
@@ -13,7 +14,7 @@ export  default function QuestionGroup1({questions,setQuestions,id}){
 
     const textAreaStyle = {
         width: "80%",
-        resize: "none"
+        resize: "none",
     }
 
     function onChangeHandler(val){
@@ -36,6 +37,7 @@ export  default function QuestionGroup1({questions,setQuestions,id}){
                 autoSize={{ minRows: 3, maxRows: 8 }}
                 value={question.candidate}
                 disabled={true}
+                className="candidate-textarea-disable"
             />
             <div style={{height:10}}></div>
             {

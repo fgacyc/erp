@@ -30,3 +30,7 @@
 .interview-btns-right-page1{
     margin-bottom: 25px;
 }
+
+.candidate-textarea-disable{
+    -webkit-text-fill-color: #1a1a1a !important;
+}
