@@ -1,7 +1,7 @@
 import {Card, Modal} from "@arco-design/web-react";
 import "./UI_InterviewAppoInsight.css";
 export default function UI_InterviewAppoInsight({visible, setVisible,insightData}){
-    // console.log(insightData)
+    console.log(insightData)
 
     return (
         <Modal

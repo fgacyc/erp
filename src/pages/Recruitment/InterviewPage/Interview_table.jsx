@@ -256,7 +256,7 @@ export default function Interview_table() {
                                     visible={QRCodeModalVisible} setVisible={setQRCodeModalVisible} />
                 </div>
             }
-            <UI_InterviewAppoInsight  visible={insightModalVisible} setVisible={setInsightModalVisible} insightData={insightData} />
+            <UI_InterviewAppoInsight1  visible={insightModalVisible} setVisible={setInsightModalVisible} insightData={insightData} />
         </>
     )
 }
