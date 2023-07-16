@@ -76,6 +76,7 @@ export  default  function PreScreening_table(){
                             onSearch={() => {
                                 confirm();
                             }}
+                            allowClear={true}
                         />
                     </div>
                 );
@@ -193,6 +194,7 @@ export  default  function PreScreening_table(){
                             onSearch={() => {
                                 confirm();
                             }}
+                            allowClear={true}
                         />
                     </div>
                 );

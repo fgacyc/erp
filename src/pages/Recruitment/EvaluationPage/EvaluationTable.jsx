@@ -78,6 +78,7 @@ export default function Recruitment_Evaluation_Table() {
                             onSearch={() => {
                                 confirm();
                             }}
+                            allowClear={true}
                         />
                     </div>
                 );
@@ -115,6 +116,7 @@ export default function Recruitment_Evaluation_Table() {
                             onSearch={() => {
                                 confirm();
                             }}
+                            allowClear={true}
                         />
                     </div>
                 );

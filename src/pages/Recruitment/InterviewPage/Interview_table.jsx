@@ -112,6 +112,7 @@ export default function Interview_table() {
                             onSearch={() => {
                                 confirm();
                             }}
+                            allowClear={true}
                         />
                     </div>
                 );
@@ -149,6 +150,7 @@ export default function Interview_table() {
                             onSearch={() => {
                                 confirm();
                             }}
+                            allowClear={true}
                         />
                     </div>
                 );
