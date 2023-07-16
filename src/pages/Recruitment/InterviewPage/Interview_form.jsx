@@ -274,16 +274,38 @@ export default function Interview_form() {
                             }
                     </div>
                 }
-                <Button type='primary'
-                        className="interview-btns interview-btns-left" id={"interview-btn-left"}
-                        disabled={disabledPrevious}
-                        onClick={()=>goToNextPart(-1)}>Previous </Button>
+                <div style={{height:100}}></div>
+                {partID === '1' && <Button type='primary'
+                                          style={{bottom:80}}
+                                           className="interview-btns interview-btns-left" id={"interview-btn-left"}
+                                           disabled={true}
+                                           onClick={()=>goToNextPart(-1)}>Previous </Button>
+
+                }
                 {
-                    partID !== '3'
-                    ?  <Button type='primary'
-                               className="interview-btns interview-btns-right" id={"interview-btn-right"}
-                               onClick={()=>goToNextPart(1)}>Next</Button>
-                    :  <Button type='primary'
+                    partID === '2' && <Button type='primary'
+                                              className="interview-btns interview-btns-left" id={"interview-btn-left"}
+                                              disabled={false}
+                                              onClick={()=>goToNextPart(-1)}>Previous </Button>
+                }
+                {
+                    partID === '3' && <Button type='primary'
+                                              className="interview-btns interview-btns-left" id={"interview-btn-left"}
+                                              disabled={false}
+                                              onClick={()=>goToNextPart(-1)}>Previous </Button>
+                }
+                {  partID === '1' &&  <Button type='primary'
+                                              style={{bottom:80}}
+                                   className="interview-btns interview-btns-right" id={"interview-btn-right"}
+                                   onClick={()=>goToNextPart(1)}>Next</Button>
+                }
+                {  partID === '2' &&  <Button type='primary'
+                                              className="interview-btns interview-btns-right" id={"interview-btn-right"}
+                                              onClick={()=>goToNextPart(1)}>Next</Button>
+                }
+
+                {
+                    partID === '3'&& <Button type='primary'
                                disabled={ifDisabledSubmit}
                                className="interview-btns interview-btns-right"
                                onClick={submitHandler}>Submit</Button>
