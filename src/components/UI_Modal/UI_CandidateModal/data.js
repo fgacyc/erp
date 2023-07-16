@@ -68,10 +68,12 @@ function preScreeningInfo(statusID,recruiter){
     if(recruiter.application.status === "pending"){
         return `Register at ${regTime}, [Waiting for pre-screening]`
     }else if(recruiter.application.status === "pre-accepted"){
-        return `Register at ${regTime}, [Passed pre-screening]`
+        let pre_screeningTime = getDateString(recruiter.pre_screening.pre_screening_time * 1000)
+        return `Register at ${regTime}, [Passed pre-screening] at ${pre_screeningTime}`
     }
     else if(recruiter.application.status === "pre-rejected"){
-        return `Register at ${regTime}, [Failed pre-screening]`
+        let pre_screeningTime = getDateString(recruiter.pre_screening.pre_screening_time * 1000)
+        return `Register at ${regTime}, [Passed pre-screening] at ${pre_screeningTime}`
     }
 }
 
@@ -104,18 +106,27 @@ function evaluationInfo(statusID,recruiter){
     } else{
         let evaluationTime = getDateString(recruiter.application.updated * 1000)
         let evaluationStatus = recruiter.application.status
-        return `[Evaluated] at ${evaluationTime}, `
+
+        let offerMessage = ""
+        if(recruiter.email.offer.send.status === false){
+            offerMessage = "❌Offer email has not been sent"
+        }else{
+            let offerEmailTime = getDateString(recruiter.email.offer.send.timestamp * 1000)
+            offerMessage = `✅Offer email has been sent at ${offerEmailTime}`
+        }
+
+
         if(statusID === 3)
         {
-            return `[Evaluated] at ${evaluationTime}, ${evaluationStatus}`
+            return `[Evaluated] at ${evaluationTime}, ${evaluationStatus}, ${offerMessage}`
 
         }else if(statusID === 3.2)
         {
-            return `[Evaluated] at ${evaluationTime}, ${evaluationStatus}`
+            return `[Evaluated] at ${evaluationTime}, ${evaluationStatus}, ${offerMessage}`
         }
         else if(statusID === 3.1)
         {
-            return  `[Evaluated] at ${evaluationTime}, ${evaluationStatus}`
+            return  `[Evaluated] at ${evaluationTime}, ${evaluationStatus}, ${offerMessage}`
         }
     }
 
