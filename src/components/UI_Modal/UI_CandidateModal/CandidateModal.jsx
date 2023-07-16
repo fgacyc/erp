@@ -1,9 +1,11 @@
-import {Modal, Button, Input, Message, Steps} from '@arco-design/web-react';
-import {useState} from "react";
+import {Modal, Input, Steps} from '@arco-design/web-react';
+import {useEffect, useState} from "react";
 import Ministry_Cascader from "../../UI_Cascader/Ministry_Cascader.jsx";
 import Pastoral_Cascader from "../../UI_Cascader/Pastoral_Cascader.jsx";
 import {updateRecruiter} from "../../../pages/Recruitment/SubmissionPage/postRequest.js";
 import valid from "../../../pages/Recruitment/SubmissionPage/valid.js";
+import {checkApplicantStatus} from "./data.js";
+import Recruitment_Steps from "./Recruitment_Steps.jsx";
 const Step = Steps.Step;
 
 function CandidateModalInput({tip,value,setValue}) {
@@ -19,35 +21,35 @@ function CandidateModalInput({tip,value,setValue}) {
     )
 }
 
-function checkApplicantStatus(recruiter){
-    if (recruiter.application.status === "accepted" ||
-        recruiter.application.status === "rejected" ||
-        recruiter.application.status === "kiv"){
-        return 4;
-    }
-    else if (recruiter.interview.status) {
-        return 3;
-    }
-    else if(recruiter.pre_screening.status){
-        return 2;
-    }
-    else if(recruiter.application === "pending"){
-        return 1;
-    }
-    else{
-        return 0;
-    }
-}
+
 
 export  default  function CandidateModal({recruiter,visible,setVisible}) {
     // console.log(recruiterInfo)
-    const [name, setName] = useState(recruiter.info.name)
-    const [phone, setPhone] = useState(recruiter.info.phone)
-    const [email, setEmail] = useState(recruiter.info.email)
-    const [pastoral_team, setPastoral_team] = useState(recruiter.info.pastoral_team)
-    const [ministry, setMinistry] = useState(recruiter.info.ministry)
+    // const [name, setName] = useState(recruiter.info.name)
+    // const [phone, setPhone] = useState(recruiter.info.phone)
+    // const [email, setEmail] = useState(recruiter.info.email)
+    // const [pastoral_team, setPastoral_team] = useState(recruiter.info.pastoral_team)
+    // const [ministry, setMinistry] = useState(recruiter.info.ministry)
 
-    // console.log(recruiter)
+    const [name, setName] = useState("")
+    const [phone, setPhone] = useState("")
+    const [email, setEmail] = useState("")
+    const [pastoral_team, setPastoral_team] = useState("")
+    const [ministry, setMinistry] = useState("")
+
+    useEffect(() => {
+        // console.log(recruiter)
+        //
+        // console.log(checkApplicantStatus(recruiter))
+    }, [])
+
+    useEffect(() => {
+        setName(recruiter.info.name)
+        setPhone(recruiter.info.phone)
+        setEmail(recruiter.info.email)
+        setPastoral_team(recruiter.info.pastoral_team)
+        setMinistry(recruiter.info.ministry)
+    }, [visible])
 
     function handleSubmit() {
         if(!valid(name, phone, email, pastoral_team, ministry)){
@@ -81,13 +83,7 @@ export  default  function CandidateModal({recruiter,visible,setVisible}) {
                 <div style={{width: 150}}>Ministry:</div>
                 <Ministry_Cascader value={ministry} setMinistry={setMinistry}/>
             </div>
-            <Steps current={
-                checkApplicantStatus(recruiter)
-            } style={{  margin: '0 auto' }} size='small'>
-                <Step title='Pre-screening' />
-                <Step title='Interview' />
-                <Step title='Evaluation' />
-            </Steps>
+            <Recruitment_Steps recruiter={recruiter}/>
         </Modal>
     );
 }
