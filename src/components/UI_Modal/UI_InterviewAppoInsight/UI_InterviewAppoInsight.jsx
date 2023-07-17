@@ -1,7 +1,7 @@
 import {Card, Modal} from "@arco-design/web-react";
 import "./UI_InterviewAppoInsight.css";
 export default function UI_InterviewAppoInsight({visible, setVisible,insightData}){
-    // console.log(insightData)
+    console.log(insightData)
 
     return (
         <Modal
@@ -16,7 +16,7 @@ export default function UI_InterviewAppoInsight({visible, setVisible,insightData
             <div className="Interview-Appo-Insight-con">
                 {insightData && insightData.map((item, index) => {
                     return (
-                        <Card style={{ width: 300 }}
+                        <Card style={{ width: 300 ,height:"100%"}}
                               title={item.date}
                               key={index}
                         >

@@ -27,7 +27,7 @@ function recruitmentItemsPermission(staff,permission) {
 
     if("position" in staff){
         if(staff.position.level === "pastoral_team_leader" || staff.position.level === "pastoral_zone_leader"){ // pastoral team leader or pastoral zone leader
-            if(staff.hasOwnProperty("ministry") && staff.ministry[0].ministry === "interviewer"){ //interviewer
+            if(staff.hasOwnProperty("ministry") && staff.ministry.length >0 && staff.ministry[0].ministry === "interviewer"){ //interviewer
                 permission.recruitment_pre_screening = true;
                 permission.recruitment_interview = true;
                 permission.recruitment_evaluation = true;

@@ -12,12 +12,12 @@ export default function Recruitment_Steps({recruiter}){
         // console.log(preScreeningInfo(1,recruiter), "👈")
         function  init(){
             let statusID = checkApplicantStatus(recruiter)
-            console.log("statusID: ",statusID)
+            //console.log("statusID: ",statusID)
             setCurrent(Math.floor(statusID))
             setDescription(getRecruiterInfo(statusID,recruiter))
         }
         init()
-        console.log("reset current step")
+        //console.log("reset current step")
     }, [recruiter])
 
 
