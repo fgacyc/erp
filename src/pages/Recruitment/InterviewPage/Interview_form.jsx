@@ -1,13 +1,12 @@
 import UI_Breadcrumb from "../../../components/UI_Breadcrumb/UI_Breadcrumb.jsx";
 import { useNavigate, useParams} from "react-router-dom";
-import {Button, Card, Input, Message, Result, Select, Steps} from "@arco-design/web-react";
+import {Button, Message,  Steps} from "@arco-design/web-react";
 import {useEffect, useState} from "react";
-import {getReq, postReq} from "../../../tools/requests.js";
+import {postReq} from "../../../tools/requests.js";
 import {get} from "idb-keyval";
 import QuestionGroup1 from "./QuestionGroup1.jsx";
 import "./recruitment-appo.css"
-import {pad, tableDataString} from "./data.js";
-import VocalRatingTable from "./VocalRatingTable.jsx";
+import {pad} from "./data.js";
 import FreeQATextArea from "./FreeQATextArea.jsx";
 import {Interview_form_Section3} from "./Interview_form_Section3.jsx";
 

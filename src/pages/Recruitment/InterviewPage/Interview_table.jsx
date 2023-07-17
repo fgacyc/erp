@@ -8,15 +8,12 @@ import CandidateModal from "../../../components/UI_Modal/UI_CandidateModal/Candi
 import "./recruitment-appo.css"
 import {useNavigate} from "react-router-dom";
 import {putReq} from "../../../tools/requests.js";
-import {IconCalendar, IconDownload, IconSearch} from "@arco-design/web-react/icon";
+import {IconCalendar, IconSearch} from "@arco-design/web-react/icon";
 import {set} from "idb-keyval";
 import {UI_QRCodeModal} from "../../../components/UI_Modal/UI_QRCodeModal/UI_QRCodeModal.jsx";
 import {getAppoInsightData, getDateTimeFilterData} from "../EvaluationPage/data.js";
 import {ifCurrentUserIsSuperAdmin} from "../../../tools/auth.js";
 import UI_InterviewAppoInsight from "../../../components/UI_Modal/UI_InterviewAppoInsight/UI_InterviewAppoInsight.jsx";
-import UI_InterviewAppoInsight1
-    from "../../../components/UI_Modal/UI_InterviewAppoInsight/UI_InterviewAppoInsight1.jsx";
-
 export default function Interview_table() {
     const breadcrumbItems = [
         {

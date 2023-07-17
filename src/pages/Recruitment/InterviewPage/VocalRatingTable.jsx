@@ -1,6 +1,5 @@
 import {Input, Rate} from "@arco-design/web-react";
 import {useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
 import {get} from "idb-keyval";
 
 export default function VocalRatingTable({vocalRatingForm, setVocalRatingForm ,ifInterviewed}){

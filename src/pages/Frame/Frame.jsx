@@ -5,7 +5,7 @@ import {Outlet, useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 const MenuItem = Menu.Item;
 const SubMenu = Menu.SubMenu;
-import {getLoginStatus, ifCurrentUserIsSuperAdmin, ifStaffInfoLocalExist} from "../../tools/auth.js";
+import {getLoginStatus, ifStaffInfoLocalExist} from "../../tools/auth.js";
 import HeadBarBtns from "../../components/UI_Menu/UI_HeaderBarMenu/HeadBarBtns.jsx";
 import UI_FloatingHelpMenu from "../../components/UI_Menu/UI_FloatingHelpMenu/UI_FloatingHelpMenu.jsx";
 import {menuPermission} from "./AuthorityDetection.js";

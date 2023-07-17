@@ -35,9 +35,6 @@ export default function FreeQATextArea({candidate,questions,freeQAs, setFreeQAs,
         boxShadow: "0 0 0 0 #bedaff"
     }
 
-    const textAreaMinHeight = { minRows: 10}
-    const VocalTextAreaMaxHeight = { maxRows: 10}
-
     function handleClick(){
         if(ifDisable){
             setIfDisable(false)
@@ -61,7 +58,7 @@ export default function FreeQATextArea({candidate,questions,freeQAs, setFreeQAs,
                         // onChange={setFreeQAs}
                         onChange={handleTextAreaChange}
                         placeholder='Please enter ...'
-                        autoSize={{ minRows: 10}}
+                        autoSize={{ minRows: 15}}
                         disabled={ifDisable}
                         value={freeQAs}
                         style={textAreaStyle}

@@ -18,7 +18,7 @@ export  default function GithubReportModal({type,visible,setVisible}) {
 
     function submitIssue() {
         console.log(title, content);
-        sendAIssue(title,content,type).then((res) => {
+        sendAIssue(title,content,type).then(() => {
             // console.log(res);
             setVisible(false);
             setTitle("");
