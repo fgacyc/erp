@@ -2,6 +2,13 @@
     margin: 0 15px;
     display: flex;
     align-items: center;
+    justify-content:space-between;
+}
+
+
+.breadcrumb-con-left{
+    display: flex;
+    align-items: center;
     justify-content: flex-start;
 }
 .breadcrumb-icon-file{

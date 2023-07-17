@@ -11,15 +11,17 @@ import FreeQATextArea from "./FreeQATextArea.jsx";
 import {Interview_form_Section3} from "./Interview_form_Section3.jsx";
 
 
+
 const Step = Steps.Step;
 
 
-const CountdownTimer = () => {
+export function  CountdownTimer(){
     const [countdown, setCountdown] = useState(15 * 60); // 初始倒计时为15分钟
 
     useEffect(() => {
         const timer = setInterval(() => {
             setCountdown(prevCountdown => prevCountdown - 1);
+            // PubSub.publish('interview-timer', { message: countdown });
         }, 1000);
 
         return () => clearInterval(timer); // 组件卸载时清除计时器
@@ -34,11 +36,11 @@ const CountdownTimer = () => {
     };
 
     return (
-        <div style={{position: "absolute",top:20,right:40}}>
-            {countdown >= 600 && <p>{formatTime()}</p>}
-            {countdown < 600 && countdown> 300 && <p style={{color:"orange"}}>{formatTime()}</p>}
-            {countdown <= 300 && countdown> 0 && <p style={{color:"red"}}>{formatTime()}</p>}
-            {countdown <= 0 && <p style={{color:"red"}}>Time's up!</p>}
+        <div >
+            {countdown >= 600 && <div>{formatTime()}</div>}
+            {countdown < 600 && countdown> 300 && <div style={{color:"orange"}}>{formatTime()}</div>}
+            {countdown <= 300 && countdown> 0 && <div style={{color:"red"}}>{formatTime()}</div>}
+            {countdown <= 0 && <div style={{color:"red"}}>Time's up!</div>}
         </div>
     );
 };
@@ -73,7 +75,7 @@ export default function Interview_form() {
 
     useEffect(() => {
         get("current_candidate").then((res) => {
-            console.log(res)
+            // console.log(res)
             setMinistry(res.info.ministry[2]);
             setQAs(res.interview.ministry.questions);
             setCandidate(res.info);
@@ -191,7 +193,6 @@ export default function Interview_form() {
             <UI_Breadcrumb items={breadcrumbItems}/>
             <div className="app-component full-screen-app-component" style={{position:"relative"}} id="interview-form">
                 <div style={{height:30}}></div>
-                <CountdownTimer  />
                 <Steps current={parseInt(partID)} style={{ maxWidth: 780, margin: '0 auto' }}>
                     <Step title='General Questions' />
                     {/*<Step title='Specific Questions' />*/}
