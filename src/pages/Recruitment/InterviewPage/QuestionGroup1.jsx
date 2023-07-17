@@ -79,9 +79,12 @@ export  default function QuestionGroup1({questions,setQuestions,id,ifInterviewed
                         disabled={ifDisable}
                         ref={input}
                     />
-                    {
-                        ifDisable ?  <IconEdit className="interviewer-answer-edit-icon" onClick={handleClick} />
-                            : <IconCheck  className="interviewer-answer-edit-icon" onClick={handleClick} />
+                    {ifInterviewed && <span>
+                        {
+                            ifDisable ?  <IconEdit className="interviewer-answer-edit-icon" onClick={handleClick} />
+                                : <IconCheck  className="interviewer-answer-edit-icon" onClick={handleClick} />
+                        }
+                    </span>
                     }
                 </div>
             }

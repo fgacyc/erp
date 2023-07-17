@@ -220,7 +220,7 @@ export default function Interview_table() {
                         >Start</Button>
                     }
                     {   recruiterInterviewStatus(record) === "Interviewed" &&
-                        <Button onClick={()=>startInterview(record)} type='primary' status="success" style={{width: 93}}
+                        <Button onClick={()=>startInterview(record)} type='secondary' status="success" style={{width: 93}}
                         >Check</Button>
                     }
                 </span>

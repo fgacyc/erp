@@ -67,9 +67,13 @@ export default function FreeQATextArea({candidate,questions,freeQAs, setFreeQAs,
                         style={textAreaStyle}
                         className="candidate-textarea-disable"
                     />
-                    {
-                        ifDisable ?  <IconEdit className="interviewer-answer-edit-icon" onClick={handleClick} />
-                            : <IconCheck  className="interviewer-answer-edit-icon" onClick={handleClick} />
+                    {ifInterviewed &&
+                        <span>
+                            {
+                                ifDisable ?  <IconEdit className="interviewer-answer-edit-icon" onClick={handleClick} />
+                                    : <IconCheck  className="interviewer-answer-edit-icon" onClick={handleClick} />
+                            }
+                        </span>
                     }
                 </div>
                 { ifVocal &&
