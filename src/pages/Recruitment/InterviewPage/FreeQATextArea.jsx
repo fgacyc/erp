@@ -9,12 +9,15 @@ export default function FreeQATextArea({candidate,questions,freeQAs, setFreeQAs,
                                        vocalRatingForm, setVocalRatingForm, ifInterviewed}){
     const [ifDisable,setIfDisable] = useState(ifInterviewed)
     const [textAreaStyle,setTextAreaStyle] = useState({width:"100%", resize:"none"})
-    const [ifVocal,setIfVocal] = useState(candidate.ministry[2] === "vocal")
+    const [ifVocal,setIfVocal] = useState(false)
     // console.log(questions)
 
     useEffect(()=>{
         if(ifInterviewed){
             setFreeQAs(getFreeQAAnswer())
+        }
+        if(candidate){
+            setIfVocal(candidate.ministry[2] === "vocal")
         }
     },[])
 

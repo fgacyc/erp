@@ -73,7 +73,7 @@ export default function Interview_form() {
 
     useEffect(() => {
         get("current_candidate").then((res) => {
-            // console.log(res)
+            console.log(res)
             setMinistry(res.info.ministry[2]);
             setQAs(res.interview.ministry.questions);
             setCandidate(res.info);
