@@ -9,6 +9,7 @@ import {IconDownload, IconSearch} from "@arco-design/web-react/icon";
 import {getTimeStamp} from "../../../tools/datetime.js";
 import UI_Breadcrumb from "../../../components/UI_Breadcrumb/UI_Breadcrumb.jsx";
 import {getAllUsers} from "../../../tools/DB.js";
+import UI_ConfirmModal from "../../../components/UI_Modal/UI_ConfirmModal/UI_ConfirmModal.jsx";
 
 
 export  default  function PreScreening_table(){
@@ -30,26 +31,28 @@ export  default  function PreScreening_table(){
     const handleStatus = (status,RID) => {
         const pre_screening_status = status ? "pre-accepted" : "pre-rejected";
 
-        setClickOption(!clickOption)
-
-        const time = getTimeStamp();
 
         const pre_screening = {
             status: pre_screening_status,
-            pre_screening_time: time,
+            pre_screening_time:  getTimeStamp(),
         }
 
-        putReq(`/application/${RID}`, pre_screening).then((res) => {
-            let newData = allData.map((item) => {
-                if (item._id === RID) {
-                    item.application.status = pre_screening_status;
-                    //console.log(item)
-                }
-
-                return item;
+        UI_ConfirmModal("Confirm",`Are you sure to ${capitalFirstLetter(pre_screening_status)} the candidate?`,()=>{
+            putReq(`/application/${RID}`, pre_screening).then((res) => {
+                let newData = allData.map((item) => {
+                    if (item._id === RID) {
+                        item.application.status = pre_screening_status;
+                        item.pre_screening.status =status;
+                    }
+                    return item;
+                });
+                setAllData(newData);
             });
-            setAllData(newData);
-        });
+        })
+    }
+
+    function postPreScreeningResult(record){
+
     }
 
     function goToPreScreeningPage(record) {
@@ -292,16 +295,6 @@ export  default  function PreScreening_table(){
         downloadTableData(allData)
     }
 
-
-    // function onChangeTable(pagination) {
-    //     const { current, pageSize } = pagination;
-    //     setLoading(true);
-    //     setTimeout(() => {
-    //         setData(allData.slice((current - 1) * pageSize, current * pageSize));
-    //         setPagination((pagination) => ({ ...pagination, current, pageSize }));
-    //         setLoading(false);
-    //     }, 300);
-    // }
 
     const breadcrumbItems = [
         {

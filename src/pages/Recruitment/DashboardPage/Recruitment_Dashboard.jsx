@@ -353,8 +353,8 @@ export default function Recruitment_Dashboard() {
                <div className="left-side">
                    <div className="upper">
                        <Recruitment_dashboard_card color={colors[0]} text="Applicants" num={totals[0]} Icon={IconCheck}/>
-                       <Recruitment_dashboard_card color={colors[1]} text="Pending" num={totals[1]} Icon={IconCheck}/>
-                       <Recruitment_dashboard_card color={colors[2]} text="Pre-Pass" num={totals[2]} Icon={IconCheck}/>
+                       <Recruitment_dashboard_card color={colors[2]} text="Pending" num={totals[1]} Icon={IconCheck}/>
+                       <Recruitment_dashboard_card color={colors[1]} text="Pre-Pass" num={totals[2]} Icon={IconCheck}/>
                        <Recruitment_dashboard_card color={"#d8e2dc"} text="Pass" num={totals[3]} Icon={IconCheck}/>
                    </div>
                    <Card

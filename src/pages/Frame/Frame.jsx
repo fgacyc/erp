@@ -27,8 +27,9 @@ export default  function  Frame(){
         let loginStatus = await getLoginStatus();
         if (!StaffInfoLocalExist || !loginStatus) navigate("/login")
         else{
-            navigate("/recruitment_dashboard")
+            //navigate("/recruitment_dashboard")
             //navigate("/recruitment_interview")
+            navigate("/recruitment_pre_screening")
         }
     }
 
