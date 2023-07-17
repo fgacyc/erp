@@ -1,17 +1,8 @@
 .pre-screening-table-con{
-    /*background-color: #fff;*/
-    /*margin: 5px;*/
-    /*width: calc(100% - 10px);*/
     height: calc(100% - 70px);
 }
 
-/**
-style={{
-            height: "100vh", display: "flex", flexDirection: "column",
-            justifyContent: "space-between"
-        }}
 
- */
 
 .pre-screening-con{
     display: flex;
@@ -30,4 +21,20 @@ style={{
 
 .pointer-cursor{
     cursor: pointer;
+}
+
+.custom-comment-action {
+    padding: 0 4px;
+    line-height: 24px;
+    border-radius: 2px;
+    background: transparent;
+    transition: all 0.1s ease;
+    color: var(--color-text-1);
+    cursor: pointer;
+    display: inline-block;
+}
+
+.custom-comment-action:hover {
+    background: var(--color-fill-3);
+    border-radius: 2px;
 }

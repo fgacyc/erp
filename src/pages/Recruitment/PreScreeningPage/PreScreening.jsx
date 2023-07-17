@@ -87,6 +87,7 @@ export default function PreScreening() {
 
         let comment = {
             "timestamp": getTimeStamp(),
+            "updated": getTimeStamp(),
             "comment": commentText,
             "CYC_ID": userCYC_ID,
         };
@@ -206,7 +207,7 @@ export default function PreScreening() {
                 </div>
 
                 <div style={{ position: 'relative', padding: '8px 12px' }}>
-                    {userDatas && <PreScreeningCommentsList userDatas={userDatas} />}
+                    {userDatas && <PreScreeningCommentsList userDatas={userDatas} setUserDatas={setUserDatas} />}
                 </div>
             </div>
             <Comment

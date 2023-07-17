@@ -30,5 +30,12 @@ export async function patchReq(url, data){
 }
 
 export async function deleteReq(url){
-    return await fetchRequest("DELETE", url,null)
+    let options ={
+        method : "DELETE",
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    };
+    let res =   await fetch(hostURL + url,options );
+    return  await res.json()
 }
