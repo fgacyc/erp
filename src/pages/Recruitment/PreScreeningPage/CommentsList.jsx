@@ -61,7 +61,7 @@ export function PreScreeningComment({item,id,RID}){
             actions={
                 <Dropdown droplist={
                     <Menu onClickMenuItem={(key)=>MenuEvent(key,id,RID)}>
-                        <Menu.Item key='1'>Edit</Menu.Item>
+                        {/*<Menu.Item key='1'>Edit</Menu.Item>*/}
                         <Menu.Item key='2'>Delete</Menu.Item>
                     </Menu>
                 } position='bl' trigger='click' >
