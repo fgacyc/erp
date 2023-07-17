@@ -28,8 +28,8 @@ export default  function  Frame(){
         if (!StaffInfoLocalExist || !loginStatus) navigate("/login")
         else{
             //navigate("/recruitment_dashboard")
-            //navigate("/recruitment_interview")
-            navigate("/recruitment_pre_screening")
+            navigate("/recruitment_interview")
+            //navigate("/recruitment_pre_screening")
         }
     }
 

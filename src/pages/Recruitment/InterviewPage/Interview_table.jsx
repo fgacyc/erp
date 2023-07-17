@@ -215,13 +215,16 @@ export default function Interview_table() {
             dataIndex: 'op',
             render: (_, record) => (
                 <span>
-                    { recruiterInterviewStatus(record) === "Not appointed"
-                        ? <span>
-                            <Button type='outline' onClick={()=> showQRCodeModal(record)}>Schedule</Button>
-                        </span>
-                        : <Button onClick={()=>startInterview(record)} type='primary'
-                            style={{width: 93}}
+                    {   recruiterInterviewStatus(record) === "Not appointed"
+                        && <Button type='outline' onClick={()=> showQRCodeModal(record)}>Schedule</Button>
+                    }
+                    {   recruiterInterviewStatus(record) === "Pending" &&
+                        <Button onClick={()=>startInterview(record)} type='primary'  style={{width: 93}}
                         >Start</Button>
+                    }
+                    {   recruiterInterviewStatus(record) === "Interviewed" &&
+                        <Button onClick={()=>startInterview(record)} type='primary' status="success" style={{width: 93}}
+                        >Check</Button>
                     }
                 </span>
 

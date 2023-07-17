@@ -8,10 +8,11 @@ import QuestionGroup1 from "./QuestionGroup1.jsx";
 import "./recruitment-appo.css"
 import {pad, tableDataString} from "./data.js";
 import VocalRatingTable from "./VocalRatingTable.jsx";
+import FreeQATextArea from "./FreeQATextArea.jsx";
 
 const Option = Select.Option;
 const Step = Steps.Step;
-const TextArea = Input.TextArea;
+
 
 const CountdownTimer = () => {
     const [countdown, setCountdown] = useState(15 * 60); // 初始倒计时为15分钟
@@ -68,13 +69,15 @@ export default function Interview_form() {
     const [ifDisabledSubmit, setIfDisabledSubmit] = useState(false);
     const [disabledPrevious, setDisabledPrevious] = useState(false);
     const [vocalRatingForm, setVocalRatingForm] = useState(null);
+    const [ifInterviewed, setIfInterviewed] = useState(false);
 
     useEffect(() => {
         get("current_candidate").then((res) => {
-            // console.log(res)
+            console.log(res)
             setMinistry(res.info.ministry[2]);
             setQAs(res.interview.ministry.questions);
             setCandidate(res.info);
+            setIfInterviewed(res.interview.status);
         })
         initVocalRatingForm();
     }, []);
@@ -113,7 +116,7 @@ export default function Interview_form() {
 
     function goToNextPart(num){
         partID  =    parseInt(partID);
-        console.log(QAs)
+        // console.log(QAs)
 
         if(num ===1){
             if (partID === 4) return;
@@ -124,6 +127,13 @@ export default function Interview_form() {
         }
     }
     function addFreeQAs(){
+        for (let ele of QAs){
+            if (ele.type === "freeQ&As"){
+                ele.interviewer = freeQAs;
+                return;
+            }
+        }
+
         let newQAs = QAs;
         newQAs.push({
             type: "freeQ&As",
@@ -194,14 +204,14 @@ export default function Interview_form() {
                         {QAs.map((question, index) => {
                             if(question.type === "general"){
                                 return (
-                                    <QuestionGroup1 questions={QAs} setQuestions={setQAs} key={index} id={index}/>
+                                    <QuestionGroup1 questions={QAs} setQuestions={setQAs} key={index} id={index} ifInterviewed={ifInterviewed}/>
                                 )
                             }
                         })}
                         {QAs.map((question, index) => {
                             if(question.type !== "general" && question.type !== "freeQ&As"){
                                 return (
-                                    <QuestionGroup1 questions={QAs} setQuestions={setQAs} key={index} id={index}/>
+                                    <QuestionGroup1 questions={QAs} setQuestions={setQAs} key={index} id={index} ifInterviewed={ifInterviewed}/>
                                 )
                             }
                         })}
@@ -209,33 +219,12 @@ export default function Interview_form() {
                 }
                 {
                     partID === '2' &&
-                    <div style={{ display: "flex",justifyItems:"center" }}>
-                        { candidate.ministry[2] === "vocal" ?
-                            <div style={{width: "80%",height:400,margin:"50px auto"}}>
-                                <TextArea
-                                    onChange={setFreeQAs}
-                                    placeholder='Please enter ...'
-                                    style={{
-                                        resize: "none"
-                                    }}
-                                    autoSize={{ minRows: 10}}
-                                />
-                                <Card>
-                                    <VocalRatingTable vocalRatingForm={vocalRatingForm} setVocalRatingForm={setVocalRatingForm} />
-                                </Card>
-                            </div>
-                            :<TextArea
-                                onChange={setFreeQAs}
-                                placeholder='Please enter ...'
-                                style={{
-                                    width: "80%",
-                                    resize: "none",
-                                    margin:"50px auto"
-                                }}
-                                autoSize={{ minRows: 20}}
-                            />
-                        }
-                    </div>
+                    <FreeQATextArea candidate={candidate}
+                                    questions={QAs}
+                                    setFreeQAs={setFreeQAs}
+                                    vocalRatingForm={vocalRatingForm}
+                                    setVocalRatingForm={setVocalRatingForm}
+                                    ifInterviewed={ifInterviewed}/>
                 }
                 {
                     partID === '3' &&
