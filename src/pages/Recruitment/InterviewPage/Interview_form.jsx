@@ -9,8 +9,9 @@ import "./recruitment-appo.css"
 import {pad, tableDataString} from "./data.js";
 import VocalRatingTable from "./VocalRatingTable.jsx";
 import FreeQATextArea from "./FreeQATextArea.jsx";
+import {Interview_form_Section3} from "./Interview_form_Section3.jsx";
 
-const Option = Select.Option;
+
 const Step = Steps.Step;
 
 
@@ -65,7 +66,7 @@ export default function Interview_form() {
     const [ministry, setMinistry] = useState(null);
     const [candidate, setCandidate] = useState(null);
     const [interviewers, setInterviewers] = useState(null);
-    const  [currentInterviewers, setCurrentInterviewers] = useState(null);
+    const [currentInterviewers, setCurrentInterviewers] = useState(null);
     const [ifDisabledSubmit, setIfDisabledSubmit] = useState(false);
     const [disabledPrevious, setDisabledPrevious] = useState(false);
     const [vocalRatingForm, setVocalRatingForm] = useState(null);
@@ -73,7 +74,7 @@ export default function Interview_form() {
 
     useEffect(() => {
         get("current_candidate").then((res) => {
-            console.log(res)
+            // console.log(res)
             setMinistry(res.info.ministry[2]);
             setQAs(res.interview.ministry.questions);
             setCandidate(res.info);
@@ -81,13 +82,6 @@ export default function Interview_form() {
         })
         initVocalRatingForm();
     }, []);
-
-    useEffect(() => {
-        ministry && getReq(`/interviewers/${ministry}`).then((res) => {
-            setInterviewers(res.data);
-            // console.log(res.data)
-        })
-    }, [ministry]);
 
     useEffect(() => {
         let target;
@@ -201,15 +195,15 @@ export default function Interview_form() {
                 {
                     partID === '1' &&
                     <div>
-                        {QAs.map((question, index) => {
+                        {QAs.length >0 && QAs.map((question, index) => {
                             if(question.type === "general"){
                                 return (
                                     <QuestionGroup1 questions={QAs} setQuestions={setQAs} key={index} id={index} ifInterviewed={ifInterviewed}/>
                                 )
                             }
                         })}
-                        {QAs.map((question, index) => {
-                            if(question.type !== "general" && question.type !== "freeQ&As"){
+                        {QAs && QAs.map((question, index) => {
+                            if(question.type !== "general" && question.type !== "freeQ&As" && question.type !== "vocalRating"){
                                 return (
                                     <QuestionGroup1 questions={QAs} setQuestions={setQAs} key={index} id={index} ifInterviewed={ifInterviewed}/>
                                 )
@@ -228,40 +222,16 @@ export default function Interview_form() {
                 }
                 {
                     partID === '3' &&
-                        <div style={{ display: "flex",flexDirection:"column",alignItems:"center",justifyItems:"center" }}>
-                            <div style={{margin:"30px 0 10px 0"}}>Interviewers</div>
-                            <Select
-                                mode='multiple'
-                                placeholder='Please select'
-                                style={{ width: 600 }}
-                                defaultValue={[]}
-                                allowClear
-                                onChange={list => setCurrentInterviewers(list)}
-                            >
-                                {interviewers && interviewers.map((interviewer,index) => (
-                                    <Option key={index} value={interviewer.CYC_ID}>
-                                        {interviewer.username
-                                            ? interviewer.username
-                                            : interviewer.full_name
-                                        }
-                                    </Option>
-                                ))}
-                            </Select>
-                            {
-                                ifSubmitted &&
-                                <Result
-                                    style={{marginTop:70}}
-                                    status='success'
-                                    title='Submission Success'
-                                    subTitle='Recruitment form has been submitted successfully.'
-                                    extra={[
-                                        <Button key='back' type='primary' onClick={backToInterViewTable}>
-                                            Back
-                                        </Button>,
-                                    ]}
-                                ></Result>
-                            }
-                    </div>
+                    <Interview_form_Section3
+                            ministry={ministry}
+                            interviewers={interviewers}
+                            setInterviewers={setInterviewers}
+                            currentInterviewers={currentInterviewers}
+                            setCurrentInterviewers={setCurrentInterviewers}
+                             ifSubmitted={ifSubmitted}
+                             backToInterViewTable={backToInterViewTable}
+                            ifInterviewed={ifInterviewed}
+                    />
                 }
                 <div style={{height:100}}></div>
                 {partID === '1' && <Button type='primary'

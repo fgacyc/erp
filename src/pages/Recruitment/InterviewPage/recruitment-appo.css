@@ -55,6 +55,12 @@
     position: relative;
 }
 
+.interviewer-qas-answer-con{
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+}
+
 .interviewer-QAs-answer-con{
     width: 80%;
     margin: 50px auto;

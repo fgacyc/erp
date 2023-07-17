@@ -41,6 +41,7 @@ export  default function QuestionGroup1({questions,setQuestions,id,ifInterviewed
 
 
     function onChangeHandler(val){
+        setInterviewerAnswer(val)
         question = {...question,["interviewer"]:val}
         let newQuestions = [...questions]
         newQuestions[id] = question
@@ -79,9 +80,8 @@ export  default function QuestionGroup1({questions,setQuestions,id,ifInterviewed
                         ref={input}
                     />
                     {
-                        ifDisable
-                        ? <IconEdit className="interviewer-answer-edit-icon" onClick={handleClick} />
-                        : <IconCheck  className="interviewer-answer-edit-icon" onClick={handleClick} />
+                        ifDisable ?  <IconEdit className="interviewer-answer-edit-icon" onClick={handleClick} />
+                            : <IconCheck  className="interviewer-answer-edit-icon" onClick={handleClick} />
                     }
                 </div>
             }

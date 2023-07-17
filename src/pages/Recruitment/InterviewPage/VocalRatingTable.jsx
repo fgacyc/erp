@@ -44,7 +44,7 @@ export default function VocalRatingTable({vocalRatingForm, setVocalRatingForm}){
         <>
             <div style={{width:"100%"}}>
                 {items.map((item, index) => {
-                    return <div key={index} style={{display:"flex"}}>
+                    return <div key={index} style={{display:"flex",marginBottom:10}}>
                         <div style={{width:"20%"}}>{item}</div>
                         <div style={{width:"20%"}}>
                             <Rate onChange={(val)=>handleStarChange(val,index)}

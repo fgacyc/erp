@@ -10,6 +10,7 @@ export default function FreeQATextArea({candidate,questions, setFreeQAs,
     const [ifDisable,setIfDisable] = useState(ifInterviewed)
     const [textAreaStyle,setTextAreaStyle] = useState({width:"100%", resize:"none"})
     const [freeQAsInterviewer,setFreeQAsInterviewer] = useState()
+    const [ifVocal,setIfVocal] = useState(candidate.ministry[2] === "vocal")
     // console.log(questions)
 
     useEffect(()=>{
@@ -35,6 +36,9 @@ export default function FreeQATextArea({candidate,questions, setFreeQAs,
         boxShadow: "0 0 0 0 #bedaff"
     }
 
+    const textAreaMinHeight = { minRows: 10}
+    const VocalTextAreaMaxHeight = { maxRows: 10}
+
     function handleClick(){
         if(ifDisable){
             setIfDisable(false)
@@ -53,46 +57,29 @@ export default function FreeQATextArea({candidate,questions, setFreeQAs,
 
     return(
         <div style={{ display: "flex",justifyItems:"center" }}>
-            { candidate.ministry[2] === "vocal" ?
-                <div style={{width: "80%",height:400,margin:"50px auto"}}>
-                    <div className="interviewer-answer-con">
-                        <TextArea
-                            // onChange={setFreeQAs}
-                            onChange={handleTextAreaChange}
-                            placeholder='Please enter ...'
-                            autoSize={{ minRows: 10}}
-                            disabled={ifDisable}
-                            value={freeQAsInterviewer}
-                            style={textAreaStyle}
-                            className="candidate-textarea-disable"
-                        />
-                        {
-                            ifDisable
-                                ? <IconEdit className="interviewer-answer-edit-icon" onClick={handleClick} />
-                                : <IconCheck  className="interviewer-answer-edit-icon" onClick={handleClick} />
-                        }
-                    </div>
-                    <Card>
-                        <VocalRatingTable vocalRatingForm={vocalRatingForm} setVocalRatingForm={setVocalRatingForm} />
-                    </Card>
-                </div>
-                :<div className="interviewer-QAs-answer-con">
+            <div style={{width: "80%",height:400,margin:"50px auto"}}>
+                <div className="interviewer-qas-answer-con">
                     <TextArea
+                        // onChange={setFreeQAs}
                         onChange={handleTextAreaChange}
                         placeholder='Please enter ...'
-                        style={textAreaStyle}
-                        autoSize={{ minRows: 20}}
+                        autoSize={{ minRows: 10}}
                         disabled={ifDisable}
                         value={freeQAsInterviewer}
+                        style={textAreaStyle}
                         className="candidate-textarea-disable"
                     />
                     {
-                        ifDisable
-                            ? <IconEdit className="interviewer-answer-edit-icon" onClick={handleClick} />
+                        ifDisable ?  <IconEdit className="interviewer-answer-edit-icon" onClick={handleClick} />
                             : <IconCheck  className="interviewer-answer-edit-icon" onClick={handleClick} />
                     }
                 </div>
-            }
+                { ifVocal &&
+                    <Card style={{marginTop:1}}>
+                        <VocalRatingTable vocalRatingForm={vocalRatingForm} setVocalRatingForm={setVocalRatingForm} />
+                    </Card>
+                }
+            </div>
         </div>
     )
 }
