@@ -100,8 +100,9 @@ export default function Interview_form() {
             target.classList.add("full-screen-app-component")
             setDisabledPrevious(false);
         }
-    }, [partID]);
 
+        // console.log(QAs)
+    }, [partID]);
 
 
     function backToInterViewTable(){
@@ -138,6 +139,12 @@ export default function Interview_form() {
 
     function addVocalRating(){
         if (candidate.ministry[2] !== "vocal") return;
+        for ( let ele of QAs){
+            if (ele.type === "vocalRating"){
+                ele.interviewer = vocalRatingForm;
+                return;
+            }
+        }
         let newQAs = QAs;
         newQAs.push({
             type: "vocalRating",
@@ -215,6 +222,7 @@ export default function Interview_form() {
                     partID === '2' &&
                     <FreeQATextArea candidate={candidate}
                                     questions={QAs}
+                                    freeQAs={freeQAs}
                                     setFreeQAs={setFreeQAs}
                                     vocalRatingForm={vocalRatingForm}
                                     setVocalRatingForm={setVocalRatingForm}

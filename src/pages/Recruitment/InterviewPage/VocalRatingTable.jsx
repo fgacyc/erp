@@ -1,12 +1,25 @@
 import {Input, Rate} from "@arco-design/web-react";
 import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
+import {get} from "idb-keyval";
 
-export default function VocalRatingTable({vocalRatingForm, setVocalRatingForm}){
+export default function VocalRatingTable({vocalRatingForm, setVocalRatingForm ,ifInterviewed}){
     const [ifDisableInput, setIfDisableInput] = useState(false);
     const [inputPlaceholder, setInputPlaceholder] = useState("Please Enter Remarks");
 
     useEffect(()=>{
+        if(ifInterviewed){
+            get("current_candidate").then((res) => {
+                let questions = res.interview.ministry.questions;
+                for (let item  of questions){
+                    if(item.type === "vocalRating"){
+                        setVocalRatingForm(item.interviewer)
+                    }
+                }
+                //console.log(vocalRatingForm)
+            });
+        }
+
         let path = window.location.pathname;
         if(path.includes("recruitment_evaluation/form/")){
             setIfDisableInput(true);

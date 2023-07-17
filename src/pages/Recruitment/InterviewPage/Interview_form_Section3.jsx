@@ -15,7 +15,7 @@ export  function Interview_form_Section3({ ministry,
     useEffect(() => {
         if(ifInterviewed){
             get("current_candidate").then((res) => {
-                console.log(res.interview.ministry.interviewers)
+                // console.log(res.interview.ministry.interviewers)
                 setCurrentInterviewers(res.interview.ministry.interviewers)
             });
         }

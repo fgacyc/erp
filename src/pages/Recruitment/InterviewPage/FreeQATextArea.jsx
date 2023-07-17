@@ -5,17 +5,16 @@ import {IconCheck, IconEdit} from "@arco-design/web-react/icon";
 import  "./recruitment-appo.css"
 
 const TextArea = Input.TextArea;
-export default function FreeQATextArea({candidate,questions, setFreeQAs,
+export default function FreeQATextArea({candidate,questions,freeQAs, setFreeQAs,
                                        vocalRatingForm, setVocalRatingForm, ifInterviewed}){
     const [ifDisable,setIfDisable] = useState(ifInterviewed)
     const [textAreaStyle,setTextAreaStyle] = useState({width:"100%", resize:"none"})
-    const [freeQAsInterviewer,setFreeQAsInterviewer] = useState()
     const [ifVocal,setIfVocal] = useState(candidate.ministry[2] === "vocal")
     // console.log(questions)
 
     useEffect(()=>{
         if(ifInterviewed){
-            setFreeQAsInterviewer(getFreeQAAnswer())
+            setFreeQAs(getFreeQAAnswer())
         }
     },[])
 
@@ -51,7 +50,6 @@ export default function FreeQATextArea({candidate,questions, setFreeQAs,
 
     function handleTextAreaChange(val){
         setFreeQAs(val)
-        setFreeQAsInterviewer(val)
     }
 
 
@@ -65,7 +63,7 @@ export default function FreeQATextArea({candidate,questions, setFreeQAs,
                         placeholder='Please enter ...'
                         autoSize={{ minRows: 10}}
                         disabled={ifDisable}
-                        value={freeQAsInterviewer}
+                        value={freeQAs}
                         style={textAreaStyle}
                         className="candidate-textarea-disable"
                     />
@@ -76,7 +74,7 @@ export default function FreeQATextArea({candidate,questions, setFreeQAs,
                 </div>
                 { ifVocal &&
                     <Card style={{marginTop:1}}>
-                        <VocalRatingTable vocalRatingForm={vocalRatingForm} setVocalRatingForm={setVocalRatingForm} />
+                        <VocalRatingTable vocalRatingForm={vocalRatingForm} setVocalRatingForm={setVocalRatingForm} ifInterviewed={ifInterviewed} />
                     </Card>
                 }
             </div>
