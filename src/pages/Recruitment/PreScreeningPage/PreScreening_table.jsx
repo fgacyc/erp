@@ -15,16 +15,10 @@ import UI_ConfirmModal from "../../../components/UI_Modal/UI_ConfirmModal/UI_Con
 export  default  function PreScreening_table(){
     const [allData, setAllData] = useState([]);
     const [data, setData] = useState(allData);
-    // const [pagination, setPagination] = useState({
-    //     sizeCanChange: true,
-    //     showTotal: true,
-    //     total: 0,
-    //     pageSize: 10,
-    //     current: 1,
-    //     pageSizeChangeResetCurrent: true,
-    // });
     const [loading, setLoading] = useState(false);
     const [clickOption, setClickOption] = useState(false);
+    const [filters, setFilters] = useState("");
+    const [refreshKey, setRefreshKey] = useState(0);
 
     const inputRef = useRef(null);
 
@@ -58,6 +52,7 @@ export  default  function PreScreening_table(){
     function goToPreScreeningPage(record) {
         navigate(`/recruitment_pre_screening/${record._id}`);
     }
+
 
     const columns = [
         {
@@ -119,7 +114,9 @@ export  default  function PreScreening_table(){
                     value: 'others',
                 }
             ],
-            onFilter: (value, row) =>row.info.pastoral_team[0] === value,
+            onFilter: (value, row) =>{
+                return row.info.pastoral_team[0] === value
+            },
             filterMultiple: true,
             render: (col, record) => (
                 <span onClick={()=> goToPreScreeningPage(record)} className="pointer-cursor">
@@ -309,36 +306,63 @@ export  default  function PreScreening_table(){
         }
     ]
 
+    function handleTableChange(pagination, sorter,filters, extra){
+
+        if(filters.hasOwnProperty("pre_screening.status")){
+            let status = filters["pre_screening.status"][0];
+            if(status === null){
+                filters["pre_screening.status"] = ["Pending"]
+            }else if(status === true){
+                filters["pre_screening.status"] = ["Pre-Accepted"]
+            } else if(status === false){
+                filters["pre_screening.status"] = ["Pre-Rejected"]
+            }
+        }
+
+        let filterValues = Object.values(filters)
+        //console.log(filterValues)
+        let filterValuesStr = []
+        for (let item of filterValues){
+            // console.log(item)
+            filterValuesStr.push(item.join(" + "))
+        }
+
+        // console.log(filterValuesStr.join(" > "))
+        setFilters(filterValuesStr.join(" > "))
+    }
+
+    function clearFilters(){
+        setFilters("")
+        setRefreshKey(prevKey => prevKey + 1);
+    }
+
 
     return(
         <>
             <UI_Breadcrumb items={breadcrumbItems}/>
             <div className="app-component pre-screening-table-con">
-                <Button type='secondary' icon={<IconDownload />}
-                        className="pre_screening-download-btn"
-                        onClick={handleDownload}
-                >Download</Button>
+                <div className="table-header-bar">
+                    <Button type='secondary' icon={<IconDownload />}
+                            className="pre_screening-download-btn"
+                            onClick={handleDownload}
+                    >Download</Button>
+                    <div>
+                        {filters}
+                        <Button type='secondary'
+                                style={{marginLeft: 10}}
+                                onClick={clearFilters}
+                        >Clear Filters</Button>
+                    </div>
+                </div>
                 {
                     data &&
                     <Table
+                        key={refreshKey}
                         loading={loading}
                         columns={columns}
                         data={allData}
                         style={{marginBottom: 20}}
-                        //pagination={pagination}
-                        //onChange={onChangeTable}
-                        // renderPagination={(paginationNode) => (
-                        //     <div
-                        //         style={{
-                        //             display: 'flex',
-                        //             justifyContent: 'space-between',
-                        //             marginTop: 10,
-                        //             float: 'right',
-                        //         }}
-                        //     >
-                        //         {paginationNode}
-                        //     </div>
-                        // )}
+                        onChange={handleTableChange}
                     />
                 }
             </div>

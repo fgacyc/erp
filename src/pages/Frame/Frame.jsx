@@ -1,7 +1,7 @@
 import { Menu} from '@arco-design/web-react';
 import {IconUserAdd} from '@arco-design/web-react/icon';
 import "./Frame.css"
-import {Outlet, useLocation, useNavigate, useParams} from "react-router-dom";
+import {Outlet, useLocation, useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 const MenuItem = Menu.Item;
 const SubMenu = Menu.SubMenu;
@@ -16,7 +16,7 @@ export default  function  Frame(){
     const [tabs, setTabs] = useState(null);
 
     const path = useLocation().pathname;
-    console.log(path)
+    // console.log(path)
 
     useEffect( () => {
         checkLogin();

@@ -43,7 +43,7 @@ export function  CountdownTimer(){
             {countdown <= 0 && <div style={{color:"red"}}>Time's up!</div>}
         </div>
     );
-};
+}
 
 export default function Interview_form() {
     const breadcrumbItems = [
