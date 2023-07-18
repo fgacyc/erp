@@ -1,7 +1,7 @@
 import { Menu} from '@arco-design/web-react';
 import {IconUserAdd} from '@arco-design/web-react/icon';
 import "./Frame.css"
-import {Outlet, useNavigate} from "react-router-dom";
+import {Outlet, useLocation, useNavigate, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 const MenuItem = Menu.Item;
 const SubMenu = Menu.SubMenu;
@@ -15,6 +15,9 @@ export default  function  Frame(){
     const navigate = useNavigate();
     const [tabs, setTabs] = useState(null);
 
+    const path = useLocation().pathname;
+    console.log(path)
+
     useEffect( () => {
         checkLogin();
         menuPermission().then((res) => {
@@ -27,6 +30,7 @@ export default  function  Frame(){
         let loginStatus = await getLoginStatus();
         if (!StaffInfoLocalExist || !loginStatus) navigate("/login")
         else{
+            path === "/" && navigate("/recruitment_dashboard")
             //navigate("/recruitment_dashboard")
             //navigate("/recruitment_interview")
             //navigate("/recruitment_pre_screening")
