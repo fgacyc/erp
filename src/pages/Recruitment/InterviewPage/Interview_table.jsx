@@ -81,6 +81,13 @@ export default function Interview_table() {
 
     }
 
+    function checkInterview(record){
+        let RID = record._id;
+        set("current_candidate", record).then(() => {
+            navigate(`/recruitment_interview/form/${RID}/1`);
+        });
+    }
+
     function showQRCodeModal(record){
         setCurrentCandidate(record);
         setQRCodeModalVisible(true);
@@ -139,7 +146,7 @@ export default function Interview_table() {
                         <Input.Search
                             ref={inputRef}
                             searchButton
-                            placeholder='Please enter a nimisitry'
+                            placeholder='Please enter a ministry'
                             value={filterKeys[0] || ''}
                             onChange={(value) => {
                                 setFilterKeys(value ? [value] : []);
@@ -220,7 +227,7 @@ export default function Interview_table() {
                         >Start</Button>
                     }
                     {   recruiterInterviewStatus(record) === "Interviewed" &&
-                        <Button onClick={()=>startInterview(record)} type='secondary' status="success" style={{width: 93}}
+                        <Button onClick={()=>checkInterview(record)} type='secondary' status="success" style={{width: 93}}
                         >Check</Button>
                     }
                 </span>
