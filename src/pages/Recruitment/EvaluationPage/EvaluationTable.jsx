@@ -7,6 +7,7 @@ import {useNavigate} from "react-router-dom";
 import {addKeys} from "../../../tools/tableTools.js";
 import {IconSearch} from "@arco-design/web-react/icon";
 import {getPassStatus,filterEvaluationData} from "./data.js";
+import {set} from "idb-keyval";
 
 export default function Recruitment_Evaluation_Table() {
     const breadcrumbItems = [
@@ -46,7 +47,9 @@ export default function Recruitment_Evaluation_Table() {
     }
 
     function startEvaluation(record){
-        navigate(`/recruitment_evaluation/form/${record._id}`);
+        set("current_candidate", record).then(() => {
+            navigate(`/recruitment_evaluation/form/${record._id}`);
+        });
     }
 
 
