@@ -244,7 +244,9 @@ export default function Interview_table() {
                     userData &&
                     <Table
                         columns={columns}
-                        data={userData} />
+                        data={userData}
+                        style={{marginBottom: 20}}
+                    />
                 }
             </div>
             {

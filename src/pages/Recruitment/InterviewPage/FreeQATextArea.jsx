@@ -10,7 +10,26 @@ export default function FreeQATextArea({candidate,questions,freeQAs, setFreeQAs,
     const [ifDisable,setIfDisable] = useState(ifInterviewed)
     const [textAreaStyle,setTextAreaStyle] = useState({width:"100%", resize:"none"})
     const [ifVocal,setIfVocal] = useState(false)
+    const [spaceHeight,setSpaceHeight] = useState(0)
     // console.log(questions)
+
+    function calHeight(){
+        if(spaceHeight!==0) return;
+
+        let appTarget = document.querySelector(".full-screen-app-component");
+        let target = document.querySelector(".full-screen-app-component-con");
+        let appHeight = window.getComputedStyle(appTarget).height;
+        let targetHeight = window.getComputedStyle(target).height;
+        //console.log(appHeight, targetHeight)
+
+        appHeight =  parseInt(appHeight, 10)
+        targetHeight = parseInt(targetHeight, 10)
+
+        if (appHeight > targetHeight){
+            setSpaceHeight(appHeight - targetHeight -286)
+            // console.log("yessss")
+        }
+    }
 
     useEffect(()=>{
         if(ifInterviewed){
@@ -19,6 +38,7 @@ export default function FreeQATextArea({candidate,questions,freeQAs, setFreeQAs,
         if(candidate){
             setIfVocal(candidate.ministry[2] === "vocal")
         }
+        calHeight();
     },[])
 
     function getFreeQAAnswer(){
@@ -55,7 +75,7 @@ export default function FreeQATextArea({candidate,questions,freeQAs, setFreeQAs,
 
     return(
         <div style={{ display: "flex",justifyItems:"center" }}>
-            <div style={{width: "80%",height:400,margin:"50px auto"}}>
+            <div style={{width: "80%",margin:"50px auto"}}>
                 <div className="interviewer-qas-answer-con">
                     <TextArea
                         // onChange={setFreeQAs}
@@ -77,10 +97,14 @@ export default function FreeQATextArea({candidate,questions,freeQAs, setFreeQAs,
                     }
                 </div>
                 { ifVocal &&
-                    <Card style={{marginTop:1}}>
-                        <VocalRatingTable vocalRatingForm={vocalRatingForm} setVocalRatingForm={setVocalRatingForm} ifInterviewed={ifInterviewed} />
-                    </Card>
+                    <div>
+                        <Card style={{marginTop:1}}>
+                            <VocalRatingTable vocalRatingForm={vocalRatingForm} setVocalRatingForm={setVocalRatingForm} ifInterviewed={ifInterviewed} />
+                        </Card>
+                        <div style={{height:50}}></div>
+                    </div>
                 }
+                <div style={{height:spaceHeight}}></div>
             </div>
         </div>
     )

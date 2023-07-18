@@ -1,5 +1,5 @@
 import {Button, Result, Select} from "@arco-design/web-react";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import {getReq} from "../../../tools/requests.js";
 import {get} from "idb-keyval";
 const Option = Select.Option;
@@ -11,6 +11,24 @@ export  function Interview_form_Section3({ ministry,
                                          ifInterviewed
 })
 {
+    const [spaceHeight,setSpaceHeight] = useState(0)
+    function calHeight(){
+        if(spaceHeight!==0) return;
+
+        let appTarget = document.querySelector(".full-screen-app-component");
+        let target = document.querySelector(".full-screen-app-component-con");
+        let appHeight = window.getComputedStyle(appTarget).height;
+        let targetHeight = window.getComputedStyle(target).height;
+        //console.log(appHeight, targetHeight)
+
+        appHeight =  parseInt(appHeight, 10)
+        targetHeight = parseInt(targetHeight, 10)
+
+        if (appHeight > targetHeight){
+            setSpaceHeight(appHeight - targetHeight )
+            // console.log("yessss")
+        }
+    }
 
     useEffect(() => {
         if(ifInterviewed){
@@ -24,6 +42,7 @@ export  function Interview_form_Section3({ ministry,
             // console.log(res.data)
             setInterviewers(res.data);
         })
+        calHeight();
     }, []);
 
 
@@ -62,6 +81,7 @@ export  function Interview_form_Section3({ ministry,
                     ]}
                 ></Result>
             }
+            <div style={{height:spaceHeight}}></div>
         </div>
     )
 }

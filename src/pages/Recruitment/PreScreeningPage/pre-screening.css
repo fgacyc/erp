@@ -1,5 +1,6 @@
 .pre-screening-table-con{
     height: calc(100% - 70px);
+    overflow: auto;
 }
 
 

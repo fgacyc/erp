@@ -4,8 +4,8 @@
 
 .long-screen-app-component{
     padding-bottom:80px;
+    position: relative;
 }
-
 .interview-btns{
     width: 100px;
     position: absolute;
@@ -16,11 +16,13 @@
 
 .interview-btns-left{
     left: 100px;
+    bottom: 30px;
 }
 
 
 .interview-btns-right{
-    right: 100px;
+    right:100px;
+    bottom: 30px;
 }
 
 .interview-btns-left-page1{

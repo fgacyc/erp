@@ -192,7 +192,9 @@ export default function Recruitment_Evaluation_Table() {
                     userData &&
                     <Table
                         columns={columns}
-                        data={userData} />
+                        data={userData}
+                        style={{marginBottom: 20}}
+                    />
                 }
             </div>
             {

@@ -72,10 +72,11 @@ export default function Interview_form() {
     const [disabledPrevious, setDisabledPrevious] = useState(false);
     const [vocalRatingForm, setVocalRatingForm] = useState(null);
     const [ifInterviewed, setIfInterviewed] = useState(false);
+    const [ifLoading, setIfLoading] = useState(false);
 
     useEffect(() => {
         get("current_candidate").then((res) => {
-            // console.log(res)
+            //console.log(res)
             setMinistry(res.info.ministry[2]);
             setQAs(res.interview.ministry.questions);
             setCandidate(res.info);
@@ -84,27 +85,19 @@ export default function Interview_form() {
         initVocalRatingForm();
     }, []);
 
+
     useEffect(() => {
-        let target;
-        if(partID === "1" || partID === "2"){
-            target = document.getElementById("interview-form");
-        }else{
-            return;
-        }
-        if (partID === "1"){
-            target.classList.remove("full-screen-app-component")
-            target.classList.add("long-screen-app-component")
+        if(partID ==="1"){
             setDisabledPrevious(true);
-        }else if (partID === "2"){
-            let target = document.getElementById("interview-form");
-            target.classList.remove("long-screen-app-component")
-            target.classList.add("full-screen-app-component")
+        }else if (partID ==="2"){
             setDisabledPrevious(false);
+            setIfDisabledSubmit(false);
+        }else if (partID ==="3"){
+            setIfDisabledSubmit(true);
         }
 
-        // console.log(QAs)
-    }, [partID]);
 
+    }, [partID]);
 
     function backToInterViewTable(){
         navigate(`/recruitment_interview`);
@@ -155,6 +148,7 @@ export default function Interview_form() {
     }
 
     async function submitHandler(){
+        setIfLoading(true);
         if(!currentInterviewers){
             Message.warning('Please select interviewers');
             return;
@@ -173,9 +167,10 @@ export default function Interview_form() {
         let res =await postReq(`/interview/answers/${RID}`,data)
 
         if(res.status){
+            setIfLoading(false);
             setIfSubmitted(true);
             setIfDisabledSubmit(true);
-            console.log(res)
+            // console.log(res)
         }
     }
 
@@ -192,91 +187,109 @@ export default function Interview_form() {
         <>
             <UI_Breadcrumb items={breadcrumbItems}/>
             <div className="app-component full-screen-app-component" style={{position:"relative"}} id="interview-form">
-                <div style={{height:30}}></div>
-                <Steps current={parseInt(partID)} style={{ maxWidth: 780, margin: '0 auto' }}>
-                    <Step title='General Questions' />
-                    {/*<Step title='Specific Questions' />*/}
-                    <Step title='Q&A' />
-                    <Step title='Finish' />
-                </Steps>
-                {
-                    partID === '1' &&
-                    <div>
-                        {QAs.length >0 && QAs.map((question, index) => {
-                            if(question.type === "general"){
-                                return (
-                                    <QuestionGroup1 questions={QAs} setQuestions={setQAs} key={index} id={index} ifInterviewed={ifInterviewed}/>
-                                )
-                            }
-                        })}
-                        {QAs && QAs.map((question, index) => {
-                            if(question.type !== "general" && question.type !== "freeQ&As" && question.type !== "vocalRating"){
-                                return (
-                                    <QuestionGroup1 questions={QAs} setQuestions={setQAs} key={index} id={index} ifInterviewed={ifInterviewed}/>
-                                )
-                            }
-                        })}
-                    </div>
-                }
-                {
-                    partID === '2' &&
-                    <FreeQATextArea candidate={candidate}
-                                    questions={QAs}
-                                    freeQAs={freeQAs}
-                                    setFreeQAs={setFreeQAs}
-                                    vocalRatingForm={vocalRatingForm}
-                                    setVocalRatingForm={setVocalRatingForm}
-                                    ifInterviewed={ifInterviewed}/>
-                }
-                {
-                    partID === '3' &&
-                    <Interview_form_Section3
+                <div className="full-screen-app-component-con">
+                    <div style={{height:30}}></div>
+                    <Steps current={parseInt(partID)} style={{ maxWidth: 780, margin: '0 auto' }}>
+                        <Step title='General Questions' />
+                        {/*<Step title='Specific Questions' />*/}
+                        <Step title='Q&A' />
+                        <Step title='Finish' />
+                    </Steps>
+                    {
+                        partID === '1' &&
+                        <div>
+                            {QAs.length >0 && QAs.map((question, index) => {
+                                if(question.type === "general"){
+                                    return (
+                                        <QuestionGroup1 questions={QAs} setQuestions={setQAs} key={index} id={index} ifInterviewed={ifInterviewed}/>
+                                    )
+                                }
+                            })}
+                            {QAs && QAs.map((question, index) => {
+                                if(question.type !== "general" && question.type !== "freeQ&As" && question.type !== "vocalRating"){
+                                    return (
+                                        <QuestionGroup1 questions={QAs} setQuestions={setQAs} key={index} id={index} ifInterviewed={ifInterviewed}/>
+                                    )
+                                }
+                            })}
+                            <div style={{height:80}}></div>
+                        </div>
+                    }
+                    {
+                        partID === '2' &&
+                        <FreeQATextArea candidate={candidate}
+                                        questions={QAs}
+                                        freeQAs={freeQAs}
+                                        setFreeQAs={setFreeQAs}
+                                        vocalRatingForm={vocalRatingForm}
+                                        setVocalRatingForm={setVocalRatingForm}
+                                        ifInterviewed={ifInterviewed}/>
+                    }
+                    {
+                        partID === '3' &&
+                        <Interview_form_Section3
                             ministry={ministry}
                             interviewers={interviewers}
                             setInterviewers={setInterviewers}
                             currentInterviewers={currentInterviewers}
                             setCurrentInterviewers={setCurrentInterviewers}
-                             ifSubmitted={ifSubmitted}
-                             backToInterViewTable={backToInterViewTable}
+                            ifSubmitted={ifSubmitted}
+                            backToInterViewTable={backToInterViewTable}
                             ifInterviewed={ifInterviewed}
-                    />
-                }
-                <div style={{height:100}}></div>
-                {partID === '1' && <Button type='primary'
-                                          style={{bottom:80}}
-                                           className="interview-btns interview-btns-left" id={"interview-btn-left"}
-                                           disabled={true}
-                                           onClick={()=>goToNextPart(-1)}>Previous </Button>
+                        />
+                    }
 
-                }
-                {
-                    partID === '2' && <Button type='primary'
-                                              className="interview-btns interview-btns-left" id={"interview-btn-left"}
-                                              disabled={false}
-                                              onClick={()=>goToNextPart(-1)}>Previous </Button>
-                }
-                {
-                    partID === '3' && <Button type='primary'
-                                              className="interview-btns interview-btns-left" id={"interview-btn-left"}
-                                              disabled={false}
-                                              onClick={()=>goToNextPart(-1)}>Previous </Button>
-                }
-                {  partID === '1' &&  <Button type='primary'
-                                              style={{bottom:80}}
-                                   className="interview-btns interview-btns-right" id={"interview-btn-right"}
-                                   onClick={()=>goToNextPart(1)}>Next</Button>
-                }
-                {  partID === '2' &&  <Button type='primary'
-                                              className="interview-btns interview-btns-right" id={"interview-btn-right"}
-                                              onClick={()=>goToNextPart(1)}>Next</Button>
-                }
+                    <Button type='primary' className="interview-btns interview-btns-left"
+                            disabled={disabledPrevious}
+                                    onClick={()=>goToNextPart(-1)}>Previous </Button>
+                    { ifDisabledSubmit
+                        ? <Button type='primary' className="interview-btns interview-btns-right"
+                                  loading={ifLoading}
+                        onClick={submitHandler}>Submit</Button>
+                        : <Button type='primary' className="interview-btns interview-btns-right"
+                                onClick={()=>goToNextPart(1)}>Next</Button>
 
-                {
-                    partID === '3'&& <Button type='primary'
-                               disabled={ifDisabledSubmit}
-                               className="interview-btns interview-btns-right"
-                               onClick={submitHandler}>Submit</Button>
-                }
+                    }
+
+                    {/*<div style={{height:100}}></div>*/}
+                    {/*{partID === '1' && <div>*/}
+                    {/*    <Button type='primary'*/}
+                    {/*            style={{bottom:37}}*/}
+                    {/*            className="interview-btns interview-btns-left" id={"interview-btn-left"}*/}
+                    {/*            disabled={true}*/}
+                    {/*            onClick={()=>goToNextPart(-1)}>Previous </Button>*/}
+                    {/*    <Button type='primary'*/}
+                    {/*            style={{bottom:37}}*/}
+                    {/*            className="interview-btns interview-btns-right" id={"interview-btn-right"}*/}
+                    {/*            onClick={()=>goToNextPart(1)}>Next</Button>*/}
+                    {/*</div>*/}
+                    {/*}*/}
+
+                    {/*{*/}
+                    {/*    partID === '2' && <div>*/}
+                    {/*        <Button type='primary'*/}
+                    {/*                className="interview-btns interview-btns-left" id={"interview-btn-left"}*/}
+                    {/*                disabled={false}*/}
+                    {/*                onClick={()=>goToNextPart(-1)}>Previous </Button>*/}
+                    {/*        <Button type='primary'*/}
+                    {/*                className="interview-btns interview-btns-right" id={"interview-btn-right"}*/}
+                    {/*                onClick={()=>goToNextPart(1)}>Next</Button>*/}
+                    {/*    </div>*/}
+                    {/*}*/}
+
+                    {/*{*/}
+                    {/*    partID === '3' &&<div>*/}
+                    {/*        <Button type='primary'*/}
+                    {/*                className="interview-btns interview-btns-left" id={"interview-btn-left"}*/}
+                    {/*                disabled={false}*/}
+                    {/*                onClick={()=>goToNextPart(-1)}>Previous </Button>*/}
+                    {/*        <Button type='primary'*/}
+                    {/*                disabled={ifDisabledSubmit}*/}
+                    {/*                className="interview-btns interview-btns-right"*/}
+                    {/*                onClick={submitHandler}>Submit</Button>*/}
+                    {/*    </div>*/}
+                    {/*}*/}
+                </div>
             </div>
         </>
     )

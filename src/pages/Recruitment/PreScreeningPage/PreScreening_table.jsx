@@ -324,6 +324,7 @@ export  default  function PreScreening_table(){
                         loading={loading}
                         columns={columns}
                         data={allData}
+                        style={{marginBottom: 20}}
                         //pagination={pagination}
                         //onChange={onChangeTable}
                         // renderPagination={(paginationNode) => (
