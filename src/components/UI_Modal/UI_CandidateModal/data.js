@@ -69,11 +69,21 @@ function preScreeningInfo(statusID,recruiter){
         return `Register at ${regTime}, [Waiting for pre-screening]`
     }else if(recruiter.application.status === "pre-accepted"){
         let pre_screeningTime = getDateString(recruiter.pre_screening.pre_screening_time * 1000)
-        return `Register at ${regTime}, [Passed pre-screening] at ${pre_screeningTime}`
+        if(recruiter.email.appointment.send.status){
+            let appointmentEmailTime = getDateString(recruiter.email.appointment.send.timestamp * 1000)
+            return `Register at ${regTime}, [Passed pre-screening] at ${pre_screeningTime}, ✅Appointment email has been sent at ${appointmentEmailTime}`
+        }else{
+            return `Register at ${regTime}, [Passed pre-screening] at ${pre_screeningTime}, ❌Appointment email has not been sent`
+        }
     }
     else if(recruiter.application.status === "pre-rejected"){
         let pre_screeningTime = getDateString(recruiter.pre_screening.pre_screening_time * 1000)
-        return `Register at ${regTime}, [Passed pre-screening] at ${pre_screeningTime}`
+        if(recruiter.email.offer.send.status){
+            let offerEmailTime = getDateString(recruiter.email.offer.send.timestamp * 1000)
+            return `Register at ${regTime}, [Failed pre-screening] at ${pre_screeningTime}, ✅Rejected email has been sent at ${offerEmailTime}`
+        }else{
+            return `Register at ${regTime}, [Failed pre-screening] at ${pre_screeningTime}, ❌Rejected email has not been sent`
+        }
     }
 }
 
