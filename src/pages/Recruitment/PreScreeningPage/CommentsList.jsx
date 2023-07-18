@@ -4,6 +4,7 @@ import {deleteReq, getReq} from "../../../tools/requests.js";
 import { IconMore} from "@arco-design/web-react/icon";
 import "./pre-screening.css";
 import PubSub from 'pubsub-js';
+import {getCurrentUserCYCID} from "../../../tools/auth.js";
 
 function MenuEvent(key,id,RID){
     // console.log(key,id,RID)
@@ -26,8 +27,17 @@ function MenuEvent(key,id,RID){
 
 
 
-export function PreScreeningComment({item,id,RID}){
-    let [username, setUsername] = useState("");
+export function PreScreeningComment({item,id,RID,CYC_ID}){
+    const [username, setUsername] = useState("");
+    const [dropdownAction, setDropdownAction] = useState(null);
+
+    useEffect(()=>{
+        let router = `/auth/names?CYC_ID=${item.CYC_ID}`;
+        getReq(router).then((res)=>{
+            if(res.status) setCommentUserName(res.data)
+        })
+        setCurrentDropdownAction()
+    },[])
 
     function setCommentUserName(data){
         if(data.username === null){
@@ -37,16 +47,25 @@ export function PreScreeningComment({item,id,RID}){
         }
     }
 
-    useEffect(()=>{
-        let router = `/auth/names?CYC_ID=${item.CYC_ID}`;
-        getReq(router).then((res)=>{
-             //console.log(res)
-            if(res.status){
-                setCommentUserName(res.data)
-            }
-        })
+    function setCurrentDropdownAction(){
+        // console.log(CYC_ID,item.CYC_ID)
+        if(CYC_ID === item.CYC_ID){
+            setDropdownAction(
+                <Dropdown droplist={
+                    <Menu onClickMenuItem={(key)=>MenuEvent(key,id,RID)}>
+                        {/*<Menu.Item key='1'>Edit</Menu.Item>*/}
+                        <Menu.Item key='2'>Delete</Menu.Item>
+                    </Menu>
+                } position='bl' trigger='click' >
+                    <span className='custom-comment-action'>
+                     <IconMore />
+                    </span>
+                </Dropdown>
+            )
+        }
+    }
 
-    },[])
+
 
 
     return(
@@ -58,23 +77,16 @@ export function PreScreeningComment({item,id,RID}){
             }
             content={item.comment}
             datetime={new Date(item.timestamp * 1000).toLocaleString()}
-            actions={
-                <Dropdown droplist={
-                    <Menu onClickMenuItem={(key)=>MenuEvent(key,id,RID)}>
-                        {/*<Menu.Item key='1'>Edit</Menu.Item>*/}
-                        <Menu.Item key='2'>Delete</Menu.Item>
-                    </Menu>
-                } position='bl' trigger='click' >
-                    <span className='custom-comment-action'>
-                     <IconMore />
-                    </span>
-                </Dropdown>
-            }
+            actions={dropdownAction}
         />
     )
 }
 
 export default  function PreScreeningCommentsList({userDatas,setUserDatas}){
+    const [currentCYCID, setCurrentCYCID] = useState(null);
+
+
+
     let comments= userDatas.pre_screening.comments
     let RID = userDatas._id
 
@@ -85,24 +97,29 @@ export default  function PreScreeningCommentsList({userDatas,setUserDatas}){
             //console.log(newComments)
             setUserDatas({...userDatas,pre_screening:{...userDatas.pre_screening,comments:comments}})
         });
+        getCurrentUserCYCID().then((res) => {
+            setCurrentCYCID(res);
+        });
 
         return () => PubSub.unsubscribe(subscription);
     }, []);
 
     return (
         <div>
-            <List
+            {currentCYCID &&  <List
                 bordered={false}
                 header={<span>{comments.length} comments</span>}
             >
                 {comments.map((item, index) => {
-                        return (
-                            <List.Item key={index} >
-                                <PreScreeningComment item={item} id={index} RID={RID}/>
-                            </List.Item>
-                        );
-                    })}
+                    return (
+                        <List.Item key={index} >
+                            <PreScreeningComment item={item} id={index} RID={RID} CYC_ID={currentCYCID} />
+                        </List.Item>
+                    );
+                })}
             </List>
+            }
+
             <div id="comment-list-bottom"></div>
         </div>
     )
