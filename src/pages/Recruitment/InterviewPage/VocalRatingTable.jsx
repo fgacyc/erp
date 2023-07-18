@@ -58,7 +58,7 @@ export default function VocalRatingTable({vocalRatingForm, setVocalRatingForm ,i
                 {items.map((item, index) => {
                     return <div key={index} style={{display:"flex",marginBottom:10}}>
                         <div style={{width:"20%"}}>{item}</div>
-                        <div style={{width:"20%"}}>
+                        <div style={{width:"20%",minWidth:160, margin:"0 10px"}}>
                             <Rate onChange={(val)=>handleStarChange(val,index)}
                             value={vocalRatingForm.stars[index]}
                             disabled={ifDisableInput}

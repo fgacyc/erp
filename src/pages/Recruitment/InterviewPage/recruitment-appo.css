@@ -34,8 +34,10 @@
 }
 
 .candidate-textarea-disable{
-    -webkit-text-fill-color: #1a1a1a !important;
-    color : #1a1a1a !important;
+    -webkit-text-fill-color:#000000 !important;
+    color: #000000 !important;
+    /*text-fill-color: #1a1a1a  !important;*/
+
 }
 
 .question-group{
