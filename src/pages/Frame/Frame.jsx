@@ -1,11 +1,11 @@
 import { Menu} from '@arco-design/web-react';
 import {IconUserAdd} from '@arco-design/web-react/icon';
 import "./Frame.css"
-import {Outlet, useNavigate} from "react-router-dom";
+import {Outlet, useLocation, useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 const MenuItem = Menu.Item;
 const SubMenu = Menu.SubMenu;
-import {getLoginStatus, ifCurrentUserIsSuperAdmin, ifStaffInfoLocalExist} from "../../tools/auth.js";
+import {getLoginStatus, ifStaffInfoLocalExist} from "../../tools/auth.js";
 import HeadBarBtns from "../../components/UI_Menu/UI_HeaderBarMenu/HeadBarBtns.jsx";
 import UI_FloatingHelpMenu from "../../components/UI_Menu/UI_FloatingHelpMenu/UI_FloatingHelpMenu.jsx";
 import {menuPermission} from "./AuthorityDetection.js";
@@ -14,6 +14,9 @@ import {menuPermission} from "./AuthorityDetection.js";
 export default  function  Frame(){
     const navigate = useNavigate();
     const [tabs, setTabs] = useState(null);
+
+    const path = useLocation().pathname;
+    // console.log(path)
 
     useEffect( () => {
         checkLogin();
@@ -27,8 +30,10 @@ export default  function  Frame(){
         let loginStatus = await getLoginStatus();
         if (!StaffInfoLocalExist || !loginStatus) navigate("/login")
         else{
-            navigate("/recruitment_dashboard")
+            path === "/" && navigate("/recruitment_dashboard")
+            //navigate("/recruitment_dashboard")
             //navigate("/recruitment_interview")
+            //navigate("/recruitment_pre_screening")
         }
     }
 

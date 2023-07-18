@@ -84,6 +84,9 @@ export function recruiterInterviewStatus(record){
     else  if(!record.appointment && record.interview.status ===false){
         return "Not appointed"
     }
+    else{
+        console.log("recruiterInterviewStatus error")
+    }
 }
 
 // pad 0 to the left of the number

@@ -69,3 +69,10 @@ style={{ display: "flex", justifyContent: "center", paddingTop: 30, paddingBotto
     border: 1px solid rgb(229,230,235);
     border-radius: 2px;
 }
+
+
+@media screen and (max-width: 1400px) {
+    .recruitment-dashboard-card-icon{
+        display: none;
+    }
+}

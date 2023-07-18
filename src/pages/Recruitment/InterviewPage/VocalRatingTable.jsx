@@ -1,12 +1,24 @@
 import {Input, Rate} from "@arco-design/web-react";
 import {useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
+import {get} from "idb-keyval";
 
-export default function VocalRatingTable({vocalRatingForm, setVocalRatingForm}){
+export default function VocalRatingTable({vocalRatingForm, setVocalRatingForm ,ifInterviewed}){
     const [ifDisableInput, setIfDisableInput] = useState(false);
     const [inputPlaceholder, setInputPlaceholder] = useState("Please Enter Remarks");
 
     useEffect(()=>{
+        if(ifInterviewed){
+            get("current_candidate").then((res) => {
+                let questions = res.interview.ministry.questions;
+                for (let item  of questions){
+                    if(item.type === "vocalRating"){
+                        setVocalRatingForm(item.interviewer)
+                    }
+                }
+                //console.log(vocalRatingForm)
+            });
+        }
+
         let path = window.location.pathname;
         if(path.includes("recruitment_evaluation/form/")){
             setIfDisableInput(true);
@@ -44,9 +56,9 @@ export default function VocalRatingTable({vocalRatingForm, setVocalRatingForm}){
         <>
             <div style={{width:"100%"}}>
                 {items.map((item, index) => {
-                    return <div key={index} style={{display:"flex"}}>
+                    return <div key={index} style={{display:"flex",marginBottom:10}}>
                         <div style={{width:"20%"}}>{item}</div>
-                        <div style={{width:"20%"}}>
+                        <div style={{width:"20%",minWidth:160, margin:"0 10px"}}>
                             <Rate onChange={(val)=>handleStarChange(val,index)}
                             value={vocalRatingForm.stars[index]}
                             disabled={ifDisableInput}

@@ -61,7 +61,8 @@
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background-color: red;
+    /*background-color: red;*/
+    background-color: #F76560;
     border: 1px solid white;
     box-sizing: border-box;
     transition: all 0.3s ease-in-out;

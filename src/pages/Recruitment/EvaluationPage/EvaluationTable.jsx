@@ -6,7 +6,7 @@ import CandidateModal from "../../../components/UI_Modal/UI_CandidateModal/Candi
 import {useNavigate} from "react-router-dom";
 import {addKeys} from "../../../tools/tableTools.js";
 import {IconSearch} from "@arco-design/web-react/icon";
-import {filterEvaluationData} from "./data.js";
+import {getPassStatus,filterEvaluationData} from "./data.js";
 
 export default function Recruitment_Evaluation_Table() {
     const breadcrumbItems = [
@@ -49,13 +49,7 @@ export default function Recruitment_Evaluation_Table() {
         navigate(`/recruitment_evaluation/form/${record._id}`);
     }
 
-    function getPassStatus(record){
-        let applicationStatus = record.application.status;
-        if(applicationStatus === "accepted") return "accepted";
-        else if(applicationStatus === "rejected") return "rejected";
-        else if(applicationStatus === "kiv") return "kiv";
-        else return "pending";
-    }
+
 
     const columns  = [
         {
@@ -172,11 +166,19 @@ export default function Recruitment_Evaluation_Table() {
             title: 'Operation',
             dataIndex: 'op',
             render: (_, record) => (
-                <Button onClick={()=>startEvaluation(record)} type='primary'
-                       // disabled={record.application.status==="accepted" ||record.application.status==="rejected" }
-                >
-                    Evaluate
-                </Button>
+                <div>
+                    { getPassStatus(record) === "pending"
+                        ?<Button onClick={()=>startEvaluation(record)}
+                                 type='primary'
+                                 style={{width:100}}
+                        >Evaluate</Button>
+                        :<Button onClick={()=>startEvaluation(record)} status='success'
+                                 type='outline'
+                                 style={{width:100}}
+                        >Check</Button>
+                    }
+                </div>
+
             ),
         },
     ];
@@ -190,7 +192,9 @@ export default function Recruitment_Evaluation_Table() {
                     userData &&
                     <Table
                         columns={columns}
-                        data={userData} />
+                        data={userData}
+                        style={{marginBottom: 20}}
+                    />
                 }
             </div>
             {

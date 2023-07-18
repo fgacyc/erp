@@ -8,15 +8,12 @@ import CandidateModal from "../../../components/UI_Modal/UI_CandidateModal/Candi
 import "./recruitment-appo.css"
 import {useNavigate} from "react-router-dom";
 import {putReq} from "../../../tools/requests.js";
-import {IconCalendar, IconDownload, IconSearch} from "@arco-design/web-react/icon";
+import {IconCalendar, IconSearch} from "@arco-design/web-react/icon";
 import {set} from "idb-keyval";
 import {UI_QRCodeModal} from "../../../components/UI_Modal/UI_QRCodeModal/UI_QRCodeModal.jsx";
 import {getAppoInsightData, getDateTimeFilterData} from "../EvaluationPage/data.js";
 import {ifCurrentUserIsSuperAdmin} from "../../../tools/auth.js";
 import UI_InterviewAppoInsight from "../../../components/UI_Modal/UI_InterviewAppoInsight/UI_InterviewAppoInsight.jsx";
-import UI_InterviewAppoInsight1
-    from "../../../components/UI_Modal/UI_InterviewAppoInsight/UI_InterviewAppoInsight1.jsx";
-
 export default function Interview_table() {
     const breadcrumbItems = [
         {
@@ -82,6 +79,13 @@ export default function Interview_table() {
             console.error(error);
         });
 
+    }
+
+    function checkInterview(record){
+        let RID = record._id;
+        set("current_candidate", record).then(() => {
+            navigate(`/recruitment_interview/form/${RID}/1`);
+        });
     }
 
     function showQRCodeModal(record){
@@ -215,13 +219,16 @@ export default function Interview_table() {
             dataIndex: 'op',
             render: (_, record) => (
                 <span>
-                    { recruiterInterviewStatus(record) === "Not appointed"
-                        ? <span>
-                            <Button type='outline' onClick={()=> showQRCodeModal(record)}>Schedule</Button>
-                        </span>
-                        : <Button onClick={()=>startInterview(record)} type='primary'
-                            style={{width: 93}}
+                    {   recruiterInterviewStatus(record) === "Not appointed"
+                        && <Button type='outline' onClick={()=> showQRCodeModal(record)}>Schedule</Button>
+                    }
+                    {   recruiterInterviewStatus(record) === "Pending" &&
+                        <Button onClick={()=>startInterview(record)} type='primary'  style={{width: 93}}
                         >Start</Button>
+                    }
+                    {   recruiterInterviewStatus(record) === "Interviewed" &&
+                        <Button onClick={()=>checkInterview(record)} type='secondary' status="success" style={{width: 93}}
+                        >Check</Button>
                     }
                 </span>
 
@@ -244,7 +251,9 @@ export default function Interview_table() {
                     userData &&
                     <Table
                         columns={columns}
-                        data={userData} />
+                        data={userData}
+                        style={{marginBottom: 20}}
+                    />
                 }
             </div>
             {

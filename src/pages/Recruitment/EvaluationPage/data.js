@@ -1,5 +1,13 @@
 import {filterByPermission, getAppointTimes} from "../InterviewPage/data.js";
 
+export function getPassStatus(record){
+    let applicationStatus = record.application.status;
+    if(applicationStatus === "accepted") return "accepted";
+    else if(applicationStatus === "rejected") return "rejected";
+    else if(applicationStatus === "kiv") return "kiv";
+    else return "pending";
+}
+
 export async function filterEvaluationData(data) {
     data =await filterByPermission(data);
     let dataFilter = [];
@@ -67,4 +75,24 @@ export function getAppoInsightData(data) {
         });
     }
     return appoInsightData;
+}
+
+
+export function classifyQuestion(QAs){
+    let res = {
+        "general": [],
+        "specific": [],
+        "freeQ&As": []
+    }
+
+    for (let item of QAs){
+        if (item.type === "general"){
+            res.general.push(item);
+        } else if (item.type === "freeQ&As"){
+            res["freeQ&As"].push(item);
+        } else {
+            res.specific.push(item);
+        }
+    }
+    return res;
 }

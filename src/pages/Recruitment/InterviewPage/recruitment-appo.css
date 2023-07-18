@@ -4,8 +4,8 @@
 
 .long-screen-app-component{
     padding-bottom:80px;
+    position: relative;
 }
-
 .interview-btns{
     width: 100px;
     position: absolute;
@@ -16,11 +16,13 @@
 
 .interview-btns-left{
     left: 100px;
+    bottom: 30px;
 }
 
 
 .interview-btns-right{
-    right: 100px;
+    right:100px;
+    bottom: 30px;
 }
 
 .interview-btns-left-page1{
@@ -32,6 +34,47 @@
 }
 
 .candidate-textarea-disable{
-    -webkit-text-fill-color: #1a1a1a !important;
-    color : #1a1a1a !important;
+    -webkit-text-fill-color:#000000 !important;
+    color: #000000 !important;
+    /*text-fill-color: #1a1a1a  !important;*/
+
+}
+
+.question-group{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.question-group-textArea{
+    width: 80%;
+    resize: none;
+}
+
+.interviewer-answer-con{
+    width: 80%;
+    margin: 0 auto;
+    position: relative;
+}
+
+.interviewer-qas-answer-con{
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+}
+
+.interviewer-QAs-answer-con{
+    width: 80%;
+    margin: 50px auto;
+    position: relative;
+}
+
+.interviewer-answer-edit-icon{
+    position: absolute;
+    right: 4px;
+    bottom: 4px;
+    cursor: pointer;
+    font-size: 16px;
 }

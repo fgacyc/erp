@@ -14,6 +14,29 @@ body{
 
 .full-screen-app-component{
     height: calc(100% - 70px);
+    overflow: auto;
+}
+
+.full-screen-app-component-con{
+    position: relative;
+}
+
+.full-screen-app-component::-webkit-scrollbar {
+    width: 6px;
+}
+
+.full-screen-app-component::-webkit-scrollbar-track {
+    background: rgb(239, 239, 239);
+    border-radius: 2px;
+}
+
+.full-screen-app-component::-webkit-scrollbar-thumb {
+    background: #40a0ff49;
+    border-radius: 10px;
+}
+
+.full-screen-app-component::-webkit-scrollbar-thumb:hover {
+    background: #40a0ff;
 }
 
 @media screen and (max-width: 768px) {
