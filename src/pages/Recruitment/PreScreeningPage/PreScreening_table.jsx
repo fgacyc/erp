@@ -10,6 +10,7 @@ import {getTimeStamp} from "../../../tools/datetime.js";
 import UI_Breadcrumb from "../../../components/UI_Breadcrumb/UI_Breadcrumb.jsx";
 import {getAllUsers} from "../../../tools/DB.js";
 import UI_ConfirmModal from "../../../components/UI_Modal/UI_ConfirmModal/UI_ConfirmModal.jsx";
+import {getCurrentUserCYCID} from "../../../tools/auth.js";
 
 
 export  default  function PreScreening_table(){
@@ -19,6 +20,7 @@ export  default  function PreScreening_table(){
     const [clickOption, setClickOption] = useState(false);
     const [filters, setFilters] = useState("");
     const [refreshKey, setRefreshKey] = useState(0);
+    const [currentUserCYC_ID, setCurrentUserCYC_ID] = useState(0);
 
     const inputRef = useRef(null);
 
@@ -28,6 +30,7 @@ export  default  function PreScreening_table(){
 
         const pre_screening = {
             status: pre_screening_status,
+            approver: currentUserCYC_ID,
             pre_screening_time:  getTimeStamp(),
         }
 
@@ -45,9 +48,6 @@ export  default  function PreScreening_table(){
         })
     }
 
-    function postPreScreeningResult(record){
-
-    }
 
     function goToPreScreeningPage(record) {
         navigate(`/recruitment_pre_screening/${record._id}`);
@@ -279,9 +279,14 @@ export  default  function PreScreening_table(){
         });
     }
 
-
+    function setCurrentCYCID(){
+        getCurrentUserCYCID().then((data) => {
+            setCurrentUserCYC_ID(data);
+        });
+    }
     useEffect(() => {
         geUserData();
+        setCurrentCYCID();
     }, []);
 
     useEffect(() => {
