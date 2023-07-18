@@ -186,7 +186,7 @@ export  default  function PreScreening_table(){
                         <Input.Search
                             ref={inputRef}
                             searchButton
-                            placeholder='Please enter a nimisitry'
+                            placeholder='Please enter a ministry'
                             value={filterKeys[0] || ''}
                             onChange={(value) => {
                                 setFilterKeys(value ? [value] : []);
