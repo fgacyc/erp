@@ -35,7 +35,7 @@ export default function Evaluation_Page() {
     useEffect(() => {
         getReq(`/comments/${RID}`).then((res) => {
             setComments(res);
-            //console.log(res)
+            console.log(res)
 
         });
 
@@ -108,13 +108,6 @@ export default function Evaluation_Page() {
                         }
                         { QAs !== null &&
                             <div>
-                                {/*<div>*/}
-                                {/*    <h2>General Questions</h2>*/}
-                                {/*    { Object.entries(QAs).map(([key, value]) => {*/}
-                                {/*        if (key.slice(0, 1) === "g")*/}
-                                {/*            return <Card title={formatQuestions(key)} key={key}> {value} </Card>*/}
-                                {/*    })}*/}
-                                {/*</div>*/}
                                 <div>
                                     <h2>General Questions</h2>
                                     {  QAs.map((item, index) => {
@@ -160,7 +153,7 @@ export default function Evaluation_Page() {
                         <div>
                             <h2>Pre-Screening</h2>
                             {
-                                comments !== null &&
+                                comments !== null && comments.length >0 &&
                                 <List bordered={false} header={<span>{comments.length} comments</span>}>
                                     {comments.map((item, index) => {
                                         return (
