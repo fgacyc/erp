@@ -1,6 +1,10 @@
 .setting-modal{
     padding: 0;
-    height:715px;
+    width: calc(100vw - 100px);
+    height: calc(100vh - 150px);
+    max-height:715px;
+    max-width: 1150px;
+    border-radius: 5px;
 }
 
 
@@ -14,9 +18,11 @@
 }
 .setting-modal-con-left{
     width: 240px;
-    height: 715px;
+    max-height:715px;
+    height: calc(100vh - 150px);
     background-color:#F2F3F5;
     border-radius: 5px 0 0 5px;
+    overflow-y: auto;
 }
 
 .setting-modal-con-right{

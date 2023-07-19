@@ -28,7 +28,6 @@ export  default  function UI_SettingModal({visible, setVisible}){
             mask = {true}
             simple = {true}
             footer = {null}
-            style={{width: 1150,height:715, borderRadius: 5}}
         >
             <div className="setting-modal-con">
                 <div className="setting-modal-con-left">
