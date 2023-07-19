@@ -132,3 +132,20 @@ export function findPastoralTeam(name){
     }
     return [team, zone];
 }
+
+
+export function findPastoralTeamLabel(pastoralTeamList){
+    let res =[]
+    for (let item of pastoral_team_options){
+        if (item.value === pastoralTeamList[0]){
+            res.push(item.label);
+            for (let child of item.children){
+                if (child.value === pastoralTeamList[1]){
+                    res.push(child.label);
+                    break;
+                }
+            }
+        }
+    }
+    return res;
+}

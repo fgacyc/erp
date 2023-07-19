@@ -48,3 +48,10 @@
 .ai-summary-con{
     width: calc(100% - 80px);
 }
+
+.evaluation-page-header{
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    border: 1px solid #000;
+}

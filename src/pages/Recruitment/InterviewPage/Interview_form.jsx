@@ -9,6 +9,8 @@ import "./recruitment-appo.css"
 import {pad} from "./data.js";
 import FreeQATextArea from "./FreeQATextArea.jsx";
 import {Interview_form_Section3} from "./Interview_form_Section3.jsx";
+import {findPastoralTeamLabel} from "../../../data/pastoral_teams.js";
+import {findMinistryLabel} from "../../../data/ministries.js";
 
 
 
@@ -195,6 +197,15 @@ export default function Interview_form() {
                         <Step title='Q&A' />
                         <Step title='Finish' />
                     </Steps>
+                    <div className="candidate-basic-info">
+                        { candidate &&
+                            <div>
+                                <div>Name: {candidate.name}</div>
+                                <div>Pastoral Team: {findPastoralTeamLabel(candidate.pastoral_team).join(" - ")}</div>
+                                <div>Ministry: {findMinistryLabel(candidate.ministry).join(" - ")}</div>
+                            </div>
+                        }
+                    </div>
                     {
                         partID === '1' &&
                         <div>
@@ -250,45 +261,6 @@ export default function Interview_form() {
                                 onClick={()=>goToNextPart(1)}>Next</Button>
 
                     }
-
-                    {/*<div style={{height:100}}></div>*/}
-                    {/*{partID === '1' && <div>*/}
-                    {/*    <Button type='primary'*/}
-                    {/*            style={{bottom:37}}*/}
-                    {/*            className="interview-btns interview-btns-left" id={"interview-btn-left"}*/}
-                    {/*            disabled={true}*/}
-                    {/*            onClick={()=>goToNextPart(-1)}>Previous </Button>*/}
-                    {/*    <Button type='primary'*/}
-                    {/*            style={{bottom:37}}*/}
-                    {/*            className="interview-btns interview-btns-right" id={"interview-btn-right"}*/}
-                    {/*            onClick={()=>goToNextPart(1)}>Next</Button>*/}
-                    {/*</div>*/}
-                    {/*}*/}
-
-                    {/*{*/}
-                    {/*    partID === '2' && <div>*/}
-                    {/*        <Button type='primary'*/}
-                    {/*                className="interview-btns interview-btns-left" id={"interview-btn-left"}*/}
-                    {/*                disabled={false}*/}
-                    {/*                onClick={()=>goToNextPart(-1)}>Previous </Button>*/}
-                    {/*        <Button type='primary'*/}
-                    {/*                className="interview-btns interview-btns-right" id={"interview-btn-right"}*/}
-                    {/*                onClick={()=>goToNextPart(1)}>Next</Button>*/}
-                    {/*    </div>*/}
-                    {/*}*/}
-
-                    {/*{*/}
-                    {/*    partID === '3' &&<div>*/}
-                    {/*        <Button type='primary'*/}
-                    {/*                className="interview-btns interview-btns-left" id={"interview-btn-left"}*/}
-                    {/*                disabled={false}*/}
-                    {/*                onClick={()=>goToNextPart(-1)}>Previous </Button>*/}
-                    {/*        <Button type='primary'*/}
-                    {/*                disabled={ifDisabledSubmit}*/}
-                    {/*                className="interview-btns interview-btns-right"*/}
-                    {/*                onClick={submitHandler}>Submit</Button>*/}
-                    {/*    </div>*/}
-                    {/*}*/}
                 </div>
             </div>
         </>
