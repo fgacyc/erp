@@ -33,11 +33,10 @@ export default function Evaluation_Page() {
     const [vocalRatingForm, setVocalRatingForm] = useState(null);
     const [currentRubberStampType, setCurrentRubberStampType] = useState(null);
     const [currentCandidate, setCurrentCandidate] = useState(null);
+    const [showRubberStamp, setShowRubberStamp] = useState(0);
 
     const RID =   useParams().RID;
     const navigate = useNavigate();
-
-
 
 
     useEffect(() => {
@@ -64,6 +63,7 @@ export default function Evaluation_Page() {
                 res.application.status === "kiv"){
                 setShowBack(true);
                 setCurrentRubberStampType(res.application.status);
+                setShowRubberStamp(2);
             }
         });
 
@@ -91,6 +91,7 @@ export default function Evaluation_Page() {
                     Message.success('Evaluation submitted successfully')
                     setShowBack(true);
                     setCurrentRubberStampType(status);
+                    setShowRubberStamp(1);
                 }
             });
         };
@@ -198,8 +199,8 @@ export default function Evaluation_Page() {
                         }
 
                     </Space>
-                {currentRubberStampType && <EvaluationResultRubberStamp type={currentRubberStampType}  /> }
-
+                {showRubberStamp===1 && currentRubberStampType && <EvaluationResultRubberStamp type={currentRubberStampType} trigger="evaluationButtons" /> }
+                {showRubberStamp ===2 && <EvaluationResultRubberStamp type={currentRubberStampType} trigger="pageLoad" /> }
             </div>
         </>
     )

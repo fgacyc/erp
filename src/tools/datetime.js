@@ -5,14 +5,19 @@ export function getTimeStamp() {
     return Math.floor(timestamp / 1000)
 }
 
+export function getYMDHMS(dateObj) {
+    let year = dateObj.getFullYear()
+    const month = String(dateObj.getMonth() + 1).padStart(2, '0');
+    const day = String(dateObj.getDate()).padStart(2, '0');
+    const hours = String(dateObj.getHours()).padStart(2, '0');
+    const minutes = String(dateObj.getMinutes()).padStart(2, '0');
+    const seconds = String(dateObj.getSeconds()).padStart(2, '0');
+    return [year, month, day, hours, minutes, seconds]
+}
+
 export  function getDateString(timestamp){
     const date = new Date(timestamp);
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
-    const hours = String(date.getHours()).padStart(2, '0');
-    const minutes = String(date.getMinutes()).padStart(2, '0');
-    const seconds = String(date.getSeconds()).padStart(2, '0');
+    let [year, month, day, hours, minutes, seconds] = getYMDHMS(date)
 
     return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 }
@@ -23,14 +28,15 @@ export  function getDateString(timestamp){
 }
 
 
-export function getRubberStampTime(){
-    const date = new Date();
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
-    const hours = String(date.getHours()).padStart(2, '0');
-    const minutes = String(date.getMinutes()).padStart(2, '0');
-    const seconds = String(date.getSeconds()).padStart(2, '0');
+export function getRubberStampTime(timestamp){
+    let date;
+    if (arguments.length === 0) {
+        date = new Date();
+    }else{
+        date = new Date(timestamp *1000);
+    }
+
+    let [year, month, day, hours, minutes, seconds] = getYMDHMS(date)
 
     let yearMonthDay = `${year}.${month}.${day}`;
     let hourMinuteSecond = `${hours}:${minutes}`;

@@ -1,13 +1,15 @@
 import "./EvaluationPage.css";
 import {useEffect, useState} from "react";
 import {getRubberStampTime} from "../../../tools/datetime.js";
-export default function EvaluationResultRubberStamp({type}){
+import {get} from "idb-keyval";
+export default function EvaluationResultRubberStamp({type,trigger}){
     const  [rubberStampType, setRubberStampType] = useState(null);
     const [currentColor , setCurrentColor] = useState(null);
     const [currentTime, setCurrentTime] = useState(null);
 
     useEffect(() => {
-        setCurrentTime(getRubberStampTime());
+        if(trigger ==="evaluationButtons")  setCurrentTime(getRubberStampTime());
+        else ifUpdateStampTime();
     }, []);
 
     useEffect(() => {
@@ -23,6 +25,17 @@ export default function EvaluationResultRubberStamp({type}){
         }
 
     }, [type]);
+
+    function  ifUpdateStampTime(){
+        get("current_candidate").then((res) => {
+            if(res.application.status === "accepted"||
+                res.application.status === "rejected"||
+                res.application.status === "kiv"){
+                console.log(res.application.updated)
+                setCurrentTime(getRubberStampTime(res.application.updated));
+            }
+        });
+    }
 
 
     return (
