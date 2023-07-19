@@ -4,13 +4,16 @@ import {useEffect, useRef, useState} from "react";
 import {getAllUsers} from "../../../tools/DB.js";
 import {Button, Input, Table} from "@arco-design/web-react";
 import {filterDataHaveAppoint, getAppointTimes, recruiterInterviewStatus} from "./data.js";
-import CandidateModal from "../../../components/UI_Modal/CandidateModal/CandidateModal.jsx";
+import CandidateModal from "../../../components/UI_Modal/UI_CandidateModal/CandidateModal.jsx";
 import "./recruitment-appo.css"
 import {useNavigate} from "react-router-dom";
 import {putReq} from "../../../tools/requests.js";
-import {IconSearch} from "@arco-design/web-react/icon";
+import {IconCalendar, IconSearch} from "@arco-design/web-react/icon";
 import {set} from "idb-keyval";
-
+import {UI_QRCodeModal} from "../../../components/UI_Modal/UI_QRCodeModal/UI_QRCodeModal.jsx";
+import {getAppoInsightData, getDateTimeFilterData} from "../EvaluationPage/data.js";
+import {ifCurrentUserIsSuperAdmin} from "../../../tools/auth.js";
+import UI_InterviewAppoInsight from "../../../components/UI_Modal/UI_InterviewAppoInsight/UI_InterviewAppoInsight.jsx";
 export default function Interview_table() {
     const breadcrumbItems = [
         {
@@ -27,6 +30,11 @@ export default function Interview_table() {
     const [userData, setUserData] = useState(null);
     const [currentCandidate, setCurrentCandidate] = useState(null);
     const [visible, setVisible] = useState(false);
+    const [QRCodeModalVisible, setQRCodeModalVisible] = useState(false);
+    const [dateTimeFilterData, setDateTimeFilterData] = useState(null);
+    const [ifShowInsightBtn, setIfShowInsightBtn] = useState(false);
+    const [insightModalVisible, setInsightModalVisible] = useState(false);
+    const [insightData, setInsightData] = useState(null);
 
     const navigate = useNavigate();
     const inputRef = useRef(null);
@@ -34,8 +42,19 @@ export default function Interview_table() {
     useEffect(() => {
         filterData().then((res) => {
             setUserData(res);
+            setDateTimeFilterData(getDateTimeFilterData(res));
+            setInsightData(getAppoInsightData(res));
         });
+
+        detectIfShowInsightBtn();
     }, []);
+
+
+    function  detectIfShowInsightBtn(){
+        ifCurrentUserIsSuperAdmin().then((res) => {
+            setIfShowInsightBtn(res);
+        });
+    }
 
     async function filterData(){
         let allUser = await  getAllUsers();
@@ -62,6 +81,20 @@ export default function Interview_table() {
 
     }
 
+    function checkInterview(record){
+        let RID = record._id;
+        set("current_candidate", record).then(() => {
+            navigate(`/recruitment_interview/form/${RID}/1`);
+        });
+    }
+
+    function showQRCodeModal(record){
+        setCurrentCandidate(record);
+        setQRCodeModalVisible(true);
+    }
+
+
+
     const columns  = [
         {
             title: 'Name',
@@ -83,6 +116,7 @@ export default function Interview_table() {
                             onSearch={() => {
                                 confirm();
                             }}
+                            allowClear={true}
                         />
                     </div>
                 );
@@ -104,11 +138,44 @@ export default function Interview_table() {
         {
             title: 'Ministry',
             dataIndex: 'info.ministry[2]',
+            sorter: (a, b) => a.info.ministry[2].localeCompare(b.info.ministry[2]),
+            filterIcon: <IconSearch />,
+            filterDropdown: ({ filterKeys, setFilterKeys, confirm }) => {
+                return (
+                    <div className='arco-table-custom-filter'>
+                        <Input.Search
+                            ref={inputRef}
+                            searchButton
+                            placeholder='Please enter a ministry'
+                            value={filterKeys[0] || ''}
+                            onChange={(value) => {
+                                setFilterKeys(value ? [value] : []);
+                            }}
+                            onSearch={() => {
+                                confirm();
+                            }}
+                            allowClear={true}
+                        />
+                    </div>
+                );
+            },
+            onFilter: (value, row) => {
+                return  row.info.ministry[2].toLowerCase().includes(value.toLowerCase());
+            },
+            onFilterDropdownVisibleChange: (visible) => {
+                if (visible) {
+                    setTimeout(() => inputRef.current.focus(), 150);
+                }
+            },
         },
         {
             title: "Date time",
             dataIndex: 'appointment.ministry.appointment_time',
-            filterMultiple: false,
+            filters: dateTimeFilterData,
+            onFilter: (value, row) =>{
+                return  getAppointTimes(row) === value
+            },
+            filterMultiple: true,
             render: (text, record) => (
                 <span >
                     {getAppointTimes(record)}
@@ -130,7 +197,7 @@ export default function Interview_table() {
                     value:  "Interviewed",
                 },
                 {
-                    text:  "Not appointed",
+                    text:  "Not Scheduled",
                     value:  "Not appointed",
                 }
             ],
@@ -142,7 +209,7 @@ export default function Interview_table() {
                 <span >
                 { recruiterInterviewStatus(record) === "Interviewed" && <span style={{color:"green"}}>Interviewed</span> }
                     { recruiterInterviewStatus(record) === "Pending" && <span>Pending</span> }
-                    { recruiterInterviewStatus(record) === "Not appointed" && <span style={{color:"grey"}}>Not appointed</span> }
+                    { recruiterInterviewStatus(record) === "Not appointed" && <span style={{color:"grey"}}>Not Scheduled</span> }
                 </span>
             )
         }
@@ -152,9 +219,16 @@ export default function Interview_table() {
             dataIndex: 'op',
             render: (_, record) => (
                 <span>
-                    { recruiterInterviewStatus(record) === "Not appointed"
-                        ? <Button type='primary' disabled>Start</Button>
-                        : <Button onClick={()=>startInterview(record)} type='primary' >Start</Button>
+                    {   recruiterInterviewStatus(record) === "Not appointed"
+                        && <Button type='outline' onClick={()=> showQRCodeModal(record)}>Schedule</Button>
+                    }
+                    {   recruiterInterviewStatus(record) === "Pending" &&
+                        <Button onClick={()=>startInterview(record)} type='primary'  style={{width: 93}}
+                        >Start</Button>
+                    }
+                    {   recruiterInterviewStatus(record) === "Interviewed" &&
+                        <Button onClick={()=>checkInterview(record)} type='secondary' status="success" style={{width: 93}}
+                        >Check</Button>
                     }
                 </span>
 
@@ -167,16 +241,31 @@ export default function Interview_table() {
         <>
             <UI_Breadcrumb items={breadcrumbItems}/>
             <div className="app-component full-screen-app-component">
+                {ifShowInsightBtn &&
+                    <Button type='secondary' icon={<IconCalendar />}
+                            className="pre_screening-download-btn"
+                        onClick={()=>{setInsightModalVisible(true)}}
+                    >Appointment Time Insight</Button>
+                }
                 {
                     userData &&
                     <Table
                         columns={columns}
-                        data={userData} />
+                        data={userData}
+                        style={{marginBottom: 20}}
+                    />
                 }
             </div>
             {
-                currentCandidate && <CandidateModal visible={visible} setVisible={setVisible} recruiter={currentCandidate}/>
+                currentCandidate &&
+                <div>
+                    <CandidateModal visible={visible} setVisible={setVisible} recruiter={currentCandidate}/>
+                    <UI_QRCodeModal ministry={currentCandidate.info.ministry[2]}
+                                    RID = {currentCandidate._id}
+                                    visible={QRCodeModalVisible} setVisible={setQRCodeModalVisible} />
+                </div>
             }
+            <UI_InterviewAppoInsight  visible={insightModalVisible} setVisible={setInsightModalVisible} insightData={insightData} />
         </>
     )
 }

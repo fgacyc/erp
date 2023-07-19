@@ -1,4 +1,5 @@
 import {getStaffInfoLocal} from "../../../tools/auth.js";
+import {getDateString} from "../../../tools/datetime.js";
 
 export async function filterDataHaveAppoint(data){
     data = await filterByPermission(data)
@@ -70,15 +71,7 @@ export function  getAppointTimes(record) {
 
     let timestamp = record.appointment.ministry.appointment_time * 1000;
 
-    const date = new Date(timestamp);
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
-    const hours = String(date.getHours()).padStart(2, '0');
-    const minutes = String(date.getMinutes()).padStart(2, '0');
-    const seconds = String(date.getSeconds()).padStart(2, '0');
-
-    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+    return  getDateString(timestamp);
 }
 
 export function recruiterInterviewStatus(record){
@@ -91,9 +84,27 @@ export function recruiterInterviewStatus(record){
     else  if(!record.appointment && record.interview.status ===false){
         return "Not appointed"
     }
+    else{
+        console.log("recruiterInterviewStatus error")
+    }
 }
 
 // pad 0 to the left of the number
 export function pad(num) {
     return ("0"+num).slice(-2);
 }
+
+
+export  const tableDataString = `
+    item: [star 1-5][Remarks]
+    Pitch 音准:[ ][ ]
+    Pronunciation 咬字&发音:[ ][ ]
+    Tone 腔调:[ ][ ]
+    Beat 节拍:[ ][ ]
+    Projection 音量:[ ][ ]
+    Breathing 气息:[ ][ ]
+    Grooving 乐感:[ ][ ]
+    Range 音域:[ ][ ]
+    Attitude 态度:[ ][ ]
+    Appearance 外形/外在表现:[ ][ ]
+   `

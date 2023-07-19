@@ -231,3 +231,23 @@ export const department_options = [
         ]
     }
 ];
+
+export function findMinistryLabel(ministryArray){
+    let res =[];
+    for(let item of department_options){
+        if(item.value === ministryArray[0]){
+            res.push(item.label);
+            for (let child of item.children){
+                if (child.value === ministryArray[1]){
+                    res.push(child.label);
+                    for (let grandchild of child.children){
+                        if (grandchild.value === ministryArray[2]){
+                            res.push(grandchild.label);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return res;
+}

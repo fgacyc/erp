@@ -11,7 +11,7 @@ import PreScreeningCommentsList from "./CommentsList.jsx";
 import { getCurrentUserCYCID} from "../../../tools/auth.js";
 import {getTimeStamp} from "../../../tools/datetime.js";
 import {IconEdit} from "@arco-design/web-react/icon";
-import CandidateModal from "../../../components/UI_Modal/CandidateModal/CandidateModal.jsx";
+import CandidateModal from "../../../components/UI_Modal/UI_CandidateModal/CandidateModal.jsx";
 
 export default function PreScreening() {
     //const RID = useParams().RID || '64a792fbe3a86cdad7522be7';
@@ -22,13 +22,19 @@ export default function PreScreening() {
     const [isButtonClicked, setIsButtonClicked] = useState(false);
     const [userCYC_ID, setUserCYC_ID] = useState(null);
     const [visible, setVisible] = useState(false);
+    const [currentUserCYC_ID, setCurrentUserCYC_ID] = useState(0);
+
 
     function getUserData(){
         getReq( `/recruiter/${RID}`).then((res) => {
             setUserDatas(res);
         });
     }
-
+    function setCurrentCYCID(){
+        getCurrentUserCYCID().then((data) => {
+            setCurrentUserCYC_ID(data);
+        });
+    }
 
 
     useEffect(() => {
@@ -36,6 +42,7 @@ export default function PreScreening() {
         getCurrentUserCYCID().then((res) => {
             setUserCYC_ID(res);
         });
+        setCurrentCYCID();
     }, [])
 
     useEffect(() => {
@@ -56,6 +63,7 @@ export default function PreScreening() {
 
         const pre_screening = {
             status: pre_screening_status,
+            approver: currentUserCYC_ID,
             pre_screening_time: time,
         }
 
@@ -87,6 +95,7 @@ export default function PreScreening() {
 
         let comment = {
             "timestamp": getTimeStamp(),
+            "updated": getTimeStamp(),
             "comment": commentText,
             "CYC_ID": userCYC_ID,
         };
@@ -206,7 +215,7 @@ export default function PreScreening() {
                 </div>
 
                 <div style={{ position: 'relative', padding: '8px 12px' }}>
-                    {userDatas && <PreScreeningCommentsList userDatas={userDatas} />}
+                    {userDatas && <PreScreeningCommentsList userDatas={userDatas} setUserDatas={setUserDatas} />}
                 </div>
             </div>
             <Comment

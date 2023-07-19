@@ -46,6 +46,7 @@
     border: 1px solid #f2f3f5 !important;
     font-size: 18px;
     font-weight: bold;
+    position: relative;
 }
 
 .head-bar-btn:hover{

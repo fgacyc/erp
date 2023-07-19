@@ -110,3 +110,13 @@ export async function getCurrentUserCYCID(){
     let info = await getStaffInfoLocal();
     return info.CYC_ID;
 }
+
+export async function ifCurrentUserIsSuperAdmin(){
+    let info = await getStaffInfoLocal();
+    if(info.role){
+        if (info.role === "super_admin"){
+            return true
+        }
+    }
+    return   false;
+}

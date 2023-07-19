@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./recruitment_dashboard.css"
 import { Card, Typography, Space, Cascader } from '@arco-design/web-react';
-import { IconUserGroup, IconCalendarClock, IconCheck } from '@arco-design/web-react/icon';
+import {  IconCheck } from '@arco-design/web-react/icon';
 import {
     Chart as ChartJS,
     ArcElement,
@@ -12,7 +12,7 @@ import {
     Tooltip,
     Legend,
 } from 'chart.js';
-import { Bar, Doughnut } from 'react-chartjs-2';
+import { Bar, Doughnut,Pie } from 'react-chartjs-2';
 
 ChartJS.register(
     ArcElement,
@@ -27,6 +27,31 @@ import "./recruitment_dashboard.css";
 import { getReq } from "../../../tools/requests.js";
 import { getInfoCount, getTotals } from "./dataCalculate.js";
 import UI_Breadcrumb from "../../../components/UI_Breadcrumb/UI_Breadcrumb.jsx";
+import {
+    getEvaluationRatio,
+    getInterviewRatio,
+    getPreScreeningRatio, getRecruiterRatio,
+    options_bar_data,
+    options_pie_data
+} from "./data.js";
+
+function Recruitment_dashboard_card({color,text,num,Icon}){
+    return (
+        <Card className="recruitment-dashboard-card"
+              hoverable>
+            <Space style={{
+                display: 'flex',
+                justifyContent: 'center'
+            }}>
+                <Icon style={{backgroundColor: color}} className="recruitment-dashboard-card-icon"/>
+                <Space style={{ display: 'flex', flexDirection: "column", alignItems: "center" }}>
+                    <Typography.Text>{text}</Typography.Text>
+                    <Typography.Text style={{ fontWeight: 600 }}>{num}</Typography.Text>
+                </Space>
+            </Space>
+        </Card>
+    )
+}
 
 export default function Recruitment_Dashboard() {
     const [allData, setAllData] = useState(null);
@@ -37,6 +62,10 @@ export default function Recruitment_Dashboard() {
     const [allPieChartData, setAllPieChartData] = useState(null);
     const [pieChartLabels, setPieChartLabels] = useState(null);
     const [pieChartData, setPieChartData] = useState(null);
+    const [pre_screening_pie, setPre_screening_pie] = useState(null);
+    const [interview_pie, setInterview_pie] = useState(null);
+    const [ evaluation_pie, setEvaluation_pie] = useState(null);
+    const [recruiter_pie, setRecruiter_pie] = useState(null);
 
     const colors = ["#D8E2DC", "#FFE5D9", "#FFCAD4", "#F4ACB7", "#9D8189",
         "#A8D8EA", "#FFAAA6", "#FF8C94", "#FF1D47", "#F28123",
@@ -249,104 +278,18 @@ export default function Recruitment_Dashboard() {
             setAllPieChartData(pieChartDatasets);
             setPieChartLabels(pieChartLabel['overall']);
             setPieChartData(pieChartDatasets['overall']);
+
+            setPre_screening_pie(getPreScreeningRatio(res));
+            setInterview_pie(getInterviewRatio(res));
+            setEvaluation_pie(getEvaluationRatio(res));
+            //console.log(getRecruiterRatio(res))
+            setRecruiter_pie(getRecruiterRatio(res));
         });
     }, []);
 
-    const options_bar = [
-        {
-            value: 'overall',
-            label: 'Overall',
+    const options_bar = options_bar_data;
 
-        },
-        {
-            value: 'wonderkids',
-            label: 'Wonderkids',
-
-        },
-        {
-            value: 'young_warrior',
-            label: 'Young Warrior',
-
-        },
-        {
-            value: 'general_service',
-            label: 'General Service',
-
-        },
-        {
-            value: 'others',
-            label: 'Others',
-        }
-    ];
-
-    const options_pie = [
-        {
-            value: 'overall',
-            label: 'Overall',
-
-        },
-        {
-            value: 'people_experience',
-            label: 'People Experience',
-            children: [
-                {
-                    value: 'people',
-                    label: 'People',
-                },
-                {
-                    value: 'general_affair',
-                    label: 'General Affair',
-                },
-                {
-                    value: 'technology',
-                    label: 'Technology',
-                }
-            ]
-        },
-        {
-            value: 'creative',
-            label: 'Creative',
-            children: [
-                {
-                    value: 'production',
-                    label: 'Production',
-                },
-                {
-                    value: 'arts',
-                    label: 'Arts',
-                },
-                {
-                    value: 'worship',
-                    label: 'Worship',
-                }
-            ]
-
-        },
-        {
-            value: 'communication',
-            label: 'Communication',
-            children: [
-                {
-                    value: 'social_media',
-                    label: 'Social Media',
-                },
-                {
-                    value: 'design',
-                    label: 'Design',
-                },
-                {
-                    value: 'photography',
-                    label: 'Photography',
-                }
-            ],
-
-        },
-        {
-            value: 'wonderkids',
-            label: 'Wonderkids',
-
-        },
-    ];
+    const options_pie = options_pie_data;
 
     const options_chart = {
         plugins: {
@@ -369,6 +312,7 @@ export default function Recruitment_Dashboard() {
         labels: barChartLabels,
         datasets: barChartData
     };
+
 
     const data_pie = {
         labels: pieChartLabels,
@@ -394,66 +338,24 @@ export default function Recruitment_Dashboard() {
         }
     ]
 
+
+
+
+
+
+
+
     return (
         <>
         <UI_Breadcrumb items={breadcrumbItems}/>
         <div className="recruitment-dashboard-con app-component">
-           <div style={{display:"flex"}}>
+           <div style={{display:"flex", height:"100%",flexDirection:"row"}}>
                <div className="left-side">
-                   <div  className="upper" >
-                       <Card className="recruitment-dashboard-card"
-                           hoverable>
-                           <Space style={{
-                               display: 'flex',
-                               justifyContent: 'center'
-                           }}>
-                               <IconUserGroup style={{backgroundColor: colors[0]}} className="recruitment-dashboard-card-icon" />
-                               <Space style={{ display: 'flex', flexDirection: "column", alignItems: "center" }}>
-                                   <Typography.Text>Applicants</Typography.Text>
-                                   <Typography.Text style={{ fontWeight: 600 }}>{totals[0]}</Typography.Text>
-                               </Space>
-                           </Space>
-                       </Card>
-
-                       <Card className="recruitment-dashboard-card"
-                           hoverable>
-                           <Space style={{
-                               display: 'flex',
-                               justifyContent: 'center',
-                           }}>
-                               <IconCalendarClock  style={{backgroundColor: colors[1]}} className="recruitment-dashboard-card-icon"  />
-                               <Space style={{ display: 'flex', flexDirection: "column", alignItems: "center" }}>
-                                   <Typography.Text>Pending</Typography.Text>
-                                   <Typography.Text style={{ fontWeight: 600 }}>{totals[1]}</Typography.Text>
-                               </Space>
-                           </Space>
-                       </Card>
-                       <Card className="recruitment-dashboard-card"
-                           hoverable>
-                           <Space style={{
-                               display: 'flex',
-                               justifyContent: 'center',
-                           }}>
-                               <IconCheck  style={{backgroundColor: colors[2]}} className="recruitment-dashboard-card-icon"  />
-                               <Space style={{ display: 'flex', flexDirection: "column", alignItems: "center" }}>
-                                   <Typography.Text>Pre-Pass</Typography.Text>
-                                   <Typography.Text style={{ fontWeight: 600 }}>{totals[2]}</Typography.Text>
-                               </Space>
-                           </Space>
-                       </Card>
-                       <Card className="recruitment-dashboard-card"
-                           hoverable>
-                           <Space style={{
-                               display: 'flex',
-                               justifyContent: 'center',
-                           }}>
-                               <IconCheck style={{backgroundColor: "#d8e2dc"}} className="recruitment-dashboard-card-icon"  />
-                               <Space style={{ display: 'flex', flexDirection: "column", alignItems: "center" }}>
-                                   <Typography.Text>Pass</Typography.Text>
-                                   <Typography.Text style={{ fontWeight: 600 }}>{totals[3]}</Typography.Text>
-                               </Space>
-                           </Space>
-                       </Card>
+                   <div className="upper">
+                       <Recruitment_dashboard_card color={colors[0]} text="Applicants" num={totals[0]} Icon={IconCheck}/>
+                       <Recruitment_dashboard_card color={colors[2]} text="Pending" num={totals[1]} Icon={IconCheck}/>
+                       <Recruitment_dashboard_card color={colors[1]} text="Pre-Pass" num={totals[2]} Icon={IconCheck}/>
+                       <Recruitment_dashboard_card color={"#d8e2dc"} text="Pass" num={totals[3]} Icon={IconCheck}/>
                    </div>
                    <Card
                        hoverable>
@@ -465,7 +367,7 @@ export default function Recruitment_Dashboard() {
                                changeOnSelect
                                allowClear
                                showSearch
-                               onChange={(value, option) => {
+                               onChange={(value) => {
                                    const pastoral_team_value = value.length > 1 ? value[1] : value[0];
                                    setBarChartLabels(barChartLabel[pastoral_team_value]);
                                    setBarChartData(allBarChartData[pastoral_team_value]);
@@ -475,12 +377,33 @@ export default function Recruitment_Dashboard() {
                        </Space>
                        {barChartLabels && barChartData && <Bar options={options_chart} data={barchart_data} />}
                    </Card>
+                    <div className="left-side-bottom">
+                        <div className="smallPie">
+                            <Typography.Text style={{ fontWeight: 600 }}>Pre-Screening</Typography.Text>
+                            {pre_screening_pie &&
+                                <Pie data={pre_screening_pie} />
+                            }
+                        </div>
+                        <div className="smallPie">
+                            <Typography.Text style={{ fontWeight: 600 }}>Interview</Typography.Text>
+                            {pre_screening_pie &&
+                                <Pie data={interview_pie} />
+                            }
+
+                        </div>
+                        <div className="smallPie">
+                            { evaluation_pie!==null && evaluation_pie.datasets[0].data.toString() ==="0,0,0,0"
+                                ? <Typography.Text style={{ fontWeight: 600 }}>Evaluation(Not Started)</Typography.Text>
+                                : <Typography.Text style={{ fontWeight: 600 }}>Evaluation</Typography.Text>
+                            }
+                            {pre_screening_pie &&
+                                <Pie data={evaluation_pie} />
+                            }
+                        </div>
+                    </div>
                </div >
                <div className="right-side">
-                   <Card style={{
-                       display: "flex", flexDirection: "column", alignItems: "center",
-                       justifyContent: "center"
-                   }}
+                   <Card className="right-side-bottom"
                          hoverable>
                        <Space style={{
                            display: "flex", flexDirection: "column", alignItems: "center",
@@ -502,6 +425,10 @@ export default function Recruitment_Dashboard() {
                        </Space>
                        <Doughnut data={data_pie} style={{marginTop:10}} />
                    </Card>
+                    <Card className="right-side-bottom" >
+                        <Typography.Text style={{ fontWeight: 600 }}>Overall progress</Typography.Text>
+                        {recruiter_pie &&<Doughnut data={recruiter_pie}  />}
+                    </Card>
                </div>
            </div>
         </div>

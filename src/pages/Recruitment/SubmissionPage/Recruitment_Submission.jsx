@@ -1,11 +1,12 @@
 import {Button, Cascader, Input, Message, Space} from "@arco-design/web-react";
 import {department_options} from "../../../data/ministries.js";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import valid from "./valid.js";
 import {postRecruiter} from "./postRequest.js";
 import "./Recruitment_Submission.css"
 import {pastoral_team_options} from "../../../data/pastoral_teams.js";
 import UI_Breadcrumb from "../../../components/UI_Breadcrumb/UI_Breadcrumb.jsx";
+import {SubmitResults} from "./SubmitResults.jsx";
 
 export  default  function  Recruitment_Submission()  {
     const [name, setName] = useState('');
@@ -13,8 +14,29 @@ export  default  function  Recruitment_Submission()  {
     const [email, setEmail] = useState('');
     const [pastoral_team, setPastoral_team] = useState([]);
     const [department1, setDepartment1] = useState([]);
+    const [ifSubmit, setIfSubmit] = useState(false);
+    const [ifSubmitSuccess, setIfSubmitSuccess] = useState(false);
+    const [resultMessage, setResultMessage] = useState('');
+    const [showLoading, setShowLoading] = useState(false);
 
+    useEffect(() => {
+        const subscription = PubSub.subscribe('reset_recruitment_add_candidate', (msg, data) => {
+            reset();
+        });
+        return () => PubSub.unsubscribe(subscription);
+    }, []);
 
+    function reset(){
+        setName('');
+        setPhone('');
+        setEmail('');
+        setPastoral_team([]);
+        setDepartment1([]);
+        setIfSubmit(false);
+        setIfSubmitSuccess(false);
+        setResultMessage('');
+        setShowLoading(false);
+    }
 
     const  divStyle  =  {
         width:  "100%",
@@ -39,11 +61,18 @@ export  default  function  Recruitment_Submission()  {
 
     const  submit  =  ()  =>  {
         if(!valid(name, phone, email, pastoral_team, department1)) return;
+        setShowLoading(true);
         postRecruiter(name, phone, email, pastoral_team, department1).then((res) => {
             if(res.status === "success"){
-                Message.success('Successfully submitted');
+                //Message.success('Successfully submitted');
+                setIfSubmit(true);
+                setIfSubmitSuccess(true);
+                setResultMessage('Successfully submitted');
             }else {
-                Message.error('Failed to submit: ' + res.error);
+                //Message.error('Failed to submit: ' + res.error);
+                setIfSubmit(true);
+                setIfSubmitSuccess(false);
+                setResultMessage('Failed to submit: ' + res.error);
             }
         });
     };
@@ -64,57 +93,74 @@ export  default  function  Recruitment_Submission()  {
     return  (
         <>
             <UI_Breadcrumb items={breadcrumbItems}/>
-        <div className="app-component full-screen-app-component">
-            <Space direction='vertical' size={"large"}  className="recruitment-container">
-                <div style={divStyle}>
-                    <p>Name:</p>
-                    <Input  allowClear placeholder='Please Enter your name' type="text" onChange={s => setName(s)}/>
-                </div>
+        <div className="app-component full-screen-app-component recruitment-form-con">
+            {
+                !ifSubmit
+                ? <Space direction='vertical' size={"large"}  className="recruitment-container">
+                        <div style={divStyle}>
+                            <p>Name:</p>
+                            <Input  allowClear
+                                    value={name}
+                                    placeholder='Please Enter your name' type="text" onChange={s => setName(s)}/>
+                        </div>
 
-                <div style={divStyle}>
-                    <p>Phone:</p>
-                    <Input  allowClear placeholder='Please Enter your phone number' type="tel" onChange={s => setPhone(s)}/>
-                </div>
+                        <div style={divStyle}>
+                            <p>Phone:</p>
+                            <Input  allowClear
+                                    value={phone}
+                                    placeholder='Please Enter your phone number' type="tel" onChange={s => setPhone(s)}/>
+                        </div>
 
-                <div style={divStyle}>
-                    <p>Email:</p>
-                    <Input  allowClear placeholder='Please Enter your email' type="email" onChange={s => setEmail(s)}/>
-                </div>
+                        <div style={divStyle}>
+                            <p>Email:</p>
+                            <Input  allowClear
+                                    value={email}
+                                    placeholder='Please Enter your email' type="email" onChange={s => setEmail(s)}/>
+                        </div>
 
 
-                <div style={divStyle}>
-                    <p>Pastoral Teams:</p>
-                    <Cascader
-                        placeholder='Click to expand'
-                        changeOnSelect
-                        expandTrigger='hover'
-                        options={pastoral_team_options}
-                        onChange={s => setPastoral_team(s)}
+                        <div style={divStyle}>
+                            <p>Pastoral Teams:</p>
+                            <Cascader
+                                placeholder='Click to expand'
+                                changeOnSelect
+                                expandTrigger='hover'
+                                value={pastoral_team}
+                                options={pastoral_team_options}
+                                onChange={s => setPastoral_team(s)}
+                            />
+                        </div>
+
+                        <div style={divStyle}>
+                            <p>Ministry:</p>
+                            <Cascader
+                                changeOnSelect
+                                placeholder='Click to expand'
+                                expandTrigger='hover'
+                                value={department1}
+                                options={department_options}
+                                onChange={s => setDepartment1(s)}
+                                allowClear
+                            />
+                        </div>
+
+                        <Button type='primary'
+                                style={{
+                                    maxWidth:  600,
+                                    width:  '100%',
+                                    marginTop:  30,
+                                }}
+                                onClick={submit}
+                                loading = {showLoading}
+                        >
+                            Submit</Button>
+                    </Space>
+                :<SubmitResults ifSubmit={ifSubmit} setIfSubmit={setIfSubmit}
+                                ifSubmitSuccess={ifSubmitSuccess}
+                                resultMessage={resultMessage}
+                                setShowLoading={setShowLoading}
                     />
-                </div>
-
-                <div style={divStyle}>
-                    <p>Ministry:</p>
-                    <Cascader
-                        changeOnSelect
-                        placeholder='Click to expand'
-                        expandTrigger='hover'
-                        options={department_options}
-                        onChange={s => setDepartment1(s)}
-                        allowClear
-                    />
-                </div>
-
-                <Button type='primary'
-                    style={{
-                            maxWidth:  600,
-                            width:  '100%',
-                            marginTop:  30,
-                    }}
-                    onClick={submit}
-                    >
-                    Submit</Button>
-            </Space>
+            }
         </div>
         </>
     )

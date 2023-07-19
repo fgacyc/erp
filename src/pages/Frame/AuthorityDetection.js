@@ -12,8 +12,8 @@ export async function menuPermission(){
 
 
 function recruitmentItemsPermission(staff,permission) {
-     permission = {
-         ...permission,
+    permission = {
+        ...permission,
         "recruitment_dashboard": true,
         "recruitment_add_candidate": true
     }
@@ -23,6 +23,17 @@ function recruitmentItemsPermission(staff,permission) {
         permission.recruitment_interview = true;
         permission.recruitment_evaluation = true;
         return permission;
+    }
+
+    if("position" in staff){
+        if(staff.position.level === "pastoral_team_leader" || staff.position.level === "pastoral_zone_leader"){ // pastoral team leader or pastoral zone leader
+            if(staff.hasOwnProperty("ministry") && staff.ministry.length >0 && staff.ministry[0].ministry === "interviewer"){ //interviewer
+                permission.recruitment_pre_screening = true;
+                permission.recruitment_interview = true;
+                permission.recruitment_evaluation = true;
+                return permission;
+            }
+        }
     }
 
     if("position" in staff){

@@ -2,11 +2,12 @@ import UI_Breadcrumb from "../../../components/UI_Breadcrumb/UI_Breadcrumb.jsx";
 import {useEffect, useRef, useState} from "react";
 import {getAllUsers} from "../../../tools/DB.js";
 import {Button, Input, Table} from "@arco-design/web-react";
-import CandidateModal from "../../../components/UI_Modal/CandidateModal/CandidateModal.jsx";
+import CandidateModal from "../../../components/UI_Modal/UI_CandidateModal/CandidateModal.jsx";
 import {useNavigate} from "react-router-dom";
 import {addKeys} from "../../../tools/tableTools.js";
 import {IconSearch} from "@arco-design/web-react/icon";
-import {filterEvaluationData} from "./data.js";
+import {getPassStatus,filterEvaluationData} from "./data.js";
+import {set} from "idb-keyval";
 
 export default function Recruitment_Evaluation_Table() {
     const breadcrumbItems = [
@@ -46,16 +47,12 @@ export default function Recruitment_Evaluation_Table() {
     }
 
     function startEvaluation(record){
-        navigate(`/recruitment_evaluation/form/${record._id}`);
+        set("current_candidate", record).then(() => {
+            navigate(`/recruitment_evaluation/form/${record._id}`);
+        });
     }
 
-    function getPassStatus(record){
-        let applicationStatus = record.application.status;
-        if(applicationStatus === "accepted") return "accepted";
-        else if(applicationStatus === "rejected") return "rejected";
-        else if(applicationStatus === "kiv") return "kiv";
-        else return "pending";
-    }
+
 
     const columns  = [
         {
@@ -78,6 +75,7 @@ export default function Recruitment_Evaluation_Table() {
                             onSearch={() => {
                                 confirm();
                             }}
+                            allowClear={true}
                         />
                     </div>
                 );
@@ -99,6 +97,35 @@ export default function Recruitment_Evaluation_Table() {
         {
             title: 'Ministry',
             dataIndex: 'info.ministry[2]',
+            sorter: (a, b) => a.info.ministry[2].localeCompare(b.info.ministry[2]),
+            filterIcon: <IconSearch />,
+            filterDropdown: ({ filterKeys, setFilterKeys, confirm }) => {
+                return (
+                    <div className='arco-table-custom-filter'>
+                        <Input.Search
+                            ref={inputRef}
+                            searchButton
+                            placeholder='Please enter a ministry'
+                            value={filterKeys[0] || ''}
+                            onChange={(value) => {
+                                setFilterKeys(value ? [value] : []);
+                            }}
+                            onSearch={() => {
+                                confirm();
+                            }}
+                            allowClear={true}
+                        />
+                    </div>
+                );
+            },
+            onFilter: (value, row) => {
+                return  row.info.ministry[2].toLowerCase().includes(value.toLowerCase());
+            },
+            onFilterDropdownVisibleChange: (visible) => {
+                if (visible) {
+                    setTimeout(() => inputRef.current.focus(), 150);
+                }
+            },
         },
         {
             title: 'Status',
@@ -120,6 +147,7 @@ export default function Recruitment_Evaluation_Table() {
                     value:  "rejected",
                 }
             ],
+            sorter: (a, b) => a.application.status.localeCompare(b.application.status),
             onFilter: (value, row) =>{
                 return  row.application.status === value
             },
@@ -141,11 +169,19 @@ export default function Recruitment_Evaluation_Table() {
             title: 'Operation',
             dataIndex: 'op',
             render: (_, record) => (
-                <Button onClick={()=>startEvaluation(record)} type='primary'
-                       // disabled={record.application.status==="accepted" ||record.application.status==="rejected" }
-                >
-                    Evaluate
-                </Button>
+                <div>
+                    { getPassStatus(record) === "pending"
+                        ?<Button onClick={()=>startEvaluation(record)}
+                                 type='primary'
+                                 style={{width:100}}
+                        >Evaluate</Button>
+                        :<Button onClick={()=>startEvaluation(record)} status='success'
+                                 type='outline'
+                                 style={{width:100}}
+                        >Check</Button>
+                    }
+                </div>
+
             ),
         },
     ];
@@ -159,7 +195,9 @@ export default function Recruitment_Evaluation_Table() {
                     userData &&
                     <Table
                         columns={columns}
-                        data={userData} />
+                        data={userData}
+                        style={{marginBottom: 20}}
+                    />
                 }
             </div>
             {
