@@ -1,6 +1,8 @@
 import {useSettingModalStore} from "./settingModalStore.js";
 import {Avatar, Button, Divider, Input} from "@arco-design/web-react";
 import {IconRight} from "@arco-design/web-react/icon";
+import {useState} from "react";
+import EmailOrPhoneSettingModal from "./accountModal/EmailOrPhoneSettingModal.jsx";
 
 function SettingModalDivider(){
     return (
@@ -10,6 +12,10 @@ function SettingModalDivider(){
 
 export  function SettingModalAccount(){
     const  staff = useSettingModalStore(state => state.staff)
+    const [emailSettingModalVisible, setEmailSettingModalVisible] = useState(false)
+    const [phoneSettingModalVisible, setPhoneSettingModalVisible] = useState(false)
+    const [passwordSettingModalVisible, setPasswordSettingModalVisible] = useState(false)
+    const [deleteAccountModalVisible, setDeleteAccountModalVisible] = useState(false)
 
     return (
         <div className="setting-modal-account-con">
@@ -35,7 +41,9 @@ export  function SettingModalAccount(){
                         <div style={{fontWeight:"bold"}}>Email</div>
                         <div>{staff && staff.email}</div>
                     </div>
-                    <Button type='outline' style={{width:140}}>Change email</Button>
+                    <Button type='outline' style={{width:140}}
+                        onClick={() => setEmailSettingModalVisible(true)}
+                    >Change email</Button>
                 </div>
                 <div  style={{display:"flex",justifyContent:"space-between",alignItems:"center", marginTop:10}}>
                     <div>
@@ -49,7 +57,9 @@ export  function SettingModalAccount(){
                         <div style={{fontWeight:"bold"}}>Phone number</div>
                         <div>{staff?.phone ? staff.phone : "None"}</div>
                     </div>
-                    <Button type='outline' style={{width:140}}>Reset number</Button>
+                    <Button type='outline' style={{width:140}}
+                        onClick={() => setPhoneSettingModalVisible(true)}
+                    >Reset number</Button>
                 </div>
             </div>
 
@@ -75,6 +85,8 @@ export  function SettingModalAccount(){
                     </div>
                 </div>
             </div>
+            <EmailOrPhoneSettingModal visible={emailSettingModalVisible} setVisible={setEmailSettingModalVisible} type="email" />
+            <EmailOrPhoneSettingModal visible={phoneSettingModalVisible} setVisible={setPhoneSettingModalVisible} type="phone" />
         </div>
     )
 }
