@@ -20,8 +20,8 @@ export function IconSecurity(){
 export  function UI_SettingModalLeft(){
     const  staff = useSettingModalStore(state => state.staff)
     const [currentTab, setCurrentTab] = useSettingModalStore(state => [state.currentTab, state.setCurrentTab],shallow)
-    const tabText =["My accountModal","My home","My settings","My notifications","My connections","Language & region","Security","Import"];
-    const tabIcon = [<IconUser />,<IconHome />, <IconSettings />, <IconNotification />, <IconApps />, <IconPublic />, <IconSecurity />, <IconToBottom />];
+    const tabText =["My accountModal","My home","My settings","My notifications","My connections","Language & region","Security"];
+    const tabIcon = [<IconUser />,<IconHome />, <IconSettings />, <IconNotification />, <IconApps />, <IconPublic />, <IconSecurity />];
     const inavtiveBgc = "transparent";
     const activeBgc = "#C9CDD4";
 

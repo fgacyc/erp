@@ -7,13 +7,22 @@ import {useEffect, useState} from "react";
 import {useSettingModalStore} from "./settingModalStore.js";
 import {SettingModalAccount} from "./SettingModalPages/SettingModalAccount.jsx";
 import SettingModalHome from "./SettingModalPages/SettingModalHome.jsx";
+import SettingModalSettings from "./SettingModalPages/SettingModalSettings.jsx";
+import SettingModalNotifications from "./SettingModalPages/SettingModalNotifications.jsx";
+import SettingModalConnections from "./SettingModalPages/SettingModalConnections.jsx";
+import SettingModalLanguageAndRegion from "./SettingModalPages/SettingModalLanguageAndRegion.jsx";
+import SettingModalSecurity from "./SettingModalPages/SettingModalSecurity.jsx";
 
 export  default  function UI_SettingModal({visible, setVisible}){
     const  staff = useSettingModalStore(state => state.staff)
     const currentTab = useSettingModalStore(state => state.currentTab)
     const initStaff = useSettingModalStore(state => state.initStaff)
     const [ifInitStaff, setIfInitStaff] = useState(false);
-    const pages = [ <SettingModalAccount />, <SettingModalHome />]
+    const pages = [ <SettingModalAccount />, <SettingModalHome />,
+        <SettingModalSettings />, <SettingModalNotifications />,
+        <SettingModalConnections />, <SettingModalLanguageAndRegion />,
+        <SettingModalSecurity />
+    ]
 
     useEffect(() => {
         initStaff().then(
