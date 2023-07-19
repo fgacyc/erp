@@ -118,6 +118,22 @@ export  const pastoral_team_options = [
     }
 ];
 
+
+export  const pastoral_team_roles = [
+    {
+        value:"pastoral_team_leader",
+        label:"Pastoral Team Leader"
+    },
+    {
+        value:"pastoral_zone_leader",
+        label:"Pastoral Zone Leader"
+    },
+    {
+        value:"pastoral_team_member",
+        label:"Pastoral Team Member"
+    }
+]
+
 export function findPastoralTeam(name){
     name = name.toLowerCase();
     let team = "";
