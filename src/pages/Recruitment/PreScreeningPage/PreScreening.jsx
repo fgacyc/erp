@@ -22,13 +22,19 @@ export default function PreScreening() {
     const [isButtonClicked, setIsButtonClicked] = useState(false);
     const [userCYC_ID, setUserCYC_ID] = useState(null);
     const [visible, setVisible] = useState(false);
+    const [currentUserCYC_ID, setCurrentUserCYC_ID] = useState(0);
+
 
     function getUserData(){
         getReq( `/recruiter/${RID}`).then((res) => {
             setUserDatas(res);
         });
     }
-
+    function setCurrentCYCID(){
+        getCurrentUserCYCID().then((data) => {
+            setCurrentUserCYC_ID(data);
+        });
+    }
 
 
     useEffect(() => {
@@ -36,6 +42,7 @@ export default function PreScreening() {
         getCurrentUserCYCID().then((res) => {
             setUserCYC_ID(res);
         });
+        setCurrentCYCID();
     }, [])
 
     useEffect(() => {
@@ -56,6 +63,7 @@ export default function PreScreening() {
 
         const pre_screening = {
             status: pre_screening_status,
+            approver: currentUserCYC_ID,
             pre_screening_time: time,
         }
 

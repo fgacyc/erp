@@ -8,6 +8,10 @@ import UI_ConfirmModal from "../../../components/UI_Modal/UI_ConfirmModal/UI_Con
 import VocalRatingTable from "../InterviewPage/VocalRatingTable.jsx";
 import {capitalAllFirstLetter} from "../../../tools/string.js";
 import {classifyQuestion} from "./data.js";
+import EvaluationResultRubberStamp from "./RubberStamp.jsx";
+import "./EvaluationPage.css";
+import {get} from "idb-keyval";
+import {distanceBetweenPoints} from "chart.js/helpers";
 export default function Evaluation_Page() {
     const breadcrumbItems = [
         {
@@ -27,6 +31,8 @@ export default function Evaluation_Page() {
     const [AISummary, setAISummary] = useState(null);
     const [ifVocal, setIfVocal] = useState(false);
     const [vocalRatingForm, setVocalRatingForm] = useState(null);
+    const [currentRubberStampType, setCurrentRubberStampType] = useState(null);
+    const [currentCandidate, setCurrentCandidate] = useState(null);
 
     const RID =   useParams().RID;
     const navigate = useNavigate();
@@ -37,8 +43,6 @@ export default function Evaluation_Page() {
     useEffect(() => {
         getReq(`/comments/${RID}`).then((res) => {
             setComments(res.data);
-            // console.log("comment: " + res.data.length)
-            // console.log(typeof res.data)
         });
 
         getReq(`/interview/answers/${RID}`).then((res) => {
@@ -50,6 +54,16 @@ export default function Evaluation_Page() {
         getReq(`/performance/${RID}`).then((res) => {
             if(res.status === "success"){
                 setAISummary(res.data);
+            }
+        });
+
+        get("current_candidate").then((res) => {
+            setCurrentCandidate(res);
+            if(res.application.status === "accepted"||
+                res.application.status === "rejected"||
+                res.application.status === "kiv"){
+                setShowBack(true);
+                setCurrentRubberStampType(res.application.status);
             }
         });
 
@@ -76,6 +90,7 @@ export default function Evaluation_Page() {
                 if(res.status){
                     Message.success('Evaluation submitted successfully')
                     setShowBack(true);
+                    setCurrentRubberStampType(status);
                 }
             });
         };
@@ -98,7 +113,11 @@ export default function Evaluation_Page() {
                     <Affix offsetTop={10}>
                         <Space style={{ width: '100%', display: 'flex', justifyContent: 'end' }}>
                             {
-                                showBack ?<Button type="primary" style={{width:100}} onClick={()=>navigate("/recruitment_evaluation")}>Back</Button>
+                                showBack ?
+                                    <div>
+                                        <Button type="outline" style={{width:100,marginRight:10}} onClick={()=>navigate("/recruitment_evaluation")}>Back</Button>
+                                        <Button type="outline" style={{width:100}} onClick={()=>setShowBack(false)}>Reset</Button>
+                                    </div>
                                 :<div>
                                     <Button status='danger' style={{width:100,marginRight:10}} onClick={()=>confirmSubmit("rejected")}>Next Time</Button>
                                     <Button status='warning' style={{width:100,marginRight:10}}  onClick={()=>confirmSubmit("kiv")}>KIV</Button>
@@ -112,7 +131,7 @@ export default function Evaluation_Page() {
                         { AISummary !== null &&
                             <div>
                                 <h2>AI Summary</h2>
-                                <p>{AISummary}</p>
+                                <p className="ai-summary-con">{AISummary}</p>
                             </div>
                         }
                         { QAs !== null &&
@@ -179,6 +198,8 @@ export default function Evaluation_Page() {
                         }
 
                     </Space>
+                {currentRubberStampType && <EvaluationResultRubberStamp type={currentRubberStampType}  /> }
+
             </div>
         </>
     )

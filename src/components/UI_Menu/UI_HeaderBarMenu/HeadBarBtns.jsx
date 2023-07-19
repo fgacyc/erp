@@ -53,7 +53,7 @@ export default function HeadBarBtns(){
             }
             <Button shape='circle' type='primary' icon={<IconSettings />} className="head-bar-btn"  />
             <Button shape='circle' type='primary' icon={<IconNotification />} className="head-bar-btn"
-                    //onClick={showNotificationModal}
+                    onClick={showNotificationModal}
             >
                 {ifNewNotification && <div className="notification-dot"></div>}
             </Button>
