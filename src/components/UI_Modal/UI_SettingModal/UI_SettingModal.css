@@ -26,7 +26,13 @@
 }
 
 .setting-modal-con-right{
-
+    width: calc(100% - 240px);
+    max-height:715px;
+    height: calc(100vh - 150px);
+    background-color: #FFFFFF;
+    overflow-y: auto;
+    box-sizing: border-box;
+    padding: 36px 60px;
 }
 
 .setting-modal-left-header{
@@ -60,4 +66,29 @@
 .setting-modal-tab-con div{
     font-size: 14px;
     margin-left: 10px;
+}
+
+.setting-modal-account-profile{
+    display: flex;
+    margin-bottom: 40px;
+}
+
+.setting-modal-account-security{
+    margin-bottom: 40px;
+    /*display: flex;*/
+    /*margin-bottom: 50px;*/
+}
+
+.setting-modal-account-support-left-icon{
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.setting-modal-account-support-left-icon:hover{
+    border-radius: 4px;
+    background-color: #efefef;
+    transition: 0.2s;
 }

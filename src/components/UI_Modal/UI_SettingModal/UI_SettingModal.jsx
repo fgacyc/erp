@@ -5,6 +5,7 @@ import { ReactComponent as IconEnter } from '/public/icons/icon-enter.svg'
 import {UI_SettingModalLeft} from "./UI_SettingModalLeft.jsx";
 import {useEffect, useState} from "react";
 import {useSettingModalStore} from "./settingModalStore.js";
+import {SettingModalAccount} from "./SettingModalAccount.jsx";
 
 export  default  function UI_SettingModal({visible, setVisible}){
     const  staff = useSettingModalStore(state => state.staff)
@@ -12,7 +13,9 @@ export  default  function UI_SettingModal({visible, setVisible}){
     const [ifInitStaff, setIfInitStaff] = useState(false);
     useEffect(() => {
         initStaff().then(
-            () => setIfInitStaff(true)
+            () => {
+                setIfInitStaff(true);
+            }
         )
     },[])
 
@@ -35,6 +38,7 @@ export  default  function UI_SettingModal({visible, setVisible}){
                     }
                 </div>
                 <div className="setting-modal-con-right">
+                    <SettingModalAccount />
                 </div>
             </div>
         </Modal>
