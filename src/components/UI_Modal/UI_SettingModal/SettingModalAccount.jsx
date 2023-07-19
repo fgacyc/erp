@@ -4,6 +4,9 @@ import {IconRight} from "@arco-design/web-react/icon";
 import {useState} from "react";
 import EmailOrPhoneSettingModal from "./accountModal/EmailOrPhoneSettingModal.jsx";
 import PasswordSettingModal from "./accountModal/PasswordSettingModal.jsx";
+import UI_ConfirmModal from "../UI_ConfirmModal/UI_ConfirmModal.jsx";
+import {capitalFirstLetter} from "../../../tools/string.js";
+import DeleteAccountModal from "./accountModal/DeleteAccountModal.jsx";
 
 function SettingModalDivider(){
     return (
@@ -18,18 +21,28 @@ export  function SettingModalAccount(){
     const [passwordSettingModalVisible, setPasswordSettingModalVisible] = useState(false)
     const [deleteAccountModalVisible, setDeleteAccountModalVisible] = useState(false)
 
+    function  showConfirmModal(){
+        UI_ConfirmModal("Confirm",`Are you sure to log out of all devices`,()=>{console.log("confirm")})
+    }
+
     return (
         <div className="setting-modal-account-con">
             <div>
                 <h3>My profile</h3>
                 <SettingModalDivider />
                 <div className="setting-modal-account-profile">
-                    <Avatar style={{ backgroundColor: '#3370ff',marginRight:30}} size={60} >
-                        {staff?.username ? staff.username[0] : staff.full_name[0]}
-                    </Avatar>
+                    { staff &&
+                        <Avatar style={{ backgroundColor: '#3370ff',marginRight:30}} size={60} >
+                         { staff?.username ? staff.username[0] : staff.full_name[0]}
+                        </Avatar>
+
+                    }
+
                     <div>
                         <div>Username</div>
-                        <Input style={{ width: 350 }}  value={staff.username ? staff.username :"" } />
+                        {staff &&
+                            <Input style={{ width: 350 }}  value={staff && staff.username ? staff.username :"" } />
+                        }
                     </div>
                 </div>
             </div>
@@ -74,7 +87,9 @@ export  function SettingModalAccount(){
                         <div style={{fontWeight:"bold"}}>Log out of all devices</div>
                         <div>Log out of all other active sessions on other devices besides this one.</div>
                     </div>
-                    <div className="setting-modal-account-support-left-icon">
+                    <div className="setting-modal-account-support-left-icon"
+                        onClick={showConfirmModal}
+                    >
                         <IconRight />
                     </div>
                 </div>
@@ -83,7 +98,9 @@ export  function SettingModalAccount(){
                         <div style={{color:"red"}}>Delete my account</div>
                         <div>Permanently delete the account and remove all data from database.</div>
                     </div>
-                    <div className="setting-modal-account-support-left-icon">
+                    <div className="setting-modal-account-support-left-icon"
+                        onClick={() => setDeleteAccountModalVisible(true)}
+                    >
                         <IconRight />
                     </div>
                 </div>
@@ -91,6 +108,7 @@ export  function SettingModalAccount(){
             <EmailOrPhoneSettingModal visible={emailSettingModalVisible} setVisible={setEmailSettingModalVisible} type="email" />
             <EmailOrPhoneSettingModal visible={phoneSettingModalVisible} setVisible={setPhoneSettingModalVisible} type="phone" />
             <PasswordSettingModal visible={passwordSettingModalVisible} setVisible={setPasswordSettingModalVisible} />
+            <DeleteAccountModal visible={deleteAccountModalVisible} setVisible={setDeleteAccountModalVisible} />
         </div>
     )
 }
