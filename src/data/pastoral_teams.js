@@ -24,6 +24,8 @@ let pastoral_teams = {
         "setapak",
         "sg_long",
         "seremban",
+        "the_blessing",
+        "to_be_confirmed"
     ]
 }
 
@@ -113,6 +115,14 @@ export  const pastoral_team_options = [
             {
                 value: "seremban",
                 label: "Seremban"
+            },
+            {
+                value: "the_blessing",
+                label: "The Blessing"
+            },
+            {
+                value: "to_be_confirmed",
+                label: "To Be Confirmed"
             }
         ]
     }

@@ -76,7 +76,7 @@ export default function Recruitment_Dashboard() {
         wonderkids: ['Wonderkids'],
         young_warrior: ['Heart', 'Move', 'Force', 'Voice', 'Mind'],
         general_service: ['YP Zone', 'Pro Family', 'Young Dreamer', 'Joshua Zone'],
-        others: ['Serdang', 'Kepong', 'USJ', 'Sg Long', 'Setapak'],
+        others: ['Serdang', 'Kepong', 'USJ', 'Sg Long', 'Setapak', 'The Blessing', 'To Be Confirmed'],
     }
 
     const pieChartLabel = {
@@ -183,28 +183,38 @@ export default function Recruitment_Dashboard() {
                 others: [
                     {
                         label: 'Serdang',
-                        data: [getInfoCount(res, "pastoral_team", 1, "serdang"), 0, 0, 0],
+                        data: [getInfoCount(res, "pastoral_team", 1, "serdang"), 0, 0, 0, 0, 0],
                         backgroundColor: colors[0],
                     },
                     {
                         label: 'Kepong',
-                        data: [0, getInfoCount(res, "pastoral_team", 1, "kepong"), 0, 0],
+                        data: [0, getInfoCount(res, "pastoral_team", 1, "kepong"), 0, 0, 0, 0],
                         backgroundColor: colors[1],
                     },
                     {
                         label: 'USJ',
-                        data: [0, 0, getInfoCount(res, "pastoral_team", 1, "usj"), 0],
+                        data: [0, 0, getInfoCount(res, "pastoral_team", 1, "usj"), 0, 0, 0],
                         backgroundColor: colors[2],
                     },
                     {
                         label: 'Sg Long',
-                        data: [0, 0, 0, getInfoCount(res, "pastoral_team", 1, "sg_long")],
+                        data: [0, 0, 0, getInfoCount(res, "pastoral_team", 1, "sg_long"), 0, 0],
                         backgroundColor: colors[3],
                     },
                     {
                         label: 'Setapak',
-                        data: [0, 0, 0, 0, getInfoCount(res, "pastoral_team", 1, "setapak")],
+                        data: [0, 0, 0, 0, getInfoCount(res, "pastoral_team", 1, "setapak"), 0, 0],
                         backgroundColor: colors[4],
+                    },
+                    {
+                        label: 'The Blessing',
+                        data: [0, 0, 0, 0, 0, getInfoCount(res, "pastoral_team", 1, "the_blessing"), 0],
+                        backgroundColor: colors[5],
+                    },
+                    {
+                        label: 'To Be Confirmed',
+                        data: [0, 0, 0, 0, 0, 0, getInfoCount(res, "pastoral_team", 1, "to_be_confirmed")],
+                        backgroundColor: colors[6],
                     },
                 ]
             };
