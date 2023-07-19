@@ -367,7 +367,7 @@ export  default  function PreScreening_table(){
                         columns={columns}
                         data={allData}
                         style={{marginBottom: 20}}
-                        onChange={handleTableChange}
+                       // onChange={handleTableChange}
                     />
                 }
             </div>
