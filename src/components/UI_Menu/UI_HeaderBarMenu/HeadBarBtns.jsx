@@ -13,11 +13,13 @@ import "../../../pages/Frame/Frame.css"
 import {useState} from "react";
 import NotificationModal from "../../UI_Modal/UI_NotificationModal/NotificationModal.jsx";
 import UI_SearchModal from "../../UI_Modal/UI_SearchModal/UI_SearchModal.jsx";
+import UI_SettingModal from "../../UI_Modal/UI_SettingModal/UI_SettingModal.jsx";
 
 export default function HeadBarBtns(){
     const [notificationModalVisible, setNotificationModalVisible] = useState(false);
     const [ifDarkTheme, setIfDarkTheme] = useState(false);
-    const [showSearchModal, setShowSearchModal] = useState(false);
+    const [searchModalVisible, setSearchModalVisible] = useState(false);
+    const [settingModalVisible, setSettingModalVisible] = useState(true);
     const [ifNewNotification, setIfNewNotification] = useState(false);
 
     function changeTheme(){
@@ -35,23 +37,24 @@ export default function HeadBarBtns(){
     }
 
 
-
     return (
         <span className="head-bar-btns">
             <Button shape='circle' type='primary' icon={<IconSearch />} className="head-bar-btn"
-                //onClick={() => setShowSearchModal(true)}
+                onClick={() => setSearchModalVisible(true)}
             />
             <Button shape='circle' type='primary' icon={<IconLanguage />} className="head-bar-btn" />
             {
                 ifDarkTheme
                 ? <Button shape='circle' type='primary' icon={<IconSun />} className="head-bar-btn"
-                          //onClick={changeTheme}
+                          onClick={changeTheme}
                     />
                 :<Button shape='circle' type='primary' icon={<IconMoon />} className="head-bar-btn"
-                         //onClick={changeTheme}
+                         onClick={changeTheme}
                     />
             }
-            <Button shape='circle' type='primary' icon={<IconSettings />} className="head-bar-btn"  />
+            <Button shape='circle' type='primary' icon={<IconSettings />} className="head-bar-btn"
+                onClick={()=> setSettingModalVisible(true)}
+            />
             <Button shape='circle' type='primary' icon={<IconNotification />} className="head-bar-btn"
                     onClick={showNotificationModal}
             >
@@ -61,7 +64,8 @@ export default function HeadBarBtns(){
 
 
             <NotificationModal visible={notificationModalVisible} setVisible={setNotificationModalVisible}/>
-            <UI_SearchModal visible={showSearchModal} setVisible={setShowSearchModal}/>
+            <UI_SearchModal visible={searchModalVisible} setVisible={setSearchModalVisible}/>
+            <UI_SettingModal visible={settingModalVisible} setVisible={setSettingModalVisible}/>
         </span>
     )
 }

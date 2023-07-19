@@ -1,0 +1,57 @@
+.setting-modal{
+    padding: 0;
+    height:715px;
+}
+
+
+.setting-modal-con{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    border-radius: 5px;
+}
+.setting-modal-con-left{
+    width: 240px;
+    height: 715px;
+    background-color:#F2F3F5;
+    border-radius: 5px 0 0 5px;
+}
+
+.setting-modal-con-right{
+
+}
+
+.setting-modal-left-header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    height: 50px;
+    /*border-bottom: 1px solid #E4E6E8;*/
+}
+
+.setting-modal-tab-con{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 10px 15px;
+    margin: 5px 0;
+}
+
+.setting-modal-tab-con:hover{
+    cursor: pointer;
+    background-color:#C9CDD4;
+}
+
+.setting-modal-tab-con svg{
+    font-size: 20px;
+}
+
+.setting-modal-tab-con div{
+    font-size: 14px;
+    margin-left: 10px;
+}
