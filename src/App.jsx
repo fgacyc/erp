@@ -1,4 +1,4 @@
-import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Frame from "./pages/Frame/Frame.jsx";
 import Login from "./pages/Login/Login.jsx";
 import "./App.css";
@@ -12,7 +12,6 @@ import Interview_form from "./pages/Recruitment/InterviewPage/Interview_form.jsx
 import Recruitment_Evaluation_Table from "./pages/Recruitment/EvaluationPage/EvaluationTable.jsx";
 import Evaluation_Page from "./pages/Recruitment/EvaluationPage/EvaluationPage.jsx";
 import Registration from './pages/Registration/Registration.jsx';
-import SettingsPage from "./pages/Settings/SettingsPage.jsx";
 import Testing from "./pages/Testing/Testing.jsx";
 
 function App() {
@@ -36,7 +35,6 @@ function App() {
                         </Route>
                         <Route path="/registration" element={<Registration/>} />
                         <Route path="/profile" element={<Profile/>} />
-                        <Route path="/settings" element={<SettingsPage/>} />
                         <Route path="/testing" element={<Testing/>} />
                         <Route path="*" element={<Login/>} />
                     </Routes>
