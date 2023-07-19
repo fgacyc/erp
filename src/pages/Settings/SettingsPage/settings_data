@@ -1,0 +1,14 @@
+export const settings_navs = [
+    {
+        title: "Account and Security",
+        route: "account",
+    },
+    {
+        title: "Calendar & Mail",
+        route: "calendar",
+    },
+    {
+        title: "About",
+        route: "about",
+    },
+];
