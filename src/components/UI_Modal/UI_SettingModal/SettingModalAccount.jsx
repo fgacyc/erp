@@ -3,6 +3,7 @@ import {Avatar, Button, Divider, Input} from "@arco-design/web-react";
 import {IconRight} from "@arco-design/web-react/icon";
 import {useState} from "react";
 import EmailOrPhoneSettingModal from "./accountModal/EmailOrPhoneSettingModal.jsx";
+import PasswordSettingModal from "./accountModal/PasswordSettingModal.jsx";
 
 function SettingModalDivider(){
     return (
@@ -50,7 +51,9 @@ export  function SettingModalAccount(){
                         <div style={{fontWeight:"bold"}}>Password</div>
                         <div>Set a permanent password to login to your account</div>
                     </div>
-                    <Button type='outline' style={{width:140}}>Reset Password</Button>
+                    <Button type='outline' style={{width:140}}
+                        onClick={() => setPasswordSettingModalVisible(true)}
+                    >Reset Password</Button>
                 </div>
                 <div  style={{display:"flex",justifyContent:"space-between",alignItems:"center", marginTop:10}}>
                     <div>
@@ -87,6 +90,7 @@ export  function SettingModalAccount(){
             </div>
             <EmailOrPhoneSettingModal visible={emailSettingModalVisible} setVisible={setEmailSettingModalVisible} type="email" />
             <EmailOrPhoneSettingModal visible={phoneSettingModalVisible} setVisible={setPhoneSettingModalVisible} type="phone" />
+            <PasswordSettingModal visible={passwordSettingModalVisible} setVisible={setPasswordSettingModalVisible} />
         </div>
     )
 }

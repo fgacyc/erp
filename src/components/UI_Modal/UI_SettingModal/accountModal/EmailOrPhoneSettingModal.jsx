@@ -1,5 +1,5 @@
 import {Button, Input, Modal} from "@arco-design/web-react";
-import {IconCloseCircle, IconLock} from "@arco-design/web-react/icon";
+import {IconCloseCircle, IconEmail, IconLock, IconPhone} from "@arco-design/web-react/icon";
 import {useEffect, useState} from "react";
 
 export default function EmailOrPhoneSettingModal({visible, setVisible,type}){
@@ -34,7 +34,10 @@ export default function EmailOrPhoneSettingModal({visible, setVisible,type}){
                     />
                 </div>
                <div style={{textAlign:"center",marginBottom:20}}>
-                   <IconLock style={{fontSize:25}} />
+                   { type === "email"
+                       ? <IconEmail style={{fontSize:25}} />
+                          : <IconPhone style={{fontSize:25}} />
+                   }
                    <div style={{fontWeight:"bold",marginTop:10}}>Set {currentKeyWords[1]}</div>
                </div>
                <div style={{marginBottom:10}}>
