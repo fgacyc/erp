@@ -31,7 +31,7 @@ export default function EvaluationResultRubberStamp({type,trigger}){
             if(res.application.status === "accepted"||
                 res.application.status === "rejected"||
                 res.application.status === "kiv"){
-                console.log(res.application.updated)
+                // console.log(res.application.updated)
                 setCurrentTime(getRubberStampTime(res.application.updated));
             }
         });

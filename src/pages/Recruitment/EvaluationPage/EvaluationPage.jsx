@@ -1,5 +1,5 @@
 import UI_Breadcrumb from "../../../components/UI_Breadcrumb/UI_Breadcrumb.jsx";
-import {Affix, Button, Space, List, Card, Message} from '@arco-design/web-react';
+import { Button, Space, List, Card, Message} from '@arco-design/web-react';
 import {useEffect, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import {getReq, putReq} from "../../../tools/requests.js";
@@ -11,6 +11,9 @@ import {classifyQuestion} from "./data.js";
 import EvaluationResultRubberStamp from "./RubberStamp.jsx";
 import "./EvaluationPage.css";
 import {get} from "idb-keyval";
+import {IconArrowLeft, IconEdit} from "@arco-design/web-react/icon";
+import {findPastoralTeamLabel} from "../../../data/pastoral_teams.js";
+import {findMinistryLabel} from "../../../data/ministries.js";
 
 export default function Evaluation_Page() {
     const breadcrumbItems = [
@@ -42,6 +45,7 @@ export default function Evaluation_Page() {
     useEffect(() => {
         getReq(`/comments/${RID}`).then((res) => {
             setComments(res.data);
+            console.log(res.data)
         });
 
         getReq(`/interview/answers/${RID}`).then((res) => {
@@ -111,22 +115,48 @@ export default function Evaluation_Page() {
         <>
             <UI_Breadcrumb items={breadcrumbItems}/>
             <div className="app-component" style={{padding:"0 30px", boxSizing:"border-box"}}>
+                <div style={{height:35}}></div>
                 <Space  className="evaluation-page-header">
                     {
                         showBack ?
-                            <div>
+                            <div className="evaluation-page-header-finished">
                                 <Button type="outline" style={{width:100,marginRight:10}} onClick={()=>navigate("/recruitment_evaluation")}>Back</Button>
                                 <Button type="outline" style={{width:100}} onClick={()=>setShowBack(false)}>Reset</Button>
+                                {/*<IconArrowLeft />*/}
+                                {/*<IconEdit />*/}
                             </div>
-                            :<div>
-                                <Button status='danger' style={{width:100,marginRight:10}} onClick={()=>confirmSubmit("rejected")}>Next Time</Button>
-                                <Button status='warning' style={{width:100,marginRight:10}}  onClick={()=>confirmSubmit("kiv")}>KIV</Button>
-                                <Button type='primary' status="success" style={{width:100}}  onClick={()=>confirmSubmit("accepted")}>Pass</Button>
+                            :<div className="evaluation-page-header-unfinished">
+                                <Button status='danger' className="evaluation-next-time-button"
+                                        onClick={()=>confirmSubmit("rejected")}>Next Time</Button>
+                                <Button status='warning' className="evaluation-kiv-button"
+                                        onClick={()=>confirmSubmit("kiv")}>KIV</Button>
+                                <Button type='primary' status="success" className="evaluation-pass-button"
+                                        onClick={()=>confirmSubmit("accepted")}>Pass</Button>
                             </div>
                     }
                 </Space>
 
                 <Space direction='vertical' size='large' style={{ overflowY: 'auto', marginTop: "24px", width: "100%" }}>
+                    {currentCandidate !== null &&
+                        <div>
+                            <h2>Candidate Info</h2>
+                            <div>
+                                <span style={{fontWeight:"bold",color:"#4E5969"}}>Name: </span>
+                                <span>{currentCandidate.info.name} </span>
+                            </div>
+                            <div>
+                                <span style={{fontWeight:"bold",color:"#4E5969"}}>Pastoral Team: </span>
+                                <span>{findPastoralTeamLabel(currentCandidate.info.pastoral_team).join(" > ")} </span>
+                            </div>
+                            <div>
+                                <span style={{fontWeight:"bold",color:"#4E5969"}}>Ministry: </span>
+                                <span>{findMinistryLabel(currentCandidate.info.ministry).join(" > ")} </span>
+                            </div>
+                        </div>
+
+                    }
+
+
                     { AISummary !== null &&
                         <div>
                             <h2>AI Summary</h2>

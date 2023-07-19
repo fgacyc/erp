@@ -32,6 +32,7 @@ export function PreScreeningComment({item,id,RID,CYC_ID}){
     const [dropdownAction, setDropdownAction] = useState(null);
 
     useEffect(()=>{
+        if(!item.CYC_ID) return;
         let router = `/auth/names?CYC_ID=${item.CYC_ID}`;
         getReq(router).then((res)=>{
             if(res.status) setCommentUserName(res.data)
