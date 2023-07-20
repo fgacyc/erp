@@ -13,7 +13,7 @@ import "./EvaluationPage.css";
 import {get} from "idb-keyval";
 import {IconArrowLeft, IconEdit} from "@arco-design/web-react/icon";
 import {findPastoralTeamLabel} from "../../../data/pastoral_teams.js";
-import {findMinistryLabel} from "../../../data/ministries.js";
+import {findInterviewsNames, findMinistryLabel} from "../../../data/ministries.js";
 
 export default function Evaluation_Page() {
     const breadcrumbItems = [
@@ -37,6 +37,7 @@ export default function Evaluation_Page() {
     const [currentRubberStampType, setCurrentRubberStampType] = useState(null);
     const [currentCandidate, setCurrentCandidate] = useState(null);
     const [showRubberStamp, setShowRubberStamp] = useState(0);
+    const [interviewers, setInterviewers] = useState("");
 
     const RID =   useParams().RID;
     const navigate = useNavigate();
@@ -45,7 +46,7 @@ export default function Evaluation_Page() {
     useEffect(() => {
         getReq(`/comments/${RID}`).then((res) => {
             setComments(res.data);
-            console.log(res.data)
+            // console.log(res.data)
         });
 
         getReq(`/interview/answers/${RID}`).then((res) => {
@@ -69,6 +70,9 @@ export default function Evaluation_Page() {
                 setCurrentRubberStampType(res.application.status);
                 setShowRubberStamp(2);
             }
+            findInterviewsNames(res.interview.ministry.interviewers).then((res) => {
+                setInterviewers(res);
+            });
         });
 
     }, []);
@@ -151,6 +155,10 @@ export default function Evaluation_Page() {
                             <div>
                                 <span style={{fontWeight:"bold",color:"#4E5969"}}>Ministry: </span>
                                 <span>{findMinistryLabel(currentCandidate.info.ministry).join(" > ")} </span>
+                            </div>
+                            <div>
+                                <span style={{fontWeight:"bold",color:"#4E5969"}}>Interviews: </span>
+                                <span>{interviewers}</span>
                             </div>
                         </div>
 

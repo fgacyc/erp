@@ -1,3 +1,5 @@
+import {getReq} from "../tools/requests.js";
+
 let department ={
     "people_experience": {
         "people": [
@@ -250,4 +252,18 @@ export function findMinistryLabel(ministryArray){
         }
     }
     return res;
+}
+
+export async function findInterviewsNames(interviewerCYCIDList){
+    let res =await  getReq(`/interviewers/CYCIDList?list=${interviewerCYCIDList.join(",")}`);
+    let interviewerNames = [];
+    if(res.status){
+        let data = res.data;
+        for(let interviewer of data){
+            interviewerNames.push("@" + interviewer.full_name);
+        }
+        // console.log(interviewerNames)
+        return interviewerNames.join(", ");
+    }
+    return "";
 }
