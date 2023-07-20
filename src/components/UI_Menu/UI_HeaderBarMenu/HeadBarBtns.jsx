@@ -40,23 +40,23 @@ export default function HeadBarBtns(){
     return (
         <span className="head-bar-btns">
             <Button shape='circle' type='primary' icon={<IconSearch />} className="head-bar-btn"
-                onClick={() => setSearchModalVisible(true)}
+                //onClick={() => setSearchModalVisible(true)}
             />
             <Button shape='circle' type='primary' icon={<IconLanguage />} className="head-bar-btn" />
             {
                 ifDarkTheme
                 ? <Button shape='circle' type='primary' icon={<IconSun />} className="head-bar-btn"
-                          onClick={changeTheme}
+                          //onClick={changeTheme}
                     />
                 :<Button shape='circle' type='primary' icon={<IconMoon />} className="head-bar-btn"
-                         onClick={changeTheme}
+                         //onClick={changeTheme}
                     />
             }
             <Button shape='circle' type='primary' icon={<IconSettings />} className="head-bar-btn"
-                onClick={()=> setSettingModalVisible(true)}
+                //onClick={()=> setSettingModalVisible(true)}
             />
             <Button shape='circle' type='primary' icon={<IconNotification />} className="head-bar-btn"
-                    onClick={showNotificationModal}
+                    //onClick={showNotificationModal}
             >
                 {ifNewNotification && <div className="notification-dot"></div>}
             </Button>
