@@ -22,7 +22,7 @@ export function UI_QRCodeModal({ministry,RID ,visible, setVisible}){
 
     function  getAppointmentDate(ministry){
         if (ministry === "dance"){
-            return [1689998400,1690025400,1690099200]
+            return [1690459200,1690596000]
         }else if(ministry === "content creation" || ministry === "editorial" || ministry === "graphic design"
             || ministry === "multimedia design" || ministry === "photography" || ministry === "sound"){
             return [1689492600,1690018200,1690097400]
