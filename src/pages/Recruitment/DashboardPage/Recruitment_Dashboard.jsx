@@ -414,8 +414,9 @@ export default function Recruitment_Dashboard() {
                                style={{ marginTop : 10}}
                                options={options_pie}
                                changeOnSelect
-                               allowClear
-                               showSearch
+                               expandTrigger='hover'
+                               // allowClear
+                               // showSearch
                                onChange={(value, option) => {
                                    let ministry_value = value.length > 1 ? value[1] : value[0];
                                    setPieChartLabels(pieChartLabel[ministry_value]);
