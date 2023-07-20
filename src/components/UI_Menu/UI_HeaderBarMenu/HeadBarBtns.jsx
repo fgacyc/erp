@@ -19,7 +19,7 @@ export default function HeadBarBtns(){
     const [notificationModalVisible, setNotificationModalVisible] = useState(false);
     const [ifDarkTheme, setIfDarkTheme] = useState(false);
     const [searchModalVisible, setSearchModalVisible] = useState(false);
-    const [settingModalVisible, setSettingModalVisible] = useState(true);
+    const [settingModalVisible, setSettingModalVisible] = useState(false);
     const [ifNewNotification, setIfNewNotification] = useState(false);
 
     function changeTheme(){

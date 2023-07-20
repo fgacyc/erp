@@ -120,3 +120,13 @@ export async function ifCurrentUserIsSuperAdmin(){
     }
     return   false;
 }
+
+
+export async function getUsername(){
+    let info = await getStaffInfoLocal();
+    if(info.username){
+        return info.username
+    }else{
+        return info.full_name
+    }
+}

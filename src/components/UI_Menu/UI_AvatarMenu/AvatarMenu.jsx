@@ -2,7 +2,7 @@ import {Avatar, Dropdown, Menu} from "@arco-design/web-react";
 import "./avatarMenu.css"
 import {useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
-import {getUserNameFromUserData} from "../../../tools/auth.js";
+import {getUsername, getUserNameFromUserData} from "../../../tools/auth.js";
 import {goToProfile, logout} from "./avatarFuncs.js";
 import {useSettingModalStore} from "../../UI_Modal/UI_SettingModal/settingModalStore.js";
 
@@ -10,15 +10,15 @@ import {useSettingModalStore} from "../../UI_Modal/UI_SettingModal/settingModalS
 export  function AvatarMenu(){
     const navigate = useNavigate();
 
-    const username = useSettingModalStore(state => state.username)
-    // const [username, setUsername] = useState(staff.username ? staff.username :staff.full_name);
+    // const username = useSettingModalStore(state => state.username)
+    const [username, setUsername] = useState("");
     //
     //
-    // useEffect(()=>{
-    //     getUserNameFromUserData().then((res)=>{
-    //         setUsername(res);
-    //     })
-    // },[])
+    useEffect(()=>{
+        getUsername().then((res)=>{
+            setUsername(res);
+        })
+    },[])
 
 
 
