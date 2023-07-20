@@ -414,6 +414,7 @@ export default function Recruitment_Dashboard() {
                                style={{ marginTop : 10}}
                                options={options_pie}
                                changeOnSelect
+                               expandTrigger='hover'
                                // allowClear
                                // showSearch
                                onChange={(value, option) => {
