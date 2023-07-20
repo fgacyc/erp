@@ -130,14 +130,14 @@ export function  getInterviewRatio(usersData){
     let interviewed = 0;
 
     for (let user of usersData){
-        if(!user.appointment) notScheduled ++;
+        if(!user.appointment  && user.application.status==="pre-accepted") notScheduled ++;
         else if (user.interview && user.interview.status === false) scheduled++;
         else if (user.interview && user.interview.status === true) interviewed++;
     }
 
 
     return {
-        labels: ['Not Schedule', 'Not Interview', 'Interviewed'],
+        labels: ['Not Schedule', 'Waiting Interview', 'Interviewed'],
         datasets: [
             {
                 label: '# of Votes',
