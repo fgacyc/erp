@@ -9,3 +9,28 @@ export function padNumberWithZeros(number) {
 
     return "CYC" + numberString;
 }
+
+
+export  function validatePhone(phone){
+    const phoneRegex = /^\d{6,12}$/; // Regex pattern for 6 - 12-digit phone number
+
+    // console.log(phone)
+
+    if (phone.trim() === "") {
+        return {
+            status: false,
+            message: "Phone number is required"
+        }
+    }
+
+    if (!phone.match(phoneRegex)) {
+        return {
+            status: false,
+            message: "Phone must not contain special characters"
+        }
+    }
+    return {
+        status: true,
+        message: "success"
+    }
+}

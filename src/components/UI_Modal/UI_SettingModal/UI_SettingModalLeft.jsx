@@ -19,29 +19,32 @@ export function IconSecurity(){
 }
 
 export  function UI_SettingModalLeft(){
-    const  staff = useSettingModalStore(state => state.staff)
+    const username = useSettingModalStore(state => state.username)
+    const email = useSettingModalStore(state => state.email)
     const [currentTab, setCurrentTab] = useSettingModalStore(state => [state.currentTab, state.setCurrentTab],shallow)
     const tabText =["My account","My home","My settings","My notifications","My connections","Language & region","Security","About"];
     const tabIcon = [<IconUser />,<IconHome />, <IconSettings />, <IconNotification />, <IconApps />, <IconPublic />, <IconSecurity />,<IconInfoCircle />];
     const inActiveBgc = "transparent";
     const activeBgc = "#C9CDD4";
-
+    const showAllInfo = useSettingModalStore(state => state.showAllInfo)
 
 
     return (
         <div>
             <div className="setting-modal-left-header">
-                <Avatar style={{ backgroundColor: '#3370ff'}} size={32} >
-                    {staff?.username ? staff.username[0] : staff.full_name[0]}
+                <Avatar style={{ backgroundColor: '#3370ff'}} size={32}
+                    onClick={() => showAllInfo()}
+                >
+                    {username && username[0].toUpperCase()}
                 </Avatar>
                 <div style={{width:180,height:40}}>
                     <div style={{fontSize:14 ,fontWeight:"bold"}}>
-                        {staff?.username ? staff.username : staff.full_name}
+                        {username&& username}
                     </div>
                     <Typography.Paragraph
                         style={{fontSize:12}}
                         ellipsis={{ rows: 1, showTooltip: false, expandable: false, wrapper: 'span' }}>
-                        {staff.email}
+                        {email && email}
                     </Typography.Paragraph>
                 </div>
             </div>

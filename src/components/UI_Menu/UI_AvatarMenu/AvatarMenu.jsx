@@ -10,15 +10,15 @@ import {useSettingModalStore} from "../../UI_Modal/UI_SettingModal/settingModalS
 export  function AvatarMenu(){
     const navigate = useNavigate();
 
-    const staff = useSettingModalStore(state => state.staff)
-    const [username, setUsername] = useState(staff.username ? staff.username :staff.full_name);
-
-
-    useEffect(()=>{
-        getUserNameFromUserData().then((res)=>{
-            setUsername(res);
-        })
-    },[])
+    const username = useSettingModalStore(state => state.username)
+    // const [username, setUsername] = useState(staff.username ? staff.username :staff.full_name);
+    //
+    //
+    // useEffect(()=>{
+    //     getUserNameFromUserData().then((res)=>{
+    //         setUsername(res);
+    //     })
+    // },[])
 
 
 

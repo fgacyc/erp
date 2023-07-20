@@ -15,24 +15,24 @@ export function SettingModalDivider(){
 }
 
 export  function SettingModalAccount(){
-    const [staff,updateStaff] = useSettingModalStore(state => [state.staff,state.updateStaff],shallow)
+    const [username, updateUsername] = useSettingModalStore(state => [state.username,state.setUsername],shallow)
+    const email = useSettingModalStore(state => state.email)
+    const phoneNumber = useSettingModalStore(state => state.phone_number)
+
     const [emailSettingModalVisible, setEmailSettingModalVisible] = useState(false)
     const [phoneSettingModalVisible, setPhoneSettingModalVisible] = useState(false)
     const [passwordSettingModalVisible, setPasswordSettingModalVisible] = useState(false)
     const [deleteAccountModalVisible, setDeleteAccountModalVisible] = useState(false)
-    const [username, setUsername] = useState(staff.username ? staff.username :staff.full_name)
+    // const [username, setUsername] = useState(staff.username ? staff.username :staff.full_name)
 
     function  showConfirmModal(){
         UI_ConfirmModal("Confirm",`Are you sure to log out of all devices`,()=>{console.log("confirm")})
     }
 
-    useEffect(()=>{
-        console.log("account page change")
-    },[staff.email])
 
     function userNameChange(val){
-        setUsername(val)
-        updateStaff({username:val})
+        updateUsername(val)
+        // updateStaff({username:val})
     }
 
     return (
@@ -41,20 +41,15 @@ export  function SettingModalAccount(){
                 <h3>My profile</h3>
                 <SettingModalDivider />
                 <div className="setting-modal-account-profile">
-                    { staff &&
-                        <Avatar style={{ backgroundColor: '#3370ff',marginRight:30}} size={60} >
-                         { staff?.username ? staff.username[0] : staff.full_name[0]}
-                        </Avatar>
-
-                    }
+                    <Avatar style={{ backgroundColor: '#3370ff',marginRight:30}} size={60} >
+                        { username && username[0].toUpperCase()}
+                    </Avatar>
 
                     <div>
                         <div>Username</div>
-                        {staff &&
-                            <Input style={{ width: 150 }}
-                                   onChange={userNameChange}
-                                   value={username } />
-                        }
+                        <Input style={{ width: 150 }}
+                               onChange={userNameChange}
+                               value={username && username } />
                     </div>
                 </div>
             </div>
@@ -65,7 +60,7 @@ export  function SettingModalAccount(){
                 <div  style={{display:"flex",justifyContent:"space-between",alignItems:"center"}}>
                     <div>
                         <div >Email</div>
-                        <div  className="setting-desc-text-grey" >{staff && staff.email}</div>
+                        <div  className="setting-desc-text-grey" >{email && email}</div>
                     </div>
                     <Button type='outline' style={{width:140}}
                         onClick={() => setEmailSettingModalVisible(true)}
@@ -83,7 +78,7 @@ export  function SettingModalAccount(){
                 <div  style={{display:"flex",justifyContent:"space-between",alignItems:"center", marginTop:10}}>
                     <div>
                         <div >Phone number</div>
-                        <div  className="setting-desc-text-grey" >{staff?.phone ? staff.phone : "None"}</div>
+                        <div  className="setting-desc-text-grey" >{phoneNumber ?phoneNumber : "None"}</div>
                     </div>
                     <Button type='outline' style={{width:140}}
                         onClick={() => setPhoneSettingModalVisible(true)}

@@ -157,7 +157,7 @@ export default function Evaluation_Page() {
                                 <span>{findMinistryLabel(currentCandidate.info.ministry).join(" > ")} </span>
                             </div>
                             <div>
-                                <span style={{fontWeight:"bold",color:"#4E5969"}}>Interviews: </span>
+                                <span style={{fontWeight:"bold",color:"#4E5969"}}>Interviewers: </span>
                                 <span>{interviewers}</span>
                             </div>
                         </div>

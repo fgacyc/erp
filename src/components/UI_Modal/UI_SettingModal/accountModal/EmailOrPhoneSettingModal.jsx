@@ -1,15 +1,18 @@
-import {Button, Input, Modal} from "@arco-design/web-react";
+import {Button, Input, Message, Modal} from "@arco-design/web-react";
 import {IconCloseCircle, IconEmail, IconLock, IconPhone} from "@arco-design/web-react/icon";
 import {useEffect, useState} from "react";
 import {useSettingModalStore} from "../settingModalStore.js";
 import {shallow} from "zustand/shallow";
+import {validateEmail} from "../../../../tools/string.js";
+import {validatePhone} from "../../../../tools/number.js";
 
 export default function EmailOrPhoneSettingModal({visible, setVisible,type}){
     const emailKeyWords = ["Email","an Email", "an new Email"];
     const phoneKeyWords = ["phone number","a phone number", "a new phone number"];
     const [currentKeyWords, setCurrentKeyWords] = useState(emailKeyWords);
     const [value, setValue] = useState("");
-    const [staff,updateStaff] = useSettingModalStore(state => [state.staff,state.updateStaff],shallow)
+    const[email,updateEmail] = useSettingModalStore(state => [state.email,state.setEmail],shallow)
+    const [phoneNumber,updatePhoneNumber] = useSettingModalStore(state => [state.phone_number,state.setPhoneNumber],shallow)
 
     useEffect(() => {
         if(type === "email"){
@@ -20,14 +23,31 @@ export default function EmailOrPhoneSettingModal({visible, setVisible,type}){
     },[])
 
     function handleClick(){
-        if(value === "") return;
 
         if(type === "email"){
-            updateStaff({email:value})
-            // console.log(staff)
-        }else if(type === "phone"){
-            updateStaff({phone:value})
+            let res = validateEmail(value);
+            if(res.status === true){
+                updateEmail(value);
+            }else{
+                Message.warning(res.message);
+                return;
+            }
         }
+
+        if(type === "phone"){
+            let res =validatePhone(value);
+            if(res.status === true){
+                updatePhoneNumber(value);
+            }else{
+                Message.warning(res.message);
+                return;
+            }
+        }
+        setValue("")
+        setVisible(false)
+    }
+
+    function handleClose(){
         setValue("")
         setVisible(false)
     }
@@ -47,7 +67,7 @@ export default function EmailOrPhoneSettingModal({visible, setVisible,type}){
            <div style={{color:"rgba(55, 53, 47, 0.65)"}}>
                 <div style={{height:30}}>
                     <IconCloseCircle  style={{float:"right",fontSize:20,color:"gray",cursor:"pointer"}}
-                                        onClick={() => setVisible(false)}
+                                        onClick={handleClose}
                     />
                 </div>
                <div style={{textAlign:"center",marginBottom:20}}>

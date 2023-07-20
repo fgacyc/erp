@@ -4,26 +4,47 @@ import {subscribeWithSelector} from "zustand/middleware";
 
 export const useSettingModalStore = create((set,get) => ({
     staff: null,
+    username:null,
+    email:null,
+    password:null,
+    phone_number:null,
+    pastoral_team : null,
+    pastoral_role : null,
+    ministry_name : null,
+    ministry_role : null,
+    ministry_interviewer : null,
+    ministry_scope : null,
+
+
     initStaff: async () => {
         const res = await getStaffInfoLocal();
         set({staff: res});
+        set({username: res.username});
+        set({email: res.email});
+        set({password: res.password});
+        set({phoneNumber: res.phone_number});
     },
-    currentTab:0,
+    currentTab:1,
     setCurrentTab:(tab)=>set(()=>({currentTab:tab})),
-    updateStaff: (newInfo) => set({staff: Object.assign(get().staff, newInfo)}),
-}));
+    setUsername: (newUsername) => set({username: newUsername}),
+    setEmail : (newEmail) => set({email: newEmail}),
+    setPassword : (newPassword) => set({password: newPassword}),
+    setPhoneNumber : (newPhoneNumber) => set({phone_number: newPhoneNumber}),
+    setPastoralTeam : (newPastoralTeam) => set({pastoral_team: newPastoralTeam}),
+    setPastoralRole : (newPastoralRole) => set({pastoral_role: newPastoralRole}),
+    setMinistryName : (newMinistryName) => set({ministry_name: newMinistryName}),
+    setMinistryRole : (newMinistryRole) => set({ministry_role: newMinistryRole}),
+    setMinistryInterviewer : (isMinistryInterviewer) => set({ministry_interviewer: isMinistryInterviewer}),
+    setMinistryScope : (newMinistryScope) => set({ministry_scope: newMinistryScope}),
 
-// export  const useSettingModalStore = create(
-//     subscribeWithSelector((set,get) => (
-//         {
-//             staff: null,
-//             initStaff: async () => {
-//                 const res = await getStaffInfoLocal();
-//                 set({staff: res});
-//             },
-//             currentTab:0,
-//             setCurrentTab:(tab)=>set(()=>({currentTab:tab})),
-//             updateStaff: (newInfo) => set({staff: Object.assign(get().staff, newInfo)}),
-//         }
-//     ))
-// );
+
+    showAllInfo: () => {
+        let data = {
+            "username": get().username,
+            "email": get().email,
+            "password": get().password,
+            "phoneNumber": get().phone_number,
+        }
+        console.log(data)
+    },
+}));
