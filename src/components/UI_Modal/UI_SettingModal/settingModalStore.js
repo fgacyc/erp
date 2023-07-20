@@ -44,6 +44,12 @@ export const useSettingModalStore = create((set,get) => ({
             "email": get().email,
             "password": get().password,
             "phoneNumber": get().phone_number,
+            "pastoral_team": get().pastoral_team,
+            "pastoral_role": get().pastoral_role,
+            "ministry_name": get().ministry_name,
+            "ministry_role": get().ministry_role,
+            "ministry_interviewer": get().ministry_interviewer,
+            "ministry_scope": get().ministry_scope,
         }
         console.log(data)
     },

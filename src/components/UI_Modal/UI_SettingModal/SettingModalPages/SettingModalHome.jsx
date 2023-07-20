@@ -10,6 +10,12 @@ export  default  function SettingModalHome(){
     const  staff = useSettingModalStore(state => state.staff)
     const [pastoral_team, setPastoral_team] = useState([])
     const [ministry, setMinistry] = useState([])
+    const [pastoralTeam, setPastoralTeam] = useSettingModalStore(state =>[state.pastoral_team, state.setPastoralTeam])
+    const [pastoralRole, setPastoralRole] = useSettingModalStore(state =>[state.pastoral_role, state.setPastoralRole])
+    const [ministryName, setMinistryName] = useSettingModalStore(state =>[state.ministry_name, state.setMinistryName])
+    const [ministryRole, setMinistryRole] = useSettingModalStore(state =>[state.ministry_role, state.setMinistryRole])
+    const [ifMinistryInterviewer, setIfMinistryInterviewer] = useSettingModalStore(state =>[state.ministry_interviewer, state.setMinistryInterviewer])
+    const [ministryScope, setMinistryScope] = useSettingModalStore(state =>[state.ministry_scope, state.setMinistryScope])
 
     return (
         <div>
@@ -22,7 +28,9 @@ export  default  function SettingModalHome(){
                         <div className="setting-desc-text-grey" >Choose which pastoral team your belong to.</div>
                     </div>
                     <div style={{width:250, textAlign:"right"}} >
-                        <Pastoral_Cascader value={pastoral_team} setPastoral={setPastoral_team} />
+                        <Pastoral_Cascader value={pastoral_team} setPastoral={setPastoral_team}
+                            onchange={setPastoralTeam}
+                        />
                     </div>
                 </div>
                 <div className="display-flex-space-between"  style={{marginBottom:10}}>
@@ -31,7 +39,7 @@ export  default  function SettingModalHome(){
                         <div className="setting-desc-text-grey" >Choose which pastoral role your are.</div>
                     </div>
                     <div style={{width:250,textAlign:"right"}} >
-                        <PastoralRoleSelect />
+                        <PastoralRoleSelect onChange={setPastoralRole} />
                     </div>
                 </div>
             </div>
