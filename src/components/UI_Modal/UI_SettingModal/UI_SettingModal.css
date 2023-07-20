@@ -33,6 +33,7 @@
     overflow-y: auto;
     box-sizing: border-box;
     padding: 36px 60px;
+    border-radius: 0  5px 5px 0;
 }
 
 .setting-modal-left-header{

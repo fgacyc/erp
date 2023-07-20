@@ -12,6 +12,7 @@ import SettingModalNotifications from "./SettingModalPages/SettingModalNotificat
 import SettingModalConnections from "./SettingModalPages/SettingModalConnections.jsx";
 import SettingModalLanguageAndRegion from "./SettingModalPages/SettingModalLanguageAndRegion.jsx";
 import SettingModalSecurity from "./SettingModalPages/SettingModalSecurity.jsx";
+import SettingModalAbout from "./SettingModalPages/SettingModalAbout.jsx";
 
 export  default  function UI_SettingModal({visible, setVisible}){
     const  staff = useSettingModalStore(state => state.staff)
@@ -21,7 +22,7 @@ export  default  function UI_SettingModal({visible, setVisible}){
     const pages = [ <SettingModalAccount />, <SettingModalHome />,
         <SettingModalSettings />, <SettingModalNotifications />,
         <SettingModalConnections />, <SettingModalLanguageAndRegion />,
-        <SettingModalSecurity />
+        <SettingModalSecurity />, <SettingModalAbout />
     ]
 
     useEffect(() => {

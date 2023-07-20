@@ -2,7 +2,7 @@ import {Avatar,Typography } from "@arco-design/web-react";
 import {useSettingModalStore} from "./settingModalStore.js";
 import "./UI_SettingModal.css"
 import {
-    IconApps, IconHome,
+    IconApps, IconHome, IconInfoCircle,
     IconNotification,
     IconPublic,
     IconSettings,
@@ -20,8 +20,8 @@ export function IconSecurity(){
 export  function UI_SettingModalLeft(){
     const  staff = useSettingModalStore(state => state.staff)
     const [currentTab, setCurrentTab] = useSettingModalStore(state => [state.currentTab, state.setCurrentTab],shallow)
-    const tabText =["My accountModal","My home","My settings","My notifications","My connections","Language & region","Security"];
-    const tabIcon = [<IconUser />,<IconHome />, <IconSettings />, <IconNotification />, <IconApps />, <IconPublic />, <IconSecurity />];
+    const tabText =["My accountModal","My home","My settings","My notifications","My connections","Language & region","Security","About"];
+    const tabIcon = [<IconUser />,<IconHome />, <IconSettings />, <IconNotification />, <IconApps />, <IconPublic />, <IconSecurity />,<IconInfoCircle />];
     const inavtiveBgc = "transparent";
     const activeBgc = "#C9CDD4";
 
