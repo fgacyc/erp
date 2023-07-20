@@ -92,7 +92,11 @@ function interviewInfo(statusID,recruiter){
         if(recruiter.hasOwnProperty("appointment")){
             let interviewCreated = getDateString(recruiter.appointment.ministry.created * 1000)
             let appointmentTime = getDateString(recruiter.appointment.ministry.appointment_time * 1000)
-            return `[Waiting for interview], Made appointment at ${interviewCreated}, Schedule Interview at ${appointmentTime}`
+            let song =null
+            if(recruiter.info.ministry[2]==="dance"){
+                 song = recruiter.interview.ministry.questions[5].candidate
+            }
+            return `[Waiting for interview], Made appointment at ${interviewCreated}, Schedule Interview at ${appointmentTime} ${song!==null && " ,choose song: ["+ song + "]."}`
         }else{
             if (recruiter.email.appointment.send.status){
                 let appointmentEmailTime = getDateString(recruiter.email.appointment.send.timestamp * 1000)
