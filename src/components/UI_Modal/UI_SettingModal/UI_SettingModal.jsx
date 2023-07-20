@@ -15,9 +15,7 @@ import SettingModalSecurity from "./SettingModalPages/SettingModalSecurity.jsx";
 import SettingModalAbout from "./SettingModalPages/SettingModalAbout.jsx";
 
 export  default  function UI_SettingModal({visible, setVisible}){
-    const  staff = useSettingModalStore(state => state.staff)
     const currentTab = useSettingModalStore(state => state.currentTab)
-    const initStaff = useSettingModalStore(state => state.initStaff)
     const [ifInitStaff, setIfInitStaff] = useState(false);
     const pages = [ <SettingModalAccount />, <SettingModalHome />,
         <SettingModalSettings />, <SettingModalNotifications />,
@@ -26,11 +24,7 @@ export  default  function UI_SettingModal({visible, setVisible}){
     ]
 
     useEffect(() => {
-        initStaff().then(
-            () => {
-                setIfInitStaff(true);
-            }
-        )
+        setIfInitStaff(true)
     },[])
 
 

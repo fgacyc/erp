@@ -1,12 +1,12 @@
 import {useSettingModalStore} from "../settingModalStore.js";
 import {Avatar, Button, Divider, Input} from "@arco-design/web-react";
 import {IconRight} from "@arco-design/web-react/icon";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import EmailOrPhoneSettingModal from "../accountModal/EmailOrPhoneSettingModal.jsx";
 import PasswordSettingModal from "../accountModal/PasswordSettingModal.jsx";
 import UI_ConfirmModal from "../../UI_ConfirmModal/UI_ConfirmModal.jsx";
-import {capitalFirstLetter} from "../../../../tools/string.js";
 import DeleteAccountModal from "../accountModal/DeleteAccountModal.jsx";
+import {shallow} from "zustand/shallow";
 
 export function SettingModalDivider(){
     return (
@@ -15,14 +15,24 @@ export function SettingModalDivider(){
 }
 
 export  function SettingModalAccount(){
-    const  staff = useSettingModalStore(state => state.staff)
+    const [staff,updateStaff] = useSettingModalStore(state => [state.staff,state.updateStaff],shallow)
     const [emailSettingModalVisible, setEmailSettingModalVisible] = useState(false)
     const [phoneSettingModalVisible, setPhoneSettingModalVisible] = useState(false)
     const [passwordSettingModalVisible, setPasswordSettingModalVisible] = useState(false)
     const [deleteAccountModalVisible, setDeleteAccountModalVisible] = useState(false)
+    const [username, setUsername] = useState(staff.username ? staff.username :staff.full_name)
 
     function  showConfirmModal(){
         UI_ConfirmModal("Confirm",`Are you sure to log out of all devices`,()=>{console.log("confirm")})
+    }
+
+    useEffect(()=>{
+        console.log("account page change")
+    },[staff.email])
+
+    function userNameChange(val){
+        setUsername(val)
+        updateStaff({username:val})
     }
 
     return (
@@ -41,7 +51,9 @@ export  function SettingModalAccount(){
                     <div>
                         <div>Username</div>
                         {staff &&
-                            <Input style={{ width: 350 }}  value={staff && staff.username ? staff.username :"" } />
+                            <Input style={{ width: 150 }}
+                                   onChange={userNameChange}
+                                   value={username } />
                         }
                     </div>
                 </div>

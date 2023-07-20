@@ -1,8 +1,8 @@
 import {SettingModalDivider} from "./SettingModalAccount.jsx";
-import Pastoral_Cascader from "../../../UI_Cascader/Pastoral_Cascader.jsx";
-import { Select } from '@arco-design/web-react';
+
+import { Select,Message } from '@arco-design/web-react';
 const Option = Select.Option;
-const options = ['Beijing', 'Shanghai', 'Guangzhou', 'Disabled'];
+const options = ['English', 'Chinese', 'Malay'];
 
 export  default function SettingModalLanguageAndRegion(){
     return(

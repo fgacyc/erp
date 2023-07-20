@@ -4,11 +4,15 @@ import {useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {getUserNameFromUserData} from "../../../tools/auth.js";
 import {goToProfile, logout} from "./avatarFuncs.js";
+import {useSettingModalStore} from "../../UI_Modal/UI_SettingModal/settingModalStore.js";
 
 
 export  function AvatarMenu(){
     const navigate = useNavigate();
-    const [username, setUsername] = useState(null);
+
+    const staff = useSettingModalStore(state => state.staff)
+    const [username, setUsername] = useState(staff.username ? staff.username :staff.full_name);
+
 
     useEffect(()=>{
         getUserNameFromUserData().then((res)=>{

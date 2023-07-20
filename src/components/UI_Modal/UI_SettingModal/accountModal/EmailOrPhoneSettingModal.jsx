@@ -1,11 +1,15 @@
 import {Button, Input, Modal} from "@arco-design/web-react";
 import {IconCloseCircle, IconEmail, IconLock, IconPhone} from "@arco-design/web-react/icon";
 import {useEffect, useState} from "react";
+import {useSettingModalStore} from "../settingModalStore.js";
+import {shallow} from "zustand/shallow";
 
 export default function EmailOrPhoneSettingModal({visible, setVisible,type}){
     const emailKeyWords = ["Email","an Email", "an new Email"];
     const phoneKeyWords = ["phone number","a phone number", "a new phone number"];
     const [currentKeyWords, setCurrentKeyWords] = useState(emailKeyWords);
+    const [value, setValue] = useState("");
+    const [staff,updateStaff] = useSettingModalStore(state => [state.staff,state.updateStaff],shallow)
 
     useEffect(() => {
         if(type === "email"){
@@ -14,6 +18,19 @@ export default function EmailOrPhoneSettingModal({visible, setVisible,type}){
             setCurrentKeyWords(phoneKeyWords);
         }
     },[])
+
+    function handleClick(){
+        if(value === "") return;
+
+        if(type === "email"){
+            updateStaff({email:value})
+            // console.log(staff)
+        }else if(type === "phone"){
+            updateStaff({phone:value})
+        }
+        setValue("")
+        setVisible(false)
+    }
 
 
     return (
@@ -42,13 +59,19 @@ export default function EmailOrPhoneSettingModal({visible, setVisible,type}){
                </div>
                <div style={{marginBottom:10}}>
                    <div style={{marginBottom:3 ,fontSize:12}}>Enter {currentKeyWords[2]}</div>
-                   <Input style={{ width: "100%" }}   placeholder={"New " + currentKeyWords[0]}/>
+                   <Input style={{ width: "100%" }}
+                          type={currentKeyWords[0] === "Email" ? "email" : "phone"}
+                          onChange={(val) => setValue(val)}
+                          placeholder={"New " + currentKeyWords[0]}
+                          value={value} />
                </div>
                <div style={{marginBottom:20}}>
                    <div style={{marginBottom:3 ,fontSize:12}}>Enter PIN code</div>
                    <Input style={{ width: "100%" }}   placeholder='PIN code' disabled/>
                </div>
-               <Button type='primary' long>Set {currentKeyWords[1]}</Button>
+               <Button type='primary' long
+                          onClick={handleClick}
+               >Set {currentKeyWords[1]}</Button>
            </div>
         </Modal>
     )

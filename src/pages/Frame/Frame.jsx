@@ -9,9 +9,12 @@ import {getLoginStatus, ifStaffInfoLocalExist} from "../../tools/auth.js";
 import HeadBarBtns from "../../components/UI_Menu/UI_HeaderBarMenu/HeadBarBtns.jsx";
 import UI_FloatingHelpMenu from "../../components/UI_Menu/UI_FloatingHelpMenu/UI_FloatingHelpMenu.jsx";
 import {menuPermission} from "./AuthorityDetection.js";
+import {useSettingModalStore} from "../../components/UI_Modal/UI_SettingModal/settingModalStore.js";
 
 
 export default  function  Frame(){
+    const  staff = useSettingModalStore(state => state.staff)
+    const initStaff = useSettingModalStore(state => state.initStaff)
     const navigate = useNavigate();
     const [tabs, setTabs] = useState(null);
 
@@ -28,9 +31,13 @@ export default  function  Frame(){
     async function checkLogin(){
         let StaffInfoLocalExist = await ifStaffInfoLocalExist();
         let loginStatus = await getLoginStatus();
-        if (!StaffInfoLocalExist || !loginStatus) navigate("/login")
+        if (!StaffInfoLocalExist || !loginStatus) {
+            navigate("/login")
+        }
         else{
-            path === "/" && navigate("/recruitment_dashboard")
+            initStaff().then(()=>{
+                path === "/" && navigate("/recruitment_dashboard")
+            })
             //navigate("/recruitment_dashboard")
             //navigate("/recruitment_interview")
             //navigate("/recruitment_pre_screening")
@@ -59,7 +66,7 @@ export default  function  Frame(){
                     <MenuItem key='2'>Solution</MenuItem>
                     <MenuItem key='3'>Service</MenuItem>
                     <MenuItem key='4'>Cooperation</MenuItem>
-                    <HeadBarBtns/>
+                    {staff &&  <HeadBarBtns/>}
                 </Menu>
             </div>
             <div className='menu-lower'>

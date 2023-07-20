@@ -1,5 +1,4 @@
 import {Avatar,Typography } from "@arco-design/web-react";
-import {useSettingModalStore} from "./settingModalStore.js";
 import "./UI_SettingModal.css"
 import {
     IconApps, IconHome, IconInfoCircle,
@@ -10,6 +9,8 @@ import {
     IconUser,
 } from "@arco-design/web-react/icon";
 import {shallow} from "zustand/shallow";
+import {useEffect, useState} from "react";
+import {useSettingModalStore} from "./settingModalStore.js";
 
 export function IconSecurity(){
     return  (
@@ -20,10 +21,11 @@ export function IconSecurity(){
 export  function UI_SettingModalLeft(){
     const  staff = useSettingModalStore(state => state.staff)
     const [currentTab, setCurrentTab] = useSettingModalStore(state => [state.currentTab, state.setCurrentTab],shallow)
-    const tabText =["My accountModal","My home","My settings","My notifications","My connections","Language & region","Security","About"];
+    const tabText =["My account","My home","My settings","My notifications","My connections","Language & region","Security","About"];
     const tabIcon = [<IconUser />,<IconHome />, <IconSettings />, <IconNotification />, <IconApps />, <IconPublic />, <IconSecurity />,<IconInfoCircle />];
-    const inavtiveBgc = "transparent";
+    const inActiveBgc = "transparent";
     const activeBgc = "#C9CDD4";
+
 
 
     return (
@@ -49,7 +51,7 @@ export  function UI_SettingModalLeft(){
                         <div className="setting-modal-tab-con"
                              key={index}
                              onClick={() => setCurrentTab(index)}
-                             style={{backgroundColor: currentTab === index ? activeBgc : inavtiveBgc}}
+                             style={{backgroundColor: currentTab === index ? activeBgc : inActiveBgc}}
                         >
                             {tabIcon[index]}
                             <div>{item}</div>

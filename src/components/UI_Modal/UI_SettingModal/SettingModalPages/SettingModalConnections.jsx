@@ -22,7 +22,7 @@ const data = [
     {
         connection_name:"Google Calendar",
         connection_user:"None",
-        img:"/icons/calendar.png",
+        img:"/icons/google-calendar.png",
         access:"None"
     },
     {
@@ -38,7 +38,7 @@ const data = [
         access:"None"
     },
     {
-        connection_name:"Google Calendar",
+        connection_name:"Apple Calendar",
         connection_user:"None",
         img:"/icons/calendar.png",
         access:"None"
