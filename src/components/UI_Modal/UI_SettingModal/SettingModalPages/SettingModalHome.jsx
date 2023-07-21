@@ -1,4 +1,4 @@
-import {Switch} from "@arco-design/web-react";
+import {Message, Switch} from "@arco-design/web-react";
 import {useSettingModalStore} from "../settingModalStore.js";
 import {SettingModalDivider} from "./SettingModalAccount.jsx";
 import Pastoral_Cascader from "../../../UI_Cascader/Pastoral_Cascader.jsx";
@@ -6,6 +6,8 @@ import Ministry_Cascader from "../../../UI_Cascader/Ministry_Cascader.jsx";
 import PastoralRoleSelect from "../../../UI_Select/PastoralRoleSelect.jsx";
 import MinistryRoleSelect from "../../../UI_Select/MinistryRoleSelect.jsx";
 import InterviewScopeSelect from "../../../UI_Select/InterviewScopeSelect.jsx";
+import {useEffect} from "react";
+import {updateSettingsRequest} from "./updateSettingsRequest.js";
 
 export  default  function SettingModalHome(){
     // const  staff = useSettingModalStore(state => state.staff)
@@ -15,6 +17,19 @@ export  default  function SettingModalHome(){
     const [ministryRole, setMinistryRole] = useSettingModalStore(state =>[state.ministry_role, state.setMinistryRole])
     const [ifMinistryInterviewer, setIfMinistryInterviewer] = useSettingModalStore(state =>[state.ministry_interviewer, state.setMinistryInterviewer])
     const [ministryScope, setMinistryScope] = useSettingModalStore(state =>[state.ministry_scope, state.setMinistryScope])
+
+    useEffect(() => {
+        let payload = [{
+            "ministry" : "interviewer",
+            "scope" : ministryScope
+        }]
+
+        updateSettingsRequest("ministry",payload).then(res => {
+            if(res.status){
+                Message.success("Update interview scope successfully!")
+            }
+        })
+    },[ministryScope])
 
     return (
         <div>

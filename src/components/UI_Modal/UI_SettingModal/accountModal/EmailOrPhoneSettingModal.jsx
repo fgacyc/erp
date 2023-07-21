@@ -5,6 +5,7 @@ import {useSettingModalStore} from "../settingModalStore.js";
 import {shallow} from "zustand/shallow";
 import {validateEmail} from "../../../../tools/string.js";
 import {validatePhone} from "../../../../tools/number.js";
+import {updateSettingsRequest} from "../SettingModalPages/updateSettingsRequest.js";
 
 export default function EmailOrPhoneSettingModal({visible, setVisible,type}){
     const emailKeyWords = ["Email","an Email", "an new Email"];
@@ -13,15 +14,12 @@ export default function EmailOrPhoneSettingModal({visible, setVisible,type}){
     const [value, setValue] = useState("");
     const[email,updateEmail] = useSettingModalStore(state => [state.email,state.setEmail],shallow)
     const [phoneNumber,updatePhoneNumber] = useSettingModalStore(state => [state.phone_number,state.setPhoneNumber],shallow)
-    const [currentValue, setCurrentValue] = useState("");
 
     useEffect(() => {
         if(type === "email"){
             setCurrentKeyWords(emailKeyWords);
-            setCurrentValue(email);
         }else if(type === "phone"){
             setCurrentKeyWords(phoneKeyWords);
-            setCurrentValue(phoneNumber);
         }
     },[])
 
@@ -30,7 +28,13 @@ export default function EmailOrPhoneSettingModal({visible, setVisible,type}){
         if(type === "email"){
             let res = validateEmail(value);
             if(res.status === true){
-                updateEmail(value);
+                updateSettingsRequest("email",value).then(res => {
+                    if(res.status){
+                        updateEmail(value);
+                    }else {
+                        Message.warning("Email updated failed!");
+                    }
+                })
             }else{
                 Message.warning(res.message);
                 return;
@@ -40,7 +44,13 @@ export default function EmailOrPhoneSettingModal({visible, setVisible,type}){
         if(type === "phone"){
             let res =validatePhone(value);
             if(res.status === true){
-                updatePhoneNumber(value);
+                updateSettingsRequest("phone_number",value).then(res => {
+                    if(res.status){
+                        updatePhoneNumber(value);
+                    }else{
+                        Message.warning("Phone number updated failed!");
+                    }
+                })
             }else{
                 Message.warning(res.message);
                 return;

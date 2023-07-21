@@ -120,6 +120,15 @@ export  function SettingModalAccount(){
                 </div>
                 <div  style={{display:"flex",justifyContent:"space-between",alignItems:"center", marginTop:10}}>
                     <div>
+                        <div >Phone number</div>
+                        <div  className="setting-desc-text-grey" >{phoneNumber ?phoneNumber : "None"}</div>
+                    </div>
+                    <Button type='outline' style={{width:140}}
+                            onClick={() => setPhoneSettingModalVisible(true)}
+                    >Change number</Button>
+                </div>
+                <div  style={{display:"flex",justifyContent:"space-between",alignItems:"center", marginTop:10}}>
+                    <div>
                         <div >Password</div>
                         <div  className="setting-desc-text-grey" >Set a permanent password to login to your account.</div>
                     </div>
@@ -127,15 +136,7 @@ export  function SettingModalAccount(){
                         onClick={() => setPasswordSettingModalVisible(true)}
                     >Reset Password</Button>
                 </div>
-                <div  style={{display:"flex",justifyContent:"space-between",alignItems:"center", marginTop:10}}>
-                    <div>
-                        <div >Phone number</div>
-                        <div  className="setting-desc-text-grey" >{phoneNumber ?phoneNumber : "None"}</div>
-                    </div>
-                    <Button type='outline' style={{width:140}}
-                        onClick={() => setPhoneSettingModalVisible(true)}
-                    >Reset number</Button>
-                </div>
+
             </div>
 
             <div  className="setting-modal-account-support">

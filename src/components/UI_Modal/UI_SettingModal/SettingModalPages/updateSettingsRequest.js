@@ -7,7 +7,12 @@ export async function updateSettingsRequest(type, data) {
         data: data
     }
     let CYC_ID = await getCurrentUserCYCID();
-    let res= await putReq(`/settings/${CYC_ID}`, payload);
-    //console.log(res)
-    return res;
+    try {
+        let res = await putReq(`/settings/${CYC_ID}`, payload);
+        console.log(res)
+        return res;
+    }catch (e) {
+        console.log(e);
+        return e;
+    }
 }

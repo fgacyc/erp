@@ -3,6 +3,7 @@ import {IconCloseCircle, IconLock} from "@arco-design/web-react/icon";
 import {useSettingModalStore} from "../settingModalStore.js";
 import {shallow} from "zustand/shallow";
 import {useState} from "react";
+import {updateSettingsRequest} from "../SettingModalPages/updateSettingsRequest.js";
 
 export default function PasswordSettingModal({visible, setVisible}){
     const [password,setPassword] = useSettingModalStore(state => [state.password, state.setPassword],shallow)
@@ -12,8 +13,15 @@ export default function PasswordSettingModal({visible, setVisible}){
 
     function handleClick(){
         if(value === confirmValue){
-            setPassword(value)
-            setVisible(false);
+            updateSettingsRequest("password",value).then(res => {
+                if(res.status){
+                    setPassword(value)
+                    setVisible(false);
+                    Message.success("Password updated successfully!")
+                }else{
+                    Message.warning("Password updated failed!")
+                }
+            })
         }else{
             Message.warning('The two passwords you entered do not match!')
         }
