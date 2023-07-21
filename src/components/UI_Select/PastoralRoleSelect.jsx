@@ -7,7 +7,7 @@ export default  function PastoralRoleSelect({value,setPastoral}){
         >
             {pastoral_team_roles.map((option, index) => (
                 <Option key={index} value={option.value}
-                        disabled={index === 2 || index ===3 }
+                        disabled={index === 3 || index ===4 }
                 >
                     {option.label}
                 </Option>

@@ -4,7 +4,7 @@ import {useSettingModalStore} from "../settingModalStore.js";
 
 export default function DeleteAccountModal({visible, setVisible}){
     const passwordKeyWords = ["password","a password", "a new password"];
-    const  staff = useSettingModalStore(state => state.staff)
+    const  email = useSettingModalStore(state => state.email)
 
     return (
         <Modal
@@ -32,7 +32,7 @@ export default function DeleteAccountModal({visible, setVisible}){
                 </div>
                 <div style={{marginBottom:10}}>
                     <div style={{marginBottom:3 ,fontSize:12}}>Type your email to confirm</div>
-                    <Input style={{ width: "100%" }}   placeholder={staff && staff.email}/>
+                    <Input style={{ width: "100%" }}   placeholder={email && email}/>
                 </div>
 
                 <Button type='secondary' status='danger' long>Permanently delete account</Button>

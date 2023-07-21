@@ -16,13 +16,7 @@ export  default function SettingModalLanguageAndRegion(){
                         <div className="setting-desc-text-grey" >Change the language used in the user interface.</div>
                     </div>
                     <div style={{width:150, textAlign:"right"}} >
-                        <Select
-                            onChange={(value) =>
-                                Message.info({
-                                    content: `You select ${value}.`,
-                                    showIcon: true,
-                                })
-                            }
+                        <Select defaultValue={options[0]}
                         >
                             {options.map((option, index) => (
                                 <Option key={option}  value={option}>

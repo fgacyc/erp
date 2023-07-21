@@ -1,7 +1,8 @@
 import {SettingModalDivider} from "./SettingModalAccount.jsx";
 import {Select} from "@arco-design/web-react";
 const Option = Select.Option;
-const options = ['Beijing', 'Shanghai', 'Guangzhou', 'Disabled'];
+const app_themes = ['Light', 'Dark'];
+const start_page_options = ['Dashboard', 'Calendar', 'Tasks', 'Contacts', 'Settings'];
 
 export  default function SettingModalSettings(){
     return(
@@ -16,14 +17,9 @@ export  default function SettingModalSettings(){
                     </div>
                     <div style={{width:140, textAlign:"right"}} >
                         <Select
-                            onChange={(value) =>
-                                Message.info({
-                                    content: `You select ${value}.`,
-                                    showIcon: true,
-                                })
-                            }
+                            value={app_themes[0]}
                         >
-                            {options.map((option, index) => (
+                            {app_themes.map((option, index) => (
                                 <Option key={option} value={option}>
                                     {option}
                                 </Option>
@@ -38,14 +34,9 @@ export  default function SettingModalSettings(){
                     </div>
                     <div style={{width:140,textAlign:"right"}} >
                         <Select
-                            onChange={(value) =>
-                                Message.info({
-                                    content: `You select ${value}.`,
-                                    showIcon: true,
-                                })
-                            }
+                            value={start_page_options[0]}
                         >
-                            {options.map((option, index) => (
+                            {start_page_options.map((option, index) => (
                                 <Option key={option} value={option}>
                                     {option}
                                 </Option>

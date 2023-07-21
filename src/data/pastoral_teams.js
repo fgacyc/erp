@@ -129,6 +129,10 @@ export  const pastoral_team_roles = [
         label:"Pastoral Team Leader"
     },
     {
+        value: "pastoral_team_admin",
+        label: "Pastoral Team Admin"
+    },
+    {
         value:"senior_cg_leader",
         label:"Senior CG Leader"
     },
