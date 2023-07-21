@@ -28,8 +28,8 @@ export  function SettingModalAccount(){
     const [phoneSettingModalVisible, setPhoneSettingModalVisible] = useState(false)
     const [passwordSettingModalVisible, setPasswordSettingModalVisible] = useState(false)
     const [deleteAccountModalVisible, setDeleteAccountModalVisible] = useState(false)
-
     const [file, setFile] = useState();
+
 
 
     function  showConfirmModal(){
