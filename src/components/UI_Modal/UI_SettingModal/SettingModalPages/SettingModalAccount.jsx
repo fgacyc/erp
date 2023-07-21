@@ -44,12 +44,13 @@ export  function SettingModalAccount(){
         })
     }
 
-    function uploadLimit(){
+    function uploadLimit(file){
         // file size limit < 5MB
-        if(file && file.size < 1 * 1024 * 1024){
-            Message.warning("File size limit < 5MB")
+        console.log(file.size)
+        if(file.size < 5 * 1024 * 1024){
             return true
         }else{
+            Message.warning("File size limit < 5MB")
             return false
         }
     }
@@ -63,7 +64,7 @@ export  function SettingModalAccount(){
                     <Upload
                         action={`${hostURL}/upload/avatar/${staff.CYC_ID}`}
                         accept="image/*"
-                        //beforeUpload={uploadLimit}
+                        beforeUpload={uploadLimit}
                         fileList={file ? [file] : []}
                         showUploadList={false}
                         onChange={(_, currentFile) => {
