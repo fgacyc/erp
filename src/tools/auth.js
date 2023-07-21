@@ -1,6 +1,7 @@
 import {getReq, putReq} from "./requests.js";
 import {get, set} from "idb-keyval";
 
+
 export async function login(CYC_ID, password,rememberMe){
     let router = "/auth";
     let res =  await getReq(router + "?CYC_ID=" + CYC_ID + "&password=" + password);  // 1. get data from server
@@ -130,3 +131,4 @@ export async function getUsername(){
         return info.full_name
     }
 }
+
