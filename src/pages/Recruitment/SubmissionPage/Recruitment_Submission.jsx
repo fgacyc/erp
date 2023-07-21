@@ -64,6 +64,7 @@ export  default  function  Recruitment_Submission()  {
         setShowLoading(true);
         postRecruiter(name, phone, email, pastoral_team, department1).then((res) => {
             if(res.status === "success"){
+                console.log(department1);
                 //Message.success('Successfully submitted');
                 setIfSubmit(true);
                 setIfSubmitSuccess(true);

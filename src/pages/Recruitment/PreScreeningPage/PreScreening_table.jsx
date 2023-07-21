@@ -163,6 +163,34 @@ export  default  function PreScreening_table(){
                 {
                     text:  "General Service - Joshua Zone",
                     value: 'joshua_zone',
+                },
+                {
+                    text:  "Others - Serdang",
+                    value: 'serdang',
+                },
+                {
+                    text:  "Others - Kepong",
+                    value: 'kepong',
+                },
+                {
+                    text:  "Others - USJ",
+                    value: 'usj',
+                },
+                {
+                    text:  "Others - Sg Long",
+                    value: 'sg_long',
+                },
+                {
+                    text:  "Others - Setapak",
+                    value: 'setapak',
+                },
+                {
+                    text:  "Others - The Blessing",
+                    value: 'the_blessing',
+                },
+                {
+                    text:  "Others - To Be Confirmed",
+                    value: 'to_be_confirmed',
                 }
             ],
             onFilter: (value, row) =>{
