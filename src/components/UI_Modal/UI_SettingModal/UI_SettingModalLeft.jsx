@@ -1,4 +1,4 @@
-import {Avatar,Typography } from "@arco-design/web-react";
+import {Typography } from "@arco-design/web-react";
 import "./UI_SettingModal.css"
 import {
     IconApps, IconHome, IconInfoCircle,

@@ -6,10 +6,9 @@ import PasswordSettingModal from "../accountModal/PasswordSettingModal.jsx";
 import UI_ConfirmModal from "../../UI_ConfirmModal/UI_ConfirmModal.jsx";
 import DeleteAccountModal from "../accountModal/DeleteAccountModal.jsx";
 import {shallow} from "zustand/shallow";
-import {useRef, useState} from "react";
+import {useState} from "react";
 import {updateSettingsRequest} from "./updateSettingsRequest.js";
 import {hostURL} from "../../../../config.js";
-import {postReq} from "../../../../tools/requests.js";
 
 export function SettingModalDivider(){
     return (

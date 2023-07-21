@@ -2,7 +2,7 @@ import {Avatar, Dropdown, Menu} from "@arco-design/web-react";
 import "./avatarMenu.css"
 import { logout} from "./avatarFuncs.js";
 import {useSettingModalStore} from "../../UI_Modal/UI_SettingModal/settingModalStore.js";
-import UI_Avatar from "../../UI_Avatar.jsx";
+//import UI_Avatar from "../../UI_Avatar.jsx";
 import PubSub from "pubsub-js";
 
 
