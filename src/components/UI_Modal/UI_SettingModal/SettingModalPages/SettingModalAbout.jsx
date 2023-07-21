@@ -1,7 +1,7 @@
 import {SettingModalDivider} from "./SettingModalAccount.jsx";
-import Pastoral_Cascader from "../../../UI_Cascader/Pastoral_Cascader.jsx";
-import PastoralRoleSelect from "../../../UI_Select/PastoralRoleSelect.jsx";
-import {Switch} from "@arco-design/web-react";
+// import Pastoral_Cascader from "../../../UI_Cascader/Pastoral_Cascader.jsx";
+// import PastoralRoleSelect from "../../../UI_Select/PastoralRoleSelect.jsx";
+// import {Switch} from "@arco-design/web-react";
 
 export  default function SettingModalAbout(){
     return(
