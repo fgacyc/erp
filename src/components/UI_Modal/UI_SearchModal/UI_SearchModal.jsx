@@ -1,6 +1,6 @@
 import {Modal} from "@arco-design/web-react";
 import "./UI_SearchModal.css"
-import {IconSearch, IconSwap, IconUndo} from "@arco-design/web-react/icon";
+import {IconSearch, IconSwap} from "@arco-design/web-react/icon";
 import { ReactComponent as IconEnter } from '/src/assets/icon-enter.svg'
 
 export  default  function UI_SearchModal({visible, setVisible}){
