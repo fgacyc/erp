@@ -35,10 +35,10 @@ export  function AvatarMenu(){
             <Dropdown droplist={dropList} position='bl' trigger='click'>
                 {
                     avatar
-                        ? <Avatar style={{ backgroundColor: '#ffffff'}}   >
+                        ? <Avatar style={{ backgroundColor: '#ffffff'}}  className="avatar"  >
                             <img src={avatar} alt="avatar" style={{width:40,height:40}} />
                         </Avatar>
-                        : <Avatar style={{ backgroundColor: '#3370ff'}}  >
+                        : <Avatar style={{ backgroundColor: '#3370ff'}}  className="avatar"  >
                             {username && username[0].toUpperCase()}
                         </Avatar>
                 }

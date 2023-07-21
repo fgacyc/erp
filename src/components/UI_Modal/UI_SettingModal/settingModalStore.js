@@ -1,5 +1,5 @@
 import {create} from "zustand";
-import {getStaffInfoLocal} from "../../../tools/auth.js";
+import {getAvatarUrl, getStaffInfoLocal} from "../../../tools/auth.js";
 
 
 export const useSettingModalStore = create((set,get) => ({
@@ -18,7 +18,7 @@ export const useSettingModalStore = create((set,get) => ({
 
     initStaff: async () => {
         const res = await getStaffInfoLocal();
-        console.log(res)
+        // console.log(res)
         set({staff: res});
         set({username: res.username});
         set({email: res.email});
@@ -26,7 +26,8 @@ export const useSettingModalStore = create((set,get) => ({
         set({phoneNumber: res.phone_number});
         set({ministry_interviewer:  res.ministry.length>0 ? res.ministry[0].ministry === "interviewer" :false});
         set({ministry_scope: res.ministry.length>0? res.ministry[0].scope:null});
-        set({avatar: res.avatar? res.avatar:null});
+        let avatarUrl =await getAvatarUrl()
+        set({avatar: avatarUrl});
     },
     currentTab:0,
     setCurrentTab:(tab)=>set(()=>({currentTab:tab})),
