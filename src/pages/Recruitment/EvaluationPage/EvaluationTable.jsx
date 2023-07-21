@@ -200,6 +200,7 @@ export default function Recruitment_Evaluation_Table() {
                     />
                 }
             </div>
+            <div style={{height:40}}></div>
             {
                 currentCandidate && <CandidateModal visible={visible} setVisible={setVisible} recruiter={currentCandidate}/>
             }
