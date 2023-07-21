@@ -1,7 +1,5 @@
 import {Modal} from "@arco-design/web-react";
 import "./UI_SettingModal.css"
-import {IconSearch, IconSwap, IconUndo} from "@arco-design/web-react/icon";
-import { ReactComponent as IconEnter } from '/public/icons/icon-enter.svg'
 import {UI_SettingModalLeft} from "./UI_SettingModalLeft.jsx";
 import {useEffect, useState} from "react";
 import {useSettingModalStore} from "./settingModalStore.js";

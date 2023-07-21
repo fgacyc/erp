@@ -39,7 +39,7 @@ export default function HeadBarBtns(){
     return (
         <span className="head-bar-btns">
             <Button shape='circle' type='primary' icon={<IconSearch />} className="head-bar-btn"
-                //onClick={() => setSearchModalVisible(true)}
+                onClick={() => setSearchModalVisible(true)}
             />
             <Button shape='circle' type='primary' icon={<IconLanguage />} className="head-bar-btn" />
             {
