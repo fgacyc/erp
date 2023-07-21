@@ -121,16 +121,20 @@ export  const pastoral_team_options = [
 
 export  const pastoral_team_roles = [
     {
-        value:"pastoral_team_leader",
-        label:"Pastoral Team Leader"
-    },
-    {
         value:"pastoral_zone_leader",
         label:"Pastoral Zone Leader"
     },
     {
-        value:"pastoral_team_member",
-        label:"Pastoral Team Member"
+        value:"pastoral_team_leader",
+        label:"Pastoral Team Leader"
+    },
+    {
+        value:"senior_cg_leader",
+        label:"Senior CG Leader"
+    },
+    {
+        value:"cg_leader",
+        label:"CG Leader"
     }
 ]
 

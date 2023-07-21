@@ -1,12 +1,14 @@
-import { Select, Message, Space } from '@arco-design/web-react';
+import { Select} from '@arco-design/web-react';
 import {pastoral_team_roles} from "../../data/pastoral_teams.js";
 const Option = Select.Option;
-export default  function PastoralRoleSelect(){
+export default  function PastoralRoleSelect({value,setPastoral}){
     return (
-        <Select
+        <Select defaultValue={value} onChange={setPastoral} placeholder="Click to expand"
         >
             {pastoral_team_roles.map((option, index) => (
-                <Option key={option.value} disabled={index === 3} value={option.value}>
+                <Option key={index} value={option.value}
+                        disabled={index === 2 || index ===3 }
+                >
                     {option.label}
                 </Option>
             ))}

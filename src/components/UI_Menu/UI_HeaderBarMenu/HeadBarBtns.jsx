@@ -19,7 +19,7 @@ export default function HeadBarBtns(){
     const [notificationModalVisible, setNotificationModalVisible] = useState(false);
     const [ifDarkTheme, setIfDarkTheme] = useState(false);
     const [searchModalVisible, setSearchModalVisible] = useState(false);
-    const [settingModalVisible, setSettingModalVisible] = useState(false);
+    const [settingModalVisible, setSettingModalVisible] = useState(true);
     const [ifNewNotification, setIfNewNotification] = useState(false);
 
     function changeTheme(){
@@ -53,7 +53,7 @@ export default function HeadBarBtns(){
                     />
             }
             <Button shape='circle' type='primary' icon={<IconSettings />} className="head-bar-btn"
-                //onClick={()=> setSettingModalVisible(true)}
+                onClick={()=> setSettingModalVisible(true)}
             />
             <Button shape='circle' type='primary' icon={<IconNotification />} className="head-bar-btn"
                     //onClick={showNotificationModal}

@@ -234,6 +234,21 @@ export const department_options = [
     }
 ];
 
+export const ministry_roles = [
+    {
+        value:"team_lead",
+        label:"Team Lead"
+    },
+    {
+        value:"department_head",
+        label:"Department Head"
+    },
+    {
+        value:"ministry_pic",
+        label:"Ministry PIC"
+    }
+]
+
 export function findMinistryLabel(ministryArray){
     let res =[];
     for(let item of department_options){
