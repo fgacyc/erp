@@ -9,6 +9,12 @@ export  default function SettingModalAbout(){
             <div  style={{marginBottom:40}}>
                 <h3>About</h3>
                 <SettingModalDivider />
+                <div style={{textAlign:"center", marginTop:20}} >
+                    <img src="/images/fga.png" alt="fga logo" style={{width:160,height:160,marginBottom:50}}/>
+                    <div>© 2023 FGACYC</div>
+                    <div>All Rights Reserved </div>
+                </div>
+
                 {/*<div className="display-flex-space-between"  style={{marginBottom:10}}>*/}
                 {/*    <div>*/}
                 {/*        <div >Notifications</div>*/}
