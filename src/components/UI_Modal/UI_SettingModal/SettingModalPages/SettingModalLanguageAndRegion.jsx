@@ -1,6 +1,6 @@
 import {SettingModalDivider} from "./SettingModalAccount.jsx";
 
-import { Select,Message } from '@arco-design/web-react';
+import { Select } from '@arco-design/web-react';
 const Option = Select.Option;
 const options = ['English', 'Chinese', 'Malay'];
 

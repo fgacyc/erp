@@ -1,12 +1,12 @@
 import {useSettingModalStore} from "../settingModalStore.js";
-import {Avatar, Button, Divider, Input} from "@arco-design/web-react";
-import {IconRight} from "@arco-design/web-react/icon";
-import {useEffect, useState} from "react";
+import {Avatar, Button, Divider, Input, Upload} from "@arco-design/web-react";
+import {IconCamera, IconRight} from "@arco-design/web-react/icon";
 import EmailOrPhoneSettingModal from "../accountModal/EmailOrPhoneSettingModal.jsx";
 import PasswordSettingModal from "../accountModal/PasswordSettingModal.jsx";
 import UI_ConfirmModal from "../../UI_ConfirmModal/UI_ConfirmModal.jsx";
 import DeleteAccountModal from "../accountModal/DeleteAccountModal.jsx";
 import {shallow} from "zustand/shallow";
+import {useState} from "react";
 
 export function SettingModalDivider(){
     return (
@@ -25,6 +25,8 @@ export  function SettingModalAccount(){
     const [deleteAccountModalVisible, setDeleteAccountModalVisible] = useState(false)
     // const [username, setUsername] = useState(staff.username ? staff.username :staff.full_name)
 
+    const [file, setFile] = useState();
+
     function  showConfirmModal(){
         UI_ConfirmModal("Confirm",`Are you sure to log out of all devices`,()=>{console.log("confirm")})
     }
@@ -35,15 +37,50 @@ export  function SettingModalAccount(){
         // updateStaff({username:val})
     }
 
+    function uploadAvatar(e){
+        console.log(e.target.files[0])
+    }
+
     return (
         <div className="setting-modal-account-con">
             <div>
                 <h3>My profile</h3>
                 <SettingModalDivider />
                 <div className="setting-modal-account-profile">
-                    <Avatar style={{ backgroundColor: '#3370ff',marginRight:30}} size={60} >
-                        { username && username[0].toUpperCase()}
-                    </Avatar>
+                    {/*<Avatar style={{ backgroundColor: '#3370ff',marginRight:30}} size={60} >*/}
+                    {/*    { username && username[0].toUpperCase()}*/}
+                    {/*</Avatar>*/}
+                    <Upload
+                        action='/'
+                        fileList={file ? [file] : []}
+                        showUploadList={false}
+                        onChange={(_, currentFile) => {
+                            setFile({
+                                ...currentFile,
+                                url: URL.createObjectURL(currentFile.originFile),
+                            });
+                            console.log(currentFile.name)
+                        }}
+                        onProgress={(currentFile) => {
+                            setFile(currentFile);
+                        }}
+                    >
+                        <Avatar
+                            triggerIcon={<IconCamera />}
+                            triggerIconStyle={{
+                                color: '#3491FA',
+                            }}
+                            // onClick={() => Message.info('Upload...')}
+                            autoFixFontSize={false}
+                            style={{
+                                backgroundColor: '#168CFF',
+                                marginRight:30
+                            }}
+                            size={60}
+                        >
+                            { username && username[0].toUpperCase()}
+                        </Avatar>
+                    </Upload>
 
                     <div>
                         <div>Username</div>

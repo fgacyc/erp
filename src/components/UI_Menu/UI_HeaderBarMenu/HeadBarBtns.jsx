@@ -3,7 +3,6 @@ import {
     IconLanguage,
     IconMoon,
     IconNotification,
-    IconPlus,
     IconSearch,
     IconSettings,
     IconSun

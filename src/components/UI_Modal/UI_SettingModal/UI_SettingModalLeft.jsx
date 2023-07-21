@@ -5,11 +5,9 @@ import {
     IconNotification,
     IconPublic,
     IconSettings,
-    IconToBottom,
     IconUser,
 } from "@arco-design/web-react/icon";
 import {shallow} from "zustand/shallow";
-import {useEffect, useState} from "react";
 import {useSettingModalStore} from "./settingModalStore.js";
 
 export function IconSecurity(){

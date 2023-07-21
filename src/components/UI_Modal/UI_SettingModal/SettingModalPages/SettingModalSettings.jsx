@@ -20,7 +20,7 @@ export  default function SettingModalSettings(){
                             value={app_themes[0]}
                         >
                             {app_themes.map((option, index) => (
-                                <Option key={option} value={option}>
+                                <Option key={index} value={option}>
                                     {option}
                                 </Option>
                             ))}
@@ -37,7 +37,7 @@ export  default function SettingModalSettings(){
                             value={start_page_options[0]}
                         >
                             {start_page_options.map((option, index) => (
-                                <Option key={option} value={option}>
+                                <Option key={index} value={option}>
                                     {option}
                                 </Option>
                             ))}

@@ -1,5 +1,5 @@
 import {Button, Input, Message, Modal} from "@arco-design/web-react";
-import {IconCloseCircle, IconEmail, IconLock, IconPhone} from "@arco-design/web-react/icon";
+import {IconCloseCircle, IconEmail, IconPhone} from "@arco-design/web-react/icon";
 import {useEffect, useState} from "react";
 import {useSettingModalStore} from "../settingModalStore.js";
 import {shallow} from "zustand/shallow";

@@ -2,9 +2,8 @@ import {Avatar, Dropdown, Menu} from "@arco-design/web-react";
 import "./avatarMenu.css"
 import {useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
-import {getUsername, getUserNameFromUserData} from "../../../tools/auth.js";
-import {goToProfile, logout} from "./avatarFuncs.js";
-import {useSettingModalStore} from "../../UI_Modal/UI_SettingModal/settingModalStore.js";
+import {getUsername} from "../../../tools/auth.js";
+import { logout} from "./avatarFuncs.js";
 
 
 export  function AvatarMenu(){

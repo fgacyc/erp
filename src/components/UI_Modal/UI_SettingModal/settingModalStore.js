@@ -1,6 +1,6 @@
 import {create} from "zustand";
 import {getStaffInfoLocal} from "../../../tools/auth.js";
-import {subscribeWithSelector} from "zustand/middleware";
+
 
 export const useSettingModalStore = create((set,get) => ({
     staff: null,

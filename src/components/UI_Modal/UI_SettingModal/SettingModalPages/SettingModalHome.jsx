@@ -1,9 +1,8 @@
-import {Avatar, Input, InputTag, Switch} from "@arco-design/web-react";
+import {Switch} from "@arco-design/web-react";
 import {useSettingModalStore} from "../settingModalStore.js";
 import {SettingModalDivider} from "./SettingModalAccount.jsx";
 import Pastoral_Cascader from "../../../UI_Cascader/Pastoral_Cascader.jsx";
 import Ministry_Cascader from "../../../UI_Cascader/Ministry_Cascader.jsx";
-import {useState} from "react";
 import PastoralRoleSelect from "../../../UI_Select/PastoralRoleSelect.jsx";
 import MinistryRoleSelect from "../../../UI_Select/MinistryRoleSelect.jsx";
 import InterviewScopeSelect from "../../../UI_Select/InterviewScopeSelect.jsx";

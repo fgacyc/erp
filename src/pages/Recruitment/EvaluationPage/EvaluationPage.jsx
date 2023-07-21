@@ -11,7 +11,6 @@ import {classifyQuestion} from "./data.js";
 import EvaluationResultRubberStamp from "./RubberStamp.jsx";
 import "./EvaluationPage.css";
 import {get} from "idb-keyval";
-import {IconArrowLeft, IconEdit} from "@arco-design/web-react/icon";
 import {findPastoralTeamLabel} from "../../../data/pastoral_teams.js";
 import {findInterviewsNames, findMinistryLabel} from "../../../data/ministries.js";
 

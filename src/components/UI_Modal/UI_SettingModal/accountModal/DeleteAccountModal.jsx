@@ -1,9 +1,8 @@
 import {Button, Input, Modal} from "@arco-design/web-react";
-import {IconCloseCircle, IconDelete, IconLock} from "@arco-design/web-react/icon";
+import {IconCloseCircle, IconDelete} from "@arco-design/web-react/icon";
 import {useSettingModalStore} from "../settingModalStore.js";
 
 export default function DeleteAccountModal({visible, setVisible}){
-    const passwordKeyWords = ["password","a password", "a new password"];
     const  email = useSettingModalStore(state => state.email)
 
     return (
