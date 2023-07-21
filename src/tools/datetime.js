@@ -21,6 +21,14 @@ export  function getDateString(timestamp){
 
     return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 }
+
+export  function getNowYYYYMMDDHHMMSS(){
+    const date = new Date();
+    let [year, month, day, hours, minutes, seconds] = getYMDHMS(date)
+
+    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+}
+
  export  function  formatTimerTime(time) {
     const minutes = Math.floor(time / 60);
     const seconds = time % 60;
