@@ -1,12 +1,13 @@
 import {useSettingModalStore} from "../settingModalStore.js";
 import {Avatar, Button, Divider, Input, Upload} from "@arco-design/web-react";
-import {IconCamera, IconRight} from "@arco-design/web-react/icon";
+import {IconCamera, IconCheck, IconRight} from "@arco-design/web-react/icon";
 import EmailOrPhoneSettingModal from "../accountModal/EmailOrPhoneSettingModal.jsx";
 import PasswordSettingModal from "../accountModal/PasswordSettingModal.jsx";
 import UI_ConfirmModal from "../../UI_ConfirmModal/UI_ConfirmModal.jsx";
 import DeleteAccountModal from "../accountModal/DeleteAccountModal.jsx";
 import {shallow} from "zustand/shallow";
 import {useState} from "react";
+import {updateSettingsRequest} from "./updateSettingsRequest.js";
 
 export function SettingModalDivider(){
     return (
@@ -16,6 +17,7 @@ export function SettingModalDivider(){
 
 export  function SettingModalAccount(){
     const [username, updateUsername] = useSettingModalStore(state => [state.username,state.setUsername],shallow)
+    const [newUsername, updateNewUsername] = useState(username)
     const email = useSettingModalStore(state => state.email)
     const phoneNumber = useSettingModalStore(state => state.phone_number)
 
@@ -39,6 +41,14 @@ export  function SettingModalAccount(){
 
     function uploadAvatar(e){
         console.log(e.target.files[0])
+    }
+
+    function newUsernameHandler(){
+        updateSettingsRequest("username",newUsername).then(res => {
+            if(res.status){
+                updateUsername(newUsername)
+            }
+        })
     }
 
     return (
@@ -84,9 +94,14 @@ export  function SettingModalAccount(){
 
                     <div>
                         <div>Username</div>
-                        <Input style={{ width: 150 }}
-                               onChange={userNameChange}
-                               value={username && username } />
+                        <div>
+                            <Input style={{ width: 150 }}
+                                   onChange={updateNewUsername}
+                                   value={newUsername} />
+                            <Button type='primary' icon={<IconCheck />}
+                                    onClick={newUsernameHandler}
+                                    style={{marginLeft:10}} />
+                        </div>
                     </div>
                 </div>
             </div>

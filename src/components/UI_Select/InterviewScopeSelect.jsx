@@ -32,7 +32,7 @@ export  default  function InterviewScopeSelect({value,setScope}){
 
 
     return (
-        <Select showSearch allowClear  mode='multiple' onChange={setScope} value={value}
+        <Select showSearch  mode='multiple' onChange={setScope} value={value}
                 placeholder='Select scopes' >
             {groups.map((options, index) => {
                 return (

@@ -13,12 +13,15 @@ export default function EmailOrPhoneSettingModal({visible, setVisible,type}){
     const [value, setValue] = useState("");
     const[email,updateEmail] = useSettingModalStore(state => [state.email,state.setEmail],shallow)
     const [phoneNumber,updatePhoneNumber] = useSettingModalStore(state => [state.phone_number,state.setPhoneNumber],shallow)
+    const [currentValue, setCurrentValue] = useState("");
 
     useEffect(() => {
         if(type === "email"){
             setCurrentKeyWords(emailKeyWords);
+            setCurrentValue(email);
         }else if(type === "phone"){
             setCurrentKeyWords(phoneKeyWords);
+            setCurrentValue(phoneNumber);
         }
     },[])
 

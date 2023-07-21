@@ -15,7 +15,6 @@ export const useSettingModalStore = create((set,get) => ({
     ministry_interviewer : null,
     ministry_scope : null,
 
-
     initStaff: async () => {
         const res = await getStaffInfoLocal();
         set({staff: res});
@@ -23,6 +22,7 @@ export const useSettingModalStore = create((set,get) => ({
         set({email: res.email});
         set({password: res.password});
         set({phoneNumber: res.phone_number});
+        set({ministry_scope: res.ministry[0].scope});
     },
     currentTab:1,
     setCurrentTab:(tab)=>set(()=>({currentTab:tab})),
@@ -36,7 +36,6 @@ export const useSettingModalStore = create((set,get) => ({
     setMinistryRole : (newMinistryRole) => set({ministry_role: newMinistryRole}),
     setMinistryInterviewer : (isMinistryInterviewer) => set({ministry_interviewer: isMinistryInterviewer}),
     setMinistryScope : (newMinistryScope) => set({ministry_scope: newMinistryScope}),
-
 
     showAllInfo: () => {
         let data = {

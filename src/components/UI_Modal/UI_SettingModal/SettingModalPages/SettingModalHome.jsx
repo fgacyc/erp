@@ -8,7 +8,7 @@ import MinistryRoleSelect from "../../../UI_Select/MinistryRoleSelect.jsx";
 import InterviewScopeSelect from "../../../UI_Select/InterviewScopeSelect.jsx";
 
 export  default  function SettingModalHome(){
-    const  staff = useSettingModalStore(state => state.staff)
+    // const  staff = useSettingModalStore(state => state.staff)
     const [pastoralTeam, setPastoralTeam] = useSettingModalStore(state =>[state.pastoral_team, state.setPastoralTeam])
     const [pastoralRole, setPastoralRole] = useSettingModalStore(state =>[state.pastoral_role, state.setPastoralRole])
     const [ministryName, setMinistryName] = useSettingModalStore(state =>[state.ministry_name, state.setMinistryName])

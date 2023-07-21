@@ -19,7 +19,7 @@ export  default function SettingModalLanguageAndRegion(){
                         <Select defaultValue={options[0]}
                         >
                             {options.map((option, index) => (
-                                <Option key={option}  value={option}>
+                                <Option key={index}  value={option}>
                                     {option}
                                 </Option>
                             ))}

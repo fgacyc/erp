@@ -4,20 +4,22 @@ import {useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {getUsername} from "../../../tools/auth.js";
 import { logout} from "./avatarFuncs.js";
+import {useSettingModalStore} from "../../UI_Modal/UI_SettingModal/settingModalStore.js";
 
 
 export  function AvatarMenu(){
-    const navigate = useNavigate();
+    const username = useSettingModalStore(state => state.username)
+    // const navigate = useNavigate();
 
     // const username = useSettingModalStore(state => state.username)
-    const [username, setUsername] = useState("");
+    //const [username, setUsername] = useState("");
     //
     //
-    useEffect(()=>{
-        getUsername().then((res)=>{
-            setUsername(res);
-        })
-    },[])
+    // useEffect(()=>{
+    //     getUsername().then((res)=>{
+    //         setUsername(res);
+    //     })
+    // },[])
 
 
 
