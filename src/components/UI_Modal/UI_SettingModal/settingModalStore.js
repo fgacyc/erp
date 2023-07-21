@@ -22,8 +22,8 @@ export const useSettingModalStore = create((set,get) => ({
         set({email: res.email});
         set({password: res.password});
         set({phoneNumber: res.phone_number});
-        set({ministry_interviewer: res.ministry[0].ministry === "interviewer"});
-        set({ministry_scope: res.ministry[0].scope});
+        set({ministry_interviewer: res.ministry ? res.ministry[0].ministry === "interviewer" :false});
+        set({ministry_scope: res.ministry ? res.ministry[0].scope:null});
     },
     currentTab:0,
     setCurrentTab:(tab)=>set(()=>({currentTab:tab})),
