@@ -6,8 +6,6 @@ import Ministry_Cascader from "../../../UI_Cascader/Ministry_Cascader.jsx";
 import PastoralRoleSelect from "../../../UI_Select/PastoralRoleSelect.jsx";
 import MinistryRoleSelect from "../../../UI_Select/MinistryRoleSelect.jsx";
 import InterviewScopeSelect from "../../../UI_Select/InterviewScopeSelect.jsx";
-import {useEffect} from "react";
-import {updateSettingsRequest} from "./updateSettingsRequest.js";
 
 export  default  function SettingModalHome(){
     // const  staff = useSettingModalStore(state => state.staff)
@@ -18,18 +16,6 @@ export  default  function SettingModalHome(){
     const [ifMinistryInterviewer, setIfMinistryInterviewer] = useSettingModalStore(state =>[state.ministry_interviewer, state.setMinistryInterviewer])
     const [ministryScope, setMinistryScope] = useSettingModalStore(state =>[state.ministry_scope, state.setMinistryScope])
 
-    useEffect(() => {
-        let payload = [{
-            "ministry" : "interviewer",
-            "scope" : ministryScope
-        }]
-
-        updateSettingsRequest("ministry",payload).then(res => {
-            if(res.status){
-                Message.success("Update interview scope successfully!")
-            }
-        })
-    },[ministryScope])
 
     return (
         <div>

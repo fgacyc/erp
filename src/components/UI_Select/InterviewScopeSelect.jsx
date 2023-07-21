@@ -1,4 +1,5 @@
-import { Select } from '@arco-design/web-react';
+import {Message, Select} from '@arco-design/web-react';
+import {updateSettingsRequest} from "../UI_Modal/UI_SettingModal/SettingModalPages/updateSettingsRequest.js";
 
 
 const Option = Select.Option;
@@ -30,9 +31,23 @@ const groups = [
 
 export  default  function InterviewScopeSelect({value,setScope}){
 
+    function changeHandler(value) {
+        let payload = [{
+            "ministry" : "interviewer",
+            "scope" : value
+        }]
+
+        updateSettingsRequest("ministry",payload).then(res => {
+            if(res.status){
+                setScope(value);
+            }
+        })
+
+    }
+
 
     return (
-        <Select showSearch  mode='multiple' onChange={setScope} value={value}
+        <Select showSearch  mode='multiple' onChange={changeHandler} value={value}
                 placeholder='Select scopes' >
             {groups.map((options, index) => {
                 return (
