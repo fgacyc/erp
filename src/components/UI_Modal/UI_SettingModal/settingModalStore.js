@@ -4,6 +4,7 @@ import {getAvatarUrl, getStaffInfoLocal} from "../../../tools/auth.js";
 
 export const useSettingModalStore = create((set,get) => ({
     staff: null,
+    CYC_ID: null,
     username:null,
     email:null,
     password:null,
@@ -20,6 +21,7 @@ export const useSettingModalStore = create((set,get) => ({
         const res = await getStaffInfoLocal();
         // console.log(res)
         set({staff: res});
+        set({CYC_ID: res.CYC_ID})
         set({username: res.username});
         set({email: res.email});
         set({password: res.password});
@@ -46,6 +48,7 @@ export const useSettingModalStore = create((set,get) => ({
     showAllInfo: () => {
         let data = {
             "username": get().username,
+            "CYC_ID": get().CYC_ID,
             "email": get().email,
             "password": get().password,
             "phoneNumber": get().phone_number,

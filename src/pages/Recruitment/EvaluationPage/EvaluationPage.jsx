@@ -2,7 +2,7 @@ import UI_Breadcrumb from "../../../components/UI_Breadcrumb/UI_Breadcrumb.jsx";
 import { Button, Space, List, Card, Message} from '@arco-design/web-react';
 import {useEffect, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
-import {getReq, putReq} from "../../../tools/requests.js";
+import {getReq, postReq, putReq} from "../../../tools/requests.js";
 import {PreScreeningComment} from "../PreScreeningPage/CommentsList.jsx";
 import UI_ConfirmModal from "../../../components/UI_Modal/UI_ConfirmModal/UI_ConfirmModal.jsx";
 import VocalRatingTable from "../InterviewPage/VocalRatingTable.jsx";
@@ -13,6 +13,7 @@ import "./EvaluationPage.css";
 import {get} from "idb-keyval";
 import {findPastoralTeamLabel} from "../../../data/pastoral_teams.js";
 import {findInterviewsNames, findMinistryLabel} from "../../../data/ministries.js";
+import {useSettingModalStore} from "../../../components/UI_Modal/UI_SettingModal/settingModalStore.js";
 
 export default function Evaluation_Page() {
     const breadcrumbItems = [
@@ -37,6 +38,7 @@ export default function Evaluation_Page() {
     const [currentCandidate, setCurrentCandidate] = useState(null);
     const [showRubberStamp, setShowRubberStamp] = useState(0);
     const [interviewers, setInterviewers] = useState("");
+    const CYC_ID = useSettingModalStore( state => state.CYC_ID)
 
     const RID =   useParams().RID;
     const navigate = useNavigate();
@@ -90,10 +92,11 @@ export default function Evaluation_Page() {
         // accepted  / rejected
 
         let data = {
-            status : status
+            status : status,
+            evaluator: CYC_ID
         }
         const submitEvaluation = () => {
-            putReq(`/application/${RID}`,data).then((res) => {
+            postReq(`/evaluation/${RID}`,data).then((res) => {
                 if(res.status){
                     Message.success('Evaluation submitted successfully')
                     setShowBack(true);
