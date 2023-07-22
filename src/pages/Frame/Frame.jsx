@@ -31,10 +31,11 @@ export default  function  Frame(){
     async function checkLogin(){
         let StaffInfoLocalExist = await ifStaffInfoLocalExist();
         let loginStatus = await getLoginStatus();
+        // console.log(StaffInfoLocalExist, loginStatus)
         if (!StaffInfoLocalExist || !loginStatus) {
             navigate("/login")
         }
-        else{
+        else{ // login success
             initStaff().then(()=>{
                 path === "/" && navigate("/recruitment_dashboard")
             })

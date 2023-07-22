@@ -1,7 +1,5 @@
 import {Modal} from "@arco-design/web-react";
 import "./UI_SettingModal.css"
-import {IconSearch, IconSwap, IconUndo} from "@arco-design/web-react/icon";
-import { ReactComponent as IconEnter } from '/public/icons/icon-enter.svg'
 import {UI_SettingModalLeft} from "./UI_SettingModalLeft.jsx";
 import {useEffect, useState} from "react";
 import {useSettingModalStore} from "./settingModalStore.js";
@@ -13,9 +11,11 @@ import SettingModalConnections from "./SettingModalPages/SettingModalConnections
 import SettingModalLanguageAndRegion from "./SettingModalPages/SettingModalLanguageAndRegion.jsx";
 import SettingModalSecurity from "./SettingModalPages/SettingModalSecurity.jsx";
 import SettingModalAbout from "./SettingModalPages/SettingModalAbout.jsx";
+import PubSub from "pubsub-js";
+import {shallow} from "zustand/shallow";
 
 export  default  function UI_SettingModal({visible, setVisible}){
-    const currentTab = useSettingModalStore(state => state.currentTab)
+    const  [currentTab, setCurrentTab] = useSettingModalStore(state => [state.currentTab, state.setCurrentTab],shallow)
     const [ifInitStaff, setIfInitStaff] = useState(false);
     const pages = [ <SettingModalAccount />, <SettingModalHome />,
         <SettingModalSettings />, <SettingModalNotifications />,
@@ -26,6 +26,20 @@ export  default  function UI_SettingModal({visible, setVisible}){
     useEffect(() => {
         setIfInitStaff(true)
     },[])
+
+    useEffect(() => {
+        const subscription = PubSub.subscribe('switchTab', (msg, data) => {
+            if(data.tabNum ===0){
+                setCurrentTab(0)
+                setVisible(true)
+            }
+            else if(data.tabNum ===2){
+                setCurrentTab(2)
+                setVisible(true)
+            }
+        });
+        return () => PubSub.unsubscribe(subscription);
+    }, []);
 
 
     return (

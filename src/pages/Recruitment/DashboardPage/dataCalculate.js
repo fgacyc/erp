@@ -8,7 +8,7 @@ export function getTotals(data) {
         if (data[i].application.status === "pending") {
             totalPending += 1;
         }
-        if (data[i].application.status === "pre-accepted") {
+        if (data[i].pre_screening.status === true) {
             totalPreAccepted += 1;
         }
         if (data[i].application.status === "accepted") {

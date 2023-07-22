@@ -1,9 +1,13 @@
 import {getReq, putReq} from "./requests.js";
 import {get, set} from "idb-keyval";
+import {getTimeStamp} from "./datetime.js";
+
+export async function getStaffInfoFromDB(CYC_ID, password){
+    return await getReq("/auth?CYC_ID=" + CYC_ID + "&password=" + password);
+}
 
 export async function login(CYC_ID, password,rememberMe){
-    let router = "/auth";
-    let res =  await getReq(router + "?CYC_ID=" + CYC_ID + "&password=" + password);  // 1. get data from server
+    let res =  await getStaffInfoFromDB(CYC_ID,password) // 1. get data from server
 
     if (res.status){
         res.data.login_status = true;
@@ -130,3 +134,17 @@ export async function getUsername(){
         return info.full_name
     }
 }
+
+export  async  function getAvatarUrl(){
+    let staff = await  getStaffInfoLocal();
+    let info = await  getStaffInfoFromDB(staff.CYC_ID, staff.password);
+    let timeStamps = getTimeStamp();
+    // console.log(info)
+    if (info.data.avatar){
+        return info.data.avatar + "?t=" + timeStamps;
+    }else{
+        return null;
+    }
+
+}
+

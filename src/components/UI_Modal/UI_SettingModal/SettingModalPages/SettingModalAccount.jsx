@@ -1,5 +1,5 @@
 import {useSettingModalStore} from "../settingModalStore.js";
-import {Avatar, Button, Divider, Input, Upload} from "@arco-design/web-react";
+import {Avatar, Button, Divider, Input, Message, Upload} from "@arco-design/web-react";
 import {IconCamera, IconCheck, IconRight} from "@arco-design/web-react/icon";
 import EmailOrPhoneSettingModal from "../accountModal/EmailOrPhoneSettingModal.jsx";
 import PasswordSettingModal from "../accountModal/PasswordSettingModal.jsx";
@@ -8,6 +8,7 @@ import DeleteAccountModal from "../accountModal/DeleteAccountModal.jsx";
 import {shallow} from "zustand/shallow";
 import {useState} from "react";
 import {updateSettingsRequest} from "./updateSettingsRequest.js";
+import {hostURL} from "../../../../config.js";
 
 export function SettingModalDivider(){
     return (
@@ -17,30 +18,21 @@ export function SettingModalDivider(){
 
 export  function SettingModalAccount(){
     const [username, updateUsername] = useSettingModalStore(state => [state.username,state.setUsername],shallow)
+    const [avatar,setAvatar] = useSettingModalStore(state => [state.avatar,state.setAvatar],shallow)
+    const staff = useSettingModalStore(state => state.staff)
     const [newUsername, updateNewUsername] = useState(username)
     const email = useSettingModalStore(state => state.email)
     const phoneNumber = useSettingModalStore(state => state.phone_number)
-
     const [emailSettingModalVisible, setEmailSettingModalVisible] = useState(false)
     const [phoneSettingModalVisible, setPhoneSettingModalVisible] = useState(false)
     const [passwordSettingModalVisible, setPasswordSettingModalVisible] = useState(false)
     const [deleteAccountModalVisible, setDeleteAccountModalVisible] = useState(false)
-    // const [username, setUsername] = useState(staff.username ? staff.username :staff.full_name)
-
     const [file, setFile] = useState();
+
+
 
     function  showConfirmModal(){
         UI_ConfirmModal("Confirm",`Are you sure to log out of all devices`,()=>{console.log("confirm")})
-    }
-
-
-    function userNameChange(val){
-        updateUsername(val)
-        // updateStaff({username:val})
-    }
-
-    function uploadAvatar(e){
-        console.log(e.target.files[0])
     }
 
     function newUsernameHandler(){
@@ -51,28 +43,31 @@ export  function SettingModalAccount(){
         })
     }
 
+    function uploadLimit(file){
+        // file size limit < 5MB
+        console.log(file.size)
+        if(file.size < 5 * 1024 * 1024){
+            return true
+        }else{
+            Message.warning("File size limit < 5MB")
+            return false
+        }
+    }
+
     return (
         <div className="setting-modal-account-con">
             <div>
                 <h3>My profile</h3>
                 <SettingModalDivider />
                 <div className="setting-modal-account-profile">
-                    {/*<Avatar style={{ backgroundColor: '#3370ff',marginRight:30}} size={60} >*/}
-                    {/*    { username && username[0].toUpperCase()}*/}
-                    {/*</Avatar>*/}
                     <Upload
-                        action='/'
+                        action={`${hostURL}/upload/avatar/${staff.CYC_ID}`}
+                        accept="image/*"
+                        beforeUpload={uploadLimit}
                         fileList={file ? [file] : []}
                         showUploadList={false}
                         onChange={(_, currentFile) => {
-                            setFile({
-                                ...currentFile,
-                                url: URL.createObjectURL(currentFile.originFile),
-                            });
-                            console.log(currentFile.name)
-                        }}
-                        onProgress={(currentFile) => {
-                            setFile(currentFile);
+                            setAvatar( URL.createObjectURL(currentFile.originFile));
                         }}
                     >
                         <Avatar
@@ -80,15 +75,16 @@ export  function SettingModalAccount(){
                             triggerIconStyle={{
                                 color: '#3491FA',
                             }}
-                            // onClick={() => Message.info('Upload...')}
                             autoFixFontSize={false}
                             style={{
                                 backgroundColor: '#168CFF',
                                 marginRight:30
                             }}
                             size={60}
-                        >
-                            { username && username[0].toUpperCase()}
+                        >{ avatar
+                            ? <img src={avatar} alt="avatar" style={{width:60,height:60,backgroundColor:"white"}}  />
+                            : username && username[0].toUpperCase()
+                        }
                         </Avatar>
                     </Upload>
 

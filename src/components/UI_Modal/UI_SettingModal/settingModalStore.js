@@ -1,5 +1,5 @@
 import {create} from "zustand";
-import {getStaffInfoLocal} from "../../../tools/auth.js";
+import {getAvatarUrl, getStaffInfoLocal} from "../../../tools/auth.js";
 
 
 export const useSettingModalStore = create((set,get) => ({
@@ -14,9 +14,11 @@ export const useSettingModalStore = create((set,get) => ({
     ministry_role : null,
     ministry_interviewer : null,
     ministry_scope : null,
+    avatar:null,
 
     initStaff: async () => {
         const res = await getStaffInfoLocal();
+        // console.log(res)
         set({staff: res});
         set({username: res.username});
         set({email: res.email});
@@ -24,6 +26,8 @@ export const useSettingModalStore = create((set,get) => ({
         set({phoneNumber: res.phone_number});
         set({ministry_interviewer:  res.ministry.length>0 ? res.ministry[0].ministry === "interviewer" :false});
         set({ministry_scope: res.ministry.length>0? res.ministry[0].scope:null});
+        let avatarUrl =await getAvatarUrl()
+        set({avatar: avatarUrl});
     },
     currentTab:0,
     setCurrentTab:(tab)=>set(()=>({currentTab:tab})),
@@ -37,6 +41,7 @@ export const useSettingModalStore = create((set,get) => ({
     setMinistryRole : (newMinistryRole) => set({ministry_role: newMinistryRole}),
     setMinistryInterviewer : (isMinistryInterviewer) => set({ministry_interviewer: isMinistryInterviewer}),
     setMinistryScope : (newMinistryScope) => set({ministry_scope: newMinistryScope}),
+    setAvatar : (newAvatar) => set({avatar: newAvatar}),
 
     showAllInfo: () => {
         let data = {
@@ -50,6 +55,7 @@ export const useSettingModalStore = create((set,get) => ({
             "ministry_role": get().ministry_role,
             "ministry_interviewer": get().ministry_interviewer,
             "ministry_scope": get().ministry_scope,
+            "avatar": get().avatar,
         }
         console.log(data)
     },

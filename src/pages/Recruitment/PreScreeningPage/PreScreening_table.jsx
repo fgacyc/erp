@@ -50,7 +50,8 @@ export  default  function PreScreening_table(){
 
 
     function goToPreScreeningPage(record) {
-        navigate(`/recruitment_pre_screening/${record._id}`);
+        //navigate(`/recruitment_pre_screening/${record._id}`);
+        window.open(`/recruitment_pre_screening/${record._id}`, "_blank");
     }
 
 

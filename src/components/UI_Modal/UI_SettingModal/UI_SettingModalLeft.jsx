@@ -1,4 +1,4 @@
-import {Avatar,Typography } from "@arco-design/web-react";
+import {Typography } from "@arco-design/web-react";
 import "./UI_SettingModal.css"
 import {
     IconApps, IconHome, IconInfoCircle,
@@ -9,6 +9,7 @@ import {
 } from "@arco-design/web-react/icon";
 import {shallow} from "zustand/shallow";
 import {useSettingModalStore} from "./settingModalStore.js";
+import UI_Avatar from "../../UI_Avatar.jsx";
 
 export function IconSecurity(){
     return  (
@@ -19,6 +20,7 @@ export function IconSecurity(){
 export  function UI_SettingModalLeft(){
     const username = useSettingModalStore(state => state.username)
     const email = useSettingModalStore(state => state.email)
+    const avatar = useSettingModalStore(state => state.avatar)
     const [currentTab, setCurrentTab] = useSettingModalStore(state => [state.currentTab, state.setCurrentTab],shallow)
     const tabText =["My account","My home","My settings","My notifications","My connections","Language & region","Security","About"];
     const tabIcon = [<IconUser />,<IconHome />, <IconSettings />, <IconNotification />, <IconApps />, <IconPublic />, <IconSecurity />,<IconInfoCircle />];
@@ -30,11 +32,7 @@ export  function UI_SettingModalLeft(){
     return (
         <div>
             <div className="setting-modal-left-header">
-                <Avatar style={{ backgroundColor: '#3370ff'}} size={32}
-                    onClick={() => showAllInfo()}
-                >
-                    {username && username[0].toUpperCase()}
-                </Avatar>
+                <UI_Avatar size={32} clickEvent={showAllInfo} url={avatar} username={username}/>
                 <div style={{width:180,height:40}}>
                     <div style={{fontSize:14 ,fontWeight:"bold"}}>
                         {username&& username}

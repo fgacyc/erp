@@ -1,8 +1,8 @@
-import {Button, Card, Modal, Typography} from "@arco-design/web-react";
+import {Button, Card, DatePicker, Modal, Typography} from "@arco-design/web-react";
 import {QRCodeSVG} from 'qrcode.react';
 
 import {useEffect, useState} from "react";
-import {getDateString} from "../../../tools/datetime.js";
+import {getDateString, getNowYYYYMMDDHHMMSS} from "../../../tools/datetime.js";
 import "./UI_QRCodeModal.css";
 import {capitalFirstLetter} from "../../../tools/string.js";
 
@@ -25,9 +25,9 @@ export function UI_QRCodeModal({ministry,RID ,visible, setVisible}){
             return [1690459200,1690596000]
         }else if(ministry === "content creation" || ministry === "editorial" || ministry === "graphic design"
             || ministry === "multimedia design" || ministry === "photography" || ministry === "sound"){
-            return [1689492600,1690018200,1690097400]
+            return [1690018200,1690097400]
         }else{
-            return [1689418800,1689492600,1690018200,1690097400]
+            return [1690018200,1690097400]
         }
     }
 
@@ -39,6 +39,29 @@ export function UI_QRCodeModal({ministry,RID ,visible, setVisible}){
     function handleClick(date){
         setCurrentDate(getDateString(date *1000));
         setURL(generateURL(date,RID));
+    }
+
+    const style = {
+        width: 200,
+        marginBottom: 24,
+        marginRight: 24,
+        bottom: 0,
+        right: 0,
+        margin: 0,
+    };
+
+    // function onSelect(dateString, date) {
+    //     console.log('onSelect', dateString, date);
+    // }
+
+    function onChange(dateString, date) {
+        if(!dateString) return;
+
+       // console.log('onChange: ', dateString, date);
+        let timeStamp =  new Date(dateString).getTime() / 1000;
+        setCurrentDate(dateString);
+        setURL(generateURL(timeStamp,RID));
+        // console.log(timeStamp);
     }
 
 
@@ -66,11 +89,19 @@ export function UI_QRCodeModal({ministry,RID ,visible, setVisible}){
                                 <Button type='dashed'
                                         key={index}
                                         onClick={() => handleClick(date)}
+                                        style={{width:200}}
                                 >{getDateString(date *1000)}
                                 </Button>
                             )
                         })
                     }
+                    <DatePicker
+                        showTime
+                        defaultValue={getNowYYYYMMDDHHMMSS()}
+                        // onSelect={onSelect}
+                        onChange={onChange}
+                        style={style}
+                    />
                 </div>
             </div>
             <Card style={{marginTop:15}}>
