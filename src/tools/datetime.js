@@ -50,3 +50,8 @@ export function getRubberStampTime(timestamp){
     let hourMinuteSecond = `${hours}:${minutes}`;
     return [yearMonthDay,hourMinuteSecond]
 }
+
+export function date2TimeStamp(YYYYMMDDHHMMSS){
+    let date = new Date(YYYYMMDDHHMMSS);
+    return date.getTime()/1000;
+}
