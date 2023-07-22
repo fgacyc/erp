@@ -17,6 +17,11 @@
     /*padding: 20px 15%;*/
 }
 
+.function-area::-webkit-scrollbar {
+    width: 0;
+}
+
+
 .top-menu{
     display: flex;
     flex-direction: row;
