@@ -25,9 +25,9 @@ export function UI_QRCodeModal({ministry,RID ,visible, setVisible}){
             return [1690459200,1690596000]
         }else if(ministry === "content creation" || ministry === "editorial" || ministry === "graphic design"
             || ministry === "multimedia design" || ministry === "photography" || ministry === "sound"){
-            return [1689492600,1690018200,1690097400]
+            return [1690018200,1690097400]
         }else{
-            return [1689418800,1689492600,1690018200,1690097400]
+            return [1690018200,1690097400]
         }
     }
 
