@@ -1,5 +1,5 @@
 import {getStaffInfoLocal} from "../../../tools/auth.js";
-import {getDateString} from "../../../tools/datetime.js";
+import {getDateString, getTimeStamp} from "../../../tools/datetime.js";
 
 export async function filterDataHaveAppoint(data){
     data = await filterByPermission(data)
@@ -70,8 +70,7 @@ export function  getAppointTimes(record) {
     }
 
     let timestamp = record.appointment.ministry.appointment_time * 1000;
-
-    return  getDateString(timestamp);
+    return  getDateString(timestamp)
 }
 
 export function recruiterInterviewStatus(record){

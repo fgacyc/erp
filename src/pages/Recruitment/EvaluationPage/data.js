@@ -1,4 +1,5 @@
 import {filterByPermission, getAppointTimes} from "../InterviewPage/data.js";
+import {getTimeStamp} from "../../../tools/datetime.js";
 
 export function getPassStatus(record){
     let applicationStatus = record.application.status;
@@ -51,11 +52,22 @@ export function getDateTimeFilterData(data){
 export function getAppoInsightData(data) {
     let appoInsightData = [];
 
-    let dateStrings = calculateDateTimeFilterData(data);
+    let filterData  = data.filter((item)=>{
+        if (item.hasOwnProperty("appointment")){
+            let appoTime = item.appointment.ministry.appointment_time
+            if(appoTime > getTimeStamp() - 2 * 24 * 60 * 60  ){
+                return true
+            }
+        }
+        return false;
+    })
+
+
+    let dateStrings = calculateDateTimeFilterData(filterData);
     for (let dateStr of dateStrings) {
         let ministryCounts = {}; // Object to store counts for each ministry on the specific date
 
-        for (let item of data) {
+        for (let item of filterData) {
             let appointTime = getAppointTimes(item);
             if (appointTime === dateStr) {
                 let ministry = item.info.ministry[2]; // Assuming "ministry" is a string or an identifier

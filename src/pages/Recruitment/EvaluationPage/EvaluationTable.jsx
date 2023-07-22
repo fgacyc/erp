@@ -135,7 +135,7 @@ export default function Recruitment_Evaluation_Table() {
                     value: "pre-accepted" ,
                 },
                 {
-                    text:  "Accepted",
+                    text:  "Passed",
                     value: "accepted" ,
                 },
                 {
@@ -143,7 +143,7 @@ export default function Recruitment_Evaluation_Table() {
                     value: "kiv" ,
                 },
                 {
-                    text:  "Rejected",
+                    text:  "Next time",
                     value:  "rejected",
                 }
             ],
@@ -155,9 +155,9 @@ export default function Recruitment_Evaluation_Table() {
             render: (_, record) => (
                 <span>
                    {getPassStatus(record) === "accepted" &&
-                       <span style={{color:"green"}}>Accepted</span>}
+                       <span style={{color:"green"}}>Passed</span>}
                     {getPassStatus(record) === "rejected" &&
-                        <span style={{color:"red"}}>Rejected</span>}
+                        <span style={{color:"red"}}>Next time</span>}
                     {getPassStatus(record) === "pending" &&
                         <span>Pending</span>}
                     {getPassStatus(record) === "kiv" &&

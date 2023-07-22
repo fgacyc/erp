@@ -13,10 +13,7 @@ export  default function QuestionGroup1({questions,setQuestions,id,ifInterviewed
 
     useEffect(()=>{
         //console.log(ifInterviewed)
-        if(ifInterviewed){
-            setInterviewerAnswer(question.interviewer)
-            //console.log("interviewerAnswer",interviewerAnswer)
-        }
+        setInterviewerAnswer(question.interviewer)
     })
 
     const activeStyle = {

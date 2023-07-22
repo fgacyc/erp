@@ -18,3 +18,15 @@ export default function Modal_Demo({visible, setVisible}){
     )
 }
 ```
+
+```jsx
+// simple modal
+ <Modal
+    visible={visible}
+    autoFocus={false}
+    focusLock={true}
+    simple={true}
+    footer={null}
+>
+</Modal>
+```

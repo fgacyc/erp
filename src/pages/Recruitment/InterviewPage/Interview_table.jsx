@@ -14,6 +14,9 @@ import {UI_QRCodeModal} from "../../../components/UI_Modal/UI_QRCodeModal/UI_QRC
 import {getAppoInsightData, getDateTimeFilterData} from "../EvaluationPage/data.js";
 import {ifCurrentUserIsSuperAdmin} from "../../../tools/auth.js";
 import UI_InterviewAppoInsight from "../../../components/UI_Modal/UI_InterviewAppoInsight/UI_InterviewAppoInsight.jsx";
+import UI_InterviewDatePickerModal
+    from "../../../components/UI_Modal/UI_InterviewDatePickerModal/UI_InterviewDatePickerModal.jsx";
+import {Tooltip} from "chart.js";
 export default function Interview_table() {
     const breadcrumbItems = [
         {
@@ -35,6 +38,7 @@ export default function Interview_table() {
     const [ifShowInsightBtn, setIfShowInsightBtn] = useState(false);
     const [insightModalVisible, setInsightModalVisible] = useState(false);
     const [insightData, setInsightData] = useState(null);
+    const [datePickerModalVisible,  setDatePickerModalVisible] = useState(false);
 
     const navigate = useNavigate();
     const inputRef = useRef(null);
@@ -178,7 +182,20 @@ export default function Interview_table() {
             filterMultiple: true,
             render: (text, record) => (
                 <span >
-                    {getAppointTimes(record)}
+                    { recruiterInterviewStatus(record) === "Pending"
+                        ? <span>
+                            <span>{getAppointTimes(record)}</span>
+                                <span className="icon-calendar-con" title={"Reschedule"}
+                                    onClick={() => {set("current_candidate", record).then(() => {
+                                                        setDatePickerModalVisible(true)
+                                                    })}}
+                                >
+                                    <IconCalendar/>
+                                </span>
+                        </span>
+                        : <span>{getAppointTimes(record)}</span>
+
+                    }
                 </span>
 
             )
@@ -267,6 +284,10 @@ export default function Interview_table() {
             }
             <div style={{height:80}}></div>
             <UI_InterviewAppoInsight  visible={insightModalVisible} setVisible={setInsightModalVisible} insightData={insightData} />
+            {
+                userData &&  <UI_InterviewDatePickerModal visible={datePickerModalVisible} setVisible={setDatePickerModalVisible}
+                                                          userData={userData} setUserData={setUserData} />
+            }
         </>
     )
 }

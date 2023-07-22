@@ -112,7 +112,7 @@ export  function SettingModalAccount(){
                     </div>
                     <Button type='outline' style={{width:140}}
                         onClick={() => setEmailSettingModalVisible(true)}
-                    >Change email</Button>
+                    >Update email</Button>
                 </div>
                 <div  style={{display:"flex",justifyContent:"space-between",alignItems:"center", marginTop:10}}>
                     <div>
@@ -121,7 +121,7 @@ export  function SettingModalAccount(){
                     </div>
                     <Button type='outline' style={{width:140}}
                             onClick={() => setPhoneSettingModalVisible(true)}
-                    >Change number</Button>
+                    >Update phone</Button>
                 </div>
                 <div  style={{display:"flex",justifyContent:"space-between",alignItems:"center", marginTop:10}}>
                     <div>
@@ -130,7 +130,7 @@ export  function SettingModalAccount(){
                     </div>
                     <Button type='outline' style={{width:140}}
                         onClick={() => setPasswordSettingModalVisible(true)}
-                    >Reset Password</Button>
+                    >Reset password</Button>
                 </div>
 
             </div>
