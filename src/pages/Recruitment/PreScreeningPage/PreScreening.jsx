@@ -28,6 +28,7 @@ export default function PreScreening() {
     function getUserData(){
         getReq( `/recruiter/${RID}`).then((res) => {
             setUserDatas(res);
+            // console.log(res)
         });
     }
     function setCurrentCYCID(){
@@ -128,6 +129,14 @@ export default function PreScreening() {
         }
     };
 
+    function getPreScreeningStatus(status){
+        if(status === "pending"|| status === "pre-accepted" || status === "pre-rejected"){
+            return status;
+        }else{
+            return "pre-accepted";
+        }
+    }
+
     const isButtonDisabled = isButtonClicked ||
         (userDatas && userDatas.pre_screening && userDatas.pre_screening.status !== null);
 
@@ -169,7 +178,7 @@ export default function PreScreening() {
                                     },
                                     {
                                         label: 'Status',
-                                        value: capitalFirstLetter(userDatas.application.status),
+                                        value: capitalFirstLetter(getPreScreeningStatus(userDatas.application.status)),
                                     }
                                 ]}
                                 labelStyle={{ textAlign: 'right', paddingRight: 36 }}
