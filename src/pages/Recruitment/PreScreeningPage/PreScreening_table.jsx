@@ -11,6 +11,7 @@ import UI_Breadcrumb from "../../../components/UI_Breadcrumb/UI_Breadcrumb.jsx";
 import {getAllUsers} from "../../../tools/DB.js";
 import UI_ConfirmModal from "../../../components/UI_Modal/UI_ConfirmModal/UI_ConfirmModal.jsx";
 import {getCurrentUserCYCID} from "../../../tools/auth.js";
+import {getEvaluationStatus} from "./data.js";
 
 
 export  default  function PreScreening_table(){
@@ -53,6 +54,8 @@ export  default  function PreScreening_table(){
         //navigate(`/recruitment_pre_screening/${record._id}`);
         window.open(`/recruitment_pre_screening/${record._id}`, "_blank");
     }
+
+
 
 
     const columns = [
@@ -271,6 +274,22 @@ export  default  function PreScreening_table(){
                     {
                         record.pre_screening.status === false &&
                         <span style={{color: "red"}}>Pre-Rejected</span>
+                    }
+                </span>
+            )
+        },{
+            title: 'Evaluation',
+            dataIndex: 'application.status',
+            render: (col, record) => (
+                <span>
+                    { getEvaluationStatus(record) === "rejected" &&
+                        <span style={{color:"red"}}>{capitalFirstLetter(getEvaluationStatus(record))}</span>
+                    }
+                    { getEvaluationStatus(record) === "accepted" &&
+                        <span style={{color:"green"}}>{capitalFirstLetter(getEvaluationStatus(record))}</span>
+                    }
+                    { getEvaluationStatus(record) === "N/A" &&
+                        <span >{getEvaluationStatus(record)}</span>
                     }
                 </span>
             )

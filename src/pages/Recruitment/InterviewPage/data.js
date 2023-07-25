@@ -93,6 +93,19 @@ export function pad(num) {
     return ("0"+num).slice(-2);
 }
 
+export  function  getPreScreeningStatusForTable(record){
+    let status = record.pre_screening.status;
+    if(status === true){
+        return "Pre-accepted"
+    }
+    else if(status === false){
+        return "Pre-rejected"
+    }
+    else{
+        return "Pending"
+    }
+}
+
 
 export  const tableDataString = `
     item: [star 1-5][Remarks]

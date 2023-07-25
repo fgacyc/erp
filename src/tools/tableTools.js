@@ -1,5 +1,7 @@
 import {getStaffInfoLocal} from "./auth.js";
 import { saveAs } from 'file-saver';
+import {getEvaluationStatus} from "../pages/Recruitment/PreScreeningPage/data.js";
+import {getPreScreeningStatusForTable, recruiterInterviewStatus} from "../pages/Recruitment/InterviewPage/data.js";
 
 export function addKeys(array){
     return array.map((item, index) => {
@@ -28,18 +30,21 @@ export async function filterDataByPermissions(data){
 
 export async function downloadTableData(data){
     let tableDataList = [];
-    tableDataList.push("Name, Phone, Email, Pastoral Team, Pastoral Zone, Team, Department, Ministry")
+    tableDataList.push("Name, Phone, Email, Pastoral Team, Pastoral Zone, Team, Department, Ministry, Pre-screening Status, Interview Status, Evaluation Status")
 
     data.forEach(item => {
         let name = item.info.name;
-        let phone = item.info.phone;
+        let phone = item.info.phone ? item.info.phone : "";
         let email = item.info.email;
         let pastoral_team = item.info.pastoral_team[0];
         let pastoral_zone = item.info.pastoral_team[1];
         let team= item.info.ministry[0];
         let department = item.info.ministry[1];
         let ministry = item.info.ministry[2];
-        tableDataList.push(`${name}, ${phone}, ${email}, ${pastoral_team}, ${pastoral_zone}, ${team}, ${department}, ${ministry}`)
+        let pre_screening_status = getPreScreeningStatusForTable(item);
+        let interview_status = recruiterInterviewStatus(item);
+        let evaluation_status = getEvaluationStatus(item);
+        tableDataList.push(`${name}, ${phone}, ${email}, ${pastoral_team}, ${pastoral_zone}, ${team}, ${department}, ${ministry}, ${pre_screening_status}, ${interview_status}, ${evaluation_status}`)
     });
 
     let staffInfo =await getStaffInfoLocal();
