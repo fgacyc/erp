@@ -142,7 +142,7 @@ export function  getInterviewRatio(usersData){
             {
                 label: '# of Votes',
                 data: [notScheduled,scheduled,interviewed],
-                backgroundColor: color,
+                backgroundColor: [color[2],color[1],color[0]],
                 borderWidth: 1,
             },
         ],
@@ -171,7 +171,7 @@ export function  getEvaluationRatio(usersData){
             {
                 label: '# of Votes',
                 data: [notEvaluation, nextTime,kiv,pass],
-                backgroundColor: color,
+                backgroundColor:  [color[1],color[2],"#fff4cf",color[0]],
                 borderWidth: 1,
             },
         ],
@@ -187,7 +187,7 @@ export function getRecruiterRatio(usersData){
     for (let user of usersData){
         if(user.application.status === "rejected") rejected ++;
         else if(user.application.status === "accepted") passed ++;
-        else if(user.application.status === "KIV") KIV ++;
+        else if(user.application.status === "kiv") KIV ++;
     }
     let pending = all - passed - rejected - KIV;
 
@@ -198,7 +198,7 @@ export function getRecruiterRatio(usersData){
             {
                 label: '# of Votes',
                 data: [pending,passed, KIV, rejected],
-                backgroundColor: color,
+                backgroundColor: [color[1],color[0],"#fff4cf",color[3]],
                 borderWidth: 1,
             },
         ],
