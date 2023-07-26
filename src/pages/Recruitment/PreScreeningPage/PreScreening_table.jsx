@@ -280,6 +280,24 @@ export  default  function PreScreening_table(){
         },{
             title: 'Evaluation',
             dataIndex: 'application.status',
+            filters: [
+                {
+                    text:  "Accepted",
+                    value: "accepted",
+                },
+                {
+                    text:  "Rejected",
+                    value: "rejected",
+                },
+                {
+                    text:  "N/A",
+                    value: "N/A",
+                }
+            ],
+            onFilter: (value, row) =>{
+                return getEvaluationStatus(row) === value
+            },
+            filterMultiple: false,
             render: (col, record) => (
                 <span>
                     { getEvaluationStatus(record) === "rejected" &&

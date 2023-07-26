@@ -112,12 +112,12 @@ export  function  getPreScreeningRatio(usersData){
     }
 
     return {
-        labels: ['Pending', 'Pre-Passed', 'Per_Rejected'],
+        labels: ['Pending', 'Pre-Passed', 'Pre_Rejected'],
         datasets: [
             {
                 label: '# of Votes',
                 data: [pending, pre_passed, per_rejected],
-                backgroundColor: color,
+                backgroundColor: [color[1],color[0],color[2]],
                 borderWidth: 1,
             },
         ],
