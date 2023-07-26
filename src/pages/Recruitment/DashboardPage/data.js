@@ -131,7 +131,7 @@ export function  getInterviewRatio(usersData){
 
     for (let user of usersData){
         if(!user.appointment  && user.application.status==="pre-accepted") notScheduled ++;
-        else if (user.interview && user.interview.status === false) scheduled++;
+        else if (user.interview && user.appointment && user.interview.status ===false ) scheduled++;
         else if (user.interview && user.interview.status === true) interviewed++;
     }
 
