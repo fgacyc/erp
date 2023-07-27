@@ -8,7 +8,7 @@ import CandidateModal from "../../../components/UI_Modal/UI_CandidateModal/Candi
 import "./recruitment-appo.css"
 import {useNavigate} from "react-router-dom";
 import {putReq} from "../../../tools/requests.js";
-import {IconCalendar, IconSearch} from "@arco-design/web-react/icon";
+import {IconArchive, IconCalendar, IconExclamationCircle, IconSearch} from "@arco-design/web-react/icon";
 import {set} from "idb-keyval";
 import {UI_QRCodeModal} from "../../../components/UI_Modal/UI_QRCodeModal/UI_QRCodeModal.jsx";
 import {getAppoInsightData, getDateTimeFilterData} from "../EvaluationPage/data.js";
@@ -17,6 +17,7 @@ import UI_InterviewAppoInsight from "../../../components/UI_Modal/UI_InterviewAp
 import UI_InterviewDatePickerModal
     from "../../../components/UI_Modal/UI_InterviewDatePickerModal/UI_InterviewDatePickerModal.jsx";
 import {Tooltip} from "chart.js";
+import UI_ConfirmModal from "../../../components/UI_Modal/UI_ConfirmModal/UI_ConfirmModal.jsx";
 export default function Interview_table() {
     const breadcrumbItems = [
         {
@@ -76,12 +77,12 @@ export default function Interview_table() {
             putReq(`/interview/start_time/${RID}`),
             set("current_candidate", record)
         ])
-        .then(() => {
-            navigate(`/recruitment_interview/form/${RID}/1`);
-        })
-        .catch((error) => {
-            console.error(error);
-        });
+            .then(() => {
+                navigate(`/recruitment_interview/form/${RID}/1`);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
 
     }
 
@@ -97,6 +98,23 @@ export default function Interview_table() {
         setQRCodeModalVisible(true);
     }
 
+    function archiveCandidate(record){
+        let data = {
+            status : "archived"
+        }
+        function archive(){
+            putReq(`/application/${record._id}`,data).then(res => {
+                if(res.status === "success"){
+                    let newRecord = userData.filter((item) => {
+                        return item._id !== record._id;
+                    });
+                    setUserData(newRecord);
+                }
+            })
+            //console.log(record);
+        }
+        UI_ConfirmModal("Confirm", `Are you sure to archive this candidate: [${record.info.name}] ?`, archive);
+    }
 
 
     const columns  = [
@@ -186,9 +204,9 @@ export default function Interview_table() {
                         ? <span>
                             <span>{getAppointTimes(record)}</span>
                                 <span className="icon-calendar-con" title={"Reschedule"}
-                                    onClick={() => {set("current_candidate", record).then(() => {
-                                                        setDatePickerModalVisible(true)
-                                                    })}}
+                                      onClick={() => {set("current_candidate", record).then(() => {
+                                          setDatePickerModalVisible(true)
+                                      })}}
                                 >
                                     <IconCalendar/>
                                 </span>
@@ -224,9 +242,12 @@ export default function Interview_table() {
             filterMultiple: false,
             render: (text, record) => (
                 <span >
-                { recruiterInterviewStatus(record) === "Interviewed" && <span style={{color:"green"}}>Interviewed</span> }
+                    { recruiterInterviewStatus(record) === "Interviewed" && <span style={{color:"green"}}>Interviewed</span> }
                     { recruiterInterviewStatus(record) === "Pending" && <span>Pending</span> }
                     { recruiterInterviewStatus(record) === "Not appointed" && <span style={{color:"grey"}}>Not Scheduled</span> }
+                    { recruiterInterviewStatus(record) === "Not appointed over 7 days"
+                        &&  <span style={{color:"red"}} title="Not appointed over 7 days">Not Scheduled</span>
+                    }
                 </span>
             )
         }
@@ -238,6 +259,14 @@ export default function Interview_table() {
                 <span>
                     {   recruiterInterviewStatus(record) === "Not appointed"
                         && <Button type='outline' onClick={()=> showQRCodeModal(record)}>Schedule</Button>
+                    }
+                    {   recruiterInterviewStatus(record) === "Not appointed over 7 days"
+                        && <span>
+                             <Button type='outline' onClick={()=> showQRCodeModal(record)}>Schedule</Button>
+                             <Button type='outline' style={{marginLeft:10}} title="Archive this candidate" icon={<IconArchive />}
+                                     onClick={()=> archiveCandidate(record)}
+                             />
+                        </span>
                     }
                     {   recruiterInterviewStatus(record) === "Pending" &&
                         <Button onClick={()=>startInterview(record)} type='primary'  style={{width: 93}}
@@ -261,7 +290,7 @@ export default function Interview_table() {
                 {ifShowInsightBtn &&
                     <Button type='secondary' icon={<IconCalendar />}
                             className="pre_screening-download-btn"
-                        onClick={()=>{setInsightModalVisible(true)}}
+                            onClick={()=>{setInsightModalVisible(true)}}
                     >Appointment Time Insight</Button>
                 }
                 {
@@ -291,3 +320,4 @@ export default function Interview_table() {
         </>
     )
 }
+

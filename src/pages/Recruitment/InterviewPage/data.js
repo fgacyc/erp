@@ -1,3 +1,4 @@
+
 import {getStaffInfoLocal} from "../../../tools/auth.js";
 import {getDateString, getTimeStamp} from "../../../tools/datetime.js";
 
@@ -74,11 +75,16 @@ export function  getAppointTimes(record) {
 }
 
 export function recruiterInterviewStatus(record){
+    let stamp = getTimeStamp();
+    let preScreeningTime = record.pre_screening.pre_screening_time;
     if(record.interview.status === true){
         return "Interviewed"
     }
     else  if(record.appointment && record.interview.status ===false){
         return "Pending"
+    }
+    else  if(!record.appointment && record.interview.status ===false && stamp - preScreeningTime > 86400 *7 ){
+        return "Not appointed over 7 days"
     }
     else  if(!record.appointment && record.interview.status ===false){
         return "Not appointed"
