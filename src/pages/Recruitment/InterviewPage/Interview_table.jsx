@@ -59,12 +59,13 @@ export default function Interview_table() {
     }
 
     function getArchivedCandidate(){
-        setIsArchived(!isArchived)
-        if (!isArchived) {
+        if (isArchived ===true) {
+            setIsArchived(false);
             initTableData();
             return;
         }
         filterData("archived").then((res) => {
+            setIsArchived(true);
             setUserData(res);
         });
     }
@@ -315,8 +316,10 @@ export default function Interview_table() {
                         >Appointment Time Insight</Button>
                         {
                             isArchived
-                                ? <Button type='secondary' icon={<IconArchive />} onClick={()=>{getArchivedCandidate()}}/>
-                                : <Button type='secondary' icon={<IconUserGroup />} onClick={()=>{getArchivedCandidate()}}/>
+                                ? <Button type='secondary' icon={<IconUserGroup />} title={"Show archived candidates"}
+                                          onClick={()=>{getArchivedCandidate()}}/>
+                                : <Button type='secondary' icon={<IconArchive />} title={"Show all candidates"}
+                                          onClick={()=>{getArchivedCandidate()}}/>
                         }
 
                     </div>
