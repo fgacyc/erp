@@ -6,7 +6,26 @@ export async function filterDataHaveAppoint(data){
     data = await filterByPermission(data)
     let result = [];
     for(let i=0;i<data.length;i++){
-        if(data[i].pre_screening.status === true){
+        let preScreeningStatus = data[i].pre_screening.status;
+        let applicationStatus = data[i].application.status;
+
+        if(preScreeningStatus === true && applicationStatus!=="archived"){
+            data[i].key = i;
+            result.push(data[i]);
+        }
+    }
+    //console.log(result)
+    return  result;
+}
+
+export async function filterArchivedCandidate(data){
+    data = await filterByPermission(data)
+    let result = [];
+    for(let i=0;i<data.length;i++){
+        let preScreeningStatus = data[i].pre_screening.status;
+        let applicationStatus = data[i].application.status;
+
+        if(applicationStatus==="archived"){
             data[i].key = i;
             result.push(data[i]);
         }

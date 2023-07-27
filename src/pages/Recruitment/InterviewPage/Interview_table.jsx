@@ -3,12 +3,12 @@ import "./recruitment_appointment.css"
 import {useEffect, useRef, useState} from "react";
 import {getAllUsers} from "../../../tools/DB.js";
 import {Button, Input, Table} from "@arco-design/web-react";
-import {filterDataHaveAppoint, getAppointTimes, recruiterInterviewStatus} from "./data.js";
+import {filterArchivedCandidate, filterDataHaveAppoint, getAppointTimes, recruiterInterviewStatus} from "./data.js";
 import CandidateModal from "../../../components/UI_Modal/UI_CandidateModal/CandidateModal.jsx";
 import "./recruitment-appo.css"
 import {useNavigate} from "react-router-dom";
 import {putReq} from "../../../tools/requests.js";
-import {IconArchive, IconCalendar, IconExclamationCircle, IconSearch} from "@arco-design/web-react/icon";
+import {IconArchive, IconCalendar, IconExclamationCircle, IconSearch, IconUserGroup} from "@arco-design/web-react/icon";
 import {set} from "idb-keyval";
 import {UI_QRCodeModal} from "../../../components/UI_Modal/UI_QRCodeModal/UI_QRCodeModal.jsx";
 import {getAppoInsightData, getDateTimeFilterData} from "../EvaluationPage/data.js";
@@ -40,19 +40,34 @@ export default function Interview_table() {
     const [insightModalVisible, setInsightModalVisible] = useState(false);
     const [insightData, setInsightData] = useState(null);
     const [datePickerModalVisible,  setDatePickerModalVisible] = useState(false);
+    const [isArchived, setIsArchived] = useState(false);
 
     const navigate = useNavigate();
     const inputRef = useRef(null);
 
     useEffect(() => {
-        filterData().then((res) => {
+        initTableData();
+        detectIfShowInsightBtn();
+    }, []);
+
+    function initTableData(){
+        filterData("all").then((res) => {
             setUserData(res);
             setDateTimeFilterData(getDateTimeFilterData(res));
             setInsightData(getAppoInsightData(res));
         });
+    }
 
-        detectIfShowInsightBtn();
-    }, []);
+    function getArchivedCandidate(){
+        setIsArchived(!isArchived)
+        if (!isArchived) {
+            initTableData();
+            return;
+        }
+        filterData("archived").then((res) => {
+            setUserData(res);
+        });
+    }
 
 
     function  detectIfShowInsightBtn(){
@@ -61,9 +76,14 @@ export default function Interview_table() {
         });
     }
 
-    async function filterData(){
+    async function filterData(type){
         let allUser = await  getAllUsers();
-        return await filterDataHaveAppoint(allUser); // pre_screening.status is ture
+        if(type=== "all"){
+            return await filterDataHaveAppoint(allUser); // pre_screening.status is ture
+        }else if(type === "archived"){
+            return await filterArchivedCandidate(allUser); // pre_screening.status is ture
+        }
+
     }
 
     function showCandidateModal(record){
@@ -288,10 +308,18 @@ export default function Interview_table() {
             <UI_Breadcrumb items={breadcrumbItems}/>
             <div className="app-component full-screen-app-component">
                 {ifShowInsightBtn &&
-                    <Button type='secondary' icon={<IconCalendar />}
-                            className="pre_screening-download-btn"
-                            onClick={()=>{setInsightModalVisible(true)}}
-                    >Appointment Time Insight</Button>
+                    <div>
+                        <Button type='secondary' icon={<IconCalendar />}
+                                className="pre_screening-download-btn"
+                                onClick={()=>{setInsightModalVisible(true)}}
+                        >Appointment Time Insight</Button>
+                        {
+                            isArchived
+                                ? <Button type='secondary' icon={<IconArchive />} onClick={()=>{getArchivedCandidate()}}/>
+                                : <Button type='secondary' icon={<IconUserGroup />} onClick={()=>{getArchivedCandidate()}}/>
+                        }
+
+                    </div>
                 }
                 {
                     userData &&
