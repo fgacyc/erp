@@ -166,6 +166,33 @@ export default function Recruitment_Evaluation_Table() {
             )
         },
         {
+            title: 'Email Confirmation',
+            dataIndex: 'email.orientation.confirm.status',
+            filters: [
+                {
+                    text:  "Confirmed",
+                    value: true ,
+                },
+                {
+                    text:  "Not confirmed",
+                    value: false ,
+                }
+            ],
+            sorter: (a, b) => a.application.status.localeCompare(b.application.status),
+            onFilter: (value, row) =>{
+                return  row.email.orientation.confirm.status === value
+            },
+            filterMultiple: false,
+            render: (_, record) => (
+                <span>
+                    {record.email.orientation.confirm.status === true
+                        ?<span style={{color:"green"}}>Confirmed</span>
+                        :<span style={{color:"red"}}>Not confirmed</span>
+                    }
+                </span>
+            )
+        },
+        {
             title: 'Operation',
             dataIndex: 'op',
             render: (_, record) => (
