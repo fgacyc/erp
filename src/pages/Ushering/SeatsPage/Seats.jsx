@@ -124,7 +124,6 @@ export const Seats = () => {
 		return grid;
 	};
 
-	// const today = new
 	return status === 'success' && serviceFetchStatus === 'success' ? (
 		<div className="app-component full-screen-app-component overflow-scroll">
 			<div

@@ -26,6 +26,11 @@
 	flex-direction: row;
 }
 
+.no-hover:hover {
+	background-color: transparent !important;
+	color: unset !important;
+}
+
 .head-menu-logo-con {
 	width: 80px;
 	height: 30px;

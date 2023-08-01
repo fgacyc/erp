@@ -60,15 +60,14 @@ export default function Frame() {
 				>
 					<MenuItem
 						key="0"
+						className="no-hover"
 						style={{ padding: 0, marginLeft: 0, marginRight: 38 }}
 					>
-						<div className="head-menu-logo-con">
-							<img
-								src={'/CYC_Logo_black_x120.png'}
-								alt={'logo'}
-								className="head-menu-logo"
-							/>
-						</div>
+						<img
+							src={'/CYC_Logo_black_x120.png'}
+							alt={'logo'}
+							className="head-menu-logo"
+						/>
 					</MenuItem>
 					<MenuItem key="1">Home</MenuItem>
 					<MenuItem key="2">Solution</MenuItem>
