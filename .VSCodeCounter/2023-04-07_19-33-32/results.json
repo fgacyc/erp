@@ -1,1 +1,200 @@
-{"file:///e%3A/Code%20Everyday/2023-04/0405-CYC-ENTS/CYC-ENTS/index.html":{"language":"HTML","code":13,"comment":0,"blank":1},"file:///e%3A/Code%20Everyday/2023-04/0405-CYC-ENTS/CYC-ENTS/vite.config.js":{"language":"JavaScript","code":5,"comment":1,"blank":2},"file:///e%3A/Code%20Everyday/2023-04/0405-CYC-ENTS/CYC-ENTS/README.md":{"language":"Markdown","code":13,"comment":0,"blank":3},"file:///e%3A/Code%20Everyday/2023-04/0405-CYC-ENTS/CYC-ENTS/public/vite.svg":{"language":"XML","code":1,"comment":0,"blank":0},"file:///e%3A/Code%20Everyday/2023-04/0405-CYC-ENTS/CYC-ENTS/src/StatusContainer.js":{"language":"JavaScript","code":3,"comment":2,"blank":1},"file:///e%3A/Code%20Everyday/2023-04/0405-CYC-ENTS/CYC-ENTS/src/index.css":{"language":"CSS","code":62,"comment":0,"blank":8},"file:///e%3A/Code%20Everyday/2023-04/0405-CYC-ENTS/CYC-ENTS/src/main.jsx":{"language":"JavaScript JSX","code":5,"comment":0,"blank":2},"file:///e%3A/Code%20Everyday/2023-04/0405-CYC-ENTS/CYC-ENTS/src/firebase/analytics.js":{"language":"JavaScript","code":12,"comment":5,"blank":4},"file:///e%3A/Code%20Everyday/2023-04/0405-CYC-ENTS/CYC-ENTS/src/firebase/authHandler.js":{"language":"JavaScript","code":191,"comment":6,"blank":24},"file:///e%3A/Code%20Everyday/2023-04/0405-CYC-ENTS/CYC-ENTS/src/ORM/User.js":{"language":"JavaScript","code":22,"comment":0,"blank":3},"file:///e%3A/Code%20Everyday/2023-04/0405-CYC-ENTS/CYC-ENTS/src/firebase/storageHandler.js":{"language":"JavaScript","code":67,"comment":1,"blank":13},"file:///e%3A/Code%20Everyday/2023-04/0405-CYC-ENTS/CYC-ENTS/src/components/Login/Login.jsx":{"language":"JavaScript JSX","code":41,"comment":0,"blank":7},"file:///e%3A/Code%20Everyday/2023-04/0405-CYC-ENTS/CYC-ENTS/src/firebase/storeHandler.js":{"language":"JavaScript","code":237,"comment":7,"blank":46},"file:///e%3A/Code%20Everyday/2023-04/0405-CYC-ENTS/CYC-ENTS/src/components/Login/Login.css":{"language":"CSS","code":14,"comment":0,"blank":1},"file:///e%3A/Code%20Everyday/2023-04/0405-CYC-ENTS/CYC-ENTS/src/components/Members/Members.jsx":{"language":"JavaScript JSX","code":64,"comment":1,"blank":6},"file:///e%3A/Code%20Everyday/2023-04/0405-CYC-ENTS/CYC-ENTS/src/components/Members/Members.css":{"language":"CSS","code":18,"comment":0,"blank":2},"file:///e%3A/Code%20Everyday/2023-04/0405-CYC-ENTS/CYC-ENTS/src/components/Members/AddMembersModal.jsx":{"language":"JavaScript JSX","code":89,"comment":0,"blank":4},"file:///e%3A/Code%20Everyday/2023-04/0405-CYC-ENTS/CYC-ENTS/src/components/Frame/Frame.jsx":{"language":"JavaScript JSX","code":120,"comment":3,"blank":7},"file:///e%3A/Code%20Everyday/2023-04/0405-CYC-ENTS/CYC-ENTS/src/components/Frame/Frame.css":{"language":"CSS","code":22,"comment":1,"blank":4},"file:///e%3A/Code%20Everyday/2023-04/0405-CYC-ENTS/CYC-ENTS/src/assets/react.svg":{"language":"XML","code":1,"comment":0,"blank":0},"file:///e%3A/Code%20Everyday/2023-04/0405-CYC-ENTS/CYC-ENTS/src/components/Discussion/DiscussionModal.jsx":{"language":"JavaScript JSX","code":42,"comment":1,"blank":8},"file:///e%3A/Code%20Everyday/2023-04/0405-CYC-ENTS/CYC-ENTS/src/components/Dashboard/PieChart.jsx":{"language":"JavaScript JSX","code":33,"comment":0,"blank":5},"file:///e%3A/Code%20Everyday/2023-04/0405-CYC-ENTS/CYC-ENTS/src/components/Discussion/Discussion.jsx":{"language":"JavaScript JSX","code":37,"comment":0,"blank":3},"file:///e%3A/Code%20Everyday/2023-04/0405-CYC-ENTS/CYC-ENTS/src/components/Dashboard/Dashboard.jsx":{"language":"JavaScript JSX","code":109,"comment":7,"blank":10},"file:///e%3A/Code%20Everyday/2023-04/0405-CYC-ENTS/CYC-ENTS/src/components/Discussion/Discussion.css":{"language":"CSS","code":39,"comment":0,"blank":8},"file:///e%3A/Code%20Everyday/2023-04/0405-CYC-ENTS/CYC-ENTS/src/components/Dashboard/Dashboard.css":{"language":"CSS","code":0,"comment":0,"blank":1},"file:///e%3A/Code%20Everyday/2023-04/0405-CYC-ENTS/CYC-ENTS/src/components/Discussion/Comment.jsx":{"language":"JavaScript JSX","code":51,"comment":1,"blank":4},"file:///e%3A/Code%20Everyday/2023-04/0405-CYC-ENTS/CYC-ENTS/src/App.jsx":{"language":"JavaScript JSX","code":20,"comment":14,"blank":3},"file:///e%3A/Code%20Everyday/2023-04/0405-CYC-ENTS/CYC-ENTS/src/App.css":{"language":"CSS","code":5,"comment":0,"blank":0},"file:///e%3A/Code%20Everyday/2023-04/0405-CYC-ENTS/CYC-ENTS/package.json":{"language":"JSON","code":27,"comment":0,"blank":1},"file:///e%3A/Code%20Everyday/2023-04/0405-CYC-ENTS/CYC-ENTS/src/components/Attendance/Attendance.jsx":{"language":"JavaScript JSX","code":251,"comment":11,"blank":19},"file:///e%3A/Code%20Everyday/2023-04/0405-CYC-ENTS/CYC-ENTS/package-lock.json":{"language":"JSON","code":2545,"comment":0,"blank":1},"file:///e%3A/Code%20Everyday/2023-04/0405-CYC-ENTS/CYC-ENTS/src/components/Attendance/Attendance.css":{"language":"CSS","code":0,"comment":0,"blank":1}}
+{
+	"file:///e%3A/Code%20Everyday/2023-04/0405-CYC-ENTS/CYC-ENTS/index.html": {
+		"language": "HTML",
+		"code": 13,
+		"comment": 0,
+		"blank": 1
+	},
+	"file:///e%3A/Code%20Everyday/2023-04/0405-CYC-ENTS/CYC-ENTS/vite.config.js": {
+		"language": "JavaScript",
+		"code": 5,
+		"comment": 1,
+		"blank": 2
+	},
+	"file:///e%3A/Code%20Everyday/2023-04/0405-CYC-ENTS/CYC-ENTS/README.md": {
+		"language": "Markdown",
+		"code": 13,
+		"comment": 0,
+		"blank": 3
+	},
+	"file:///e%3A/Code%20Everyday/2023-04/0405-CYC-ENTS/CYC-ENTS/public/vite.svg": {
+		"language": "XML",
+		"code": 1,
+		"comment": 0,
+		"blank": 0
+	},
+	"file:///e%3A/Code%20Everyday/2023-04/0405-CYC-ENTS/CYC-ENTS/src/StatusContainer.js": {
+		"language": "JavaScript",
+		"code": 3,
+		"comment": 2,
+		"blank": 1
+	},
+	"file:///e%3A/Code%20Everyday/2023-04/0405-CYC-ENTS/CYC-ENTS/src/index.css": {
+		"language": "CSS",
+		"code": 62,
+		"comment": 0,
+		"blank": 8
+	},
+	"file:///e%3A/Code%20Everyday/2023-04/0405-CYC-ENTS/CYC-ENTS/src/main.jsx": {
+		"language": "JavaScript JSX",
+		"code": 5,
+		"comment": 0,
+		"blank": 2
+	},
+	"file:///e%3A/Code%20Everyday/2023-04/0405-CYC-ENTS/CYC-ENTS/src/firebase/analytics.js": {
+		"language": "JavaScript",
+		"code": 12,
+		"comment": 5,
+		"blank": 4
+	},
+	"file:///e%3A/Code%20Everyday/2023-04/0405-CYC-ENTS/CYC-ENTS/src/firebase/authHandler.js": {
+		"language": "JavaScript",
+		"code": 191,
+		"comment": 6,
+		"blank": 24
+	},
+	"file:///e%3A/Code%20Everyday/2023-04/0405-CYC-ENTS/CYC-ENTS/src/ORM/User.js": {
+		"language": "JavaScript",
+		"code": 22,
+		"comment": 0,
+		"blank": 3
+	},
+	"file:///e%3A/Code%20Everyday/2023-04/0405-CYC-ENTS/CYC-ENTS/src/firebase/storageHandler.js": {
+		"language": "JavaScript",
+		"code": 67,
+		"comment": 1,
+		"blank": 13
+	},
+	"file:///e%3A/Code%20Everyday/2023-04/0405-CYC-ENTS/CYC-ENTS/src/components/Login/Login.jsx": {
+		"language": "JavaScript JSX",
+		"code": 41,
+		"comment": 0,
+		"blank": 7
+	},
+	"file:///e%3A/Code%20Everyday/2023-04/0405-CYC-ENTS/CYC-ENTS/src/firebase/storeHandler.js": {
+		"language": "JavaScript",
+		"code": 237,
+		"comment": 7,
+		"blank": 46
+	},
+	"file:///e%3A/Code%20Everyday/2023-04/0405-CYC-ENTS/CYC-ENTS/src/components/Login/Login.css": {
+		"language": "CSS",
+		"code": 14,
+		"comment": 0,
+		"blank": 1
+	},
+	"file:///e%3A/Code%20Everyday/2023-04/0405-CYC-ENTS/CYC-ENTS/src/components/Members/Members.jsx": {
+		"language": "JavaScript JSX",
+		"code": 64,
+		"comment": 1,
+		"blank": 6
+	},
+	"file:///e%3A/Code%20Everyday/2023-04/0405-CYC-ENTS/CYC-ENTS/src/components/Members/Members.css": {
+		"language": "CSS",
+		"code": 18,
+		"comment": 0,
+		"blank": 2
+	},
+	"file:///e%3A/Code%20Everyday/2023-04/0405-CYC-ENTS/CYC-ENTS/src/components/Members/AddMembersModal.jsx": {
+		"language": "JavaScript JSX",
+		"code": 89,
+		"comment": 0,
+		"blank": 4
+	},
+	"file:///e%3A/Code%20Everyday/2023-04/0405-CYC-ENTS/CYC-ENTS/src/components/Frame/Frame.jsx": {
+		"language": "JavaScript JSX",
+		"code": 120,
+		"comment": 3,
+		"blank": 7
+	},
+	"file:///e%3A/Code%20Everyday/2023-04/0405-CYC-ENTS/CYC-ENTS/src/components/Frame/Frame.css": {
+		"language": "CSS",
+		"code": 22,
+		"comment": 1,
+		"blank": 4
+	},
+	"file:///e%3A/Code%20Everyday/2023-04/0405-CYC-ENTS/CYC-ENTS/src/assets/react.svg": {
+		"language": "XML",
+		"code": 1,
+		"comment": 0,
+		"blank": 0
+	},
+	"file:///e%3A/Code%20Everyday/2023-04/0405-CYC-ENTS/CYC-ENTS/src/components/Discussion/DiscussionModal.jsx": {
+		"language": "JavaScript JSX",
+		"code": 42,
+		"comment": 1,
+		"blank": 8
+	},
+	"file:///e%3A/Code%20Everyday/2023-04/0405-CYC-ENTS/CYC-ENTS/src/components/Dashboard/PieChart.jsx": {
+		"language": "JavaScript JSX",
+		"code": 33,
+		"comment": 0,
+		"blank": 5
+	},
+	"file:///e%3A/Code%20Everyday/2023-04/0405-CYC-ENTS/CYC-ENTS/src/components/Discussion/Discussion.jsx": {
+		"language": "JavaScript JSX",
+		"code": 37,
+		"comment": 0,
+		"blank": 3
+	},
+	"file:///e%3A/Code%20Everyday/2023-04/0405-CYC-ENTS/CYC-ENTS/src/components/Dashboard/Dashboard.jsx": {
+		"language": "JavaScript JSX",
+		"code": 109,
+		"comment": 7,
+		"blank": 10
+	},
+	"file:///e%3A/Code%20Everyday/2023-04/0405-CYC-ENTS/CYC-ENTS/src/components/Discussion/Discussion.css": {
+		"language": "CSS",
+		"code": 39,
+		"comment": 0,
+		"blank": 8
+	},
+	"file:///e%3A/Code%20Everyday/2023-04/0405-CYC-ENTS/CYC-ENTS/src/components/Dashboard/Dashboard.css": {
+		"language": "CSS",
+		"code": 0,
+		"comment": 0,
+		"blank": 1
+	},
+	"file:///e%3A/Code%20Everyday/2023-04/0405-CYC-ENTS/CYC-ENTS/src/components/Discussion/Comment.jsx": {
+		"language": "JavaScript JSX",
+		"code": 51,
+		"comment": 1,
+		"blank": 4
+	},
+	"file:///e%3A/Code%20Everyday/2023-04/0405-CYC-ENTS/CYC-ENTS/src/App.jsx": {
+		"language": "JavaScript JSX",
+		"code": 20,
+		"comment": 14,
+		"blank": 3
+	},
+	"file:///e%3A/Code%20Everyday/2023-04/0405-CYC-ENTS/CYC-ENTS/src/App.css": {
+		"language": "CSS",
+		"code": 5,
+		"comment": 0,
+		"blank": 0
+	},
+	"file:///e%3A/Code%20Everyday/2023-04/0405-CYC-ENTS/CYC-ENTS/package.json": {
+		"language": "JSON",
+		"code": 27,
+		"comment": 0,
+		"blank": 1
+	},
+	"file:///e%3A/Code%20Everyday/2023-04/0405-CYC-ENTS/CYC-ENTS/src/components/Attendance/Attendance.jsx": {
+		"language": "JavaScript JSX",
+		"code": 251,
+		"comment": 11,
+		"blank": 19
+	},
+	"file:///e%3A/Code%20Everyday/2023-04/0405-CYC-ENTS/CYC-ENTS/package-lock.json": {
+		"language": "JSON",
+		"code": 2545,
+		"comment": 0,
+		"blank": 1
+	},
+	"file:///e%3A/Code%20Everyday/2023-04/0405-CYC-ENTS/CYC-ENTS/src/components/Attendance/Attendance.css": {
+		"language": "CSS",
+		"code": 0,
+		"comment": 0,
+		"blank": 1
+	}
+}

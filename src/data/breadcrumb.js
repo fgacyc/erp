@@ -9,11 +9,7 @@
 * */
 
 const breadcrumbNameMap = {
-    '/recruitment_dashboard': 'Dashboard',
-    '/recruitment_add_recruiter': 'Add Recruiter',
-    '/recruitment_pre_screening': 'Pre Screening',
+	'/recruitment_dashboard': 'Dashboard',
+	'/recruitment_add_recruiter': 'Add Recruiter',
+	'/recruitment_pre_screening': 'Pre Screening',
 };
-
-
-
-export
