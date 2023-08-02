@@ -1,5 +1,9 @@
-import { Menu } from '@arco-design/web-react';
-import { IconUserAdd } from '@arco-design/web-react/icon';
+import { Button, Menu } from '@arco-design/web-react';
+import {
+	IconMenuFold,
+	IconMenuUnfold,
+	IconUserAdd,
+} from '@arco-design/web-react/icon';
 import './Frame.css';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
@@ -17,7 +21,7 @@ export default function Frame() {
 	const initStaff = useSettingModalStore((state) => state.initStaff);
 	const navigate = useNavigate();
 	const [tabs, setTabs] = useState(null);
-
+	const [collapse, setCollapse] = useState(false);
 	const path = useLocation().pathname;
 	// console.log(path)
 
@@ -25,6 +29,26 @@ export default function Frame() {
 		checkLogin();
 		menuPermission().then((res) => {
 			setTabs(res);
+		});
+	}, []);
+
+	useEffect(() => {
+		window.addEventListener('resize', () => {
+			const vWidth = window.innerWidth;
+
+			if (vWidth < 640) {
+				setCollapse(true);
+			} else setCollapse(false);
+
+			return () => {
+				window.removeEventListener('resize', () => {
+					const vWidth = window.innerWidth;
+
+					if (vWidth < 640) {
+						setCollapse(true);
+					} else setCollapse(false);
+				});
+			};
 		});
 	}, []);
 
@@ -81,9 +105,11 @@ export default function Frame() {
 					<Menu
 						onClickMenuItem={onClickMenuItem}
 						style={{ width: 200, height: '100%' }}
-						hasCollapseButton
+						// hasCollapseButton
+						mode="vertical"
 						// defaultOpenKeys={['3']}
-						autoOpen
+						// autoOpen
+						collapse={collapse}
 						defaultSelectedKeys={['0_1']}
 					>
 						<SubMenu
@@ -121,6 +147,12 @@ export default function Frame() {
 							<MenuItem key="ushering/dashboard">Dashboard</MenuItem>
 							<MenuItem key="ushering/seats">Seats</MenuItem>
 						</SubMenu>
+						<button
+							onClick={() => setCollapse((state) => !state)}
+							className="arco-menu-collapse-button"
+						>
+							{collapse ? <IconMenuUnfold /> : <IconMenuFold />}
+						</button>
 					</Menu>
 				</div>
 				<div className="function-area">

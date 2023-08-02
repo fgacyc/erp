@@ -65,3 +65,12 @@
 .head-bar-btn:active {
 	background-color: #e5e6eb !important;
 }
+
+/* Override CSS */
+.arco-menu-collapse-button {
+	right: 15px !important;
+	bottom: 30px !important;
+	border: none !important;
+	width: 30px !important;
+	height: 30px !important;
+}

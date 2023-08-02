@@ -4,7 +4,7 @@ import { useFirestore, useFirestoreDocData } from 'reactfire';
 import { PiArmchairFill } from 'react-icons/pi';
 import { TiTick } from 'react-icons/ti';
 import { RiToolsFill } from 'react-icons/ri';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export const Seats = () => {
 	const db = useFirestore();
@@ -13,6 +13,8 @@ export const Seats = () => {
 	const [serviceData, setServiceData] = useState({});
 	const seatsRef = doc(db, 'seats', 'hallsConfig');
 	const serviceRef = doc(db, 'seats', service);
+
+	const functionAreaRef = useRef();
 
 	const { status, data: seatsData } = useFirestoreDocData(seatsRef, {
 		idField: '_id',
@@ -125,7 +127,11 @@ export const Seats = () => {
 	};
 
 	return status === 'success' && serviceFetchStatus === 'success' ? (
-		<div className="app-component full-screen-app-component overflow-scroll">
+		<div
+			style={{ position: 'relative' }}
+			className="app-component full-screen-app-component overflow-scroll"
+			ref={functionAreaRef}
+		>
 			<div
 				style={{
 					display: 'grid',
