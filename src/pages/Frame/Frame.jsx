@@ -1,5 +1,5 @@
 import { Menu} from '@arco-design/web-react';
-import {IconUserAdd} from '@arco-design/web-react/icon';
+import {IconThunderbolt, IconUserAdd, IconUserGroup} from '@arco-design/web-react/icon';
 import "./Frame.css"
 import {Outlet, useLocation, useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
@@ -10,6 +10,8 @@ import HeadBarBtns from "../../components/UI_Menu/UI_HeaderBarMenu/HeadBarBtns.j
 import UI_FloatingHelpMenu from "../../components/UI_Menu/UI_FloatingHelpMenu/UI_FloatingHelpMenu.jsx";
 import {menuPermission} from "./AuthorityDetection.js";
 import {useSettingModalStore} from "../../components/UI_Modal/UI_SettingModal/settingModalStore.js";
+import {FaChalkboardTeacher} from "react-icons/fa";
+import {LuGraduationCap} from "react-icons/lu";
 
 
 export default  function  Frame(){
@@ -73,15 +75,15 @@ export default  function  Frame(){
             <div className='menu-lower'>
                 <div className='menu-side'>
                     <Menu onClickMenuItem={onClickMenuItem}
-                        style={{ width: 200, height: '100%' }}
+                        style={{ width: 220, height: '100%' }}
                         hasCollapseButton
                         // defaultOpenKeys={['3']}
                         autoOpen
                         defaultSelectedKeys={['0_1']}
                     >
                         <SubMenu
-                            key='3'
-                            title={<><IconUserAdd /> Recruitment</>}
+                            key='1'
+                            title={<><IconUserAdd />Recruitment</>}
                         >
                             <MenuItem key='recruitment_dashboard'>Dashboard</MenuItem>
                             <MenuItem key='recruitment_add_candidate'>Add Candidate</MenuItem>
@@ -94,6 +96,30 @@ export default  function  Frame(){
                             { tabs && tabs.recruitment_evaluation &&
                                 <MenuItem key='recruitment_evaluation'>Evaluation</MenuItem>
                             }
+                        </SubMenu>
+                        <SubMenu
+                            key='2'
+                            title={<><IconUserGroup />Users</>}
+                        >
+                            <MenuItem key='users/ministry'>Ministry</MenuItem>
+                            <MenuItem key='users/pastoral'>Pastoral</MenuItem>
+                        </SubMenu>
+                        <SubMenu
+                            key='3'
+                            title={<><IconThunderbolt />Events</>}
+                        >
+                            <MenuItem key='events/camp'>Camp</MenuItem>
+                            <MenuItem key='events/conference'>Conference</MenuItem>
+                            <MenuItem key='events/evangelism'>Evangelism</MenuItem>
+                        </SubMenu>
+                        <SubMenu
+                            key='4'
+                            title={<><LuGraduationCap
+                                style={{marginRight:16}}
+                            />Education</>}
+                        >
+                            <MenuItem key='education/dashboard'>Dashboard</MenuItem>
+                            <MenuItem key='education/student'>Student</MenuItem>
                         </SubMenu>
                     </Menu>
                 </div>

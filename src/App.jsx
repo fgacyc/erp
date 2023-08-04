@@ -13,6 +13,9 @@ import Recruitment_Evaluation_Table from "./pages/Recruitment/EvaluationPage/Eva
 import Evaluation_Page from "./pages/Recruitment/EvaluationPage/EvaluationPage.jsx";
 import Registration from './pages/Registration/Registration.jsx';
 import Testing from "./pages/Testing/Testing.jsx";
+import UserManagementMinistry from "./pages/UserManagement/userManagementMinistry/UserManagementMinistry.jsx";
+import LeaderRetreat from "./pages/Events/Camp/LeaderRetreat/LeaderRetreat.jsx";
+import UserManagementPastoral from "./pages/UserManagement/userManagementPastroal/UserManagementPastoral.jsx";
 
 function App() {
 
@@ -32,6 +35,11 @@ function App() {
                             <Route path="/recruitment_interview/form/:RID/:partID" element={<Interview_form/>} />
                             <Route path="/recruitment_evaluation" element={<Recruitment_Evaluation_Table/>} />
                             <Route path="/recruitment_evaluation/form/:RID" element={<Evaluation_Page/>} />
+                            <Route path="/users/ministry" element={<UserManagementMinistry/>} />
+                            <Route path="/users/pastoral" element={<UserManagementPastoral/>} />
+
+
+                            <Route path="/events/leader_retreat" element={<LeaderRetreat/>} />
                         </Route>
                         <Route path="/registration" element={<Registration/>} />
                         <Route path="/profile" element={<Profile/>} />
