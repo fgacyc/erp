@@ -80,7 +80,7 @@ export default function HeadBarBtns() {
 				type="primary"
 				icon={<IconNotification />}
 				className="head-bar-btn"
-				//onClick={showNotificationModal}
+				onClick={showNotificationModal}
 			>
 				{ifNewNotification && <div className="notification-dot"></div>}
 			</Button>

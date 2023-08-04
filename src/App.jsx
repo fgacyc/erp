@@ -25,7 +25,7 @@ import EducationStudents from "./pages/Education/EducationStudents/EducationStud
 import SeatsPage from './pages/Ushering/SeatsPage';
 import { FirebaseAppProvider } from 'reactfire';
 import firebaseConfig from './firebase/config.js';
-import { Dashboard } from './pages/Ushering/Dashboard.jsx';
+import { UsheringDashboard } from './pages/Ushering/UsheringDashboard.jsx';
 import MyGroupDashboard from "./pages/MyGroup/MyGroupDashboard/MyGroupDashboard.jsx";
 import MyGroupMembers from "./pages/MyGroup/MyGroupMember/MyGroupMembers.jsx";
 import MyGroupAttendance from "./pages/MyGroup/MyGroupAttandance/MyGroupAttendance.jsx";
@@ -63,7 +63,7 @@ function App() {
                                 <Route path="/education/dashboard" element={<EducationDashboard/>} />
                                 <Route path="/education/students" element={<EducationStudents/>} />
 
-                                <Route path="/ushering/dashboard" element={<Dashboard />} />
+                                <Route path="/ushering/dashboard" element={<UsheringDashboard />} />
                                 <Route path="/ushering/seats" element={<SeatsPage />} />
 
                                 <Route path="/group/dashboard" element={<MyGroupDashboard />} />
