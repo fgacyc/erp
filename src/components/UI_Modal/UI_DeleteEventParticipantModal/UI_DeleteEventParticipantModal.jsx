@@ -38,15 +38,7 @@ export  default function UI_DeleteEventParticipantModal({visible, setVisible,del
             timestamp: getTimeStamp(),
             reason: delete_reason,
         }
-
-        putReq(`/leader_retreat/${current_participant.CYC_ID}`,deletedData).then((res) => {
-            if(res.status) {
-                deleteParticipant(current_participant.CYC_ID);
-                Message.success("Participant deleted successfully");
-            }
-            else Message.error("Something went wrong");
-            setVisible(false)
-        });
+        deleteParticipant(current_participant.CYC_ID,deletedData);
     }
 
 

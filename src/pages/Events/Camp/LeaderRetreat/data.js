@@ -7,3 +7,12 @@ export  function  getPaymentStatus(record){
 
     return "pending";
 }
+
+export function  changeNameKey(record){
+    for (let item of record){
+        if(item.hasOwnProperty("full_name")){
+            item["name"] = item.full_name;
+        }
+    }
+    return record;
+}
