@@ -1,6 +1,6 @@
 import UI_Breadcrumb from "../../../../components/UI_Breadcrumb/UI_Breadcrumb.jsx";
 import {Button, Space, Table} from "@arco-design/web-react";
-import {IconDelete, IconPlus} from "@arco-design/web-react/icon";
+import {IconDelete, IconPlus, IconUserGroup} from "@arco-design/web-react/icon";
 import {useEffect, useState} from "react";
 import {getReq} from "../../../../tools/requests.js";
 import {addKeys} from "../../../../tools/tableTools.js";
@@ -25,14 +25,50 @@ export default function LeaderRetreat(){
             link: "/events/camp/leader_retreat",
         }
     ]
+
     const [data, setData] = useState([]);
+    const [deletedData, setDeletedData] = useState([]);
+    const [displayData, setDisplayData] = useState([]);
     const [deleteModalVisible, setDeleteModalVisible] = useState(false);
+    const [current_display_type, setCurrentDisplayType] = useState("registered");
 
     useEffect(() => {
-        getReq("/leader_retreat").then((res) => {
-            if(res.status) setData(addKeys(res.data));
+        initData().then((res) => {
+            setData(res[0]);
+            setDeletedData(res[1]);
+            setDisplayData(res[0]);
         });
     }, []);
+
+     async  function initData(){
+         let resData;
+        let res= await  getReq("/leader_retreat")
+        if (res.status === true ){
+            resData = addKeys(res.data)
+        }
+        let registeredData = resData.filter((item) => item.leader_retreat.status === "registered");
+        let deletedData = resData.filter((item) => item.leader_retreat.status === "deleted");
+        return [registeredData, deletedData]
+    }
+
+    async function displayDataToTable(type){
+        if(type === "registered") {
+            setDisplayData(data);
+            setCurrentDisplayType("registered")
+        }
+        else if(type === "deleted") {
+            setDisplayData(deletedData);
+            setCurrentDisplayType("deleted")
+        }
+    }
+
+
+    function deleteParticipant(CYC_ID){
+         let deletedParticipant = data.filter((item) => item.CYC_ID === CYC_ID);
+        let newData = data.filter((item) => item.CYC_ID !== CYC_ID);
+        setData(newData);
+        setDeletedData([...deletedData, ...deletedParticipant]);
+    }
 
 
     const  columns = [
@@ -90,11 +126,17 @@ export default function LeaderRetreat(){
                     <Button type='primary' icon={<IconPlus />}
                             style={{"margin":"10px 0"}}
                     >Register new</Button>
-                    <Button type='secondary' icon={<IconDelete />}
-                            onClick={() => console.log("delete")}
-                    ></Button>
+                    { current_display_type === "registered"
+                        ? <Button type='secondary' icon={<IconDelete />}
+                                  onClick={() => displayDataToTable("deleted")}
+                        ></Button>
+                        : <Button type='secondary' icon={<IconUserGroup />}
+                                  onClick={() => displayDataToTable("registered")}
+                        ></Button>
+
+                    }
                 </Space>
-                <Table columns={columns} data={data}
+                <Table columns={columns} data={displayData}
                        renderPagination={(paginationNode) => (
                            <div
                                style={{
@@ -104,8 +146,8 @@ export default function LeaderRetreat(){
                                }}
                            >
                                <Space style={{marginLeft:16}}>
-                                   { data
-                                       ?<span>{data.length} Items</span>
+                                   { displayData
+                                       ?<span>{displayData.length} Items</span>
                                        :<span>0 items</span>
                                    }
                                </Space>
@@ -113,7 +155,7 @@ export default function LeaderRetreat(){
                            </div>)}
                 />
             </div>
-            <UI_DeleteEventParticipantModal visible={deleteModalVisible} setVisible={setDeleteModalVisible}/>
+            <UI_DeleteEventParticipantModal visible={deleteModalVisible} setVisible={setDeleteModalVisible} deleteParticipant={deleteParticipant} />
         </>
     )
 }
