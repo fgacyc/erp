@@ -33,6 +33,7 @@ function App() {
 
     return (
         <>
+            <FirebaseAppProvider firebaseConfig={firebaseConfig}>
              <Router>
                     <Routes>
                         <Route path="/login" element={<Login/>} />
@@ -67,6 +68,7 @@ function App() {
                         <Route path="*" element={<Login/>} />
                     </Routes>
             </Router>
+            </FirebaseAppProvider>
         </>
 
     )

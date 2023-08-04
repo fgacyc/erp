@@ -2,6 +2,23 @@
 	height: calc(100vh - 58px) !important;
 }
 
+.arco-menu-inner::-webkit-scrollbar {
+	width: 4px;
+}
+
+.arco-menu-inner::-webkit-scrollbar-track {
+	background: rgb(239, 239, 239);
+	border-radius: 2px;
+}
+
+.arco-menu-inner::-webkit-scrollbar-thumb {
+	background: #e9ecef;
+}
+
+.arco-menu-inner::-webkit-scrollbar-thumb:hover {
+	background:#ced4da;
+}
+
 .menu-lower {
 	display: flex;
 	flex-direction: row;
