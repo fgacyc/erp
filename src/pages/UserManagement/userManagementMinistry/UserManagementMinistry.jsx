@@ -1,9 +1,9 @@
 import UI_Breadcrumb from "../../../components/UI_Breadcrumb/UI_Breadcrumb.jsx";
 import {Button, Input, Space, Table} from "@arco-design/web-react";
-import {IconDelete, IconPlus, IconReply, IconSearch} from "@arco-design/web-react/icon";
+import {IconDelete, IconPlus, IconSearch} from "@arco-design/web-react/icon";
 import {useEffect, useRef, useState} from "react";
 import {getReq} from "../../../tools/requests.js";
-import {changeNameKey, changeNameKeyAndID} from "../../Events/Camp/LeaderRetreat/data.js";
+import {changeNameKeyAndID} from "../../Events/Camp/LeaderRetreat/data.js";
 import {addKeys} from "../../../tools/tableTools.js";
 
 export  default function  UserManagementMinistry(){
@@ -22,6 +22,8 @@ export  default function  UserManagementMinistry(){
 
     const [data, setData] = useState([]);
     const inputRef = useRef(null);
+    const [type, setType] = useState('checkbox');
+    const [selectedRowKeys, setSelectedRowKeys] = useState([]);
 
     useEffect(() => {
         getReq("/ministries").then((res) => {
@@ -215,6 +217,17 @@ export  default function  UserManagementMinistry(){
                                </Space>
                                {paginationNode}
                            </div>)}
+                       rowSelection={{
+                           type,
+                           selectedRowKeys,
+                           onChange: (selectedRowKeys, selectedRows) => {
+                               // console.log('onChange:', selectedRowKeys, selectedRows);
+                               setSelectedRowKeys(selectedRowKeys);
+                           },
+                           onSelect: (selected, record, selectedRows) => {
+                               //console.log('onSelect:', selected, record, selectedRows);
+                           }
+                       }}
                 />
             </div>
         </>

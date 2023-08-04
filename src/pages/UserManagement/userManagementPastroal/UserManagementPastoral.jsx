@@ -21,6 +21,8 @@ export default function UserManagementPastoral() {
 
     const [data, setData] = useState([]);
     const inputRef = useRef(null);
+    const [type, setType] = useState('checkbox');
+    const [selectedRowKeys, setSelectedRowKeys] = useState([]);
 
     useEffect(() => {
         getReq("/cgls").then((res) => {
@@ -205,6 +207,17 @@ export default function UserManagementPastoral() {
                                </Space>
                                {paginationNode}
                            </div>)}
+                       rowSelection={{
+                           type,
+                           selectedRowKeys,
+                           onChange: (selectedRowKeys, selectedRows) => {
+                               // console.log('onChange:', selectedRowKeys, selectedRows);
+                               setSelectedRowKeys(selectedRowKeys);
+                           },
+                           onSelect: (selected, record, selectedRows) => {
+                               //console.log('onSelect:', selected, record, selectedRows);
+                           }
+                       }}
                 />
             </div>
         </>
