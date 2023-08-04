@@ -282,3 +282,19 @@ export async function findInterviewsNames(interviewerCYCIDList){
     }
     return "";
 }
+
+export   function  findMinistryArray(ministryValue){
+    let res = [];
+    for(let item of department_options){
+        for (let child of item.children){
+            for (let grandchild of child.children){
+                if (grandchild.value === ministryValue){
+                    res.push(item.value);
+                    res.push(child.value);
+                    res.push(grandchild.value);
+                    return res;
+                }
+            }
+        }
+    }
+}

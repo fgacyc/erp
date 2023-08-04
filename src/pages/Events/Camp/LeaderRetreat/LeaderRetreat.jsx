@@ -1,8 +1,13 @@
 import UI_Breadcrumb from "../../../../components/UI_Breadcrumb/UI_Breadcrumb.jsx";
 import {Button, Space, Table} from "@arco-design/web-react";
-import {IconPlus} from "@arco-design/web-react/icon";
+import {IconDelete, IconPlus} from "@arco-design/web-react/icon";
 import {useEffect, useState} from "react";
 import {getReq} from "../../../../tools/requests.js";
+import {addKeys} from "../../../../tools/tableTools.js";
+import {getPaymentStatus} from "./data.js";
+import UI_DeleteEventParticipantModal
+    from "../../../../components/UI_Modal/UI_DeleteEventParticipantModal/UI_DeleteEventParticipantModal.jsx";
+import {set} from "idb-keyval";
 
 export default function LeaderRetreat(){
     const breadcrumbItems = [
@@ -12,16 +17,20 @@ export default function LeaderRetreat(){
             clickable: false
         },
         {
-            name: "Leader Retreat",
-            link: "/events/leader_retreat",
+            name: "Camp",
+            link: "/events/camp",
             clickable: true
+        },{
+            name: "Leader Retreat",
+            link: "/events/camp/leader_retreat",
         }
     ]
     const [data, setData] = useState([]);
+    const [deleteModalVisible, setDeleteModalVisible] = useState(false);
 
     useEffect(() => {
         getReq("/leader_retreat").then((res) => {
-            if(res.status) setData(res.data);
+            if(res.status) setData(addKeys(res.data));
         });
     }, []);
 
@@ -43,16 +52,48 @@ export default function LeaderRetreat(){
             title: 'Email',
             dataIndex: 'email',
         },
+        {
+            title: "Paid",
+            dataIndex: "paid",
+            render: (text, record) => (
+                <div>
+                    {getPaymentStatus(record) === "pending" && <span>Not yet</span>}
+                    {getPaymentStatus(record) === "uploaded" && <span>Waiting Confirm</span>}
+                    {getPaymentStatus(record) === "confirmed "&& <span>Confirmed</span>}
+                </div>
+            )
+        },
+        {
+            title:"Operation",
+            render: (text, record) => (
+                <Space>
+                    <Button type='secondary' icon={<IconDelete />}
+                        onClick={() => deleteBtnHandler(record)}
+                    ></Button>
+                </Space>
+            )
+        }
     ];
+
+    function  deleteBtnHandler(record){
+        set("current_participant", record).then(() =>
+            setDeleteModalVisible(true)
+        );
+    }
 
 
     return (
         <>
             <UI_Breadcrumb items={breadcrumbItems}/>
             <div className="app-component full-screen-app-component">
-                <Button type='primary' icon={<IconPlus />}
-                    style={{"margin":"10px 0"}}
-                >Register new</Button>
+                <Space>
+                    <Button type='primary' icon={<IconPlus />}
+                            style={{"margin":"10px 0"}}
+                    >Register new</Button>
+                    <Button type='secondary' icon={<IconDelete />}
+                            onClick={() => console.log("delete")}
+                    ></Button>
+                </Space>
                 <Table columns={columns} data={data}
                        renderPagination={(paginationNode) => (
                            <div
@@ -72,6 +113,7 @@ export default function LeaderRetreat(){
                            </div>)}
                 />
             </div>
+            <UI_DeleteEventParticipantModal visible={deleteModalVisible} setVisible={setDeleteModalVisible}/>
         </>
     )
 }

@@ -16,6 +16,9 @@ import Testing from "./pages/Testing/Testing.jsx";
 import UserManagementMinistry from "./pages/UserManagement/userManagementMinistry/UserManagementMinistry.jsx";
 import LeaderRetreat from "./pages/Events/Camp/LeaderRetreat/LeaderRetreat.jsx";
 import UserManagementPastoral from "./pages/UserManagement/userManagementPastroal/UserManagementPastoral.jsx";
+import CampPage from "./pages/Events/Camp/CampPage/CampPage.jsx";
+import ConferencePage from "./pages/Events/Conference/ConferencePage/ConferencePage.jsx";
+import EvangelismPage from "./pages/Events/Evangelism/Evangelism/Evangelism.jsx";
 
 function App() {
 
@@ -38,8 +41,10 @@ function App() {
                             <Route path="/users/ministry" element={<UserManagementMinistry/>} />
                             <Route path="/users/pastoral" element={<UserManagementPastoral/>} />
 
-
-                            <Route path="/events/leader_retreat" element={<LeaderRetreat/>} />
+                            <Route path="/events/camp" element={<CampPage/>} />
+                            <Route path="/events/conference" element={<ConferencePage/>} />
+                            <Route path="/events/evangelism" element={<EvangelismPage/>} />
+                            <Route path="/events/camp/leader_retreat" element={<LeaderRetreat/>} />
                         </Route>
                         <Route path="/registration" element={<Registration/>} />
                         <Route path="/profile" element={<Profile/>} />
