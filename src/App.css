@@ -55,6 +55,11 @@ body {
 	width: 400px !important;
 }
 
+.arco-menu-collapse-button{
+	/*position: relative;*/
+	bottom: 20px;
+}
+
 /*
 CSS Framework
 */

@@ -26,6 +26,10 @@ import SeatsPage from './pages/Ushering/SeatsPage';
 import { FirebaseAppProvider } from 'reactfire';
 import firebaseConfig from './firebase/config.js';
 import { Dashboard } from './pages/Ushering/Dashboard.jsx';
+import MyGroupDashboard from "./pages/MyGroup/MyGroupDashboard/MyGroupDashboard.jsx";
+import MyGroupMembers from "./pages/MyGroup/MyGroupMember/MyGroupMembers.jsx";
+import MyGroupAttendance from "./pages/MyGroup/MyGroupAttandance/MyGroupAttendance.jsx";
+import MyGroupPastoring from "./pages/MyGroup/MyGroupPastoring/MyGroupPastoring.jsx";
 
 function App() {
 
@@ -34,40 +38,45 @@ function App() {
     return (
         <>
             <FirebaseAppProvider firebaseConfig={firebaseConfig}>
-             <Router>
-                    <Routes>
-                        <Route path="/login" element={<Login/>} />
-                        <Route path="/" element={<Frame/>} >
-                            <Route path="/recruitment_dashboard" element={<Recruitment_Dashboard/>} />
-                            <Route path="/recruitment_add_candidate" element={<Recruitment_Submission/>} />
-                            <Route path="/recruitment_pre_screening" element={<PreScreening_table/>} />
-                            <Route path="/recruitment_pre_screening/:RID" element={<PreScreening/>} />
-                            <Route path="/recruitment_interview" element={<Interview_table/>} />
-                            <Route path="/recruitment_interview/form/:RID/:partID" element={<Interview_form/>} />
-                            <Route path="/recruitment_evaluation" element={<Recruitment_Evaluation_Table/>} />
-                            <Route path="/recruitment_evaluation/form/:RID" element={<Evaluation_Page/>} />
+                 <Router>
+                        <Routes>
+                            <Route path="/login" element={<Login/>} />
+                            <Route path="/" element={<Frame/>} >
+                                <Route path="/recruitment_dashboard" element={<Recruitment_Dashboard/>} />
+                                <Route path="/recruitment_add_candidate" element={<Recruitment_Submission/>} />
+                                <Route path="/recruitment_pre_screening" element={<PreScreening_table/>} />
+                                <Route path="/recruitment_pre_screening/:RID" element={<PreScreening/>} />
+                                <Route path="/recruitment_interview" element={<Interview_table/>} />
+                                <Route path="/recruitment_interview/form/:RID/:partID" element={<Interview_form/>} />
+                                <Route path="/recruitment_evaluation" element={<Recruitment_Evaluation_Table/>} />
+                                <Route path="/recruitment_evaluation/form/:RID" element={<Evaluation_Page/>} />
 
-                            <Route path="/users/dashboard" element={<UserManagementDashboard/>} />
-                            <Route path="/users/ministry" element={<UserManagementMinistry/>} />
-                            <Route path="/users/pastoral" element={<UserManagementPastoral/>} />
+                                <Route path="/users/dashboard" element={<UserManagementDashboard/>} />
+                                <Route path="/users/ministry" element={<UserManagementMinistry/>} />
+                                <Route path="/users/pastoral" element={<UserManagementPastoral/>} />
 
-                            <Route path="/events/camp" element={<CampPage/>} />
-                            <Route path="/events/conference" element={<ConferencePage/>} />
-                            <Route path="/events/evangelism" element={<EvangelismPage/>} />
-                            <Route path="/events/camp/leader_retreat" element={<LeaderRetreat/>} />
+                                <Route path="/events/camp" element={<CampPage/>} />
+                                <Route path="/events/conference" element={<ConferencePage/>} />
+                                <Route path="/events/evangelism" element={<EvangelismPage/>} />
+                                <Route path="/events/camp/leader_retreat" element={<LeaderRetreat/>} />
 
-                            <Route path="/education/dashboard" element={<EducationDashboard/>} />
-                            <Route path="/education/students" element={<EducationStudents/>} />
+                                <Route path="/education/dashboard" element={<EducationDashboard/>} />
+                                <Route path="/education/students" element={<EducationStudents/>} />
 
-                            <Route path="/ushering/dashboard" element={<Dashboard />} />
-                            <Route path="/ushering/seats" element={<SeatsPage />} />
-                        </Route>
-                        <Route path="/registration" element={<Registration/>} />
-                        <Route path="/profile" element={<Profile/>} />
-                        <Route path="/testing" element={<Testing/>} />
-                        <Route path="*" element={<Login/>} />
-                    </Routes>
-            </Router>
+                                <Route path="/ushering/dashboard" element={<Dashboard />} />
+                                <Route path="/ushering/seats" element={<SeatsPage />} />
+
+                                <Route path="/group/dashboard" element={<MyGroupDashboard />} />
+                                <Route path="/group/members" element={<MyGroupMembers />} />
+                                <Route path="/group/attendance" element={<MyGroupAttendance />} />
+                                <Route path="/group/pastoring" element={<MyGroupPastoring />} />
+                            </Route>
+                            <Route path="/registration" element={<Registration/>} />
+                            <Route path="/profile" element={<Profile/>} />
+                            <Route path="/testing" element={<Testing/>} />
+                            <Route path="*" element={<Login/>} />
+                        </Routes>
+                </Router>
             </FirebaseAppProvider>
         </>
 

@@ -15,6 +15,7 @@ import {LuGraduationCap} from "react-icons/lu";
 
 
 import { FaPeopleGroup } from 'react-icons/fa6';
+import {BiHomeSmile} from "react-icons/bi";
 
 export default  function  Frame(){
     const  staff = useSettingModalStore(state => state.staff)
@@ -135,6 +136,17 @@ export default  function  Frame(){
                         >
                             <MenuItem key="ushering/dashboard">Dashboard</MenuItem>
                             <MenuItem key="ushering/seats">Seats</MenuItem>
+                        </SubMenu>
+                        <SubMenu
+                            key='6'
+                            title={<><BiHomeSmile
+                                style={{marginRight:16}}
+                            />My group</>}
+                        >
+                            <MenuItem key='group/dashboard'>Dashboard</MenuItem>
+                            <MenuItem key='group/members'>Members</MenuItem>
+                            <MenuItem key='group/attendance'>Attendance</MenuItem>
+                            <MenuItem key='group/pastoring'>Pastoring</MenuItem>
                         </SubMenu>
                     </Menu>
                 </div>
