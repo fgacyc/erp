@@ -4,11 +4,12 @@ import {IconDelete, IconPlus, IconSearch} from "@arco-design/web-react/icon";
 import {useEffect, useRef, useState} from "react";
 import {getReq} from "../../../tools/requests.js";
 import {formatData} from "./data.js";
+import {addKeys} from "../../../tools/tableTools.js";
 
 export default function UserManagementPastoral() {
     const breadcrumbItems = [
         {
-            name: "Events",
+            name: "Users",
             link: "/",
             clickable: false
         },
@@ -26,7 +27,7 @@ export default function UserManagementPastoral() {
 
     useEffect(() => {
         getReq("/cgls").then((res) => {
-            if(res.status) setData(formatData(res.data));
+            if(res.status) setData(addKeys(formatData(res.data)));
         });
     }, []);
 

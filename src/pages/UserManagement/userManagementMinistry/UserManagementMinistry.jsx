@@ -9,7 +9,7 @@ import {addKeys} from "../../../tools/tableTools.js";
 export  default function  UserManagementMinistry(){
     const breadcrumbItems = [
         {
-            name: "Events",
+            name: "Users",
             link: "/",
             clickable: false
         },
@@ -30,7 +30,7 @@ export  default function  UserManagementMinistry(){
             if(res.status){
                 let data = changeNameKeyAndID(res.data)
                 setData(addKeys(data));
-                console.log(data)
+                //console.log(data)
             }
         });
     }, []);
@@ -225,7 +225,8 @@ export  default function  UserManagementMinistry(){
                                setSelectedRowKeys(selectedRowKeys);
                            },
                            onSelect: (selected, record, selectedRows) => {
-                               //console.log('onSelect:', selected, record, selectedRows);
+                               // console.log('onSelect:', selected, record, selectedRows);
+                               //console.log(selectedRows);
                            }
                        }}
                 />

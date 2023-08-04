@@ -101,6 +101,7 @@ export default  function  Frame(){
                             key='2'
                             title={<><IconUserGroup />Users</>}
                         >
+                            <MenuItem key='users/dashboard'>Dashboard</MenuItem>
                             <MenuItem key='users/ministry'>Ministry</MenuItem>
                             <MenuItem key='users/pastoral'>Pastoral</MenuItem>
                         </SubMenu>
@@ -119,7 +120,7 @@ export default  function  Frame(){
                             />Education</>}
                         >
                             <MenuItem key='education/dashboard'>Dashboard</MenuItem>
-                            <MenuItem key='education/student'>Student</MenuItem>
+                            <MenuItem key='education/students'>Students</MenuItem>
                         </SubMenu>
                     </Menu>
                 </div>

@@ -19,6 +19,9 @@ import UserManagementPastoral from "./pages/UserManagement/userManagementPastroa
 import CampPage from "./pages/Events/Camp/CampPage/CampPage.jsx";
 import ConferencePage from "./pages/Events/Conference/ConferencePage/ConferencePage.jsx";
 import EvangelismPage from "./pages/Events/Evangelism/Evangelism/Evangelism.jsx";
+import UserManagementDashboard from "./pages/UserManagement/userManagementDashboard/userManagementDashboard.jsx";
+import EducationDashboard from "./pages/Education/EducationDashboard/EducationDashboard.jsx";
+import EducationStudents from "./pages/Education/EducationStudents/EducationStudents.jsx";
 
 function App() {
 
@@ -38,6 +41,8 @@ function App() {
                             <Route path="/recruitment_interview/form/:RID/:partID" element={<Interview_form/>} />
                             <Route path="/recruitment_evaluation" element={<Recruitment_Evaluation_Table/>} />
                             <Route path="/recruitment_evaluation/form/:RID" element={<Evaluation_Page/>} />
+
+                            <Route path="/users/dashboard" element={<UserManagementDashboard/>} />
                             <Route path="/users/ministry" element={<UserManagementMinistry/>} />
                             <Route path="/users/pastoral" element={<UserManagementPastoral/>} />
 
@@ -45,6 +50,9 @@ function App() {
                             <Route path="/events/conference" element={<ConferencePage/>} />
                             <Route path="/events/evangelism" element={<EvangelismPage/>} />
                             <Route path="/events/camp/leader_retreat" element={<LeaderRetreat/>} />
+
+                            <Route path="/education/dashboard" element={<EducationDashboard/>} />
+                            <Route path="/education/students" element={<EducationStudents/>} />
                         </Route>
                         <Route path="/registration" element={<Registration/>} />
                         <Route path="/profile" element={<Profile/>} />
