@@ -14,7 +14,7 @@ function ServiceCard({title,description,imageURL,URL}){
             cover={
                 <div style={{ height: 200, overflow: 'hidden' }}>
                     <img
-                        style={{ width: '100%', transform: 'translateY(-20px)' }}
+                        style={{ width: '100%',height:"100%", transform: 'translateY(-20px)',objectFit:"cover"}}
                         alt='dessert'
                         src={imageURL}
                     />

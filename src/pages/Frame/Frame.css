@@ -7,16 +7,16 @@
 }
 
 .arco-menu-inner::-webkit-scrollbar-track {
-	background: rgb(239, 239, 239);
+	background: #e9ecef;
 	border-radius: 2px;
 }
 
 .arco-menu-inner::-webkit-scrollbar-thumb {
-	background: #e9ecef;
+	background: #ced4da;
 }
 
 .arco-menu-inner::-webkit-scrollbar-thumb:hover {
-	background:#ced4da;
+	background:#748ffc;
 }
 
 .menu-lower {
