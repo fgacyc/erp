@@ -30,6 +30,8 @@ import MyGroupDashboard from "./pages/MyGroup/MyGroupDashboard/MyGroupDashboard.
 import MyGroupMembers from "./pages/MyGroup/MyGroupMember/MyGroupMembers.jsx";
 import MyGroupAttendance from "./pages/MyGroup/MyGroupAttandance/MyGroupAttendance.jsx";
 import MyGroupPastoring from "./pages/MyGroup/MyGroupPastoring/MyGroupPastoring.jsx";
+import ServicesPage from "./pages/Services/ServicesPage/ServicesPage.jsx";
+import RoomBooking from "./pages/Services/RoomBooking/RoomBooking.jsx";
 
 function App() {
 
@@ -70,6 +72,10 @@ function App() {
                                 <Route path="/group/members" element={<MyGroupMembers />} />
                                 <Route path="/group/attendance" element={<MyGroupAttendance />} />
                                 <Route path="/group/pastoring" element={<MyGroupPastoring />} />
+
+                                <Route path="/services" element={<ServicesPage />} />
+                                <Route path="/services/room_booking" element={<RoomBooking />} />
+
                             </Route>
                             <Route path="/registration" element={<Registration/>} />
                             <Route path="/profile" element={<Profile/>} />

@@ -59,7 +59,9 @@ export default  function  Frame(){
     return (
         <div className={"container"}>
             <div className='menu-demo'>
-                <Menu mode='horizontal' defaultSelectedKeys={['1']} className={"top-menu"}  >
+                <Menu mode='horizontal' defaultSelectedKeys={['1']} className={"top-menu"}
+                      onClickMenuItem={onClickMenuItem}
+                >
                     <MenuItem
                         key='0'
                         style={{ padding: 0, marginLeft:0,marginRight: 38, }}
@@ -68,10 +70,10 @@ export default  function  Frame(){
                             <img src={"/CYC_Logo_black_x120.png"} alt={"logo"} className="head-menu-logo"/>
                         </div>
                     </MenuItem>
-                    <MenuItem key='1'>Home</MenuItem>
-                    <MenuItem key='2'>Solution</MenuItem>
-                    <MenuItem key='3'>Service</MenuItem>
-                    <MenuItem key='4'>Cooperation</MenuItem>
+                    <MenuItem key='recruitment_dashboard'>Home</MenuItem>
+                    <MenuItem key='services'>Services</MenuItem>
+                    {/*<MenuItem key='3'>Solution</MenuItem>*/}
+                    {/*<MenuItem key='4'>Cooperation</MenuItem>*/}
                     {staff &&  <HeadBarBtns/>}
                 </Menu>
             </div>
