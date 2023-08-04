@@ -5,7 +5,7 @@ import {useNavigate} from "react-router-dom";
 import {getReq} from "../../../../tools/requests.js";
 const InputSearch = Input.Search;
 
-function ButtonGroup({currentActive, setCurrentActive}){
+export function ButtonGroup({currentActive, setCurrentActive}){
     return(
         <>
             <Space>
