@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Frame from "./pages/Frame/Frame.jsx";
 import Login from "./pages/Login/Login.jsx";
 import "./App.css";
@@ -22,6 +22,10 @@ import EvangelismPage from "./pages/Events/Evangelism/Evangelism/Evangelism.jsx"
 import UserManagementDashboard from "./pages/UserManagement/userManagementDashboard/userManagementDashboard.jsx";
 import EducationDashboard from "./pages/Education/EducationDashboard/EducationDashboard.jsx";
 import EducationStudents from "./pages/Education/EducationStudents/EducationStudents.jsx";
+import SeatsPage from './pages/Ushering/SeatsPage';
+import { FirebaseAppProvider } from 'reactfire';
+import firebaseConfig from './firebase/config.js';
+import { Dashboard } from './pages/Ushering/Dashboard.jsx';
 
 function App() {
 
@@ -53,6 +57,9 @@ function App() {
 
                             <Route path="/education/dashboard" element={<EducationDashboard/>} />
                             <Route path="/education/students" element={<EducationStudents/>} />
+
+                            <Route path="/ushering/dashboard" element={<Dashboard />} />
+                            <Route path="/ushering/seats" element={<SeatsPage />} />
                         </Route>
                         <Route path="/registration" element={<Registration/>} />
                         <Route path="/profile" element={<Profile/>} />

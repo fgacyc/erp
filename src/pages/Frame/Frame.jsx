@@ -14,6 +14,8 @@ import {FaChalkboardTeacher} from "react-icons/fa";
 import {LuGraduationCap} from "react-icons/lu";
 
 
+import { FaPeopleGroup } from 'react-icons/fa6';
+
 export default  function  Frame(){
     const  staff = useSettingModalStore(state => state.staff)
     const initStaff = useSettingModalStore(state => state.initStaff)
@@ -121,6 +123,18 @@ export default  function  Frame(){
                         >
                             <MenuItem key='education/dashboard'>Dashboard</MenuItem>
                             <MenuItem key='education/students'>Students</MenuItem>
+                        </SubMenu>
+                        <SubMenu
+                            key="5"
+                            title={
+                                <>
+                                    <FaPeopleGroup className="arco-icon" />
+                                    Ushering
+                                </>
+                            }
+                        >
+                            <MenuItem key="ushering/dashboard">Dashboard</MenuItem>
+                            <MenuItem key="ushering/seats">Seats</MenuItem>
                         </SubMenu>
                     </Menu>
                 </div>

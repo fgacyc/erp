@@ -1,3 +1,1 @@
-export default function notificationMessageCard(){
-
-}
+export default function notificationMessageCard() {}

@@ -1,22 +1,22 @@
 export function getTotals(data) {
-    let totalApplicants = data.length;
-    let totalPending = 0;
-    let totalPreAccepted = 0;
-    let totalAccepted = 0;
+	let totalApplicants = data.length;
+	let totalPending = 0;
+	let totalPreAccepted = 0;
+	let totalAccepted = 0;
 
-    for (let i = 0; i < data.length; i++) {
-        if (data[i].application.status === "pending") {
-            totalPending += 1;
-        }
-        if (data[i].pre_screening.status === true) {
-            totalPreAccepted += 1;
-        }
-        if (data[i].application.status === "accepted") {
-            totalAccepted += 1;
-        }
-    }
-    // console.log(totalApplicants, totalPending, totalAccepted)
-    return [totalApplicants, totalPending,totalPreAccepted ,totalAccepted]
+	for (let i = 0; i < data.length; i++) {
+		if (data[i].application.status === 'pending') {
+			totalPending += 1;
+		}
+		if (data[i].pre_screening.status === true) {
+			totalPreAccepted += 1;
+		}
+		if (data[i].application.status === 'accepted') {
+			totalAccepted += 1;
+		}
+	}
+	// console.log(totalApplicants, totalPending, totalAccepted)
+	return [totalApplicants, totalPending, totalPreAccepted, totalAccepted];
 }
 
 // export function getPastoralTeamCount(data, index, field) {
@@ -31,13 +31,13 @@ export function getTotals(data) {
 // }
 
 export function getInfoCount(data, other, index, field) {
-    let count = 0;
+	let count = 0;
 
-    for (let i = 0; i < data.length; i++) {
-        if (data[i].info[other][index] === field) {
-            count += 1;
-        }
-    }
+	for (let i = 0; i < data.length; i++) {
+		if (data[i].info[other][index] === field) {
+			count += 1;
+		}
+	}
 
-    return count;
+	return count;
 }

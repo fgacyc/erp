@@ -1,40 +1,42 @@
-.qrcode-modal-con{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: flex-start;
-    height: 100%;
+.qrcode-modal-con {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: flex-start;
+	height: 100%;
 }
 
-.qrcode-modal-btns-con{
-    display: flex;
-    flex-direction: column;
-    /*justify-content: center;*/
-    align-items: center;
-    justify-content: space-around;
-    margin-left: 20px;
-    height: 210px;
-    position: relative;
+.qrcode-modal-btns-con {
+	display: flex;
+	flex-direction: column;
+	/*justify-content: center;*/
+	align-items: center;
+	justify-content: space-around;
+	margin-left: 20px;
+	height: 210px;
+	position: relative;
 }
 
-.qrcode-modal-code-con{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-right: 20px;
-    /*border: 1px solid #000;*/
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-    text-align: center;
+.qrcode-modal-code-con {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin-right: 20px;
+	/*border: 1px solid #000;*/
+	padding: 20px;
+	border-radius: 10px;
+	box-shadow:
+		0 20px 25px -5px rgb(0 0 0 / 0.1),
+		0 8px 10px -6px rgb(0 0 0 / 0.1);
+	text-align: center;
 }
 
-.qrcode-modal-code-con div{
-    margin-top: 10px;
-    font-size: 20px;
+.qrcode-modal-code-con div {
+	margin-top: 10px;
+	font-size: 20px;
 }
 
-.changed-button{
-    background-color: #165dff;
+.changed-button {
+	background-color: #165dff;
 }
