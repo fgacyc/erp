@@ -1,7 +1,7 @@
-import {Button, Space, Table} from "@arco-design/web-react";
+import {Button, Input, Space, Table} from "@arco-design/web-react";
 import UI_Breadcrumb from "../../../components/UI_Breadcrumb/UI_Breadcrumb.jsx";
-import {IconPlus} from "@arco-design/web-react/icon";
-import {useEffect, useState} from "react";
+import {IconDelete, IconPlus, IconSearch} from "@arco-design/web-react/icon";
+import {useEffect, useRef, useState} from "react";
 import {getReq} from "../../../tools/requests.js";
 import {formatData} from "./data.js";
 
@@ -20,6 +20,7 @@ export default function UserManagementPastoral() {
     ]
 
     const [data, setData] = useState([]);
+    const inputRef = useRef(null);
 
     useEffect(() => {
         getReq("/cgls").then((res) => {
@@ -28,27 +29,155 @@ export default function UserManagementPastoral() {
     }, []);
 
 
+
     const  columns = [
-        {
-            title: 'Name',
-            dataIndex: 'name',
-        },
         {
             title: 'CYC ID',
             dataIndex: 'CYC_ID',
+            sorter: (a, b) =>  a.CYC_ID <  b.CYC_ID,
+            filterIcon: <IconSearch />,
+            filterDropdown: ({ filterKeys, setFilterKeys, confirm }) => {
+                return (
+                    <div className='arco-table-custom-filter'>
+                        <Input.Search
+                            ref={inputRef}
+                            searchButton
+                            placeholder='Please enter a ministry'
+                            value={filterKeys[0] || ''}
+                            onChange={(value) => {
+                                setFilterKeys(value ? [value] : []);
+                            }}
+                            onSearch={() => {
+                                confirm();
+                            }}
+                            allowClear={true}
+                        />
+                    </div>
+                );
+            },
+            onFilter: (value, row) => {
+                return  String(row.CYC_ID) === value;
+            },
+            onFilterDropdownVisibleChange: (visible) => {
+                if (visible) {
+                    setTimeout(() => inputRef.current.focus(), 150);
+                }
+            },
         },
         {
-          title: "Role",
+            title: 'Name',
+            dataIndex: 'name',
+            sorter: (a, b) => a.name.localeCompare(b.name),
+            filterIcon: <IconSearch />,
+            filterDropdown: ({ filterKeys, setFilterKeys, confirm }) => {
+                return (
+                    <div className='arco-table-custom-filter'>
+                        <Input.Search
+                            ref={inputRef}
+                            searchButton
+                            placeholder='Please enter a ministry'
+                            value={filterKeys[0] || ''}
+                            onChange={(value) => {
+                                setFilterKeys(value ? [value] : []);
+                            }}
+                            onSearch={() => {
+                                confirm();
+                            }}
+                            allowClear={true}
+                        />
+                    </div>
+                );
+            },
+            onFilter: (value, row) => {
+                return  row.name.toLowerCase().includes(value.toLowerCase());
+            },
+            onFilterDropdownVisibleChange: (visible) => {
+                if (visible) {
+                    setTimeout(() => inputRef.current.focus(), 150);
+                }
+            },
+        },
+
+        {
+            title: "Role",
             dataIndex: "role"
         },
-        {
-            title: 'Phone',
-            dataIndex: 'phone_number',
-        },
+        // {
+        //     title: 'Phone',
+        //     dataIndex: 'phone_number',
+        //     filterIcon: <IconSearch />,
+        //     filterDropdown: ({ filterKeys, setFilterKeys, confirm }) => {
+        //         return (
+        //             <div className='arco-table-custom-filter'>
+        //                 <Input.Search
+        //                     ref={inputRef}
+        //                     searchButton
+        //                     placeholder='Please enter a ministry'
+        //                     value={filterKeys[0] || ''}
+        //                     onChange={(value) => {
+        //                         setFilterKeys(value ? [value] : []);
+        //                     }}
+        //                     onSearch={() => {
+        //                         confirm();
+        //                     }}
+        //                     allowClear={true}
+        //                 />
+        //             </div>
+        //         );
+        //     },
+        //     onFilter: (value, row) => {
+        //         return  String(row.phone_number).toLowerCase().includes(value.toLowerCase());
+        //     },
+        //     onFilterDropdownVisibleChange: (visible) => {
+        //         if (visible) {
+        //             setTimeout(() => inputRef.current.focus(), 150);
+        //         }
+        //     },
+        // },
         {
             title: 'Email',
             dataIndex: 'email',
+            filterIcon: <IconSearch />,
+            filterDropdown: ({ filterKeys, setFilterKeys, confirm }) => {
+                return (
+                    <div className='arco-table-custom-filter'>
+                        <Input.Search
+                            ref={inputRef}
+                            searchButton
+                            placeholder='Please enter a ministry'
+                            value={filterKeys[0] || ''}
+                            onChange={(value) => {
+                                setFilterKeys(value ? [value] : []);
+                            }}
+                            onSearch={() => {
+                                confirm();
+                            }}
+                            allowClear={true}
+                        />
+                    </div>
+                );
+            },
+            onFilter: (value, row) => {
+                return  row.email.toLowerCase().includes(value.toLowerCase());
+            },
+            onFilterDropdownVisibleChange: (visible) => {
+                if (visible) {
+                    setTimeout(() => inputRef.current.focus(), 150);
+                }
+            },
         },
+        {
+            title:"Operation",
+            render: (text, record) => (
+                <Space>
+                    {
+                        <Button type='secondary' icon={<IconDelete />}
+                                onClick={() => console.log(record)}
+                        ></Button>
+                    }
+                </Space>
+            )
+        }
     ];
 
 

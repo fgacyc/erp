@@ -1,7 +1,6 @@
 import {Input, Modal, Select,Message} from "@arco-design/web-react";
 import {useEffect, useState} from "react";
 import {get} from "idb-keyval";
-import {deleteReq, putReq} from "../../../tools/requests.js";
 import {getTimeStamp} from "../../../tools/datetime.js";
 
 
@@ -63,7 +62,7 @@ export  default function UI_DeleteEventParticipantModal({visible, setVisible,del
                 }
             >
                 {options.map((option, index) => (
-                    <Option key={option} value={option}>
+                    <Option key={index} value={option}>
                         {option}
                     </Option>
                 ))}
