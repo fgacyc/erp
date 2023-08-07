@@ -49,25 +49,25 @@ export default function ServicesPage() {
                             URL="/services/room_booking"/>
                     </Col>
                     <Col span={6}>
-                        <ServiceCard
-                            title="Room Booking"
-                            description="Book a room for your event"
-                            imageURL="/images/room_booking.jpg"
-                            URL="/services/room_booking"/>
+                        {/*<ServiceCard*/}
+                        {/*    title="Room Booking"*/}
+                        {/*    description="Book a room for your event"*/}
+                        {/*    imageURL="/images/room_booking.jpg"*/}
+                        {/*    URL="/services/room_booking"/>*/}
                     </Col>
                     <Col span={6}>
-                        <ServiceCard
-                            title="Room Booking"
-                            description="Book a room for your event"
-                            imageURL="/images/room_booking.jpg"
-                            URL="/services/room_booking"/>
+                        {/*<ServiceCard*/}
+                        {/*    title="Room Booking"*/}
+                        {/*    description="Book a room for your event"*/}
+                        {/*    imageURL="/images/room_booking.jpg"*/}
+                        {/*    URL="/services/room_booking"/>*/}
                     </Col>
                     <Col span={6}>
-                        <ServiceCard
-                            title="Room Booking"
-                            description="Book a room for your event"
-                            imageURL="/images/room_booking.jpg"
-                            URL="/services/room_booking"/>
+                        {/*<ServiceCard*/}
+                        {/*    title="Room Booking"*/}
+                        {/*    description="Book a room for your event"*/}
+                        {/*    imageURL="/images/room_booking.jpg"*/}
+                        {/*    URL="/services/room_booking"/>*/}
                     </Col>
                 </Row>
             </div>
