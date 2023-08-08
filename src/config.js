@@ -1,10 +1,4 @@
-
-// prod
-//export  const hostURL = "https://api.enjoycoding.me";
-
-// cloud dev
-export  const hostURL = "https://api.enjoycoding.me/dev";
-
-
-// local dev
-//export  const hostURL = "http://localhost:6023/dev";
+export const hostURL =
+	import.meta.env['MODE'] === 'development'
+		? import.meta.env['VITE_CLOUD_HOST_URL']
+		: import.meta.env['VITE_PROD_HOST_URL'];
