@@ -32,8 +32,10 @@ import MyGroupAttendance from './pages/MyGroup/MyGroupAttandance/MyGroupAttendan
 import MyGroupPastoring from './pages/MyGroup/MyGroupPastoring/MyGroupPastoring.jsx';
 import ServicesPage from './pages/Services/ServicesPage/ServicesPage.jsx';
 import RoomBooking from './pages/Services/RoomBooking/RoomBooking.jsx';
+import { hostURL } from './config.js';
 
 function App() {
+	console.log(hostURL);
 	return (
 		<>
 			<FirebaseAppProvider firebaseConfig={firebaseConfig}>
