@@ -112,7 +112,7 @@ export default function Registration() {
                 </FormItem>
             </Form>
             {
-                ministry.length !== 0 && (
+                ministry&& ministry.length !== 0 && (
                     <Paragraph>
                         <Title heading={4}>Ministry to be Interviewed</Title>
                         <ul>
