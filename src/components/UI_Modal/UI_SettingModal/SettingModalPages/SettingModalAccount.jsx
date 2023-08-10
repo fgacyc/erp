@@ -26,6 +26,7 @@ export function SettingModalAccount() {
 		(state) => [state.username, state.setUsername],
 		shallow,
 	);
+	const cyc_id = useSettingModalStore((state) => state.CYC_ID);
 	const [avatar, setAvatar] = useSettingModalStore(
 		(state) => [state.avatar, state.setAvatar],
 		shallow,
@@ -131,6 +132,18 @@ export function SettingModalAccount() {
 			<div className="setting-modal-account-security">
 				<h3>Account Security</h3>
 				<SettingModalDivider />
+				<div
+					style={{
+						display: 'flex',
+						justifyContent: 'space-between',
+						alignItems: 'center',
+					}}
+				>
+					<div>
+						<div>CYC ID</div>
+						<div className="setting-desc-text-grey">{cyc_id && cyc_id}</div>
+					</div>
+				</div>
 				<div
 					style={{
 						display: 'flex',
