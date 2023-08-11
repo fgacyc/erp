@@ -1,10 +1,16 @@
 {
 	"compilerOptions": {
-		"target": "ES2020",
+		"baseUrl": ".",
+		"paths": {
+			"@/*": ["src/*"]
+		},
+		"target": "ESNext",
 		"useDefineForClassFields": true,
-		"lib": ["ES2020", "DOM", "DOM.Iterable"],
+		"lib": ["ES2023", "DOM", "DOM.Iterable"],
 		"module": "ESNext",
 		"skipLibCheck": true,
+		"allowJs": true,
+		"checkJs": true,
 
 		/* Bundler mode */
 		"moduleResolution": "bundler",
@@ -12,7 +18,8 @@
 		"resolveJsonModule": true,
 		"isolatedModules": true,
 		"noEmit": true,
-		"jsx": "react-jsx",
+		"jsx": "preserve",
+		"noUncheckedIndexedAccess": true,
 
 		/* Linting */
 		"strict": true,
@@ -20,6 +27,13 @@
 		"noUnusedParameters": true,
 		"noFallthroughCasesInSwitch": true
 	},
-	"include": ["src"],
+
+	"include": [
+		"**/*.ts",
+		"**/*.tsx",
+		"src/components/UI_Modal/UI_SearchModal/UI_SearchModal.j/tsx",
+		"src/pages/Recruitment/InterviewPage/QuestionGroup.example"
+	],
+	"exclude": ["node_modules"],
 	"references": [{ "path": "./tsconfig.node.json" }]
 }

@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Frame from './pages/Frame/Frame.jsx';
+import Frame from './pages/Frame/Frame.js';
 import Login from './pages/Login/Login.jsx';
 import './App.css';
 import Recruitment_Submission from './pages/Recruitment/SubmissionPage/Recruitment_Submission.jsx';
@@ -8,20 +8,20 @@ import PreScreening from './pages/Recruitment/PreScreeningPage/PreScreening.jsx'
 import Recruitment_Dashboard from './pages/Recruitment/DashboardPage/Recruitment_Dashboard.jsx';
 import Interview_table from './pages/Recruitment/InterviewPage/Interview_table.jsx';
 import Profile from './pages/Profile/Profile.jsx';
-import Interview_form from './pages/Recruitment/InterviewPage/Interview_form.jsx';
+import InterviewForm from './pages/Recruitment/InterviewPage/Interview_form';
 import Recruitment_Evaluation_Table from './pages/Recruitment/EvaluationPage/EvaluationTable.jsx';
 import Evaluation_Page from './pages/Recruitment/EvaluationPage/EvaluationPage.jsx';
 import Registration from './pages/Registration/Registration.jsx';
-import Testing from './pages/Testing/Testing.jsx';
+// import Testing from './pages/Testing/Testing.jsx';
 import UserManagementMinistry from './pages/UserManagement/userManagementMinistry/UserManagementMinistry.jsx';
-import LeaderRetreat from './pages/Events/Camp/LeaderRetreat/LeaderRetreat.jsx';
+import LeaderRetreat from './pages/Events/Camp/LeaderRetreat/LeaderRetreat.js';
 import UserManagementPastoral from './pages/UserManagement/userManagementPastroal/UserManagementPastoral.jsx';
-import CampPage from './pages/Events/Camp/CampPage/CampPage.jsx';
-import ConferencePage from './pages/Events/Conference/ConferencePage/ConferencePage.jsx';
+import CampPage from './pages/Events/Camp/CampPage/CampPage.js';
+import ConferencePage from './pages/Events/Conference/ConferencePage/ConferencePage.js';
 import EvangelismPage from './pages/Events/Evangelism/Evangelism/Evangelism.jsx';
 import UserManagementDashboard from './pages/UserManagement/userManagementDashboard/userManagementDashboard.jsx';
-import EducationDashboard from './pages/Education/EducationDashboard/EducationDashboard.jsx';
-import EducationStudents from './pages/Education/EducationStudents/EducationStudents.jsx';
+import EducationDashboard from './pages/Education/EducationDashboard/EducationDashboard.js';
+import EducationStudents from './pages/Education/EducationStudents/EducationStudents.js';
 import SeatsPage from './pages/Ushering/SeatsPage/index.jsx';
 import { FirebaseAppProvider } from 'reactfire';
 import firebaseConfig from './firebase/config.js';
@@ -32,7 +32,6 @@ import MyGroupAttendance from './pages/MyGroup/MyGroupAttandance/MyGroupAttendan
 import MyGroupPastoring from './pages/MyGroup/MyGroupPastoring/MyGroupPastoring.jsx';
 import ServicesPage from './pages/Services/ServicesPage/ServicesPage.jsx';
 import RoomBooking from './pages/Services/RoomBooking/RoomBooking.jsx';
-import { hostURL } from './config.js';
 
 function App() {
 	return (
@@ -63,7 +62,7 @@ function App() {
 						/>
 						<Route
 							path="/recruitment_interview/form/:RID/:partID"
-							element={<Interview_form />}
+							element={<InterviewForm />}
 						/>
 						<Route
 							path="/recruitment_evaluation"
@@ -114,7 +113,7 @@ function App() {
 					</Route>
 					<Route path="/registration" element={<Registration />} />
 					<Route path="/profile" element={<Profile />} />
-					<Route path="/testing" element={<Testing />} />
+					{/* <Route path="/testing" element={<Testing />} /> */}
 					<Route path="*" element={<Login />} />
 				</Routes>
 			</Router>
