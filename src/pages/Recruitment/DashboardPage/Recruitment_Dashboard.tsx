@@ -187,46 +187,53 @@ export default function Recruitment_Dashboard() {
 
 	const barChartLabel: {
 		[key: string]: string[];
-	} = {
-		overall: ['Wonderkids', 'Young Warrior', 'General Service', 'Others'],
-		wonderkids: ['Wonderkids'],
-		young_warrior: ['Heart', 'Move', 'Force', 'Voice', 'Mind'],
-		general_service: ['YP Zone', 'Pro Family', 'Young Dreamer', 'Joshua Zone'],
-		others: [
-			'Serdang',
-			'Kepong',
-			'USJ',
-			'Sg Long',
-			'Setapak',
-			'The Blessing',
-			'To Be Confirmed',
-		],
-	};
-
-	const pieChartLabel: PieChartLabel = {
-		overall: ['People Experience', 'Creative', 'Communication', 'Wonderkids'],
-		people_experience: ['People', 'General Affair', 'Technology'],
-		people: ['Usher', 'Security'],
-		general_affair: ['Admin', 'Lounge', 'Shuttle'],
-		technology: ['Software Development', 'Project Management'],
-		creative: ['Production', 'Arts', 'Worship'],
-		production: [
-			'Stage Management',
-			'Multimedia',
-			'Sound',
-			'Lighting',
-			'Translation',
-		],
-		arts: ['Dance', 'Fashion & Image', 'Drama'],
-		worship: ['Musician', 'Vocal'],
-		communication: ['Social Media', 'Design', 'Photography'],
-		social_media: ['Content Creation', 'Editorial'],
-		design: ['Graphic Design', 'Multimedia Design'],
-		photography: ['Photographer'],
-		wonderkids: ['Children Minister'],
-	};
+	} = useMemo(
+		() => ({
+			overall: ['Wonderkids', 'Young Warrior', 'General Service', 'Others'],
+			wonderkids: ['Wonderkids'],
+			young_warrior: ['Heart', 'Move', 'Force', 'Voice', 'Mind'],
+			general_service: [
+				'YP Zone',
+				'Pro Family',
+				'Young Dreamer',
+				'Joshua Zone',
+			],
+			others: [
+				'Serdang',
+				'Kepong',
+				'USJ',
+				'Sg Long',
+				'Setapak',
+				'The Blessing',
+				'To Be Confirmed',
+			],
+		}),
+		[],
+	);
 
 	useEffect(() => {
+		const pieChartLabel: PieChartLabel = {
+			overall: ['People Experience', 'Creative', 'Communication', 'Wonderkids'],
+			people_experience: ['People', 'General Affair', 'Technology'],
+			people: ['Usher', 'Security'],
+			general_affair: ['Admin', 'Lounge', 'Shuttle'],
+			technology: ['Software Development', 'Project Management'],
+			creative: ['Production', 'Arts', 'Worship'],
+			production: [
+				'Stage Management',
+				'Multimedia',
+				'Sound',
+				'Lighting',
+				'Translation',
+			],
+			arts: ['Dance', 'Fashion & Image', 'Drama'],
+			worship: ['Musician', 'Vocal'],
+			communication: ['Social Media', 'Design', 'Photography'],
+			social_media: ['Content Creation', 'Editorial'],
+			design: ['Graphic Design', 'Multimedia Design'],
+			photography: ['Photographer'],
+			wonderkids: ['Children Minister'],
+		};
 		getReq('/recruiters?account=admin&password=admin').then(
 			(res: Recruiter[]) => {
 				// setAllData(res);
@@ -534,7 +541,7 @@ export default function Recruitment_Dashboard() {
 				setRecruiter_pie(getRecruiterRatio(res));
 			},
 		);
-	}, [barChartLabel.overall, colors, pieChartLabel.overall]);
+	}, [barChartLabel.overall, colors]);
 
 	const options_bar = options_bar_data;
 
