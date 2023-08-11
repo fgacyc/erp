@@ -1,92 +1,88 @@
-.name-column{
-    cursor: pointer;
+.name-column {
+	cursor: pointer;
 }
 
-.long-screen-app-component{
-    padding-bottom:80px;
-    position: relative;
+.long-screen-app-component {
+	padding-bottom: 80px;
+	position: relative;
 }
-.interview-btns{
-    width: 100px;
-    position: absolute;
-    bottom: 10px;
-}
-
-
-
-.interview-btns-left{
-    left: 100px;
-    bottom: 30px;
+.interview-btns {
+	width: 100px;
+	position: absolute;
+	bottom: 10px;
 }
 
-
-.interview-btns-right{
-    right:100px;
-    bottom: 30px;
+.interview-btns-left {
+	left: 100px;
+	bottom: 30px;
 }
 
-.interview-btns-left-page1{
-    margin-bottom: 25px;
+.interview-btns-right {
+	right: 100px;
+	bottom: 30px;
 }
 
-.interview-btns-right-page1{
-    margin-bottom: 25px;
+.interview-btns-left-page1 {
+	margin-bottom: 25px;
 }
 
-.candidate-textarea-disable{
-    -webkit-text-fill-color:#000000 !important;
-    color: #000000 !important;
-    /*text-fill-color: #1a1a1a  !important;*/
-
+.interview-btns-right-page1 {
+	margin-bottom: 25px;
 }
 
-.question-group{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+.candidate-textarea-disable {
+	-webkit-text-fill-color: #000000 !important;
+	color: #000000 !important;
+	/*text-fill-color: #1a1a1a  !important;*/
 }
 
-.question-group-textArea{
-    width: 80%;
-    resize: none;
+.question-group {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 }
 
-.interviewer-answer-con{
-    width: 80%;
-    margin: 0 auto;
-    position: relative;
+.question-group-textArea {
+	width: 80%;
+	resize: none;
 }
 
-.interviewer-qas-answer-con{
-    width: 100%;
-    margin: 0 auto;
-    position: relative;
+.interviewer-answer-con {
+	width: 80%;
+	margin: 0 auto;
+	position: relative;
 }
 
-.interviewer-QAs-answer-con{
-    width: 80%;
-    margin: 50px auto;
-    position: relative;
+.interviewer-qas-answer-con {
+	width: 100%;
+	margin: 0 auto;
+	position: relative;
 }
 
-.interviewer-answer-edit-icon{
-    position: absolute;
-    right: 4px;
-    bottom: 4px;
-    cursor: pointer;
-    font-size: 16px;
+.interviewer-QAs-answer-con {
+	width: 80%;
+	margin: 50px auto;
+	position: relative;
 }
 
-.candidate-basic-info{
-    margin-top: 30px;
-    width: 100%;
-    height: 80px;
-    /*background-color: greenyellow;*/
-    background-color: white;
-    border-bottom: 20px solid #f8f9fa;
-    border-top: 20px solid #f8f9fa;
-    text-align: center;
-    padding-top: 10px;
+.interviewer-answer-edit-icon {
+	position: absolute;
+	right: 4px;
+	bottom: 4px;
+	cursor: pointer;
+	font-size: 16px;
+}
+
+.candidate-basic-info {
+	margin-top: 30px;
+	width: 100%;
+	height: 80px;
+	/*background-color: greenyellow;*/
+	background-color: white;
+	border-bottom: 20px solid #f8f9fa;
+	border-top: 20px solid #f8f9fa;
+	text-align: center;
+	padding-top: 10px;
 }

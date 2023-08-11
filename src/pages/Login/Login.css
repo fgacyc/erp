@@ -1,36 +1,35 @@
 .login-bg {
-    background-image: url('/images/bg-white.png');
+	background-image: url('/images/bg-white.png');
 }
 
 .login-center {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
 
 .login-container {
-    /* background-color: white; */
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+	/* background-color: white; */
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
 
 .login-glass-effect {
-    background: rgba(255, 255, 255, 0.6);
-    border-radius: 4px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(1.5px);
-    -webkit-backdrop-filter: blur(1.5px);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    padding: 30px;
+	background: rgba(255, 255, 255, 0.6);
+	border-radius: 4px;
+	box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+	backdrop-filter: blur(1.5px);
+	-webkit-backdrop-filter: blur(1.5px);
+	border: 1px solid rgba(255, 255, 255, 0.05);
+	padding: 30px;
 }
 
-
 @media screen and (max-width: 768px) {
-    .login-center  {
-        width: 80%;
-    }
+	.login-center {
+		width: 80%;
+	}
 }
