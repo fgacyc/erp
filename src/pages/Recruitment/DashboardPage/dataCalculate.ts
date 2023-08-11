@@ -37,7 +37,6 @@ export function getInfoCount(
 	field: string,
 ) {
 	let count = 0;
-
 	for (let i = 0; i < data.length; i++) {
 		if (data[i]?.info[other][index] === field) {
 			count += 1;
