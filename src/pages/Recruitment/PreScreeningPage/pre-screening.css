@@ -1,46 +1,48 @@
-.pre-screening-table-con {
-	height: calc(100% - 70px);
-	overflow: auto;
+.pre-screening-table-con{
+    height: calc(100% - 70px);
+    overflow: auto;
 }
 
-.pre-screening-con {
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	height: calc(100% - 15px);
-	background-color: #fff;
-	margin: 5px;
-	width: calc(100% - 15px);
-	border: 1px solid rgb(229, 230, 235);
+
+
+.pre-screening-con{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: calc(100% - 15px);
+    background-color: #fff;
+    margin: 5px;
+    width: calc(100% - 15px);
+    border: 1px solid rgb(229, 230, 235);
 }
 
-.pre_screening-download-btn {
-	margin: 10px 10px 10px 0;
+.pre_screening-download-btn{
+    margin: 10px 10px 10px 0;
 }
 
-.pointer-cursor {
-	cursor: pointer;
+.pointer-cursor{
+    cursor: pointer;
 }
 
 .custom-comment-action {
-	padding: 0 4px;
-	line-height: 24px;
-	border-radius: 2px;
-	background: transparent;
-	transition: all 0.1s ease;
-	color: var(--color-text-1);
-	cursor: pointer;
-	display: inline-block;
+    padding: 0 4px;
+    line-height: 24px;
+    border-radius: 2px;
+    background: transparent;
+    transition: all 0.1s ease;
+    color: var(--color-text-1);
+    cursor: pointer;
+    display: inline-block;
 }
 
 .custom-comment-action:hover {
-	background: var(--color-fill-3);
-	border-radius: 2px;
+    background: var(--color-fill-3);
+    border-radius: 2px;
 }
 
-.table-header-bar {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	align-items: center;
+.table-header-bar{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 }

@@ -1,7 +1,7 @@
 .registration-container {
-	margin: 0 auto;
-	max-width: 600px;
-	overflow: auto !important;
+    margin: 0 auto;
+    max-width: 600px;
+    overflow: auto !important;
 }
 
 /* .btn-registration{
@@ -9,16 +9,17 @@
 } */
 
 @media screen and (max-width: 768px) {
-	.registration-container {
-		margin: 0 15px;
-	}
+    .registration-container {
+        margin: 0 15px;
+    }
 }
 
-.arco-form-label-item {
-	text-align: left !important;
-	width: 150px !important;
+
+.arco-form-label-item{
+    text-align: left !important;
+    width: 150px !important;
 }
 
-.arco-col-5 {
-	flex: none !important;
+.arco-col-5{
+    flex: none !important;
 }

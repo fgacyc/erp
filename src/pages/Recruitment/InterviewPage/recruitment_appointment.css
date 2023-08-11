@@ -1,20 +1,20 @@
-.recruitment-appointment-con {
-	height: calc(100% - 70px);
+.recruitment-appointment-con{
+    height: calc(100% - 70px);
 }
 
-.icon-calendar-con {
-	/*background-color: green;*/
-	font-size: 16px;
-	margin-left: 5px;
-	cursor: pointer;
-	width: 22px;
-	height: 22px;
-	display: inline-block;
-	line-height: 22px;
-	text-align: center;
-	border-radius: 4px;
+.icon-calendar-con{
+    /*background-color: green;*/
+    font-size: 16px;
+    margin-left: 5px;
+    cursor: pointer;
+    width: 22px;
+    height: 22px;
+    display: inline-block;
+    line-height: 22px;
+    text-align: center;
+    border-radius: 4px;
 }
 
-.icon-calendar-con:hover {
-	background-color: #c9cdd4;
+.icon-calendar-con:hover{
+    background-color:#C9CDD4;
 }

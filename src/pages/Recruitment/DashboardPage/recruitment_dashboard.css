@@ -2,82 +2,84 @@
 style={{ display: "flex", justifyContent: "center", paddingTop: 30, paddingBottom: 15 }}
 */
 
-.recruitment-dashboard-con .left-side {
-	display: flex;
-	flex-direction: column;
-	width: 60%;
-	height: 100%;
+
+.recruitment-dashboard-con .left-side{
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    height: 100%;
 }
 
-.recruitment-dashboard-con .left-side .upper {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
+.recruitment-dashboard-con .left-side .upper{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
-.recruitment-dashboard-con .right-side {
-	width: 40%;
-	height: 100%;
+.recruitment-dashboard-con .right-side{
+    width: 40%;
+    height: 100%;
 }
 
 .recruitment-dashboard-con {
-	height: calc(100% - 70px);
-	background-color: white;
-	border-radius: 5px;
+    height: calc(100% - 70px);
+    background-color: white;
+    border-radius: 5px;
 }
 
-.recruitment-dashboard-card {
-	flex: 1;
+.recruitment-dashboard-card{
+    flex: 1;
 }
 
 .recruitment-dashboard-card-icon {
-	width: 30%;
-	height: 100%;
-	max-width: 36px;
-	max-height: 36px;
-	border-radius: 100%;
-	padding: 10px;
-	margin-right: 2px;
+    width: 30%;
+    height: 100%;
+    max-width: 36px;
+    max-height: 36px;
+    border-radius: 100%;
+    padding: 10px;
+    margin-right: 2px;
 }
 
-.right-side {
-	display: flex;
-	flex-direction: column;
-	height: 100% !important;
+.right-side{
+    display: flex;
+    flex-direction: column;
+    height: 100% !important;
 }
 
-.right-side-bottom {
-	height: 100%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	text-align: center;
+.right-side-bottom{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 
-.left-side-bottom {
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	width: 100%;
-	justify-content: space-between;
+.left-side-bottom{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-between;
 }
 
 .smallPie {
-	width: 33%;
-	text-align: center;
-	background-color: #fff;
-	border: 1px solid rgb(229, 230, 235);
-	border-radius: 2px;
+    width: 33%;
+    text-align: center;
+    background-color: #fff;
+    border: 1px solid rgb(229,230,235);
+    border-radius: 2px;
 }
 
+
 @media screen and (max-width: 1400px) {
-	.recruitment-dashboard-card-icon {
-		display: none;
-	}
+    .recruitment-dashboard-card-icon{
+        display: none;
+    }
 }
 
 @media screen and (max-width: 1250px) {
-	.smallPie {
-		width: calc(50% - 2px);
-	}
+    .smallPie{
+        width:calc(50% - 2px);
+    }
 }

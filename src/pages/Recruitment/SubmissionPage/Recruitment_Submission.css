@@ -1,21 +1,22 @@
+
 .recruitment-con_style {
-	height: calc(100% - 70px);
+    height: calc(100% - 70px);
 }
 
-.recruitment-form-con {
-	/*width: 100%;*/
-	display: flex;
-	flex-direction: column;
-	justify-content: space-around;
-	align-items: center;
+.recruitment-form-con{
+    /*width: 100%;*/
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
 }
 
-.recruitment-container {
-	width: 95%;
-	max-width: 600px;
-	/*background-color: chartreuse;*/
-	/*position: absolute;*/
-	/*top: 50%;*/
-	/*left: 50%;*/
-	/*transform: translate(-50%, -50%);*/
+.recruitment-container{
+    width:95%;
+    max-width:600px;
+    /*background-color: chartreuse;*/
+    /*position: absolute;*/
+    /*top: 50%;*/
+    /*left: 50%;*/
+    /*transform: translate(-50%, -50%);*/
 }
