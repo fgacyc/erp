@@ -102,7 +102,9 @@ export const Seats = () => {
 								if (idx > -1) {
 									updateDoc(serviceRef, {
 										...serviceData,
-										[sectionName]: serviceData[sectionName]?.toSpliced(idx, 1),
+										[sectionName]: serviceData[sectionName]
+											?.slice(0, idx)
+											.concat(serviceData[sectionName]?.slice(idx + 1) ?? ''), //serviceData[sectionName]?.toSpliced(idx, 1),
 									});
 								}
 							}}

@@ -35,7 +35,7 @@ export const PreScreeningComment: FunctionComponent<
 
 	function setCommentUserName(data: User) {
 		if (data.username === null) {
-			setUsername(data.full_name);
+			setUsername(data.full_name ?? '');
 		} else {
 			setUsername(data.username);
 		}

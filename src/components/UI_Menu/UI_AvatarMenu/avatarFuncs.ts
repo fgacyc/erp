@@ -1,6 +1,6 @@
-import { updateStaffInfoLocal } from '../../../tools/auth.ts';
+import { updateStaffInfoLocal } from '@/tools/auth';
 export function logout() {
-	updateStaffInfoLocal({ login_status: false }).then(() => {
+	updateStaffInfoLocal(undefined).then(() => {
 		// /login
 		window.location.href = '/login';
 	});

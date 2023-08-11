@@ -99,7 +99,7 @@ export default function PreScreening_table() {
 					setTimeout(() => inputRef.current?.focus(), 150);
 				}
 			},
-			render: (col, record) => (
+			render: (_, record) => (
 				<span
 					onClick={() => goToPreScreeningPage(record)}
 					className="pointer-cursor"
@@ -133,7 +133,7 @@ export default function PreScreening_table() {
 				return row.info.pastoral_team[0] === value;
 			},
 			filterMultiple: true,
-			render: (col, record) => (
+			render: (_, record) => (
 				<span
 					onClick={() => goToPreScreeningPage(record)}
 					className="pointer-cursor"
@@ -215,7 +215,7 @@ export default function PreScreening_table() {
 				return row.info.pastoral_team[1] === value;
 			},
 			filterMultiple: true,
-			render: (col, record) => (
+			render: (_, record) => (
 				<span
 					onClick={() => goToPreScreeningPage(record)}
 					className="pointer-cursor"
@@ -278,7 +278,7 @@ export default function PreScreening_table() {
 				return row.pre_screening.status === value;
 			},
 			filterMultiple: false,
-			render: (col, record) => (
+			render: (_, record) => (
 				<span onClick={() => goToPreScreeningPage(record)}>
 					{record.pre_screening.status === null && (
 						<span style={{ color: 'black' }}>Pending</span>
@@ -313,7 +313,7 @@ export default function PreScreening_table() {
 				return getEvaluationStatus(row) === value;
 			},
 			filterMultiple: false,
-			render: (col, record) => (
+			render: (_, record) => (
 				<span>
 					{getEvaluationStatus(record) === 'rejected' && (
 						<span style={{ color: 'red' }}>

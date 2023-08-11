@@ -76,7 +76,7 @@ export async function getLoginStatus() {
 	}
 }
 
-export async function setStaffInfoLocal(data: User) {
+export async function setStaffInfoLocal(data?: User) {
 	try {
 		await set('staff', data);
 		return true;
@@ -90,7 +90,8 @@ export async function getStaffInfoLocal() {
 	return await get('staff');
 }
 
-export async function updateStaffInfoLocal(data: User) {
+export async function updateStaffInfoLocal(data?: User) {
+	if (!data) setStaffInfoLocal(undefined); //logout
 	const old = await getStaffInfoLocal();
 	const new_data = Object.assign(old, data);
 	await setStaffInfoLocal(new_data);

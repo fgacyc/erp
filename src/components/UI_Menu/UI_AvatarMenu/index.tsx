@@ -37,7 +37,7 @@ const AvatarMenu = () => {
 				</Avatar>
 			) : (
 				<Avatar style={{ backgroundColor: '#3370ff' }} className="avatar">
-					{username && username[0].toUpperCase()}
+					{username && username[0]?.toUpperCase()}
 				</Avatar>
 			)}
 		</Dropdown>
