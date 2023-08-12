@@ -6,7 +6,7 @@ module.exports = {
 	},
 	env: {
 		browser: true,
-		es2020: true,
+		es2022: true,
 	},
 	extends: [
 		'eslint:recommended',
@@ -38,7 +38,7 @@ module.exports = {
 			'warn',
 			{ allowConstantExport: true },
 		],
-		'no-unused-vars': ['warn'],
+		'@typescript-eslint/no-unused-vars': ['warn'],
 		'linebreak-style': ['error', 'unix'],
 		quotes: ['error', 'single'],
 		semi: ['error', 'always'],
