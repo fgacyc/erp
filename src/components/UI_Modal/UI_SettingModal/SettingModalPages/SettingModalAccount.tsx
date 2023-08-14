@@ -141,7 +141,7 @@ export const SettingModalAccount = () => {
 				>
 					<div>
 						<div>CYC ID</div>
-						<div className="setting-desc-text-grey">{cyc_id && cyc_id}</div>
+						<div className="setting-desc-text-grey">{cyc_id ?? '-'}</div>
 					</div>
 				</div>
 				<div

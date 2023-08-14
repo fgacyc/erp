@@ -69,10 +69,10 @@ export function UI_SettingModalLeft() {
 				<div style={{ width: 180, height: 40 }}>
 					<div style={{ display: 'flex', justifyContent: 'space-between' }}>
 						<div style={{ fontSize: 14, fontWeight: 'bold' }}>
-							{username && username}
+							{username ?? '-'}
 						</div>
 						<div title="CYC ID" style={{ cursor: 'default' }}>
-							{cyc_id && cyc_id}
+							{cyc_id ?? '-'}
 						</div>
 					</div>
 
