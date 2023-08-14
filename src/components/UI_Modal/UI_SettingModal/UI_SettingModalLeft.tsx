@@ -24,7 +24,8 @@ const IconSecurity = () => {
 	);
 };
 
-export const UI_SettingModalLeft = () => {
+export function UI_SettingModalLeft() {
+	const cyc_id = useSettingModalStore((state) => state.CYC_ID);
 	const username = useSettingModalStore((state) => state.username);
 	const email = useSettingModalStore((state) => state.email);
 	const avatar = useSettingModalStore((state) => state.avatar);
@@ -66,9 +67,15 @@ export const UI_SettingModalLeft = () => {
 					username={username}
 				/>
 				<div style={{ width: 180, height: 40 }}>
-					<div style={{ fontSize: 14, fontWeight: 'bold' }}>
-						{username && username}
+					<div style={{ display: 'flex', justifyContent: 'space-between' }}>
+						<div style={{ fontSize: 14, fontWeight: 'bold' }}>
+							{username ?? '-'}
+						</div>
+						<div title="CYC ID" style={{ cursor: 'default' }}>
+							{cyc_id ?? '-'}
+						</div>
 					</div>
+
 					<Typography.Paragraph
 						style={{ fontSize: 12 }}
 						ellipsis={{
@@ -101,4 +108,4 @@ export const UI_SettingModalLeft = () => {
 			</div>
 		</div>
 	);
-};
+}
