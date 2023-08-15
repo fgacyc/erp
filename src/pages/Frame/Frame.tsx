@@ -166,7 +166,7 @@ const Frame = () => {
 							key="4"
 							title={
 								<>
-									<LuGraduationCap style={{ marginRight: 16 }} />
+									<LuGraduationCap className="arco-icon" />
 									Education
 								</>
 							}
@@ -190,7 +190,7 @@ const Frame = () => {
 							key="6"
 							title={
 								<>
-									<BiHomeSmile style={{ marginRight: 16 }} />
+									<BiHomeSmile className="arco-icon" />
 									My group
 								</>
 							}
