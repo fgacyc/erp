@@ -1,14 +1,15 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Input, Button, Checkbox } from '@arco-design/web-react';
 import './Login.css';
+// import { login } from '@/tools/auth';
 
 const Login = () => {
 	const navigate = useNavigate();
 
-	const [CYC_ID, setCYC_ID] = useState('0');
-	const [password, setPassword] = useState('');
-	const [rememberMe, setRememberMe] = useState(false);
+	// const [CYC_ID, setCYC_ID] = useState('0');
+	// const [password, setPassword] = useState('');
+	// const [rememberMe, setRememberMe] = useState(false);
 
 	async function handleLogin(e: FormEvent) {
 		e.preventDefault();
@@ -43,20 +44,20 @@ const Login = () => {
 						style={{ width: 350, marginBottom: 15 }}
 						addBefore="CYC"
 						type="number"
-						onChange={setCYC_ID}
+						// onChange={setCYC_ID}
 						placeholder="Enter CYC ID"
 					/>
 					<Input.Password
 						style={{ width: 350, marginBottom: 15 }}
 						placeholder="Enter password"
-						value={password}
-						onChange={setPassword}
+						// value={password}
+						// onChange={setPassword}
 						type="password"
 						autoComplete="on"
 					/>
 					<Checkbox
 						style={{ width: 350, marginBottom: 20 }}
-						onChange={setRememberMe}
+						// onChange={setRememberMe}
 					>
 						Remember me
 					</Checkbox>

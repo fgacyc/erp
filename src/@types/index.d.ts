@@ -146,7 +146,6 @@ declare global {
 		email: string;
 		password: string;
 		role: string;
-		position: object;
 		ministry: MinistryTeam[] | string;
 		position: Position;
 		recent_login: EpochTimeStamp;
@@ -255,7 +254,6 @@ declare global {
 		full_name?: string;
 		username: string;
 		email: string;
-		ministry: MinistryTeam[];
 		CYC_ID: number;
 		password: string;
 		role: string;

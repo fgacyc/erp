@@ -28,15 +28,15 @@ const groups = [
 ];
 
 interface InterviewScopeSelectProps {
-	value: string;
-	setScope: (newMinistryScope: string) => void;
+	value: string[];
+	setScope: (newMinistryScope: string[]) => void;
 }
 
 const InterviewScopeSelect: FunctionComponent<InterviewScopeSelectProps> = ({
 	value,
 	setScope,
 }) => {
-	function changeHandler(value: string) {
+	function changeHandler(value: string[]) {
 		const payload = [
 			{
 				ministry: 'interviewer',

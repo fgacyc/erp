@@ -14,7 +14,7 @@ export const useSettingModalStore = create<{
 	ministry_name: string[];
 	ministry_role: string;
 	ministry_interviewer: boolean;
-	ministry_scope: string;
+	ministry_scope: string[];
 	avatar: string;
 	currentTab: number;
 	setCurrentTab: (tab: number) => void;
@@ -27,7 +27,7 @@ export const useSettingModalStore = create<{
 	setMinistryName: (newMinistryName: string[]) => void;
 	setMinistryRole: (newMinistryRole: string) => void;
 	setMinistryInterviewer: (isMinistryInterviewer: boolean) => void;
-	setMinistryScope: (newMinistryScope: string) => void;
+	setMinistryScope: (newMinistryScope: string[]) => void;
 	setAvatar: (newAvatar: string) => void;
 	showAllInfo: () => void;
 	initStaff: () => Promise<void>;
@@ -43,14 +43,13 @@ export const useSettingModalStore = create<{
 	ministry_name: [],
 	ministry_role: '',
 	ministry_interviewer: false,
-	ministry_scope: '',
+	ministry_scope: [],
 	avatar: '',
 
 	initStaff: async () => {
 		console.log('initStaff');
 		const mockUser: User = {
 			_id: '64b07ec76da3becc1eedb2fb',
-			CYC_ID: 123,
 			full_name: 'John Doe',
 			username: 'johndoe',
 			email: 'johndoe@example.com',
@@ -60,6 +59,7 @@ export const useSettingModalStore = create<{
 					scope: ['project management', 'software development'],
 				},
 			],
+			CYC_ID: 12345,
 			password: 'hashed_password',
 			role: 'super_admin',
 			picture:
@@ -106,12 +106,12 @@ export const useSettingModalStore = create<{
 		set({
 			ministry_interviewer:
 				mockUser.ministry.length > 0
-					? mockUser.ministry[0].ministry === 'interviewer'
+					? mockUser.ministry[0]?.ministry === 'interviewer'
 					: false,
 		});
 		set({
 			ministry_scope:
-				mockUser.ministry.length > 0 ? mockUser.ministry[0].scope : null,
+				mockUser.ministry.length > 0 ? mockUser.ministry[0]?.scope : [],
 		});
 		set({ avatar: mockUser.picture });
 	},
@@ -132,7 +132,7 @@ export const useSettingModalStore = create<{
 		set({ ministry_role: newMinistryRole }),
 	setMinistryInterviewer: (isMinistryInterviewer: boolean) =>
 		set({ ministry_interviewer: isMinistryInterviewer }),
-	setMinistryScope: (newMinistryScope: string) =>
+	setMinistryScope: (newMinistryScope: string[]) =>
 		set({ ministry_scope: newMinistryScope }),
 	setAvatar: (newAvatar: string) => set({ avatar: newAvatar }),
 
