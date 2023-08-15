@@ -11,8 +11,7 @@ import { useEffect, useState } from 'react';
 import { Menu } from '@arco-design/web-react';
 const MenuItem = Menu.Item;
 const SubMenu = Menu.SubMenu;
-import { getLoginStatus, ifStaffInfoLocalExist } from '@/tools/auth';
-import HeadBarBtns from '@/components/UI_Menu/UI_HeaderBarMenu/';
+import HeadBarBtns from '@/components/UI_Menu/UI_HeaderBarMenu';
 import UIFloatingHelpMenu from '@/components/UI_Menu/UI_FloatingHelpMenu';
 import { menuPermission } from './AuthorityDetection';
 import { useSettingModalStore } from '@/components/UI_Modal/UI_SettingModal/settingModalStore';
@@ -26,30 +25,15 @@ const Frame = () => {
 
 	const staff = useSettingModalStore((state) => state.staff);
 	const initStaff = useSettingModalStore((state) => state.initStaff);
-
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		async function checkLogin() {
-			const StaffInfoLocalExist = await ifStaffInfoLocalExist();
-			const loginStatus = await getLoginStatus();
-			// console.log(StaffInfoLocalExist, loginStatus)
-			if (!StaffInfoLocalExist || !loginStatus) {
-				navigate('/login');
-			} else {
-				// login success
-				initStaff().then(() => {
-					path === '/' && navigate('/recruitment_dashboard');
-				});
-				//navigate("/recruitment_dashboard")
-				//navigate("/recruitment_interview")
-				//navigate("/recruitment_pre_screening")
-			}
-		}
-		checkLogin();
-		menuPermission().then((res) => {
-			if (!res) return;
-			setTabs(res);
+		initStaff().then(() => {
+			path === '/' && navigate('/recruitment_dashboard');
+			menuPermission().then((res) => {
+				if (!res) return;
+				setTabs(res);
+			});
 		});
 	}, [initStaff, navigate, path]);
 	const [tabs, setTabs] = useState({
@@ -181,7 +165,7 @@ const Frame = () => {
 							key="4"
 							title={
 								<>
-									<LuGraduationCap style={{ marginRight: 16 }} />
+									<LuGraduationCap className="arco-icon" />
 									Education
 								</>
 							}
@@ -205,7 +189,7 @@ const Frame = () => {
 							key="6"
 							title={
 								<>
-									<BiHomeSmile style={{ marginRight: 16 }} />
+									<BiHomeSmile className="arco-icon" />
 									My group
 								</>
 							}
