@@ -30,6 +30,11 @@ const Login = () => {
 					style={{ width: '200px', height: '200px' }}
 				/>
 				<h1>FGA CYC</h1>
+				{import.meta.env['VITE_NODE_ENV'] === 'development' ? (
+					<span className="text-red-600 text-lg">DEV</span>
+				) : (
+					''
+				)}
 				<form
 					style={{ display: 'flex', flexDirection: 'column' }}
 					onSubmit={handleLogin}
