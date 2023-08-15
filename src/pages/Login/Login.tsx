@@ -2,7 +2,6 @@ import { FormEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Input, Button, Checkbox } from '@arco-design/web-react';
 import './Login.css';
-import { login } from '@/tools/auth';
 
 const Login = () => {
 	const navigate = useNavigate();

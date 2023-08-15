@@ -11,7 +11,7 @@ import { useEffect, useState } from 'react';
 import { Menu } from '@arco-design/web-react';
 const MenuItem = Menu.Item;
 const SubMenu = Menu.SubMenu;
-import { getLoginStatus, ifStaffInfoLocalExist } from '@/tools/auth';
+// import { getLoginStatus, ifStaffInfoLocalExist } from '@/tools/auth';
 import HeadBarBtns from '@/components/UI_Menu/UI_HeaderBarMenu/';
 import UIFloatingHelpMenu from '@/components/UI_Menu/UI_FloatingHelpMenu';
 import { menuPermission } from './AuthorityDetection';
