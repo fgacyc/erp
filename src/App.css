@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 body {
 	margin: 0;
 	padding: 0;
@@ -55,7 +59,7 @@ body {
 	width: 400px !important;
 }
 
-.arco-menu-collapse-button{
+.arco-menu-collapse-button {
 	/*position: relative;*/
 	bottom: 20px;
 }
@@ -64,21 +68,21 @@ body {
 CSS Framework
 */
 
-.flex-cc{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.flex-cc {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
-.flex-cc-col{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.flex-cc-col {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
 
-.flex-csb{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.flex-csb {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
