@@ -13,12 +13,13 @@ const Login = () => {
 
 	async function handleLogin(e: FormEvent) {
 		e.preventDefault();
-		const res = await login(CYC_ID, password, rememberMe);
-		if (res) {
-			navigate('/');
-		} else {
-			alert('Login failed');
-		}
+		// const res = await login(CYC_ID, password, rememberMe);
+		// if (res) {
+		// 	navigate('/');
+		// } else {
+		// 	alert('Login failed');
+		// }
+		navigate('/');
 	}
 
 	return (

@@ -26,30 +26,15 @@ const Frame = () => {
 
 	const staff = useSettingModalStore((state) => state.staff);
 	const initStaff = useSettingModalStore((state) => state.initStaff);
-
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		async function checkLogin() {
-			const StaffInfoLocalExist = await ifStaffInfoLocalExist();
-			const loginStatus = await getLoginStatus();
-			// console.log(StaffInfoLocalExist, loginStatus)
-			if (!StaffInfoLocalExist || !loginStatus) {
-				navigate('/login');
-			} else {
-				// login success
-				initStaff().then(() => {
-					path === '/' && navigate('/recruitment_dashboard');
-				});
-				//navigate("/recruitment_dashboard")
-				//navigate("/recruitment_interview")
-				//navigate("/recruitment_pre_screening")
-			}
-		}
-		checkLogin();
-		menuPermission().then((res) => {
-			if (!res) return;
-			setTabs(res);
+		initStaff().then(() => {
+			path === '/' && navigate('/recruitment_dashboard');
+			menuPermission().then((res) => {
+				if (!res) return;
+				setTabs(res);
+			});
 		});
 	}, [initStaff, navigate, path]);
 	const [tabs, setTabs] = useState({
