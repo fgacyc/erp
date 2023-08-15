@@ -87,7 +87,7 @@ const Frame = () => {
 	}, []);
 
 	return (
-		<div className={'container'}>
+		<div>
 			<div className="menu-demo">
 				<Menu
 					mode="horizontal"
@@ -100,7 +100,11 @@ const Frame = () => {
 						style={{ padding: 0, marginLeft: 0, marginRight: 38 }}
 					>
 						<img
-							src={'/CYC_Logo_black_x120.png'}
+							src={
+								import.meta.env['VITE_NODE_ENV'] === 'development'
+									? '/cyc-plain-dev.png'
+									: '/CYC_Logo_black_x120.png'
+							}
 							alt={'logo'}
 							className="head-menu-logo"
 						/>
