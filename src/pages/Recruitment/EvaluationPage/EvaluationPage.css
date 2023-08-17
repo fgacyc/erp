@@ -1,0 +1,86 @@
+.rubber-stamp-con {
+	position: absolute;
+	top: 40px;
+	right: 40px;
+	width: 150px;
+	height: 150px;
+	border-radius: 50%;
+	/*border: 5px solid rgba(0, 180, 42,0.5);*/
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	/*color: rgba(0, 180, 42,0.5);*/
+	/*background-color: blue;*/
+}
+
+.rubber-stamp-container {
+	width: 140px;
+	height: 140px;
+	border-radius: 50%;
+	/*border: 2px solid rgba(0, 180, 42,0.5);*/
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.rubber-stamp-body {
+	width: 130px;
+	height: 130px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	transform: rotate(-25deg);
+}
+
+.rubber-stamp-body div:first-child {
+	font-size: 40px;
+	font-weight: 600;
+}
+
+.rubber-stamp-body-text {
+	font-size: 12px;
+	font-weight: 600;
+	text-align: center;
+}
+
+.ai-summary-con {
+	width: 100%;
+}
+
+.evaluation-page-header {
+	width: 100%;
+	display: flex;
+	justify-content: flex-start;
+	/*border: 1px solid #000;*/
+	position: absolute;
+	top: 30px;
+	left: 30px;
+}
+
+.evaluation-page-header-finished {
+	display: flex;
+	width: 100%;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.evaluation-next-time-button {
+	width: 100px;
+	margin-right: 10px;
+	color: white;
+}
+
+.evaluation-kiv-button {
+	width: 100px;
+	margin-right: 10px;
+	color: white;
+}
+
+.evaluation-pass-button {
+	width: 100px;
+	margin-right: 10px;
+	color: white;
+}

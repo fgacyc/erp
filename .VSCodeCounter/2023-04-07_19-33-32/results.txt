@@ -1,0 +1,77 @@
+Date : 2023-04-07 19:33:32
+Directory : e:\Code Everyday\2023-04\0405-CYC-ENTS\CYC-ENTS
+Total : 33 files,  4159 codes, 61 comments, 202 blanks, all 4422 lines
+
+Languages
++----------------+------------+------------+------------+------------+------------+
+| language       | files      | code       | comment    | blank      | total      |
++----------------+------------+------------+------------+------------+------------+
+| JSON           |          2 |      2,572 |          0 |          2 |      2,574 |
+| JavaScript JSX |         12 |        862 |         38 |         78 |        978 |
+| JavaScript     |          7 |        537 |         22 |         93 |        652 |
+| CSS            |          8 |        160 |          1 |         25 |        186 |
+| HTML           |          1 |         13 |          0 |          1 |         14 |
+| Markdown       |          1 |         13 |          0 |          3 |         16 |
+| XML            |          2 |          2 |          0 |          0 |          2 |
++----------------+------------+------------+------------+------------+------------+
+
+Directories
++-----------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                          | files      | code       | comment    | blank      | total      |
++-----------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                             |         33 |      4,159 |         61 |        202 |      4,422 |
+| . (Files)                                                                                     |          5 |      2,603 |          1 |          8 |      2,612 |
+| public                                                                                        |          1 |          1 |          0 |          0 |          1 |
+| src                                                                                           |         27 |      1,555 |         60 |        194 |      1,809 |
+| src (Files)                                                                                   |          5 |         95 |         16 |         14 |        125 |
+| src\ORM                                                                                       |          1 |         22 |          0 |          3 |         25 |
+| src\assets                                                                                    |          1 |          1 |          0 |          0 |          1 |
+| src\components                                                                                |         16 |        930 |         25 |         90 |      1,045 |
+| src\components\Attendance                                                                     |          2 |        251 |         11 |         20 |        282 |
+| src\components\Dashboard                                                                      |          3 |        142 |          7 |         16 |        165 |
+| src\components\Discussion                                                                     |          4 |        169 |          2 |         23 |        194 |
+| src\components\Frame                                                                          |          2 |        142 |          4 |         11 |        157 |
+| src\components\Login                                                                          |          2 |         55 |          0 |          8 |         63 |
+| src\components\Members                                                                        |          3 |        171 |          1 |         12 |        184 |
+| src\firebase                                                                                  |          4 |        507 |         19 |         87 |        613 |
++-----------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-----------------------------------------------------------------------------------------------+----------------+------------+------------+------------+------------+
+| filename                                                                                      | language       | code       | comment    | blank      | total      |
++-----------------------------------------------------------------------------------------------+----------------+------------+------------+------------+------------+
+| e:\Code Everyday\2023-04\0405-CYC-ENTS\CYC-ENTS\README.md                                     | Markdown       |         13 |          0 |          3 |         16 |
+| e:\Code Everyday\2023-04\0405-CYC-ENTS\CYC-ENTS\index.html                                    | HTML           |         13 |          0 |          1 |         14 |
+| e:\Code Everyday\2023-04\0405-CYC-ENTS\CYC-ENTS\package-lock.json                             | JSON           |      2,545 |          0 |          1 |      2,546 |
+| e:\Code Everyday\2023-04\0405-CYC-ENTS\CYC-ENTS\package.json                                  | JSON           |         27 |          0 |          1 |         28 |
+| e:\Code Everyday\2023-04\0405-CYC-ENTS\CYC-ENTS\public\vite.svg                               | XML            |          1 |          0 |          0 |          1 |
+| e:\Code Everyday\2023-04\0405-CYC-ENTS\CYC-ENTS\src\App.css                                   | CSS            |          5 |          0 |          0 |          5 |
+| e:\Code Everyday\2023-04\0405-CYC-ENTS\CYC-ENTS\src\App.jsx                                   | JavaScript JSX |         20 |         14 |          3 |         37 |
+| e:\Code Everyday\2023-04\0405-CYC-ENTS\CYC-ENTS\src\ORM\User.js                               | JavaScript     |         22 |          0 |          3 |         25 |
+| e:\Code Everyday\2023-04\0405-CYC-ENTS\CYC-ENTS\src\StatusContainer.js                        | JavaScript     |          3 |          2 |          1 |          6 |
+| e:\Code Everyday\2023-04\0405-CYC-ENTS\CYC-ENTS\src\assets\react.svg                          | XML            |          1 |          0 |          0 |          1 |
+| e:\Code Everyday\2023-04\0405-CYC-ENTS\CYC-ENTS\src\components\Attendance\Attendance.css      | CSS            |          0 |          0 |          1 |          1 |
+| e:\Code Everyday\2023-04\0405-CYC-ENTS\CYC-ENTS\src\components\Attendance\Attendance.jsx      | JavaScript JSX |        251 |         11 |         19 |        281 |
+| e:\Code Everyday\2023-04\0405-CYC-ENTS\CYC-ENTS\src\components\Dashboard\Dashboard.css        | CSS            |          0 |          0 |          1 |          1 |
+| e:\Code Everyday\2023-04\0405-CYC-ENTS\CYC-ENTS\src\components\Dashboard\Dashboard.jsx        | JavaScript JSX |        109 |          7 |         10 |        126 |
+| e:\Code Everyday\2023-04\0405-CYC-ENTS\CYC-ENTS\src\components\Dashboard\PieChart.jsx         | JavaScript JSX |         33 |          0 |          5 |         38 |
+| e:\Code Everyday\2023-04\0405-CYC-ENTS\CYC-ENTS\src\components\Discussion\Comment.jsx         | JavaScript JSX |         51 |          1 |          4 |         56 |
+| e:\Code Everyday\2023-04\0405-CYC-ENTS\CYC-ENTS\src\components\Discussion\Discussion.css      | CSS            |         39 |          0 |          8 |         47 |
+| e:\Code Everyday\2023-04\0405-CYC-ENTS\CYC-ENTS\src\components\Discussion\Discussion.jsx      | JavaScript JSX |         37 |          0 |          3 |         40 |
+| e:\Code Everyday\2023-04\0405-CYC-ENTS\CYC-ENTS\src\components\Discussion\DiscussionModal.jsx | JavaScript JSX |         42 |          1 |          8 |         51 |
+| e:\Code Everyday\2023-04\0405-CYC-ENTS\CYC-ENTS\src\components\Frame\Frame.css                | CSS            |         22 |          1 |          4 |         27 |
+| e:\Code Everyday\2023-04\0405-CYC-ENTS\CYC-ENTS\src\components\Frame\Frame.jsx                | JavaScript JSX |        120 |          3 |          7 |        130 |
+| e:\Code Everyday\2023-04\0405-CYC-ENTS\CYC-ENTS\src\components\Login\Login.css                | CSS            |         14 |          0 |          1 |         15 |
+| e:\Code Everyday\2023-04\0405-CYC-ENTS\CYC-ENTS\src\components\Login\Login.jsx                | JavaScript JSX |         41 |          0 |          7 |         48 |
+| e:\Code Everyday\2023-04\0405-CYC-ENTS\CYC-ENTS\src\components\Members\AddMembersModal.jsx    | JavaScript JSX |         89 |          0 |          4 |         93 |
+| e:\Code Everyday\2023-04\0405-CYC-ENTS\CYC-ENTS\src\components\Members\Members.css            | CSS            |         18 |          0 |          2 |         20 |
+| e:\Code Everyday\2023-04\0405-CYC-ENTS\CYC-ENTS\src\components\Members\Members.jsx            | JavaScript JSX |         64 |          1 |          6 |         71 |
+| e:\Code Everyday\2023-04\0405-CYC-ENTS\CYC-ENTS\src\firebase\analytics.js                     | JavaScript     |         12 |          5 |          4 |         21 |
+| e:\Code Everyday\2023-04\0405-CYC-ENTS\CYC-ENTS\src\firebase\authHandler.js                   | JavaScript     |        191 |          6 |         24 |        221 |
+| e:\Code Everyday\2023-04\0405-CYC-ENTS\CYC-ENTS\src\firebase\storageHandler.js                | JavaScript     |         67 |          1 |         13 |         81 |
+| e:\Code Everyday\2023-04\0405-CYC-ENTS\CYC-ENTS\src\firebase\storeHandler.js                  | JavaScript     |        237 |          7 |         46 |        290 |
+| e:\Code Everyday\2023-04\0405-CYC-ENTS\CYC-ENTS\src\index.css                                 | CSS            |         62 |          0 |          8 |         70 |
+| e:\Code Everyday\2023-04\0405-CYC-ENTS\CYC-ENTS\src\main.jsx                                  | JavaScript JSX |          5 |          0 |          2 |          7 |
+| e:\Code Everyday\2023-04\0405-CYC-ENTS\CYC-ENTS\vite.config.js                                | JavaScript     |          5 |          1 |          2 |          8 |
+| Total                                                                                         |                |      4,159 |         61 |        202 |      4,422 |
++-----------------------------------------------------------------------------------------------+----------------+------------+------------+------------+------------+

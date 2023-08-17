@@ -1,0 +1,93 @@
+.menu-side {
+	height: calc(100vh - 58px) !important;
+}
+
+.arco-menu-inner::-webkit-scrollbar {
+	width: 4px;
+}
+
+.arco-menu-inner::-webkit-scrollbar-track {
+	background: #e9ecef;
+	border-radius: 2px;
+}
+
+.arco-menu-inner::-webkit-scrollbar-thumb {
+	background: #ced4da;
+}
+
+.arco-menu-inner::-webkit-scrollbar-thumb:hover {
+	background:#748ffc;
+}
+
+.menu-lower {
+	display: flex;
+	flex-direction: row;
+	overflow: hidden;
+}
+
+.function-area {
+	width: 100%;
+	height: calc(100vh - 58px);
+	overflow-y: auto;
+	background-color: #f8f9fa;
+	box-sizing: border-box;
+	/*padding: 20px 15%;*/
+}
+
+.function-area::-webkit-scrollbar {
+	width: 0;
+}
+
+.top-menu {
+	display: flex;
+	flex-direction: row;
+}
+
+.no-hover:hover {
+	background-color: transparent !important;
+	color: unset !important;
+}
+
+.head-menu-logo-con {
+	width: 80px;
+	height: 30px;
+}
+
+.head-menu-logo {
+	width: 100px;
+	position: relative;
+	top: 5px;
+}
+
+.head-bar-btns {
+	display: inline-block;
+	float: right;
+	line-height: 40px;
+}
+
+.head-bar-btn {
+	margin-right: 15px;
+	color: #4e5969 !important;
+	background-color: white !important;
+	border: 1px solid #f2f3f5 !important;
+	font-size: 18px;
+	font-weight: bold;
+	position: relative;
+}
+
+.head-bar-btn:hover {
+	background-color: #f2f3f5 !important;
+}
+
+.head-bar-btn:active {
+	background-color: #e5e6eb !important;
+}
+
+/* Override CSS */
+.arco-menu-collapse-button {
+	right: 15px !important;
+	bottom: 30px !important;
+	border: none !important;
+	width: 30px !important;
+	height: 30px !important;
+}
