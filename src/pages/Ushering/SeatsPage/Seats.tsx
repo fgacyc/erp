@@ -41,22 +41,22 @@ export const Seats = () => {
 	const defaultStruct = {
 		L5: {
 			zone_A: {
-				broken: ['3,5'],
+				broken: [],
 				col: 12,
 				row: 5,
 			},
 			zone_B: {
-				broken: ['7,3'],
+				broken: [],
 				col: 12,
 				row: 5,
 			},
 			zone_C: {
-				broken: ['2,3'],
+				broken: [],
 				col: 12,
 				row: 5,
 			},
 			zone_D: {
-				broken: ['3,5'],
+				broken: [],
 				col: 12,
 				row: 5,
 			},
@@ -85,13 +85,7 @@ export const Seats = () => {
 						<RiToolsFill
 							onClick={() => alert('broken seat')}
 							key={`${r}-${c}`}
-							style={{
-								background: 'rgb(245,63,63)',
-								color: '#fff',
-								border: '1px solid #ccc',
-								padding: '5px',
-								textAlign: 'center',
-							}}
+							className="bg-[rgb(245,63,63)] text-white border border-[#ccc] p-[5px] text-center text-[25px]"
 						/>
 					) : isOccupied ? (
 						<TiTick
@@ -109,13 +103,7 @@ export const Seats = () => {
 								}
 							}}
 							key={`${r}-${c}`}
-							style={{
-								background: '#4bb543',
-								color: '#fff',
-								border: '1px solid #ccc',
-								padding: '5px',
-								textAlign: 'center',
-							}}
+							className="bg-[#4bb543] text-white border border-[#ccc] p-[5px] text-center text-[25px]"
 						/>
 					) : (
 						<PiArmchairFill
@@ -124,13 +112,7 @@ export const Seats = () => {
 								serviceData[sectionName]?.push(seatCoordinates);
 								updateDoc(serviceRef, serviceData);
 							}}
-							style={{
-								background: 'rgb(22,93,255)',
-								color: '#fff',
-								border: '1px solid #ccc',
-								padding: '5px',
-								textAlign: 'center',
-							}}
+							className="bg-[rgb(22,93,255)] text-white border border-[#ccc] p-[5px] text-center text-[25px]"
 						/>
 					),
 				);
@@ -152,12 +134,11 @@ export const Seats = () => {
 			ref={functionAreaRef}
 		>
 			<div
+				className="grid gap-3"
 				style={{
-					display: 'grid',
 					gridTemplateColumns: `repeat(${
 						Object.entries(seatsData['L5']).length
 					}, minmax(400px, 1fr))`,
-					gap: '10px',
 				}}
 			>
 				{Object.entries(seatsData['L5'])
@@ -173,22 +154,15 @@ export const Seats = () => {
 					.map(([sectionName, section]) => (
 						<div
 							key={sectionName}
-							style={{
-								// width: '100%',
-								width: '350px',
-								margin: '10px',
-								padding: '10px',
-								border: '1px solid #ccc',
-							}}
+							className="w-[400px] m-[10px] p-[10px] border border-[#ccc]"
 						>
-							<h3 style={{ width: '100%', textAlign: 'center' }}>
+							<h3 className="w-full text-center">
 								{sectionName.replace('_', ' ').toUpperCase()}
 							</h3>
 							<div
+								className="grid gap-2"
 								style={{
-									display: 'grid',
 									gridTemplateColumns: `repeat(${section.col}, minmax(0, 1fr))`,
-									gap: '5px',
 								}}
 							>
 								{generateSectionGrid(
@@ -213,9 +187,22 @@ export const Seats = () => {
 			>
 				Reset
 			</Button>
-			<pre>{JSON.stringify(serviceData, null, 2)}</pre>
+			{/* <pre>{JSON.stringify(serviceData, null, 2)}</pre> */}
 		</div>
 	) : (
 		<div className="app-component full-screen-app-component">Loading</div>
+		// <Button
+		// 	onClick={() => {
+		// 		updateDoc(seatsRef, defaultStruct);
+		// 		updateDoc(serviceRef, {
+		// 			zone_A: [],
+		// 			zone_B: [],
+		// 			zone_C: [],
+		// 			zone_D: [],
+		// 		});
+		// 	}}
+		// >
+		// 	Reset
+		// </Button>
 	);
 };
