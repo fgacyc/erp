@@ -1,0 +1,24 @@
+.registration-container {
+	margin: 0 auto;
+	max-width: 600px;
+	overflow: auto !important;
+}
+
+/* .btn-registration{
+    margin-top: 30px;
+} */
+
+@media screen and (max-width: 768px) {
+	.registration-container {
+		margin: 0 15px;
+	}
+}
+
+.arco-form-label-item {
+	text-align: left !important;
+	width: 150px !important;
+}
+
+.arco-col-5 {
+	flex: none !important;
+}
