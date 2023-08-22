@@ -2,25 +2,27 @@ import { FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Input, Button, Checkbox } from '@arco-design/web-react';
 import './Login.css';
+import { useAuth0 } from '@auth0/auth0-react';
 // import { login } from '@/tools/auth';
 
 const Login = () => {
-	const navigate = useNavigate();
+	// const navigate = useNavigate();
 
-	// const [CYC_ID, setCYC_ID] = useState('0');
-	// const [password, setPassword] = useState('');
-	// const [rememberMe, setRememberMe] = useState(false);
+	// // const [CYC_ID, setCYC_ID] = useState('0');
+	// // const [password, setPassword] = useState('');
+	// // const [rememberMe, setRememberMe] = useState(false);
 
-	async function handleLogin(e: FormEvent) {
-		e.preventDefault();
-		// const res = await login(CYC_ID, password, rememberMe);
-		// if (res) {
-		// 	navigate('/');
-		// } else {
-		// 	alert('Login failed');
-		// }
-		navigate('/');
-	}
+	// async function handleLogin(e: FormEvent) {
+	// 	e.preventDefault();
+	// 	// const res = await login(CYC_ID, password, rememberMe);
+	// 	// if (res) {
+	// 	// 	navigate('/');
+	// 	// } else {
+	// 	// 	alert('Login failed');
+	// 	// }
+	// 	navigate('/');
+	// }
+	const { loginWithRedirect } = useAuth0();
 
 	return (
 		<div className="login-bg login-container">
@@ -36,35 +38,14 @@ const Login = () => {
 				) : (
 					''
 				)}
-				<form
-					style={{ display: 'flex', flexDirection: 'column' }}
-					onSubmit={handleLogin}
+
+				<Button
+					type="primary"
+					htmlType="submit"
+					onClick={() => loginWithRedirect()}
 				>
-					<Input
-						style={{ width: 350, marginBottom: 15 }}
-						addBefore="CYC"
-						type="number"
-						// onChange={setCYC_ID}
-						placeholder="Enter CYC ID"
-					/>
-					<Input.Password
-						style={{ width: 350, marginBottom: 15 }}
-						placeholder="Enter password"
-						// value={password}
-						// onChange={setPassword}
-						type="password"
-						autoComplete="on"
-					/>
-					<Checkbox
-						style={{ width: 350, marginBottom: 20 }}
-						// onChange={setRememberMe}
-					>
-						Remember me
-					</Checkbox>
-					<Button type="primary" htmlType="submit">
-						Log In
-					</Button>
-				</form>
+					Log In
+				</Button>
 			</div>
 		</div>
 	);
