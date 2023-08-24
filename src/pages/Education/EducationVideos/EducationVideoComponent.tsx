@@ -47,6 +47,7 @@ function EducationVideoComponent() {
     }
   
     function onTimeUpdate(evt: MediaTimeUpdateEvent) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const timeProgress = (evt as any).detail.currentTime;
       console.log('Check timeProgress ', timeProgress);
     }
