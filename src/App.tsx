@@ -22,6 +22,8 @@ import EvangelismPage from './pages/Events/Evangelism/Evangelism/Evangelism';
 import UserManagementDashboard from './pages/UserManagement/userManagementDashboard/userManagementDashboard';
 import EducationDashboard from './pages/Education/EducationDashboard/EducationDashboard';
 import EducationStudents from './pages/Education/EducationStudents/EducationStudents';
+import EducationVideos from './pages/Education/EducationVideos/EducationVideos';
+
 import SeatsPage from './pages/Ushering/SeatsPage/index';
 import { FirebaseAppProvider } from 'reactfire';
 import firebaseConfig from './firebase/config';
@@ -99,6 +101,7 @@ function App() {
 							element={<EducationDashboard />}
 						/>
 						<Route path="/education/students" element={<EducationStudents />} />
+						<Route path="/education/videos" element={<EducationVideos />} />
 
 						<Route path="/ushering/dashboard" element={<UsheringDashboard />} />
 						<Route path="/ushering/seats" element={<SeatsPage />} />

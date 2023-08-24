@@ -1,0 +1,17 @@
+.volumnSlider {
+    width: 100px;
+  }
+  
+  #timeSlider {
+    width:99%;
+    display: block;
+  }
+  
+  #mediaPlayer {
+    width:40vh;
+  }
+
+
+#mediaOutlet{
+    height:10vh;
+}
