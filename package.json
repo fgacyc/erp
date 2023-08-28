@@ -12,7 +12,8 @@
 		"lint": "yarn check:types && yarn lint:eslint",
 		"clean": "rimraf node_modules dist",
 		"prepare": "yarn lint",
-		"postinstall": "husky install"
+		"postinstall": "husky install",
+		"generate-types": "yarn openapi-typescript https://identity.fgacyc.com/specs -o src/@types/schema.d.ts"
 	},
 	"dependencies": {
 		"@arco-design/web-react": "^2.46.2",
@@ -22,6 +23,7 @@
 		"firebase": "^9.19.1",
 		"idb-keyval": "^6.2.1",
 		"octokit": "^3.1.0",
+		"openapi-fetch": "^0.7.4",
 		"pubsub-js": "^1.9.4",
 		"qrcode.react": "^3.1.0",
 		"react": "^18.2.0",
@@ -52,6 +54,7 @@
 		"eslint-plugin-react-hooks": "^4.3.0",
 		"eslint-plugin-react-refresh": "^0.4.3",
 		"husky": "^8.0.0",
+		"openapi-typescript": "^6.5.3",
 		"postcss": "^8.4.27",
 		"prettier": "^3.0.0",
 		"tailwindcss": "^3.3.3",

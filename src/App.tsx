@@ -24,7 +24,7 @@ import EducationDashboard from './pages/Education/EducationDashboard/EducationDa
 import EducationStudents from './pages/Education/EducationStudents/EducationStudents';
 import SeatsPage from './pages/Ushering/SeatsPage/index';
 import { FirebaseAppProvider } from 'reactfire';
-import firebaseConfig from './firebase/config';
+import firebaseConfig from './lib/firebase/config';
 import { UsheringDashboard } from './pages/Ushering/UsheringDashboard';
 import MyGroupDashboard from './pages/MyGroup/MyGroupDashboard/MyGroupDashboard';
 import MyGroupMembers from './pages/MyGroup/MyGroupMember/MyGroupMembers';
