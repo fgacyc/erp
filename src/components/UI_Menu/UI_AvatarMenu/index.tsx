@@ -1,13 +1,13 @@
 import { Avatar, Dropdown, Menu } from '@arco-design/web-react';
 import './avatarMenu.css';
 import { logout } from './avatarFuncs';
-import { useSettingModalStore } from '../../UI_Modal/UI_SettingModal/settingModalStore';
 //import UI_Avatar from "../../UI_Avatar.jsx";
 import PubSub from 'pubsub-js';
+import { useAuth0 } from '@auth0/auth0-react';
 
 const AvatarMenu = () => {
-	const username = useSettingModalStore((state) => state.username);
-	const avatar = useSettingModalStore((state) => state.avatar);
+	const { user } = useAuth0();
+	const { logout } = useAuth0();
 
 	function handleMenuClick(key: string) {
 		if (key === '1') {
@@ -25,19 +25,21 @@ const AvatarMenu = () => {
 		<Menu onClickMenuItem={handleMenuClick}>
 			<Menu.Item key="1">Account</Menu.Item>
 			<Menu.Item key="2">Settings</Menu.Item>
-			<Menu.Item key="3">Log out</Menu.Item>
+			<Menu.Item key="3" onClick={() => logout()}>
+				Log out
+			</Menu.Item>
 		</Menu>
 	);
 
 	return (
 		<Dropdown droplist={dropList} position="bl" trigger="click">
-			{avatar ? (
+			{user?.picture && (
 				<Avatar style={{ backgroundColor: '#ffffff' }} className="avatar">
-					<img src={avatar} alt="avatar" style={{ width: 40, height: 40 }} />
-				</Avatar>
-			) : (
-				<Avatar style={{ backgroundColor: '#3370ff' }} className="avatar">
-					{username && username[0]?.toUpperCase()}
+					<img
+						src={user?.picture}
+						alt="avatar"
+						style={{ width: 40, height: 40 }}
+					/>
 				</Avatar>
 			)}
 		</Dropdown>

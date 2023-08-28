@@ -33,6 +33,7 @@ import MyGroupPastoring from './pages/MyGroup/MyGroupPastoring/MyGroupPastoring'
 import ServicesPage from './pages/Services/ServicesPage/ServicesPage';
 import RoomBooking from './pages/Services/RoomBooking/RoomBooking';
 import { Auth0Provider } from '@auth0/auth0-react';
+import { RequireAuth } from './components/RequireAuth';
 
 function App() {
 	return (
@@ -42,12 +43,20 @@ function App() {
 			authorizationParams={{
 				redirect_uri: window.location.origin,
 			}}
+			cacheLocation="localstorage"
 		>
 			<FirebaseAppProvider firebaseConfig={firebaseConfig}>
 				<Router>
 					<Routes>
 						<Route path="/login" element={<Login />} />
-						<Route path="/" element={<Frame />}>
+						<Route
+							path="/"
+							element={
+								<RequireAuth>
+									<Frame />
+								</RequireAuth>
+							}
+						>
 							<Route
 								path="/recruitment_dashboard"
 								element={<Recruitment_Dashboard />}

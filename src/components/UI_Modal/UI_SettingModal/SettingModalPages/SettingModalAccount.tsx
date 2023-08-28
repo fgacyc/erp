@@ -12,27 +12,21 @@ import EmailOrPhoneSettingModal from '../accountModal/EmailOrPhoneSettingModal';
 import PasswordSettingModal from '../accountModal/PasswordSettingModal';
 import UI_ConfirmModal from '../../UI_ConfirmModal/';
 import DeleteAccountModal from '../accountModal/DeleteAccountModal';
-import { shallow } from 'zustand/shallow';
 import { useState } from 'react';
-import { updateSettingsRequest } from './updateSettingsRequest';
 import { hostURL } from '@/config';
+import { useAuth0 } from '@auth0/auth0-react';
 
 export const SettingModalDivider = () => {
 	return <Divider style={{ margin: '10px 0' }} />;
 };
 
 export const SettingModalAccount = () => {
-	const [username, updateUsername] = useSettingModalStore(
-		(state) => [state.username, state.setUsername],
-		shallow,
-	);
+	const { user } = useAuth0();
+
 	const cyc_id = useSettingModalStore((state) => state.CYC_ID);
-	const [avatar, setAvatar] = useSettingModalStore(
-		(state) => [state.avatar, state.setAvatar],
-		shallow,
-	);
+
 	const staff = useSettingModalStore((state) => state.staff);
-	const [newUsername, updateNewUsername] = useState(username);
+	const [newUsername, updateNewUsername] = useState(user?.name);
 	const email = useSettingModalStore((state) => state.email);
 	const phoneNumber = useSettingModalStore((state) => state.phoneNumber);
 	const [emailSettingModalVisible, setEmailSettingModalVisible] =
@@ -52,11 +46,12 @@ export const SettingModalAccount = () => {
 	}
 
 	function newUsernameHandler() {
-		updateSettingsRequest('username', newUsername).then((res) => {
-			if (res.status) {
-				updateUsername(newUsername);
-			}
-		});
+		console.log('Update username');
+		// updateSettingsRequest('username', newUsername).then((res) => {
+		// 	if (res.status) {
+		// 		updateUsername(newUsername);
+		// 	}
+		// });
 	}
 
 	function uploadLimit(file: File) {
@@ -82,8 +77,9 @@ export const SettingModalAccount = () => {
 						beforeUpload={uploadLimit}
 						fileList={file ? [file] : []}
 						showUploadList={false}
-						onChange={(_, currentFile) => {
-							setAvatar(URL.createObjectURL(currentFile.originFile as File));
+						onChange={() => {
+							// setAvatar(URL.createObjectURL(currentFile.originFile as File));
+							console.log('change avatar');
 						}}
 					>
 						<Avatar
@@ -98,14 +94,12 @@ export const SettingModalAccount = () => {
 							}}
 							size={60}
 						>
-							{avatar ? (
+							{user?.picture && (
 								<img
-									src={avatar}
+									src={user?.picture}
 									alt="avatar"
 									style={{ width: 60, height: 60, backgroundColor: 'white' }}
 								/>
-							) : (
-								username && username[0]?.toUpperCase()
 							)}
 						</Avatar>
 					</Upload>

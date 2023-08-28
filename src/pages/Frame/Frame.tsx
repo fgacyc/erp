@@ -17,14 +17,15 @@ import { useSettingModalStore } from '@/components/UI_Modal/UI_SettingModal/sett
 import { LuGraduationCap } from 'react-icons/lu';
 import { FaPeopleGroup } from 'react-icons/fa6';
 import { BiHomeSmile } from 'react-icons/bi';
+import { useAuth0 } from '@auth0/auth0-react';
 
 const Frame = () => {
-	// console.log(path)
-
 	const staff = useSettingModalStore((state) => state.staff);
 	const navigate = useNavigate();
 
-	const [tabs, setTabs] = useState({
+	const { user } = useAuth0();
+
+	const [tabs] = useState({
 		recruitment_dashboard: false,
 		recruitment_add_candidate: false,
 		recruitment_pre_screening: false,
@@ -85,7 +86,7 @@ const Frame = () => {
 					<MenuItem key="2">Solution</MenuItem>
 					<MenuItem key="3">Service</MenuItem>
 					<MenuItem key="4">Cooperation</MenuItem>
-					{staff && <HeadBarBtns />}
+					{user && <HeadBarBtns />}
 				</Menu>
 			</div>
 			<div className="menu-lower">
