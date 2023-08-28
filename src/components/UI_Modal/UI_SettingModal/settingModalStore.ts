@@ -1,6 +1,5 @@
 import { create } from 'zustand';
 // import { getAvatarUrl, getStaffInfoLocal } from '@/tools/auth';
-import { set as setLocalStorage } from 'idb-keyval';
 
 export const useSettingModalStore = create<{
 	staff?: User;
@@ -30,7 +29,7 @@ export const useSettingModalStore = create<{
 	setMinistryScope: (newMinistryScope: string[]) => void;
 	setAvatar: (newAvatar: string) => void;
 	showAllInfo: () => void;
-	initStaff: () => Promise<void>;
+	setStaff: (user: User) => void;
 }>((set, get) => ({
 	staff: undefined,
 	CYC_ID: 0,
@@ -46,76 +45,9 @@ export const useSettingModalStore = create<{
 	ministry_scope: [],
 	avatar: '',
 
-	initStaff: async () => {
-		console.log('initStaff');
-		const mockUser: User = {
-			_id: '64b07ec76da3becc1eedb2fb',
-			full_name: 'John Doe',
-			username: 'johndoe',
-			email: 'johndoe@example.com',
-			ministry: [
-				{
-					ministry: 'interviewer',
-					scope: ['project management', 'software development'],
-				},
-			],
-			CYC_ID: 12345,
-			password: 'hashed_password',
-			role: 'super_admin',
-			picture:
-				'https://storage.googleapis.com/cyc-ents.appspot.com/avatars/403.jpg',
-			created: 1678838400,
-			position: { level: 'Staff', name: 'Staff Position' },
-			cg_id: 'cg123',
-			given_name: 'John',
-			family_name: 'Doe',
-			name: 'John Doe',
-			gender: 'male',
-			ic_number: '123456789012',
-			phone_number: '123-456-7890',
-			nickname: 'JD',
-			leader_retreat: {
-				year: '2023',
-				status: 'registered',
-				paid: {
-					confirmed: {
-						status: true,
-						timestamp: 1678924800,
-					},
-					uploaded: {
-						timestamp: 1679011200,
-						url: 'https://example.com/payment_receipt.jpg',
-						status: true,
-					},
-				},
-				deleted: {
-					timestamp: 1679011200,
-					reason: 'Changed plans',
-				},
-			},
-			recent_login: 1679011200,
-		};
-		await setLocalStorage('staff', mockUser);
-		// console.log(res)
-		set({ staff: mockUser });
-		set({ CYC_ID: mockUser.CYC_ID });
-		set({ username: mockUser.username });
-		set({ email: mockUser.email });
-		set({ password: mockUser.password });
-		set({ phoneNumber: mockUser.phone_number });
-		set({
-			ministry_interviewer:
-				mockUser.ministry.length > 0
-					? mockUser.ministry[0]?.ministry === 'interviewer'
-					: false,
-		});
-		set({
-			ministry_scope:
-				mockUser.ministry.length > 0 ? mockUser.ministry[0]?.scope : [],
-		});
-		set({ avatar: mockUser.picture });
-	},
 	currentTab: 0,
+
+	setStaff: (user: User) => set(() => ({ ...user })),
 	setCurrentTab: (tab: number) => set(() => ({ currentTab: tab })),
 	setUsername: (newUsername: string) => set({ username: newUsername }),
 	setEmail: (newEmail: string) => set({ email: newEmail }),
