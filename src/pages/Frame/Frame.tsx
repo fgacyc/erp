@@ -13,14 +13,14 @@ const MenuItem = Menu.Item;
 const SubMenu = Menu.SubMenu;
 import HeadBarBtns from '@/components/UI_Menu/UI_HeaderBarMenu';
 import UIFloatingHelpMenu from '@/components/UI_Menu/UI_FloatingHelpMenu';
-import { useSettingModalStore } from '@/components/UI_Modal/UI_SettingModal/settingModalStore';
+// import { useSettingModalStore } from '@/components/UI_Modal/UI_SettingModal/settingModalStore';
 import { LuGraduationCap } from 'react-icons/lu';
 import { FaPeopleGroup } from 'react-icons/fa6';
 import { BiHomeSmile } from 'react-icons/bi';
 import { useAuth0 } from '@auth0/auth0-react';
 
 const Frame = () => {
-	const staff = useSettingModalStore((state) => state.staff);
+	// const staff = useSettingModalStore((state) => state.staff);
 	const navigate = useNavigate();
 
 	const { user } = useAuth0();

@@ -1,6 +1,5 @@
 import { Avatar, Dropdown, Menu } from '@arco-design/web-react';
 import './avatarMenu.css';
-import { logout } from './avatarFuncs';
 //import UI_Avatar from "../../UI_Avatar.jsx";
 import PubSub from 'pubsub-js';
 import { useAuth0 } from '@auth0/auth0-react';

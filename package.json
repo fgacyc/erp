@@ -7,7 +7,10 @@
 		"dev": "vite",
 		"build": "tsc && vite build",
 		"preview": "vite preview",
-		"lint": "tsc --noemit; eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+		"check:types": "tsc --noEmit",
+		"lint:eslint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+		"lint": "yarn check:types && yarn lint:eslint",
+		"clean": "rimraf node_modules dist",
 		"prepare": "yarn lint",
 		"postinstall": "husky install"
 	},
