@@ -1,16 +1,16 @@
-import UIBreadcrumb from '../../../components/UIBreadcrumb';
+import UIBreadcrumb from "../../../components/UIBreadcrumb";
 import {
 	Button,
 	Input,
 	Space,
 	Table,
 	TableColumnProps,
-} from '@arco-design/web-react';
-import { IconDelete, IconPlus, IconSearch } from '@arco-design/web-react/icon';
-import { useEffect, useRef, useState } from 'react';
-import { getReq } from '@/tools/requests';
-import { changeNameKeyAndID } from '@/pages/Events/Camp/LeaderRetreat/data';
-import { RefInputType } from '@arco-design/web-react/es/Input/interface';
+} from "@arco-design/web-react";
+import { IconDelete, IconPlus, IconSearch } from "@arco-design/web-react/icon";
+import { useEffect, useRef, useState } from "react";
+import { getReq } from "@/tools/requests";
+import { changeNameKeyAndID } from "@/pages/Events/Camp/LeaderRetreat/data";
+import { RefInputType } from "@arco-design/web-react/es/Input/interface";
 
 const addKeys = (
 	array: MinistryAccount[],
@@ -24,13 +24,13 @@ const addKeys = (
 const UserManagementMinistry = () => {
 	const breadcrumbItems = [
 		{
-			name: 'Users',
-			link: '/',
+			name: "Users",
+			link: "/",
 			clickable: false,
 		},
 		{
-			name: 'Ministry management',
-			link: '/users/ministry',
+			name: "Ministry management",
+			link: "/users/ministry",
 			clickable: true,
 		},
 	];
@@ -38,13 +38,13 @@ const UserManagementMinistry = () => {
 	const [data, setData] = useState<(MinistryAccount & { key: number })[]>([]);
 	const inputRef = useRef<RefInputType>(null);
 	// const [type, setType] = useState<'checkbox' | 'radio'>('checkbox');
-	const type = 'checkbox';
+	const type = "checkbox";
 	const [selectedRowKeys, setSelectedRowKeys] = useState<(string | number)[]>(
 		[],
 	);
 
 	useEffect(() => {
-		getReq('/ministries').then(
+		getReq("/ministries").then(
 			(res: { status: boolean; data: MinistryAccount[] }) => {
 				if (res.status) {
 					const data = changeNameKeyAndID(res.data);
@@ -57,8 +57,8 @@ const UserManagementMinistry = () => {
 
 	const columns: TableColumnProps[] = [
 		{
-			title: 'CYC ID',
-			dataIndex: 'CYC_ID',
+			title: "CYC ID",
+			dataIndex: "CYC_ID",
 			sorter: (a, b) => a.CYC_ID < b.CYC_ID,
 			filterIcon: <IconSearch />,
 			filterDropdown: ({ filterKeys, setFilterKeys, confirm }) => {
@@ -68,7 +68,7 @@ const UserManagementMinistry = () => {
 							ref={inputRef}
 							searchButton
 							placeholder="Please enter a ministry"
-							value={filterKeys?.[0] || ''}
+							value={filterKeys?.[0] || ""}
 							onChange={(value) => {
 								setFilterKeys?.(value ? [value] : []);
 							}}
@@ -90,8 +90,8 @@ const UserManagementMinistry = () => {
 			},
 		},
 		{
-			title: 'Name',
-			dataIndex: 'name',
+			title: "Name",
+			dataIndex: "name",
 			sorter: (a, b) => a.name.localeCompare(b.name),
 			filterIcon: <IconSearch />,
 			filterDropdown: ({ filterKeys, setFilterKeys, confirm }) => {
@@ -101,7 +101,7 @@ const UserManagementMinistry = () => {
 							ref={inputRef}
 							searchButton
 							placeholder="Please enter a ministry"
-							value={filterKeys?.[0] || ''}
+							value={filterKeys?.[0] || ""}
 							onChange={(value) => {
 								setFilterKeys?.(value ? [value] : []);
 							}}
@@ -123,16 +123,16 @@ const UserManagementMinistry = () => {
 			},
 		},
 		{
-			title: 'Ministry',
-			dataIndex: 'ministry',
+			title: "Ministry",
+			dataIndex: "ministry",
 		},
 		{
-			title: 'Role',
-			dataIndex: 'role',
+			title: "Role",
+			dataIndex: "role",
 		},
 		{
-			title: 'Education',
-			dataIndex: 'education',
+			title: "Education",
+			dataIndex: "education",
 		},
 		// {
 		//     title: 'Phone',
@@ -199,7 +199,7 @@ const UserManagementMinistry = () => {
 		//     },
 		// },
 		{
-			title: 'Operation',
+			title: "Operation",
 			render: (_, record) => (
 				<Space>
 					{
@@ -218,7 +218,7 @@ const UserManagementMinistry = () => {
 		<>
 			<UIBreadcrumb items={breadcrumbItems} />
 			<div className="app-component full-screen-app-component">
-				<Button type="primary" icon={<IconPlus />} style={{ margin: '10px 0' }}>
+				<Button type="primary" icon={<IconPlus />} style={{ margin: "10px 0" }}>
 					Register new
 				</Button>
 				<Table
@@ -227,8 +227,8 @@ const UserManagementMinistry = () => {
 					renderPagination={(paginationNode) => (
 						<div
 							style={{
-								display: 'flex',
-								justifyContent: 'space-between',
+								display: "flex",
+								justifyContent: "space-between",
 								marginTop: 10,
 							}}
 						>

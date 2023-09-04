@@ -5,13 +5,13 @@ export function getTotals(data: Recruiter[]) {
 	let totalAccepted = 0;
 
 	for (let i = 0; i < data.length; i++) {
-		if (data[i]?.application.status === 'pending') {
+		if (data[i]?.application.status === "pending") {
 			totalPending += 1;
 		}
 		if (data[i]?.pre_screening.status === true) {
 			totalPreAccepted += 1;
 		}
-		if (data[i]?.application.status === 'accepted') {
+		if (data[i]?.application.status === "accepted") {
 			totalAccepted += 1;
 		}
 	}
@@ -32,7 +32,7 @@ export function getTotals(data: Recruiter[]) {
 
 export function getInfoCount(
 	data: Recruiter[],
-	other: 'pastoral_team' | 'ministry',
+	other: "pastoral_team" | "ministry",
 	index: number,
 	field: string,
 ) {

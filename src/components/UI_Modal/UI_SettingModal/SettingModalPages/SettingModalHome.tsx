@@ -1,11 +1,11 @@
-import { Switch } from '@arco-design/web-react';
-import { useSettingModalStore } from '../settingModalStore';
-import { SettingModalDivider } from './SettingModalAccount';
-import PastoralCascader from '@/components/UI_Cascader/PastoralCascader';
-import MinistryCascader from '@/components/UI_Cascader/MinistryCascader';
-import PastoralRoleSelect from '@/components/UI_Select/PastoralRoleSelect';
-import MinistryRoleSelect from '@/components/UI_Select/MinistryRoleSelect';
-import InterviewScopeSelect from '@/components/UI_Select/InterviewScopeSelect';
+import { Switch } from "@arco-design/web-react";
+import { useSettingModalStore } from "../settingModalStore";
+import { SettingModalDivider } from "./SettingModalAccount";
+import PastoralCascader from "@/components/UI_Cascader/PastoralCascader";
+import MinistryCascader from "@/components/UI_Cascader/MinistryCascader";
+import PastoralRoleSelect from "@/components/UI_Select/PastoralRoleSelect";
+import MinistryRoleSelect from "@/components/UI_Select/MinistryRoleSelect";
+import InterviewScopeSelect from "@/components/UI_Select/InterviewScopeSelect";
 
 const SettingModalHome = () => {
 	// const  staff = useSettingModalStore(state => state.staff)
@@ -50,7 +50,7 @@ const SettingModalHome = () => {
 							Choose which pastoral team your belong to.
 						</div>
 					</div>
-					<div style={{ width: 250, textAlign: 'right' }}>
+					<div style={{ width: 250, textAlign: "right" }}>
 						<PastoralCascader
 							value={pastoralTeam}
 							setPastoral={setPastoralTeam}
@@ -67,7 +67,7 @@ const SettingModalHome = () => {
 							Choose which pastoral role your are.
 						</div>
 					</div>
-					<div style={{ width: 250, textAlign: 'right' }}>
+					<div style={{ width: 250, textAlign: "right" }}>
 						<PastoralRoleSelect
 							value={pastoralRole}
 							setPastoral={setPastoralRole}
@@ -126,7 +126,7 @@ const SettingModalHome = () => {
 							Choose whether to accept the interview appointment.
 						</div>
 					</div>
-					<div style={{ width: 250, textAlign: 'right' }}>
+					<div style={{ width: 250, textAlign: "right" }}>
 						<Switch
 							checked={ifMinistryInterviewer}
 							onChange={setIfMinistryInterviewer}

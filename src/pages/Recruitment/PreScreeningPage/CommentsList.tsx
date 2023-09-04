@@ -1,16 +1,16 @@
-import { Avatar, Comment, List, Dropdown, Menu } from '@arco-design/web-react';
+import { Avatar, Comment, List, Dropdown, Menu } from "@arco-design/web-react";
 import {
 	Dispatch,
 	FunctionComponent,
 	SetStateAction,
 	useEffect,
 	useState,
-} from 'react';
-import { deleteReq, getReq } from '@/tools/requests';
-import { IconMore } from '@arco-design/web-react/icon';
-import './pre-screening.css';
-import PubSub from 'pubsub-js';
-import { getCurrentUserCYCID } from '@/tools/auth';
+} from "react";
+import { deleteReq, getReq } from "@/tools/requests";
+import { IconMore } from "@arco-design/web-react/icon";
+import "./pre-screening.css";
+import PubSub from "pubsub-js";
+import { getCurrentUserCYCID } from "@/tools/auth";
 
 interface PreScreeningCommentProps {
 	item: ClientComment;
@@ -21,7 +21,7 @@ interface PreScreeningCommentProps {
 export const PreScreeningComment: FunctionComponent<
 	PreScreeningCommentProps
 > = ({ item, id, RID }) => {
-	const [username, setUsername] = useState('');
+	const [username, setUsername] = useState("");
 	const [showDropdown, setShowDropdown] = useState(false);
 
 	useEffect(() => {
@@ -35,7 +35,7 @@ export const PreScreeningComment: FunctionComponent<
 
 	function setCommentUserName(data: User) {
 		if (data.username === null) {
-			setUsername(data.full_name ?? '');
+			setUsername(data.full_name ?? "");
 		} else {
 			setUsername(data.username);
 		}
@@ -46,7 +46,7 @@ export const PreScreeningComment: FunctionComponent<
 			align="right"
 			author={username}
 			avatar={
-				<Avatar style={{ backgroundColor: '#14a9f8' }}>
+				<Avatar style={{ backgroundColor: "#14a9f8" }}>
 					{username.charAt(0).toUpperCase()}
 				</Avatar>
 			}
@@ -57,7 +57,7 @@ export const PreScreeningComment: FunctionComponent<
 					<Dropdown
 						droplist={
 							<Menu
-								onClickMenuItem={(key) => menuEvent(key, id ?? 0, RID ?? '')}
+								onClickMenuItem={(key) => menuEvent(key, id ?? 0, RID ?? "")}
 							>
 								{/*<Menu.Item key='1'>Edit</Menu.Item>*/}
 								<Menu.Item key="2">Delete</Menu.Item>
@@ -90,7 +90,7 @@ const PreScreeningCommentsList: FunctionComponent<
 	const RID = userData._id;
 
 	useEffect(() => {
-		const subscription = PubSub.subscribe('deleteComment', (_, data) => {
+		const subscription = PubSub.subscribe("deleteComment", (_, data) => {
 			const id = data.message;
 			comments.splice(id, 1);
 			//console.log(newComments)
@@ -133,18 +133,18 @@ const PreScreeningCommentsList: FunctionComponent<
 function menuEvent(key: string, id: number, RID: string) {
 	// console.log(key,id,RID)
 
-	if (key === '1') {
-		console.log('edit');
-	} else if (key === '2') {
-		console.log('delete');
+	if (key === "1") {
+		console.log("edit");
+	} else if (key === "2") {
+		console.log("delete");
 		deleteReq(`/comments/${RID}?commentID=${id}`).then((res) => {
 			// console.log(res)
 			if (res.status) {
-				PubSub.publish('deleteComment', { message: id });
+				PubSub.publish("deleteComment", { message: id });
 			}
 		});
 	} else {
-		console.log('cancel');
+		console.log("cancel");
 	}
 }
 export default PreScreeningCommentsList;

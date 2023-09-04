@@ -1,20 +1,20 @@
-import { doc, updateDoc } from 'firebase/firestore';
-import { Button } from '@arco-design/web-react';
-import { useFirestore, useFirestoreDocData } from 'reactfire';
-import { PiArmchairFill } from 'react-icons/pi';
-import { TiTick } from 'react-icons/ti';
-import { RiToolsFill } from 'react-icons/ri';
-import { useEffect, useRef, useState } from 'react';
+import { doc, updateDoc } from "firebase/firestore";
+import { Button } from "@arco-design/web-react";
+import { useFirestore, useFirestoreDocData } from "reactfire";
+import { PiArmchairFill } from "react-icons/pi";
+import { TiTick } from "react-icons/ti";
+import { RiToolsFill } from "react-icons/ri";
+import { useEffect, useRef, useState } from "react";
 
 export const Seats = () => {
 	const db = useFirestore();
 
-	const [service] = useState('YW_3PM');
+	const [service] = useState("YW_3PM");
 	const [serviceData, setServiceData] = useState<{ [key: string]: string[] }>(
 		{},
 	);
-	const seatsRef = doc(db, 'seats', 'hallsConfig');
-	const serviceRef = doc(db, 'seats', service);
+	const seatsRef = doc(db, "seats", "hallsConfig");
+	const serviceRef = doc(db, "seats", service);
 
 	const functionAreaRef = useRef<HTMLDivElement>(null);
 
@@ -26,7 +26,7 @@ export const Seats = () => {
 			zone_D: SeatsConfig;
 		};
 	}>(seatsRef, {
-		idField: '_id',
+		idField: "_id",
 	});
 
 	const { status: serviceFetchStatus, data } = useFirestoreDocData(serviceRef);
@@ -83,7 +83,7 @@ export const Seats = () => {
 				rowCells.push(
 					isBroken ? (
 						<RiToolsFill
-							onClick={() => alert('broken seat')}
+							onClick={() => alert("broken seat")}
 							key={`${r}-${c}`}
 							className="bg-[rgb(245,63,63)] text-white border border-[#ccc] p-[5px] text-center text-[25px]"
 						/>
@@ -98,7 +98,7 @@ export const Seats = () => {
 										...serviceData,
 										[sectionName]: serviceData[sectionName]
 											?.slice(0, idx)
-											.concat(serviceData[sectionName]?.slice(idx + 1) ?? ''), //serviceData[sectionName]?.toSpliced(idx, 1),
+											.concat(serviceData[sectionName]?.slice(idx + 1) ?? ""), //serviceData[sectionName]?.toSpliced(idx, 1),
 									});
 								}
 							}}
@@ -124,12 +124,12 @@ export const Seats = () => {
 		return grid;
 	};
 
-	return status === 'success' &&
-		serviceFetchStatus === 'success' &&
+	return status === "success" &&
+		serviceFetchStatus === "success" &&
 		seatsData &&
-		seatsData['L5'] ? (
+		seatsData["L5"] ? (
 		<div
-			style={{ position: 'relative' }}
+			style={{ position: "relative" }}
 			className="app-component full-screen-app-component overflow-scroll"
 			ref={functionAreaRef}
 		>
@@ -137,11 +137,11 @@ export const Seats = () => {
 				className="grid gap-3"
 				style={{
 					gridTemplateColumns: `repeat(${
-						Object.entries(seatsData['L5']).length
+						Object.entries(seatsData["L5"]).length
 					}, minmax(400px, 1fr))`,
 				}}
 			>
-				{Object.entries(seatsData['L5'])
+				{Object.entries(seatsData["L5"])
 					.sort((a, b) => {
 						if (a[0] < b[0]) {
 							return -1;
@@ -157,7 +157,7 @@ export const Seats = () => {
 							className="w-[400px] m-[10px] p-[10px] border border-[#ccc]"
 						>
 							<h3 className="w-full text-center">
-								{sectionName.replace('_', ' ').toUpperCase()}
+								{sectionName.replace("_", " ").toUpperCase()}
 							</h3>
 							<div
 								className="grid gap-2"

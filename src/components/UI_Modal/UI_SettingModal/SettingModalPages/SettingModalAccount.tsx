@@ -1,4 +1,4 @@
-import { useSettingModalStore } from '../settingModalStore.js';
+import { useSettingModalStore } from "../settingModalStore.js";
 import {
 	Avatar,
 	Button,
@@ -6,22 +6,22 @@ import {
 	Input,
 	Message,
 	Upload,
-} from '@arco-design/web-react';
-import { IconCamera, IconCheck, IconRight } from '@arco-design/web-react/icon';
-import EmailOrPhoneSettingModal from '../accountModal/EmailOrPhoneSettingModal';
-import PasswordSettingModal from '../accountModal/PasswordSettingModal';
-import UI_ConfirmModal from '../../UI_ConfirmModal/';
-import DeleteAccountModal from '../accountModal/DeleteAccountModal';
-import { useState } from 'react';
-import { hostURL } from '@/config';
-import { useAuth0 } from '@auth0/auth0-react';
+} from "@arco-design/web-react";
+import { IconCamera, IconCheck, IconRight } from "@arco-design/web-react/icon";
+import EmailOrPhoneSettingModal from "../accountModal/EmailOrPhoneSettingModal";
+import PasswordSettingModal from "../accountModal/PasswordSettingModal";
+import UI_ConfirmModal from "../../UI_ConfirmModal/";
+import DeleteAccountModal from "../accountModal/DeleteAccountModal";
+import { useState } from "react";
+import { hostURL } from "@/config";
+import { useAccount } from "@/store/useAccount.js";
 
 export const SettingModalDivider = () => {
-	return <Divider style={{ margin: '10px 0' }} />;
+	return <Divider style={{ margin: "10px 0" }} />;
 };
 
 export const SettingModalAccount = () => {
-	const { user } = useAuth0();
+	const { user } = useAccount();
 
 	const cyc_id = useSettingModalStore((state) => state.CYC_ID);
 
@@ -40,13 +40,13 @@ export const SettingModalAccount = () => {
 	const [file] = useState();
 
 	function showConfirmModal() {
-		UI_ConfirmModal('Confirm', 'Are you sure to log out of all devices', () => {
-			console.log('confirm');
+		UI_ConfirmModal("Confirm", "Are you sure to log out of all devices", () => {
+			console.log("confirm");
 		});
 	}
 
 	function newUsernameHandler() {
-		console.log('Update username');
+		console.log("Update username");
 		// updateSettingsRequest('username', newUsername).then((res) => {
 		// 	if (res.status) {
 		// 		updateUsername(newUsername);
@@ -60,7 +60,7 @@ export const SettingModalAccount = () => {
 		if (file.size < 5 * 1024 * 1024) {
 			return true;
 		} else {
-			Message.warning('File size limit < 5MB');
+			Message.warning("File size limit < 5MB");
 			return false;
 		}
 	}
@@ -79,26 +79,26 @@ export const SettingModalAccount = () => {
 						showUploadList={false}
 						onChange={() => {
 							// setAvatar(URL.createObjectURL(currentFile.originFile as File));
-							console.log('change avatar');
+							console.log("change avatar");
 						}}
 					>
 						<Avatar
 							triggerIcon={<IconCamera />}
 							triggerIconStyle={{
-								color: '#3491FA',
+								color: "#3491FA",
 							}}
 							autoFixFontSize={false}
 							style={{
-								backgroundColor: '#168CFF',
+								backgroundColor: "#168CFF",
 								marginRight: 30,
 							}}
 							size={60}
 						>
-							{user?.picture && (
+							{user?.avatarUrl && (
 								<img
-									src={user?.picture}
+									src={user?.avatarUrl}
 									alt="avatar"
-									style={{ width: 60, height: 60, backgroundColor: 'white' }}
+									style={{ width: 60, height: 60, backgroundColor: "white" }}
 								/>
 							)}
 						</Avatar>
@@ -128,21 +128,21 @@ export const SettingModalAccount = () => {
 				<SettingModalDivider />
 				<div
 					style={{
-						display: 'flex',
-						justifyContent: 'space-between',
-						alignItems: 'center',
+						display: "flex",
+						justifyContent: "space-between",
+						alignItems: "center",
 					}}
 				>
 					<div>
 						<div>CYC ID</div>
-						<div className="setting-desc-text-grey">{cyc_id ?? '-'}</div>
+						<div className="setting-desc-text-grey">{cyc_id ?? "-"}</div>
 					</div>
 				</div>
 				<div
 					style={{
-						display: 'flex',
-						justifyContent: 'space-between',
-						alignItems: 'center',
+						display: "flex",
+						justifyContent: "space-between",
+						alignItems: "center",
 					}}
 				>
 					<div>
@@ -159,16 +159,16 @@ export const SettingModalAccount = () => {
 				</div>
 				<div
 					style={{
-						display: 'flex',
-						justifyContent: 'space-between',
-						alignItems: 'center',
+						display: "flex",
+						justifyContent: "space-between",
+						alignItems: "center",
 						marginTop: 10,
 					}}
 				>
 					<div>
 						<div>Phone number</div>
 						<div className="setting-desc-text-grey">
-							{phoneNumber ? phoneNumber : 'None'}
+							{phoneNumber ? phoneNumber : "None"}
 						</div>
 					</div>
 					<Button
@@ -181,9 +181,9 @@ export const SettingModalAccount = () => {
 				</div>
 				<div
 					style={{
-						display: 'flex',
-						justifyContent: 'space-between',
-						alignItems: 'center',
+						display: "flex",
+						justifyContent: "space-between",
+						alignItems: "center",
 						marginTop: 10,
 					}}
 				>
@@ -208,9 +208,9 @@ export const SettingModalAccount = () => {
 				<SettingModalDivider />
 				<div
 					style={{
-						display: 'flex',
-						justifyContent: 'space-between',
-						alignItems: 'center',
+						display: "flex",
+						justifyContent: "space-between",
+						alignItems: "center",
 					}}
 				>
 					<div>
@@ -229,14 +229,14 @@ export const SettingModalAccount = () => {
 				</div>
 				<div
 					style={{
-						display: 'flex',
-						justifyContent: 'space-between',
-						alignItems: 'center',
+						display: "flex",
+						justifyContent: "space-between",
+						alignItems: "center",
 						marginTop: 10,
 					}}
 				>
 					<div>
-						<div style={{ color: 'red' }}>Delete my account</div>
+						<div style={{ color: "red" }}>Delete my account</div>
 						<div className="setting-desc-text-grey">
 							Permanently delete the account and remove all data from database.
 						</div>

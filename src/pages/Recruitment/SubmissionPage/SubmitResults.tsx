@@ -1,6 +1,6 @@
-import { Button, Result } from '@arco-design/web-react';
-import PubSub from 'pubsub-js';
-import { Dispatch, FunctionComponent, SetStateAction } from 'react';
+import { Button, Result } from "@arco-design/web-react";
+import PubSub from "pubsub-js";
+import { Dispatch, FunctionComponent, SetStateAction } from "react";
 
 interface SubmitResultsProps {
 	setIfSubmit: Dispatch<SetStateAction<boolean>>;
@@ -16,7 +16,7 @@ export const SubmitResults: FunctionComponent<SubmitResultsProps> = ({
 	setShowLoading,
 }) => {
 	function tryAgain() {
-		PubSub.publish('reset_recruitment_add_candidate', { message: 'reset' });
+		PubSub.publish("reset_recruitment_add_candidate", { message: "reset" });
 	}
 
 	function back() {
@@ -35,7 +35,7 @@ export const SubmitResults: FunctionComponent<SubmitResultsProps> = ({
 							key="again"
 							type="secondary"
 							onClick={tryAgain}
-							style={{ margin: '0 16px' }}
+							style={{ margin: "0 16px" }}
 						>
 							Add another
 						</Button>,
@@ -52,7 +52,7 @@ export const SubmitResults: FunctionComponent<SubmitResultsProps> = ({
 						<Button
 							key="again"
 							type="secondary"
-							style={{ margin: '0 16px' }}
+							style={{ margin: "0 16px" }}
 							onClick={tryAgain}
 						>
 							Try again

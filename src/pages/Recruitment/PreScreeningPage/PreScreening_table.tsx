@@ -1,39 +1,39 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from "react";
 import {
 	Table,
 	Input,
 	Button,
 	Space,
 	TableColumnProps,
-} from '@arco-design/web-react';
-import { putReq } from '@/tools/requests';
+} from "@arco-design/web-react";
+import { putReq } from "@/tools/requests";
 import {
 	addKeys,
 	downloadTableData,
 	filterDataByPermissions,
-} from '@/tools/tableTools';
-import { capitalFirstLetter } from '@/tools/string';
-import './pre-screening.css';
-import { IconDownload, IconSearch } from '@arco-design/web-react/icon';
-import { getTimeStamp } from '@/tools/datetime';
-import UIBreadcrumb from '@/components/UIBreadcrumb';
-import { getAllUsers } from '@/tools/DB';
-import UI_ConfirmModal from '@/components/UI_Modal/UI_ConfirmModal';
-import { getCurrentUserCYCID } from '@/tools/auth';
-import { getEvaluationStatus } from './data';
-import { RefInputType } from '@arco-design/web-react/es/Input/interface.js';
+} from "@/tools/tableTools";
+import { capitalFirstLetter } from "@/tools/string";
+import "./pre-screening.css";
+import { IconDownload, IconSearch } from "@arco-design/web-react/icon";
+import { getTimeStamp } from "@/tools/datetime";
+import UIBreadcrumb from "@/components/UIBreadcrumb";
+import { getAllUsers } from "@/tools/DB";
+import UI_ConfirmModal from "@/components/UI_Modal/UI_ConfirmModal";
+import { getCurrentUserCYCID } from "@/tools/auth";
+import { getEvaluationStatus } from "./data";
+import { RefInputType } from "@arco-design/web-react/es/Input/interface.js";
 
 export default function PreScreening_table() {
 	const [allData, setAllData] = useState<Recruiter[]>([]);
 	const [clickOption] = useState(false);
-	const [filters, setFilters] = useState('');
+	const [filters, setFilters] = useState("");
 	const [refreshKey, setRefreshKey] = useState(0);
 	const [currentUserCYC_ID, setCurrentUserCYC_ID] = useState(0);
 
 	const inputRef = useRef<RefInputType>(null);
 
 	const handleStatus = (status: boolean, RID: string) => {
-		const pre_screening_status = status ? 'pre-accepted' : 'pre-rejected';
+		const pre_screening_status = status ? "pre-accepted" : "pre-rejected";
 
 		const pre_screening = {
 			status: pre_screening_status,
@@ -42,7 +42,7 @@ export default function PreScreening_table() {
 		};
 
 		UI_ConfirmModal(
-			'Confirm',
+			"Confirm",
 			`Are you sure to ${capitalFirstLetter(
 				pre_screening_status,
 			)} the candidate?`,
@@ -63,13 +63,13 @@ export default function PreScreening_table() {
 
 	function goToPreScreeningPage(record: Recruiter) {
 		//navigate(`/recruitment_pre_screening/${record._id}`);
-		window.open(`/recruitment_pre_screening/${record._id}`, '_blank');
+		window.open(`/recruitment_pre_screening/${record._id}`, "_blank");
 	}
 
 	const columns: TableColumnProps[] = [
 		{
-			title: 'Name',
-			dataIndex: 'info.name',
+			title: "Name",
+			dataIndex: "info.name",
 			sorter: (a, b) => a.info.name.localeCompare(b.info.name),
 			filterIcon: <IconSearch />,
 			filterDropdown: ({ filterKeys, setFilterKeys, confirm }) => {
@@ -79,7 +79,7 @@ export default function PreScreening_table() {
 							ref={inputRef}
 							searchButton
 							placeholder="Please enter a name"
-							value={filterKeys?.[0] || ''}
+							value={filterKeys?.[0] || ""}
 							onChange={(value) => {
 								setFilterKeys?.(value ? [value] : []);
 							}}
@@ -109,24 +109,24 @@ export default function PreScreening_table() {
 			),
 		},
 		{
-			title: 'Pastoral Team',
-			dataIndex: 'info.pastoral_team[0]',
+			title: "Pastoral Team",
+			dataIndex: "info.pastoral_team[0]",
 			filters: [
 				{
-					text: 'Young Warrior',
-					value: 'young_warrior',
+					text: "Young Warrior",
+					value: "young_warrior",
 				},
 				{
-					text: 'General Service',
-					value: 'general_service',
+					text: "General Service",
+					value: "general_service",
 				},
 				{
-					text: 'Wonderkids',
-					value: 'wonderkids',
+					text: "Wonderkids",
+					value: "wonderkids",
 				},
 				{
-					text: 'Others',
-					value: 'others',
+					text: "Others",
+					value: "others",
 				},
 			],
 			onFilter: (value, row) => {
@@ -143,72 +143,72 @@ export default function PreScreening_table() {
 			),
 		},
 		{
-			title: 'Pastoral Zone',
-			dataIndex: 'info.pastoral_team[1]',
+			title: "Pastoral Zone",
+			dataIndex: "info.pastoral_team[1]",
 			filters: [
 				{
-					text: 'Young Warrior - Heart',
-					value: 'heart',
+					text: "Young Warrior - Heart",
+					value: "heart",
 				},
 				{
-					text: 'Young Warrior - Move',
-					value: 'move',
+					text: "Young Warrior - Move",
+					value: "move",
 				},
 				{
-					text: 'Young Warrior - Force',
-					value: 'force',
+					text: "Young Warrior - Force",
+					value: "force",
 				},
 				{
-					text: 'Young Warrior - Voice',
-					value: 'voice',
+					text: "Young Warrior - Voice",
+					value: "voice",
 				},
 				{
-					text: 'Young Warrior - Mind',
-					value: 'mind',
+					text: "Young Warrior - Mind",
+					value: "mind",
 				},
 				{
-					text: 'General Service - YP Zone',
-					value: 'yp_zone',
+					text: "General Service - YP Zone",
+					value: "yp_zone",
 				},
 				{
-					text: 'General Service - Pro Family',
-					value: 'pro_family',
+					text: "General Service - Pro Family",
+					value: "pro_family",
 				},
 				{
-					text: 'General Service - Young Dreamer',
-					value: 'young_dreamer',
+					text: "General Service - Young Dreamer",
+					value: "young_dreamer",
 				},
 				{
-					text: 'General Service - Joshua Zone',
-					value: 'joshua_zone',
+					text: "General Service - Joshua Zone",
+					value: "joshua_zone",
 				},
 				{
-					text: 'Others - Serdang',
-					value: 'serdang',
+					text: "Others - Serdang",
+					value: "serdang",
 				},
 				{
-					text: 'Others - Kepong',
-					value: 'kepong',
+					text: "Others - Kepong",
+					value: "kepong",
 				},
 				{
-					text: 'Others - USJ',
-					value: 'usj',
+					text: "Others - USJ",
+					value: "usj",
 				},
 				{
-					text: 'Others - Sg Long',
-					value: 'sg_long',
+					text: "Others - Sg Long",
+					value: "sg_long",
 				},
 				{
-					text: 'Others - Setapak',
-					value: 'setapak',
+					text: "Others - Setapak",
+					value: "setapak",
 				},
 				{
-					text: 'Others - The Blessing',
-					value: 'the_blessing',
+					text: "Others - The Blessing",
+					value: "the_blessing",
 				},
 				{
-					text: 'Others - To Be Confirmed',
-					value: 'to_be_confirmed',
+					text: "Others - To Be Confirmed",
+					value: "to_be_confirmed",
 				},
 			],
 			onFilter: (value, row) => {
@@ -225,8 +225,8 @@ export default function PreScreening_table() {
 			),
 		},
 		{
-			title: 'Ministry',
-			dataIndex: 'info.ministry[2]',
+			title: "Ministry",
+			dataIndex: "info.ministry[2]",
 			sorter: (a, b) => a.info.ministry[2].localeCompare(b.info.ministry[2]),
 			filterIcon: <IconSearch />,
 			filterDropdown: ({ filterKeys, setFilterKeys, confirm }) => {
@@ -236,7 +236,7 @@ export default function PreScreening_table() {
 							ref={inputRef}
 							searchButton
 							placeholder="Please enter a ministry"
-							value={filterKeys?.[0] || ''}
+							value={filterKeys?.[0] || ""}
 							onChange={(value) => {
 								setFilterKeys?.(value ? [value] : []);
 							}}
@@ -258,19 +258,19 @@ export default function PreScreening_table() {
 			},
 		},
 		{
-			title: 'Status',
-			dataIndex: 'pre_screening.status',
+			title: "Status",
+			dataIndex: "pre_screening.status",
 			filters: [
 				{
-					text: 'Pending',
+					text: "Pending",
 					value: null,
 				},
 				{
-					text: 'Pre-Accepted',
+					text: "Pre-Accepted",
 					value: true,
 				},
 				{
-					text: 'Pre-Rejected',
+					text: "Pre-Rejected",
 					value: false,
 				},
 			],
@@ -281,32 +281,32 @@ export default function PreScreening_table() {
 			render: (_, record) => (
 				<span onClick={() => goToPreScreeningPage(record)}>
 					{record.pre_screening.status === null && (
-						<span style={{ color: 'black' }}>Pending</span>
+						<span style={{ color: "black" }}>Pending</span>
 					)}
 					{record.pre_screening.status === true && (
-						<span style={{ color: 'green' }}>Pre-Accepted</span>
+						<span style={{ color: "green" }}>Pre-Accepted</span>
 					)}
 					{record.pre_screening.status === false && (
-						<span style={{ color: 'red' }}>Pre-Rejected</span>
+						<span style={{ color: "red" }}>Pre-Rejected</span>
 					)}
 				</span>
 			),
 		},
 		{
-			title: 'Evaluation',
-			dataIndex: 'application.status',
+			title: "Evaluation",
+			dataIndex: "application.status",
 			filters: [
 				{
-					text: 'Accepted',
-					value: 'accepted',
+					text: "Accepted",
+					value: "accepted",
 				},
 				{
-					text: 'Rejected',
-					value: 'rejected',
+					text: "Rejected",
+					value: "rejected",
 				},
 				{
-					text: 'N/A',
-					value: 'N/A',
+					text: "N/A",
+					value: "N/A",
 				},
 			],
 			onFilter: (value, row) => {
@@ -315,25 +315,25 @@ export default function PreScreening_table() {
 			filterMultiple: false,
 			render: (_, record) => (
 				<span>
-					{getEvaluationStatus(record) === 'rejected' && (
-						<span style={{ color: 'red' }}>
+					{getEvaluationStatus(record) === "rejected" && (
+						<span style={{ color: "red" }}>
 							{capitalFirstLetter(getEvaluationStatus(record))}
 						</span>
 					)}
-					{getEvaluationStatus(record) === 'accepted' && (
-						<span style={{ color: 'green' }}>
+					{getEvaluationStatus(record) === "accepted" && (
+						<span style={{ color: "green" }}>
 							{capitalFirstLetter(getEvaluationStatus(record))}
 						</span>
 					)}
-					{getEvaluationStatus(record) === 'N/A' && (
+					{getEvaluationStatus(record) === "N/A" && (
 						<span>{getEvaluationStatus(record)}</span>
 					)}
 				</span>
 			),
 		},
 		{
-			title: 'Operation',
-			dataIndex: 'op',
+			title: "Operation",
+			dataIndex: "op",
 			render: (_, record) => (
 				<Space>
 					<Button
@@ -390,13 +390,13 @@ export default function PreScreening_table() {
 
 	const breadcrumbItems = [
 		{
-			name: 'Recruitment',
-			link: '/',
+			name: "Recruitment",
+			link: "/",
 			clickable: false,
 		},
 		{
-			name: 'Pre-Screening',
-			link: '/recruitment_pre_screening',
+			name: "Pre-Screening",
+			link: "/recruitment_pre_screening",
 			clickable: true,
 		},
 	];
@@ -426,7 +426,7 @@ export default function PreScreening_table() {
 	// }
 
 	function clearFilters() {
-		setFilters('');
+		setFilters("");
 		setRefreshKey((prevKey) => prevKey + 1);
 	}
 

@@ -1,5 +1,5 @@
-import { SettingModalDivider } from './SettingModalAccount';
-import { Switch } from '@arco-design/web-react';
+import { SettingModalDivider } from "./SettingModalAccount";
+import { Switch } from "@arco-design/web-react";
 
 const SettingModalNotifications = () => {
 	return (
@@ -17,7 +17,7 @@ const SettingModalNotifications = () => {
 							Choose receive notification or not.
 						</div>
 					</div>
-					<div style={{ width: 140, textAlign: 'right' }}>
+					<div style={{ width: 140, textAlign: "right" }}>
 						<Switch checked={true} />
 					</div>
 				</div>
@@ -31,7 +31,7 @@ const SettingModalNotifications = () => {
 							Receive message notification.
 						</div>
 					</div>
-					<div style={{ width: 140, textAlign: 'right' }}>
+					<div style={{ width: 140, textAlign: "right" }}>
 						<Switch checked={true} />
 					</div>
 				</div>
@@ -45,7 +45,7 @@ const SettingModalNotifications = () => {
 							Receive tasks notification.
 						</div>
 					</div>
-					<div style={{ width: 140, textAlign: 'right' }}>
+					<div style={{ width: 140, textAlign: "right" }}>
 						<Switch checked={true} />
 					</div>
 				</div>
@@ -63,7 +63,7 @@ const SettingModalNotifications = () => {
 							Receive emails when you get notifications.
 						</div>
 					</div>
-					<div style={{ width: 140, textAlign: 'right' }}>
+					<div style={{ width: 140, textAlign: "right" }}>
 						<Switch checked={true} />
 					</div>
 				</div>
@@ -77,7 +77,7 @@ const SettingModalNotifications = () => {
 							Receive emails when you get messages.
 						</div>
 					</div>
-					<div style={{ width: 140, textAlign: 'right' }}>
+					<div style={{ width: 140, textAlign: "right" }}>
 						<Switch checked={true} />
 					</div>
 				</div>
@@ -91,7 +91,7 @@ const SettingModalNotifications = () => {
 							Receive emails when you get tasks.
 						</div>
 					</div>
-					<div style={{ width: 140, textAlign: 'right' }}>
+					<div style={{ width: 140, textAlign: "right" }}>
 						<Switch checked={true} />
 					</div>
 				</div>

@@ -4,8 +4,8 @@ import {
 	DatePicker,
 	Modal,
 	Typography,
-} from '@arco-design/web-react';
-import { QRCodeSVG } from 'qrcode.react';
+} from "@arco-design/web-react";
+import { QRCodeSVG } from "qrcode.react";
 
 import {
 	Dispatch,
@@ -13,13 +13,13 @@ import {
 	SetStateAction,
 	useEffect,
 	useState,
-} from 'react';
+} from "react";
 import {
 	getDateString,
 	getNowYYYYMMDDHHMMSS,
-} from '../../../tools/datetime.js';
-import './UI_QRCodeModal.css';
-import { capitalFirstLetter } from '../../../tools/string.js';
+} from "../../../tools/datetime.js";
+import "./UI_QRCodeModal.css";
+import { capitalFirstLetter } from "../../../tools/string.js";
 
 interface UIQrCodeModalProps {
 	ministry: string;
@@ -37,8 +37,8 @@ export const UI_QRCodeModal: FunctionComponent<UIQrCodeModalProps> = ({
 	const [appointmentDates, setAppointmentDates] = useState<EpochTimeStamp[]>(
 		[],
 	);
-	const [currentDate, setCurrentDate] = useState<string>('');
-	const [URL, setURL] = useState('https://fgacyc.com/serve');
+	const [currentDate, setCurrentDate] = useState<string>("");
+	const [URL, setURL] = useState("https://fgacyc.com/serve");
 
 	useEffect(() => {
 		setAppointmentDates(getAppointmentDate(ministry));
@@ -49,15 +49,15 @@ export const UI_QRCodeModal: FunctionComponent<UIQrCodeModalProps> = ({
 	}, [RID, ministry, visible]);
 
 	function getAppointmentDate(ministry?: string) {
-		if (ministry === 'dance') {
+		if (ministry === "dance") {
 			return [1690459200, 1690596000];
 		} else if (
-			ministry === 'content creation' ||
-			ministry === 'editorial' ||
-			ministry === 'graphic design' ||
-			ministry === 'multimedia design' ||
-			ministry === 'photography' ||
-			ministry === 'sound'
+			ministry === "content creation" ||
+			ministry === "editorial" ||
+			ministry === "graphic design" ||
+			ministry === "multimedia design" ||
+			ministry === "photography" ||
+			ministry === "sound"
 		) {
 			return [1690018200, 1690097400];
 		} else {

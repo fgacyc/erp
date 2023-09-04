@@ -4,301 +4,301 @@
  */
 
 export interface paths {
-	'/connect-groups': {
+	"/connect-groups": {
 		/**
 		 * List or search connect groups
 		 * @description Retrieve a list of connect groups or search for connect groups given a query.
 		 */
-		get: operations['list-connect-groups'];
+		get: operations["list-connect-groups"];
 		/**
 		 * Create a connect group
 		 * @description Create a new connect group given its information.
 		 */
-		post: operations['create-connect-group'];
+		post: operations["create-connect-group"];
 	};
-	'/connect-groups/{id}': {
+	"/connect-groups/{id}": {
 		/**
 		 * Get a connect group
 		 * @description Retrieve a connect group's details given its id.
 		 */
-		get: operations['get-connect-group'];
+		get: operations["get-connect-group"];
 		/**
 		 * Delete a connect group
 		 * @description Delete a connect group given its id.
 		 */
-		delete: operations['delete-connect-group'];
+		delete: operations["delete-connect-group"];
 		/**
 		 * Update a connect group
 		 * @description Update a connect group's details given its id and the corresponding fields to update.
 		 */
-		patch: operations['update-connect-group'];
+		patch: operations["update-connect-group"];
 	};
-	'/connect-groups/{id}/users': {
+	"/connect-groups/{id}/users": {
 		/**
 		 * Get connect group users
 		 * @description Retrieve a list of users associated with a connect group given the connect group's id.
 		 */
-		get: operations['get-connect-group-users'];
+		get: operations["get-connect-group-users"];
 		/**
 		 * Associate users with a connect group
 		 * @description Associate users with a connect group given the connect group's id and the users' ids.
 		 */
-		post: operations['associate-users-with-connect-group'];
+		post: operations["associate-users-with-connect-group"];
 		/**
 		 * Remove users from a connect group
 		 * @description Remove users from a connect group given the connect group's id and the users' ids.
 		 */
-		delete: operations['remove-users-from-connect-group'];
+		delete: operations["remove-users-from-connect-group"];
 	};
-	'/ministries': {
+	"/ministries": {
 		/**
 		 * List or search ministries
 		 * @description Retrieve a list of ministries or search for ministries given a query.
 		 */
-		get: operations['list-ministries'];
+		get: operations["list-ministries"];
 		/**
 		 * Create a ministry
 		 * @description Create a new ministry given its information.
 		 */
-		post: operations['create-ministry'];
+		post: operations["create-ministry"];
 	};
-	'/ministries/{id}': {
+	"/ministries/{id}": {
 		/**
 		 * Get a ministry
 		 * @description Retrieve a ministry's details given its id.
 		 */
-		get: operations['get-ministry'];
+		get: operations["get-ministry"];
 		/**
 		 * Delete a ministry
 		 * @description Delete a ministry given its id.
 		 */
-		delete: operations['delete-ministry'];
+		delete: operations["delete-ministry"];
 		/**
 		 * Update a ministry
 		 * @description Update a ministry's details given its id and the corresponding fields to update.
 		 */
-		patch: operations['update-ministry'];
+		patch: operations["update-ministry"];
 	};
-	'/ministries/{id}/users': {
+	"/ministries/{id}/users": {
 		/**
 		 * Get users associated with a ministry
 		 * @description Retrieve a list of users associated with a ministry given the ministry's id.
 		 */
-		get: operations['get-ministry-users'];
+		get: operations["get-ministry-users"];
 		/**
 		 * Associate users with a ministry
 		 * @description Associate users with a ministry given the ministry's id and the users' ids.
 		 */
-		post: operations['associate-users-with-ministry'];
+		post: operations["associate-users-with-ministry"];
 		/**
 		 * Remove users from a ministry
 		 * @description Remove users from a ministry given the ministry's id and the users' ids.
 		 */
-		delete: operations['remove-users-from-ministry'];
+		delete: operations["remove-users-from-ministry"];
 	};
-	'/ministry-departments': {
+	"/ministry-departments": {
 		/**
 		 * List or search ministry departments
 		 * @description Retrieve a list of ministry departments or search for ministry departments given a query.
 		 */
-		get: operations['list-ministry-department'];
+		get: operations["list-ministry-department"];
 		/**
 		 * Create a ministry department
 		 * @description Create a new ministry department given its information.
 		 */
-		post: operations['create-ministry-department'];
+		post: operations["create-ministry-department"];
 	};
-	'/ministry-departments/{id}': {
+	"/ministry-departments/{id}": {
 		/**
 		 * Get a ministry department
 		 * @description Retrieve a ministry department's details given its id.
 		 */
-		get: operations['get-ministry-department'];
+		get: operations["get-ministry-department"];
 		/**
 		 * Delete a ministry department
 		 * @description Delete a ministry department given its id.
 		 */
-		delete: operations['delete-ministry-department'];
+		delete: operations["delete-ministry-department"];
 		/**
 		 * Update a ministry department
 		 * @description Update a ministry department's details given its id and the corresponding fields to update.
 		 */
-		patch: operations['update-ministry-department'];
+		patch: operations["update-ministry-department"];
 	};
-	'/ministry-roles': {
+	"/ministry-roles": {
 		/**
 		 * List or search ministry roles
 		 * @description Retrieve a list of ministry roles or search for ministry roles given a query.
 		 */
-		get: operations['list-ministry-roles'];
+		get: operations["list-ministry-roles"];
 		/**
 		 * Create a ministry role
 		 * @description Create a new ministry role given its information.
 		 */
-		post: operations['create-ministry-role'];
+		post: operations["create-ministry-role"];
 	};
-	'/ministry-roles/{id}': {
+	"/ministry-roles/{id}": {
 		/**
 		 * Get a ministry role
 		 * @description Retrieve a ministry role's details given its id.
 		 */
-		get: operations['get-ministry-role'];
+		get: operations["get-ministry-role"];
 		/**
 		 * Delete a ministry role
 		 * @description Delete a ministry role given its id.
 		 */
-		delete: operations['delete-ministry-role'];
+		delete: operations["delete-ministry-role"];
 		/**
 		 * Update a ministry role
 		 * @description Update a ministry role's details given its id and the corresponding fields to update.
 		 */
-		patch: operations['update-ministry-role'];
+		patch: operations["update-ministry-role"];
 	};
-	'/ministry-teams': {
+	"/ministry-teams": {
 		/**
 		 * List or search ministry teams
 		 * @description Retrieve a list of ministry teams or search for ministry teams given a query.
 		 */
-		get: operations['list-ministry-team'];
+		get: operations["list-ministry-team"];
 		/**
 		 * Create a ministry team
 		 * @description Create a new ministry team given its information.
 		 */
-		post: operations['create-ministry-team'];
+		post: operations["create-ministry-team"];
 	};
-	'/ministry-teams/{id}': {
+	"/ministry-teams/{id}": {
 		/**
 		 * Get a ministry team
 		 * @description Retrieve a ministry team's details given its id.
 		 */
-		get: operations['get-ministry-team'];
+		get: operations["get-ministry-team"];
 		/**
 		 * Delete a ministry team
 		 * @description Delete a ministry team given its id.
 		 */
-		delete: operations['delete-ministry-team'];
+		delete: operations["delete-ministry-team"];
 		/**
 		 * Update a ministry team
 		 * @description Update a ministry team's details given its id and the corresponding fields to update.
 		 */
-		patch: operations['update-ministry-team'];
+		patch: operations["update-ministry-team"];
 	};
-	'/pastoral-roles': {
+	"/pastoral-roles": {
 		/**
 		 * List or search pastoral roles
 		 * @description Retrieve a list of pastoral roles or search for pastoral roles given a query.
 		 */
-		get: operations['list-pastoral-roles'];
+		get: operations["list-pastoral-roles"];
 		/**
 		 * Create a pastoral role
 		 * @description Create a new pastoral role given its information.
 		 */
-		post: operations['create-pastoral-role'];
+		post: operations["create-pastoral-role"];
 	};
-	'/pastoral-roles/{id}': {
+	"/pastoral-roles/{id}": {
 		/**
 		 * Get a pastoral role
 		 * @description Retrieve a pastoral role's details given its id.
 		 */
-		get: operations['get-pastoral-role'];
+		get: operations["get-pastoral-role"];
 		/**
 		 * Delete a pastoral role
 		 * @description Delete a pastoral role given its id.
 		 */
-		delete: operations['delete-pastoral-role'];
+		delete: operations["delete-pastoral-role"];
 		/**
 		 * Update a pastoral role
 		 * @description Update a pastoral role's details given its id and the corresponding fields to update.
 		 */
-		patch: operations['update-pastoral-role'];
+		patch: operations["update-pastoral-role"];
 	};
-	'/satellites': {
+	"/satellites": {
 		/**
 		 * List or search satellites
 		 * @description Retrieve a list of satellites or search for satellites given a query.
 		 */
-		get: operations['list-satellites'];
+		get: operations["list-satellites"];
 		/**
 		 * Create a satellite
 		 * @description Create a new satellite given its information.
 		 */
-		post: operations['create-satellite'];
+		post: operations["create-satellite"];
 	};
-	'/satellites/{id}': {
+	"/satellites/{id}": {
 		/**
 		 * Get a satellite
 		 * @description Retrieve a satellite's details given its id.
 		 */
-		get: operations['get-satellite'];
+		get: operations["get-satellite"];
 		/**
 		 * Delete a satellite
 		 * @description Delete a satellite given its id.
 		 */
-		delete: operations['delete-satellite'];
+		delete: operations["delete-satellite"];
 		/**
 		 * Update a satellite
 		 * @description Update a satellite's details given its id and the corresponding fields to update.
 		 */
-		patch: operations['update-satellite'];
+		patch: operations["update-satellite"];
 	};
-	'/users': {
+	"/users": {
 		/**
 		 * List or search users
 		 * @description Retrieve a list of users or search for users given a query. For now it only supports
 		 * retrieving a list of users.
 		 */
-		get: operations['list-users'];
+		get: operations["list-users"];
 		/**
 		 * Create a user
 		 * @description Create a new user given its information. This endpoint ideally should be called after a
 		 * user is created in Auth0 such as after signup or logging in through social providers.
 		 */
-		post: operations['create-user'];
+		post: operations["create-user"];
 	};
-	'/users/{id}': {
+	"/users/{id}": {
 		/**
 		 * Get a user
 		 * @description Retrieve a user's details given its id.
 		 */
-		get: operations['get-user'];
+		get: operations["get-user"];
 		/**
 		 * Delete a user
 		 * @description Deletes a user based on the id from the database.
 		 */
-		delete: operations['delete-user'];
+		delete: operations["delete-user"];
 		/**
 		 * Update a user
 		 * @description Update a user's details given its id and the corresponding fields to update.
 		 */
-		patch: operations['update-user'];
+		patch: operations["update-user"];
 	};
-	'/users/{id}/connect-groups': {
+	"/users/{id}/connect-groups": {
 		/**
 		 * Get a user's connect groups
 		 * @description List the connect groups that a user is in.
 		 */
-		get: operations['get-user-connect-groups'];
+		get: operations["get-user-connect-groups"];
 	};
-	'/users/{id}/ministries': {
+	"/users/{id}/ministries": {
 		/**
 		 * Get a user's ministries
 		 * @description List the ministries that a user is in.
 		 */
-		get: operations['get-user-ministries'];
+		get: operations["get-user-ministries"];
 	};
-	'/users/{id}/ministry-roles': {
+	"/users/{id}/ministry-roles": {
 		/**
 		 * Get a user's ministry roles
 		 * @description List the ministry roles associated with a user.
 		 */
-		get: operations['get-user-ministry-roles'];
+		get: operations["get-user-ministry-roles"];
 	};
-	'/users/{id}/pastoral-roles': {
+	"/users/{id}/pastoral-roles": {
 		/**
 		 * Get a user's pastoral roles
 		 * @description List the pastoral roles associated with a user.
 		 */
-		get: operations['get-user-pastoral-roles'];
+		get: operations["get-user-pastoral-roles"];
 	};
 }
 
@@ -315,14 +315,14 @@ export interface components {
 			state: string;
 		};
 		AssociateUsersWithConnectGroupRequest: {
-			users: components['schemas']['AssociateUsersWithConnectGroupRequestUser'][];
+			users: components["schemas"]["AssociateUsersWithConnectGroupRequestUser"][];
 		};
 		AssociateUsersWithConnectGroupRequestUser: {
 			role_id: string;
 			user_id: string;
 		};
 		AssociateUsersWithMinistryRequest: {
-			users: components['schemas']['AssociateUsersWithMinistryRequestUser'][];
+			users: components["schemas"]["AssociateUsersWithMinistryRequestUser"][];
 		};
 		AssociateUsersWithMinistryRequestUser: {
 			role_id: string;
@@ -375,20 +375,20 @@ export interface components {
 			weight: number;
 		};
 		CreateSatelliteRequest: {
-			address?: components['schemas']['Address'];
+			address?: components["schemas"]["Address"];
 			name: string;
 			/** Format: int32 */
 			no: number;
 		};
 		CreateUserRequest: {
-			address?: components['schemas']['Address'];
+			address?: components["schemas"]["Address"];
 			avatar_url?: string;
 			/** Format: date-time */
 			date_of_birth?: string;
 			email: string;
 			email_verified?: boolean;
 			family_name?: string;
-			gender?: components['schemas']['Gender'];
+			gender?: components["schemas"]["Gender"];
 			given_name?: string;
 			ic_number?: string;
 			id: string;
@@ -404,7 +404,7 @@ export interface components {
 			message: string;
 		};
 		/** @enum {string} */
-		Gender: 'male' | 'female';
+		Gender: "male" | "female";
 		Ministry: {
 			/** Format: date-time */
 			created_at: string;
@@ -456,7 +456,7 @@ export interface components {
 			users: string[];
 		};
 		Satellite: {
-			address: components['schemas']['Address'];
+			address: components["schemas"]["Address"];
 			/** Format: date-time */
 			created_at: string;
 			id: string;
@@ -501,20 +501,20 @@ export interface components {
 			weight?: number;
 		};
 		UpdateSatelliteRequest: {
-			address?: components['schemas']['Address'];
+			address?: components["schemas"]["Address"];
 			name?: string;
 			/** Format: int32 */
 			no?: number;
 		};
 		UpdateUserRequest: {
-			address?: components['schemas']['Address'];
+			address?: components["schemas"]["Address"];
 			avatar_url?: string;
 			/** Format: date-time */
 			date_of_birth?: string;
 			email?: string;
 			email_verified?: boolean;
 			family_name?: string;
-			gender?: components['schemas']['Gender'];
+			gender?: components["schemas"]["Gender"];
 			given_name?: string;
 			ic_number?: string;
 			id: string;
@@ -527,7 +527,7 @@ export interface components {
 			username?: string;
 		};
 		User: {
-			address?: components['schemas']['Address'];
+			address?: components["schemas"]["Address"];
 			avatar_url?: string;
 			/** Format: date-time */
 			created_at: string;
@@ -536,7 +536,7 @@ export interface components {
 			email: string;
 			email_verified: boolean;
 			family_name?: string;
-			gender?: components['schemas']['Gender'];
+			gender?: components["schemas"]["Gender"];
 			given_name?: string;
 			ic_number?: string;
 			id: string;
@@ -567,21 +567,21 @@ export interface operations {
 	 * List or search connect groups
 	 * @description Retrieve a list of connect groups or search for connect groups given a query.
 	 */
-	'list-connect-groups': {
+	"list-connect-groups": {
 		responses: {
 			200: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ConnectGroup'][];
+					"application/json; charset=utf-8": components["schemas"]["ConnectGroup"][];
 				};
 			};
 			400: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			500: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 		};
@@ -590,31 +590,31 @@ export interface operations {
 	 * Create a connect group
 	 * @description Create a new connect group given its information.
 	 */
-	'create-connect-group': {
+	"create-connect-group": {
 		requestBody: {
 			content: {
-				'application/json; charset=utf-8': components['schemas']['CreateConnectGroupRequest'];
+				"application/json; charset=utf-8": components["schemas"]["CreateConnectGroupRequest"];
 			};
 		};
 		responses: {
 			200: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ConnectGroup'];
+					"application/json; charset=utf-8": components["schemas"]["ConnectGroup"];
 				};
 			};
 			400: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			404: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			500: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 		};
@@ -623,7 +623,7 @@ export interface operations {
 	 * Get a connect group
 	 * @description Retrieve a connect group's details given its id.
 	 */
-	'get-connect-group': {
+	"get-connect-group": {
 		parameters: {
 			path: {
 				id: string;
@@ -632,22 +632,22 @@ export interface operations {
 		responses: {
 			200: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ConnectGroup'];
+					"application/json; charset=utf-8": components["schemas"]["ConnectGroup"];
 				};
 			};
 			400: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			404: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			500: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 		};
@@ -656,7 +656,7 @@ export interface operations {
 	 * Delete a connect group
 	 * @description Delete a connect group given its id.
 	 */
-	'delete-connect-group': {
+	"delete-connect-group": {
 		parameters: {
 			path: {
 				id: string;
@@ -665,22 +665,22 @@ export interface operations {
 		responses: {
 			200: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ConnectGroup'];
+					"application/json; charset=utf-8": components["schemas"]["ConnectGroup"];
 				};
 			};
 			400: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			404: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			500: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 		};
@@ -689,7 +689,7 @@ export interface operations {
 	 * Update a connect group
 	 * @description Update a connect group's details given its id and the corresponding fields to update.
 	 */
-	'update-connect-group': {
+	"update-connect-group": {
 		parameters: {
 			path: {
 				id: string;
@@ -697,28 +697,28 @@ export interface operations {
 		};
 		requestBody: {
 			content: {
-				'application/json; charset=utf-8': components['schemas']['UpdateConnectGroupRequest'];
+				"application/json; charset=utf-8": components["schemas"]["UpdateConnectGroupRequest"];
 			};
 		};
 		responses: {
 			200: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ConnectGroup'];
+					"application/json; charset=utf-8": components["schemas"]["ConnectGroup"];
 				};
 			};
 			400: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			404: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			500: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 		};
@@ -727,7 +727,7 @@ export interface operations {
 	 * Get connect group users
 	 * @description Retrieve a list of users associated with a connect group given the connect group's id.
 	 */
-	'get-connect-group-users': {
+	"get-connect-group-users": {
 		parameters: {
 			path: {
 				id: string;
@@ -736,22 +736,22 @@ export interface operations {
 		responses: {
 			200: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['User'][];
+					"application/json; charset=utf-8": components["schemas"]["User"][];
 				};
 			};
 			400: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			404: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			500: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 		};
@@ -760,7 +760,7 @@ export interface operations {
 	 * Associate users with a connect group
 	 * @description Associate users with a connect group given the connect group's id and the users' ids.
 	 */
-	'associate-users-with-connect-group': {
+	"associate-users-with-connect-group": {
 		parameters: {
 			path: {
 				id: string;
@@ -768,28 +768,28 @@ export interface operations {
 		};
 		requestBody: {
 			content: {
-				'application/json; charset=utf-8': components['schemas']['AssociateUsersWithConnectGroupRequest'];
+				"application/json; charset=utf-8": components["schemas"]["AssociateUsersWithConnectGroupRequest"];
 			};
 		};
 		responses: {
 			200: {
 				content: {
-					'application/json; charset=utf-8': string;
+					"application/json; charset=utf-8": string;
 				};
 			};
 			400: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			404: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			500: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 		};
@@ -798,7 +798,7 @@ export interface operations {
 	 * Remove users from a connect group
 	 * @description Remove users from a connect group given the connect group's id and the users' ids.
 	 */
-	'remove-users-from-connect-group': {
+	"remove-users-from-connect-group": {
 		parameters: {
 			path: {
 				id: string;
@@ -806,28 +806,28 @@ export interface operations {
 		};
 		requestBody: {
 			content: {
-				'application/json; charset=utf-8': components['schemas']['RemoveUsersFromConnectGroupRequest'];
+				"application/json; charset=utf-8": components["schemas"]["RemoveUsersFromConnectGroupRequest"];
 			};
 		};
 		responses: {
 			200: {
 				content: {
-					'application/json; charset=utf-8': string;
+					"application/json; charset=utf-8": string;
 				};
 			};
 			400: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			404: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			500: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 		};
@@ -836,21 +836,21 @@ export interface operations {
 	 * List or search ministries
 	 * @description Retrieve a list of ministries or search for ministries given a query.
 	 */
-	'list-ministries': {
+	"list-ministries": {
 		responses: {
 			200: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['Ministry'][];
+					"application/json; charset=utf-8": components["schemas"]["Ministry"][];
 				};
 			};
 			400: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			500: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 		};
@@ -859,31 +859,31 @@ export interface operations {
 	 * Create a ministry
 	 * @description Create a new ministry given its information.
 	 */
-	'create-ministry': {
+	"create-ministry": {
 		requestBody: {
 			content: {
-				'application/json; charset=utf-8': components['schemas']['CreateMinistryRequest'];
+				"application/json; charset=utf-8": components["schemas"]["CreateMinistryRequest"];
 			};
 		};
 		responses: {
 			200: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['Ministry'];
+					"application/json; charset=utf-8": components["schemas"]["Ministry"];
 				};
 			};
 			400: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			404: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			500: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 		};
@@ -892,7 +892,7 @@ export interface operations {
 	 * Get a ministry
 	 * @description Retrieve a ministry's details given its id.
 	 */
-	'get-ministry': {
+	"get-ministry": {
 		parameters: {
 			path: {
 				id: string;
@@ -901,22 +901,22 @@ export interface operations {
 		responses: {
 			200: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['Ministry'];
+					"application/json; charset=utf-8": components["schemas"]["Ministry"];
 				};
 			};
 			400: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			404: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			500: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 		};
@@ -925,7 +925,7 @@ export interface operations {
 	 * Delete a ministry
 	 * @description Delete a ministry given its id.
 	 */
-	'delete-ministry': {
+	"delete-ministry": {
 		parameters: {
 			path: {
 				id: string;
@@ -934,22 +934,22 @@ export interface operations {
 		responses: {
 			200: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['Ministry'];
+					"application/json; charset=utf-8": components["schemas"]["Ministry"];
 				};
 			};
 			400: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			404: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			500: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 		};
@@ -958,7 +958,7 @@ export interface operations {
 	 * Update a ministry
 	 * @description Update a ministry's details given its id and the corresponding fields to update.
 	 */
-	'update-ministry': {
+	"update-ministry": {
 		parameters: {
 			path: {
 				id: string;
@@ -966,28 +966,28 @@ export interface operations {
 		};
 		requestBody: {
 			content: {
-				'application/json; charset=utf-8': components['schemas']['UpdateMinistryRequest'];
+				"application/json; charset=utf-8": components["schemas"]["UpdateMinistryRequest"];
 			};
 		};
 		responses: {
 			200: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['Ministry'];
+					"application/json; charset=utf-8": components["schemas"]["Ministry"];
 				};
 			};
 			400: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			404: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			500: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 		};
@@ -996,7 +996,7 @@ export interface operations {
 	 * Get users associated with a ministry
 	 * @description Retrieve a list of users associated with a ministry given the ministry's id.
 	 */
-	'get-ministry-users': {
+	"get-ministry-users": {
 		parameters: {
 			path: {
 				id: string;
@@ -1005,22 +1005,22 @@ export interface operations {
 		responses: {
 			200: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['User'][];
+					"application/json; charset=utf-8": components["schemas"]["User"][];
 				};
 			};
 			400: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			404: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			500: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 		};
@@ -1029,7 +1029,7 @@ export interface operations {
 	 * Associate users with a ministry
 	 * @description Associate users with a ministry given the ministry's id and the users' ids.
 	 */
-	'associate-users-with-ministry': {
+	"associate-users-with-ministry": {
 		parameters: {
 			path: {
 				id: string;
@@ -1037,28 +1037,28 @@ export interface operations {
 		};
 		requestBody: {
 			content: {
-				'application/json; charset=utf-8': components['schemas']['AssociateUsersWithMinistryRequest'];
+				"application/json; charset=utf-8": components["schemas"]["AssociateUsersWithMinistryRequest"];
 			};
 		};
 		responses: {
 			200: {
 				content: {
-					'application/json; charset=utf-8': string;
+					"application/json; charset=utf-8": string;
 				};
 			};
 			400: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			404: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			500: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 		};
@@ -1067,7 +1067,7 @@ export interface operations {
 	 * Remove users from a ministry
 	 * @description Remove users from a ministry given the ministry's id and the users' ids.
 	 */
-	'remove-users-from-ministry': {
+	"remove-users-from-ministry": {
 		parameters: {
 			path: {
 				id: string;
@@ -1075,28 +1075,28 @@ export interface operations {
 		};
 		requestBody: {
 			content: {
-				'application/json; charset=utf-8': components['schemas']['RemoveUsersFromMinistryRequest'];
+				"application/json; charset=utf-8": components["schemas"]["RemoveUsersFromMinistryRequest"];
 			};
 		};
 		responses: {
 			200: {
 				content: {
-					'application/json; charset=utf-8': string;
+					"application/json; charset=utf-8": string;
 				};
 			};
 			400: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			404: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			500: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 		};
@@ -1105,21 +1105,21 @@ export interface operations {
 	 * List or search ministry departments
 	 * @description Retrieve a list of ministry departments or search for ministry departments given a query.
 	 */
-	'list-ministry-department': {
+	"list-ministry-department": {
 		responses: {
 			200: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['MinistryDepartment'][];
+					"application/json; charset=utf-8": components["schemas"]["MinistryDepartment"][];
 				};
 			};
 			400: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			500: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 		};
@@ -1128,31 +1128,31 @@ export interface operations {
 	 * Create a ministry department
 	 * @description Create a new ministry department given its information.
 	 */
-	'create-ministry-department': {
+	"create-ministry-department": {
 		requestBody: {
 			content: {
-				'application/json; charset=utf-8': components['schemas']['CreateMinistryDepartmentRequest'];
+				"application/json; charset=utf-8": components["schemas"]["CreateMinistryDepartmentRequest"];
 			};
 		};
 		responses: {
 			200: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['MinistryDepartment'];
+					"application/json; charset=utf-8": components["schemas"]["MinistryDepartment"];
 				};
 			};
 			400: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			404: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			500: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 		};
@@ -1161,7 +1161,7 @@ export interface operations {
 	 * Get a ministry department
 	 * @description Retrieve a ministry department's details given its id.
 	 */
-	'get-ministry-department': {
+	"get-ministry-department": {
 		parameters: {
 			path: {
 				id: string;
@@ -1170,22 +1170,22 @@ export interface operations {
 		responses: {
 			200: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['MinistryDepartment'];
+					"application/json; charset=utf-8": components["schemas"]["MinistryDepartment"];
 				};
 			};
 			400: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			404: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			500: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 		};
@@ -1194,7 +1194,7 @@ export interface operations {
 	 * Delete a ministry department
 	 * @description Delete a ministry department given its id.
 	 */
-	'delete-ministry-department': {
+	"delete-ministry-department": {
 		parameters: {
 			path: {
 				id: string;
@@ -1203,22 +1203,22 @@ export interface operations {
 		responses: {
 			200: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['MinistryDepartment'];
+					"application/json; charset=utf-8": components["schemas"]["MinistryDepartment"];
 				};
 			};
 			400: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			404: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			500: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 		};
@@ -1227,7 +1227,7 @@ export interface operations {
 	 * Update a ministry department
 	 * @description Update a ministry department's details given its id and the corresponding fields to update.
 	 */
-	'update-ministry-department': {
+	"update-ministry-department": {
 		parameters: {
 			path: {
 				id: string;
@@ -1235,28 +1235,28 @@ export interface operations {
 		};
 		requestBody: {
 			content: {
-				'application/json; charset=utf-8': components['schemas']['UpdateMinistryDepartmentRequest'];
+				"application/json; charset=utf-8": components["schemas"]["UpdateMinistryDepartmentRequest"];
 			};
 		};
 		responses: {
 			200: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['MinistryDepartment'];
+					"application/json; charset=utf-8": components["schemas"]["MinistryDepartment"];
 				};
 			};
 			400: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			404: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			500: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 		};
@@ -1265,21 +1265,21 @@ export interface operations {
 	 * List or search ministry roles
 	 * @description Retrieve a list of ministry roles or search for ministry roles given a query.
 	 */
-	'list-ministry-roles': {
+	"list-ministry-roles": {
 		responses: {
 			200: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['MinistryRole'][];
+					"application/json; charset=utf-8": components["schemas"]["MinistryRole"][];
 				};
 			};
 			400: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			500: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 		};
@@ -1288,31 +1288,31 @@ export interface operations {
 	 * Create a ministry role
 	 * @description Create a new ministry role given its information.
 	 */
-	'create-ministry-role': {
+	"create-ministry-role": {
 		requestBody: {
 			content: {
-				'application/json; charset=utf-8': components['schemas']['CreateMinistryRoleRequest'];
+				"application/json; charset=utf-8": components["schemas"]["CreateMinistryRoleRequest"];
 			};
 		};
 		responses: {
 			200: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['MinistryRole'];
+					"application/json; charset=utf-8": components["schemas"]["MinistryRole"];
 				};
 			};
 			400: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			404: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			500: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 		};
@@ -1321,7 +1321,7 @@ export interface operations {
 	 * Get a ministry role
 	 * @description Retrieve a ministry role's details given its id.
 	 */
-	'get-ministry-role': {
+	"get-ministry-role": {
 		parameters: {
 			path: {
 				id: string;
@@ -1330,22 +1330,22 @@ export interface operations {
 		responses: {
 			200: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['MinistryRole'];
+					"application/json; charset=utf-8": components["schemas"]["MinistryRole"];
 				};
 			};
 			400: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			404: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			500: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 		};
@@ -1354,7 +1354,7 @@ export interface operations {
 	 * Delete a ministry role
 	 * @description Delete a ministry role given its id.
 	 */
-	'delete-ministry-role': {
+	"delete-ministry-role": {
 		parameters: {
 			path: {
 				id: string;
@@ -1363,22 +1363,22 @@ export interface operations {
 		responses: {
 			200: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['MinistryRole'];
+					"application/json; charset=utf-8": components["schemas"]["MinistryRole"];
 				};
 			};
 			400: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			404: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			500: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 		};
@@ -1387,7 +1387,7 @@ export interface operations {
 	 * Update a ministry role
 	 * @description Update a ministry role's details given its id and the corresponding fields to update.
 	 */
-	'update-ministry-role': {
+	"update-ministry-role": {
 		parameters: {
 			path: {
 				id: string;
@@ -1395,28 +1395,28 @@ export interface operations {
 		};
 		requestBody: {
 			content: {
-				'application/json; charset=utf-8': components['schemas']['UpdateMinistryRoleRequest'];
+				"application/json; charset=utf-8": components["schemas"]["UpdateMinistryRoleRequest"];
 			};
 		};
 		responses: {
 			200: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['MinistryRole'];
+					"application/json; charset=utf-8": components["schemas"]["MinistryRole"];
 				};
 			};
 			400: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			404: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			500: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 		};
@@ -1425,21 +1425,21 @@ export interface operations {
 	 * List or search ministry teams
 	 * @description Retrieve a list of ministry teams or search for ministry teams given a query.
 	 */
-	'list-ministry-team': {
+	"list-ministry-team": {
 		responses: {
 			200: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['MinistryTeam'][];
+					"application/json; charset=utf-8": components["schemas"]["MinistryTeam"][];
 				};
 			};
 			400: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			500: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 		};
@@ -1448,31 +1448,31 @@ export interface operations {
 	 * Create a ministry team
 	 * @description Create a new ministry team given its information.
 	 */
-	'create-ministry-team': {
+	"create-ministry-team": {
 		requestBody: {
 			content: {
-				'application/json; charset=utf-8': components['schemas']['CreateMinistryTeamRequest'];
+				"application/json; charset=utf-8": components["schemas"]["CreateMinistryTeamRequest"];
 			};
 		};
 		responses: {
 			200: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['MinistryTeam'];
+					"application/json; charset=utf-8": components["schemas"]["MinistryTeam"];
 				};
 			};
 			400: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			404: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			500: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 		};
@@ -1481,7 +1481,7 @@ export interface operations {
 	 * Get a ministry team
 	 * @description Retrieve a ministry team's details given its id.
 	 */
-	'get-ministry-team': {
+	"get-ministry-team": {
 		parameters: {
 			path: {
 				id: string;
@@ -1490,22 +1490,22 @@ export interface operations {
 		responses: {
 			200: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['MinistryTeam'];
+					"application/json; charset=utf-8": components["schemas"]["MinistryTeam"];
 				};
 			};
 			400: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			404: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			500: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 		};
@@ -1514,7 +1514,7 @@ export interface operations {
 	 * Delete a ministry team
 	 * @description Delete a ministry team given its id.
 	 */
-	'delete-ministry-team': {
+	"delete-ministry-team": {
 		parameters: {
 			path: {
 				id: string;
@@ -1523,22 +1523,22 @@ export interface operations {
 		responses: {
 			200: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['MinistryTeam'];
+					"application/json; charset=utf-8": components["schemas"]["MinistryTeam"];
 				};
 			};
 			400: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			404: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			500: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 		};
@@ -1547,7 +1547,7 @@ export interface operations {
 	 * Update a ministry team
 	 * @description Update a ministry team's details given its id and the corresponding fields to update.
 	 */
-	'update-ministry-team': {
+	"update-ministry-team": {
 		parameters: {
 			path: {
 				id: string;
@@ -1555,28 +1555,28 @@ export interface operations {
 		};
 		requestBody: {
 			content: {
-				'application/json; charset=utf-8': components['schemas']['UpdateMinistryTeamRequest'];
+				"application/json; charset=utf-8": components["schemas"]["UpdateMinistryTeamRequest"];
 			};
 		};
 		responses: {
 			200: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['MinistryTeam'];
+					"application/json; charset=utf-8": components["schemas"]["MinistryTeam"];
 				};
 			};
 			400: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			404: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			500: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 		};
@@ -1585,21 +1585,21 @@ export interface operations {
 	 * List or search pastoral roles
 	 * @description Retrieve a list of pastoral roles or search for pastoral roles given a query.
 	 */
-	'list-pastoral-roles': {
+	"list-pastoral-roles": {
 		responses: {
 			200: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['PastoralRole'][];
+					"application/json; charset=utf-8": components["schemas"]["PastoralRole"][];
 				};
 			};
 			400: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			500: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 		};
@@ -1608,31 +1608,31 @@ export interface operations {
 	 * Create a pastoral role
 	 * @description Create a new pastoral role given its information.
 	 */
-	'create-pastoral-role': {
+	"create-pastoral-role": {
 		requestBody: {
 			content: {
-				'application/json; charset=utf-8': components['schemas']['CreatePastoralRoleRequest'];
+				"application/json; charset=utf-8": components["schemas"]["CreatePastoralRoleRequest"];
 			};
 		};
 		responses: {
 			200: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['PastoralRole'];
+					"application/json; charset=utf-8": components["schemas"]["PastoralRole"];
 				};
 			};
 			400: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			404: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			500: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 		};
@@ -1641,7 +1641,7 @@ export interface operations {
 	 * Get a pastoral role
 	 * @description Retrieve a pastoral role's details given its id.
 	 */
-	'get-pastoral-role': {
+	"get-pastoral-role": {
 		parameters: {
 			path: {
 				id: string;
@@ -1650,22 +1650,22 @@ export interface operations {
 		responses: {
 			200: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['PastoralRole'];
+					"application/json; charset=utf-8": components["schemas"]["PastoralRole"];
 				};
 			};
 			400: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			404: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			500: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 		};
@@ -1674,7 +1674,7 @@ export interface operations {
 	 * Delete a pastoral role
 	 * @description Delete a pastoral role given its id.
 	 */
-	'delete-pastoral-role': {
+	"delete-pastoral-role": {
 		parameters: {
 			path: {
 				id: string;
@@ -1683,22 +1683,22 @@ export interface operations {
 		responses: {
 			200: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['PastoralRole'];
+					"application/json; charset=utf-8": components["schemas"]["PastoralRole"];
 				};
 			};
 			400: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			404: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			500: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 		};
@@ -1707,7 +1707,7 @@ export interface operations {
 	 * Update a pastoral role
 	 * @description Update a pastoral role's details given its id and the corresponding fields to update.
 	 */
-	'update-pastoral-role': {
+	"update-pastoral-role": {
 		parameters: {
 			path: {
 				id: string;
@@ -1715,28 +1715,28 @@ export interface operations {
 		};
 		requestBody: {
 			content: {
-				'application/json; charset=utf-8': components['schemas']['UpdatePastoralRoleRequest'];
+				"application/json; charset=utf-8": components["schemas"]["UpdatePastoralRoleRequest"];
 			};
 		};
 		responses: {
 			200: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['PastoralRole'];
+					"application/json; charset=utf-8": components["schemas"]["PastoralRole"];
 				};
 			};
 			400: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			404: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			500: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 		};
@@ -1745,21 +1745,21 @@ export interface operations {
 	 * List or search satellites
 	 * @description Retrieve a list of satellites or search for satellites given a query.
 	 */
-	'list-satellites': {
+	"list-satellites": {
 		responses: {
 			200: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['Satellite'][];
+					"application/json; charset=utf-8": components["schemas"]["Satellite"][];
 				};
 			};
 			400: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			500: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 		};
@@ -1768,31 +1768,31 @@ export interface operations {
 	 * Create a satellite
 	 * @description Create a new satellite given its information.
 	 */
-	'create-satellite': {
+	"create-satellite": {
 		requestBody: {
 			content: {
-				'application/json; charset=utf-8': components['schemas']['CreateSatelliteRequest'];
+				"application/json; charset=utf-8": components["schemas"]["CreateSatelliteRequest"];
 			};
 		};
 		responses: {
 			200: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['Satellite'];
+					"application/json; charset=utf-8": components["schemas"]["Satellite"];
 				};
 			};
 			400: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			404: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			500: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 		};
@@ -1801,7 +1801,7 @@ export interface operations {
 	 * Get a satellite
 	 * @description Retrieve a satellite's details given its id.
 	 */
-	'get-satellite': {
+	"get-satellite": {
 		parameters: {
 			path: {
 				id: string;
@@ -1810,22 +1810,22 @@ export interface operations {
 		responses: {
 			200: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['Satellite'];
+					"application/json; charset=utf-8": components["schemas"]["Satellite"];
 				};
 			};
 			400: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			404: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			500: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 		};
@@ -1834,7 +1834,7 @@ export interface operations {
 	 * Delete a satellite
 	 * @description Delete a satellite given its id.
 	 */
-	'delete-satellite': {
+	"delete-satellite": {
 		parameters: {
 			path: {
 				id: string;
@@ -1843,22 +1843,22 @@ export interface operations {
 		responses: {
 			200: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['Satellite'];
+					"application/json; charset=utf-8": components["schemas"]["Satellite"];
 				};
 			};
 			400: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			404: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			500: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 		};
@@ -1867,7 +1867,7 @@ export interface operations {
 	 * Update a satellite
 	 * @description Update a satellite's details given its id and the corresponding fields to update.
 	 */
-	'update-satellite': {
+	"update-satellite": {
 		parameters: {
 			path: {
 				id: string;
@@ -1875,28 +1875,28 @@ export interface operations {
 		};
 		requestBody: {
 			content: {
-				'application/json; charset=utf-8': components['schemas']['UpdateSatelliteRequest'];
+				"application/json; charset=utf-8": components["schemas"]["UpdateSatelliteRequest"];
 			};
 		};
 		responses: {
 			200: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['Satellite'];
+					"application/json; charset=utf-8": components["schemas"]["Satellite"];
 				};
 			};
 			400: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			404: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			500: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 		};
@@ -1906,21 +1906,21 @@ export interface operations {
 	 * @description Retrieve a list of users or search for users given a query. For now it only supports
 	 * retrieving a list of users.
 	 */
-	'list-users': {
+	"list-users": {
 		responses: {
 			200: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['User'][];
+					"application/json; charset=utf-8": components["schemas"]["User"][];
 				};
 			};
 			400: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			500: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 		};
@@ -1930,26 +1930,26 @@ export interface operations {
 	 * @description Create a new user given its information. This endpoint ideally should be called after a
 	 * user is created in Auth0 such as after signup or logging in through social providers.
 	 */
-	'create-user': {
+	"create-user": {
 		requestBody: {
 			content: {
-				'application/json; charset=utf-8': components['schemas']['CreateUserRequest'];
+				"application/json; charset=utf-8": components["schemas"]["CreateUserRequest"];
 			};
 		};
 		responses: {
 			200: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['User'];
+					"application/json; charset=utf-8": components["schemas"]["User"];
 				};
 			};
 			400: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			500: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 		};
@@ -1958,7 +1958,7 @@ export interface operations {
 	 * Get a user
 	 * @description Retrieve a user's details given its id.
 	 */
-	'get-user': {
+	"get-user": {
 		parameters: {
 			path: {
 				id: string;
@@ -1967,22 +1967,22 @@ export interface operations {
 		responses: {
 			200: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['User'];
+					"application/json; charset=utf-8": components["schemas"]["User"];
 				};
 			};
 			400: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			404: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			500: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 		};
@@ -1991,7 +1991,7 @@ export interface operations {
 	 * Delete a user
 	 * @description Deletes a user based on the id from the database.
 	 */
-	'delete-user': {
+	"delete-user": {
 		parameters: {
 			path: {
 				id: string;
@@ -2000,22 +2000,22 @@ export interface operations {
 		responses: {
 			200: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['User'];
+					"application/json; charset=utf-8": components["schemas"]["User"];
 				};
 			};
 			400: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			404: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			500: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 		};
@@ -2024,7 +2024,7 @@ export interface operations {
 	 * Update a user
 	 * @description Update a user's details given its id and the corresponding fields to update.
 	 */
-	'update-user': {
+	"update-user": {
 		parameters: {
 			path: {
 				id: string;
@@ -2032,28 +2032,28 @@ export interface operations {
 		};
 		requestBody: {
 			content: {
-				'application/json; charset=utf-8': components['schemas']['UpdateUserRequest'];
+				"application/json; charset=utf-8": components["schemas"]["UpdateUserRequest"];
 			};
 		};
 		responses: {
 			200: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['User'];
+					"application/json; charset=utf-8": components["schemas"]["User"];
 				};
 			};
 			400: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			404: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			500: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 		};
@@ -2062,7 +2062,7 @@ export interface operations {
 	 * Get a user's connect groups
 	 * @description List the connect groups that a user is in.
 	 */
-	'get-user-connect-groups': {
+	"get-user-connect-groups": {
 		parameters: {
 			path: {
 				id: string;
@@ -2071,22 +2071,22 @@ export interface operations {
 		responses: {
 			200: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ConnectGroup'][];
+					"application/json; charset=utf-8": components["schemas"]["ConnectGroup"][];
 				};
 			};
 			400: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			404: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			500: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 		};
@@ -2095,7 +2095,7 @@ export interface operations {
 	 * Get a user's ministries
 	 * @description List the ministries that a user is in.
 	 */
-	'get-user-ministries': {
+	"get-user-ministries": {
 		parameters: {
 			path: {
 				id: string;
@@ -2104,22 +2104,22 @@ export interface operations {
 		responses: {
 			200: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['Ministry'][];
+					"application/json; charset=utf-8": components["schemas"]["Ministry"][];
 				};
 			};
 			400: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			404: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			500: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 		};
@@ -2128,7 +2128,7 @@ export interface operations {
 	 * Get a user's ministry roles
 	 * @description List the ministry roles associated with a user.
 	 */
-	'get-user-ministry-roles': {
+	"get-user-ministry-roles": {
 		parameters: {
 			path: {
 				id: string;
@@ -2137,22 +2137,22 @@ export interface operations {
 		responses: {
 			200: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['MinistryRole'][];
+					"application/json; charset=utf-8": components["schemas"]["MinistryRole"][];
 				};
 			};
 			400: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			404: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			500: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 		};
@@ -2161,7 +2161,7 @@ export interface operations {
 	 * Get a user's pastoral roles
 	 * @description List the pastoral roles associated with a user.
 	 */
-	'get-user-pastoral-roles': {
+	"get-user-pastoral-roles": {
 		parameters: {
 			path: {
 				id: string;
@@ -2170,22 +2170,22 @@ export interface operations {
 		responses: {
 			200: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['PastoralRole'][];
+					"application/json; charset=utf-8": components["schemas"]["PastoralRole"][];
 				};
 			};
 			400: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			404: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 			500: {
 				content: {
-					'application/json; charset=utf-8': components['schemas']['ErrorResponse'];
+					"application/json; charset=utf-8": components["schemas"]["ErrorResponse"];
 				};
 			};
 		};

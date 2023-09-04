@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import './registration.css';
+import { useState } from "react";
+import "./registration.css";
 import {
 	Form,
 	Input,
@@ -7,9 +7,9 @@ import {
 	Message,
 	Cascader,
 	Typography,
-} from '@arco-design/web-react';
-import { department_options } from '@/data/ministries';
-import { postReq } from '@/tools/requests';
+} from "@arco-design/web-react";
+import { department_options } from "@/data/ministries";
+import { postReq } from "@/tools/requests";
 const FormItem = Form.Item;
 const { Title, Paragraph } = Typography;
 
@@ -53,7 +53,7 @@ export default function Registration() {
 						email: v.email,
 						ministry: [
 							{
-								ministry: 'interviewer',
+								ministry: "interviewer",
 								scope: ministries,
 							},
 						],
@@ -61,10 +61,10 @@ export default function Registration() {
 					// console.log(registration_data)
 					// return;
 
-					postReq('/interviewer', registration_data).then((res) => {
+					postReq("/interviewer", registration_data).then((res) => {
 						if (res.status) {
 							console.log(res.data);
-							Message.success('success');
+							Message.success("success");
 							alert(
 								`Your CYC ID is ${res.data.CYC_ID}. Your password is ${res.data.password}. Please take a screenshot of your credentials and keep them safe.`,
 							);
@@ -75,14 +75,14 @@ export default function Registration() {
 				<FormItem
 					label="Full Name"
 					field="full_name"
-					rules={[{ required: true, message: 'full name 是必填项' }]}
+					rules={[{ required: true, message: "full name 是必填项" }]}
 				>
 					<Input placeholder="please enter your full name" />
 				</FormItem>
 				<FormItem
 					label="Username"
 					field="username"
-					rules={[{ required: true, message: 'username 是必填项' }]}
+					rules={[{ required: true, message: "username 是必填项" }]}
 				>
 					<Input placeholder="please enter your username" />
 				</FormItem>
@@ -91,8 +91,8 @@ export default function Registration() {
 					field="email"
 					rules={[
 						{
-							type: 'email',
-							validateLevel: 'warning',
+							type: "email",
+							validateLevel: "warning",
 						},
 						{
 							required: true,
@@ -106,7 +106,7 @@ export default function Registration() {
 					field="interview"
 					rules={[
 						{
-							type: 'array',
+							type: "array",
 							required: true,
 						},
 					]}

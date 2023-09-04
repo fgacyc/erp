@@ -1,25 +1,25 @@
-import UIBreadcrumb from '@/components/UIBreadcrumb';
-import { useEffect, useRef, useState } from 'react';
-import { getAllUsers } from '@/tools/DB.js';
-import { Button, Input, Table, TableColumnProps } from '@arco-design/web-react';
-import CandidateModal from '@/components/UI_Modal/UI_CandidateModal/CandidateModal';
-import { useNavigate } from 'react-router-dom';
-import { addKeys } from '@/tools/tableTools';
-import { IconSearch } from '@arco-design/web-react/icon';
-import { getPassStatus, filterEvaluationData } from './data';
-import { set } from 'idb-keyval';
-import { RefInputType } from '@arco-design/web-react/es/Input/interface.js';
+import UIBreadcrumb from "@/components/UIBreadcrumb";
+import { useEffect, useRef, useState } from "react";
+import { getAllUsers } from "@/tools/DB.js";
+import { Button, Input, Table, TableColumnProps } from "@arco-design/web-react";
+import CandidateModal from "@/components/UI_Modal/UI_CandidateModal/CandidateModal";
+import { useNavigate } from "react-router-dom";
+import { addKeys } from "@/tools/tableTools";
+import { IconSearch } from "@arco-design/web-react/icon";
+import { getPassStatus, filterEvaluationData } from "./data";
+import { set } from "idb-keyval";
+import { RefInputType } from "@arco-design/web-react/es/Input/interface.js";
 
 export default function Recruitment_Evaluation_Table() {
 	const breadcrumbItems = [
 		{
-			name: 'Recruitment',
-			link: '/',
+			name: "Recruitment",
+			link: "/",
 			clickable: false,
 		},
 		{
-			name: 'Evaluation',
-			link: '/recruitment_evaluation',
+			name: "Evaluation",
+			link: "/recruitment_evaluation",
 			clickable: true,
 		},
 	];
@@ -47,16 +47,16 @@ export default function Recruitment_Evaluation_Table() {
 	}
 
 	function startEvaluation(record: Recruiter) {
-		set('current_candidate', record).then(() => {
+		set("current_candidate", record).then(() => {
 			navigate(`/recruitment_evaluation/form/${record._id}`);
 		});
 	}
 
 	const columns: TableColumnProps[] = [
 		{
-			title: 'Name',
-			dataIndex: 'info.name',
-			className: 'name-column',
+			title: "Name",
+			dataIndex: "info.name",
+			className: "name-column",
 			sorter: (a, b) => a.info.name.localeCompare(b.info.name),
 			filterIcon: <IconSearch />,
 			filterDropdown: ({ filterKeys, setFilterKeys, confirm }) => {
@@ -66,7 +66,7 @@ export default function Recruitment_Evaluation_Table() {
 							ref={inputRef}
 							searchButton
 							placeholder="Please enter a name"
-							value={filterKeys?.[0] || ''}
+							value={filterKeys?.[0] || ""}
 							onChange={(value) => {
 								setFilterKeys?.(value ? [value] : []);
 							}}
@@ -95,8 +95,8 @@ export default function Recruitment_Evaluation_Table() {
 			},
 		},
 		{
-			title: 'Ministry',
-			dataIndex: 'info.ministry[2]',
+			title: "Ministry",
+			dataIndex: "info.ministry[2]",
 			sorter: (a, b) => a.info.ministry[2].localeCompare(b.info.ministry[2]),
 			filterIcon: <IconSearch />,
 			filterDropdown: ({ filterKeys, setFilterKeys, confirm }) => {
@@ -106,7 +106,7 @@ export default function Recruitment_Evaluation_Table() {
 							ref={inputRef}
 							searchButton
 							placeholder="Please enter a ministry"
-							value={filterKeys?.[0] || ''}
+							value={filterKeys?.[0] || ""}
 							onChange={(value) => {
 								setFilterKeys?.(value ? [value] : []);
 							}}
@@ -128,23 +128,23 @@ export default function Recruitment_Evaluation_Table() {
 			},
 		},
 		{
-			title: 'Status',
+			title: "Status",
 			filters: [
 				{
-					text: 'Pending',
-					value: 'pre-accepted',
+					text: "Pending",
+					value: "pre-accepted",
 				},
 				{
-					text: 'Passed',
-					value: 'accepted',
+					text: "Passed",
+					value: "accepted",
 				},
 				{
-					text: 'KIV',
-					value: 'kiv',
+					text: "KIV",
+					value: "kiv",
 				},
 				{
-					text: 'Next time',
-					value: 'rejected',
+					text: "Next time",
+					value: "rejected",
 				},
 			],
 			sorter: (a, b) =>
@@ -155,29 +155,29 @@ export default function Recruitment_Evaluation_Table() {
 			filterMultiple: false,
 			render: (_, record) => (
 				<span>
-					{getPassStatus(record) === 'accepted' && (
-						<span style={{ color: 'green' }}>Passed</span>
+					{getPassStatus(record) === "accepted" && (
+						<span style={{ color: "green" }}>Passed</span>
 					)}
-					{getPassStatus(record) === 'rejected' && (
-						<span style={{ color: 'red' }}>Next time</span>
+					{getPassStatus(record) === "rejected" && (
+						<span style={{ color: "red" }}>Next time</span>
 					)}
-					{getPassStatus(record) === 'pending' && <span>Pending</span>}
-					{getPassStatus(record) === 'kiv' && (
-						<span style={{ color: 'orange' }}>KIV</span>
+					{getPassStatus(record) === "pending" && <span>Pending</span>}
+					{getPassStatus(record) === "kiv" && (
+						<span style={{ color: "orange" }}>KIV</span>
 					)}
 				</span>
 			),
 		},
 		{
-			title: 'Email Confirmation',
-			dataIndex: 'email.orientation.confirm.status',
+			title: "Email Confirmation",
+			dataIndex: "email.orientation.confirm.status",
 			filters: [
 				{
-					text: 'Confirmed',
+					text: "Confirmed",
 					value: true,
 				},
 				{
-					text: 'Not confirmed',
+					text: "Not confirmed",
 					value: false,
 				},
 			],
@@ -190,19 +190,19 @@ export default function Recruitment_Evaluation_Table() {
 			render: (_, record) => (
 				<span>
 					{record.email.orientation.confirm.status === true ? (
-						<span style={{ color: 'green' }}>Confirmed</span>
+						<span style={{ color: "green" }}>Confirmed</span>
 					) : (
-						<span style={{ color: 'red' }}>Not confirmed</span>
+						<span style={{ color: "red" }}>Not confirmed</span>
 					)}
 				</span>
 			),
 		},
 		{
-			title: 'Operation',
-			dataIndex: 'op',
+			title: "Operation",
+			dataIndex: "op",
 			render: (_, record) => (
 				<div>
-					{getPassStatus(record) === 'pending' ? (
+					{getPassStatus(record) === "pending" ? (
 						<Button
 							onClick={() => startEvaluation(record)}
 							type="primary"

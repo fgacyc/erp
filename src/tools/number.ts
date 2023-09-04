@@ -4,10 +4,10 @@ export function padNumberWithZeros(number: number) {
 
 	// 在数字字符串前添加零
 	for (let i = 0; i < zerosToAdd; i++) {
-		numberString = '0' + numberString;
+		numberString = "0" + numberString;
 	}
 
-	return 'CYC' + numberString;
+	return "CYC" + numberString;
 }
 
 export function validatePhone(phone: string) {
@@ -15,21 +15,21 @@ export function validatePhone(phone: string) {
 
 	// console.log(phone)
 
-	if (phone.trim() === '') {
+	if (phone.trim() === "") {
 		return {
 			status: false,
-			message: 'Phone number is required',
+			message: "Phone number is required",
 		};
 	}
 
 	if (!phone.match(phoneRegex)) {
 		return {
 			status: false,
-			message: 'Phone must not contain special characters',
+			message: "Phone must not contain special characters",
 		};
 	}
 	return {
 		status: true,
-		message: 'success',
+		message: "success",
 	};
 }

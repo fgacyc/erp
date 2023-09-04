@@ -1,15 +1,15 @@
-import UIBreadcrumb from '@/components/UIBreadcrumb';
+import UIBreadcrumb from "@/components/UIBreadcrumb";
 
 const MyGroupAttendance = () => {
 	const breadcrumbItems = [
 		{
-			name: 'My Group',
-			link: '/',
+			name: "My Group",
+			link: "/",
 			clickable: false,
 		},
 		{
-			name: 'Attendance',
-			link: '/group/attendance',
+			name: "Attendance",
+			link: "/group/attendance",
 			clickable: true,
 		},
 	];
@@ -20,9 +20,9 @@ const MyGroupAttendance = () => {
 			<div className="app-component full-screen-app-component">
 				<div
 					style={{
-						margin: '20px 20px 0 20px',
+						margin: "20px 20px 0 20px",
 						fontSize: 26,
-						fontWeight: 'bold',
+						fontWeight: "bold",
 					}}
 				>
 					MyGroupAttendance

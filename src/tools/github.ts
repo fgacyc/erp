@@ -1,17 +1,17 @@
-import { Octokit } from 'octokit';
+import { Octokit } from "octokit";
 
 const sendAiIssue = async (
 	title: string,
 	body: string,
-	type: 'bug' | 'enhancement',
+	type: "bug" | "enhancement",
 ) => {
 	const octokit = new Octokit({
-		auth: import.meta.env['VITE_GITHUB_AUTH_TOKEN'],
+		auth: import.meta.env["VITE_GITHUB_AUTH_TOKEN"],
 	});
 	// TODO: Change repo link?
-	return await octokit.request('POST /repos/yuenci/CYC-ENTS/issues', {
+	return await octokit.request("POST /repos/yuenci/CYC-ENTS/issues", {
 		// owner: 'yuenci',
-		repo: 'CYC-ENTS',
+		repo: "CYC-ENTS",
 		title: title,
 		body: body,
 		// assignees: [
@@ -20,7 +20,7 @@ const sendAiIssue = async (
 		// milestone: 1,
 		labels: [type],
 		headers: {
-			'X-GitHub-Api-Version': '2022-11-28',
+			"X-GitHub-Api-Version": "2022-11-28",
 		},
 	});
 };

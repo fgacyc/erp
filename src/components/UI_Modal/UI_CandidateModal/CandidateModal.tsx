@@ -1,16 +1,16 @@
-import { Modal, Input } from '@arco-design/web-react';
+import { Modal, Input } from "@arco-design/web-react";
 import {
 	FunctionComponent,
 	SetStateAction,
 	useEffect,
 	useState,
 	Dispatch,
-} from 'react';
-import MinistryCascader from '@/components/UI_Cascader/MinistryCascader';
-import PastoralCascader from '@/components/UI_Cascader/PastoralCascader';
-import { updateRecruiter } from '@/pages/Recruitment/SubmissionPage/postRequest';
-import { valid } from '@/pages/Recruitment/SubmissionPage/valid';
-import RecruitmentSteps from './RecruitmentSteps';
+} from "react";
+import MinistryCascader from "@/components/UI_Cascader/MinistryCascader";
+import PastoralCascader from "@/components/UI_Cascader/PastoralCascader";
+import { updateRecruiter } from "@/pages/Recruitment/SubmissionPage/postRequest";
+import { valid } from "@/pages/Recruitment/SubmissionPage/valid";
+import RecruitmentSteps from "./RecruitmentSteps";
 
 interface CandidateModalInputProps {
 	tip: string;
@@ -24,13 +24,13 @@ const CandidateModalInput: FunctionComponent<CandidateModalInputProps> = ({
 	setValue,
 }) => {
 	return (
-		<div style={{ display: 'flex', alignItems: 'center', marginBottom: 10 }}>
+		<div style={{ display: "flex", alignItems: "center", marginBottom: 10 }}>
 			<div style={{ width: 120 }}>{tip}:</div>
 			<Input
 				allowClear
 				value={value}
 				placeholder="Please Enter something"
-				style={{ width: '80%' }}
+				style={{ width: "80%" }}
 				onChange={setValue}
 			/>
 		</div>
@@ -55,9 +55,9 @@ const CandidateModal: FunctionComponent<CandidateModalProps> = ({
 	// const [pastoral_team, setPastoral_team] = useState(recruiter.info.pastoral_team)
 	// const [ministry, setMinistry] = useState(recruiter.info.ministry)
 
-	const [name, setName] = useState('');
-	const [phone, setPhone] = useState('');
-	const [email, setEmail] = useState('');
+	const [name, setName] = useState("");
+	const [phone, setPhone] = useState("");
+	const [email, setEmail] = useState("");
 	const [pastoral_team, setPastoral_team] = useState<string[]>([]);
 	const [ministry, setMinistry] = useState<string[]>([]);
 
@@ -106,7 +106,7 @@ const CandidateModal: FunctionComponent<CandidateModalProps> = ({
 			<CandidateModalInput tip="Name" value={name} setValue={setName} />
 			<CandidateModalInput tip="Phone" value={phone} setValue={setPhone} />
 			<CandidateModalInput tip="Email" value={email} setValue={setEmail} />
-			<div style={{ display: 'flex', alignItems: 'center', marginBottom: 10 }}>
+			<div style={{ display: "flex", alignItems: "center", marginBottom: 10 }}>
 				<div style={{ width: 150 }}>Pastoral Team:</div>
 				<PastoralCascader
 					value={pastoral_team}
@@ -114,7 +114,7 @@ const CandidateModal: FunctionComponent<CandidateModalProps> = ({
 					setPastoral={setPastoral_team}
 				/>
 			</div>
-			<div style={{ display: 'flex', alignItems: 'center', marginBottom: 30 }}>
+			<div style={{ display: "flex", alignItems: "center", marginBottom: 30 }}>
 				<div style={{ width: 150 }}>Ministry:</div>
 				<MinistryCascader value={ministry} setMinistry={setMinistry} />
 			</div>

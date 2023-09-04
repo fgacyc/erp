@@ -1,45 +1,45 @@
-import UIBreadcrumb from '@/components/UIBreadcrumb/';
-import './recruitment_appointment.css';
-import { useEffect, useRef, useState } from 'react';
-import { getAllUsers } from '@/tools/DB';
-import { Button, Input, Table, TableColumnProps } from '@arco-design/web-react';
+import UIBreadcrumb from "@/components/UIBreadcrumb/";
+import "./recruitment_appointment.css";
+import { useEffect, useRef, useState } from "react";
+import { getAllUsers } from "@/tools/DB";
+import { Button, Input, Table, TableColumnProps } from "@arco-design/web-react";
 import {
 	filterArchivedCandidate,
 	filterDataHaveAppoint,
 	getAppointTimes,
 	recruiterInterviewStatus,
-} from './data';
-import CandidateModal from '@/components/UI_Modal/UI_CandidateModal/CandidateModal';
-import './recruitment-appo.css';
-import { useNavigate } from 'react-router-dom';
-import { putReq } from '@/tools/requests';
+} from "./data";
+import CandidateModal from "@/components/UI_Modal/UI_CandidateModal/CandidateModal";
+import "./recruitment-appo.css";
+import { useNavigate } from "react-router-dom";
+import { putReq } from "@/tools/requests";
 import {
 	IconArchive,
 	IconCalendar,
 	IconSearch,
 	IconUserGroup,
-} from '@arco-design/web-react/icon';
-import { set } from 'idb-keyval';
-import { UI_QRCodeModal } from '@/components/UI_Modal/UI_QRCodeModal/UI_QRCodeModal';
+} from "@arco-design/web-react/icon";
+import { set } from "idb-keyval";
+import { UI_QRCodeModal } from "@/components/UI_Modal/UI_QRCodeModal/UI_QRCodeModal";
 import {
 	getAppoInsightData,
 	getDateTimeFilterData,
-} from '../EvaluationPage/data';
-import { ifCurrentUserIsSuperAdmin } from '@/tools/auth';
-import UIInterviewAppoInsight from '@/components/UI_Modal/UI_InterviewAppoInsight';
-import UIInterviewDatePickerModal from '@/components/UI_Modal/UI_InterviewDatePickerModal';
-import UI_ConfirmModal from '@/components/UI_Modal/UI_ConfirmModal';
-import { RefInputType } from '@arco-design/web-react/es/Input/interface.js';
+} from "../EvaluationPage/data";
+import { ifCurrentUserIsSuperAdmin } from "@/tools/auth";
+import UIInterviewAppoInsight from "@/components/UI_Modal/UI_InterviewAppoInsight";
+import UIInterviewDatePickerModal from "@/components/UI_Modal/UI_InterviewDatePickerModal";
+import UI_ConfirmModal from "@/components/UI_Modal/UI_ConfirmModal";
+import { RefInputType } from "@arco-design/web-react/es/Input/interface.js";
 export default function Interview_table() {
 	const breadcrumbItems = [
 		{
-			name: 'Recruitment',
-			link: '/',
+			name: "Recruitment",
+			link: "/",
 			clickable: false,
 		},
 		{
-			name: 'Interview',
-			link: '/recruitment_interview',
+			name: "Interview",
+			link: "/recruitment_interview",
 			clickable: true,
 		},
 	];
@@ -64,7 +64,7 @@ export default function Interview_table() {
 
 	useEffect(() => {
 		function initTableData() {
-			filterData('all').then((res) => {
+			filterData("all").then((res) => {
 				setUserData(res as Recruiter[]);
 				setDateTimeFilterData(getDateTimeFilterData(res as Recruiter[]));
 				setInsightData(getAppoInsightData(res as Recruiter[]));
@@ -75,7 +75,7 @@ export default function Interview_table() {
 	}, []);
 
 	function initTableData() {
-		filterData('all').then((res) => {
+		filterData("all").then((res) => {
 			setUserData(res as Recruiter[]);
 			setDateTimeFilterData(getDateTimeFilterData(res as Recruiter[]));
 			setInsightData(getAppoInsightData(res as Recruiter[]));
@@ -88,7 +88,7 @@ export default function Interview_table() {
 			initTableData();
 			return;
 		}
-		filterData('archived').then((res) => {
+		filterData("archived").then((res) => {
 			setIsArchived(true);
 			setUserData(res as Recruiter[]);
 		});
@@ -102,7 +102,7 @@ export default function Interview_table() {
 
 	async function filterData(type: string) {
 		const allUser = await getAllUsers();
-		if (type === 'all') {
+		if (type === "all") {
 			return await filterDataHaveAppoint(allUser); // pre_screening.status is ture
 		} else {
 			return await filterArchivedCandidate(allUser); // pre_screening.status is ture
@@ -118,7 +118,7 @@ export default function Interview_table() {
 		const RID = record._id;
 		Promise.all([
 			putReq(`/interview/start_time/${RID}`),
-			set('current_candidate', record),
+			set("current_candidate", record),
 		])
 			.then(() => {
 				navigate(`/recruitment_interview/form/${RID}/1`);
@@ -130,7 +130,7 @@ export default function Interview_table() {
 
 	function checkInterview(record: Recruiter) {
 		const RID = record._id;
-		set('current_candidate', record).then(() => {
+		set("current_candidate", record).then(() => {
 			navigate(`/recruitment_interview/form/${RID}/1`);
 		});
 	}
@@ -142,11 +142,11 @@ export default function Interview_table() {
 
 	function archiveCandidate(record: Recruiter) {
 		const data = {
-			status: 'archived',
+			status: "archived",
 		};
 		function archive() {
 			putReq(`/application/${record._id}`, data).then((res) => {
-				if (res.status === 'success') {
+				if (res.status === "success") {
 					const newRecord = userData.filter((item) => {
 						return item._id !== record._id;
 					});
@@ -156,7 +156,7 @@ export default function Interview_table() {
 			//console.log(record);
 		}
 		UI_ConfirmModal(
-			'Confirm',
+			"Confirm",
 			`Are you sure to archive this candidate: [${record.info.name}] ?`,
 			archive,
 		);
@@ -164,9 +164,9 @@ export default function Interview_table() {
 
 	const columns: TableColumnProps[] = [
 		{
-			title: 'Name',
-			dataIndex: 'info.name',
-			className: 'name-column',
+			title: "Name",
+			dataIndex: "info.name",
+			className: "name-column",
 			sorter: (a: Recruiter, b: Recruiter) =>
 				a.info.name.localeCompare(b.info.name),
 			filterIcon: <IconSearch />,
@@ -177,7 +177,7 @@ export default function Interview_table() {
 							ref={inputRef}
 							searchButton
 							placeholder="Please enter a name"
-							value={filterKeys?.[0] || ''}
+							value={filterKeys?.[0] || ""}
 							onChange={(value) => {
 								setFilterKeys?.(value ? [value] : []);
 							}}
@@ -206,8 +206,8 @@ export default function Interview_table() {
 			},
 		},
 		{
-			title: 'Ministry',
-			dataIndex: 'info.ministry[2]',
+			title: "Ministry",
+			dataIndex: "info.ministry[2]",
 			sorter: (a, b) => a.info.ministry[2].localeCompare(b.info.ministry[2]),
 			filterIcon: <IconSearch />,
 			filterDropdown: ({ filterKeys, setFilterKeys, confirm }) => {
@@ -217,7 +217,7 @@ export default function Interview_table() {
 							ref={inputRef}
 							searchButton
 							placeholder="Please enter a ministry"
-							value={filterKeys?.[0] || ''}
+							value={filterKeys?.[0] || ""}
 							onChange={(value) => {
 								setFilterKeys?.(value ? [value] : []);
 							}}
@@ -239,8 +239,8 @@ export default function Interview_table() {
 			},
 		},
 		{
-			title: 'Date time',
-			dataIndex: 'appointment.ministry.appointment_time',
+			title: "Date time",
+			dataIndex: "appointment.ministry.appointment_time",
 			filters: dateTimeFilterData,
 			onFilter: (value, row) => {
 				return getAppointTimes(row) === value;
@@ -248,14 +248,14 @@ export default function Interview_table() {
 			filterMultiple: true,
 			render: (_, record) => (
 				<span>
-					{recruiterInterviewStatus(record) === 'Pending' ? (
+					{recruiterInterviewStatus(record) === "Pending" ? (
 						<span>
 							<span>{getAppointTimes(record)}</span>
 							<span
 								className="icon-calendar-con"
-								title={'Reschedule'}
+								title={"Reschedule"}
 								onClick={() => {
-									set('current_candidate', record).then(() => {
+									set("current_candidate", record).then(() => {
 										setDatePickerModalVisible(true);
 									});
 								}}
@@ -270,20 +270,20 @@ export default function Interview_table() {
 			),
 		},
 		{
-			title: 'Status',
-			dataIndex: 'interview.status',
+			title: "Status",
+			dataIndex: "interview.status",
 			filters: [
 				{
-					text: 'Pending',
-					value: 'Pending',
+					text: "Pending",
+					value: "Pending",
 				},
 				{
-					text: 'Interviewed',
-					value: 'Interviewed',
+					text: "Interviewed",
+					value: "Interviewed",
 				},
 				{
-					text: 'Not Scheduled',
-					value: 'Not appointed',
+					text: "Not Scheduled",
+					value: "Not appointed",
 				},
 			],
 			onFilter: (value, row) => {
@@ -292,17 +292,17 @@ export default function Interview_table() {
 			filterMultiple: false,
 			render: (_, record) => (
 				<span>
-					{recruiterInterviewStatus(record) === 'Interviewed' && (
-						<span style={{ color: 'green' }}>Interviewed</span>
+					{recruiterInterviewStatus(record) === "Interviewed" && (
+						<span style={{ color: "green" }}>Interviewed</span>
 					)}
-					{recruiterInterviewStatus(record) === 'Pending' && (
+					{recruiterInterviewStatus(record) === "Pending" && (
 						<span>Pending</span>
 					)}
-					{recruiterInterviewStatus(record) === 'Not appointed' && (
-						<span style={{ color: 'grey' }}>Not Scheduled</span>
+					{recruiterInterviewStatus(record) === "Not appointed" && (
+						<span style={{ color: "grey" }}>Not Scheduled</span>
 					)}
-					{recruiterInterviewStatus(record) === 'Not appointed over 7 days' && (
-						<span style={{ color: 'red' }} title="Not appointed over 7 days">
+					{recruiterInterviewStatus(record) === "Not appointed over 7 days" && (
+						<span style={{ color: "red" }} title="Not appointed over 7 days">
 							Not Scheduled
 						</span>
 					)}
@@ -310,16 +310,16 @@ export default function Interview_table() {
 			),
 		},
 		{
-			title: 'Operation',
-			dataIndex: 'op',
+			title: "Operation",
+			dataIndex: "op",
 			render: (_, record) => (
 				<span>
-					{recruiterInterviewStatus(record) === 'Not appointed' && (
+					{recruiterInterviewStatus(record) === "Not appointed" && (
 						<Button type="outline" onClick={() => showQRCodeModal(record)}>
 							Schedule
 						</Button>
 					)}
-					{recruiterInterviewStatus(record) === 'Not appointed over 7 days' && (
+					{recruiterInterviewStatus(record) === "Not appointed over 7 days" && (
 						<span>
 							<Button type="outline" onClick={() => showQRCodeModal(record)}>
 								Schedule
@@ -333,7 +333,7 @@ export default function Interview_table() {
 							/>
 						</span>
 					)}
-					{recruiterInterviewStatus(record) === 'Pending' && (
+					{recruiterInterviewStatus(record) === "Pending" && (
 						<Button
 							onClick={() => startInterview(record)}
 							type="primary"
@@ -342,7 +342,7 @@ export default function Interview_table() {
 							Start
 						</Button>
 					)}
-					{recruiterInterviewStatus(record) === 'Interviewed' && (
+					{recruiterInterviewStatus(record) === "Interviewed" && (
 						<Button
 							onClick={() => checkInterview(record)}
 							type="secondary"
@@ -377,7 +377,7 @@ export default function Interview_table() {
 							<Button
 								type="secondary"
 								icon={<IconUserGroup />}
-								title={'Show archived candidates'}
+								title={"Show archived candidates"}
 								onClick={() => {
 									getArchivedCandidate();
 								}}
@@ -386,7 +386,7 @@ export default function Interview_table() {
 							<Button
 								type="secondary"
 								icon={<IconArchive />}
-								title={'Show all candidates'}
+								title={"Show all candidates"}
 								onClick={() => {
 									getArchivedCandidate();
 								}}
@@ -410,7 +410,7 @@ export default function Interview_table() {
 						recruiter={currentCandidate}
 					/>
 					<UI_QRCodeModal
-						ministry={currentCandidate.info.ministry[2] || ''}
+						ministry={currentCandidate.info.ministry[2] || ""}
 						RID={currentCandidate._id}
 						visible={QRCodeModalVisible}
 						setVisible={setQRCodeModalVisible}

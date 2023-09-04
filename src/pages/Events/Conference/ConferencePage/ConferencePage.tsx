@@ -1,20 +1,20 @@
-import UIBreadcrumb from '@/components/UIBreadcrumb';
+import UIBreadcrumb from "@/components/UIBreadcrumb";
 
-import { Input } from '@arco-design/web-react';
-import { ButtonGroup } from '@/components/ButtonGroup';
-import { useState } from 'react';
+import { Input } from "@arco-design/web-react";
+import { ButtonGroup } from "@/components/ButtonGroup";
+import { useState } from "react";
 const InputSearch = Input.Search;
 
 const ConferencePage = () => {
 	const breadcrumbItems = [
 		{
-			name: 'Events',
-			link: '/',
+			name: "Events",
+			link: "/",
 			clickable: false,
 		},
 		{
-			name: 'ConferencePage',
-			link: '/events/conference',
+			name: "ConferencePage",
+			link: "/events/conference",
 			clickable: true,
 		},
 	];
@@ -26,19 +26,19 @@ const ConferencePage = () => {
 			<div className="app-component full-screen-app-component">
 				<div
 					style={{
-						margin: '20px 20px 0 20px',
+						margin: "20px 20px 0 20px",
 						fontSize: 26,
-						fontWeight: 'bold',
+						fontWeight: "bold",
 					}}
 				>
 					Conference
 				</div>
-				<div style={{ boxSizing: 'border-box', padding: 20 }}>
+				<div style={{ boxSizing: "border-box", padding: 20 }}>
 					<div
 						style={{
-							display: 'flex',
-							justifyContent: 'space-between',
-							alignItems: 'center',
+							display: "flex",
+							justifyContent: "space-between",
+							alignItems: "center",
 							marginBottom: 20,
 						}}
 					>

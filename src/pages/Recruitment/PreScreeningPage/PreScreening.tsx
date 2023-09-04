@@ -1,27 +1,27 @@
-import { useState, useEffect, KeyboardEventHandler } from 'react';
-import { useParams } from 'react-router-dom';
+import { useState, useEffect, KeyboardEventHandler } from "react";
+import { useParams } from "react-router-dom";
 import {
 	Comment,
 	Button,
 	Input,
 	Descriptions,
 	Popconfirm,
-} from '@arco-design/web-react';
-import { getReq, putReq } from '@/tools/requests';
-import { capitalFirstLetter } from '@/tools/string';
-import './pre-screening.css';
-import PreScreeningCommentsList from './CommentsList';
-import { getCurrentUserCYCID } from '@/tools/auth';
-import { getTimeStamp } from '@/tools/datetime';
-import { IconEdit } from '@arco-design/web-react/icon';
-import CandidateModal from '@/components/UI_Modal/UI_CandidateModal/CandidateModal';
+} from "@arco-design/web-react";
+import { getReq, putReq } from "@/tools/requests";
+import { capitalFirstLetter } from "@/tools/string";
+import "./pre-screening.css";
+import PreScreeningCommentsList from "./CommentsList";
+import { getCurrentUserCYCID } from "@/tools/auth";
+import { getTimeStamp } from "@/tools/datetime";
+import { IconEdit } from "@arco-design/web-react/icon";
+import CandidateModal from "@/components/UI_Modal/UI_CandidateModal/CandidateModal";
 
 export default function PreScreening() {
 	//const RID = useParams().RID || '64a792fbe3a86cdad7522be7';
 	const RID = useParams().RID;
 
 	const [userDatas, setUserDatas] = useState<Recruiter>();
-	const [commentText, setCommentText] = useState('');
+	const [commentText, setCommentText] = useState("");
 	const [isButtonClicked, setIsButtonClicked] = useState(false);
 	const [userCYC_ID, setUserCYC_ID] = useState<number>(0);
 	const [visible, setVisible] = useState(false);
@@ -61,7 +61,7 @@ export default function PreScreening() {
 	}, [RID, visible]);
 
 	const handleStatus = (status: boolean) => {
-		const pre_screening_status = status ? 'pre-accepted' : 'pre-rejected';
+		const pre_screening_status = status ? "pre-accepted" : "pre-rejected";
 
 		const time = getTimeStamp();
 
@@ -88,14 +88,14 @@ export default function PreScreening() {
 	};
 
 	function commentScrollToBottom() {
-		const target = document.getElementById('comment-list-bottom');
+		const target = document.getElementById("comment-list-bottom");
 		target?.scrollIntoView({
-			behavior: 'smooth',
+			behavior: "smooth",
 		});
 	}
 
 	function sendComment() {
-		if (commentText.trim() === '') {
+		if (commentText.trim() === "") {
 			return;
 		}
 
@@ -119,7 +119,7 @@ export default function PreScreening() {
 		});
 
 		putReq(`/comments/${RID}`, comment).then(() => {
-			setCommentText('');
+			setCommentText("");
 		});
 	}
 
@@ -130,7 +130,7 @@ export default function PreScreening() {
 	};
 
 	const handleKeyDown: KeyboardEventHandler<HTMLTextAreaElement> = (event) => {
-		if (event.ctrlKey && event.key === 'Enter') {
+		if (event.ctrlKey && event.key === "Enter") {
 			event.preventDefault();
 			commentScrollToBottom();
 			sendComment();
@@ -139,13 +139,13 @@ export default function PreScreening() {
 
 	function getPreScreeningStatus(status: ApplicationStatus) {
 		if (
-			status === 'pending' ||
-			status === 'pre-accepted' ||
-			status === 'pre-rejected'
+			status === "pending" ||
+			status === "pre-accepted" ||
+			status === "pre-rejected"
 		) {
 			return status;
 		} else {
-			return 'pre-accepted';
+			return "pre-accepted";
 		}
 	}
 
@@ -157,24 +157,24 @@ export default function PreScreening() {
 
 	return (
 		<div className="pre-screening-con">
-			<div style={{ position: 'relative', overflow: 'auto' }}>
+			<div style={{ position: "relative", overflow: "auto" }}>
 				<div
 					style={{
-						display: 'flex',
-						flexDirection: 'column',
-						alignItems: 'center',
-						padding: '15px',
+						display: "flex",
+						flexDirection: "column",
+						alignItems: "center",
+						padding: "15px",
 					}}
 				>
 					{userDatas && (
 						<div>
 							<div
 								className="arco-descriptions-title"
-								style={{ textAlign: 'center', marginBottom: '25px' }}
+								style={{ textAlign: "center", marginBottom: "25px" }}
 							>
 								<span style={{ marginRight: 10 }}>Candidate Information</span>
 								<IconEdit
-									style={{ cursor: 'pointer' }}
+									style={{ cursor: "pointer" }}
 									onClick={() => setVisible(true)}
 								/>
 							</div>
@@ -182,19 +182,19 @@ export default function PreScreening() {
 								column={1}
 								data={[
 									{
-										label: 'Name',
+										label: "Name",
 										value: userDatas.info.name,
 									},
 									{
-										label: 'Contact Number',
+										label: "Contact Number",
 										value: userDatas.info.phone,
 									},
 									{
-										label: 'Email',
+										label: "Email",
 										value: userDatas.info.email,
 									},
 									{
-										label: 'Pastoral Team',
+										label: "Pastoral Team",
 										value: `${capitalFirstLetter(
 											String(userDatas.info.pastoral_team[0]),
 										)}, 
@@ -203,24 +203,24 @@ export default function PreScreening() {
 																		)}`,
 									},
 									{
-										label: 'Ministry',
+										label: "Ministry",
 										value: capitalFirstLetter(
 											String(userDatas.info.ministry[2]),
 										),
 									},
 									{
-										label: 'Status',
+										label: "Status",
 										value: capitalFirstLetter(
 											getPreScreeningStatus(userDatas.application.status),
 										),
 									},
 								]}
-								labelStyle={{ textAlign: 'right', paddingRight: 36 }}
+								labelStyle={{ textAlign: "right", paddingRight: 36 }}
 							/>
 						</div>
 					)}
 
-					<div style={{ marginTop: '15px' }}>
+					<div style={{ marginTop: "15px" }}>
 						<Popconfirm
 							disabled={isButtonDisabled}
 							focusLock
@@ -235,7 +235,7 @@ export default function PreScreening() {
 								type="primary"
 								status="success"
 								style={{
-									marginRight: '10px',
+									marginRight: "10px",
 								}}
 								disabled={isButtonDisabled}
 							>
@@ -259,7 +259,7 @@ export default function PreScreening() {
 					</div>
 				</div>
 
-				<div style={{ position: 'relative', padding: '8px 12px' }}>
+				<div style={{ position: "relative", padding: "8px 12px" }}>
 					{userDatas && (
 						<PreScreeningCommentsList
 							userData={userDatas}
@@ -269,7 +269,7 @@ export default function PreScreening() {
 				</div>
 			</div>
 			<Comment
-				style={{ marginBottom: '15px' }}
+				style={{ marginBottom: "15px" }}
 				align="right"
 				actions={
 					<Button key="1" type="primary" onClick={(e) => handleComment(e)}>

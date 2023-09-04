@@ -1,6 +1,6 @@
-import { Select } from '@arco-design/web-react';
-import { pastoral_team_roles } from '../../data/pastoral_teams.js';
-import { FunctionComponent } from 'react';
+import { Select } from "@arco-design/web-react";
+import { pastoral_team_roles } from "../../data/pastoral_teams.js";
+import { FunctionComponent } from "react";
 
 interface PastoralRoleSelectProps {
 	value: string;

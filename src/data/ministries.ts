@@ -1,4 +1,4 @@
-import { getReq } from '@/tools/requests';
+import { getReq } from "@/tools/requests";
 
 // const department = {
 // 	people_experience: {
@@ -29,176 +29,176 @@ import { getReq } from '@/tools/requests';
 
 export const department_options = [
 	{
-		value: 'people_experience',
-		label: 'People Experience',
+		value: "people_experience",
+		label: "People Experience",
 		children: [
 			{
-				value: 'people',
-				label: 'People',
+				value: "people",
+				label: "People",
 				children: [
 					{
-						value: 'usher',
-						label: 'Usher',
+						value: "usher",
+						label: "Usher",
 					},
 					{
-						value: 'security',
-						label: 'Security',
+						value: "security",
+						label: "Security",
 					},
 				],
 			},
 			{
-				value: 'general_affair',
-				label: 'General Affair',
+				value: "general_affair",
+				label: "General Affair",
 				children: [
 					{
-						value: 'admin',
-						label: 'Admin',
+						value: "admin",
+						label: "Admin",
 					},
 					{
-						value: 'lounge',
-						label: 'Lounge',
+						value: "lounge",
+						label: "Lounge",
 					},
 					{
-						value: 'shuttle',
-						label: 'Shuttle',
+						value: "shuttle",
+						label: "Shuttle",
 					},
 				],
 			},
 			{
-				value: 'technology',
-				label: 'Technology',
+				value: "technology",
+				label: "Technology",
 				children: [
 					{
-						value: 'software development',
-						label: 'Software Development',
+						value: "software development",
+						label: "Software Development",
 					},
 					{
-						value: 'project management',
-						label: 'Project Management',
+						value: "project management",
+						label: "Project Management",
 					},
 				],
 			},
 		],
 	},
 	{
-		value: 'creative',
-		label: 'Creative',
+		value: "creative",
+		label: "Creative",
 		children: [
 			{
-				value: 'production',
-				label: 'Production',
+				value: "production",
+				label: "Production",
 				children: [
 					{
-						value: 'stage management',
-						label: 'Stage Management',
+						value: "stage management",
+						label: "Stage Management",
 					},
 					{
-						value: 'multimedia',
-						label: 'Multimedia',
+						value: "multimedia",
+						label: "Multimedia",
 					},
 					{
-						value: 'sound',
-						label: 'Sound',
+						value: "sound",
+						label: "Sound",
 					},
 					{
-						value: 'lighting',
-						label: 'Lighting',
+						value: "lighting",
+						label: "Lighting",
 					},
 					{
-						value: 'translation',
-						label: 'Translation',
+						value: "translation",
+						label: "Translation",
 					},
 				],
 			},
 			{
-				value: 'arts',
-				label: 'Arts',
+				value: "arts",
+				label: "Arts",
 				children: [
 					{
-						value: 'dance',
-						label: 'Dance',
+						value: "dance",
+						label: "Dance",
 					},
 					{
-						value: 'fashion&image',
-						label: 'Fashion & Image',
+						value: "fashion&image",
+						label: "Fashion & Image",
 					},
 					{
-						value: 'drama',
-						label: 'Drama',
+						value: "drama",
+						label: "Drama",
 					},
 				],
 			},
 			{
-				value: 'worship',
-				label: 'Worship',
+				value: "worship",
+				label: "Worship",
 				children: [
 					{
-						value: 'musician',
-						label: 'Musician',
+						value: "musician",
+						label: "Musician",
 					},
 					{
-						value: 'vocal',
-						label: 'Vocal',
+						value: "vocal",
+						label: "Vocal",
 					},
 				],
 			},
 		],
 	},
 	{
-		value: 'communication',
-		label: 'Communication',
+		value: "communication",
+		label: "Communication",
 		children: [
 			{
-				value: 'social_media',
-				label: 'Social Media',
+				value: "social_media",
+				label: "Social Media",
 				children: [
 					{
-						value: 'content creation',
-						label: 'Content Creation',
+						value: "content creation",
+						label: "Content Creation",
 					},
 					{
-						value: 'editorial',
-						label: 'Editorial',
+						value: "editorial",
+						label: "Editorial",
 					},
 				],
 			},
 			{
-				value: 'design',
-				label: 'Design',
+				value: "design",
+				label: "Design",
 				children: [
 					{
-						value: 'graphic design',
-						label: 'Graphic Design',
+						value: "graphic design",
+						label: "Graphic Design",
 					},
 					{
-						value: 'multimedia design',
-						label: 'Multimedia Design',
+						value: "multimedia design",
+						label: "Multimedia Design",
 					},
 				],
 			},
 			{
-				value: 'photography',
-				label: 'Photography',
+				value: "photography",
+				label: "Photography",
 				children: [
 					{
-						value: 'photography',
-						label: 'Photography',
+						value: "photography",
+						label: "Photography",
 					},
 				],
 			},
 		],
 	},
 	{
-		value: 'wonderkids',
-		label: 'Wonder Kids',
+		value: "wonderkids",
+		label: "Wonder Kids",
 		children: [
 			{
-				value: 'wonderkids',
-				label: 'Wonder Kids',
+				value: "wonderkids",
+				label: "Wonder Kids",
 				children: [
 					{
-						value: 'children minister',
-						label: 'Children Minister',
+						value: "children minister",
+						label: "Children Minister",
 					},
 				],
 			},
@@ -208,16 +208,16 @@ export const department_options = [
 
 export const ministry_roles = [
 	{
-		value: 'team_lead',
-		label: 'Team Lead',
+		value: "team_lead",
+		label: "Team Lead",
 	},
 	{
-		value: 'department_head',
-		label: 'Department Head',
+		value: "department_head",
+		label: "Department Head",
 	},
 	{
-		value: 'ministry_pic',
-		label: 'Ministry PIC',
+		value: "ministry_pic",
+		label: "Ministry PIC",
 	},
 ];
 
@@ -243,18 +243,18 @@ export function findMinistryLabel(ministryArray: string[]) {
 
 export async function findInterviewsNames(interviewerCYCIDList: number[]) {
 	const res = await getReq(
-		`/interviewers/CYCIDList?list=${interviewerCYCIDList.join(',')}`,
+		`/interviewers/CYCIDList?list=${interviewerCYCIDList.join(",")}`,
 	);
 	const interviewerNames = [];
 	if (res.status) {
 		const data = res.data;
 		for (const interviewer of data) {
-			interviewerNames.push('@' + interviewer.full_name);
+			interviewerNames.push("@" + interviewer.full_name);
 		}
 		// console.log(interviewerNames)
-		return interviewerNames.join(', ');
+		return interviewerNames.join(", ");
 	}
-	return '';
+	return "";
 }
 
 // export function findMinistryArray(ministryValue) {

@@ -1,4 +1,4 @@
-import { postReq, putReq } from '@/tools/requests';
+import { postReq, putReq } from "@/tools/requests";
 
 export async function postRecruiter(
 	name: string,
@@ -7,7 +7,7 @@ export async function postRecruiter(
 	pastoral_team: string[],
 	department: string[],
 ) {
-	const router = '/recruiter';
+	const router = "/recruiter";
 	const data = {
 		name: name,
 		phone: phone,

@@ -1,8 +1,8 @@
-import { SettingModalDivider } from './SettingModalAccount';
+import { SettingModalDivider } from "./SettingModalAccount";
 
-import { Select } from '@arco-design/web-react';
+import { Select } from "@arco-design/web-react";
 const Option = Select.Option;
-const options = ['English', 'Chinese', 'Malay'];
+const options = ["English", "Chinese", "Malay"];
 
 const SettingModalLanguageAndRegion = () => {
 	return (
@@ -20,7 +20,7 @@ const SettingModalLanguageAndRegion = () => {
 							Change the language used in the user interface.
 						</div>
 					</div>
-					<div style={{ width: 150, textAlign: 'right' }}>
+					<div style={{ width: 150, textAlign: "right" }}>
 						<Select defaultValue={options[0]}>
 							{options.map((option, index) => (
 								<Option key={index} value={option}>

@@ -1,15 +1,15 @@
-import UIBreadcrumb from '@/components/UIBreadcrumb';
+import UIBreadcrumb from "@/components/UIBreadcrumb";
 
 const UserManagementDashboard = () => {
 	const breadcrumbItems = [
 		{
-			name: 'Users',
-			link: '/',
+			name: "Users",
+			link: "/",
 			clickable: false,
 		},
 		{
-			name: 'Dashboard',
-			link: '/users/dashboard',
+			name: "Dashboard",
+			link: "/users/dashboard",
 			clickable: true,
 		},
 	];
@@ -20,9 +20,9 @@ const UserManagementDashboard = () => {
 			<div className="app-component full-screen-app-component">
 				<div
 					style={{
-						margin: '20px 20px 0 20px',
+						margin: "20px 20px 0 20px",
 						fontSize: 26,
-						fontWeight: 'bold',
+						fontWeight: "bold",
 					}}
 				>
 					User Management

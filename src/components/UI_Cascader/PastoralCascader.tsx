@@ -1,6 +1,6 @@
-import { FunctionComponent } from 'react';
-import { pastoral_team_options } from '../../data/pastoral_teams';
-import { Cascader } from '@arco-design/web-react';
+import { FunctionComponent } from "react";
+import { pastoral_team_options } from "../../data/pastoral_teams";
+import { Cascader } from "@arco-design/web-react";
 
 interface PastoralCascaderProps {
 	value: string[];

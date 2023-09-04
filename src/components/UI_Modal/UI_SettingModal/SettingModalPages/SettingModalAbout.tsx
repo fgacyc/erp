@@ -1,4 +1,4 @@
-import { SettingModalDivider } from './SettingModalAccount';
+import { SettingModalDivider } from "./SettingModalAccount";
 // import Pastoral_Cascader from "../../../UI_Cascader/Pastoral_Cascader.jsx";
 // import PastoralRoleSelect from "../../../UI_Select/PastoralRoleSelect.jsx";
 // import {Switch} from "@arco-design/web-react";
@@ -9,7 +9,7 @@ const SettingModalAbout = () => {
 			<div style={{ marginBottom: 40 }}>
 				<h3>About</h3>
 				<SettingModalDivider />
-				<div style={{ textAlign: 'center', marginTop: 20 }}>
+				<div style={{ textAlign: "center", marginTop: 20 }}>
 					<img
 						src="/images/fga.png"
 						alt="fga logo"

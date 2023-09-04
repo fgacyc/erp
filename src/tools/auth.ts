@@ -1,9 +1,9 @@
-import { getReq, putReq } from './requests.ts';
-import { get, set } from 'idb-keyval';
-import { getTimeStamp } from './datetime.ts';
+import { getReq, putReq } from "./requests.ts";
+import { get, set } from "idb-keyval";
+import { getTimeStamp } from "./datetime.ts";
 
 export async function getStaffInfoFromDB(CYC_ID: string, password: string) {
-	return await getReq('/auth?CYC_ID=' + CYC_ID + '&password=' + password);
+	return await getReq("/auth?CYC_ID=" + CYC_ID + "&password=" + password);
 }
 
 export async function login(
@@ -20,10 +20,10 @@ export async function login(
 		if (rememberMe) await updateRecentLogin();
 
 		if (store) {
-			window.location.href = '/';
+			window.location.href = "/";
 			return true;
 		} else {
-			console.log('store failed');
+			console.log("store failed");
 			return false;
 		}
 	} else {
@@ -32,7 +32,7 @@ export async function login(
 }
 
 export function getAccAndPsw() {
-	const res = JSON.parse(localStorage.getItem('cyc-acc') ?? '');
+	const res = JSON.parse(localStorage.getItem("cyc-acc") ?? "");
 	if (res) {
 		const CYC_ID = parseInt(res[0]);
 		const password = res[1];
@@ -63,12 +63,12 @@ export async function getUserNameFromUserData() {
 }
 
 export async function ifStaffInfoLocalExist() {
-	const res = await get('staff');
+	const res = await get("staff");
 	return !!res;
 }
 
 export async function getLoginStatus() {
-	const res = await get('staff');
+	const res = await get("staff");
 	if (res) {
 		return res.login_status;
 	} else {
@@ -78,7 +78,7 @@ export async function getLoginStatus() {
 
 export async function setStaffInfoLocal(data?: User) {
 	try {
-		await set('staff', data);
+		await set("staff", data);
 		return true;
 	} catch (err) {
 		console.log(err);
@@ -87,7 +87,7 @@ export async function setStaffInfoLocal(data?: User) {
 }
 
 export async function getStaffInfoLocal() {
-	return await get('staff');
+	return await get("staff");
 }
 
 export async function updateStaffInfoLocal(data?: User) {
@@ -119,7 +119,7 @@ export async function getCurrentUserCYCID() {
 export async function ifCurrentUserIsSuperAdmin() {
 	const info = await getStaffInfoLocal();
 	if (info.role) {
-		if (info.role === 'super_admin') {
+		if (info.role === "super_admin") {
 			return true;
 		}
 	}
@@ -141,7 +141,7 @@ export async function getAvatarUrl() {
 	const timeStamps = getTimeStamp();
 	// console.log(info)
 	if (info.data.avatar) {
-		return info.data.avatar + '?t=' + timeStamps;
+		return info.data.avatar + "?t=" + timeStamps;
 	} else {
 		return null;
 	}

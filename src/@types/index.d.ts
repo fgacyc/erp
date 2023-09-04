@@ -9,11 +9,43 @@ type EmailResponse = {
 	};
 };
 
-type EducationStatus = 'finished';
+type EducationStatus = "finished";
+
+type Address = {
+	city: string;
+	country: string;
+	lineOne: string;
+	lineTwo?: string;
+	postalCode: string;
+	state: string;
+};
 
 type MinistryTeam = { ministry: string; scope: string[] };
 type Position = { level: string; name: string };
 declare global {
+	// NEW
+	type User2 = {
+		id: string;
+		no: number;
+		email: string;
+		emailVerified: boolean;
+		name: string;
+		address: Address | null;
+		avatarUrl: string | null;
+		createdAt: string | null;
+		dob: string | null;
+		familyName: string | null;
+		gender: Gender | null;
+		givenName: string | null;
+		icNumber: string | null;
+		nickname: string | null;
+		phoneNumber: string | null;
+		phoneNumberVerified: boolean | null;
+		updatedAt: string | null;
+		username: string | null;
+	};
+
+	// OLD
 	type VocalRating = {
 		stars?: number[];
 		remarks?: string[];
@@ -25,16 +57,16 @@ declare global {
 		CYC_ID: number;
 	};
 	type ApplicationStatus =
-		| 'accepted'
-		| 'kiv'
-		| 'rejected'
-		| 'pending'
-		| 'pre-accepted'
-		| 'pre-rejected'
-		| 'archived';
+		| "accepted"
+		| "kiv"
+		| "rejected"
+		| "pending"
+		| "pre-accepted"
+		| "pre-rejected"
+		| "archived";
 
 	type InterviewQuestion = {
-		type: 'general' | 'freeQ&As' | 'specific' | 'vocalRating';
+		type: "general" | "freeQ&As" | "specific" | "vocalRating";
 		question: string;
 		candidate: string;
 		interviewer: string | VocalRating;
@@ -135,7 +167,7 @@ declare global {
 		};
 	};
 
-	type Gender = 'male' | 'female';
+	type Gender = "male" | "female";
 
 	type MinistryAccount = {
 		name?: string;
@@ -246,7 +278,7 @@ declare global {
 	};
 
 	type CGL = User & {
-		new_members?: Omit<User, '_id' | 'leader_retreat'>[];
+		new_members?: Omit<User, "_id" | "leader_retreat">[];
 	};
 
 	type User = {

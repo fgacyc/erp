@@ -1,107 +1,107 @@
 export const options_bar_data: { value: string; label: string }[] = [
 	{
-		value: 'overall',
-		label: 'Overall',
+		value: "overall",
+		label: "Overall",
 	},
 	{
-		value: 'wonderkids',
-		label: 'Wonderkids',
+		value: "wonderkids",
+		label: "Wonderkids",
 	},
 	{
-		value: 'young_warrior',
-		label: 'Young Warrior',
+		value: "young_warrior",
+		label: "Young Warrior",
 	},
 	{
-		value: 'general_service',
-		label: 'General Service',
+		value: "general_service",
+		label: "General Service",
 	},
 	{
-		value: 'others',
-		label: 'Others',
+		value: "others",
+		label: "Others",
 	},
 ];
 
 export const options_pie_data = [
 	{
-		value: 'overall',
-		label: 'Overall',
+		value: "overall",
+		label: "Overall",
 	},
 	{
-		value: 'people_experience',
-		label: 'People Experience',
+		value: "people_experience",
+		label: "People Experience",
 		children: [
 			{
-				value: 'people',
-				label: 'People',
+				value: "people",
+				label: "People",
 			},
 			{
-				value: 'general_affair',
-				label: 'General Affair',
+				value: "general_affair",
+				label: "General Affair",
 			},
 			{
-				value: 'technology',
-				label: 'Technology',
+				value: "technology",
+				label: "Technology",
 			},
 		],
 	},
 	{
-		value: 'creative',
-		label: 'Creative',
+		value: "creative",
+		label: "Creative",
 		children: [
 			{
-				value: 'production',
-				label: 'Production',
+				value: "production",
+				label: "Production",
 			},
 			{
-				value: 'arts',
-				label: 'Arts',
+				value: "arts",
+				label: "Arts",
 			},
 			{
-				value: 'worship',
-				label: 'Worship',
+				value: "worship",
+				label: "Worship",
 			},
 		],
 	},
 	{
-		value: 'communication',
-		label: 'Communication',
+		value: "communication",
+		label: "Communication",
 		children: [
 			{
-				value: 'social_media',
-				label: 'Social Media',
+				value: "social_media",
+				label: "Social Media",
 			},
 			{
-				value: 'design',
-				label: 'Design',
+				value: "design",
+				label: "Design",
 			},
 			{
-				value: 'photography',
-				label: 'Photography',
+				value: "photography",
+				label: "Photography",
 			},
 		],
 	},
 	{
-		value: 'wonderkids',
-		label: 'Wonderkids',
+		value: "wonderkids",
+		label: "Wonderkids",
 	},
 ];
 
 const color = [
-	'#D8E2DC',
-	'#FFE5D9',
-	'#FFCAD4',
-	'#F4ACB7',
-	'#9D8189',
-	'#A8D8EA',
-	'#FFAAA6',
-	'#FF8C94',
-	'#FF1D47',
-	'#F28123',
-	'#FFC90E',
-	'#FFFF72',
-	'#D1D075',
-	'#C7EF86',
-	'#7BE495',
+	"#D8E2DC",
+	"#FFE5D9",
+	"#FFCAD4",
+	"#F4ACB7",
+	"#9D8189",
+	"#A8D8EA",
+	"#FFAAA6",
+	"#FF8C94",
+	"#FF1D47",
+	"#F28123",
+	"#FFC90E",
+	"#FFFF72",
+	"#D1D075",
+	"#C7EF86",
+	"#7BE495",
 ];
 
 export function getPreScreeningRatio(usersData: Recruiter[]) {
@@ -116,10 +116,10 @@ export function getPreScreeningRatio(usersData: Recruiter[]) {
 	}
 
 	return {
-		labels: ['Pending', 'Pre-Passed', 'Pre_Rejected'],
+		labels: ["Pending", "Pre-Passed", "Pre_Rejected"],
 		datasets: [
 			{
-				label: '# of Votes',
+				label: "# of Votes",
 				data: [pending, pre_passed, per_rejected],
 				backgroundColor: [color[1], color[0], color[2]],
 				borderWidth: 1,
@@ -134,7 +134,7 @@ export function getInterviewRatio(usersData: Recruiter[]) {
 	let interviewed = 0;
 
 	for (const user of usersData) {
-		if (!user.appointment && user.application.status === 'pre-accepted')
+		if (!user.appointment && user.application.status === "pre-accepted")
 			notScheduled++;
 		else if (
 			user.interview &&
@@ -146,10 +146,10 @@ export function getInterviewRatio(usersData: Recruiter[]) {
 	}
 
 	return {
-		labels: ['Not Schedule', 'Waiting Interview', 'Interviewed'],
+		labels: ["Not Schedule", "Waiting Interview", "Interviewed"],
 		datasets: [
 			{
-				label: '# of Votes',
+				label: "# of Votes",
 				data: [notScheduled, scheduled, interviewed],
 				backgroundColor: [color[2], color[1], color[0]],
 				borderWidth: 1,
@@ -167,20 +167,20 @@ export function getEvaluationRatio(usersData: Recruiter[]) {
 	for (const user of usersData) {
 		// console.log(user.application.status)
 
-		if (user.application.status === 'rejected') nextTime++;
-		else if (user.application.status === 'kiv') kiv++;
-		else if (user.application.status === 'accepted') pass++;
+		if (user.application.status === "rejected") nextTime++;
+		else if (user.application.status === "kiv") kiv++;
+		else if (user.application.status === "accepted") pass++;
 		else if (user.interview && user.interview.status === true) notEvaluation++;
 	}
 	// console.log(notEvaluation,nextTime,kiv,pass)
 
 	return {
-		labels: ['Not Evaluation', 'Next time', 'KIV', 'Pass'],
+		labels: ["Not Evaluation", "Next time", "KIV", "Pass"],
 		datasets: [
 			{
-				label: '# of Votes',
+				label: "# of Votes",
 				data: [notEvaluation, nextTime, kiv, pass],
-				backgroundColor: [color[1], color[2], '#fff4cf', color[0]],
+				backgroundColor: [color[1], color[2], "#fff4cf", color[0]],
 				borderWidth: 1,
 			},
 		],
@@ -194,19 +194,19 @@ export function getRecruiterRatio(usersData: Recruiter[]) {
 	const all = usersData.length;
 
 	for (const user of usersData) {
-		if (user.application.status === 'rejected') rejected++;
-		else if (user.application.status === 'accepted') passed++;
-		else if (user.application.status === 'kiv') KIV++;
+		if (user.application.status === "rejected") rejected++;
+		else if (user.application.status === "accepted") passed++;
+		else if (user.application.status === "kiv") KIV++;
 	}
 	const pending = all - passed - rejected - KIV;
 
 	return {
-		labels: ['Pending', 'Pass', 'KIV', 'Next time'],
+		labels: ["Pending", "Pass", "KIV", "Next time"],
 		datasets: [
 			{
-				label: '# of Votes',
+				label: "# of Votes",
 				data: [pending, passed, KIV, rejected],
-				backgroundColor: [color[1], color[0], '#fff4cf', color[3]],
+				backgroundColor: [color[1], color[0], "#fff4cf", color[3]],
 				borderWidth: 1,
 			},
 		],

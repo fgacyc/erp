@@ -1,5 +1,5 @@
-import { getStaffInfoLocal } from '@/tools/auth';
-import { getDateString, getTimeStamp } from '@/tools/datetime';
+import { getStaffInfoLocal } from "@/tools/auth";
+import { getDateString, getTimeStamp } from "@/tools/datetime";
 
 export async function filterDataHaveAppoint(data: Recruiter[]) {
 	const filteredData = await filterByPermission(data);
@@ -8,7 +8,7 @@ export async function filterDataHaveAppoint(data: Recruiter[]) {
 		const preScreeningStatus = filteredData[i]?.pre_screening.status;
 		const applicationStatus = filteredData[i]?.application.status;
 
-		if (preScreeningStatus === true && applicationStatus !== 'archived') {
+		if (preScreeningStatus === true && applicationStatus !== "archived") {
 			// filteredData[i]?.key = i;
 			result.push(filteredData[i]);
 		}
@@ -23,7 +23,7 @@ export async function filterArchivedCandidate(data: Recruiter[]) {
 		// const preScreeningStatus = filteredData[i].pre_screening.status;
 		const applicationStatus = filteredData[i]?.application.status;
 
-		if (applicationStatus === 'archived') {
+		if (applicationStatus === "archived") {
 			// filteredData[i]?.key = i;
 			result.push(filteredData[i]);
 		}
@@ -34,7 +34,7 @@ export async function filterArchivedCandidate(data: Recruiter[]) {
 
 export async function filterByPermission(data: Recruiter[]) {
 	const staff = await getStaffInfoLocal();
-	if (staff.role === 'super_admin') {
+	if (staff.role === "super_admin") {
 		return data;
 	}
 
@@ -52,13 +52,13 @@ export async function filterByPermission(data: Recruiter[]) {
 
 const appointmentTimes = {
 	general: [
-		{ value: '1689418800', label: '15/7/2023 (Sat) 7pm' },
-		{ value: '1689492600', label: '16/7/2023 (Sun) 3.30pm' },
-		{ value: '1690018200', label: '22/7/2023 (Sat) 5.30pm' },
+		{ value: "1689418800", label: "15/7/2023 (Sat) 7pm" },
+		{ value: "1689492600", label: "16/7/2023 (Sun) 3.30pm" },
+		{ value: "1690018200", label: "22/7/2023 (Sat) 5.30pm" },
 	],
 	dance: [
-		{ value: '1689998400', label: '22/7/2023 (Sat) 12pm' },
-		{ value: '1690099200', label: '23/7/2023 (Sun) 4pm' },
+		{ value: "1689998400", label: "22/7/2023 (Sat) 12pm" },
+		{ value: "1690099200", label: "23/7/2023 (Sun) 4pm" },
 	],
 };
 
@@ -83,7 +83,7 @@ export function getAppointmentTimesString(value: string) {
 
 export function getAppointTimes(record: Recruiter) {
 	if (!record.appointment) {
-		return 'N/A';
+		return "N/A";
 	}
 
 	const timestamp = record.appointment.ministry.appointment_time * 1000;
@@ -94,35 +94,35 @@ export function recruiterInterviewStatus(record: Recruiter) {
 	const stamp = getTimeStamp();
 	const preScreeningTime = record.pre_screening.pre_screening_time;
 	if (record.interview.status === true) {
-		return 'Interviewed';
+		return "Interviewed";
 	} else if (record.appointment && record.interview.status === false) {
-		return 'Pending';
+		return "Pending";
 	} else if (
 		!record.appointment &&
 		record.interview.status === false &&
 		stamp - preScreeningTime > 86400 * 7
 	) {
-		return 'Not appointed over 7 days';
+		return "Not appointed over 7 days";
 	} else if (!record.appointment && record.interview.status === false) {
-		return 'Not appointed';
+		return "Not appointed";
 	} else {
-		console.log('recruiterInterviewStatus error');
+		console.log("recruiterInterviewStatus error");
 	}
 }
 
 // pad 0 to the left of the number
 export function pad(num: number) {
-	return ('0' + num).slice(-2);
+	return ("0" + num).slice(-2);
 }
 
 export function getPreScreeningStatusForTable(record: Recruiter) {
 	const status = record.pre_screening.status;
 	if (status === true) {
-		return 'Pre-accepted';
+		return "Pre-accepted";
 	} else if (status === false) {
-		return 'Pre-rejected';
+		return "Pre-rejected";
 	} else {
-		return 'Pending';
+		return "Pending";
 	}
 }
 

@@ -1,5 +1,5 @@
-import { Typography } from '@arco-design/web-react';
-import './UI_SettingModal.css';
+import { Typography } from "@arco-design/web-react";
+import "./UI_SettingModal.css";
 import {
 	IconApps,
 	IconHome,
@@ -8,10 +8,10 @@ import {
 	IconPublic,
 	IconSettings,
 	IconUser,
-} from '@arco-design/web-react/icon';
-import { shallow } from 'zustand/shallow';
-import { useSettingModalStore } from './settingModalStore';
-import UI_Avatar from '@/components/UI_Avatar';
+} from "@arco-design/web-react/icon";
+import { shallow } from "zustand/shallow";
+import { useSettingModalStore } from "./settingModalStore";
+import UI_Avatar from "@/components/UI_Avatar";
 
 // eslint-disable-next-line react-refresh/only-export-components
 const IconSecurity = () => {
@@ -34,14 +34,14 @@ export function UI_SettingModalLeft() {
 		shallow,
 	);
 	const tabText = [
-		'My account',
-		'My home',
-		'My settings',
-		'My notifications',
-		'My connections',
-		'Language & region',
-		'Security',
-		'About',
+		"My account",
+		"My home",
+		"My settings",
+		"My notifications",
+		"My connections",
+		"Language & region",
+		"Security",
+		"About",
 	];
 	const tabIcon = [
 		<IconUser key={0} />,
@@ -53,8 +53,8 @@ export function UI_SettingModalLeft() {
 		<IconSecurity key={6} />,
 		<IconInfoCircle key={7} />,
 	];
-	const inActiveBgc = 'transparent';
-	const activeBgc = '#C9CDD4';
+	const inActiveBgc = "transparent";
+	const activeBgc = "#C9CDD4";
 	const showAllInfo = useSettingModalStore((state) => state.showAllInfo);
 
 	return (
@@ -67,12 +67,12 @@ export function UI_SettingModalLeft() {
 					username={username}
 				/>
 				<div style={{ width: 180, height: 40 }}>
-					<div style={{ display: 'flex', justifyContent: 'space-between' }}>
-						<div style={{ fontSize: 14, fontWeight: 'bold' }}>
-							{username ?? '-'}
+					<div style={{ display: "flex", justifyContent: "space-between" }}>
+						<div style={{ fontSize: 14, fontWeight: "bold" }}>
+							{username ?? "-"}
 						</div>
-						<div title="CYC ID" style={{ cursor: 'default' }}>
-							{cyc_id ?? '-'}
+						<div title="CYC ID" style={{ cursor: "default" }}>
+							{cyc_id ?? "-"}
 						</div>
 					</div>
 
@@ -82,7 +82,7 @@ export function UI_SettingModalLeft() {
 							rows: 1,
 							showTooltip: false,
 							expandable: false,
-							wrapper: 'span',
+							wrapper: "span",
 						}}
 					>
 						{email && email}

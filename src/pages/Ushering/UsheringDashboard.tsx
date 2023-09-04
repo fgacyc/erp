@@ -1,15 +1,15 @@
-import UIBreadcrumb from '@/components/UIBreadcrumb';
+import UIBreadcrumb from "@/components/UIBreadcrumb";
 
 export const UsheringDashboard = () => {
 	const breadcrumbItems = [
 		{
-			name: 'Ushering',
-			link: '/',
+			name: "Ushering",
+			link: "/",
 			clickable: false,
 		},
 		{
-			name: 'Dashboard',
-			link: '/ushering/dashboard',
+			name: "Dashboard",
+			link: "/ushering/dashboard",
 			clickable: true,
 		},
 	];
@@ -20,9 +20,9 @@ export const UsheringDashboard = () => {
 			<div className="app-component full-screen-app-component">
 				<div
 					style={{
-						margin: '20px 20px 0 20px',
+						margin: "20px 20px 0 20px",
 						fontSize: 26,
-						fontWeight: 'bold',
+						fontWeight: "bold",
 					}}
 				>
 					UsheringDashboard

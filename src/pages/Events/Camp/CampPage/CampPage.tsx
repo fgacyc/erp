@@ -1,9 +1,9 @@
-import UIBreadcrumb from '@/components/UIBreadcrumb';
-import { Button, Card, Input } from '@arco-design/web-react';
-import { FunctionComponent, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { getReq } from '@/tools/requests.js';
-import { ButtonGroup } from '@/components/ButtonGroup';
+import UIBreadcrumb from "@/components/UIBreadcrumb";
+import { Button, Card, Input } from "@arco-design/web-react";
+import { FunctionComponent, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { getReq } from "@/tools/requests.js";
+import { ButtonGroup } from "@/components/ButtonGroup";
 
 const InputSearch = Input.Search;
 
@@ -58,13 +58,13 @@ const CampCard: FunctionComponent<CampCardProps> = ({
 export default function CampPage() {
 	const breadcrumbItems = [
 		{
-			name: 'Events',
-			link: '/',
+			name: "Events",
+			link: "/",
 			clickable: false,
 		},
 		{
-			name: 'Camp',
-			link: '/events/camp',
+			name: "Camp",
+			link: "/events/camp",
 			clickable: true,
 		},
 	];
@@ -76,19 +76,19 @@ export default function CampPage() {
 			<div className="app-component full-screen-app-component">
 				<div
 					style={{
-						margin: '20px 20px 0 20px',
+						margin: "20px 20px 0 20px",
 						fontSize: 26,
-						fontWeight: 'bold',
+						fontWeight: "bold",
 					}}
 				>
 					Camps
 				</div>
-				<div style={{ boxSizing: 'border-box', padding: 20 }}>
+				<div style={{ boxSizing: "border-box", padding: 20 }}>
 					<div
 						style={{
-							display: 'flex',
-							justifyContent: 'space-between',
-							alignItems: 'center',
+							display: "flex",
+							justifyContent: "space-between",
+							alignItems: "center",
 							marginBottom: 20,
 						}}
 					>
@@ -104,10 +104,10 @@ export default function CampPage() {
 					</div>
 					<div>
 						<CampCard
-							title={'Leader Retreat'}
-							created={'2023-08-02 18:30:00'}
-							started={'2023-11-01 18:30:00'}
-							url={'/events/camp/leader_retreat'}
+							title={"Leader Retreat"}
+							created={"2023-08-02 18:30:00"}
+							started={"2023-11-01 18:30:00"}
+							url={"/events/camp/leader_retreat"}
 						/>
 					</div>
 				</div>

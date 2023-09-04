@@ -1,24 +1,24 @@
-import { Modal } from '@arco-design/web-react';
-import './UI_SettingModal.css';
-import { UI_SettingModalLeft } from './UI_SettingModalLeft';
+import { Modal } from "@arco-design/web-react";
+import "./UI_SettingModal.css";
+import { UI_SettingModalLeft } from "./UI_SettingModalLeft";
 import {
 	Dispatch,
 	FunctionComponent,
 	SetStateAction,
 	useEffect,
 	useState,
-} from 'react';
-import { useSettingModalStore } from './settingModalStore';
-import { SettingModalAccount } from './SettingModalPages/SettingModalAccount';
-import SettingModalHome from './SettingModalPages/SettingModalHome';
-import SettingModalSettings from './SettingModalPages/SettingModalSettings';
-import SettingModalNotifications from './SettingModalPages/SettingModalNotifications';
-import SettingModalConnections from './SettingModalPages/SettingModalConnections';
-import SettingModalLanguageAndRegion from './SettingModalPages/SettingModalLanguageAndRegion';
-import SettingModalSecurity from './SettingModalPages/SettingModalSecurity';
-import SettingModalAbout from './SettingModalPages/SettingModalAbout';
-import PubSub from 'pubsub-js';
-import { shallow } from 'zustand/shallow';
+} from "react";
+import { useSettingModalStore } from "./settingModalStore";
+import { SettingModalAccount } from "./SettingModalPages/SettingModalAccount";
+import SettingModalHome from "./SettingModalPages/SettingModalHome";
+import SettingModalSettings from "./SettingModalPages/SettingModalSettings";
+import SettingModalNotifications from "./SettingModalPages/SettingModalNotifications";
+import SettingModalConnections from "./SettingModalPages/SettingModalConnections";
+import SettingModalLanguageAndRegion from "./SettingModalPages/SettingModalLanguageAndRegion";
+import SettingModalSecurity from "./SettingModalPages/SettingModalSecurity";
+import SettingModalAbout from "./SettingModalPages/SettingModalAbout";
+import PubSub from "pubsub-js";
+import { shallow } from "zustand/shallow";
 
 interface UISettingModal {
 	visible: boolean;
@@ -50,7 +50,7 @@ const UI_SettingModal: FunctionComponent<UISettingModal> = ({
 	}, []);
 
 	useEffect(() => {
-		const subscription = PubSub.subscribe('switchTab', (_, data) => {
+		const subscription = PubSub.subscribe("switchTab", (_, data) => {
 			if (data.tabNum === 0) {
 				setCurrentTab(0);
 				setVisible(true);

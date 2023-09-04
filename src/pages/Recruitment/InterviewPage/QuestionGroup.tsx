@@ -1,6 +1,6 @@
-import { Input } from '@arco-design/web-react';
+import { Input } from "@arco-design/web-react";
 const TextArea = Input.TextArea;
-import './recruitment-appo.css';
+import "./recruitment-appo.css";
 import {
 	CSSProperties,
 	Dispatch,
@@ -9,8 +9,8 @@ import {
 	useEffect,
 	useRef,
 	useState,
-} from 'react';
-import { IconCheck, IconEdit } from '@arco-design/web-react/icon';
+} from "react";
+import { IconCheck, IconEdit } from "@arco-design/web-react/icon";
 
 interface QuestionGroupProps {
 	questions: InterviewQuestion[];
@@ -32,18 +32,18 @@ const QuestionGroup: FunctionComponent<QuestionGroupProps> = ({
 	// setQAs,
 }) => {
 	let question = questions[id] ?? {
-		type: 'freeQ&As',
-		question: '',
-		candidate: '',
-		interviewer: '',
+		type: "freeQ&As",
+		question: "",
+		candidate: "",
+		interviewer: "",
 	};
 	const [interviewerAnswer, setInterviewerAnswer] = useState<
 		VocalRating | string
 	>();
 	const [ifDisable, setIfDisable] = useState(ifInterviewed);
 	const [textAreaStyle, setTextAreaStyle] = useState({
-		width: '100%',
-		resize: 'none',
+		width: "100%",
+		resize: "none",
 	});
 
 	const input = useRef(null);
@@ -54,12 +54,12 @@ const QuestionGroup: FunctionComponent<QuestionGroupProps> = ({
 	}, [question?.interviewer]);
 
 	const activeStyle = {
-		width: '100%',
-		resize: 'none',
-		border: '1px solid #165dff',
-		backgroundColor: '#fff',
-		borderRadius: '2px',
-		boxShadow: '0 0 0 0 #bedaff',
+		width: "100%",
+		resize: "none",
+		border: "1px solid #165dff",
+		backgroundColor: "#fff",
+		borderRadius: "2px",
+		boxShadow: "0 0 0 0 #bedaff",
 	};
 
 	function handleClick() {
@@ -68,13 +68,13 @@ const QuestionGroup: FunctionComponent<QuestionGroupProps> = ({
 			setTextAreaStyle(activeStyle);
 		} else {
 			setIfDisable(true);
-			setTextAreaStyle({ width: '100%', resize: 'none' });
+			setTextAreaStyle({ width: "100%", resize: "none" });
 		}
 	}
 
 	function onChangeHandler(val: string) {
 		setInterviewerAnswer(val);
-		question = { ...question, ['interviewer']: val };
+		question = { ...question, ["interviewer"]: val };
 		const newQuestions = [...questions];
 		newQuestions[id] = question;
 		setQuestions(newQuestions);
@@ -84,8 +84,8 @@ const QuestionGroup: FunctionComponent<QuestionGroupProps> = ({
 		<div className="question-group">
 			<div
 				style={{
-					marginTop: '30px',
-					marginBottom: '10px',
+					marginTop: "30px",
+					marginBottom: "10px",
 				}}
 			>{`${id + 1}. ${question?.question}`}</div>
 			<TextArea
@@ -96,7 +96,7 @@ const QuestionGroup: FunctionComponent<QuestionGroupProps> = ({
 				className="candidate-textarea-disable question-group-textArea"
 			/>
 			<div style={{ height: 10 }}></div>
-			{question?.type === 'general' && (
+			{question?.type === "general" && (
 				<div className="interviewer-answer-con">
 					<TextArea
 						placeholder="Please enter your remarks ..."

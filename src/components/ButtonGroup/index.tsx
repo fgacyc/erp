@@ -1,5 +1,5 @@
-import { Space, Button } from '@arco-design/web-react';
-import { Dispatch, FunctionComponent, SetStateAction } from 'react';
+import { Space, Button } from "@arco-design/web-react";
+import { Dispatch, FunctionComponent, SetStateAction } from "react";
 
 interface ButtonGroupProps {
 	currentActive: number;
@@ -21,7 +21,7 @@ export const ButtonGroup: FunctionComponent<ButtonGroupProps> = ({
 					<Button
 						shape="round"
 						type="text"
-						style={{ color: 'black' }}
+						style={{ color: "black" }}
 						onClick={() => setCurrentActive(0)}
 					>
 						All
@@ -35,7 +35,7 @@ export const ButtonGroup: FunctionComponent<ButtonGroupProps> = ({
 					<Button
 						shape="round"
 						type="text"
-						style={{ color: 'black' }}
+						style={{ color: "black" }}
 						onClick={() => setCurrentActive(1)}
 					>
 						In progress
@@ -49,7 +49,7 @@ export const ButtonGroup: FunctionComponent<ButtonGroupProps> = ({
 					<Button
 						shape="round"
 						type="text"
-						style={{ color: 'black' }}
+						style={{ color: "black" }}
 						onClick={() => setCurrentActive(2)}
 					>
 						Finished

@@ -1,45 +1,46 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Frame from './pages/Frame/Frame';
-import Login from './pages/Login/Login';
-import './App.css';
-import Recruitment_Submission from './pages/Recruitment/SubmissionPage/Recruitment_Submission';
-import PreScreening_table from './pages/Recruitment/PreScreeningPage/PreScreening_table';
-import PreScreening from './pages/Recruitment/PreScreeningPage/PreScreening';
-import Recruitment_Dashboard from './pages/Recruitment/DashboardPage/Recruitment_Dashboard';
-import Interview_table from './pages/Recruitment/InterviewPage/Interview_table';
-import Profile from './pages/Profile/Profile';
-import InterviewForm from './pages/Recruitment/InterviewPage/Interview_form';
-import Recruitment_Evaluation_Table from './pages/Recruitment/EvaluationPage/EvaluationTable';
-import Evaluation_Page from './pages/Recruitment/EvaluationPage/EvaluationPage';
-import Registration from './pages/Registration/Registration';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Frame from "./pages/Frame/Frame";
+import Login from "./pages/Login/Login";
+import "./App.css";
+import Recruitment_Submission from "./pages/Recruitment/SubmissionPage/Recruitment_Submission";
+import PreScreening_table from "./pages/Recruitment/PreScreeningPage/PreScreening_table";
+import PreScreening from "./pages/Recruitment/PreScreeningPage/PreScreening";
+import Recruitment_Dashboard from "./pages/Recruitment/DashboardPage/Recruitment_Dashboard";
+import Interview_table from "./pages/Recruitment/InterviewPage/Interview_table";
+import Profile from "./pages/Profile/Profile";
+import InterviewForm from "./pages/Recruitment/InterviewPage/Interview_form";
+import Recruitment_Evaluation_Table from "./pages/Recruitment/EvaluationPage/EvaluationTable";
+import Evaluation_Page from "./pages/Recruitment/EvaluationPage/EvaluationPage";
+import Registration from "./pages/Registration/Registration";
 // import Testing from './pages/Testing/Testing';
-import UserManagementMinistry from './pages/UserManagement/userManagementMinistry/UserManagementMinistry';
-import LeaderRetreat from './pages/Events/Camp/LeaderRetreat/LeaderRetreat';
-import UserManagementPastoral from './pages/UserManagement/userManagementPastroal/UserManagementPastoral';
-import CampPage from './pages/Events/Camp/CampPage/CampPage';
-import ConferencePage from './pages/Events/Conference/ConferencePage/ConferencePage';
-import EvangelismPage from './pages/Events/Evangelism/Evangelism/Evangelism';
-import UserManagementDashboard from './pages/UserManagement/userManagementDashboard/userManagementDashboard';
-import EducationDashboard from './pages/Education/EducationDashboard/EducationDashboard';
-import EducationStudents from './pages/Education/EducationStudents/EducationStudents';
-import SeatsPage from './pages/Ushering/SeatsPage/index';
-import { FirebaseAppProvider } from 'reactfire';
-import firebaseConfig from './lib/firebase/config';
-import { UsheringDashboard } from './pages/Ushering/UsheringDashboard';
-import MyGroupDashboard from './pages/MyGroup/MyGroupDashboard/MyGroupDashboard';
-import MyGroupMembers from './pages/MyGroup/MyGroupMember/MyGroupMembers';
-import MyGroupAttendance from './pages/MyGroup/MyGroupAttandance/MyGroupAttendance';
-import MyGroupPastoring from './pages/MyGroup/MyGroupPastoring/MyGroupPastoring';
-import ServicesPage from './pages/Services/ServicesPage/ServicesPage';
-import RoomBooking from './pages/Services/RoomBooking/RoomBooking';
-import { Auth0Provider } from '@auth0/auth0-react';
-import { RequireAuth } from './components/RequireAuth';
+import UserManagementMinistry from "./pages/UserManagement/userManagementMinistry/UserManagementMinistry";
+import LeaderRetreat from "./pages/Events/Camp/LeaderRetreat/LeaderRetreat";
+import UserManagementPastoral from "./pages/UserManagement/userManagementPastoral/UserManagementPastoral";
+import CampPage from "./pages/Events/Camp/CampPage/CampPage";
+import ConferencePage from "./pages/Events/Conference/ConferencePage/ConferencePage";
+import EvangelismPage from "./pages/Events/Evangelism/Evangelism/Evangelism";
+import UserManagementDashboard from "./pages/UserManagement/userManagementDashboard/userManagementDashboard";
+import EducationDashboard from "./pages/Education/EducationDashboard/EducationDashboard";
+import EducationStudents from "./pages/Education/EducationStudents/EducationStudents";
+import SeatsPage from "./pages/Ushering/SeatsPage/index";
+import { FirebaseAppProvider } from "reactfire";
+import firebaseConfig from "./lib/firebase/config";
+import { UsheringDashboard } from "./pages/Ushering/UsheringDashboard";
+import MyGroupDashboard from "./pages/MyGroup/MyGroupDashboard/MyGroupDashboard";
+import MyGroupMembers from "./pages/MyGroup/MyGroupMember/MyGroupMembers";
+import MyGroupAttendance from "./pages/MyGroup/MyGroupAttandance/MyGroupAttendance";
+import MyGroupPastoring from "./pages/MyGroup/MyGroupPastoring/MyGroupPastoring";
+import ServicesPage from "./pages/Services/ServicesPage/ServicesPage";
+import RoomBooking from "./pages/Services/RoomBooking/RoomBooking";
+import { Auth0Provider } from "@auth0/auth0-react";
+import { RequireAuth } from "./components/RequireAuth";
+import "@arco-design/web-react/dist/css/arco.css";
 
 function App() {
 	return (
 		<Auth0Provider
-			domain={import.meta.env['VITE_AUTH0_DOMAIN_ID']}
-			clientId={import.meta.env['VITE_AUTH0_CLIENT_ID']}
+			domain={import.meta.env["VITE_AUTH0_DOMAIN_ID"]}
+			clientId={import.meta.env["VITE_AUTH0_CLIENT_ID"]}
 			authorizationParams={{
 				redirect_uri: window.location.origin,
 			}}

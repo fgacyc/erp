@@ -1,14 +1,14 @@
-import { DatePicker, Message, Modal } from '@arco-design/web-react';
+import { DatePicker, Message, Modal } from "@arco-design/web-react";
 import {
 	Dispatch,
 	FunctionComponent,
 	SetStateAction,
 	useEffect,
 	useState,
-} from 'react';
-import { date2TimeStamp, getNowYYYYMMDDHHMMSS } from '../../../tools/datetime';
-import { get } from 'idb-keyval';
-import { putReq } from '../../../tools/requests';
+} from "react";
+import { date2TimeStamp, getNowYYYYMMDDHHMMSS } from "../../../tools/datetime";
+import { get } from "idb-keyval";
+import { putReq } from "../../../tools/requests";
 
 interface UIInterviewDatePickerModalProps {
 	visible: boolean;
@@ -24,7 +24,7 @@ const UIInterviewDatePickerModal: FunctionComponent<
 
 	useEffect(() => {
 		setDate(getNowYYYYMMDDHHMMSS);
-		get('current_candidate').then((res) => {
+		get("current_candidate").then((res) => {
 			if (res) {
 				setRID(res._id);
 				//console.log(res._id)
@@ -46,7 +46,7 @@ const UIInterviewDatePickerModal: FunctionComponent<
 			if (res.status) {
 				setVisible(false);
 			} else {
-				Message.warning('Reschedule Failed');
+				Message.warning("Reschedule Failed");
 			}
 		});
 
@@ -84,11 +84,11 @@ const UIInterviewDatePickerModal: FunctionComponent<
 				triggerElement={null}
 				showTime={true}
 				defaultValue={date}
-				style={{ width: 300, position: 'relative', left: 15 }}
+				style={{ width: 300, position: "relative", left: 15 }}
 				onSelect={changeHandle}
 				onOk={handleOk}
 			/>
-			<div style={{ fontSize: 18, textAlign: 'center', marginTop: 10 }}>
+			<div style={{ fontSize: 18, textAlign: "center", marginTop: 10 }}>
 				{date}
 			</div>
 		</Modal>
