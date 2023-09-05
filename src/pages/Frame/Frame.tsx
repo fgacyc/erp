@@ -6,37 +6,26 @@ import {
 	IconUserGroup,
 } from '@arco-design/web-react/icon';
 import './Frame.css';
-import { Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { Menu } from '@arco-design/web-react';
 const MenuItem = Menu.Item;
 const SubMenu = Menu.SubMenu;
 import HeadBarBtns from '@/components/UI_Menu/UI_HeaderBarMenu';
 import UIFloatingHelpMenu from '@/components/UI_Menu/UI_FloatingHelpMenu';
-import { menuPermission } from './AuthorityDetection';
-import { useSettingModalStore } from '@/components/UI_Modal/UI_SettingModal/settingModalStore';
+// import { useSettingModalStore } from '@/components/UI_Modal/UI_SettingModal/settingModalStore';
 import { LuGraduationCap } from 'react-icons/lu';
 import { FaPeopleGroup } from 'react-icons/fa6';
 import { BiHomeSmile } from 'react-icons/bi';
+import { useAuth0 } from '@auth0/auth0-react';
 
 const Frame = () => {
-	const path = useLocation().pathname;
-	// console.log(path)
-
-	const staff = useSettingModalStore((state) => state.staff);
-	const initStaff = useSettingModalStore((state) => state.initStaff);
+	// const staff = useSettingModalStore((state) => state.staff);
 	const navigate = useNavigate();
 
-	useEffect(() => {
-		initStaff().then(() => {
-			path === '/' && navigate('/recruitment_dashboard');
-			menuPermission().then((res) => {
-				if (!res) return;
-				setTabs(res);
-			});
-		});
-	}, [initStaff, navigate, path]);
-	const [tabs, setTabs] = useState({
+	const { user } = useAuth0();
+
+	const [tabs] = useState({
 		recruitment_dashboard: false,
 		recruitment_add_candidate: false,
 		recruitment_pre_screening: false,
@@ -97,7 +86,7 @@ const Frame = () => {
 					<MenuItem key="2">Solution</MenuItem>
 					<MenuItem key="3">Service</MenuItem>
 					<MenuItem key="4">Cooperation</MenuItem>
-					{staff && <HeadBarBtns />}
+					{user && <HeadBarBtns />}
 				</Menu>
 			</div>
 			<div className="menu-lower">
