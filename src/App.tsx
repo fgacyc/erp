@@ -113,14 +113,12 @@ function App() {
 								element={<LeaderRetreat />}
 							/>
 
-<<<<<<< HEAD
 						<Route
 							path="/education/dashboard"
 							element={<EducationDashboard />}
 						/>
 						<Route path="/education/students" element={<EducationStudents />} />
 						<Route path="/education/videos" element={<EducationVideos />} />
-=======
 							<Route
 								path="/education/dashboard"
 								element={<EducationDashboard />}
@@ -129,7 +127,6 @@ function App() {
 								path="/education/students"
 								element={<EducationStudents />}
 							/>
->>>>>>> 0d0805ac4adf3a9d3fba170231f3ed4d09c58bac
 
 							<Route
 								path="/ushering/dashboard"

@@ -34,7 +34,7 @@ const EducationVideos = () => {
                 {
                     arr.map((a, index) => (
                         <span className='m-5' key={index + a}>
-                        <EducationVideoComponent />
+                        {/* <EducationVideoComponent /> */}
                         </span>
                     ))
                 }   
