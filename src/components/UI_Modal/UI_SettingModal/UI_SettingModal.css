@@ -1,10 +1,10 @@
 .setting-modal {
-	padding: 0;
-	width: calc(100vw - 100px);
-	height: calc(100vh - 150px);
-	max-height: 715px;
-	max-width: 1150px;
-	border-radius: 5px;
+	padding: 0 !important;
+	width: calc(100vw - 100px) !important;
+	height: calc(100vh - 150px) !important;
+	max-height: 715px !important;
+	max-width: 1150px !important;
+	border-radius: 5px !important;
 }
 
 .setting-modal-con {

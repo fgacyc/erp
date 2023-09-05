@@ -2,7 +2,13 @@ import { Button, Modal, Radio } from "@arco-design/web-react";
 
 import * as Yup from "yup";
 import { type FormikValues, Formik, type FormikProps, Form } from "formik";
-import { Dispatch, FunctionComponent, SetStateAction, useRef } from "react";
+import {
+	Dispatch,
+	FunctionComponent,
+	SetStateAction,
+	useRef,
+	useState,
+} from "react";
 import { useAPI } from "@/lib/openapi";
 import { AddressField, CustomField } from "./Field";
 
@@ -39,6 +45,8 @@ export const ProfileForm: FunctionComponent<ProfileFormProps> = ({
 
 	const formRef = useRef<FormikProps<ProfileFormType>>(null);
 
+	const [editable, setEditable] = useState(!checkDetails);
+
 	const genderOptions: { label: string; value: Gender }[] = [
 		{ label: "Male", value: "male" },
 		{ label: "Female", value: "female" },
@@ -52,9 +60,14 @@ export const ProfileForm: FunctionComponent<ProfileFormProps> = ({
 			unmountOnExit
 			hideCancel={!checkDetails}
 			onOk={() => {
+				if (!editable) {
+					setEditable(true);
+					return;
+				}
 				if (!formRef.current) return;
 				if (formRef.current.isSubmitting) return;
 				formRef.current.submitForm();
+				setEditable(false);
 				// setNewUser(false);
 			}}
 			closable={checkDetails}
@@ -62,6 +75,8 @@ export const ProfileForm: FunctionComponent<ProfileFormProps> = ({
 			mountOnEnter={false}
 			className={"w-[800px]"}
 			onCancel={onClose}
+			okText={!editable ? "Update" : "Confirm"}
+			cancelText="Cancel"
 		>
 			<Formik<ProfileFormType>
 				validateOnBlur={false}
@@ -128,14 +143,12 @@ export const ProfileForm: FunctionComponent<ProfileFormProps> = ({
 
 						if (!res.error) {
 							actions.setSubmitting(false);
-							actions.resetForm();
-							setVisible(false);
+							!checkDetails && setVisible(false);
 						}
 					} catch (err) {
 						throw new Error(err as string);
 					} finally {
 						actions.setSubmitting(false);
-						actions.resetForm();
 					}
 				}}
 			>
@@ -149,6 +162,7 @@ export const ProfileForm: FunctionComponent<ProfileFormProps> = ({
 							label="full name"
 							errors={errors}
 							loading={isSubmitting}
+							editable={editable}
 						/>
 						<CustomField
 							name="icNo"
@@ -156,6 +170,7 @@ export const ProfileForm: FunctionComponent<ProfileFormProps> = ({
 							placeholder="xxxxxx-xx-xxxx"
 							errors={errors}
 							loading={isSubmitting}
+							editable={editable}
 						/>
 						<CustomField
 							name="phoneNo"
@@ -163,6 +178,7 @@ export const ProfileForm: FunctionComponent<ProfileFormProps> = ({
 							placeholder="xxx-xxxxxxx"
 							errors={errors}
 							loading={isSubmitting}
+							editable={editable}
 						/>
 						<div className="flex flex-row items-center justify-between gap-3">
 							<label htmlFor={"gender"} className="text-sm capitalize">
@@ -181,6 +197,7 @@ export const ProfileForm: FunctionComponent<ProfileFormProps> = ({
 													<Button
 														tabIndex={-1}
 														key={item.value}
+														disabled={isSubmitting || !editable}
 														shape="round"
 														type={checked ? "primary" : "default"}
 														onClick={() =>
@@ -197,7 +214,11 @@ export const ProfileForm: FunctionComponent<ProfileFormProps> = ({
 							</Radio.Group>
 						</div>
 
-						<AddressField errors={errors} loading={isSubmitting} />
+						<AddressField
+							errors={errors}
+							loading={isSubmitting}
+							editable={editable}
+						/>
 					</Form>
 				)}
 			</Formik>

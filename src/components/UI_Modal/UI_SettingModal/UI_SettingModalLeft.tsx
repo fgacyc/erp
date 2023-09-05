@@ -1,7 +1,7 @@
 import { Typography } from "@arco-design/web-react";
 import "./UI_SettingModal.css";
 import {
-	IconApps,
+	// IconApps,
 	IconHome,
 	IconInfoCircle,
 	IconNotification,
@@ -12,6 +12,7 @@ import {
 import { shallow } from "zustand/shallow";
 import { useSettingModalStore } from "./settingModalStore";
 import UI_Avatar from "@/components/UI_Avatar";
+import { useAccount } from "@/store/useAccount";
 
 // eslint-disable-next-line react-refresh/only-export-components
 const IconSecurity = () => {
@@ -25,10 +26,8 @@ const IconSecurity = () => {
 };
 
 export function UI_SettingModalLeft() {
-	const cyc_id = useSettingModalStore((state) => state.CYC_ID);
-	const username = useSettingModalStore((state) => state.username);
-	const email = useSettingModalStore((state) => state.email);
-	const avatar = useSettingModalStore((state) => state.avatar);
+	const { user } = useAccount();
+
 	const [currentTab, setCurrentTab] = useSettingModalStore(
 		(state) => [state.currentTab, state.setCurrentTab],
 		shallow,
@@ -38,7 +37,7 @@ export function UI_SettingModalLeft() {
 		"My home",
 		"My settings",
 		"My notifications",
-		"My connections",
+		// "My connections",
 		"Language & region",
 		"Security",
 		"About",
@@ -48,7 +47,7 @@ export function UI_SettingModalLeft() {
 		<IconHome key={1} />,
 		<IconSettings key={2} />,
 		<IconNotification key={3} />,
-		<IconApps key={4} />,
+		// <IconApps key={4} />,
 		<IconPublic key={5} />,
 		<IconSecurity key={6} />,
 		<IconInfoCircle key={7} />,
@@ -63,16 +62,16 @@ export function UI_SettingModalLeft() {
 				<UI_Avatar
 					size={32}
 					clickEvent={showAllInfo}
-					url={avatar}
-					username={username}
+					url={user.avatarUrl ?? ""}
+					username={user.name}
 				/>
 				<div style={{ width: 180, height: 40 }}>
 					<div style={{ display: "flex", justifyContent: "space-between" }}>
 						<div style={{ fontSize: 14, fontWeight: "bold" }}>
-							{username ?? "-"}
+							{user.name ?? "-"}
 						</div>
 						<div title="CYC ID" style={{ cursor: "default" }}>
-							{cyc_id ?? "-"}
+							{user.no ?? "-"}
 						</div>
 					</div>
 
@@ -85,7 +84,7 @@ export function UI_SettingModalLeft() {
 							wrapper: "span",
 						}}
 					>
-						{email && email}
+						{user.email}
 					</Typography.Paragraph>
 				</div>
 			</div>

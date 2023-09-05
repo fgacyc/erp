@@ -13,7 +13,7 @@ import { SettingModalAccount } from "./SettingModalPages/SettingModalAccount";
 import SettingModalHome from "./SettingModalPages/SettingModalHome";
 import SettingModalSettings from "./SettingModalPages/SettingModalSettings";
 import SettingModalNotifications from "./SettingModalPages/SettingModalNotifications";
-import SettingModalConnections from "./SettingModalPages/SettingModalConnections";
+// import SettingModalConnections from "./SettingModalPages/SettingModalConnections";
 import SettingModalLanguageAndRegion from "./SettingModalPages/SettingModalLanguageAndRegion";
 import SettingModalSecurity from "./SettingModalPages/SettingModalSecurity";
 import SettingModalAbout from "./SettingModalPages/SettingModalAbout";
@@ -39,10 +39,10 @@ const UI_SettingModal: FunctionComponent<UISettingModal> = ({
 		<SettingModalHome key={1} />,
 		<SettingModalSettings key={2} />,
 		<SettingModalNotifications key={3} />,
-		<SettingModalConnections key={4} />,
-		<SettingModalLanguageAndRegion key={5} />,
-		<SettingModalSecurity key={6} />,
-		<SettingModalAbout key={7} />,
+		// <SettingModalConnections key={4} />,
+		<SettingModalLanguageAndRegion key={4} />,
+		<SettingModalSecurity key={5} />,
+		<SettingModalAbout key={6} />,
 	];
 
 	useEffect(() => {
@@ -68,7 +68,7 @@ const UI_SettingModal: FunctionComponent<UISettingModal> = ({
 		<Modal
 			alignCenter={false}
 			visible={visible}
-			className="setting-modal"
+			className="setting-modal w-[1000px]"
 			onOk={() => setVisible(false)}
 			onCancel={() => setVisible(false)}
 			autoFocus={false}

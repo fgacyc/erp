@@ -27,6 +27,9 @@ const UserManagementPastoral = () => {
 			operations["get-user"]["responses"]["200"]["content"]["application/json; charset=utf-8"][]
 		>();
 
+	const [visible, setVisible] = useState(false);
+	const [selectedUser, setSelectedUser] = useState<User2>();
+
 	const api = useAPI();
 
 	useEffect(() => {
@@ -38,19 +41,13 @@ const UserManagementPastoral = () => {
 					>(res.data),
 				);
 			}
-			console.log(res.data);
 		});
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
-
-	const [visible, setVisible] = useState(false);
-
-	const [selectedUser, setSelectedUser] = useState<User2 | undefined>();
+	}, [visible]);
 
 	useEffect(() => {
 		if (selectedUser) setVisible(true);
-		if (!selectedUser) setVisible(false);
 	}, [selectedUser]);
 
 	return (

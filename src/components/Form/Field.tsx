@@ -17,6 +17,7 @@ export const CustomField: FunctionComponent<CustomFieldProps> = ({
 	label = name,
 	errors,
 	loading,
+	editable,
 }) => {
 	return (
 		<div className="flex flex-col w-full justify-end">
@@ -30,7 +31,7 @@ export const CustomField: FunctionComponent<CustomFieldProps> = ({
 					placeholder={placeholder}
 					className="arco-input w-[350px]"
 					type={type}
-					disabled={loading}
+					disabled={loading || !editable}
 				>
 					{children}
 				</Field>
@@ -47,10 +48,12 @@ export const CustomField: FunctionComponent<CustomFieldProps> = ({
 interface FormikFieldProps {
 	errors: FormikErrors<FormikValues>;
 	loading: boolean;
+	editable?: boolean;
 }
 
 export const AddressField: FunctionComponent<FormikFieldProps> = ({
 	errors,
+	editable,
 	loading,
 }) => {
 	const addressFields = [
@@ -78,7 +81,7 @@ export const AddressField: FunctionComponent<FormikFieldProps> = ({
 								id={field.name}
 								name={field.name}
 								className="arco-input"
-								disabled={loading}
+								disabled={loading || !editable}
 								type={field.name === "postalCode" ? "number" : "text"}
 								maxLength={field.name === "postalCode" ? 5 : undefined}
 							/>
