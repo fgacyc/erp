@@ -35,6 +35,7 @@ import RoomBooking from "./pages/Services/RoomBooking/RoomBooking";
 import { Auth0Provider } from "@auth0/auth0-react";
 import { RequireAuth } from "./components/RequireAuth";
 import "@arco-design/web-react/dist/css/arco.css";
+import PastoralRolesPage from "./pages/UserManagement/roles";
 
 function App() {
 	return (
@@ -103,7 +104,10 @@ function App() {
 								path="/users/pastoral"
 								element={<UserManagementPastoral />}
 							/>
-
+							<Route
+								path="/users/pastoral/roles"
+								element={<PastoralRolesPage />}
+							/>
 							<Route path="/events/camp" element={<CampPage />} />
 							<Route path="/events/conference" element={<ConferencePage />} />
 							<Route path="/events/evangelism" element={<EvangelismPage />} />

@@ -114,7 +114,6 @@ export const SettingModalAccount = () => {
 			</div>
 
 			<div className="setting-modal-account-security">
-				<h3>Account Security</h3>
 				<SettingModalDivider />
 				<div
 					style={{

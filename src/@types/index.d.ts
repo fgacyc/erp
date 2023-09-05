@@ -45,6 +45,13 @@ declare global {
 		username: string | null;
 	};
 
+	type Role = {
+		id: string;
+		name: string;
+		description: string;
+		weight: number;
+	};
+
 	// OLD
 	type VocalRating = {
 		stars?: number[];

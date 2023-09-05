@@ -16,7 +16,7 @@ const UserManagementPastoral = () => {
 			clickable: false,
 		},
 		{
-			name: "Pastoral management",
+			name: "Members",
 			link: "/users/pastoral",
 			clickable: true,
 		},
@@ -29,19 +29,23 @@ const UserManagementPastoral = () => {
 
 	const [visible, setVisible] = useState(false);
 	const [selectedUser, setSelectedUser] = useState<User2>();
+	const [firstLoad, setFirstLoad] = useState(true);
 
 	const api = useAPI();
 
 	useEffect(() => {
-		api.GET("/users", {}).then((res) => {
-			if (!res.error) {
-				setData(
-					addKeys<
-						operations["get-user"]["responses"]["200"]["content"]["application/json; charset=utf-8"]
-					>(res.data),
-				);
-			}
-		});
+		api
+			.GET("/users", {})
+			.then((res) => {
+				if (!res.error) {
+					setData(
+						addKeys<
+							operations["get-user"]["responses"]["200"]["content"]["application/json; charset=utf-8"]
+						>(res.data),
+					);
+				}
+			})
+			.finally(() => setFirstLoad(false));
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [visible]);
@@ -71,7 +75,7 @@ const UserManagementPastoral = () => {
 					Register new
 				</Button> */}
 				<Table
-					loading={visible}
+					loading={visible || firstLoad}
 					columns={[
 						{
 							title: "no",
