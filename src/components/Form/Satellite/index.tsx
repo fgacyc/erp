@@ -17,7 +17,6 @@ import {
 } from "react";
 import * as Yup from "yup";
 import { AddressField, CustomField } from "../Field";
-import { operations } from "@/@types/schema";
 
 interface SatelliteFormType extends FormikValues {
 	name: string;
