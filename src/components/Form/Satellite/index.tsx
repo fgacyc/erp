@@ -47,7 +47,7 @@ export const SatelliteForm: FunctionComponent<SatelliteFormProps> = ({
 	checkDetails,
 }) => {
 	const formRef = useRef<FormikProps<SatelliteFormType>>(null);
-	const [editable, setEditable] = useState(!checkDetails);
+	const [editable, setEditable] = useState(checkDetails);
 
 	const api = useAPI();
 
