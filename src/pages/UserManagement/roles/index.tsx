@@ -163,7 +163,7 @@ const PastoralRolesPage = () => {
 									<div className="arco-table-custom-filter">
 										<Input.Search
 											searchButton
-											placeholder="Please enter a email"
+											placeholder="Please enter a name"
 											value={filterKeys?.[0] || ""}
 											onChange={(value) => {
 												setFilterKeys?.(value ? [value] : []);
@@ -255,7 +255,8 @@ const PastoralRolesPage = () => {
 															.then(() => {
 																getRoles();
 															}),
-												);
+												),
+													setLoading(false);
 											}}
 										/>
 									}

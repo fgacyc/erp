@@ -11,15 +11,6 @@ type EmailResponse = {
 
 type EducationStatus = "finished";
 
-type Address = {
-	city: string;
-	country: string;
-	lineOne: string;
-	lineTwo?: string;
-	postalCode: string;
-	state: string;
-};
-
 type MinistryTeam = { ministry: string; scope: string[] };
 type Position = { level: string; name: string };
 declare global {
@@ -45,11 +36,29 @@ declare global {
 		username: string | null;
 	};
 
+	type Address = {
+		city: string;
+		country: string;
+		lineOne: string;
+		lineTwo?: string;
+		postalCode: string;
+		state: string;
+	};
+
 	type Role = {
 		id: string;
 		name: string;
 		description: string;
 		weight: number;
+	};
+
+	type Satellite = {
+		id: string;
+		no: number;
+		name: string;
+		address: Address;
+		createdAt: string;
+		updatedAt: string;
 	};
 
 	// OLD

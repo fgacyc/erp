@@ -36,6 +36,7 @@ import { Auth0Provider } from "@auth0/auth0-react";
 import { RequireAuth } from "./components/RequireAuth";
 import "@arco-design/web-react/dist/css/arco.css";
 import PastoralRolesPage from "./pages/UserManagement/roles";
+import SatellitePage from "./pages/UserManagement/Satellite";
 
 function App() {
 	return (
@@ -96,6 +97,7 @@ function App() {
 								path="/users/dashboard"
 								element={<UserManagementDashboard />}
 							/>
+							<Route path="/users/satellites" element={<SatellitePage />} />
 							<Route
 								path="/users/ministry"
 								element={<UserManagementMinistry />}

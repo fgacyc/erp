@@ -17,7 +17,7 @@ import { FaPeopleGroup } from "react-icons/fa6";
 import { BiHomeSmile } from "react-icons/bi";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useAccount } from "@/store/useAccount";
-import { ProfileForm } from "@/components/Form";
+import { ProfileForm } from "@/components/Form/Profile";
 
 const MenuItem = Menu.Item;
 const SubMenu = Menu.SubMenu;
@@ -147,6 +147,7 @@ const Frame = () => {
 							}
 						>
 							<MenuItem key="users/dashboard">Dashboard</MenuItem>
+							<MenuItem key="users/satellites">Satellites</MenuItem>
 							<MenuItem key="users/ministry">Ministry</MenuItem>
 
 							<SubMenu key="2.1" title="Pastoral">

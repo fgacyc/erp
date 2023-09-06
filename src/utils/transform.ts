@@ -31,3 +31,23 @@ export const transformUserFromAPI = (
 		username: input.username ?? "",
 	};
 };
+
+export const transformSatelliteFromAPI = (
+	input: operations["get-satellite"]["responses"]["200"]["content"]["application/json; charset=utf-8"],
+): Satellite => {
+	return {
+		id: input.id,
+		address: {
+			city: input.address?.city ?? "",
+			country: input.address?.country ?? "",
+			postalCode: input.address?.postal_code ?? "",
+			lineOne: input.address?.line_one ?? "",
+			state: input.address?.state ?? "",
+			lineTwo: input.address?.line_two,
+		},
+		createdAt: input.created_at,
+		name: input.name,
+		no: input.no,
+		updatedAt: input.updated_at,
+	};
+};

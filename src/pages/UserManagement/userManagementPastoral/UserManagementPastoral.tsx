@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { useAPI } from "@/lib/openapi";
 import { operations } from "@/@types/schema";
 import { addKeys } from "@/tools/tableTools";
-import { ProfileForm } from "@/components/Form";
+import { ProfileForm } from "@/components/Form/Profile";
 import { transformUserFromAPI } from "@/utils/transform";
 
 const UserManagementPastoral = () => {

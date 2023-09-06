@@ -1,7 +1,7 @@
 import { Modal } from "@arco-design/web-react";
 import type { ReactNode } from "react";
 
-const UIConfirmModal = (title: string, content: ReactNode, OK: () => void) => {
+const UIConfirmModal = (title: string, content: ReactNode, OK: () => void, onCancel?: () => void) => {
 	Modal.confirm({
 		title: title,
 		content: content,
@@ -13,6 +13,7 @@ const UIConfirmModal = (title: string, content: ReactNode, OK: () => void) => {
 		onOk: () => {
 			OK();
 		},
+		onCancel:onCancel
 	});
 };
 
