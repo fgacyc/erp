@@ -14,6 +14,7 @@ import {
 	FunctionComponent,
 	ChangeEvent,
 	useState,
+	useEffect,
 } from "react";
 import * as Yup from "yup";
 import { AddressField, CustomField } from "../Field";
@@ -47,8 +48,10 @@ export const SatelliteForm: FunctionComponent<SatelliteFormProps> = ({
 	checkDetails,
 }) => {
 	const formRef = useRef<FormikProps<SatelliteFormType>>(null);
-	const [editable, setEditable] = useState(checkDetails);
-
+	const [editable, setEditable] = useState(false);
+	useEffect(() => {
+		setEditable(!checkDetails);
+	}, [checkDetails]);
 	const api = useAPI();
 
 	return (

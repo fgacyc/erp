@@ -36,6 +36,16 @@ declare global {
 		username: string | null;
 	};
 
+	type CG = {
+		id: string;
+		no: number;
+		name?: string;
+		variant?: string;
+		satelliteId: string;
+		createdAt: string;
+		updatedAt: string;
+	};
+
 	type Address = {
 		city: string;
 		country: string;

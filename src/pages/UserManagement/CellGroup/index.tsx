@@ -1,58 +1,57 @@
-import { SatelliteForm } from "@/components/Form/Satellite";
+import { CGForm } from "@/components/Form/CG";
 import UIBreadcrumb from "@/components/UIBreadcrumb";
 import { useAPI } from "@/lib/openapi";
 import { addKeys } from "@/tools/tableTools";
-import { transformSatelliteFromAPI } from "@/utils/transform";
+import { transformCGFromAPI } from "@/utils/transform";
 import { Button, Input, Space, Table } from "@arco-design/web-react";
 import { IconPlus, IconSearch } from "@arco-design/web-react/icon";
-import { useEffect, useState } from "react";
+import { FunctionComponent, useEffect, useState } from "react";
 
-const PastoralRolesPage = () => {
+const CellGroupPage = () => {
 	const breadcrumbItems = [
 		{
 			name: "Users",
 			link: "/",
-			clickable: false,
 		},
-
 		{
-			name: "Satellites",
-			link: "/users/satellites",
-			clickable: true,
+			name: "Members",
+			link: "/users/pastoral",
+		},
+		{
+			name: "Cell Groups",
+			link: "/users/pastoral/cg",
 		},
 	];
 
 	const api = useAPI();
-	const [satellites, setSatellites] = useState<Satellite[]>();
-	const [selectedSatellite, setSelectedSatellite] = useState<Satellite>();
+	const [cgs, setCGs] = useState<CG[]>();
+	const [selectedCG, setSelectedCG] = useState<CG>();
 	const [modalVisible, setModalVisible] = useState(false);
 	const [loading, setLoading] = useState(true);
 
-	const getSatellites = () => {
+	const getCGs = () => {
 		setLoading(true);
-		api.GET("/satellites", {}).then((res) => {
+		api.GET("/connect-groups", {}).then((res) => {
 			if (!res.data) return;
-			setSatellites(
-				addKeys<Satellite>(res.data.map((d) => transformSatelliteFromAPI(d))),
-			);
+			setCGs(addKeys<CG>(res.data.map((d) => transformCGFromAPI(d))));
 			setLoading(false);
 		});
 	};
 
 	useEffect(() => {
-		getSatellites();
+		getCGs();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [modalVisible]);
 
 	return (
 		<>
-			<SatelliteForm
+			<CGForm
 				visible={modalVisible}
 				setVisible={setModalVisible}
-				satellite={selectedSatellite}
-				title={selectedSatellite?.name ?? "Add New Satellite?"}
-				checkDetails={selectedSatellite ? true : false}
-				onClose={() => setSelectedSatellite(undefined)}
+				cg={selectedCG}
+				title={selectedCG?.name ?? "Add New CG?"}
+				checkDetails={selectedCG ? true : false}
+				onClose={() => setSelectedCG(undefined)}
 			/>
 			<UIBreadcrumb items={breadcrumbItems} />
 			<div className="app-component full-screen-app-component">
@@ -62,13 +61,13 @@ const PastoralRolesPage = () => {
 					onClick={() => setModalVisible(true)}
 					className="mt-5 mx-5"
 				>
-					Add new satellite
+					Add new CG
 				</Button>
 
 				<Table
 					loading={loading}
 					className="m-3"
-					data={satellites?.sort((a, b) => a.no - b.no)}
+					data={cgs?.sort((a, b) => a.no - b.no)}
 					columns={[
 						{
 							title: "Name",
@@ -99,8 +98,8 @@ const PastoralRolesPage = () => {
 						},
 
 						{
-							title: "M100 No.",
-							dataIndex: "no",
+							title: "Satellite",
+							render: (_, record) => <Satellite id={record.satelliteId} />,
 						},
 						{
 							title: "Details",
@@ -113,7 +112,7 @@ const PastoralRolesPage = () => {
 											onClick={async () => {
 												setLoading(true);
 												api
-													.GET("/satellites/{id}", {
+													.GET("/connect-groups/{id}", {
 														params: {
 															path: {
 																id: record.id,
@@ -122,10 +121,7 @@ const PastoralRolesPage = () => {
 													})
 													.then((res) => {
 														if (!res.data) return;
-														setSelectedSatellite(
-															transformSatelliteFromAPI(res.data),
-														);
-
+														setSelectedCG(transformCGFromAPI(res.data));
 														setModalVisible(true);
 													});
 											}}
@@ -141,4 +137,26 @@ const PastoralRolesPage = () => {
 	);
 };
 
-export default PastoralRolesPage;
+export default CellGroupPage;
+
+const Satellite: FunctionComponent<{ id: string }> = ({ id }) => {
+	const api = useAPI();
+
+	const [sat, setSat] = useState("Loading...");
+
+	useEffect(() => {
+		setSat("Loading...");
+		if (!id) {
+			setSat("No Assigned Satellites.");
+			return;
+		}
+		api
+			.GET("/satellites/{id}", {
+				params: { path: { id: id } },
+			})
+			.then(({ data }) => setSat(String(data?.name)))
+			.catch(() => setSat("Error."));
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [id]);
+	return <>{sat}</>;
+};

@@ -8,16 +8,16 @@ import { Navigate } from "react-router-dom";
 export const RequireAuth: FunctionComponent<{ children: JSX.Element }> = ({
 	children,
 }) => {
-	const { isLoading, isAuthenticated, user: auth0User } = useAuth0();
-	const { setUser } = useAccount();
+	const { isLoading, user: auth0User } = useAuth0();
+	const { setUser, user } = useAccount();
 	const api = useAPI();
 
 	const [tip, setTip] = useState("Loading...");
 	const [loadingUserData, setLoadingUserData] = useState(true);
+	const [overallLoading, setOverallLoading] = useState(true);
 
 	useEffect(() => {
-		if (!auth0User?.sub) return;
-
+		if (isLoading) return;
 		api
 			.GET("/users/{id}", {
 				params: {
@@ -28,15 +28,15 @@ export const RequireAuth: FunctionComponent<{ children: JSX.Element }> = ({
 			})
 			.then(({ data }) => {
 				data && setUser(data);
-				data && console.log(data);
-				data && setLoadingUserData(false);
+				setLoadingUserData(false);
 			})
 			.catch((err) => {
+				setLoadingUserData(false);
 				throw new Error(err);
 			});
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [auth0User?.sub]);
+	}, [auth0User?.sub, isLoading]);
 
 	useEffect(() => {
 		const timeout = setTimeout(() => setTip("This may take a while.."), 5000);
@@ -44,13 +44,21 @@ export const RequireAuth: FunctionComponent<{ children: JSX.Element }> = ({
 		return () => clearTimeout(timeout);
 	}, []);
 
-	return isLoading || loadingUserData ? (
+	useEffect(() => {
+		if (!loadingUserData && !isLoading) {
+			const to = setTimeout(() => setOverallLoading(false), 300);
+
+			return () => clearTimeout(to);
+		}
+	}, [isLoading, loadingUserData]);
+
+	return overallLoading ? (
 		<div className="min-h-screen min-w-screen flex flex-col justify-center items-center">
 			<Spin tip={tip} size={40} block />
 		</div>
-	) : isAuthenticated ? (
+	) : user.id ? (
 		children
 	) : (
-		<Navigate to={"/login"} replace />
+		<Navigate to={"/login"} />
 	);
 };

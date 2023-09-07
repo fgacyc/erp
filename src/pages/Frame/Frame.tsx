@@ -148,10 +148,12 @@ const Frame = () => {
 						>
 							<MenuItem key="users/dashboard">Dashboard</MenuItem>
 							<MenuItem key="users/satellites">Satellites</MenuItem>
+
 							<MenuItem key="users/ministry">Ministry</MenuItem>
 
 							<SubMenu key="2.1" title="Pastoral">
 								<MenuItem key="users/pastoral">Members</MenuItem>
+								<MenuItem key="users/pastoral/cg">Cell Groups</MenuItem>
 								<MenuItem key="users/pastoral/roles">Roles</MenuItem>
 							</SubMenu>
 						</SubMenu>

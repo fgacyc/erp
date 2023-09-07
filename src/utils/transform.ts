@@ -51,3 +51,17 @@ export const transformSatelliteFromAPI = (
 		updatedAt: input.updated_at,
 	};
 };
+
+export const transformCGFromAPI = (
+	input: operations["get-connect-group"]["responses"]["200"]["content"]["application/json; charset=utf-8"],
+): CG => {
+	return {
+		id: input.id,
+		createdAt: input.created_at,
+		no: input.no,
+		satelliteId: input.satellite_id,
+		updatedAt: input.updated_at,
+		name: input.name ?? "",
+		variant: input.variant ?? "",
+	};
+};

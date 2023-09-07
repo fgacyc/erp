@@ -35,8 +35,9 @@ import RoomBooking from "./pages/Services/RoomBooking/RoomBooking";
 import { Auth0Provider } from "@auth0/auth0-react";
 import { RequireAuth } from "./components/RequireAuth";
 import "@arco-design/web-react/dist/css/arco.css";
-import PastoralRolesPage from "./pages/UserManagement/roles";
+import PastoralRolesPage from "./pages/UserManagement/Role";
 import SatellitePage from "./pages/UserManagement/Satellite";
+import CellGroupPage from "./pages/UserManagement/CellGroup";
 
 function App() {
 	return (
@@ -98,6 +99,7 @@ function App() {
 								element={<UserManagementDashboard />}
 							/>
 							<Route path="/users/satellites" element={<SatellitePage />} />
+							<Route path="/users/pastoral/cg" element={<CellGroupPage />} />
 							<Route
 								path="/users/ministry"
 								element={<UserManagementMinistry />}
