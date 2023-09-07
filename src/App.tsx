@@ -38,6 +38,10 @@ import "@arco-design/web-react/dist/css/arco.css";
 import PastoralRolesPage from "./pages/UserManagement/Role";
 import SatellitePage from "./pages/UserManagement/Satellite";
 import CellGroupPage from "./pages/UserManagement/CellGroup";
+import VideoManagement from "@/pages/FaithFlix/VideoManagement.tsx";
+import FaithflixDashboard from "@/pages/FaithFlix/FaithflixDashboard.tsx";
+import SectionManagement from "@/pages/FaithFlix/SectionManagement.tsx";
+import FaithflixUsers from "@/pages/FaithFlix/FaithflixUsers.tsx";
 
 function App() {
 	return (
@@ -142,6 +146,12 @@ function App() {
 
 							<Route path="/services" element={<ServicesPage />} />
 							<Route path="/services/room_booking" element={<RoomBooking />} />
+
+                            <Route path="/faithflix/dashboard" element={<FaithflixDashboard /> } />
+                            <Route path="/faithflix/video-management" element={<VideoManagement /> } />
+                            <Route path="/faithflix/section-management" element={<SectionManagement /> } />
+                            <Route path="/faithflix/users" element={<FaithflixUsers /> } />
+
 						</Route>
 						<Route path="/registration" element={<Registration />} />
 						<Route path="/profile" element={<Profile />} />

@@ -18,6 +18,7 @@ import { BiHomeSmile } from "react-icons/bi";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useAccount } from "@/store/useAccount";
 import { ProfileForm } from "@/components/Form/Profile";
+import {TbBrandNetflix} from "react-icons/tb";
 
 const MenuItem = Menu.Item;
 const SubMenu = Menu.SubMenu;
@@ -208,6 +209,20 @@ const Frame = () => {
 							<MenuItem key="group/attendance">Attendance</MenuItem>
 							<MenuItem key="group/pastoring">Pastoring</MenuItem>
 						</SubMenu>
+                        <SubMenu
+                            key="7"
+                            title={
+                                <>
+                                    <TbBrandNetflix className="arco-icon" />
+                                    Faithflix
+                                </>
+                            }
+                        >
+                            <MenuItem key="faithflix/dashboard">Dashboard</MenuItem>
+                            <MenuItem key="faithflix/video-management">Videos</MenuItem>
+                            <MenuItem key="faithflix/section-management">Sections</MenuItem>
+                            <MenuItem key="faithflix/users">Users</MenuItem>
+                        </SubMenu>
 						<button
 							onClick={() => setCollapse((state) => !state)}
 							className="arco-menu-collapse-button"
