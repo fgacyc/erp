@@ -3,7 +3,6 @@ import {
 	Cascader,
 	Modal,
 	Radio,
-	Select,
 	Spin,
 } from "@arco-design/web-react";
 
@@ -19,7 +18,7 @@ import {
 } from "react";
 import { useAPI } from "@/lib/openapi";
 import { AddressField, CustomField } from "../Field";
-import { addKeys } from "@/tools/tableTools";
+//import { addKeys } from "@/tools/tableTools";
 import { addRolesToCGField, transformCGFromAPI } from "@/utils/transform";
 
 interface ProfileFormType extends FormikValues {
@@ -226,10 +225,10 @@ export const ProfileForm: FunctionComponent<ProfileFormProps> = ({
 										mode="multiple"
 										disabled={!editable}
 										placeholder="None."
-										onChange={(item, selectedOption) => {
-											// setValues({ ...values, role: item });
-											console.log(item);
-										}}
+										// onChange={(item, selectedOption) => {
+										// 	// setValues({ ...values, role: item });
+										// 	console.log(item);
+										// }}
 										changeOnSelect
 										options={addRolesToCGField(cgs, roles)}
 									>
