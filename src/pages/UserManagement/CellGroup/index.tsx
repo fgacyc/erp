@@ -2,6 +2,7 @@ import { CGForm } from "@/components/Form/CG";
 import UIBreadcrumb from "@/components/UIBreadcrumb";
 import { useAPI } from "@/lib/openapi";
 import { addKeys } from "@/tools/tableTools";
+import { cgVariants } from "@/utils/constants";
 import { transformCGFromAPI } from "@/utils/transform";
 import { Button, Input, Space, Table } from "@arco-design/web-react";
 import { IconPlus, IconSearch } from "@arco-design/web-react/icon";
@@ -35,6 +36,7 @@ const CellGroupPage = () => {
 			if (!res.data) return;
 			setCGs(addKeys<CG>(res.data.map((d) => transformCGFromAPI(d))));
 			setLoading(false);
+			console.log(res.data);
 		});
 	};
 
@@ -96,7 +98,12 @@ const CellGroupPage = () => {
 								return row.name.toLowerCase().includes(value.toLowerCase());
 							},
 						},
-
+						{
+							title: "Variant",
+							render: (_, record) =>
+								cgVariants.find((a) => a.value === record.variant?.trim())
+									?.label,
+						},
 						{
 							title: "Satellite",
 							render: (_, record) => <Satellite id={record.satelliteId} />,

@@ -1,4 +1,11 @@
-import { Button, Modal, Radio, Select, Spin } from "@arco-design/web-react";
+import {
+	Button,
+	Cascader,
+	Modal,
+	Radio,
+	Select,
+	Spin,
+} from "@arco-design/web-react";
 
 import * as Yup from "yup";
 import { type FormikValues, Formik, type FormikProps, Form } from "formik";
@@ -13,6 +20,7 @@ import {
 import { useAPI } from "@/lib/openapi";
 import { AddressField, CustomField } from "../Field";
 import { addKeys } from "@/tools/tableTools";
+import { addRolesToCGField, transformCGFromAPI } from "@/utils/transform";
 
 interface ProfileFormType extends FormikValues {
 	name: string;
@@ -56,19 +64,21 @@ export const ProfileForm: FunctionComponent<ProfileFormProps> = ({
 
 	const [loading, setLoading] = useState(false);
 	const [roles, setRoles] = useState<Role[]>();
+	const [cgs, setCGs] = useState<CG[]>();
 
-	const getRoles = () => {
+	const getRolesAndCGs = async () => {
 		setLoading(true);
-		api.GET("/pastoral-roles", {}).then((res) => {
-			if (!res.data) return;
-			setRoles(addKeys<Role>(res.data));
-			setLoading(false);
-		});
+		const res = await api.GET("/pastoral-roles", {});
+		setRoles(res.data);
+
+		const res2 = await api.GET("/connect-groups", {});
+		setCGs(res2.data?.map((d) => transformCGFromAPI(d)));
+
+		if (!res.error && !res2.error) setLoading(false);
 	};
 
 	useEffect(() => {
-		getRoles();
-
+		getRolesAndCGs();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
@@ -132,7 +142,7 @@ export const ProfileForm: FunctionComponent<ProfileFormProps> = ({
 						state: Yup.string().required("Required."),
 						country: Yup.string().required("Required."),
 						postalCode: Yup.string()
-							.required()
+							.required("Required.")
 							.matches(/^[0-9]+$/, "Must be only digits")
 							.min(5, "Must be exactly 5 digits")
 							.max(5, "Must be exactly 5 digits"),
@@ -206,8 +216,33 @@ export const ProfileForm: FunctionComponent<ProfileFormProps> = ({
 								loading={isSubmitting}
 								editable={editable}
 							/>
-
 							{checkDetails && (
+								<div className="flex flex-row items-center justify-between gap-3">
+									<label htmlFor={"cg"} className="text-sm capitalize">
+										CG
+									</label>
+									<Cascader
+										className="w-[350px]"
+										mode="multiple"
+										disabled={!editable}
+										placeholder="None."
+										onChange={(item, selectedOption) => {
+											// setValues({ ...values, role: item });
+											console.log(item);
+										}}
+										changeOnSelect
+										options={addRolesToCGField(cgs, roles)}
+									>
+										{/* {cgs?.map((cg) => (
+											<Select.Option value={cg.id} key={cg.id}>
+												{cg.name}
+											</Select.Option>
+										))} */}
+									</Cascader>
+								</div>
+							)}
+
+							{/* {checkDetails && (
 								<div className="flex flex-row items-center justify-between gap-3">
 									<label htmlFor={"role"} className="text-sm capitalize">
 										Role
@@ -228,7 +263,7 @@ export const ProfileForm: FunctionComponent<ProfileFormProps> = ({
 										))}
 									</Select>
 								</div>
-							)}
+							)} */}
 
 							<div className="flex flex-row items-center justify-between gap-3">
 								<label htmlFor={"gender"} className="text-sm capitalize">

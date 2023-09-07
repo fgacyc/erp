@@ -65,3 +65,16 @@ export const transformCGFromAPI = (
 		variant: input.variant ?? "",
 	};
 };
+
+export const addRolesToCGField = (
+	cgs: CG[] | undefined,
+	roles: Role[] | undefined,
+) => {
+	if (cgs?.length === 0 || roles?.length === 0) return;
+	return cgs?.map((cg) => ({
+		value: cg.id,
+		label: cg.name,
+		disableCheckbox: true,
+		children: roles?.map((role) => ({ value: role.id, label: role.name })),
+	}));
+};

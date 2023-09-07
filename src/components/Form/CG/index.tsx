@@ -19,6 +19,7 @@ import {
 import * as Yup from "yup";
 import { CustomField } from "../Field";
 import { transformSatelliteFromAPI } from "@/utils/transform";
+import { cgVariants } from "@/utils/constants";
 
 interface CGFormType extends FormikValues {
 	no: number;
@@ -35,29 +36,6 @@ interface CGFormProps {
 	checkDetails?: boolean;
 	onClose?: () => void;
 }
-
-const variants = [
-	{
-		label: "Junior",
-		value: "J",
-	},
-	{
-		label: "Senior",
-		value: "S",
-	},
-	{
-		label: "Tertiary",
-		value: "T",
-	},
-	{
-		label: "GS",
-		value: "W",
-	},
-	{
-		label: "GS (Adult)",
-		value: "A",
-	},
-];
 
 export const CGForm: FunctionComponent<CGFormProps> = ({
 	visible,
@@ -136,7 +114,6 @@ export const CGForm: FunctionComponent<CGFormProps> = ({
 					})}
 					onSubmit={(values, action) => {
 						action.setSubmitting(true);
-						console.warn(values);
 						if (checkDetails) {
 							api
 								.PATCH("/connect-groups/{id}", {
@@ -206,7 +183,7 @@ export const CGForm: FunctionComponent<CGFormProps> = ({
 										});
 									}}
 								>
-									{variants.map((v) => (
+									{cgVariants.map((v) => (
 										<Select.Option key={v.value} value={v.value}>
 											{v.label}
 										</Select.Option>
