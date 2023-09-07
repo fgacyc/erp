@@ -1,6 +1,6 @@
-import { FunctionComponent } from 'react';
-import { department_options } from '@/data/ministries';
-import { Cascader } from '@arco-design/web-react';
+import { FunctionComponent } from "react";
+import { department_options } from "@/data/ministries";
+import { Cascader } from "@arco-design/web-react";
 
 interface MinistryCascaderProps {
 	value: string[];

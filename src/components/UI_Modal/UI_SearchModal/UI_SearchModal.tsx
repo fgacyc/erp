@@ -1,8 +1,8 @@
-import { Modal } from '@arco-design/web-react';
-import './UI_SearchModal.css';
-import { IconSearch, IconSwap } from '@arco-design/web-react/icon';
-import IconEnter from './IconEnterSVG';
-import { Dispatch, FunctionComponent, SetStateAction } from 'react';
+import { Modal } from "@arco-design/web-react";
+import "./UI_SearchModal.css";
+import { IconSearch, IconSwap } from "@arco-design/web-react/icon";
+import IconEnter from "./IconEnterSVG";
+import { Dispatch, FunctionComponent, SetStateAction } from "react";
 
 interface UISearchModalProps {
 	visible: boolean;
@@ -16,7 +16,7 @@ const UI_SearchModal: FunctionComponent<UISearchModalProps> = ({
 	return (
 		<Modal
 			alignCenter={false}
-			className={'notification-modal'}
+			className={"notification-modal"}
 			visible={visible}
 			onOk={() => setVisible(false)}
 			onCancel={() => setVisible(false)}

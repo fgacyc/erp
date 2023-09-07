@@ -1,4 +1,4 @@
-import AvatarMenu from '@/components/UI_Menu/UI_AvatarMenu';
+import AvatarMenu from "@/components/UI_Menu/UI_AvatarMenu";
 import {
 	IconLanguage,
 	IconMoon,
@@ -6,13 +6,13 @@ import {
 	IconSearch,
 	IconSettings,
 	IconSun,
-} from '@arco-design/web-react/icon';
-import { Button } from '@arco-design/web-react';
-import '../../../pages/Frame/Frame.css';
-import { useState } from 'react';
-import NotificationModal from '@/components/UI_Modal/UI_NotificationModal/NotificationModal';
-import UI_SearchModal from '@/components/UI_Modal/UI_SearchModal/UI_SearchModal';
-import UI_SettingModal from '@/components/UI_Modal/UI_SettingModal/UI_SettingModal';
+} from "@arco-design/web-react/icon";
+import { Button } from "@arco-design/web-react";
+import "../../../pages/Frame/Frame.css";
+import { useState } from "react";
+import NotificationModal from "@/components/UI_Modal/UI_NotificationModal/NotificationModal";
+import UI_SearchModal from "@/components/UI_Modal/UI_SearchModal/UI_SearchModal";
+import UI_SettingModal from "@/components/UI_Modal/UI_SettingModal/UI_SettingModal";
 
 const HeadBarBtns = () => {
 	const [notificationModalVisible, setNotificationModalVisible] =
@@ -24,10 +24,10 @@ const HeadBarBtns = () => {
 
 	function changeTheme() {
 		if (ifDarkTheme) {
-			document.body.removeAttribute('arco-theme');
+			document.body.removeAttribute("arco-theme");
 			setIfDarkTheme(false);
 		} else {
-			document.body.setAttribute('arco-theme', 'dark');
+			document.body.setAttribute("arco-theme", "dark");
 			setIfDarkTheme(true);
 		}
 	}

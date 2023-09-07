@@ -1,7 +1,7 @@
-import { Button, Input, Modal } from '@arco-design/web-react';
-import { IconCloseCircle, IconDelete } from '@arco-design/web-react/icon';
-import { useSettingModalStore } from '../settingModalStore';
-import { Dispatch, FunctionComponent, SetStateAction } from 'react';
+import { Button, Input, Modal } from "@arco-design/web-react";
+import { IconCloseCircle, IconDelete } from "@arco-design/web-react/icon";
+import { useSettingModalStore } from "../settingModalStore";
+import { Dispatch, FunctionComponent, SetStateAction } from "react";
 
 interface DeleteAccountModalProps {
 	visible: boolean;
@@ -25,25 +25,25 @@ const DeleteAccountModal: FunctionComponent<DeleteAccountModalProps> = ({
 			footer={null}
 			closeIcon={<IconCloseCircle />}
 		>
-			<div style={{ color: 'rgba(55, 53, 47, 0.65)' }}>
+			<div style={{ color: "rgba(55, 53, 47, 0.65)" }}>
 				<div style={{ height: 30 }}>
 					<IconCloseCircle
 						style={{
-							float: 'right',
+							float: "right",
 							fontSize: 20,
-							color: 'gray',
-							cursor: 'pointer',
+							color: "gray",
+							cursor: "pointer",
 						}}
 						onClick={() => setVisible(false)}
 					/>
 				</div>
-				<div style={{ textAlign: 'center', marginBottom: 10 }}>
+				<div style={{ textAlign: "center", marginBottom: 10 }}>
 					<IconDelete style={{ fontSize: 25 }} />
-					<div style={{ fontWeight: 'bold', marginTop: 10 }}>
+					<div style={{ fontWeight: "bold", marginTop: 10 }}>
 						Delete your account
 					</div>
 				</div>
-				<div style={{ textAlign: 'center', marginBottom: 20, fontSize: 12 }}>
+				<div style={{ textAlign: "center", marginBottom: 20, fontSize: 12 }}>
 					<div>
 						This action cannot be undone. This will permanently delete your
 						entire account. All private data will be deleted, and you will be
@@ -54,7 +54,7 @@ const DeleteAccountModal: FunctionComponent<DeleteAccountModalProps> = ({
 					<div style={{ marginBottom: 3, fontSize: 12 }}>
 						Type your email to confirm
 					</div>
-					<Input style={{ width: '100%' }} placeholder={email && email} />
+					<Input style={{ width: "100%" }} placeholder={email && email} />
 				</div>
 
 				<Button type="secondary" status="danger" long>

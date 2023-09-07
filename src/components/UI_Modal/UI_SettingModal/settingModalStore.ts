@@ -1,6 +1,7 @@
-import { create } from 'zustand';
+import { create } from "zustand";
 // import { getAvatarUrl, getStaffInfoLocal } from '@/tools/auth';
 
+// DEPRECATED: slowly remove this
 export const useSettingModalStore = create<{
 	staff?: User;
 	CYC_ID: number;
@@ -33,17 +34,17 @@ export const useSettingModalStore = create<{
 }>((set, get) => ({
 	staff: undefined,
 	CYC_ID: 0,
-	username: '',
-	email: '',
-	password: '',
-	phoneNumber: '',
+	username: "",
+	email: "",
+	password: "",
+	phoneNumber: "",
 	pastoral_team: [],
-	pastoral_role: '',
+	pastoral_role: "",
 	ministry_name: [],
-	ministry_role: '',
+	ministry_role: "",
 	ministry_interviewer: false,
 	ministry_scope: [],
-	avatar: '',
+	avatar: "",
 
 	currentTab: 0,
 

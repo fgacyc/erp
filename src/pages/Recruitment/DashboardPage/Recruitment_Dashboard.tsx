@@ -5,9 +5,9 @@ import {
 	useEffect,
 	useMemo,
 	useState,
-} from 'react';
-import { Card, Typography, Space, Cascader } from '@arco-design/web-react';
-import { IconCheck, IconProps } from '@arco-design/web-react/icon';
+} from "react";
+import { Card, Typography, Space, Cascader } from "@arco-design/web-react";
+import { IconCheck, IconProps } from "@arco-design/web-react/icon";
 import {
 	Chart as ChartJS,
 	ArcElement,
@@ -17,8 +17,8 @@ import {
 	Title,
 	Tooltip,
 	Legend,
-} from 'chart.js';
-import { Bar, Doughnut, Pie } from 'react-chartjs-2';
+} from "chart.js";
+import { Bar, Doughnut, Pie } from "react-chartjs-2";
 
 ChartJS.register(
 	ArcElement,
@@ -29,10 +29,10 @@ ChartJS.register(
 	Tooltip,
 	Legend,
 );
-import './recruitment_dashboard.css';
-import { getReq } from '@/tools/requests';
-import { getInfoCount, getTotals } from './dataCalculate';
-import UIBreadcrumb from '@/components/UIBreadcrumb';
+import "./recruitment_dashboard.css";
+import { getReq } from "@/tools/requests";
+import { getInfoCount, getTotals } from "./dataCalculate";
+import UIBreadcrumb from "@/components/UIBreadcrumb";
 import {
 	getEvaluationRatio,
 	getInterviewRatio,
@@ -40,7 +40,7 @@ import {
 	getRecruiterRatio,
 	options_bar_data,
 	options_pie_data,
-} from './data';
+} from "./data";
 
 interface RecruitmentDashboardCardProps {
 	color: `#${string}`;
@@ -107,8 +107,8 @@ const RecruitmentDashboardCard: FunctionComponent<
 		<Card className="recruitment-dashboard-card" hoverable>
 			<Space
 				style={{
-					display: 'flex',
-					justifyContent: 'center',
+					display: "flex",
+					justifyContent: "center",
 				}}
 			>
 				<Icon
@@ -117,9 +117,9 @@ const RecruitmentDashboardCard: FunctionComponent<
 				/>
 				<Space
 					style={{
-						display: 'flex',
-						flexDirection: 'column',
-						alignItems: 'center',
+						display: "flex",
+						flexDirection: "column",
+						alignItems: "center",
 					}}
 				>
 					<Typography.Text>{text}</Typography.Text>
@@ -133,7 +133,7 @@ const RecruitmentDashboardCard: FunctionComponent<
 const defaultPieChartDatasetWithLabel = {
 	datasets: [
 		{
-			label: '',
+			label: "",
 			data: [],
 			backgroundColor: [],
 			borderWidth: 0,
@@ -166,21 +166,21 @@ export default function Recruitment_Dashboard() {
 
 	const colors: `#${string}`[] = useMemo(
 		() => [
-			'#D8E2DC',
-			'#FFE5D9',
-			'#FFCAD4',
-			'#F4ACB7',
-			'#9D8189',
-			'#A8D8EA',
-			'#FFAAA6',
-			'#FF8C94',
-			'#FF1D47',
-			'#F28123',
-			'#FFC90E',
-			'#FFFF72',
-			'#D1D075',
-			'#C7EF86',
-			'#7BE495',
+			"#D8E2DC",
+			"#FFE5D9",
+			"#FFCAD4",
+			"#F4ACB7",
+			"#9D8189",
+			"#A8D8EA",
+			"#FFAAA6",
+			"#FF8C94",
+			"#FF1D47",
+			"#F28123",
+			"#FFC90E",
+			"#FFFF72",
+			"#D1D075",
+			"#C7EF86",
+			"#7BE495",
 		],
 		[],
 	);
@@ -189,23 +189,23 @@ export default function Recruitment_Dashboard() {
 		[key: string]: string[];
 	} = useMemo(
 		() => ({
-			overall: ['Wonderkids', 'Young Warrior', 'General Service', 'Others'],
-			wonderkids: ['Wonderkids'],
-			young_warrior: ['Heart', 'Move', 'Force', 'Voice', 'Mind'],
+			overall: ["Wonderkids", "Young Warrior", "General Service", "Others"],
+			wonderkids: ["Wonderkids"],
+			young_warrior: ["Heart", "Move", "Force", "Voice", "Mind"],
 			general_service: [
-				'YP Zone',
-				'Pro Family',
-				'Young Dreamer',
-				'Joshua Zone',
+				"YP Zone",
+				"Pro Family",
+				"Young Dreamer",
+				"Joshua Zone",
 			],
 			others: [
-				'Serdang',
-				'Kepong',
-				'USJ',
-				'Sg Long',
-				'Setapak',
-				'The Blessing',
-				'To Be Confirmed',
+				"Serdang",
+				"Kepong",
+				"USJ",
+				"Sg Long",
+				"Setapak",
+				"The Blessing",
+				"To Be Confirmed",
 			],
 		}),
 		[],
@@ -213,28 +213,28 @@ export default function Recruitment_Dashboard() {
 
 	useEffect(() => {
 		const pieChartLabel: PieChartLabel = {
-			overall: ['People Experience', 'Creative', 'Communication', 'Wonderkids'],
-			people_experience: ['People', 'General Affair', 'Technology'],
-			people: ['Usher', 'Security'],
-			general_affair: ['Admin', 'Lounge', 'Shuttle'],
-			technology: ['Software Development', 'Project Management'],
-			creative: ['Production', 'Arts', 'Worship'],
+			overall: ["People Experience", "Creative", "Communication", "Wonderkids"],
+			people_experience: ["People", "General Affair", "Technology"],
+			people: ["Usher", "Security"],
+			general_affair: ["Admin", "Lounge", "Shuttle"],
+			technology: ["Software Development", "Project Management"],
+			creative: ["Production", "Arts", "Worship"],
 			production: [
-				'Stage Management',
-				'Multimedia',
-				'Sound',
-				'Lighting',
-				'Translation',
+				"Stage Management",
+				"Multimedia",
+				"Sound",
+				"Lighting",
+				"Translation",
 			],
-			arts: ['Dance', 'Fashion & Image', 'Drama'],
-			worship: ['Musician', 'Vocal'],
-			communication: ['Social Media', 'Design', 'Photography'],
-			social_media: ['Content Creation', 'Editorial'],
-			design: ['Graphic Design', 'Multimedia Design'],
-			photography: ['Photographer'],
-			wonderkids: ['Children Minister'],
+			arts: ["Dance", "Fashion & Image", "Drama"],
+			worship: ["Musician", "Vocal"],
+			communication: ["Social Media", "Design", "Photography"],
+			social_media: ["Content Creation", "Editorial"],
+			design: ["Graphic Design", "Multimedia Design"],
+			photography: ["Photographer"],
+			wonderkids: ["Children Minister"],
 		};
-		getReq('/recruiters?account=admin&password=admin').then(
+		getReq("/recruiters?account=admin&password=admin").then(
 			(res: Recruiter[]) => {
 				// setAllData(res);
 				setTotals(getTotals(res));
@@ -248,207 +248,207 @@ export default function Recruitment_Dashboard() {
 				} = {
 					overall: [
 						{
-							label: 'Wonderkids',
+							label: "Wonderkids",
 							data: [
-								getInfoCount(res, 'pastoral_team', 0, 'wonderkids'),
+								getInfoCount(res, "pastoral_team", 0, "wonderkids"),
 								0,
 								0,
 								0,
 							],
-							backgroundColor: colors[0] ?? '',
+							backgroundColor: colors[0] ?? "",
 						},
 						{
-							label: 'Young Warrior',
+							label: "Young Warrior",
 							data: [
 								0,
-								getInfoCount(res, 'pastoral_team', 0, 'young_warrior'),
+								getInfoCount(res, "pastoral_team", 0, "young_warrior"),
 								0,
 								0,
 							],
-							backgroundColor: colors[1] ?? '',
+							backgroundColor: colors[1] ?? "",
 						},
 						{
-							label: 'General Service',
+							label: "General Service",
 							data: [
 								0,
 								0,
-								getInfoCount(res, 'pastoral_team', 0, 'general_service'),
+								getInfoCount(res, "pastoral_team", 0, "general_service"),
 								0,
 							],
-							backgroundColor: colors[2] ?? '',
+							backgroundColor: colors[2] ?? "",
 						},
 						{
-							label: 'Others',
-							data: [0, 0, 0, getInfoCount(res, 'pastoral_team', 0, 'others')],
-							backgroundColor: colors[3] ?? '',
+							label: "Others",
+							data: [0, 0, 0, getInfoCount(res, "pastoral_team", 0, "others")],
+							backgroundColor: colors[3] ?? "",
 						},
 					],
 					wonderkids: [
 						{
-							label: 'Wonderkids',
-							data: [getInfoCount(res, 'pastoral_team', 1, 'wonderkids')],
-							backgroundColor: colors[0] ?? '',
+							label: "Wonderkids",
+							data: [getInfoCount(res, "pastoral_team", 1, "wonderkids")],
+							backgroundColor: colors[0] ?? "",
 						},
 					],
 					young_warrior: [
 						{
-							label: 'Heart',
+							label: "Heart",
 							data: [
-								getInfoCount(res, 'pastoral_team', 1, 'heart'),
+								getInfoCount(res, "pastoral_team", 1, "heart"),
 								0,
 								0,
 								0,
 								0,
 							],
-							backgroundColor: colors[0] ?? '',
+							backgroundColor: colors[0] ?? "",
 						},
 						{
-							label: 'Move',
-							data: [0, getInfoCount(res, 'pastoral_team', 1, 'move'), 0, 0, 0],
-							backgroundColor: colors[1] ?? '',
+							label: "Move",
+							data: [0, getInfoCount(res, "pastoral_team", 1, "move"), 0, 0, 0],
+							backgroundColor: colors[1] ?? "",
 						},
 						{
-							label: 'Force',
+							label: "Force",
 							data: [
 								0,
 								0,
-								getInfoCount(res, 'pastoral_team', 1, 'force'),
+								getInfoCount(res, "pastoral_team", 1, "force"),
 								0,
 								0,
 							],
-							backgroundColor: colors[2] ?? '',
+							backgroundColor: colors[2] ?? "",
 						},
 						{
-							label: 'Voice',
+							label: "Voice",
 							data: [
 								0,
 								0,
 								0,
-								getInfoCount(res, 'pastoral_team', 1, 'voice'),
+								getInfoCount(res, "pastoral_team", 1, "voice"),
 								0,
 							],
-							backgroundColor: colors[3] ?? '',
+							backgroundColor: colors[3] ?? "",
 						},
 						{
-							label: 'Mind',
-							data: [0, 0, 0, 0, getInfoCount(res, 'pastoral_team', 1, 'mind')],
-							backgroundColor: colors[4] ?? '',
+							label: "Mind",
+							data: [0, 0, 0, 0, getInfoCount(res, "pastoral_team", 1, "mind")],
+							backgroundColor: colors[4] ?? "",
 						},
 					],
 					general_service: [
 						{
-							label: 'YP Zone',
-							data: [getInfoCount(res, 'pastoral_team', 1, 'yp_zone'), 0, 0, 0],
-							backgroundColor: colors[0] ?? '',
+							label: "YP Zone",
+							data: [getInfoCount(res, "pastoral_team", 1, "yp_zone"), 0, 0, 0],
+							backgroundColor: colors[0] ?? "",
 						},
 						{
-							label: 'Pro Family',
+							label: "Pro Family",
 							data: [
 								0,
-								getInfoCount(res, 'pastoral_team', 1, 'pro_family'),
+								getInfoCount(res, "pastoral_team", 1, "pro_family"),
 								0,
 								0,
 							],
-							backgroundColor: colors[1] ?? '',
+							backgroundColor: colors[1] ?? "",
 						},
 						{
-							label: 'Young Dreamer',
+							label: "Young Dreamer",
 							data: [
 								0,
 								0,
-								getInfoCount(res, 'pastoral_team', 1, 'young_dreamer'),
+								getInfoCount(res, "pastoral_team", 1, "young_dreamer"),
 								0,
 							],
-							backgroundColor: colors[2] ?? '',
+							backgroundColor: colors[2] ?? "",
 						},
 						{
-							label: 'Joshua Zone',
+							label: "Joshua Zone",
 							data: [
 								0,
 								0,
 								0,
-								getInfoCount(res, 'pastoral_team', 1, 'joshua_zone'),
+								getInfoCount(res, "pastoral_team", 1, "joshua_zone"),
 							],
-							backgroundColor: colors[3] ?? '',
+							backgroundColor: colors[3] ?? "",
 						},
 					],
 					others: [
 						{
-							label: 'Serdang',
+							label: "Serdang",
 							data: [
-								getInfoCount(res, 'pastoral_team', 1, 'serdang'),
+								getInfoCount(res, "pastoral_team", 1, "serdang"),
 								0,
 								0,
 								0,
 								0,
 								0,
 							],
-							backgroundColor: colors[0] ?? '',
+							backgroundColor: colors[0] ?? "",
 						},
 						{
-							label: 'Kepong',
+							label: "Kepong",
 							data: [
 								0,
-								getInfoCount(res, 'pastoral_team', 1, 'kepong'),
+								getInfoCount(res, "pastoral_team", 1, "kepong"),
 								0,
 								0,
 								0,
 								0,
 							],
-							backgroundColor: colors[1] ?? '',
+							backgroundColor: colors[1] ?? "",
 						},
 						{
-							label: 'USJ',
+							label: "USJ",
 							data: [
 								0,
 								0,
-								getInfoCount(res, 'pastoral_team', 1, 'usj'),
+								getInfoCount(res, "pastoral_team", 1, "usj"),
 								0,
 								0,
 								0,
 							],
-							backgroundColor: colors[2] ?? '',
+							backgroundColor: colors[2] ?? "",
 						},
 						{
-							label: 'Sg Long',
+							label: "Sg Long",
 							data: [
 								0,
 								0,
 								0,
-								getInfoCount(res, 'pastoral_team', 1, 'sg_long'),
+								getInfoCount(res, "pastoral_team", 1, "sg_long"),
 								0,
 								0,
 							],
-							backgroundColor: colors[3] ?? '',
+							backgroundColor: colors[3] ?? "",
 						},
 						{
-							label: 'Setapak',
+							label: "Setapak",
 							data: [
 								0,
 								0,
 								0,
 								0,
-								getInfoCount(res, 'pastoral_team', 1, 'setapak'),
+								getInfoCount(res, "pastoral_team", 1, "setapak"),
 								0,
 								0,
 							],
-							backgroundColor: colors[4] ?? '',
+							backgroundColor: colors[4] ?? "",
 						},
 						{
-							label: 'The Blessing',
+							label: "The Blessing",
 							data: [
 								0,
 								0,
 								0,
 								0,
 								0,
-								getInfoCount(res, 'pastoral_team', 1, 'the_blessing'),
+								getInfoCount(res, "pastoral_team", 1, "the_blessing"),
 								0,
 							],
-							backgroundColor: colors[5] ?? '',
+							backgroundColor: colors[5] ?? "",
 						},
 						{
-							label: 'To Be Confirmed',
+							label: "To Be Confirmed",
 							data: [
 								0,
 								0,
@@ -456,9 +456,9 @@ export default function Recruitment_Dashboard() {
 								0,
 								0,
 								0,
-								getInfoCount(res, 'pastoral_team', 1, 'to_be_confirmed'),
+								getInfoCount(res, "pastoral_team", 1, "to_be_confirmed"),
 							],
-							backgroundColor: colors[6] ?? '',
+							backgroundColor: colors[6] ?? "",
 						},
 					],
 				};
@@ -469,65 +469,65 @@ export default function Recruitment_Dashboard() {
 
 				const pieChartDatasets: PieChartDataset = {
 					overall: [
-						getInfoCount(res, 'ministry', 0, 'people_experience'),
-						getInfoCount(res, 'ministry', 0, 'creative'),
-						getInfoCount(res, 'ministry', 0, 'communication'),
-						getInfoCount(res, 'ministry', 0, 'wonderkids'),
+						getInfoCount(res, "ministry", 0, "people_experience"),
+						getInfoCount(res, "ministry", 0, "creative"),
+						getInfoCount(res, "ministry", 0, "communication"),
+						getInfoCount(res, "ministry", 0, "wonderkids"),
 					],
 					people_experience: [
-						getInfoCount(res, 'ministry', 1, 'people'),
-						getInfoCount(res, 'ministry', 1, 'general_affair'),
-						getInfoCount(res, 'ministry', 1, 'technology'),
+						getInfoCount(res, "ministry", 1, "people"),
+						getInfoCount(res, "ministry", 1, "general_affair"),
+						getInfoCount(res, "ministry", 1, "technology"),
 					],
 					people: [
-						getInfoCount(res, 'ministry', 2, 'usher'),
-						getInfoCount(res, 'ministry', 2, 'security'),
+						getInfoCount(res, "ministry", 2, "usher"),
+						getInfoCount(res, "ministry", 2, "security"),
 					],
 					general_affair: [
-						getInfoCount(res, 'ministry', 2, 'admin'),
-						getInfoCount(res, 'ministry', 2, 'lounge'),
-						getInfoCount(res, 'ministry', 2, 'shuttle'),
+						getInfoCount(res, "ministry", 2, "admin"),
+						getInfoCount(res, "ministry", 2, "lounge"),
+						getInfoCount(res, "ministry", 2, "shuttle"),
 					],
 					technology: [
-						getInfoCount(res, 'ministry', 2, 'software development'),
-						getInfoCount(res, 'ministry', 2, 'project management'),
+						getInfoCount(res, "ministry", 2, "software development"),
+						getInfoCount(res, "ministry", 2, "project management"),
 					],
 					creative: [
-						getInfoCount(res, 'ministry', 1, 'production'),
-						getInfoCount(res, 'ministry', 1, 'arts'),
-						getInfoCount(res, 'ministry', 1, 'worship'),
+						getInfoCount(res, "ministry", 1, "production"),
+						getInfoCount(res, "ministry", 1, "arts"),
+						getInfoCount(res, "ministry", 1, "worship"),
 					],
 					production: [
-						getInfoCount(res, 'ministry', 2, 'stage management'),
-						getInfoCount(res, 'ministry', 2, 'multimedia'),
-						getInfoCount(res, 'ministry', 2, 'sound'),
-						getInfoCount(res, 'ministry', 2, 'lighting'),
-						getInfoCount(res, 'ministry', 2, 'translation'),
+						getInfoCount(res, "ministry", 2, "stage management"),
+						getInfoCount(res, "ministry", 2, "multimedia"),
+						getInfoCount(res, "ministry", 2, "sound"),
+						getInfoCount(res, "ministry", 2, "lighting"),
+						getInfoCount(res, "ministry", 2, "translation"),
 					],
 					arts: [
-						getInfoCount(res, 'ministry', 2, 'dance'),
-						getInfoCount(res, 'ministry', 2, 'fashion&image'),
-						getInfoCount(res, 'ministry', 2, 'drama'),
+						getInfoCount(res, "ministry", 2, "dance"),
+						getInfoCount(res, "ministry", 2, "fashion&image"),
+						getInfoCount(res, "ministry", 2, "drama"),
 					],
 					worship: [
-						getInfoCount(res, 'ministry', 2, 'musician'),
-						getInfoCount(res, 'ministry', 2, 'vocal'),
+						getInfoCount(res, "ministry", 2, "musician"),
+						getInfoCount(res, "ministry", 2, "vocal"),
 					],
 					communication: [
-						getInfoCount(res, 'ministry', 1, 'social_media'),
-						getInfoCount(res, 'ministry', 1, 'design'),
-						getInfoCount(res, 'ministry', 1, 'photography'),
+						getInfoCount(res, "ministry", 1, "social_media"),
+						getInfoCount(res, "ministry", 1, "design"),
+						getInfoCount(res, "ministry", 1, "photography"),
 					],
 					social_media: [
-						getInfoCount(res, 'ministry', 2, 'content creation'),
-						getInfoCount(res, 'ministry', 2, 'editorial'),
+						getInfoCount(res, "ministry", 2, "content creation"),
+						getInfoCount(res, "ministry", 2, "editorial"),
 					],
 					design: [
-						getInfoCount(res, 'ministry', 2, 'graphic design'),
-						getInfoCount(res, 'ministry', 2, 'multimedia design'),
+						getInfoCount(res, "ministry", 2, "graphic design"),
+						getInfoCount(res, "ministry", 2, "multimedia design"),
 					],
-					photography: [getInfoCount(res, 'ministry', 2, 'photography')],
-					wonderkids: [getInfoCount(res, 'ministry', 2, 'children minister')],
+					photography: [getInfoCount(res, "ministry", 2, "photography")],
+					wonderkids: [getInfoCount(res, "ministry", 2, "children minister")],
 				};
 
 				// setAllPieChartData(pieChartDatasets);
@@ -573,7 +573,7 @@ export default function Recruitment_Dashboard() {
 		labels: pieChartLabels,
 		datasets: [
 			{
-				label: '# of Applicants',
+				label: "# of Applicants",
 				data: pieChartData,
 				backgroundColor: colors,
 			},
@@ -582,13 +582,13 @@ export default function Recruitment_Dashboard() {
 
 	const breadcrumbItems = [
 		{
-			name: 'Recruitment',
-			link: '/',
+			name: "Recruitment",
+			link: "/",
 			clickable: false,
 		},
 		{
-			name: 'Dashboard',
-			link: '/recruitment_dashboard',
+			name: "Dashboard",
+			link: "/recruitment_dashboard",
 			clickable: true,
 		},
 	];
@@ -597,29 +597,29 @@ export default function Recruitment_Dashboard() {
 		<>
 			<UIBreadcrumb items={breadcrumbItems} />
 			<div className="recruitment-dashboard-con app-component">
-				<div style={{ display: 'flex', height: '100%', flexDirection: 'row' }}>
+				<div style={{ display: "flex", height: "100%", flexDirection: "row" }}>
 					<div className="left-side">
 						<div className="upper">
 							<RecruitmentDashboardCard
-								color={colors[0] ?? '#'}
+								color={colors[0] ?? "#"}
 								text="Applicants"
 								num={totals[0] ?? 0}
 								Icon={IconCheck}
 							/>
 							<RecruitmentDashboardCard
-								color={colors[2] ?? '#'}
+								color={colors[2] ?? "#"}
 								text="Pending"
 								num={totals[1] ?? 0}
 								Icon={IconCheck}
 							/>
 							<RecruitmentDashboardCard
-								color={colors[1] ?? '#'}
+								color={colors[1] ?? "#"}
 								text="Pre-Pass"
 								num={totals[2] ?? 0}
 								Icon={IconCheck}
 							/>
 							<RecruitmentDashboardCard
-								color={'#d8e2dc'}
+								color={"#d8e2dc"}
 								text="Pass"
 								num={totals[3] ?? 0}
 								Icon={IconCheck}
@@ -672,7 +672,7 @@ export default function Recruitment_Dashboard() {
 							</div>
 							<div className="smallPie">
 								{evaluation_pie !== null &&
-								evaluation_pie?.datasets[0]?.data.toString() === '0,0,0,0' ? (
+								evaluation_pie?.datasets[0]?.data.toString() === "0,0,0,0" ? (
 									<Typography.Text style={{ fontWeight: 600 }}>
 										Evaluation(Not Started)
 									</Typography.Text>
@@ -689,9 +689,9 @@ export default function Recruitment_Dashboard() {
 						<Card className="right-side-bottom" hoverable>
 							<Space
 								style={{
-									display: 'flex',
-									flexDirection: 'column',
-									alignItems: 'center',
+									display: "flex",
+									flexDirection: "column",
+									alignItems: "center",
 								}}
 							>
 								<Typography.Text style={{ fontWeight: 600 }}>

@@ -1,16 +1,16 @@
-import { Input, Modal, Select, Message } from '@arco-design/web-react';
+import { Input, Modal, Select, Message } from "@arco-design/web-react";
 import {
 	Dispatch,
 	FunctionComponent,
 	SetStateAction,
 	useEffect,
 	useState,
-} from 'react';
-import { get } from 'idb-keyval';
-import { getTimeStamp } from '../../../tools/datetime';
+} from "react";
+import { get } from "idb-keyval";
+import { getTimeStamp } from "../../../tools/datetime";
 
 const Option = Select.Option;
-const options = ['Work', 'Health Issue', 'On a Vacation', 'custom'];
+const options = ["Work", "Health Issue", "On a Vacation", "custom"];
 const TextArea = Input.TextArea;
 
 interface DeleteEventParticipantModalProps {
@@ -33,7 +33,7 @@ const UIDeleteEventParticipantModal: FunctionComponent<
 	const [key, setKey] = useState(0);
 
 	useEffect(() => {
-		get('current_participant').then((res) => {
+		get("current_participant").then((res) => {
 			setCurrentParticipant(null);
 			setDeleteReason(null);
 			if (res) setCurrentParticipant(res);
@@ -45,10 +45,10 @@ const UIDeleteEventParticipantModal: FunctionComponent<
 		console.log(delete_reason);
 		if (!current_participant) return;
 		if (!delete_reason) {
-			Message.warning('Please select a reason');
+			Message.warning("Please select a reason");
 			return;
-		} else if (delete_reason === 'custom') {
-			Message.warning('Please enter a custom reason');
+		} else if (delete_reason === "custom") {
+			Message.warning("Please enter a custom reason");
 			return;
 		}
 
@@ -82,12 +82,12 @@ const UIDeleteEventParticipantModal: FunctionComponent<
 					</Option>
 				))}
 			</Select>
-			{delete_reason === 'custom' && (
+			{delete_reason === "custom" && (
 				<TextArea
 					placeholder="Please enter a custom reason"
 					allowClear
 					autoSize={{ minRows: 3, maxRows: 6 }}
-					style={{ marginTop: 20, resize: 'none' }}
+					style={{ marginTop: 20, resize: "none" }}
 				/>
 			)}
 		</Modal>

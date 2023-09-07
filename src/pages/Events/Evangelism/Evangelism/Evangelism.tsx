@@ -1,19 +1,19 @@
-import UIBreadcrumb from '@/components/UIBreadcrumb';
-import { useState } from 'react';
-import { ButtonGroup } from '@/components/ButtonGroup';
-import { Input } from '@arco-design/web-react';
+import UIBreadcrumb from "@/components/UIBreadcrumb";
+import { useState } from "react";
+import { ButtonGroup } from "@/components/ButtonGroup";
+import { Input } from "@arco-design/web-react";
 const InputSearch = Input.Search;
 
 const EvangelismPage = () => {
 	const breadcrumbItems = [
 		{
-			name: 'Events',
-			link: '/',
+			name: "Events",
+			link: "/",
 			clickable: false,
 		},
 		{
-			name: 'Evangelism',
-			link: '/events/evangelism',
+			name: "Evangelism",
+			link: "/events/evangelism",
 			clickable: true,
 		},
 	];
@@ -25,19 +25,19 @@ const EvangelismPage = () => {
 			<div className="app-component full-screen-app-component">
 				<div
 					style={{
-						margin: '20px 20px 0 20px',
+						margin: "20px 20px 0 20px",
 						fontSize: 26,
-						fontWeight: 'bold',
+						fontWeight: "bold",
 					}}
 				>
 					Evangelism
 				</div>
-				<div style={{ boxSizing: 'border-box', padding: 20 }}>
+				<div style={{ boxSizing: "border-box", padding: 20 }}>
 					<div
 						style={{
-							display: 'flex',
-							justifyContent: 'space-between',
-							alignItems: 'center',
+							display: "flex",
+							justifyContent: "space-between",
+							alignItems: "center",
 							marginBottom: 20,
 						}}
 					>

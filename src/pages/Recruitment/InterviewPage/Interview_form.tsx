@@ -1,16 +1,16 @@
-import UIBreadcrumb from '../../../components/UIBreadcrumb/index.jsx';
-import { useNavigate, useParams } from 'react-router-dom';
-import { Button, Message, Steps } from '@arco-design/web-react';
-import { useEffect, useState } from 'react';
-import { postReq } from '../../../tools/requests.js';
-import { get } from 'idb-keyval';
-import QuestionGroup from './QuestionGroup';
-import './recruitment-appo.css';
-import { pad } from './data.js';
-import FreeQATextArea from './FreeQATextArea.jsx';
-import { Interview_form_Section3 } from './Interview_form_Section3';
-import { findPastoralTeamLabel } from '../../../data/pastoral_teams.js';
-import { findMinistryLabel } from '../../../data/ministries.js';
+import UIBreadcrumb from "../../../components/UIBreadcrumb/index.jsx";
+import { useNavigate, useParams } from "react-router-dom";
+import { Button, Message, Steps } from "@arco-design/web-react";
+import { useEffect, useState } from "react";
+import { postReq } from "../../../tools/requests.js";
+import { get } from "idb-keyval";
+import QuestionGroup from "./QuestionGroup";
+import "./recruitment-appo.css";
+import { pad } from "./data.js";
+import FreeQATextArea from "./FreeQATextArea.jsx";
+import { Interview_form_Section3 } from "./Interview_form_Section3";
+import { findPastoralTeamLabel } from "../../../data/pastoral_teams.js";
+import { findMinistryLabel } from "../../../data/ministries.js";
 
 const Step = Steps.Step;
 
@@ -37,12 +37,12 @@ export function CountdownTimer() {
 		<div>
 			{countdown >= 600 && <div>{formatTime()}</div>}
 			{countdown < 600 && countdown > 300 && (
-				<div style={{ color: 'orange' }}>{formatTime()}</div>
+				<div style={{ color: "orange" }}>{formatTime()}</div>
 			)}
 			{countdown <= 300 && countdown > 0 && (
-				<div style={{ color: 'red' }}>{formatTime()}</div>
+				<div style={{ color: "red" }}>{formatTime()}</div>
 			)}
-			{countdown <= 0 && <div style={{ color: 'red' }}>Time&apos;s up!</div>}
+			{countdown <= 0 && <div style={{ color: "red" }}>Time&apos;s up!</div>}
 		</div>
 	);
 }
@@ -50,24 +50,24 @@ export function CountdownTimer() {
 const InterviewForm = () => {
 	const breadcrumbItems = [
 		{
-			name: 'Recruitment',
-			link: '/',
+			name: "Recruitment",
+			link: "/",
 			clickable: false,
 		},
 		{
-			name: 'Interview',
-			link: '/recruitment_interview',
+			name: "Interview",
+			link: "/recruitment_interview",
 			clickable: true,
 		},
 	];
 	const { RID, partID } = useParams();
 
 	const [QAs, setQAs] = useState<InterviewQuestion[]>([]);
-	const [freeQAs, setFreeQAs] = useState<string | VocalRating | undefined>('');
+	const [freeQAs, setFreeQAs] = useState<string | VocalRating | undefined>("");
 	const [ifSubmitted, setIfSubmitted] = useState(false);
 	const navigate = useNavigate();
 	const [ministry, setMinistry] = useState<string>();
-	const [candidate, setCandidate] = useState<Recruiter['info']>();
+	const [candidate, setCandidate] = useState<Recruiter["info"]>();
 	const [interviewers, setInterviewers] = useState<User[]>([]);
 	const [currentInterviewers, setCurrentInterviewers] = useState<number[]>([]);
 	const [ifDisabledSubmit, setIfDisabledSubmit] = useState(false);
@@ -77,7 +77,7 @@ const InterviewForm = () => {
 	const [ifLoading, setIfLoading] = useState(false);
 
 	useEffect(() => {
-		get('current_candidate').then((res: Recruiter) => {
+		get("current_candidate").then((res: Recruiter) => {
 			//console.log(res)
 			setMinistry(res.info.ministry[2]);
 			setQAs(res.interview.ministry.questions);
@@ -88,18 +88,18 @@ const InterviewForm = () => {
 	}, []);
 
 	useEffect(() => {
-		if (partID === '1') {
+		if (partID === "1") {
 			setDisabledPrevious(true);
-		} else if (partID === '2') {
+		} else if (partID === "2") {
 			setDisabledPrevious(false);
 			setIfDisabledSubmit(false);
-		} else if (partID === '3') {
+		} else if (partID === "3") {
 			setIfDisabledSubmit(true);
 		}
 	}, [partID]);
 
 	function backToInterviewTable() {
-		navigate('/recruitment_interview');
+		navigate("/recruitment_interview");
 	}
 
 	function goToNextPart(num: number) {
@@ -116,7 +116,7 @@ const InterviewForm = () => {
 	}
 	function addFreeQAs() {
 		for (const ele of QAs) {
-			if (ele.type === 'freeQ&As') {
+			if (ele.type === "freeQ&As") {
 				if (!freeQAs) return;
 				ele.interviewer = freeQAs;
 				return;
@@ -125,18 +125,18 @@ const InterviewForm = () => {
 
 		const newQAs = QAs;
 		newQAs.push({
-			type: 'freeQ&As',
-			interviewer: freeQAs ?? '',
-			question: '',
-			candidate: '',
+			type: "freeQ&As",
+			interviewer: freeQAs ?? "",
+			question: "",
+			candidate: "",
 		});
 		setQAs(newQAs);
 	}
 
 	function addVocalRating() {
-		if (candidate?.ministry[2] !== 'vocal') return;
+		if (candidate?.ministry[2] !== "vocal") return;
 		for (const ele of QAs) {
-			if (ele.type === 'vocalRating') {
+			if (ele.type === "vocalRating") {
 				if (!vocalRatingForm) return;
 				ele.interviewer = vocalRatingForm;
 				return;
@@ -144,10 +144,10 @@ const InterviewForm = () => {
 		}
 		const newQAs = QAs;
 		newQAs.push({
-			type: 'vocalRating',
-			interviewer: vocalRatingForm ? vocalRatingForm : '',
-			question: '',
-			candidate: '',
+			type: "vocalRating",
+			interviewer: vocalRatingForm ? vocalRatingForm : "",
+			question: "",
+			candidate: "",
 		});
 		setQAs(newQAs);
 	}
@@ -155,7 +155,7 @@ const InterviewForm = () => {
 	async function submitHandler() {
 		setIfLoading(true);
 		if (!currentInterviewers) {
-			Message.warning('Please select interviewers');
+			Message.warning("Please select interviewers");
 			return;
 		}
 		addFreeQAs();
@@ -182,7 +182,7 @@ const InterviewForm = () => {
 	function initVocalRatingForm() {
 		const vocalRatingForm = {
 			stars: Array(10).fill(0),
-			remarks: Array(10).fill(''),
+			remarks: Array(10).fill(""),
 		};
 		setVocalRatingForm(vocalRatingForm);
 	}
@@ -192,14 +192,14 @@ const InterviewForm = () => {
 			<UIBreadcrumb items={breadcrumbItems} />
 			<div
 				className="app-component full-screen-app-component"
-				style={{ position: 'relative' }}
+				style={{ position: "relative" }}
 				id="interview-form"
 			>
 				<div className="full-screen-app-component-con">
 					<div style={{ height: 30 }}></div>
 					<Steps
-						current={parseInt(partID ?? '') ?? 0}
-						style={{ maxWidth: 780, margin: '0 auto' }}
+						current={parseInt(partID ?? "") ?? 0}
+						style={{ maxWidth: 780, margin: "0 auto" }}
 					>
 						<Step title="General Questions" />
 						{/*<Step title='Specific Questions' />*/}
@@ -211,20 +211,20 @@ const InterviewForm = () => {
 							<div>
 								<div>Name: {candidate.name}</div>
 								<div>
-									Pastoral Team:{' '}
-									{findPastoralTeamLabel(candidate.pastoral_team).join(' - ')}
+									Pastoral Team:{" "}
+									{findPastoralTeamLabel(candidate.pastoral_team).join(" - ")}
 								</div>
 								<div>
-									Ministry: {findMinistryLabel(candidate.ministry).join(' - ')}
+									Ministry: {findMinistryLabel(candidate.ministry).join(" - ")}
 								</div>
 							</div>
 						)}
 					</div>
-					{partID === '1' && (
+					{partID === "1" && (
 						<div>
 							{QAs.length > 0 &&
 								QAs.map((question, index) => {
-									if (question.type === 'general') {
+									if (question.type === "general") {
 										return (
 											<QuestionGroup
 												questions={QAs}
@@ -239,9 +239,9 @@ const InterviewForm = () => {
 							{QAs &&
 								QAs.map((question, index) => {
 									if (
-										question.type !== 'general' &&
-										question.type !== 'freeQ&As' &&
-										question.type !== 'vocalRating'
+										question.type !== "general" &&
+										question.type !== "freeQ&As" &&
+										question.type !== "vocalRating"
 									) {
 										return (
 											<QuestionGroup
@@ -257,7 +257,7 @@ const InterviewForm = () => {
 							<div style={{ height: 80 }}></div>
 						</div>
 					)}
-					{partID === '2' && (
+					{partID === "2" && (
 						<FreeQATextArea
 							candidate={candidate}
 							questions={QAs}
@@ -268,7 +268,7 @@ const InterviewForm = () => {
 							ifInterviewed={ifInterviewed}
 						/>
 					)}
-					{partID === '3' && (
+					{partID === "3" && (
 						<Interview_form_Section3
 							ministry={ministry}
 							interviewers={interviewers}
@@ -287,7 +287,7 @@ const InterviewForm = () => {
 						disabled={disabledPrevious}
 						onClick={() => goToNextPart(-1)}
 					>
-						Previous{' '}
+						Previous{" "}
 					</Button>
 					{ifDisabledSubmit ? (
 						<Button

@@ -86,3 +86,16 @@ CSS Framework
 	justify-content: space-between;
 	align-items: center;
 }
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+	-webkit-appearance: none !important;
+	margin: 0 !important;
+}
+
+/* Firefox */
+input[type='number'] {
+	appearance: textfield !important;
+	-moz-appearance: textfield !important;
+}

@@ -1,6 +1,6 @@
-import { checkApplicantStatus, getRecruiterInfo } from './data.js';
-import { Steps } from '@arco-design/web-react';
-import { FunctionComponent, useEffect, useState } from 'react';
+import { checkApplicantStatus, getRecruiterInfo } from "./data.js";
+import { Steps } from "@arco-design/web-react";
+import { FunctionComponent, useEffect, useState } from "react";
 const Step = Steps.Step;
 
 const RecruitmentSteps: FunctionComponent<{ recruiter: Recruiter }> = ({
@@ -28,7 +28,7 @@ const RecruitmentSteps: FunctionComponent<{ recruiter: Recruiter }> = ({
 			{current >= 0 ? (
 				<Steps
 					current={current}
-					style={{ margin: '0 auto' }}
+					style={{ margin: "0 auto" }}
 					size="small"
 					direction="vertical"
 				>
@@ -39,7 +39,7 @@ const RecruitmentSteps: FunctionComponent<{ recruiter: Recruiter }> = ({
 			) : (
 				<Steps
 					current={current * -1}
-					style={{ margin: '0 auto' }}
+					style={{ margin: "0 auto" }}
 					size="small"
 					direction="vertical"
 					status="error"

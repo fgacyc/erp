@@ -1,11 +1,11 @@
-import { Input, Modal } from '@arco-design/web-react';
-import { IconBulb, IconExclamationCircle } from '@arco-design/web-react/icon';
-import { Dispatch, FunctionComponent, SetStateAction, useState } from 'react';
-import sendAiIssue from '@/tools/github';
+import { Input, Modal } from "@arco-design/web-react";
+import { IconBulb, IconExclamationCircle } from "@arco-design/web-react/icon";
+import { Dispatch, FunctionComponent, SetStateAction, useState } from "react";
+import sendAiIssue from "@/tools/github";
 const TextArea = Input.TextArea;
 
 interface GitHubReportModalProps {
-	type: 'bug' | 'enhancement';
+	type: "bug" | "enhancement";
 	visible: boolean;
 	setVisible: Dispatch<SetStateAction<boolean>>;
 }
@@ -15,14 +15,14 @@ const GithubReportModal: FunctionComponent<GitHubReportModalProps> = ({
 	visible,
 	setVisible,
 }) => {
-	const [title, setTitle] = useState('');
-	const [content, setContent] = useState('');
+	const [title, setTitle] = useState("");
+	const [content, setContent] = useState("");
 
-	let topic = '';
-	if (type === 'bug') {
-		topic = 'Report a bug';
-	} else if (type === 'enhancement') {
-		topic = 'Request a feature';
+	let topic = "";
+	if (type === "bug") {
+		topic = "Report a bug";
+	} else if (type === "enhancement") {
+		topic = "Request a feature";
 	}
 
 	function submitIssue() {
@@ -30,29 +30,29 @@ const GithubReportModal: FunctionComponent<GitHubReportModalProps> = ({
 		sendAiIssue(title, content, type).then(() => {
 			// console.log(res);
 			setVisible(false);
-			setTitle('');
-			setContent('');
+			setTitle("");
+			setContent("");
 		});
 	}
 
 	function cancelIssue() {
 		setVisible(false);
-		setTitle('');
-		setContent('');
+		setTitle("");
+		setContent("");
 	}
 
 	return (
 		<Modal
 			title={
 				<div>
-					{type === 'bug' ? (
+					{type === "bug" ? (
 						<div>
-							<IconExclamationCircle style={{ color: 'orange' }} />
+							<IconExclamationCircle style={{ color: "orange" }} />
 							{topic}
 						</div>
 					) : (
 						<div>
-							<IconBulb style={{ color: 'orange' }} />
+							<IconBulb style={{ color: "orange" }} />
 							{topic}
 						</div>
 					)}

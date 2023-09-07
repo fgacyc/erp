@@ -1,6 +1,6 @@
-import { Select } from '@arco-design/web-react';
-import { ministry_roles } from '../../data/ministries';
-import { FunctionComponent } from 'react';
+import { Select } from "@arco-design/web-react";
+import { ministry_roles } from "../../data/ministries";
+import { FunctionComponent } from "react";
 
 interface MinistryRoleSelectProps {
 	value: string;

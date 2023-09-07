@@ -1,30 +1,30 @@
-import UIBreadcrumb from '@/components/UIBreadcrumb/index.jsx';
-import { Button, Space, List, Card, Message } from '@arco-design/web-react';
-import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import { getReq, postReq } from '@/tools/requests';
-import { PreScreeningComment } from '@/pages/Recruitment/PreScreeningPage/CommentsList';
-import UI_ConfirmModal from '@/components/UI_Modal/UI_ConfirmModal';
-import VocalRatingTable from '../InterviewPage/VocalRatingTable';
-import { capitalAllFirstLetter } from '@/tools/string';
-import { classifyQuestion } from './data';
-import EvaluationResultRubberStamp from './RubberStamp';
-import './EvaluationPage.css';
-import { get } from 'idb-keyval';
-import { findPastoralTeamLabel } from '@/data/pastoral_teams';
-import { findInterviewsNames, findMinistryLabel } from '@/data/ministries';
-import { useSettingModalStore } from '@/components/UI_Modal/UI_SettingModal/settingModalStore';
+import UIBreadcrumb from "@/components/UIBreadcrumb/index.jsx";
+import { Button, Space, List, Card, Message } from "@arco-design/web-react";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { getReq, postReq } from "@/tools/requests";
+import { PreScreeningComment } from "@/pages/Recruitment/PreScreeningPage/CommentsList";
+import UI_ConfirmModal from "@/components/UI_Modal/UI_ConfirmModal";
+import VocalRatingTable from "../InterviewPage/VocalRatingTable";
+import { capitalAllFirstLetter } from "@/tools/string";
+import { classifyQuestion } from "./data";
+import EvaluationResultRubberStamp from "./RubberStamp";
+import "./EvaluationPage.css";
+import { get } from "idb-keyval";
+import { findPastoralTeamLabel } from "@/data/pastoral_teams";
+import { findInterviewsNames, findMinistryLabel } from "@/data/ministries";
+import { useSettingModalStore } from "@/components/UI_Modal/UI_SettingModal/settingModalStore";
 
 export default function Evaluation_Page() {
 	const breadcrumbItems = [
 		{
-			name: 'Recruitment',
-			link: '/',
+			name: "Recruitment",
+			link: "/",
 			clickable: false,
 		},
 		{
-			name: 'Evaluation',
-			link: '/recruitment_evaluation',
+			name: "Evaluation",
+			link: "/recruitment_evaluation",
 			clickable: true,
 		},
 	];
@@ -32,11 +32,11 @@ export default function Evaluation_Page() {
 	const [QAs, setQAs] = useState<{
 		general: InterviewQuestion[];
 		specific: InterviewQuestion[];
-		'freeQ&As': InterviewQuestion[];
+		"freeQ&As": InterviewQuestion[];
 	}>({
 		general: [],
 		specific: [],
-		'freeQ&As': [],
+		"freeQ&As": [],
 	});
 	const [showBack, setShowBack] = useState(false);
 	const [AISummary, setAISummary] = useState(null);
@@ -51,7 +51,7 @@ export default function Evaluation_Page() {
 		useState<ApplicationStatus>();
 	const [currentCandidate, setCurrentCandidate] = useState<Recruiter>();
 	const [showRubberStamp, setShowRubberStamp] = useState(0);
-	const [interviewers, setInterviewers] = useState('');
+	const [interviewers, setInterviewers] = useState("");
 	const CYC_ID = useSettingModalStore((state) => state.CYC_ID);
 
 	const RID = useParams().RID;
@@ -65,24 +65,24 @@ export default function Evaluation_Page() {
 			},
 		);
 
-		getReq(`/interview/answers/${RID}`).then((res: Recruiter['interview']) => {
+		getReq(`/interview/answers/${RID}`).then((res: Recruiter["interview"]) => {
 			const qes = res.ministry.questions;
 			setQAs(classifyQuestion(qes));
 			ifCandidateVocal(qes);
 		});
 
 		getReq(`/performance/${RID}`).then((res) => {
-			if (res.status === 'success') {
+			if (res.status === "success") {
 				setAISummary(res.data);
 			}
 		});
 
-		get('current_candidate').then((res: Recruiter) => {
+		get("current_candidate").then((res: Recruiter) => {
 			setCurrentCandidate(res);
 			if (
-				res.application.status === 'accepted' ||
-				res.application.status === 'rejected' ||
-				res.application.status === 'kiv'
+				res.application.status === "accepted" ||
+				res.application.status === "rejected" ||
+				res.application.status === "kiv"
 			) {
 				setShowBack(true);
 				setCurrentRubberStampType(res.application.status);
@@ -96,7 +96,7 @@ export default function Evaluation_Page() {
 
 	function ifCandidateVocal(QAs: InterviewQuestion[]) {
 		for (const item of QAs) {
-			if (item.type === 'vocalRating') {
+			if (item.type === "vocalRating") {
 				setIfVocal(true);
 				setVocalRatingForm(item.interviewer as VocalRating);
 				return;
@@ -114,7 +114,7 @@ export default function Evaluation_Page() {
 		const submitEvaluation = () => {
 			postReq(`/evaluation/${RID}`, data).then((res) => {
 				if (res.status) {
-					Message.success('Evaluation submitted successfully');
+					Message.success("Evaluation submitted successfully");
 					setShowBack(true);
 					setCurrentRubberStampType(status);
 					setShowRubberStamp(1);
@@ -125,14 +125,14 @@ export default function Evaluation_Page() {
 		const evaluationMap: {
 			[key: string]: string;
 		} = {
-			rejected: 'Next Time',
-			kiv: 'KIV',
-			accepted: 'Pass',
+			rejected: "Next Time",
+			kiv: "KIV",
+			accepted: "Pass",
 		};
-		const evaluation = capitalAllFirstLetter(evaluationMap[status] ?? '');
+		const evaluation = capitalAllFirstLetter(evaluationMap[status] ?? "");
 
 		UI_ConfirmModal(
-			'Confirm',
+			"Confirm",
 			`Are you sure to submit the evaluation: [${evaluation}] ?`,
 			submitEvaluation,
 		);
@@ -143,7 +143,7 @@ export default function Evaluation_Page() {
 			<UIBreadcrumb items={breadcrumbItems} />
 			<div
 				className="app-component"
-				style={{ padding: '0 30px', boxSizing: 'border-box' }}
+				style={{ padding: "0 30px", boxSizing: "border-box" }}
 			>
 				<div style={{ height: 35 }}></div>
 				<Space className="evaluation-page-header">
@@ -152,7 +152,7 @@ export default function Evaluation_Page() {
 							<Button
 								type="outline"
 								style={{ width: 100, marginRight: 10 }}
-								onClick={() => navigate('/recruitment_evaluation')}
+								onClick={() => navigate("/recruitment_evaluation")}
 							>
 								Back
 							</Button>
@@ -171,14 +171,14 @@ export default function Evaluation_Page() {
 							<Button
 								status="danger"
 								className="evaluation-next-time-button"
-								onClick={() => confirmSubmit('rejected')}
+								onClick={() => confirmSubmit("rejected")}
 							>
 								Next Time
 							</Button>
 							<Button
 								status="warning"
 								className="evaluation-kiv-button"
-								onClick={() => confirmSubmit('kiv')}
+								onClick={() => confirmSubmit("kiv")}
 							>
 								KIV
 							</Button>
@@ -186,7 +186,7 @@ export default function Evaluation_Page() {
 								type="primary"
 								status="success"
 								className="evaluation-pass-button"
-								onClick={() => confirmSubmit('accepted')}
+								onClick={() => confirmSubmit("accepted")}
 							>
 								Pass
 							</Button>
@@ -197,40 +197,40 @@ export default function Evaluation_Page() {
 				<Space
 					direction="vertical"
 					size="large"
-					style={{ overflowY: 'auto', marginTop: '24px', width: '100%' }}
+					style={{ overflowY: "auto", marginTop: "24px", width: "100%" }}
 				>
 					{currentCandidate !== null && (
 						<div>
 							<h2>Candidate Info</h2>
 							<div>
-								<span style={{ fontWeight: 'bold', color: '#4E5969' }}>
-									Name:{' '}
+								<span style={{ fontWeight: "bold", color: "#4E5969" }}>
+									Name:{" "}
 								</span>
 								<span>{currentCandidate?.info.name} </span>
 							</div>
 							<div>
-								<span style={{ fontWeight: 'bold', color: '#4E5969' }}>
-									Pastoral Team:{' '}
+								<span style={{ fontWeight: "bold", color: "#4E5969" }}>
+									Pastoral Team:{" "}
 								</span>
 								<span>
 									{findPastoralTeamLabel(
 										currentCandidate?.info.pastoral_team ?? [],
-									).join(' > ')}{' '}
+									).join(" > ")}{" "}
 								</span>
 							</div>
 							<div>
-								<span style={{ fontWeight: 'bold', color: '#4E5969' }}>
-									Ministry:{' '}
+								<span style={{ fontWeight: "bold", color: "#4E5969" }}>
+									Ministry:{" "}
 								</span>
 								<span>
 									{findMinistryLabel(
 										currentCandidate?.info.ministry ?? [],
-									).join(' > ')}{' '}
+									).join(" > ")}{" "}
 								</span>
 							</div>
 							<div>
-								<span style={{ fontWeight: 'bold', color: '#4E5969' }}>
-									Interviewers:{' '}
+								<span style={{ fontWeight: "bold", color: "#4E5969" }}>
+									Interviewers:{" "}
 								</span>
 								<span>{interviewers}</span>
 							</div>
@@ -252,14 +252,14 @@ export default function Evaluation_Page() {
 										return (
 											<Card title={item.question} key={index}>
 												<div style={{ marginBottom: 10 }}>
-													<span style={{ fontWeight: 'bold' }}>
+													<span style={{ fontWeight: "bold" }}>
 														Candidate Answer:
 													</span>
 													<span>{item.candidate} </span>
 												</div>
 												<div>
-													<span style={{ fontWeight: 'bold' }}>
-														Interviewer Remark:{' '}
+													<span style={{ fontWeight: "bold" }}>
+														Interviewer Remark:{" "}
 													</span>
 													<span>{item.interviewer as string}</span>
 												</div>
@@ -274,21 +274,21 @@ export default function Evaluation_Page() {
 									{QAs.specific.map((item, index) => {
 										return (
 											<Card title={item.question} key={index}>
-												{' '}
-												{item.candidate}{' '}
+												{" "}
+												{item.candidate}{" "}
 											</Card>
 										);
 									})}
 								</div>
 							)}
-							{QAs['freeQ&As'].length > 0 && (
+							{QAs["freeQ&As"].length > 0 && (
 								<div>
 									<h2>Q&A</h2>
-									{QAs['freeQ&As'].map((item, index) => {
+									{QAs["freeQ&As"].map((item, index) => {
 										return (
 											<Card title={item.question} key={index}>
-												{' '}
-												{item.interviewer as string}{' '}
+												{" "}
+												{item.interviewer as string}{" "}
 											</Card>
 										);
 									})}

@@ -4,20 +4,20 @@ import {
 	SetStateAction,
 	useEffect,
 	useState,
-} from 'react';
-import { Empty, Modal } from '@arco-design/web-react';
-import './notificationModal.css';
+} from "react";
+import { Empty, Modal } from "@arco-design/web-react";
+import "./notificationModal.css";
 
 const activeStyle = {
-	backgroundColor: '#f2f3f5',
-	color: '#165DFF',
-	borderRadius: '32px',
+	backgroundColor: "#f2f3f5",
+	color: "#165DFF",
+	borderRadius: "32px",
 };
 
 const inactiveStyle = {
-	backgroundColor: '#fff',
-	color: '#000',
-	borderRadius: 'unset',
+	backgroundColor: "#fff",
+	color: "#000",
+	borderRadius: "unset",
 };
 
 interface NotificationModalProps {
@@ -49,9 +49,9 @@ const NotificationModal: FunctionComponent<NotificationModalProps> = ({
 
 	useEffect(() => {
 		initModalPosition();
-		window.addEventListener('resize', initModalPosition);
+		window.addEventListener("resize", initModalPosition);
 		return () => {
-			window.removeEventListener('resize', initModalPosition);
+			window.removeEventListener("resize", initModalPosition);
 		};
 	}, []);
 
@@ -86,7 +86,7 @@ const NotificationModal: FunctionComponent<NotificationModalProps> = ({
 		<Modal
 			alignCenter={false}
 			style={modalStyle}
-			className={'notification-modal'}
+			className={"notification-modal"}
 			visible={visible}
 			onOk={() => setVisible(false)}
 			onCancel={() => setVisible(false)}
@@ -95,9 +95,9 @@ const NotificationModal: FunctionComponent<NotificationModalProps> = ({
 			mask={true}
 			simple={true}
 			footer={null}
-			maskStyle={{ backgroundColor: 'rgba(0,0,0,0.0)' }}
+			maskStyle={{ backgroundColor: "rgba(0,0,0,0.0)" }}
 		>
-			<div className={'notification-modal-header'}>
+			<div className={"notification-modal-header"}>
 				<div className="notification-modal-header-btns">
 					{messagesNum > 0 ? (
 						<span style={messageStyle} onClick={() => setCurrentTab(0)}>
@@ -129,7 +129,7 @@ const NotificationModal: FunctionComponent<NotificationModalProps> = ({
 				</div>
 				<div className="notification-modal-clear">Clear</div>
 			</div>
-			<div className={'notification-modal-body'}>
+			<div className={"notification-modal-body"}>
 				{showEmpty && (
 					<Empty
 						imgSrc="/images/empty.png"
@@ -137,12 +137,12 @@ const NotificationModal: FunctionComponent<NotificationModalProps> = ({
 					/>
 				)}
 			</div>
-			<div className={'notification-modal-footer'}>
+			<div className={"notification-modal-footer"}>
 				<div>
-					<span style={{ cursor: 'pointer' }}>Read All</span>
+					<span style={{ cursor: "pointer" }}>Read All</span>
 				</div>
 				<div>
-					<span style={{ cursor: 'pointer' }}>Read More</span>
+					<span style={{ cursor: "pointer" }}>Read More</span>
 				</div>
 			</div>
 		</Modal>

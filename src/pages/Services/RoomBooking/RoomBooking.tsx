@@ -1,15 +1,15 @@
-import UIBreadcrumb from '@/components/UIBreadcrumb';
+import UIBreadcrumb from "@/components/UIBreadcrumb";
 
 const RoomBooking = () => {
 	const breadcrumbItems = [
 		{
-			name: 'Services',
-			link: '/services',
+			name: "Services",
+			link: "/services",
 			clickable: true,
 		},
 		{
-			name: 'Room Booking',
-			link: '/services/room_booking',
+			name: "Room Booking",
+			link: "/services/room_booking",
 			clickable: true,
 		},
 	];
@@ -20,9 +20,9 @@ const RoomBooking = () => {
 			<div className="app-component full-screen-app-component">
 				<div
 					style={{
-						margin: '20px 20px 0 20px',
+						margin: "20px 20px 0 20px",
 						fontSize: 26,
-						fontWeight: 'bold',
+						fontWeight: "bold",
 					}}
 				>
 					RoomBooking

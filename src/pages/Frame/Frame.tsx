@@ -4,26 +4,30 @@ import {
 	IconMenuFold,
 	IconMenuUnfold,
 	IconUserGroup,
-} from '@arco-design/web-react/icon';
-import './Frame.css';
-import { Outlet, useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import { Menu } from '@arco-design/web-react';
+} from "@arco-design/web-react/icon";
+import "./Frame.css";
+import { Outlet, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Menu } from "@arco-design/web-react";
+import HeadBarBtns from "@/components/UI_Menu/UI_HeaderBarMenu";
+import UIFloatingHelpMenu from "@/components/UI_Menu/UI_FloatingHelpMenu";
+// import { useSettingModalStore } from '@/components/UI_Modal/UI_SettingModal/settingModalStore';
+import { LuGraduationCap } from "react-icons/lu";
+import { FaPeopleGroup } from "react-icons/fa6";
+import { BiHomeSmile } from "react-icons/bi";
+import { useAuth0 } from "@auth0/auth0-react";
+import { useAccount } from "@/store/useAccount";
+import { ProfileForm } from "@/components/Form/Profile";
+
 const MenuItem = Menu.Item;
 const SubMenu = Menu.SubMenu;
-import HeadBarBtns from '@/components/UI_Menu/UI_HeaderBarMenu';
-import UIFloatingHelpMenu from '@/components/UI_Menu/UI_FloatingHelpMenu';
-// import { useSettingModalStore } from '@/components/UI_Modal/UI_SettingModal/settingModalStore';
-import { LuGraduationCap } from 'react-icons/lu';
-import { FaPeopleGroup } from 'react-icons/fa6';
-import { BiHomeSmile } from 'react-icons/bi';
-import { useAuth0 } from '@auth0/auth0-react';
 
 const Frame = () => {
 	// const staff = useSettingModalStore((state) => state.staff);
 	const navigate = useNavigate();
 
-	const { user } = useAuth0();
+	const { user: auth0User } = useAuth0();
+	const { user } = useAccount();
 
 	const [tabs] = useState({
 		recruitment_dashboard: false,
@@ -37,10 +41,10 @@ const Frame = () => {
 
 	function onClickMenuItem(key: string) {
 		// console.log(key);
-		navigate('/' + key);
+		navigate("/" + key);
 	}
 	useEffect(() => {
-		window.addEventListener('resize', () => {
+		window.addEventListener("resize", () => {
 			const vWidth = window.innerWidth;
 
 			if (vWidth < 640) {
@@ -48,7 +52,7 @@ const Frame = () => {
 			} else setCollapse(false);
 
 			return () => {
-				window.removeEventListener('resize', () => {
+				window.removeEventListener("resize", () => {
 					const vWidth = window.innerWidth;
 
 					if (vWidth < 640) {
@@ -59,13 +63,22 @@ const Frame = () => {
 		});
 	}, []);
 
+	const [newUser, setNewUser] = useState(false);
+
+	useEffect(() => {
+		if (user.icNumber) return;
+		setNewUser(true);
+	}, [user.icNumber]);
+
 	return (
-		<div>
+		<>
+			<ProfileForm visible={newUser} setVisible={setNewUser} user={user} />
+
 			<div className="menu-demo">
 				<Menu
 					mode="horizontal"
-					defaultSelectedKeys={['1']}
-					className={'top-menu'}
+					defaultSelectedKeys={["1"]}
+					className={"top-menu"}
 				>
 					<MenuItem
 						key="0"
@@ -74,11 +87,11 @@ const Frame = () => {
 					>
 						<img
 							src={
-								import.meta.env['VITE_NODE_ENV'] === 'development'
-									? '/cyc-plain-dev.png'
-									: '/CYC_Logo_black_x120.png'
+								import.meta.env["VITE_NODE_ENV"] === "development"
+									? "/cyc-plain-dev.png"
+									: "/CYC_Logo_black_x120.png"
 							}
-							alt={'logo'}
+							alt={"logo"}
 							className="head-menu-logo"
 						/>
 					</MenuItem>
@@ -86,20 +99,20 @@ const Frame = () => {
 					<MenuItem key="2">Solution</MenuItem>
 					<MenuItem key="3">Service</MenuItem>
 					<MenuItem key="4">Cooperation</MenuItem>
-					{user && <HeadBarBtns />}
+					{auth0User && <HeadBarBtns />}
 				</Menu>
 			</div>
 			<div className="menu-lower">
 				<div className="menu-side">
 					<Menu
 						onClickMenuItem={onClickMenuItem}
-						style={{ width: 200, height: '100%' }}
+						style={{ width: 200, height: "100%" }}
 						// hasCollapseButton
 						mode="vertical"
 						// defaultOpenKeys={['3']}
 						// autoOpen
 						collapse={collapse}
-						defaultSelectedKeys={['0_1']}
+						defaultSelectedKeys={["0_1"]}
 					>
 						<SubMenu
 							key="1"
@@ -134,8 +147,15 @@ const Frame = () => {
 							}
 						>
 							<MenuItem key="users/dashboard">Dashboard</MenuItem>
+							<MenuItem key="users/satellites">Satellites</MenuItem>
+
 							<MenuItem key="users/ministry">Ministry</MenuItem>
-							<MenuItem key="users/pastoral">Pastoral</MenuItem>
+
+							<SubMenu key="2.1" title="Pastoral">
+								<MenuItem key="users/pastoral">Members</MenuItem>
+								<MenuItem key="users/pastoral/cg">Cell Groups</MenuItem>
+								<MenuItem key="users/pastoral/roles">Roles</MenuItem>
+							</SubMenu>
 						</SubMenu>
 						<SubMenu
 							key="3"
@@ -201,7 +221,7 @@ const Frame = () => {
 				</div>
 			</div>
 			<UIFloatingHelpMenu />
-		</div>
+		</>
 	);
 };
 

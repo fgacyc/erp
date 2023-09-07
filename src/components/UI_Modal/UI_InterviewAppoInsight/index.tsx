@@ -1,6 +1,6 @@
-import { Card, Modal } from '@arco-design/web-react';
-import './UI_InterviewAppoInsight.css';
-import { Dispatch, FunctionComponent, SetStateAction } from 'react';
+import { Card, Modal } from "@arco-design/web-react";
+import "./UI_InterviewAppoInsight.css";
+import { Dispatch, FunctionComponent, SetStateAction } from "react";
 
 interface UIInterviewAppoInsightProps {
 	visible: boolean;
@@ -33,7 +33,7 @@ const UIInterviewAppoInsight: FunctionComponent<
 					insightData.map((item, index) => {
 						return (
 							<Card
-								style={{ width: 300, height: '100%' }}
+								style={{ width: 300, height: "100%" }}
 								title={item.date}
 								key={index}
 							>

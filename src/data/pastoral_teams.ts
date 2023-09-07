@@ -1,115 +1,115 @@
 export const pastoral_teams: {
 	[key: string]: string[];
 } = {
-	wonderkids: ['wonderkids'],
-	young_warrior: ['heart', 'move', 'force', 'voice', 'mind'],
-	general_service: ['yp_zone', 'pro_family', 'young_dreamer', 'joshua_zone'],
+	wonderkids: ["wonderkids"],
+	young_warrior: ["heart", "move", "force", "voice", "mind"],
+	general_service: ["yp_zone", "pro_family", "young_dreamer", "joshua_zone"],
 	others: [
-		'serdang',
-		'kepong',
-		'usj',
-		'setapak',
-		'sg_long',
-		'seremban',
-		'the_blessing',
-		'to_be_confirmed',
+		"serdang",
+		"kepong",
+		"usj",
+		"setapak",
+		"sg_long",
+		"seremban",
+		"the_blessing",
+		"to_be_confirmed",
 	],
 };
 
 export const pastoral_team_options = [
 	{
-		value: 'wonderkids',
-		label: 'Wonder Kids',
+		value: "wonderkids",
+		label: "Wonder Kids",
 		children: [
 			{
-				value: 'wonderkids',
-				label: 'Wonder Kids',
+				value: "wonderkids",
+				label: "Wonder Kids",
 			},
 		],
 	},
 	{
-		value: 'young_warrior',
-		label: 'Young Warrior',
+		value: "young_warrior",
+		label: "Young Warrior",
 		children: [
 			{
-				value: 'heart',
-				label: 'Heart',
+				value: "heart",
+				label: "Heart",
 			},
 			{
-				value: 'move',
-				label: 'Move',
+				value: "move",
+				label: "Move",
 			},
 			{
-				value: 'force',
-				label: 'Force',
+				value: "force",
+				label: "Force",
 			},
 			{
-				value: 'voice',
-				label: 'Voice',
+				value: "voice",
+				label: "Voice",
 			},
 			{
-				value: 'mind',
-				label: 'Mind',
+				value: "mind",
+				label: "Mind",
 			},
 		],
 	},
 	{
-		value: 'general_service',
-		label: 'General Service',
+		value: "general_service",
+		label: "General Service",
 		children: [
 			{
-				value: 'yp_zone',
-				label: 'YP Zone',
+				value: "yp_zone",
+				label: "YP Zone",
 			},
 			{
-				value: 'pro_family',
-				label: 'Pro Family',
+				value: "pro_family",
+				label: "Pro Family",
 			},
 			{
-				value: 'young_dreamer',
-				label: 'Young Dreamer',
+				value: "young_dreamer",
+				label: "Young Dreamer",
 			},
 			{
-				value: 'joshua_zone',
-				label: 'Joshua Zone',
+				value: "joshua_zone",
+				label: "Joshua Zone",
 			},
 		],
 	},
 	{
-		value: 'others',
-		label: 'Others',
+		value: "others",
+		label: "Others",
 		children: [
 			{
-				value: 'serdang',
-				label: 'Serdang',
+				value: "serdang",
+				label: "Serdang",
 			},
 			{
-				value: 'kepong',
-				label: 'Kepong',
+				value: "kepong",
+				label: "Kepong",
 			},
 			{
-				value: 'usj',
-				label: 'USJ',
+				value: "usj",
+				label: "USJ",
 			},
 			{
-				value: 'setapak',
-				label: 'Setapak',
+				value: "setapak",
+				label: "Setapak",
 			},
 			{
-				value: 'sg_long',
-				label: 'Sg Long',
+				value: "sg_long",
+				label: "Sg Long",
 			},
 			{
-				value: 'seremban',
-				label: 'Seremban',
+				value: "seremban",
+				label: "Seremban",
 			},
 			{
-				value: 'the_blessing',
-				label: 'The Blessing',
+				value: "the_blessing",
+				label: "The Blessing",
 			},
 			{
-				value: 'to_be_confirmed',
-				label: 'To Be Confirmed',
+				value: "to_be_confirmed",
+				label: "To Be Confirmed",
 			},
 		],
 	},
@@ -117,24 +117,24 @@ export const pastoral_team_options = [
 
 export const pastoral_team_roles = [
 	{
-		value: 'pastoral_zone_leader',
-		label: 'Pastoral Zone Leader',
+		value: "pastoral_zone_leader",
+		label: "Pastoral Zone Leader",
 	},
 	{
-		value: 'pastoral_team_leader',
-		label: 'Pastoral Team Leader',
+		value: "pastoral_team_leader",
+		label: "Pastoral Team Leader",
 	},
 	{
-		value: 'pastoral_team_admin',
-		label: 'Pastoral Team Admin',
+		value: "pastoral_team_admin",
+		label: "Pastoral Team Admin",
 	},
 	{
-		value: 'senior_cg_leader',
-		label: 'Senior CG Leader',
+		value: "senior_cg_leader",
+		label: "Senior CG Leader",
 	},
 	{
-		value: 'cg_leader',
-		label: 'CG Leader',
+		value: "cg_leader",
+		label: "CG Leader",
 	},
 ];
 

@@ -1,19 +1,19 @@
-import { Card, Input, TextAreaProps } from '@arco-design/web-react';
-import VocalRatingTable from './VocalRatingTable';
+import { Card, Input, TextAreaProps } from "@arco-design/web-react";
+import VocalRatingTable from "./VocalRatingTable";
 import {
 	Dispatch,
 	FunctionComponent,
 	SetStateAction,
 	useEffect,
 	useState,
-} from 'react';
-import { IconCheck, IconEdit } from '@arco-design/web-react/icon';
-import './recruitment-appo.css';
+} from "react";
+import { IconCheck, IconEdit } from "@arco-design/web-react/icon";
+import "./recruitment-appo.css";
 
 const TextArea = Input.TextArea;
 
 interface FreeQATextAreaProps {
-	candidate?: Recruiter['info'];
+	candidate?: Recruiter["info"];
 	questions: InterviewQuestion[];
 	freeQAs?: string | VocalRating;
 	setFreeQAs: Dispatch<SetStateAction<string | VocalRating | undefined>>;
@@ -32,9 +32,9 @@ const FreeQATextArea: FunctionComponent<FreeQATextAreaProps> = ({
 	ifInterviewed,
 }) => {
 	const [ifDisable, setIfDisable] = useState(ifInterviewed);
-	const [textAreaStyle, setTextAreaStyle] = useState<TextAreaProps['style']>({
-		width: '100%',
-		resize: 'none',
+	const [textAreaStyle, setTextAreaStyle] = useState<TextAreaProps["style"]>({
+		width: "100%",
+		resize: "none",
 	});
 	const [ifVocal, setIfVocal] = useState(false);
 	const [spaceHeight, setSpaceHeight] = useState(0);
@@ -43,7 +43,7 @@ const FreeQATextArea: FunctionComponent<FreeQATextAreaProps> = ({
 	useEffect(() => {
 		function getFreeQAAnswer() {
 			for (const item of questions) {
-				if (item.type === 'freeQ&As') {
+				if (item.type === "freeQ&As") {
 					return item.interviewer;
 				}
 			}
@@ -51,8 +51,8 @@ const FreeQATextArea: FunctionComponent<FreeQATextAreaProps> = ({
 		function calHeight() {
 			if (spaceHeight !== 0) return;
 
-			const appTarget = document.querySelector('.full-screen-app-component');
-			const target = document.querySelector('.full-screen-app-component-con');
+			const appTarget = document.querySelector(".full-screen-app-component");
+			const target = document.querySelector(".full-screen-app-component-con");
 			const appHeight = window.getComputedStyle(appTarget as Element).height;
 			const targetHeight = window.getComputedStyle(target as Element).height;
 			//console.log(appHeight, targetHeight)
@@ -70,18 +70,18 @@ const FreeQATextArea: FunctionComponent<FreeQATextAreaProps> = ({
 			setFreeQAs(getFreeQAAnswer());
 		}
 		if (candidate) {
-			setIfVocal(candidate.ministry[2] === 'vocal');
+			setIfVocal(candidate.ministry[2] === "vocal");
 		}
 		calHeight();
 	}, [candidate, ifInterviewed, questions, setFreeQAs, spaceHeight]);
 
-	const activeStyle: TextAreaProps['style'] = {
-		width: '100%',
-		resize: 'none',
-		border: '1px solid #165dff',
-		backgroundColor: '#fff',
-		borderRadius: '2px',
-		boxShadow: '0 0 0 0 #bedaff',
+	const activeStyle: TextAreaProps["style"] = {
+		width: "100%",
+		resize: "none",
+		border: "1px solid #165dff",
+		backgroundColor: "#fff",
+		borderRadius: "2px",
+		boxShadow: "0 0 0 0 #bedaff",
 	};
 
 	function handleClick() {
@@ -90,7 +90,7 @@ const FreeQATextArea: FunctionComponent<FreeQATextAreaProps> = ({
 			setTextAreaStyle(activeStyle);
 		} else {
 			setIfDisable(true);
-			setTextAreaStyle({ width: '100%', resize: 'none' });
+			setTextAreaStyle({ width: "100%", resize: "none" });
 		}
 	}
 
@@ -99,8 +99,8 @@ const FreeQATextArea: FunctionComponent<FreeQATextAreaProps> = ({
 	}
 
 	return (
-		<div style={{ display: 'flex', justifyItems: 'center' }}>
-			<div style={{ width: '80%', margin: '50px auto' }}>
+		<div style={{ display: "flex", justifyItems: "center" }}>
+			<div style={{ width: "80%", margin: "50px auto" }}>
 				<div className="interviewer-qas-answer-con">
 					<TextArea
 						// onChange={setFreeQAs}

@@ -1,17 +1,18 @@
-import { Typography } from '@arco-design/web-react';
-import './UI_SettingModal.css';
+import { Typography } from "@arco-design/web-react";
+import "./UI_SettingModal.css";
 import {
-	IconApps,
+	// IconApps,
 	IconHome,
 	IconInfoCircle,
 	IconNotification,
 	IconPublic,
 	IconSettings,
 	IconUser,
-} from '@arco-design/web-react/icon';
-import { shallow } from 'zustand/shallow';
-import { useSettingModalStore } from './settingModalStore';
-import UI_Avatar from '@/components/UI_Avatar';
+} from "@arco-design/web-react/icon";
+import { shallow } from "zustand/shallow";
+import { useSettingModalStore } from "./settingModalStore";
+import UI_Avatar from "@/components/UI_Avatar";
+import { useAccount } from "@/store/useAccount";
 
 // eslint-disable-next-line react-refresh/only-export-components
 const IconSecurity = () => {
@@ -25,36 +26,34 @@ const IconSecurity = () => {
 };
 
 export function UI_SettingModalLeft() {
-	const cyc_id = useSettingModalStore((state) => state.CYC_ID);
-	const username = useSettingModalStore((state) => state.username);
-	const email = useSettingModalStore((state) => state.email);
-	const avatar = useSettingModalStore((state) => state.avatar);
+	const { user } = useAccount();
+
 	const [currentTab, setCurrentTab] = useSettingModalStore(
 		(state) => [state.currentTab, state.setCurrentTab],
 		shallow,
 	);
 	const tabText = [
-		'My account',
-		'My home',
-		'My settings',
-		'My notifications',
-		'My connections',
-		'Language & region',
-		'Security',
-		'About',
+		"My account",
+		"My home",
+		"My settings",
+		"My notifications",
+		// "My connections",
+		"Language & region",
+		"Security",
+		"About",
 	];
 	const tabIcon = [
 		<IconUser key={0} />,
 		<IconHome key={1} />,
 		<IconSettings key={2} />,
 		<IconNotification key={3} />,
-		<IconApps key={4} />,
+		// <IconApps key={4} />,
 		<IconPublic key={5} />,
 		<IconSecurity key={6} />,
 		<IconInfoCircle key={7} />,
 	];
-	const inActiveBgc = 'transparent';
-	const activeBgc = '#C9CDD4';
+	const inActiveBgc = "transparent";
+	const activeBgc = "#C9CDD4";
 	const showAllInfo = useSettingModalStore((state) => state.showAllInfo);
 
 	return (
@@ -63,16 +62,16 @@ export function UI_SettingModalLeft() {
 				<UI_Avatar
 					size={32}
 					clickEvent={showAllInfo}
-					url={avatar}
-					username={username}
+					url={user.avatarUrl ?? ""}
+					username={user.name}
 				/>
 				<div style={{ width: 180, height: 40 }}>
-					<div style={{ display: 'flex', justifyContent: 'space-between' }}>
-						<div style={{ fontSize: 14, fontWeight: 'bold' }}>
-							{username ?? '-'}
+					<div style={{ display: "flex", justifyContent: "space-between" }}>
+						<div style={{ fontSize: 14, fontWeight: "bold" }}>
+							{user.name ?? "-"}
 						</div>
-						<div title="CYC ID" style={{ cursor: 'default' }}>
-							{cyc_id ?? '-'}
+						<div title="CYC ID" style={{ cursor: "default" }}>
+							{user.no ?? "-"}
 						</div>
 					</div>
 
@@ -82,10 +81,10 @@ export function UI_SettingModalLeft() {
 							rows: 1,
 							showTooltip: false,
 							expandable: false,
-							wrapper: 'span',
+							wrapper: "span",
 						}}
 					>
-						{email && email}
+						{user.email}
 					</Typography.Paragraph>
 				</div>
 			</div>

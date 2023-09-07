@@ -1,5 +1,5 @@
-import { Avatar } from '@arco-design/web-react';
-import { FunctionComponent } from 'react';
+import { Avatar } from "@arco-design/web-react";
+import { FunctionComponent } from "react";
 
 interface UIAvatarProps {
 	size: number;
@@ -18,7 +18,7 @@ const UI_Avatar: FunctionComponent<UIAvatarProps> = ({
 		<>
 			{url ? (
 				<Avatar
-					style={{ backgroundColor: '#ffffff' }}
+					style={{ backgroundColor: "#ffffff" }}
 					size={size}
 					onClick={clickEvent}
 				>
@@ -26,7 +26,7 @@ const UI_Avatar: FunctionComponent<UIAvatarProps> = ({
 				</Avatar>
 			) : (
 				<Avatar
-					style={{ backgroundColor: '#3370ff' }}
+					style={{ backgroundColor: "#3370ff" }}
 					size={size}
 					onClick={clickEvent}
 				>

@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Menu, Trigger } from '@arco-design/web-react';
+import { useState } from "react";
+import { Menu, Trigger } from "@arco-design/web-react";
 import {
 	IconClose,
 	IconBug,
@@ -7,34 +7,34 @@ import {
 	IconQuestion,
 	IconFile,
 	IconCompass,
-} from '@arco-design/web-react/icon';
-import './UI_FloatingHelpMenu.css';
-import GithubReportModal from '@/components/UI_Modal/UI_GithubReportModal';
+} from "@arco-design/web-react/icon";
+import "./UI_FloatingHelpMenu.css";
+import GithubReportModal from "@/components/UI_Modal/UI_GithubReportModal";
 
 const UIFloatingHelpMenu = () => {
 	const [bugModalVisible, setBugModalVisible] = useState(false);
 	const [ideaModalVisible, setIdeaModalVisible] = useState(false);
 
 	function onClickMenuItem(key: string) {
-		if (key === '1') {
-			console.log('bug');
+		if (key === "1") {
+			console.log("bug");
 			setBugModalVisible(true);
-		} else if (key === '2') {
-			console.log('idea');
+		} else if (key === "2") {
+			console.log("idea");
 			setIdeaModalVisible(true);
 			// sendAIssue().then((res) => {
 			//     console.log(res);
 			//
 			// });
-		} else if (key === '3') {
+		} else if (key === "3") {
 			window.open(
-				'https://drive.google.com/drive/folders/14sulRff83Fq2i_GnP1kGPZ3DLDyZSyb2?usp=sharing',
-				'_blank',
+				"https://drive.google.com/drive/folders/14sulRff83Fq2i_GnP1kGPZ3DLDyZSyb2?usp=sharing",
+				"_blank",
 			);
-		} else if (key === '4') {
+		} else if (key === "4") {
 			window.open(
-				'https://github.com/users/yuenci/projects/8/views/1',
-				'_blank',
+				"https://github.com/users/yuenci/projects/8/views/1",
+				"_blank",
 			);
 		}
 	}
@@ -43,7 +43,7 @@ const UIFloatingHelpMenu = () => {
 		return (
 			<Menu
 				mode="popButton"
-				tooltipProps={{ position: 'left' }}
+				tooltipProps={{ position: "left" }}
 				hasCollapseButton
 				onClickMenuItem={onClickMenuItem}
 			>
@@ -59,7 +59,7 @@ const UIFloatingHelpMenu = () => {
 					<IconFile />
 					Tutorial
 				</Menu.Item>
-				<Menu.Item key={'4'}>
+				<Menu.Item key={"4"}>
 					<IconCompass />
 					Progress
 				</Menu.Item>
@@ -72,14 +72,14 @@ const UIFloatingHelpMenu = () => {
 			<Trigger
 				className="floating-menu-trigger"
 				popup={renderMenu}
-				trigger={['click', 'hover']}
+				trigger={["click", "hover"]}
 				clickToClose
 				position="top"
 				onVisibleChange={(v) => setPopupVisible(v)}
 			>
 				<div
 					className={`button-trigger ${
-						popupVisible ? 'button-trigger-active' : ''
+						popupVisible ? "button-trigger-active" : ""
 					}`}
 				>
 					{popupVisible ? (

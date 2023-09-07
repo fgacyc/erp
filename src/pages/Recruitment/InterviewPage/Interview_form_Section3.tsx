@@ -1,13 +1,13 @@
-import { Button, Result, Select } from '@arco-design/web-react';
+import { Button, Result, Select } from "@arco-design/web-react";
 import {
 	Dispatch,
 	FunctionComponent,
 	SetStateAction,
 	useEffect,
 	useState,
-} from 'react';
-import { getReq } from '@/tools/requests';
-import { get } from 'idb-keyval';
+} from "react";
+import { getReq } from "@/tools/requests";
+import { get } from "idb-keyval";
 
 interface InterviewFormSection3 {
 	ministry?: string;
@@ -36,7 +36,7 @@ export const Interview_form_Section3: FunctionComponent<
 
 	useEffect(() => {
 		if (ifInterviewed) {
-			get('current_candidate').then((res: Recruiter) => {
+			get("current_candidate").then((res: Recruiter) => {
 				// console.log(res.interview.ministry.interviewers)
 				setCurrentInterviewers(res.interview.ministry.interviewers);
 			});
@@ -45,8 +45,8 @@ export const Interview_form_Section3: FunctionComponent<
 		function calHeight() {
 			if (spaceHeight !== 0) return;
 
-			const appTarget = document.querySelector('.full-screen-app-component');
-			const target = document.querySelector('.full-screen-app-component-con');
+			const appTarget = document.querySelector(".full-screen-app-component");
+			const target = document.querySelector(".full-screen-app-component-con");
 			const appHeight = window.getComputedStyle(appTarget as Element).height;
 
 			const targetHeight = window.getComputedStyle(target as Element).height;
@@ -81,13 +81,13 @@ export const Interview_form_Section3: FunctionComponent<
 	return (
 		<div
 			style={{
-				display: 'flex',
-				flexDirection: 'column',
-				alignItems: 'center',
-				justifyItems: 'center',
+				display: "flex",
+				flexDirection: "column",
+				alignItems: "center",
+				justifyItems: "center",
 			}}
 		>
-			<div style={{ margin: '30px 0 10px 0' }}>Interviewers</div>
+			<div style={{ margin: "30px 0 10px 0" }}>Interviewers</div>
 			<Select
 				mode="multiple"
 				placeholder="Please select"

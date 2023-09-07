@@ -10,40 +10,40 @@ export const valid = (
 	pastoral: string[],
 	department: string[],
 ) => {
-	if (name === '') {
-		alert('Name cannot be empty');
+	if (name === "") {
+		alert("Name cannot be empty");
 		return false;
 	}
 
-	if (phone === '') {
-		alert('Phone cannot be empty');
+	if (phone === "") {
+		alert("Phone cannot be empty");
 		return false;
 	}
 
-	if (email === '' || !validEmail(email)) {
-		alert('Email cannot be empty or invalid');
+	if (email === "" || !validEmail(email)) {
+		alert("Email cannot be empty or invalid");
 		return false;
 	}
 
 	if (pastoral.length === 0) {
-		alert('Pastoral cannot be empty');
+		alert("Pastoral cannot be empty");
 		return false;
 	}
 
-	if (pastoral[0] !== 'wonder kids') {
+	if (pastoral[0] !== "wonder kids") {
 		if (pastoral[1] === undefined) {
-			alert('Pastoral team cannot be empty');
+			alert("Pastoral team cannot be empty");
 			return false;
 		}
 	}
 
 	if (department.length === 0 || !department) {
-		alert('Department cannot be empty');
+		alert("Department cannot be empty");
 		return false;
 	}
 
 	if (department.length !== 3) {
-		alert('Please select your department');
+		alert("Please select your department");
 		return false;
 	}
 

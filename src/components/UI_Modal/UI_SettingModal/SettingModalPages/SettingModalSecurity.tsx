@@ -1,5 +1,5 @@
-import { SettingModalDivider } from './SettingModalAccount';
-import { Switch } from '@arco-design/web-react';
+import { SettingModalDivider } from "./SettingModalAccount";
+import { Switch } from "@arco-design/web-react";
 
 const SettingModalSecurity = () => {
 	return (
@@ -17,7 +17,7 @@ const SettingModalSecurity = () => {
 							Receive email notification when you login
 						</div>
 					</div>
-					<div style={{ width: 140, textAlign: 'right' }}>
+					<div style={{ width: 140, textAlign: "right" }}>
 						<Switch checked={true} />
 					</div>
 				</div>

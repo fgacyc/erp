@@ -1,8 +1,8 @@
 // import { FormEvent } from 'react';
 // import { useNavigate } from 'react-router-dom';
-import { Button } from '@arco-design/web-react';
-import './Login.css';
-import { useAuth0 } from '@auth0/auth0-react';
+import { Button } from "@arco-design/web-react";
+import "./Login.css";
+import { useAuth0 } from "@auth0/auth0-react";
 // import { login } from '@/tools/auth';
 
 const Login = () => {
@@ -30,13 +30,13 @@ const Login = () => {
 				<img
 					src="/images/fga.png"
 					alt="CYC Logo"
-					style={{ width: '200px', height: '200px' }}
+					style={{ width: "200px", height: "200px" }}
 				/>
 				<h1>FGA CYC</h1>
-				{import.meta.env['VITE_NODE_ENV'] === 'development' ? (
+				{import.meta.env["VITE_NODE_ENV"] === "development" ? (
 					<span className="text-red-600 text-lg">DEV</span>
 				) : (
-					''
+					""
 				)}
 
 				<Button

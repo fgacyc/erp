@@ -1,12 +1,12 @@
-import { filterByPermission, getAppointTimes } from '../InterviewPage/data';
-import { getTimeStamp } from '@/tools/datetime';
+import { filterByPermission, getAppointTimes } from "../InterviewPage/data";
+import { getTimeStamp } from "@/tools/datetime";
 
 export function getPassStatus(record: Recruiter) {
 	const applicationStatus = record.application.status;
-	if (applicationStatus === 'accepted') return 'accepted';
-	else if (applicationStatus === 'rejected') return 'rejected';
-	else if (applicationStatus === 'kiv') return 'kiv';
-	else return 'pending';
+	if (applicationStatus === "accepted") return "accepted";
+	else if (applicationStatus === "rejected") return "rejected";
+	else if (applicationStatus === "kiv") return "kiv";
+	else return "pending";
 }
 
 export async function filterEvaluationData(data: Recruiter[]) {
@@ -25,7 +25,7 @@ function calculateDateTimeFilterData(data: Recruiter[]) {
 	const dateStrings: string[] = [];
 	for (const item of data) {
 		const dateStr = getAppointTimes(item);
-		if (dateStr === 'N/A') continue;
+		if (dateStr === "N/A") continue;
 		if (!dateStrings.includes(dateStr)) {
 			dateStrings.push(dateStr);
 		}
@@ -52,7 +52,7 @@ export function getAppoInsightData(data: Recruiter[]) {
 	const appoInsightData = [];
 
 	const filterData = data.filter((item) => {
-		if (Object.prototype.hasOwnProperty.call(item, 'appointment')) {
+		if (Object.prototype.hasOwnProperty.call(item, "appointment")) {
 			const appoTime = item.appointment.ministry.appointment_time;
 			if (appoTime > getTimeStamp() - 2 * 24 * 60 * 60) {
 				return true;
@@ -93,18 +93,18 @@ export const classifyQuestion = (QAs: InterviewQuestion[]) => {
 	const res: {
 		general: InterviewQuestion[];
 		specific: InterviewQuestion[];
-		'freeQ&As': InterviewQuestion[];
+		"freeQ&As": InterviewQuestion[];
 	} = {
 		general: [],
 		specific: [],
-		'freeQ&As': [],
+		"freeQ&As": [],
 	};
 
 	for (const item of QAs) {
-		if (item.type === 'general') {
+		if (item.type === "general") {
 			res.general.push(item);
-		} else if (item.type === 'freeQ&As') {
-			res['freeQ&As'].push(item);
+		} else if (item.type === "freeQ&As") {
+			res["freeQ&As"].push(item);
 		} else {
 			res.specific.push(item);
 		}

@@ -1,4 +1,4 @@
-import UIBreadcrumb from '../../../../components/UIBreadcrumb';
+import UIBreadcrumb from "../../../../components/UIBreadcrumb";
 import {
 	Button,
 	Input,
@@ -6,37 +6,37 @@ import {
 	Space,
 	Table,
 	TableColumnProps,
-} from '@arco-design/web-react';
+} from "@arco-design/web-react";
 import {
 	IconDelete,
 	IconPlus,
 	IconReply,
 	IconSearch,
 	IconUserGroup,
-} from '@arco-design/web-react/icon';
-import { useEffect, useRef, useState } from 'react';
-import { getReq, putReq } from '../../../../tools/requests';
-import { addKeysForLeadersRetreat, getPaymentStatus } from './data';
-import UIDeleteEventParticipantModal from '../../../../components/UI_Modal/UI_DeleteEventParticipantModal';
-import { get, set } from 'idb-keyval';
-import UIConfirmModal from '../../../../components/UI_Modal/UI_ConfirmModal';
-import { RefInputType } from '@arco-design/web-react/es/Input/interface';
+} from "@arco-design/web-react/icon";
+import { useEffect, useRef, useState } from "react";
+import { getReq, putReq } from "../../../../tools/requests";
+import { addKeysForLeadersRetreat, getPaymentStatus } from "./data";
+import UIDeleteEventParticipantModal from "../../../../components/UI_Modal/UI_DeleteEventParticipantModal";
+import { get, set } from "idb-keyval";
+import UIConfirmModal from "../../../../components/UI_Modal/UI_ConfirmModal";
+import { RefInputType } from "@arco-design/web-react/es/Input/interface";
 
 export default function LeaderRetreat() {
 	const breadcrumbItems = [
 		{
-			name: 'Events',
-			link: '/',
+			name: "Events",
+			link: "/",
 			clickable: false,
 		},
 		{
-			name: 'Camp',
-			link: '/events/camp',
+			name: "Camp",
+			link: "/events/camp",
 			clickable: true,
 		},
 		{
-			name: 'Leader Retreat',
-			link: '/events/camp/leader_retreat',
+			name: "Leader Retreat",
+			link: "/events/camp/leader_retreat",
 		},
 	];
 	const [data, setData] = useState<
@@ -55,13 +55,13 @@ export default function LeaderRetreat() {
 		})[]
 	>([]);
 	const [deleteModalVisible, setDeleteModalVisible] = useState(false);
-	const [current_display_type, setCurrentDisplayType] = useState('registered');
+	const [current_display_type, setCurrentDisplayType] = useState("registered");
 	const inputRef = useRef<RefInputType>(null);
 
 	const columns: TableColumnProps[] = [
 		{
-			title: 'Name',
-			dataIndex: 'name',
+			title: "Name",
+			dataIndex: "name",
 			sorter: (a, b) => a.name.localeCompare(b.name),
 			filterIcon: <IconSearch />,
 			filterDropdown: ({ filterKeys, setFilterKeys, confirm }) => {
@@ -71,7 +71,7 @@ export default function LeaderRetreat() {
 							ref={inputRef}
 							searchButton
 							placeholder="Please enter a ministry"
-							value={filterKeys?.[0] || ''}
+							value={filterKeys?.[0] || ""}
 							onChange={(value) => {
 								setFilterKeys?.(value ? [value] : []);
 							}}
@@ -93,8 +93,8 @@ export default function LeaderRetreat() {
 			},
 		},
 		{
-			title: 'CYC ID',
-			dataIndex: 'CYC_ID',
+			title: "CYC ID",
+			dataIndex: "CYC_ID",
 			sorter: (a, b) => a.CYC_ID < b.CYC_ID,
 			filterIcon: <IconSearch />,
 			filterDropdown: ({ filterKeys, setFilterKeys, confirm }) => {
@@ -104,7 +104,7 @@ export default function LeaderRetreat() {
 							ref={inputRef}
 							searchButton
 							placeholder="Please enter a ministry"
-							value={filterKeys?.[0] || ''}
+							value={filterKeys?.[0] || ""}
 							onChange={(value) => {
 								setFilterKeys?.(value ? [value] : []);
 							}}
@@ -126,8 +126,8 @@ export default function LeaderRetreat() {
 			},
 		},
 		{
-			title: 'Phone',
-			dataIndex: 'phone_number',
+			title: "Phone",
+			dataIndex: "phone_number",
 			filterIcon: <IconSearch />,
 			filterDropdown: ({ filterKeys, setFilterKeys, confirm }) => {
 				return (
@@ -136,7 +136,7 @@ export default function LeaderRetreat() {
 							ref={inputRef}
 							searchButton
 							placeholder="Please enter a ministry"
-							value={filterKeys?.[0] || ''}
+							value={filterKeys?.[0] || ""}
 							onChange={(value) => {
 								setFilterKeys?.(value ? [value] : []);
 							}}
@@ -149,7 +149,7 @@ export default function LeaderRetreat() {
 				);
 			},
 			onFilter: (value, row) => {
-				if (Object.prototype.hasOwnProperty.call(row, 'phone_number')) {
+				if (Object.prototype.hasOwnProperty.call(row, "phone_number")) {
 					return row.phone_number.toLowerCase().includes(value.toLowerCase());
 				}
 			},
@@ -160,8 +160,8 @@ export default function LeaderRetreat() {
 			},
 		},
 		{
-			title: 'Email',
-			dataIndex: 'email',
+			title: "Email",
+			dataIndex: "email",
 			filterIcon: <IconSearch />,
 			filterDropdown: ({ filterKeys, setFilterKeys, confirm }) => {
 				return (
@@ -170,7 +170,7 @@ export default function LeaderRetreat() {
 							ref={inputRef}
 							searchButton
 							placeholder="Please enter a ministry"
-							value={filterKeys?.[0] || ''}
+							value={filterKeys?.[0] || ""}
 							onChange={(value) => {
 								setFilterKeys?.(value ? [value] : []);
 							}}
@@ -192,20 +192,20 @@ export default function LeaderRetreat() {
 			},
 		},
 		{
-			title: 'Paid',
-			dataIndex: 'paid',
+			title: "Paid",
+			dataIndex: "paid",
 			filters: [
 				{
-					text: 'Not yet',
-					value: 'pending',
+					text: "Not yet",
+					value: "pending",
 				},
 				{
-					text: 'Waiting Confirm',
-					value: 'uploaded',
+					text: "Waiting Confirm",
+					value: "uploaded",
 				},
 				{
-					text: 'Confirmed',
-					value: 'confirmed',
+					text: "Confirmed",
+					value: "confirmed",
 				},
 			],
 			onFilter: (value, row) => {
@@ -214,16 +214,16 @@ export default function LeaderRetreat() {
 			filterMultiple: false,
 			render: (_, record) => (
 				<div>
-					{getPaymentStatus(record) === 'pending' && <span>Not yet</span>}
-					{getPaymentStatus(record) === 'uploaded' && (
+					{getPaymentStatus(record) === "pending" && <span>Not yet</span>}
+					{getPaymentStatus(record) === "uploaded" && (
 						<span>Waiting Confirm</span>
 					)}
-					{getPaymentStatus(record) === 'confirmed' && <span>Confirmed</span>}
+					{getPaymentStatus(record) === "confirmed" && <span>Confirmed</span>}
 				</div>
 			),
 		},
 		{
-			title: 'Operation',
+			title: "Operation",
 			render: (_, record) => (
 				<Space>
 					{
@@ -240,8 +240,8 @@ export default function LeaderRetreat() {
 
 	const columnsForDeletedTable: TableColumnProps[] = [
 		{
-			title: 'Name',
-			dataIndex: 'name',
+			title: "Name",
+			dataIndex: "name",
 			sorter: (a, b) => a.name.localeCompare(b.name),
 			filterIcon: <IconSearch />,
 			filterDropdown: ({ filterKeys, setFilterKeys, confirm }) => {
@@ -251,7 +251,7 @@ export default function LeaderRetreat() {
 							ref={inputRef}
 							searchButton
 							placeholder="Please enter a ministry"
-							value={filterKeys?.[0] || ''}
+							value={filterKeys?.[0] || ""}
 							onChange={(value) => {
 								setFilterKeys?.(value ? [value] : []);
 							}}
@@ -273,8 +273,8 @@ export default function LeaderRetreat() {
 			},
 		},
 		{
-			title: 'CYC ID',
-			dataIndex: 'CYC_ID',
+			title: "CYC ID",
+			dataIndex: "CYC_ID",
 			sorter: (a, b) => a.CYC_ID < b.CYC_ID,
 			filterIcon: <IconSearch />,
 			filterDropdown: ({ filterKeys, setFilterKeys, confirm }) => {
@@ -284,7 +284,7 @@ export default function LeaderRetreat() {
 							ref={inputRef}
 							searchButton
 							placeholder="Please enter a ministry"
-							value={filterKeys?.[0] || ''}
+							value={filterKeys?.[0] || ""}
 							onChange={(value) => {
 								setFilterKeys?.(value ? [value] : []);
 							}}
@@ -306,8 +306,8 @@ export default function LeaderRetreat() {
 			},
 		},
 		{
-			title: 'Phone',
-			dataIndex: 'phone_number',
+			title: "Phone",
+			dataIndex: "phone_number",
 			filterIcon: <IconSearch />,
 			filterDropdown: ({ filterKeys, setFilterKeys, confirm }) => {
 				return (
@@ -316,7 +316,7 @@ export default function LeaderRetreat() {
 							ref={inputRef}
 							searchButton
 							placeholder="Please enter a ministry"
-							value={filterKeys?.[0] || ''}
+							value={filterKeys?.[0] || ""}
 							onChange={(value) => {
 								setFilterKeys?.(value ? [value] : []);
 							}}
@@ -329,7 +329,7 @@ export default function LeaderRetreat() {
 				);
 			},
 			onFilter: (value, row) => {
-				if (Object.prototype.hasOwnProperty.call(row, 'phone_number')) {
+				if (Object.prototype.hasOwnProperty.call(row, "phone_number")) {
 					return row.phone_number.toLowerCase().includes(value.toLowerCase());
 				}
 			},
@@ -340,8 +340,8 @@ export default function LeaderRetreat() {
 			},
 		},
 		{
-			title: 'Email',
-			dataIndex: 'email',
+			title: "Email",
+			dataIndex: "email",
 			filterIcon: <IconSearch />,
 			filterDropdown: ({ filterKeys, setFilterKeys, confirm }) => {
 				return (
@@ -350,7 +350,7 @@ export default function LeaderRetreat() {
 							ref={inputRef}
 							searchButton
 							placeholder="Please enter a ministry"
-							value={filterKeys?.[0] || ''}
+							value={filterKeys?.[0] || ""}
 							onChange={(value) => {
 								setFilterKeys?.(value ? [value] : []);
 							}}
@@ -372,20 +372,20 @@ export default function LeaderRetreat() {
 			},
 		},
 		{
-			title: 'Paid',
-			dataIndex: 'paid',
+			title: "Paid",
+			dataIndex: "paid",
 			filters: [
 				{
-					text: 'Not yet',
-					value: 'pending',
+					text: "Not yet",
+					value: "pending",
 				},
 				{
-					text: 'Waiting Confirm',
-					value: 'uploaded',
+					text: "Waiting Confirm",
+					value: "uploaded",
 				},
 				{
-					text: 'Confirmed',
-					value: 'confirmed',
+					text: "Confirmed",
+					value: "confirmed",
 				},
 			],
 			onFilter: (value, row) => {
@@ -394,20 +394,20 @@ export default function LeaderRetreat() {
 			filterMultiple: false,
 			render: (_, record) => (
 				<div>
-					{getPaymentStatus(record) === 'pending' && <span>Not yet</span>}
-					{getPaymentStatus(record) === 'uploaded' && (
+					{getPaymentStatus(record) === "pending" && <span>Not yet</span>}
+					{getPaymentStatus(record) === "uploaded" && (
 						<span>Waiting Confirm</span>
 					)}
-					{getPaymentStatus(record) === 'confirmed' && <span>Confirmed</span>}
+					{getPaymentStatus(record) === "confirmed" && <span>Confirmed</span>}
 				</div>
 			),
 		},
 		{
-			title: 'Cancel Reason',
-			dataIndex: 'leader_retreat.deleted.reason',
+			title: "Cancel Reason",
+			dataIndex: "leader_retreat.deleted.reason",
 		},
 		{
-			title: 'Operation',
+			title: "Operation",
 			render: (_, record) => (
 				<Space>
 					{
@@ -433,7 +433,7 @@ export default function LeaderRetreat() {
 	async function initData() {
 		let resData;
 		const res: { status: boolean; data: LeadersRetreatRecord[] } = await getReq(
-			'/leader_retreat',
+			"/leader_retreat",
 		);
 		if (res.status === true) {
 			resData = addKeysForLeadersRetreat(res.data);
@@ -441,21 +441,21 @@ export default function LeaderRetreat() {
 		}
 
 		const registeredData = resData!.filter(
-			(item) => item.leader_retreat.status === 'registered',
+			(item) => item.leader_retreat.status === "registered",
 		);
 		const deletedData = resData!.filter(
-			(item) => item.leader_retreat.status === 'deleted',
+			(item) => item.leader_retreat.status === "deleted",
 		);
 		return { registeredData: registeredData, deletedData: deletedData };
 	}
 
 	async function displayDataToTable(type: string) {
-		if (type === 'registered') {
+		if (type === "registered") {
 			setDisplayData(data);
-			setCurrentDisplayType('registered');
-		} else if (type === 'deleted') {
+			setCurrentDisplayType("registered");
+		} else if (type === "deleted") {
 			setDisplayData(deletedData);
-			setCurrentDisplayType('deleted');
+			setCurrentDisplayType("deleted");
 		}
 	}
 
@@ -468,8 +468,8 @@ export default function LeaderRetreat() {
 
 		putReq(`/leader_retreat/${CYC_ID}`, deletedPutData).then((res) => {
 			if (res.status) {
-				Message.success('Participant deleted successfully');
-			} else Message.error('Something went wrong');
+				Message.success("Participant deleted successfully");
+			} else Message.error("Something went wrong");
 		});
 
 		setDeleteModalVisible(false);
@@ -480,11 +480,11 @@ export default function LeaderRetreat() {
 	}
 
 	function deleteBtnHandler(record: LeadersRetreatRecord) {
-		set('current_participant', record).then(() => setDeleteModalVisible(true));
+		set("current_participant", record).then(() => setDeleteModalVisible(true));
 	}
 
 	function restoreBtnHandler() {
-		get('current_participant').then((res: LeadersRetreatRecord) => {
+		get("current_participant").then((res: LeadersRetreatRecord) => {
 			const CYC_ID = res.CYC_ID;
 			//console.log(CYC_ID)
 			getReq(`/leader_retreat/restore/${CYC_ID}`).then((res) => {
@@ -501,9 +501,9 @@ export default function LeaderRetreat() {
 	}
 
 	function restoreParticipant(record: LeadersRetreatRecord) {
-		set('current_participant', record).then(() => {
+		set("current_participant", record).then(() => {
 			UIConfirmModal(
-				'Restore participant',
+				"Restore participant",
 				`Are you sure to restore this participant: [${record.name}] ?`,
 				restoreBtnHandler,
 			);
@@ -518,27 +518,27 @@ export default function LeaderRetreat() {
 					<Button
 						type="primary"
 						icon={<IconPlus />}
-						style={{ margin: '10px 0' }}
+						style={{ margin: "10px 0" }}
 					>
 						Register new
 					</Button>
-					{current_display_type === 'registered' ? (
+					{current_display_type === "registered" ? (
 						<Button
 							type="secondary"
 							icon={<IconDelete />}
-							onClick={() => displayDataToTable('deleted')}
+							onClick={() => displayDataToTable("deleted")}
 						></Button>
 					) : (
 						<Button
 							type="secondary"
 							icon={<IconUserGroup />}
-							onClick={() => displayDataToTable('registered')}
+							onClick={() => displayDataToTable("registered")}
 						></Button>
 					)}
 				</Space>
 				<Table
 					columns={
-						current_display_type === 'registered'
+						current_display_type === "registered"
 							? columns
 							: columnsForDeletedTable
 					}
@@ -546,8 +546,8 @@ export default function LeaderRetreat() {
 					renderPagination={(paginationNode) => (
 						<div
 							style={{
-								display: 'flex',
-								justifyContent: 'space-between',
+								display: "flex",
+								justifyContent: "space-between",
 								marginTop: 10,
 							}}
 						>

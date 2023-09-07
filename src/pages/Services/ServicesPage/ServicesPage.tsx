@@ -1,6 +1,6 @@
-import { Grid, Card } from '@arco-design/web-react';
-import { FunctionComponent } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Grid, Card } from "@arco-design/web-react";
+import { FunctionComponent } from "react";
+import { useNavigate } from "react-router-dom";
 const Row = Grid.Row;
 const Col = Grid.Col;
 const { Meta } = Card;
@@ -22,15 +22,15 @@ const ServiceCard: FunctionComponent<ServiceCardProps> = ({
 	return (
 		<Card
 			hoverable
-			style={{ margin: 20, cursor: 'pointer' }}
+			style={{ margin: 20, cursor: "pointer" }}
 			cover={
-				<div style={{ height: 200, overflow: 'hidden' }}>
+				<div style={{ height: 200, overflow: "hidden" }}>
 					<img
 						style={{
-							width: '100%',
-							height: '100%',
-							transform: 'translateY(-20px)',
-							objectFit: 'cover',
+							width: "100%",
+							height: "100%",
+							transform: "translateY(-20px)",
+							objectFit: "cover",
 						}}
 						alt="dessert"
 						src={imageURL}
