@@ -42,7 +42,6 @@ import VideoManagement from "@/pages/FaithFlix/VideoManagement.tsx";
 import FaithflixDashboard from "@/pages/FaithFlix/FaithflixDashboard.tsx";
 import SectionManagement from "@/pages/FaithFlix/SectionManagement.tsx";
 import FaithflixUsers from "@/pages/FaithFlix/FaithflixUsers.tsx";
-import { GoogleOAuthProvider } from "@react-oauth/google";
 
 
 function App() {
@@ -151,12 +150,7 @@ function App() {
 
                             <Route path="/faithflix/dashboard" element={<FaithflixDashboard /> } />
 
-                            <Route path="/faithflix/video-management" element={
-								<GoogleOAuthProvider clientId={import.meta.env["VITE_YOUTUBE_CLIENT_ID"]}>
-									<VideoManagement />
-								</GoogleOAuthProvider>
-							}
-							/>
+                            <Route path="/faithflix/video-management" element={<VideoManagement />}/>
                             <Route path="/faithflix/section-management" element={<SectionManagement /> } />
                             <Route path="/faithflix/users" element={<FaithflixUsers /> } />
 
