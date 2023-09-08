@@ -13,7 +13,7 @@ interface AddVideoModalProps {
     visible: boolean;
     setVisible: (visible: boolean) => void;
 }
-export default function AddVideoModal(props: AddVideoModalProps) {
+export default function AddSeriesModal(props: AddVideoModalProps) {
     const { visible, setVisible } = props;
     // const formRef = useRef();
     const formRef = useRef<FormInstance | null>(null);
@@ -34,7 +34,6 @@ export default function AddVideoModal(props: AddVideoModalProps) {
         }[];
         // 其他属性
     }
-
 
 
     return (

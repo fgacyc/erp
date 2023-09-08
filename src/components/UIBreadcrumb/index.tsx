@@ -11,7 +11,7 @@ interface BreadcrumbProps {
 }
 const UIBreadcrumb: FunctionComponent<BreadcrumbProps> = () => {
 	const location = useLocation();
-	console.log(location);
+	// console.log(location);
 	const [ifShowTimerInBar, setIfShowTimerInBar] = useState(false);
 
 	useEffect(() => {
