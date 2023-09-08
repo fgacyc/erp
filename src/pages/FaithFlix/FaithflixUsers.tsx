@@ -1,5 +1,6 @@
 import UIBreadcrumb from "@/components/UIBreadcrumb";
 
+
 export  default function FaithflixUsers() {
     const breadcrumbItems = [
         {

@@ -66,7 +66,7 @@ export default function AddSeriesModal(props: AddVideoModalProps) {
                     }}
             >
                 <FormItem
-                    label='Video Title' field='videoTitle' required >
+                    label='Series Title' field='videoTitle' required >
                     <Input allowClear />
                 </FormItem>
                 <FormItem label='Description' field={"description"} required>
