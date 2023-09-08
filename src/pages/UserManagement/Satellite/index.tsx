@@ -1,5 +1,4 @@
 import { SatelliteForm } from "@/components/Form/Satellite";
-import UIBreadcrumb from "@/components/UIBreadcrumb";
 import { useAPI } from "@/lib/openapi";
 import { addKeys } from "@/tools/tableTools";
 import { transformSatelliteFromAPI } from "@/utils/transform";
@@ -8,20 +7,6 @@ import { IconPlus, IconSearch } from "@arco-design/web-react/icon";
 import { useEffect, useState } from "react";
 
 const PastoralRolesPage = () => {
-	const breadcrumbItems = [
-		{
-			name: "Users",
-			link: "/",
-			clickable: false,
-		},
-
-		{
-			name: "Satellites",
-			link: "/users/satellites",
-			clickable: true,
-		},
-	];
-
 	const api = useAPI();
 	const [satellites, setSatellites] = useState<Satellite[]>();
 	const [selectedSatellite, setSelectedSatellite] = useState<Satellite>();
@@ -54,7 +39,6 @@ const PastoralRolesPage = () => {
 				checkDetails={selectedSatellite ? true : false}
 				onClose={() => setSelectedSatellite(undefined)}
 			/>
-			<UIBreadcrumb items={breadcrumbItems} />
 			<div className="app-component full-screen-app-component">
 				<Button
 					type="primary"

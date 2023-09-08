@@ -1,4 +1,3 @@
-import UIBreadcrumb from "@/components/UIBreadcrumb";
 import { Button, Card, Input } from "@arco-design/web-react";
 import { FunctionComponent, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -56,23 +55,10 @@ const CampCard: FunctionComponent<CampCardProps> = ({
 };
 
 export default function CampPage() {
-	const breadcrumbItems = [
-		{
-			name: "Events",
-			link: "/",
-			clickable: false,
-		},
-		{
-			name: "Camp",
-			link: "/events/camp",
-			clickable: true,
-		},
-	];
 	const [currentActive, setCurrentActive] = useState(0);
 
 	return (
 		<>
-			<UIBreadcrumb items={breadcrumbItems} />
 			<div className="app-component full-screen-app-component">
 				<div
 					style={{

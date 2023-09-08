@@ -3,7 +3,7 @@ import {
 	Cascader,
 	Modal,
 	Radio,
-	Select,
+	// Select,
 	Spin,
 } from "@arco-design/web-react";
 
@@ -19,8 +19,9 @@ import {
 } from "react";
 import { useAPI } from "@/lib/openapi";
 import { AddressField, CustomField } from "../Field";
-import { addKeys } from "@/tools/tableTools";
+// import { addKeys } from "@/tools/tableTools";
 import { addRolesToCGField, transformCGFromAPI } from "@/utils/transform";
+import { hasDuplicatesInData } from "@/utils/helpers";
 
 interface ProfileFormType extends FormikValues {
 	name: string;
@@ -33,6 +34,7 @@ interface ProfileFormType extends FormikValues {
 	state: string;
 	postalCode: string;
 	gender: Gender;
+	cg: (string | string[])[];
 }
 
 interface ProfileFormProps {
@@ -74,6 +76,8 @@ export const ProfileForm: FunctionComponent<ProfileFormProps> = ({
 		const res2 = await api.GET("/connect-groups", {});
 		setCGs(res2.data?.map((d) => transformCGFromAPI(d)));
 
+		// const res3 = await api.GET("/users/{id}/pastoral-roles");
+
 		if (!res.error && !res2.error) setLoading(false);
 	};
 
@@ -97,8 +101,11 @@ export const ProfileForm: FunctionComponent<ProfileFormProps> = ({
 				}
 				if (!formRef.current) return;
 				if (formRef.current.isSubmitting) return;
-				formRef.current.submitForm();
-				setEditable(false);
+				formRef.current
+					.submitForm()
+					.then(() => setEditable(false))
+					.catch(() => setEditable(true));
+				// setEditable(false);
 				// setNewUser(false);
 			}}
 			closable={checkDetails}
@@ -111,8 +118,8 @@ export const ProfileForm: FunctionComponent<ProfileFormProps> = ({
 		>
 			<Spin loading={loading} tip="loading data..." className="w-full mx-auto">
 				<Formik<ProfileFormType>
-					validateOnBlur={false}
-					validateOnChange={false}
+					validateOnBlur
+					validateOnChange
 					innerRef={formRef}
 					initialValues={{
 						name: user.name,
@@ -125,7 +132,7 @@ export const ProfileForm: FunctionComponent<ProfileFormProps> = ({
 						state: user.address?.state ?? "",
 						postalCode: user.address?.postalCode ?? "",
 						gender: "male",
-						role: [],
+						cg: [],
 					}}
 					validationSchema={Yup.object().shape({
 						name: Yup.string()
@@ -149,43 +156,84 @@ export const ProfileForm: FunctionComponent<ProfileFormProps> = ({
 					})}
 					onSubmit={async (values, actions) => {
 						actions.setSubmitting(true);
-						// console.log(values);
-						try {
-							const res = await api.PATCH("/users/{id}", {
-								params: {
-									path: {
+
+						if (hasDuplicatesInData(values.cg)) {
+							actions.setFieldError("cg", "Only 1 role allowed per CG.");
+							throw new Error("Only 1 role allowed per CG.");
+						} else
+							try {
+								const res = await api.PATCH("/users/{id}", {
+									params: {
+										path: {
+											id: user.id,
+										},
+									},
+									body: {
 										id: user.id,
+										address: {
+											city: values.city,
+											country: values.country,
+											line_one: values.lineOne,
+											line_two: values.lineTwo ?? "",
+											postal_code: values.postalCode,
+											state: values.state,
+										},
+										name: values.name,
+										phone_number: values.phoneNo,
+										ic_number: values.icNo,
+										gender: values.gender,
 									},
-								},
-								body: {
-									id: user.id,
-									address: {
-										city: values.city,
-										country: values.country,
-										line_one: values.lineOne,
-										line_two: values.lineTwo ?? "",
-										postal_code: values.postalCode,
-										state: values.state,
-									},
-									name: values.name,
-									phone_number: values.phoneNo,
-									ic_number: values.icNo,
-									gender: values.gender,
-								},
-							});
+								});
 
-							// TODO: Associate Roles
-							// const res2 = await api.
+								values.cg.forEach((cg) => {
+									if (Array.isArray(cg)) {
+										api.POST("/connect-groups/{id}/users", {
+											params: {
+												path: { id: cg[0] as string },
+											},
+											body: {
+												users: [
+													{
+														user_id: user.id,
+														role_id: cg[1] as string,
+													},
+												],
+											},
+										});
+									} else {
+										api.POST("/connect-groups/{id}/users", {
+											params: {
+												path: { id: cg[0] as string },
+											},
+											body: {
+												users: [
+													{
+														user_id: user.id,
+														role_id: cg[1] as string,
+													},
+												],
+											},
+										});
+									}
+								});
 
-							if (!res.error) {
+								// const res2 = await api.POST("/connect-groups/{id}/users", {
+								// 	params: {
+								// 		path: {
+								// 			id:
+								// 		}
+								// 	}
+								// })
+
+								if (!res.error) {
+									actions.setSubmitting(false);
+									!checkDetails && setVisible(false);
+								}
+							} catch (err) {
+								throw new Error(err as string);
+							} finally {
 								actions.setSubmitting(false);
-								!checkDetails && setVisible(false);
 							}
-						} catch (err) {
-							throw new Error(err as string);
-						} finally {
-							actions.setSubmitting(false);
-						}
 					}}
 				>
 					{({ errors, isSubmitting, setValues, values }) => (
@@ -217,28 +265,34 @@ export const ProfileForm: FunctionComponent<ProfileFormProps> = ({
 								editable={editable}
 							/>
 							{checkDetails && (
-								<div className="flex flex-row items-center justify-between gap-3">
-									<label htmlFor={"cg"} className="text-sm capitalize">
-										CG
-									</label>
-									<Cascader
-										className="w-[350px]"
-										mode="multiple"
-										disabled={!editable}
-										placeholder="None."
-										onChange={(item, selectedOption) => {
-											// setValues({ ...values, role: item });
-											console.log(item);
-										}}
-										changeOnSelect
-										options={addRolesToCGField(cgs, roles)}
-									>
-										{/* {cgs?.map((cg) => (
-											<Select.Option value={cg.id} key={cg.id}>
-												{cg.name}
-											</Select.Option>
-										))} */}
-									</Cascader>
+								<div className="flex flex-col w-full justify-end">
+									<div className="flex flex-row items-center justify-between gap-3">
+										<label className="text-sm capitalize">CG</label>
+										<Cascader
+											className="w-[350px]"
+											mode="multiple"
+											disabled={!editable}
+											placeholder="None."
+											onChange={(item) => {
+												console.log(errors);
+
+												setValues({
+													...values,
+													cg: item,
+												});
+											}}
+											checkedStrategy="parent"
+											allowClear
+											showSearch={false}
+											changeOnSelect
+											options={addRolesToCGField(cgs, roles)}
+										/>
+									</div>
+									{errors && (
+										<div className="text-red-500 text-xs text-right">
+											{errors["cg"]}
+										</div>
+									)}
 								</div>
 							)}
 

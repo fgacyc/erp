@@ -1,4 +1,3 @@
-import UIBreadcrumb from "@/components/UIBreadcrumb/";
 import "./recruitment_appointment.css";
 import { useEffect, useRef, useState } from "react";
 import { getAllUsers } from "@/tools/DB";
@@ -29,20 +28,9 @@ import { ifCurrentUserIsSuperAdmin } from "@/tools/auth";
 import UIInterviewAppoInsight from "@/components/UI_Modal/UI_InterviewAppoInsight";
 import UIInterviewDatePickerModal from "@/components/UI_Modal/UI_InterviewDatePickerModal";
 import UI_ConfirmModal from "@/components/UI_Modal/UI_ConfirmModal";
-import { RefInputType } from "@arco-design/web-react/es/Input/interface.js";
+import { RefInputType } from "@arco-design/web-react/es/Input/interface";
+
 export default function Interview_table() {
-	const breadcrumbItems = [
-		{
-			name: "Recruitment",
-			link: "/",
-			clickable: false,
-		},
-		{
-			name: "Interview",
-			link: "/recruitment_interview",
-			clickable: true,
-		},
-	];
 	const [userData, setUserData] = useState<Recruiter[]>([]);
 	const [currentCandidate, setCurrentCandidate] = useState<Recruiter>();
 	const [visible, setVisible] = useState(false);
@@ -359,7 +347,6 @@ export default function Interview_table() {
 
 	return (
 		<>
-			<UIBreadcrumb items={breadcrumbItems} />
 			<div className="app-component full-screen-app-component">
 				{ifShowInsightBtn && (
 					<div>

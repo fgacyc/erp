@@ -1,5 +1,4 @@
 import { CGForm } from "@/components/Form/CG";
-import UIBreadcrumb from "@/components/UIBreadcrumb";
 import { useAPI } from "@/lib/openapi";
 import { addKeys } from "@/tools/tableTools";
 import { cgVariants } from "@/utils/constants";
@@ -9,21 +8,6 @@ import { IconPlus, IconSearch } from "@arco-design/web-react/icon";
 import { FunctionComponent, useEffect, useState } from "react";
 
 const CellGroupPage = () => {
-	const breadcrumbItems = [
-		{
-			name: "Users",
-			link: "/",
-		},
-		{
-			name: "Members",
-			link: "/users/pastoral",
-		},
-		{
-			name: "Cell Groups",
-			link: "/users/pastoral/cg",
-		},
-	];
-
 	const api = useAPI();
 	const [cgs, setCGs] = useState<CG[]>();
 	const [selectedCG, setSelectedCG] = useState<CG>();
@@ -55,7 +39,6 @@ const CellGroupPage = () => {
 				checkDetails={selectedCG ? true : false}
 				onClose={() => setSelectedCG(undefined)}
 			/>
-			<UIBreadcrumb items={breadcrumbItems} />
 			<div className="app-component full-screen-app-component">
 				<Button
 					type="primary"

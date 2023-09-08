@@ -32,7 +32,6 @@ ChartJS.register(
 import "./recruitment_dashboard.css";
 import { getReq } from "@/tools/requests";
 import { getInfoCount, getTotals } from "./dataCalculate";
-import UIBreadcrumb from "@/components/UIBreadcrumb";
 import {
 	getEvaluationRatio,
 	getInterviewRatio,
@@ -580,22 +579,8 @@ export default function Recruitment_Dashboard() {
 		],
 	};
 
-	const breadcrumbItems = [
-		{
-			name: "Recruitment",
-			link: "/",
-			clickable: false,
-		},
-		{
-			name: "Dashboard",
-			link: "/recruitment_dashboard",
-			clickable: true,
-		},
-	];
-
 	return (
 		<>
-			<UIBreadcrumb items={breadcrumbItems} />
 			<div className="recruitment-dashboard-con app-component">
 				<div style={{ display: "flex", height: "100%", flexDirection: "row" }}>
 					<div className="left-side">

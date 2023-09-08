@@ -1,5 +1,4 @@
 import { CustomField } from "@/components/Form/Field";
-import UIBreadcrumb from "@/components/UIBreadcrumb";
 import UIConfirmModal from "@/components/UI_Modal/UI_ConfirmModal";
 import { useAPI } from "@/lib/openapi";
 import { addKeys } from "@/tools/tableTools";
@@ -10,24 +9,6 @@ import { ChangeEvent, useEffect, useRef, useState } from "react";
 import * as Yup from "yup";
 
 const PastoralRolesPage = () => {
-	const breadcrumbItems = [
-		{
-			name: "Users",
-			link: "/",
-			clickable: false,
-		},
-		{
-			name: "Members",
-			link: "/users/pastoral",
-			clickable: true,
-		},
-		{
-			name: "Roles",
-			link: "/users/pastoral/roles",
-			clickable: true,
-		},
-	];
-
 	const api = useAPI();
 	const [roles, setRoles] = useState<Role[]>();
 	const [modalVisible, setModalVisible] = useState(false);
@@ -137,7 +118,6 @@ const PastoralRolesPage = () => {
 					)}
 				</Formik>
 			</Modal>
-			<UIBreadcrumb items={breadcrumbItems} />
 			<div className="app-component full-screen-app-component">
 				<Button
 					type="primary"

@@ -1,4 +1,3 @@
-import UIBreadcrumb from "@/components/UIBreadcrumb";
 import { useEffect, useRef, useState } from "react";
 import { getAllUsers } from "@/tools/DB.js";
 import { Button, Input, Table, TableColumnProps } from "@arco-design/web-react";
@@ -11,18 +10,6 @@ import { set } from "idb-keyval";
 import { RefInputType } from "@arco-design/web-react/es/Input/interface.js";
 
 export default function Recruitment_Evaluation_Table() {
-	const breadcrumbItems = [
-		{
-			name: "Recruitment",
-			link: "/",
-			clickable: false,
-		},
-		{
-			name: "Evaluation",
-			link: "/recruitment_evaluation",
-			clickable: true,
-		},
-	];
 	const [userData, setUserData] = useState<Recruiter[]>();
 	const [currentCandidate, setCurrentCandidate] = useState<Recruiter>();
 	const [visible, setVisible] = useState(false);
@@ -227,7 +214,6 @@ export default function Recruitment_Evaluation_Table() {
 
 	return (
 		<>
-			<UIBreadcrumb items={breadcrumbItems} />
 			<div className="app-component full-screen-app-component">
 				{userData && (
 					<Table
