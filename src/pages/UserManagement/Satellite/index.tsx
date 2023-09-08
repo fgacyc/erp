@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 
 const PastoralRolesPage = () => {
 	const api = useIdentityAPI();
+
 	const [satellites, setSatellites] = useState<Satellite[]>();
 	const [selectedSatellite, setSelectedSatellite] = useState<Satellite>();
 	const [modalVisible, setModalVisible] = useState(false);
