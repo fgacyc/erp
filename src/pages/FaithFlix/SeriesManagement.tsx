@@ -9,7 +9,7 @@ import {AiOutlineYoutube} from "react-icons/ai";
 import UI_ConfirmModal from "@/components/UI_Modal/UI_ConfirmModal";
 
 
-export  default function VideoManagement() {
+export  default function SeriesManagement() {
     const breadcrumbItems = [
         {
             name: "My Group",

@@ -42,6 +42,8 @@ import VideoManagement from "@/pages/FaithFlix/VideoManagement.tsx";
 import FaithflixDashboard from "@/pages/FaithFlix/FaithflixDashboard.tsx";
 import SectionManagement from "@/pages/FaithFlix/SectionManagement.tsx";
 import FaithflixUsers from "@/pages/FaithFlix/FaithflixUsers.tsx";
+import SeriesManagement from "@/pages/FaithFlix/SeriesManagement.tsx";
+import FaithflixCredits from "@/pages/FaithFlix/FaithflixCredits.tsx";
 
 
 function App() {
@@ -149,10 +151,12 @@ function App() {
 							<Route path="/services/room_booking" element={<RoomBooking />} />
 
                             <Route path="/faithflix/dashboard" element={<FaithflixDashboard /> } />
-
                             <Route path="/faithflix/video-management" element={<VideoManagement />}/>
+                            <Route path="/faithflix/series-management" element={<SeriesManagement /> } />
                             <Route path="/faithflix/section-management" element={<SectionManagement /> } />
                             <Route path="/faithflix/users" element={<FaithflixUsers /> } />
+                            <Route path="/faithflix/credits" element={<FaithflixCredits /> } />
+
 
 						</Route>
 						<Route path="/registration" element={<Registration />} />
