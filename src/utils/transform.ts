@@ -1,4 +1,4 @@
-import { operations } from "@/@types/schema";
+import { operations } from "@/@types/identity";
 
 export const transformUserFromAPI = (
 	input: operations["get-user"]["responses"]["200"]["content"]["application/json; charset=utf-8"],
