@@ -1,4 +1,4 @@
-import { useAPI } from "@/lib/openapi";
+import { useIdentityAPI } from "@/lib/openapi";
 import { Modal } from "@arco-design/web-react";
 import {
 	Formik,
@@ -52,7 +52,7 @@ export const SatelliteForm: FunctionComponent<SatelliteFormProps> = ({
 	useEffect(() => {
 		setEditable(!checkDetails);
 	}, [checkDetails]);
-	const api = useAPI();
+	const api = useIdentityAPI();
 
 	return (
 		<Modal

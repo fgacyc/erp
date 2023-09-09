@@ -1,5 +1,5 @@
 import { SatelliteForm } from "@/components/Form/Satellite";
-import { useAPI } from "@/lib/openapi";
+import { useIdentityAPI } from "@/lib/openapi";
 import { addKeys } from "@/tools/tableTools";
 import { transformSatelliteFromAPI } from "@/utils/transform";
 import { Button, Input, Space, Table } from "@arco-design/web-react";
@@ -7,7 +7,7 @@ import { IconPlus, IconSearch } from "@arco-design/web-react/icon";
 import { useEffect, useState } from "react";
 
 const PastoralRolesPage = () => {
-	const api = useAPI();
+	const api = useIdentityAPI();
 	const [satellites, setSatellites] = useState<Satellite[]>();
 	const [selectedSatellite, setSelectedSatellite] = useState<Satellite>();
 	const [modalVisible, setModalVisible] = useState(false);

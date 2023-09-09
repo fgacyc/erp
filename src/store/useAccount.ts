@@ -1,4 +1,4 @@
-import { operations } from "@/@types/schema";
+import { operations } from "@/@types/identity";
 import { create } from "zustand";
 
 type UserStore = {

@@ -1,4 +1,4 @@
-import { useAPI } from "@/lib/openapi";
+import { useIdentityAPI } from "@/lib/openapi";
 import { useAccount } from "@/store/useAccount";
 import { Spin } from "@arco-design/web-react";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -10,7 +10,7 @@ export const RequireAuth: FunctionComponent<{ children: JSX.Element }> = ({
 }) => {
 	const { isLoading, user: auth0User } = useAuth0();
 	const { setUser, user } = useAccount();
-	const api = useAPI();
+	const api = useIdentityAPI();
 
 	const [tip, setTip] = useState("Loading...");
 	const [loadingUserData, setLoadingUserData] = useState(true);

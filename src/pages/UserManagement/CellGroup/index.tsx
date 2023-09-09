@@ -1,5 +1,5 @@
 import { CGForm } from "@/components/Form/CG";
-import { useAPI } from "@/lib/openapi";
+import { useIdentityAPI } from "@/lib/openapi";
 import { addKeys } from "@/tools/tableTools";
 import { cgVariants } from "@/utils/constants";
 import { transformCGFromAPI } from "@/utils/transform";
@@ -8,7 +8,7 @@ import { IconPlus, IconSearch } from "@arco-design/web-react/icon";
 import { FunctionComponent, useEffect, useState } from "react";
 
 const CellGroupPage = () => {
-	const api = useAPI();
+	const api = useIdentityAPI();
 	const [cgs, setCGs] = useState<CG[]>();
 	const [selectedCG, setSelectedCG] = useState<CG>();
 	const [modalVisible, setModalVisible] = useState(false);
@@ -130,7 +130,7 @@ const CellGroupPage = () => {
 export default CellGroupPage;
 
 const Satellite: FunctionComponent<{ id: string }> = ({ id }) => {
-	const api = useAPI();
+	const api = useIdentityAPI();
 
 	const [sat, setSat] = useState("Loading...");
 

@@ -1,8 +1,8 @@
 import { Button, Input, Space, Table } from "@arco-design/web-react";
 import { IconSearch } from "@arco-design/web-react/icon";
 import { useEffect, useState } from "react";
-import { useAPI } from "@/lib/openapi";
-import { operations } from "@/@types/schema";
+import { useIdentityAPI } from "@/lib/openapi";
+import { operations } from "@/@types/identity";
 import { addKeys } from "@/tools/tableTools";
 import { ProfileForm } from "@/components/Form/Profile";
 import { transformUserFromAPI } from "@/utils/transform";
@@ -17,7 +17,7 @@ const UserManagementPastoral = () => {
 	const [selectedUser, setSelectedUser] = useState<User2>();
 	const [firstLoad, setFirstLoad] = useState(true);
 
-	const api = useAPI();
+	const api = useIdentityAPI();
 
 	useEffect(() => {
 		api
