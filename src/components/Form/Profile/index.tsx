@@ -19,7 +19,6 @@ import {
 } from "react";
 import { useIdentityAPI } from "@/lib/openapi";
 import { AddressField, CustomField } from "../Field";
-// import { addKeys } from "@/tools/tableTools";
 import { addRolesToCGField, transformCGFromAPI } from "@/utils/transform";
 import { hasDuplicatesInData } from "@/utils/helpers";
 
@@ -265,34 +264,28 @@ export const ProfileForm: FunctionComponent<ProfileFormProps> = ({
 								editable={editable}
 							/>
 							{checkDetails && (
-								<div className="flex flex-col w-full justify-end">
-									<div className="flex flex-row items-center justify-between gap-3">
-										<label className="text-sm capitalize">CG</label>
-										<Cascader
-											className="w-[350px]"
-											mode="multiple"
-											disabled={!editable}
-											placeholder="None."
-											onChange={(item) => {
-												console.log(errors);
-
-												setValues({
-													...values,
-													cg: item,
-												});
-											}}
-											checkedStrategy="parent"
-											allowClear
-											showSearch={false}
-											changeOnSelect
-											options={addRolesToCGField(cgs, roles)}
-										/>
-									</div>
-									{errors && (
-										<div className="text-red-500 text-xs text-right">
-											{errors["cg"]}
-										</div>
-									)}
+								<div className="flex flex-row items-center justify-between gap-3">
+									<label htmlFor={"cg"} className="text-sm capitalize">
+										CG
+									</label>
+									<Cascader
+										className="w-[350px]"
+										mode="multiple"
+										disabled={!editable}
+										placeholder="None."
+										onChange={(item) => {
+											// setValues({ ...values, role: item });
+											console.log(item);
+										}}
+										changeOnSelect
+										options={addRolesToCGField(cgs, roles)}
+									>
+										{/* {cgs?.map((cg) => (
+											<Select.Option value={cg.id} key={cg.id}>
+												{cg.name}
+											</Select.Option>
+										))} */}
+									</Cascader>
 								</div>
 							)}
 
