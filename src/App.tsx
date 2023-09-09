@@ -45,6 +45,8 @@ function App() {
 			domain={import.meta.env["VITE_AUTH0_DOMAIN_ID"]}
 			clientId={import.meta.env["VITE_AUTH0_CLIENT_ID"]}
 			authorizationParams={{
+				audience: "https://identity.development.fgacyc.com",
+				scope: "openid profile email",
 				redirect_uri: window.location.origin,
 			}}
 			cacheLocation="localstorage"

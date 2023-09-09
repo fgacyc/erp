@@ -1,4 +1,4 @@
-import { useAPI } from "@/lib/openapi";
+import { useIdentityAPI } from "@/lib/openapi";
 import { Modal, Select, Spin } from "@arco-design/web-react";
 import {
 	Formik,
@@ -54,7 +54,7 @@ export const CGForm: FunctionComponent<CGFormProps> = ({
 		setEditable(!checkDetails);
 	}, [checkDetails]);
 
-	const api = useAPI();
+	const api = useIdentityAPI();
 
 	useEffect(() => {
 		setLoading(true);
