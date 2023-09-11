@@ -1,6 +1,6 @@
 import { CGForm } from "@/components/Form/CG";
 import UIBreadcrumb from "@/components/UIBreadcrumb";
-import { useAPI } from "@/lib/openapi";
+import { useIdentityAPI } from "@/lib/openapi";
 import { addKeys } from "@/tools/tableTools";
 import { cgVariants } from "@/utils/constants";
 import { transformCGFromAPI } from "@/utils/transform";
@@ -24,7 +24,7 @@ const CellGroupPage = () => {
 		},
 	];
 
-	const api = useAPI();
+	const api = useIdentityAPI();
 	const [cgs, setCGs] = useState<CG[]>();
 	const [selectedCG, setSelectedCG] = useState<CG>();
 	const [modalVisible, setModalVisible] = useState(false);
@@ -147,7 +147,7 @@ const CellGroupPage = () => {
 export default CellGroupPage;
 
 const Satellite: FunctionComponent<{ id: string }> = ({ id }) => {
-	const api = useAPI();
+	const api = useIdentityAPI();
 
 	const [sat, setSat] = useState("Loading...");
 

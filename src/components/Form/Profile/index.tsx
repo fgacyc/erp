@@ -16,9 +16,8 @@ import {
 	useRef,
 	useState,
 } from "react";
-import { useAPI } from "@/lib/openapi";
+import { useIdentityAPI } from "@/lib/openapi";
 import { AddressField, CustomField } from "../Field";
-//import { addKeys } from "@/tools/tableTools";
 import { addRolesToCGField, transformCGFromAPI } from "@/utils/transform";
 
 interface ProfileFormType extends FormikValues {
@@ -50,7 +49,7 @@ export const ProfileForm: FunctionComponent<ProfileFormProps> = ({
 	checkDetails,
 	onClose,
 }) => {
-	const api = useAPI();
+	const api = useIdentityAPI();
 
 	const formRef = useRef<FormikProps<ProfileFormType>>(null);
 
@@ -225,10 +224,10 @@ export const ProfileForm: FunctionComponent<ProfileFormProps> = ({
 										mode="multiple"
 										disabled={!editable}
 										placeholder="None."
-										// onChange={(item, selectedOption) => {
-										// 	// setValues({ ...values, role: item });
-										// 	console.log(item);
-										// }}
+										onChange={(item) => {
+											// setValues({ ...values, role: item });
+											console.log(item);
+										}}
 										changeOnSelect
 										options={addRolesToCGField(cgs, roles)}
 									>

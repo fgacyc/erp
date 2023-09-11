@@ -13,7 +13,7 @@
 		"clean": "rimraf node_modules dist",
 		"prepare": "yarn lint",
 		"postinstall": "husky install",
-		"generate-types": "yarn openapi-typescript https://identity.fgacyc.com/specs -o src/@types/schema.d.ts"
+		"generate-types": "yarn openapi-typescript https://identity.fgacyc.com/specs -o src/@types/identity.d.ts && yarn openapi-typescript https://event.fgacyc.com/specs -o src/@types/event.d.ts"
 	},
 	"dependencies": {
 		"@arco-design/web-react": "^2.46.2",

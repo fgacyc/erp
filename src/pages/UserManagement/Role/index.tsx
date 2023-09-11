@@ -1,7 +1,7 @@
 import { CustomField } from "@/components/Form/Field";
 import UIBreadcrumb from "@/components/UIBreadcrumb";
 import UIConfirmModal from "@/components/UI_Modal/UI_ConfirmModal";
-import { useAPI } from "@/lib/openapi";
+import { useIdentityAPI } from "@/lib/openapi";
 import { addKeys } from "@/tools/tableTools";
 import { Button, Input, Modal, Space, Table } from "@arco-design/web-react";
 import { IconDelete, IconPlus } from "@arco-design/web-react/icon";
@@ -28,7 +28,7 @@ const PastoralRolesPage = () => {
 		},
 	];
 
-	const api = useAPI();
+	const api = useIdentityAPI();
 	const [roles, setRoles] = useState<Role[]>();
 	const [modalVisible, setModalVisible] = useState(false);
 	const [loading, setLoading] = useState(true);
