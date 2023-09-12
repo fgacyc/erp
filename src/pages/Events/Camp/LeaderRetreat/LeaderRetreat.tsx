@@ -1,4 +1,3 @@
-import UIBreadcrumb from "../../../../components/UIBreadcrumb";
 import {
 	Button,
 	Input,
@@ -23,22 +22,6 @@ import UIConfirmModal from "../../../../components/UI_Modal/UI_ConfirmModal";
 import { RefInputType } from "@arco-design/web-react/es/Input/interface";
 
 export default function LeaderRetreat() {
-	const breadcrumbItems = [
-		{
-			name: "Events",
-			link: "/",
-			clickable: false,
-		},
-		{
-			name: "Camp",
-			link: "/events/camp",
-			clickable: true,
-		},
-		{
-			name: "Leader Retreat",
-			link: "/events/camp/leader_retreat",
-		},
-	];
 	const [data, setData] = useState<
 		(LeadersRetreatRecord & {
 			key: number;
@@ -432,9 +415,8 @@ export default function LeaderRetreat() {
 
 	async function initData() {
 		let resData;
-		const res: { status: boolean; data: LeadersRetreatRecord[] } = await getReq(
-			"/leader_retreat",
-		);
+		const res: { status: boolean; data: LeadersRetreatRecord[] } =
+			await getReq("/leader_retreat");
 		if (res.status === true) {
 			resData = addKeysForLeadersRetreat(res.data);
 			// resData = changeNameKey(resData);
@@ -512,7 +494,6 @@ export default function LeaderRetreat() {
 
 	return (
 		<>
-			<UIBreadcrumb items={breadcrumbItems} />
 			<div className="app-component full-screen-app-component">
 				<Space>
 					<Button

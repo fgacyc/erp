@@ -1,22 +1,6 @@
-import UIBreadcrumb from "../../../components/UIBreadcrumb/index.jsx";
-
 const EducationStudents = () => {
-	const breadcrumbItems = [
-		{
-			name: "Education",
-			link: "/",
-			clickable: false,
-		},
-		{
-			name: "Students",
-			link: "/education/students",
-			clickable: true,
-		},
-	];
-
 	return (
 		<>
-			<UIBreadcrumb items={breadcrumbItems} />
 			<div className="app-component full-screen-app-component">
 				<div
 					style={{

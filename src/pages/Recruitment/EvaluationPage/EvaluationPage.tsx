@@ -1,4 +1,3 @@
-import UIBreadcrumb from "@/components/UIBreadcrumb/index.jsx";
 import { Button, Space, List, Card, Message } from "@arco-design/web-react";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -16,18 +15,6 @@ import { findInterviewsNames, findMinistryLabel } from "@/data/ministries";
 import { useSettingModalStore } from "@/components/UI_Modal/UI_SettingModal/settingModalStore";
 
 export default function Evaluation_Page() {
-	const breadcrumbItems = [
-		{
-			name: "Recruitment",
-			link: "/",
-			clickable: false,
-		},
-		{
-			name: "Evaluation",
-			link: "/recruitment_evaluation",
-			clickable: true,
-		},
-	];
 	const [comments, setComments] = useState<ClientComment[]>([]);
 	const [QAs, setQAs] = useState<{
 		general: InterviewQuestion[];
@@ -140,7 +127,6 @@ export default function Evaluation_Page() {
 
 	return (
 		<>
-			<UIBreadcrumb items={breadcrumbItems} />
 			<div
 				className="app-component"
 				style={{ padding: "0 30px", boxSizing: "border-box" }}

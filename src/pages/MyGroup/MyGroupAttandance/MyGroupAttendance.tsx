@@ -1,22 +1,6 @@
-import UIBreadcrumb from "@/components/UIBreadcrumb";
-
 const MyGroupAttendance = () => {
-	const breadcrumbItems = [
-		{
-			name: "My Group",
-			link: "/",
-			clickable: false,
-		},
-		{
-			name: "Attendance",
-			link: "/group/attendance",
-			clickable: true,
-		},
-	];
-
 	return (
 		<>
-			<UIBreadcrumb items={breadcrumbItems} />
 			<div className="app-component full-screen-app-component">
 				<div
 					style={{

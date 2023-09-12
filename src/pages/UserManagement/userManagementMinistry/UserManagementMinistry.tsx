@@ -1,4 +1,3 @@
-import UIBreadcrumb from "../../../components/UIBreadcrumb";
 import {
 	Button,
 	Input,
@@ -22,19 +21,6 @@ const addKeys = (
 };
 
 const UserManagementMinistry = () => {
-	const breadcrumbItems = [
-		{
-			name: "Users",
-			link: "/",
-			clickable: false,
-		},
-		{
-			name: "Ministry management",
-			link: "/users/ministry",
-			clickable: true,
-		},
-	];
-
 	const [data, setData] = useState<(MinistryAccount & { key: number })[]>([]);
 	const inputRef = useRef<RefInputType>(null);
 	// const [type, setType] = useState<'checkbox' | 'radio'>('checkbox');
@@ -216,7 +202,6 @@ const UserManagementMinistry = () => {
 
 	return (
 		<>
-			<UIBreadcrumb items={breadcrumbItems} />
 			<div className="app-component full-screen-app-component">
 				<Button type="primary" icon={<IconPlus />} style={{ margin: "10px 0" }}>
 					Register new

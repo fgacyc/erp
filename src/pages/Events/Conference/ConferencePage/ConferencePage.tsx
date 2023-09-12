@@ -1,28 +1,13 @@
-import UIBreadcrumb from "@/components/UIBreadcrumb";
-
 import { Input } from "@arco-design/web-react";
 import { ButtonGroup } from "@/components/ButtonGroup";
 import { useState } from "react";
 const InputSearch = Input.Search;
 
 const ConferencePage = () => {
-	const breadcrumbItems = [
-		{
-			name: "Events",
-			link: "/",
-			clickable: false,
-		},
-		{
-			name: "ConferencePage",
-			link: "/events/conference",
-			clickable: true,
-		},
-	];
 	const [currentActive, setCurrentActive] = useState(0);
 
 	return (
 		<>
-			<UIBreadcrumb items={breadcrumbItems} />
 			<div className="app-component full-screen-app-component">
 				<div
 					style={{

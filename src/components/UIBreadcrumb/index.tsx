@@ -6,12 +6,8 @@ import { CountdownTimer } from "@/pages/Recruitment/InterviewPage/Interview_form
 import { ifShowTimer } from "./data";
 import { useLocation } from "react-router-dom";
 
-interface BreadcrumbProps {
-	items: BreadcrumbLinks[];
-}
-const UIBreadcrumb: FunctionComponent<BreadcrumbProps> = () => {
+const UIBreadcrumb: FunctionComponent = () => {
 	const location = useLocation();
-	console.log(location);
 	const [ifShowTimerInBar, setIfShowTimerInBar] = useState(false);
 
 	useEffect(() => {
@@ -41,7 +37,14 @@ const UIBreadcrumb: FunctionComponent<BreadcrumbProps> = () => {
 					{location.pathname.split("/").map(
 						(item, index) =>
 							item && (
-								<Breadcrumb.Item key={index} href={`/${item}`}>
+								<Breadcrumb.Item
+									className={`capitalize ${
+										index === location.pathname.split("/").length - 1
+											? "font-bold"
+											: null
+									}`}
+									key={index}
+								>
 									{item}
 								</Breadcrumb.Item>
 							),

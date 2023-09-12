@@ -1,22 +1,6 @@
-import UIBreadcrumb from "@/components/UIBreadcrumb";
-
 const RoomBooking = () => {
-	const breadcrumbItems = [
-		{
-			name: "Services",
-			link: "/services",
-			clickable: true,
-		},
-		{
-			name: "Room Booking",
-			link: "/services/room_booking",
-			clickable: true,
-		},
-	];
-
 	return (
 		<>
-			<UIBreadcrumb items={breadcrumbItems} />
 			<div className="app-component full-screen-app-component">
 				<div
 					style={{
