@@ -28,8 +28,8 @@ export const useIdentityAPI = () => {
 				console.error(`Failed to acquire access token for ${audience}: ${e}`);
 			}
 		})();
-	}, [getAccessTokenSilently]);
 
+	}, [getAccessTokenSilently]);
 	return client;
 };
 
@@ -38,26 +38,23 @@ export const useEventAPI = () => {
 	const { getAccessTokenSilently } = useAuth0();
 
 	useEffect(() => {
-		const audience = import.meta.env["VITE_EVENT_API_URL"];
-		const scope = import.meta.env["VITE_EVENT_API_SCOPE"];
+	  const audience = import.meta.env["VITE_EVENT_API_URL"];
+	  const scope = import.meta.env["VITE_EVENT_API_SCOPE"];
 
-		(async () => {
-			try {
-				const token = await getAccessTokenSilently({
-					authorizationParams: { audience, scope },
-				});
-				setClient(
-					createClient<eventPaths>({
-						baseUrl: audience,
-						headers: { Authorization: `Bearer ${token}` },
-					}),
-				);
-			} catch (e) {
-				// Handle errors such as `login_required` and `consent_required` by re-prompting for a login
-				console.error(`Failed to acquire access token for ${audience}: ${e}`);
-			}
-		})();
+	  (async () => {
+		try {
+		  const token = await getAccessTokenSilently({
+		    authorizationParams: { audience, scope },
+		  });
+		  setClient(createClient<eventPaths>({
+			  baseUrl: audience,
+			  headers: { Authorization: `Bearer ${token}` }
+		  }));
+		} catch (e) {
+		  // Handle errors such as `login_required` and `consent_required` by re-prompting for a login
+		  console.error(`Failed to acquire access token for ${audience}: ${e}`);
+		}
+	  })();
 	}, [getAccessTokenSilently]);
-
 	return client;
 };
