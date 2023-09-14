@@ -1,4 +1,4 @@
-import {getPaymentStatus} from "./data.js";
+import {getPaymentStatus} from "./data.ts";
 import {Button, Space} from "@arco-design/web-react";
 import {IconDelete} from "@arco-design/web-react/icon";
 

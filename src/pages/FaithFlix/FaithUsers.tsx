@@ -1,7 +1,7 @@
 import UIBreadcrumb from "@/components/UIBreadcrumb";
 
 
-export  default function FaithflixCredits() {
+export  default function FaithUsers() {
     const breadcrumbItems = [
         {
             name: "My Group",
@@ -20,7 +20,7 @@ export  default function FaithflixCredits() {
         <>
             <UIBreadcrumb items={breadcrumbItems} />
             <div className="app-component full-screen-app-component">
-                <h1>FaithflixCredits.tsx</h1>
+                <h1>FaithflixUsers</h1>
             </div>
         </>
     );

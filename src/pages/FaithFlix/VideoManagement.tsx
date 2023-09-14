@@ -1,12 +1,15 @@
 import UIBreadcrumb from "@/components/UIBreadcrumb";
-import { Button } from "@arco-design/web-react";
-import {IconDownload, IconPlus} from "@arco-design/web-react/icon";
+import {Button, Image, Progress} from "@arco-design/web-react";
+import {IconArchive, IconEdit, IconPlus} from "@arco-design/web-react/icon";
 import { Table, TableColumnProps } from "@arco-design/web-react";
 import AddVideoModal from "@/components/UI_Modal/UI_AddVideoModal/AddVideoModal.tsx";
-import { useState} from "react";
+import React, {useEffect, useState} from "react";
 import AddSeriesModal from "@/components/UI_Modal/UI_AddVideoModal/AddSeriesModal.tsx";
 import {AiOutlineYoutube} from "react-icons/ai";
 import UI_ConfirmModal from "@/components/UI_Modal/UI_ConfirmModal";
+import {getReq} from "@/tools/requests.ts";
+import {getNumOfTrue, videoDataToMap, type VideoData} from "@/pages/FaithFlix/data.js";
+
 
 
 export  default function VideoManagement() {
@@ -25,64 +28,96 @@ export  default function VideoManagement() {
 
     const columns: TableColumnProps[] = [
         {
-            title: "Name",
-            dataIndex: "name",
+            title: "Title",
+            dataIndex: "title",
         },
         {
-            title: "Salary",
-            dataIndex: "salary",
+            title:"Completeness",
+            render: (_, record) => {
+                return (
+                   <span>
+                        {getNumOfTrue([record.has_subtitles, record.has_video_credits, record.has_video_tags]) ===0 &&
+                            <Progress type='circle' percent={25} size={"small"} className={"whitespace-nowrap flex flex-row justify-center"} />
+                        }
+                       {getNumOfTrue([record.has_subtitles, record.has_video_credits, record.has_video_tags]) ===1 &&
+                           <Progress type='circle' percent={50} size={"small"} className={"whitespace-nowrap flex flex-row justify-center"} />
+                       }
+                       {getNumOfTrue([record.has_subtitles, record.has_video_credits, record.has_video_tags]) ===2 &&
+                           <Progress type='circle' percent={75} size={"small"} className={"whitespace-nowrap flex flex-row justify-center"} />
+                       }
+                       {getNumOfTrue([record.has_subtitles, record.has_video_credits, record.has_video_tags]) ===3 &&
+                           <Progress type='circle' percent={100}   status='success' size={"small"}
+                                     className={"whitespace-nowrap  flex flex-row justify-center"} />
+                       }
+                   </span>
+                );
+            },
         },
         {
-            title: "Address",
-            dataIndex: "address",
+            title: "cover",
+            dataIndex: "cover_url",
+            render: (text, record) => {
+                return (
+                    <img src={text} alt={record.title} className={"w-20 h-12 object-cover cursor-pointer"}
+                        onClick={() =>{
+                            setCurrentVideoCoverURL(text);
+                            setVisible(true);
+                        }}
+                    />
+                );
+            },
         },
         {
-            title: "Email",
-            dataIndex: "email",
-        },
-    ];
-
-    const data = [
-        {
-            key: "1",
-            name: "Jane Doe",
-            salary: 23000,
-            address: "32 Park Road, London",
-            email: "jane.doe@example.com",
+            title: "duration",
+            dataIndex: "duration",
         },
         {
-            key: "2",
-            name: "Alisa Ross",
-            salary: 25000,
-            address: "35 Park Road, London",
-            email: "alisa.ross@example.com",
+            title: "release_date",
+            dataIndex: "release_date",
         },
         {
-            key: "3",
-            name: "Kevin Sandra",
-            salary: 22000,
-            address: "31 Park Road, London",
-            email: "kevin.sandra@example.com",
-        },
-        {
-            key: "4",
-            name: "Ed Hellen",
-            salary: 17000,
-            address: "42 Park Road, London",
-            email: "ed.hellen@example.com",
-        },
-        {
-            key: "5",
-            name: "William Smith",
-            salary: 27000,
-            address: "62 Park Road, London",
-            email: "william.smith@example.com",
-        },
+            title: "viewCount",
+            dataIndex: "viewCount",
+        },{
+            title: "Options",
+            render: (_, record) => {
+                return (
+                    <div className={"flex flex-row justify-around"}>
+                        <Button type="secondary" icon={<IconEdit
+                            onClick={() =>  console.log(record)}
+                        />}></Button>
+                        {/*<Button type="secondary" icon={<IconArchive />}>Archive</Button>*/}
+                    </div>
+                );
+            },
+        }
     ];
 
     const [AddVideoModalVisible, setAddVideoModalVisible] = useState(false);
     const [AddSeriesModalVisible, setAddSeriesModalVisible] = useState(false);
     const [loadingVisible, setLoadingVisible] = useState(false);
+    const [tableLoading, setTableLoading] = useState(false);
+    const [allVideoData, setAllVideoData] = useState<VideoData[]>([]);
+    const [currentVideoCoverURL, setCurrentVideoCoverURL] = useState<string>("");
+    const [visible, setVisible] = React.useState(false);
+
+    useEffect(() => {
+        async function fetchData() {
+            setTableLoading(true);
+            const res = await  getReq("video-data-by-limit?limit=100");
+            if(res.status){
+                // console.log(videoDataToMap(res.data));
+                const allVideoData:VideoData[] = videoDataToMap(res.data);
+                // console.log(allVideoData);
+                setAllVideoData(allVideoData);
+            }
+            else{
+                console.log(res.error);
+            }
+            setTableLoading(false);
+        }
+        fetchData();
+    }, []);
 
     function updateDBData() {
         const update = () => {
@@ -121,15 +156,22 @@ export  default function VideoManagement() {
                             Update data
                         </Button>
                     </div>
-
-                    <Button type="secondary" icon={<IconDownload />}>
-                        Export Data
-                    </Button>
+                    <div>
+                        <Button type='secondary' icon={<IconArchive />}  />
+                        {/*<Button type="secondary" icon={<IconDownload />}>*/}
+                        {/*    Export Data*/}
+                        {/*</Button>*/}
+                    </div>
                 </div>
-                <Table columns={columns} data={data} />
+                <Table columns={columns} data={allVideoData} loading={tableLoading} />
             </div>
             <AddVideoModal visible={AddVideoModalVisible} setVisible={setAddVideoModalVisible} />
             <AddSeriesModal visible={AddSeriesModalVisible} setVisible={setAddSeriesModalVisible} />
+            <Image.Preview
+                src={currentVideoCoverURL}
+                visible={visible}
+                onVisibleChange={setVisible}
+            />
         </>
     );
 

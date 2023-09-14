@@ -1,6 +1,6 @@
 import UIBreadcrumb from "@/components/UIBreadcrumb";
 
-export  default function FaithflixDashboard() {
+export  default function FaithDashboard() {
     const breadcrumbItems = [
         {
             name: "My Group",

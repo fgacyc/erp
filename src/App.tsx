@@ -39,11 +39,13 @@ import PastoralRolesPage from "./pages/UserManagement/Role";
 import SatellitePage from "./pages/UserManagement/Satellite";
 import CellGroupPage from "./pages/UserManagement/CellGroup";
 import VideoManagement from "@/pages/FaithFlix/VideoManagement.tsx";
-import FaithflixDashboard from "@/pages/FaithFlix/FaithflixDashboard.tsx";
+import FaithDashboard from "@/pages/FaithFlix/FaithDashboard.tsx";
 import SectionManagement from "@/pages/FaithFlix/SectionManagement.tsx";
-import FaithflixUsers from "@/pages/FaithFlix/FaithflixUsers.tsx";
+import FaithUsers from "@/pages/FaithFlix/FaithUsers.tsx";
 import SeriesManagement from "@/pages/FaithFlix/SeriesManagement.tsx";
-import FaithflixCredits from "@/pages/FaithFlix/FaithflixCredits.tsx";
+import FaithCredits from "@/pages/FaithFlix/FaithCredits.tsx";
+import FaithRoles from "@/pages/FaithFlix/FaithRoles.tsx";
+import FaithGenres from "@/pages/FaithFlix/FaithGenres.tsx";
 
 
 function App() {
@@ -152,12 +154,15 @@ function App() {
 							<Route path="/services" element={<ServicesPage />} />
 							<Route path="/services/room_booking" element={<RoomBooking />} />
 
-                            <Route path="/faithflix/dashboard" element={<FaithflixDashboard /> } />
+                            <Route path="/faithflix/dashboard" element={<FaithDashboard /> } />
                             <Route path="/faithflix/video-management" element={<VideoManagement />}/>
                             <Route path="/faithflix/series-management" element={<SeriesManagement /> } />
                             <Route path="/faithflix/section-management" element={<SectionManagement /> } />
-                            <Route path="/faithflix/users" element={<FaithflixUsers /> } />
-                            <Route path="/faithflix/credits" element={<FaithflixCredits /> } />
+                            <Route path="/faithflix/users" element={<FaithUsers /> } />
+                            <Route path="/faithflix/credits" element={<FaithCredits /> } />
+                            <Route path="/faithflix/roles" element={<FaithCredits /> } />
+                            <Route path="/faithflix/genres" element={<FaithGenres/> } />
+                            <Route path="/faithflix/tags" element={<FaithRoles/> } />
 
 
 						</Route>
