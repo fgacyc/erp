@@ -16,7 +16,7 @@ export default function Interview_table() {
 	];
 	return (
 		<>
-			<UIBreadcrumb items={breadcrumbItems} />
+			{/*<UIBreadcrumb items={breadcrumbItems} />*/}
 			<div className="app-component full-screen-app-component">
 				<h1>Interview_table</h1>
 			</div>

@@ -1,4 +1,3 @@
-import UIBreadcrumb from "@/components/UIBreadcrumb";
 import {Button, Table, TableColumnProps} from "@arco-design/web-react";
 import {useState} from "react";
 import { IconPlus} from "@arco-design/web-react/icon";
@@ -6,18 +5,7 @@ import AddVideoModal from "@/components/UI_Modal/UI_AddVideoModal/AddVideoModal.
 
 
 export  default function FaithRoles() {
-    const breadcrumbItems = [
-        {
-            name: "My Group",
-            link: "/",
-            clickable: false,
-        },
-        {
-            name: "Pastoring",
-            link: "/group/pastoring",
-            clickable: true,
-        },
-    ];
+
 
     const columns: TableColumnProps[] = [
         {
@@ -97,7 +85,7 @@ export  default function FaithRoles() {
 
     return (
         <>
-            <UIBreadcrumb items={breadcrumbItems} />
+            {/*<UIBreadcrumb items={breadcrumbItems} />*/}
             <div className="app-component full-screen-app-component p-5">
                 <div className={"flex flex-row justify-between mb-3"}>
                     <Button type="secondary" icon={<IconPlus />}

@@ -1,4 +1,3 @@
-import UIBreadcrumb from "../../../components/UIBreadcrumb/index.jsx";
 import { useNavigate, useParams } from "react-router-dom";
 import { Button, Message, Steps } from "@arco-design/web-react";
 import { useEffect, useState } from "react";
@@ -48,18 +47,6 @@ export function CountdownTimer() {
 }
 
 const InterviewForm = () => {
-	const breadcrumbItems = [
-		{
-			name: "Recruitment",
-			link: "/",
-			clickable: false,
-		},
-		{
-			name: "Interview",
-			link: "/recruitment_interview",
-			clickable: true,
-		},
-	];
 	const { RID, partID } = useParams();
 
 	const [QAs, setQAs] = useState<InterviewQuestion[]>([]);
@@ -189,7 +176,6 @@ const InterviewForm = () => {
 
 	return (
 		<>
-			<UIBreadcrumb items={breadcrumbItems} />
 			<div
 				className="app-component full-screen-app-component"
 				style={{ position: "relative" }}

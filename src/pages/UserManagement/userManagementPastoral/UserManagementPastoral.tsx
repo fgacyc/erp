@@ -1,5 +1,4 @@
 import { Button, Input, Space, Table } from "@arco-design/web-react";
-import UIBreadcrumb from "@/components/UIBreadcrumb";
 import { IconSearch } from "@arco-design/web-react/icon";
 import { useEffect, useState } from "react";
 import { useIdentityAPI } from "@/lib/openapi";
@@ -9,19 +8,6 @@ import { ProfileForm } from "@/components/Form/Profile";
 import { transformUserFromAPI } from "@/utils/transform";
 
 const UserManagementPastoral = () => {
-	const breadcrumbItems = [
-		{
-			name: "Users",
-			link: "/",
-			clickable: false,
-		},
-		{
-			name: "Members",
-			link: "/users/pastoral",
-			clickable: true,
-		},
-	];
-
 	const [data, setData] =
 		useState<
 			operations["get-user"]["responses"]["200"]["content"]["application/json; charset=utf-8"][]
@@ -69,7 +55,6 @@ const UserManagementPastoral = () => {
 					checkDetails
 				/>
 			)}
-			<UIBreadcrumb items={breadcrumbItems} />
 			<div className="app-component full-screen-app-component">
 				{/* <Button type="primary" icon={<IconPlus />} style={{ margin: '10px 0' }}>
 					Register new

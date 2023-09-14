@@ -16,7 +16,6 @@ import { capitalFirstLetter } from "@/tools/string";
 import "./pre-screening.css";
 import { IconDownload, IconSearch } from "@arco-design/web-react/icon";
 import { getTimeStamp } from "@/tools/datetime";
-import UIBreadcrumb from "@/components/UIBreadcrumb";
 import { getAllUsers } from "@/tools/DB";
 import UI_ConfirmModal from "@/components/UI_Modal/UI_ConfirmModal";
 import { getCurrentUserCYCID } from "@/tools/auth";
@@ -388,19 +387,6 @@ export default function PreScreening_table() {
 		downloadTableData(allData);
 	}
 
-	const breadcrumbItems = [
-		{
-			name: "Recruitment",
-			link: "/",
-			clickable: false,
-		},
-		{
-			name: "Pre-Screening",
-			link: "/recruitment_pre_screening",
-			clickable: true,
-		},
-	];
-
 	// function handleTableChange(filters) {
 	// 	if (Object.prototype.hasOwnProperty.call(filters, 'pre_screening.status')) {
 	// 		const status = filters['pre_screening.status'][0];
@@ -432,7 +418,6 @@ export default function PreScreening_table() {
 
 	return (
 		<>
-			<UIBreadcrumb items={breadcrumbItems} />
 			<div className="app-component pre-screening-table-con">
 				<div className="table-header-bar">
 					<Button

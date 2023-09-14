@@ -1,4 +1,4 @@
-import UIBreadcrumb from "@/components/UIBreadcrumb";
+//import UIBreadcrumb from "@/components/UIBreadcrumb";
 import {Button, Message, Table, TableColumnProps} from "@arco-design/web-react";
 import {useEffect, useState} from "react";
 import UI_ConfirmModal from "@/components/UI_Modal/UI_ConfirmModal";
@@ -12,18 +12,18 @@ import {useAddCreditsModalStore, type AddCreditsModalState} from "@/pages/FaithF
 
 
 export  default function FaithCredits() {
-    const breadcrumbItems = [
-        {
-            name: "My Group",
-            link: "/",
-            clickable: false,
-        },
-        {
-            name: "Pastoring",
-            link: "/group/pastoring",
-            clickable: true,
-        },
-    ];
+    // const breadcrumbItems = [
+    //     {
+    //         name: "My Group",
+    //         link: "/",
+    //         clickable: false,
+    //     },
+    //     {
+    //         name: "Pastoring",
+    //         link: "/group/pastoring",
+    //         clickable: true,
+    //     },
+    // ];
 
     const columns: TableColumnProps[] = [
         {
@@ -103,7 +103,7 @@ export  default function FaithCredits() {
 
     return (
         <>
-            <UIBreadcrumb items={breadcrumbItems} />
+            {/*<UIBreadcrumb items={breadcrumbItems} />*/}
             <div className="app-component full-screen-app-component p-5">
                 <div className={"flex flex-row justify-between mb-3"}>
                     <Button type="secondary" icon={<IconPlus />}

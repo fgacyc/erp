@@ -1,4 +1,4 @@
-import UIBreadcrumb from "@/components/UIBreadcrumb";
+
 import { Button } from "@arco-design/web-react";
 import {IconDownload, IconPlus} from "@arco-design/web-react/icon";
 import { Table, TableColumnProps } from "@arco-design/web-react";
@@ -10,18 +10,7 @@ import UI_ConfirmModal from "@/components/UI_Modal/UI_ConfirmModal";
 
 
 export  default function SeriesManagement() {
-    const breadcrumbItems = [
-        {
-            name: "My Group",
-            link: "/",
-            clickable: false,
-        },
-        {
-            name: "Pastoring",
-            link: "/group/pastoring",
-            clickable: true,
-        },
-    ];
+
 
     const columns: TableColumnProps[] = [
         {
@@ -102,7 +91,7 @@ export  default function SeriesManagement() {
 
     return (
         <>
-            <UIBreadcrumb items={breadcrumbItems} />
+            {/*<UIBreadcrumb items={breadcrumbItems} />*/}
             <div className="app-component full-screen-app-component p-5">
                 <div className={"flex flex-row justify-between mb-3"}>
                     <div>

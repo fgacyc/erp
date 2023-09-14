@@ -18,6 +18,7 @@ import { BiHomeSmile } from "react-icons/bi";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useAccount } from "@/store/useAccount";
 import { ProfileForm } from "@/components/Form/Profile";
+import UIBreadcrumb from "@/components/UIBreadcrumb";
 import {TbBrandNetflix} from "react-icons/tb";
 
 const MenuItem = Menu.Item;
@@ -240,6 +241,7 @@ const Frame = () => {
 					</Menu>
 				</div>
 				<div className="function-area">
+					<UIBreadcrumb />
 					<Outlet />
 				</div>
 			</div>

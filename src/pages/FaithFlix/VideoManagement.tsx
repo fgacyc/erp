@@ -1,4 +1,4 @@
-import UIBreadcrumb from "@/components/UIBreadcrumb";
+
 import {Button, Image, Progress} from "@arco-design/web-react";
 import {IconArchive, IconEdit, IconPlus} from "@arco-design/web-react/icon";
 import { Table, TableColumnProps } from "@arco-design/web-react";
@@ -13,18 +13,6 @@ import {getNumOfTrue, videoDataToMap, type VideoData} from "@/pages/FaithFlix/da
 
 
 export  default function VideoManagement() {
-    const breadcrumbItems = [
-        {
-            name: "My Group",
-            link: "/",
-            clickable: false,
-        },
-        {
-            name: "Pastoring",
-            link: "/group/pastoring",
-            clickable: true,
-        },
-    ];
 
     const columns: TableColumnProps[] = [
         {
@@ -137,7 +125,7 @@ export  default function VideoManagement() {
 
     return (
         <>
-            <UIBreadcrumb items={breadcrumbItems} />
+            {/*<UIBreadcrumb items={breadcrumbItems} />*/}
             <div className="app-component full-screen-app-component p-5">
                 <div className={"flex flex-row justify-between mb-3"}>
                     <div>

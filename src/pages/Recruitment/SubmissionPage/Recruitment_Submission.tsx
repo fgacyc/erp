@@ -4,7 +4,6 @@ import { CSSProperties, useEffect, useState } from "react";
 import { postRecruiter } from "./postRequest";
 import "./Recruitment_Submission.css";
 import { pastoral_team_options } from "@/data/pastoral_teams";
-import UIBreadcrumb from "@/components/UIBreadcrumb";
 import { SubmitResults } from "./SubmitResults";
 
 export default function Recruitment_Submission() {
@@ -87,22 +86,8 @@ export default function Recruitment_Submission() {
 		});
 	};
 
-	const breadcrumbItems = [
-		{
-			name: "Recruitment",
-			link: "/",
-			clickable: false,
-		},
-		{
-			name: "Add Candidate",
-			link: "/recruitment_add_candidate",
-			clickable: true,
-		},
-	];
-
 	return (
 		<>
-			<UIBreadcrumb items={breadcrumbItems} />
 			<div className="app-component full-screen-app-component recruitment-form-con">
 				{!ifSubmit ? (
 					<Space
