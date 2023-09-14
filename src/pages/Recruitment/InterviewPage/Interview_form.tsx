@@ -1,15 +1,15 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { Button, Message, Steps } from "@arco-design/web-react";
 import { useEffect, useState } from "react";
-import { postReq } from "../../../tools/requests.js";
+import { postReq } from "@/tools/requests.ts";
 import { get } from "idb-keyval";
 import QuestionGroup from "./QuestionGroup";
 import "./recruitment-appo.css";
 import { pad } from "./data.js";
 import FreeQATextArea from "./FreeQATextArea.jsx";
 import { Interview_form_Section3 } from "./Interview_form_Section3";
-import { findPastoralTeamLabel } from "../../../data/pastoral_teams.js";
-import { findMinistryLabel } from "../../../data/ministries.js";
+import { findPastoralTeamLabel } from "@/data/pastoral_teams.ts";
+import { findMinistryLabel } from "@/data/ministries.ts";
 
 const Step = Steps.Step;
 

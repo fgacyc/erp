@@ -36,7 +36,7 @@ const PastoralRolesPage = () => {
 				setVisible={setModalVisible}
 				satellite={selectedSatellite}
 				title={selectedSatellite?.name ?? "Add New Satellite?"}
-				checkDetails={selectedSatellite ? true : false}
+				checkDetails={!!selectedSatellite}
 				onClose={() => setSelectedSatellite(undefined)}
 			/>
 			<div className="app-component full-screen-app-component">

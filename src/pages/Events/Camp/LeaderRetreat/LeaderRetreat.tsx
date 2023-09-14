@@ -14,7 +14,7 @@ import {
 	IconUserGroup,
 } from "@arco-design/web-react/icon";
 import { useEffect, useRef, useState } from "react";
-import { getReq, putReq } from "../../../../tools/requests";
+import { getReq, putReq } from "@/tools/requests.ts";
 import { addKeysForLeadersRetreat, getPaymentStatus } from "./data";
 import UIDeleteEventParticipantModal from "../../../../components/UI_Modal/UI_DeleteEventParticipantModal";
 import { get, set } from "idb-keyval";
@@ -417,7 +417,7 @@ export default function LeaderRetreat() {
 		let resData;
 		const res: { status: boolean; data: LeadersRetreatRecord[] } =
 			await getReq("/leader_retreat");
-		if (res.status === true) {
+		if (res.status) {
 			resData = addKeysForLeadersRetreat(res.data);
 			// resData = changeNameKey(resData);
 		}

@@ -36,7 +36,7 @@ const CellGroupPage = () => {
 				setVisible={setModalVisible}
 				cg={selectedCG}
 				title={selectedCG?.name ?? "Add New CG?"}
-				checkDetails={selectedCG ? true : false}
+				checkDetails={!!selectedCG}
 				onClose={() => setSelectedCG(undefined)}
 			/>
 			<div className="app-component full-screen-app-component">

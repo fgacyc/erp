@@ -71,7 +71,7 @@ export default function Interview_table() {
 	}
 
 	function getArchivedCandidate() {
-		if (isArchived === true) {
+		if (isArchived) {
 			setIsArchived(false);
 			initTableData();
 			return;
