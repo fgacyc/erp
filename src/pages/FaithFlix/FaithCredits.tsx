@@ -9,22 +9,7 @@ import {creditDataToMap, type CreditData} from "@/pages/FaithFlix/data.ts";
 import {useAddCreditsModalStore, type AddCreditsModalState} from "@/pages/FaithFlix/Modals/addCreditsModalStore.ts";
 
 
-
-
-export  default function FaithCredits() {
-    // const breadcrumbItems = [
-    //     {
-    //         name: "My Group",
-    //         link: "/",
-    //         clickable: false,
-    //     },
-    //     {
-    //         name: "Pastoring",
-    //         link: "/group/pastoring",
-    //         clickable: true,
-    //     },
-    // ];
-
+export default function FaithCredits() {
     const columns: TableColumnProps[] = [
         {
             title: "Name(ZH)",
@@ -49,7 +34,9 @@ export  default function FaithCredits() {
                         }}
                     />}></Button>
                     <Button type="secondary" size="small" className="mr-2" icon={<IconDelete
-                        onClick={() => {deleteCredit(record.credit_id);}}
+                        onClick={() => {
+                            deleteCredit(record.credit_id);
+                        }}
                     />}></Button>
                 </div>
             )
@@ -57,11 +44,11 @@ export  default function FaithCredits() {
     ];
 
 
-
     const [AddVideoModalVisible, setAddVideoModalVisible] = useState(false);
     //const [loadingVisible, setLoadingVisible] = useState(false);
-    const [allData,setAllData] = useState<CreditData[]>([]);
-    const setCurrentCredit = useAddCreditsModalStore((state:AddCreditsModalState) => state.setCreditsData);
+    const [allData, setAllData] = useState<CreditData[]>([]);
+    const setCurrentCredit = useAddCreditsModalStore((state: AddCreditsModalState) => state.setCreditsData);
+    const [loadingVisible, setLoadingVisible] = useState(false);
 
     useEffect(() => {
         getLatestData();
@@ -73,20 +60,22 @@ export  default function FaithCredits() {
         };
     }, []);
 
-     function getLatestData(){
-        getReq("credits").then((res)=>{
-            if(res.status){
+    function getLatestData() {
+        setLoadingVisible(true);
+        getReq("credits").then((res) => {
+            if (res.status) {
                 console.log(res.data);
                 const tableData = creditDataToMap(res.data);
                 setAllData(tableData);
+                setLoadingVisible(false);
             }
         });
     }
 
-     function deleteCredit(id:number){
-        const deleteCredit =async ()=>{
-            const res = await deleteReq("credits?credit_id="+id);
-            if(res.status){
+    function deleteCredit(id: number) {
+        const deleteCredit = async () => {
+            const res = await deleteReq("credits?credit_id=" + id);
+            if (res.status) {
                 Message.success("Delete credit successfully");
                 getLatestData();
             }
@@ -106,16 +95,21 @@ export  default function FaithCredits() {
             {/*<UIBreadcrumb items={breadcrumbItems} />*/}
             <div className="app-component full-screen-app-component p-5">
                 <div className={"flex flex-row justify-between mb-3"}>
-                    <Button type="secondary" icon={<IconPlus />}
+                    <Button type="secondary" icon={<IconPlus/>}
                             onClick={() => setAddVideoModalVisible(true)}
                             className={"mr-3"}
                     >Add Credit</Button>
                 </div>
-                <Table columns={columns} data={allData}
-                       //loading={loadingVisible}
+                <Table
+                    columns={columns}
+                    data={allData}
+                    loading={loadingVisible}
                 />
             </div>
-            <AddCreditsModal visible={AddVideoModalVisible} setVisible={setAddVideoModalVisible} />
+            <AddCreditsModal
+                visible={AddVideoModalVisible}
+                setVisible={setAddVideoModalVisible}
+            />
         </>
     );
 }

@@ -1,12 +1,10 @@
 import {Button, Table, TableColumnProps} from "@arco-design/web-react";
 import {useState} from "react";
-import { IconPlus} from "@arco-design/web-react/icon";
-import AddVideoModal from "@/components/UI_Modal/UI_AddVideoModal/AddVideoModal.tsx";
+import {IconDelete, IconEdit, IconPlus} from "@arco-design/web-react/icon";
+import {AddNameAndDescModal} from "@/pages/FaithFlix/Modals/addNameAndDescModal.tsx";
 
 
 export  default function FaithRoles() {
-
-
     const columns: TableColumnProps[] = [
         {
             title: "Name",
@@ -23,7 +21,21 @@ export  default function FaithRoles() {
         {
             title: "Email",
             dataIndex: "email",
-        },
+        },{
+            title: "Operation",
+            render: (_, record) => (
+                <div className="flex flex-row">
+                    <Button type="secondary" size="small" className="mr-2" icon={<IconEdit
+                        onClick={() => setModalVisible(true)}
+                    />}></Button>
+                    <Button type="secondary" size="small" className="mr-2" icon={<IconDelete
+                        onClick={() => {
+                            console.log(record.credit_id);
+                        }}
+                    />}></Button>
+                </div>
+            )
+        }
     ];
 
     const data = [
@@ -64,24 +76,7 @@ export  default function FaithRoles() {
         },
     ];
 
-    const [AddVideoModalVisible, setAddVideoModalVisible] = useState(false);
-    //const [loadingVisible, setLoadingVisible] = useState(false);
-
-    // function updateDBData() {
-    //     const update = () => {
-    //         setLoadingVisible(true);
-    //
-    //         setTimeout(() => {
-    //             setLoadingVisible(false);
-    //         }, 2000);
-    //     };
-    //
-    //     UI_ConfirmModal(
-    //         "Confirm",
-    //         "Are you sure to update the new data from YouTube?",
-    //         update,
-    //     );
-    // }
+    const [modalVisible, setModalVisible] = useState(false);
 
     return (
         <>
@@ -89,15 +84,15 @@ export  default function FaithRoles() {
             <div className="app-component full-screen-app-component p-5">
                 <div className={"flex flex-row justify-between mb-3"}>
                     <Button type="secondary" icon={<IconPlus />}
-                            onClick={() => setAddVideoModalVisible(true)}
+                            onClick={() => setModalVisible(true)}
                             className={"mr-3"}
-                    >Add Video</Button>
+                    >Add Video roles</Button>
                 </div>
                 <Table columns={columns} data={data}
                        //loading={loadingVisible}
                 />
             </div>
-            <AddVideoModal visible={AddVideoModalVisible} setVisible={setAddVideoModalVisible} />
+            <AddNameAndDescModal visible={modalVisible} setVisible={setModalVisible} modalTitle="Roles"  />
         </>
     );
 }

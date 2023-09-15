@@ -1,25 +1,4 @@
-/*
-*  video_id SERIAL PRIMARY KEY,
-    youtube_video_id VARCHAR(255),
-    video_url VARCHAR(255),
-    title VARCHAR(255),
-    cover_url VARCHAR(255),
-    description TEXT,
-    duration VARCHAR(255),
-    release_date TIMESTAMP,
-    channel_id INTEGER REFERENCES channels(channel_id),
-    average_rating DECIMAL(3, 2) DEFAULT 0,
-    definition VARCHAR(255)  CHECK (definition IN ('hd', 'sd')),
-    viewCount INTEGER DEFAULT 0,
-    likeCount INTEGER DEFAULT 0,
-    favoriteCount INTEGER DEFAULT 0,
-    commentCount INTEGER DEFAULT 0,
-    created_at TIMESTAMP DEFAULT NOW(),
-    updated_at TIMESTAMP DEFAULT NOW()
-*
-*
-* */
-
+import {deleteReq, getReq, postReq, putReq} from "@/tools/requests.ts";
 
 export interface VideoData {
     key: number;
@@ -54,21 +33,60 @@ interface VideoDBData {
     cover_url: string;
     description: string;
     duration: string;
-    release_date: string; // 或者使用 Date 类型，根据您的需求
+    release_date: string;
     channel_id: number;
     average_rating: number;
-    definition: "hd" | "sd"; // 只允许 'hd' 或 'sd'
+    definition: "hd" | "sd";
     viewCount: number;
     likeCount: number;
     favoriteCount: number;
     commentCount: number;
-    created_at: string; // 或者使用 Date 类型，根据您的需求
-    updated_at: string; // 或者使用 Date 类型，根据您的需求
+    created_at: string;
+    updated_at: string;
     archived: boolean;
     has_video_credits: boolean;
     has_subtitles: boolean;
     has_video_tags: boolean;
 }
+
+export interface CreditData {
+    key: number;
+    credit_id: number;
+    name_zh: string;
+    name_en: string;
+    description: string;
+    created_at: string;
+    updated_at: string;
+    oauth2_id: number;
+}
+
+interface CreditDBData {
+    credit_id: number;
+    name_zh: string;
+    name_en: string;
+    description: string;
+    created_at: string;
+    updated_at: string;
+    oauth2_id: number;
+}
+
+export interface VideoRole{
+    role_id: number;
+    role_name: string;
+    description: string;
+    created_at: string;
+    updated_at: string;
+}
+
+export interface GenreTag{
+    tag_id: number;
+    tag_name: string;
+    type: "genre" | "tag";
+    description: string;
+    created_at: string;
+    updated_at: string;
+}
+
 
 
 export  const  videoDataToMap = (data: VideoDBData[] ) => {
@@ -158,26 +176,6 @@ function padZero(num:number):string {
     return num.toString().padStart(2, "0");
 }
 
-export interface CreditData {
-    key: number;
-    credit_id: number;
-    name_zh: string;
-    name_en: string;
-    description: string;
-    created_at: string;
-    updated_at: string;
-    oauth2_id: number;
-}
-
-interface CreditDBData {
-    credit_id: number;
-    name_zh: string;
-    name_en: string;
-    description: string;
-    created_at: string;
-    updated_at: string;
-    oauth2_id: number;
-}
 
 export function creditDataToMap(data:CreditDBData[]){
     return data.map((credit, index) => {
@@ -192,4 +190,34 @@ export function creditDataToMap(data:CreditDBData[]){
             oauth2_id: credit.oauth2_id
         };
     } );
+}
+
+function getRouter(type:string):string{
+    let router = "";
+    if (type === "Roles") {
+        router = "roles";
+    } else if (type === "Genres" || type === "Tags") {
+        router = "genre-tags";
+    }
+    return router;
+}
+
+export async function getRoleGenreTag(type:string){
+    const router:string = getRouter(type);
+    return await getReq(`${router}`);
+}
+
+export async function addRoleGenreTag(type:string,data:Partial<VideoRole> | Partial<GenreTag> ){
+    const router:string = getRouter(type);
+    return await postReq(`${router}`, data);
+}
+
+export async function deleteRoleGenreTag(id:number,type:string){
+    const router:string = getRouter(type);
+    return await deleteReq(`${router}?id=${id}`);
+}
+
+export async function updateRoleGenreTag(id:number, type:string, data:Partial<VideoRole> | Partial<GenreTag> ){
+    const router:string = getRouter(type);
+    return await putReq(`${router}?id=${id}`, data);
 }
