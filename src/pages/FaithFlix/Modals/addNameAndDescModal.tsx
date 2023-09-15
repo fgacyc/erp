@@ -1,5 +1,6 @@
 import {Form, FormInstance, Input, Modal} from "@arco-design/web-react";
 import {FunctionComponent, useRef} from "react";
+import {addRoleGenreTag, GenreTag, VideoRole} from "@/pages/FaithFlix/data.ts";
 
 const FormItem = Form.Item;
 const TextArea = Input.TextArea;
@@ -16,14 +17,43 @@ export const AddNameAndDescModal: FunctionComponent<AddNameAndDescModalProps> = 
     const [form] = Form.useForm();
 
     function handleOk() {
-        console.log(formRef.current?.getFieldsValue());
-        // if (modalTitle === "Roles") {
-        //     upsertRole();
-        // } else if (modalTitle === "Genres") {
-        //     upsertGenreTags("Genres");
-        // } else if (modalTitle === "Tags") {
-        //     upsertGenreTags("Tags");
-        // }
+        if (modalTitle === "Roles") {
+            const newRoles: VideoRole = {
+                role_name: formRef.current?.getFieldValue("name"),
+                description: formRef.current?.getFieldValue("description"),
+                role_id: 0,
+                created_at: "",
+                updated_at: "",
+            };
+            addRoleGenreTag("Roles",newRoles).then((res) => {
+                console.log(res);
+            });
+        }
+        else if (modalTitle === "Genres") {
+            const newRoles: GenreTag = {
+                tag_name: formRef.current?.getFieldValue("name"),
+                description: formRef.current?.getFieldValue("description"),
+                type: "genre",
+                tag_id: 0,
+                created_at: "",
+                updated_at: "",
+            };
+            addRoleGenreTag("Genres",newRoles).then((res) => {
+                console.log(res);
+            });
+        } else if (modalTitle === "Tags") {
+            const newRoles: GenreTag = {
+                tag_name: formRef.current?.getFieldValue("name"),
+                description: formRef.current?.getFieldValue("description"),
+                type: "tag",
+                tag_id: 0,
+                created_at: "",
+                updated_at: "",
+            };
+            addRoleGenreTag("Tags",newRoles).then((res) => {
+                console.log(res);
+            });
+        }
         setVisible(false);
     }
 

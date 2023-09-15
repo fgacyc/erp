@@ -194,9 +194,9 @@ export function creditDataToMap(data:CreditDBData[]){
 
 function getRouter(type:string):string{
     let router = "";
-    if (type === "Roles") {
+    if (type.toLowerCase() === "roles") {
         router = "roles";
-    } else if (type === "Genres" || type === "Tags") {
+    } else if (type.toLowerCase() === "genres" || type.toLowerCase() === "tags") {
         router = "genre-tags";
     }
     return router;
