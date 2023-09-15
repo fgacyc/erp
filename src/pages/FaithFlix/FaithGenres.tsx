@@ -5,6 +5,7 @@ import {AddNameAndDescModal} from "@/pages/FaithFlix/Modals/addNameAndDescModal.
 import {deleteRoleGenreTag, GenreTag, getRoleGenreTag} from "@/pages/FaithFlix/data.ts";
 import PubSub from "pubsub-js";
 import UI_ConfirmModal from "@/components/UI_Modal/UI_ConfirmModal";
+import {useAddGenreTagModalStore} from "@/pages/FaithFlix/Modals/addNameAndDescStore.ts";
 
 
 export  default function FaithGenres() {
@@ -22,7 +23,10 @@ export  default function FaithGenres() {
             render: (_, record) => (
                 <div className="flex flex-row">
                     <Button type="secondary" size="small" className="mr-2" icon={<IconEdit
-                        onClick={() => setModalVisible(true)}
+                        onClick={() => {
+                            setModalVisible(true);
+                            setGenreTagData(record);
+                        }}
                     />}></Button>
                     <Button type="secondary" size="small" className="mr-2" icon={<IconDelete
                         onClick={() => {
@@ -35,12 +39,16 @@ export  default function FaithGenres() {
     ];
     const [modalVisible, setModalVisible] = useState(false);
     const [allData, setAllData] = useState<GenreTag[]>([]);
+    const [loadingVisible, setLoadingVisible] = useState(false);
+    const setGenreTagData = useAddGenreTagModalStore((state) => state.setGenreTagData);
 
     function updateData(){
+        setLoadingVisible(true);
         getRoleGenreTag("genres").then((res) => {
             if(res.status){
                 const genresData = res.data.filter((item:GenreTag) => item.type === "genre");
                 setAllData(genresData);
+                setLoadingVisible(false);
             }
         });
     }
@@ -82,7 +90,7 @@ export  default function FaithGenres() {
                     >Add Video Genres</Button>
                 </div>
                 <Table columns={columns} data={allData}
-                    //loading={loadingVisible}
+                    loading={loadingVisible}
                 />
             </div>
             <AddNameAndDescModal visible={modalVisible} setVisible={setModalVisible} modalTitle="Genres"  />

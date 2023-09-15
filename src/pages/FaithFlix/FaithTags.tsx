@@ -5,6 +5,7 @@ import {AddNameAndDescModal} from "@/pages/FaithFlix/Modals/addNameAndDescModal.
 import {deleteRoleGenreTag, GenreTag, getRoleGenreTag} from "@/pages/FaithFlix/data.ts";
 import PubSub from "pubsub-js";
 import UI_ConfirmModal from "@/components/UI_Modal/UI_ConfirmModal";
+import {useAddGenreTagModalStore} from "@/pages/FaithFlix/Modals/addNameAndDescStore.ts";
 
 
 export  default function FaithTags() {
@@ -22,7 +23,9 @@ export  default function FaithTags() {
             render: (_, record) => (
                 <div className="flex flex-row">
                     <Button type="secondary" size="small" className="mr-2" icon={<IconEdit
-                        onClick={() => setModalVisible(true)}
+                        onClick={() => {
+                            setGenreTagData(record);
+                            setModalVisible(true);}}
                     />}></Button>
                     <Button type="secondary" size="small" className="mr-2" icon={<IconDelete
                         onClick={() => {
@@ -36,13 +39,17 @@ export  default function FaithTags() {
 
     const [modalVisible, setModalVisible] = useState(false);
     const [allData, setAllData] = useState<GenreTag[]>([]);
+    const [loadingVisible, setLoadingVisible] = useState(false);
+    const setGenreTagData = useAddGenreTagModalStore((state) => state.setGenreTagData);
 
 
     function updateData(){
+        setLoadingVisible(true);
         getRoleGenreTag("genres").then((res) => {
             if(res.status){
                 const genresData = res.data.filter((item:GenreTag) => item.type === "tag");
                 setAllData(genresData);
+                setLoadingVisible(false);
             }
         });
     }
@@ -85,7 +92,7 @@ export  default function FaithTags() {
                     >Add Video Tags</Button>
                 </div>
                 <Table columns={columns} data={allData}
-                    //loading={loadingVisible}
+                    loading={loadingVisible}
                 />
             </div>
             <AddNameAndDescModal visible={modalVisible} setVisible={setModalVisible} modalTitle="Tags"  />

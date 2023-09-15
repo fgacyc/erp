@@ -1,6 +1,6 @@
 import {FormInstance, Message, Modal} from "@arco-design/web-react";
 import { Form, Input} from "@arco-design/web-react";
-import {FunctionComponent, useEffect, useRef} from "react";
+import {FunctionComponent, useEffect, useRef, useState} from "react";
 import {useAddCreditsModalStore} from "@/pages/FaithFlix/Modals/addCreditsModalStore.ts";
 import {postReq, putReq} from "@/tools/requests.ts";
 const FormItem = Form.Item;
@@ -32,6 +32,8 @@ export  const  AddCreditsModal:FunctionComponent<AddCreditsModalProps> = ({ visi
     const [form] = Form.useForm();
     const [creditsData, isUpdate] = useAddCreditsModalStore((state) => [state.creditsData, state.isUpdate]);
     const reset = useAddCreditsModalStore((state) => state.resetCreditsData);
+    const [isHandling , setIsHandling] = useState(false);
+
 
     useEffect(() => {
         if (visible && isUpdate) {
@@ -40,9 +42,16 @@ export  const  AddCreditsModal:FunctionComponent<AddCreditsModalProps> = ({ visi
             reset();
             formRef.current?.resetFields();
         }
-    }, [visible,isUpdate,creditsData,reset]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [visible]);
 
     async  function handleOk() {
+        if(isHandling){
+            Message.warning("Please wait for the previous operation to complete");
+            return;
+        }
+        setIsHandling(true);
+
         const values: Partial<CreditFormData> | undefined = formRef.current?.getFieldsValue();
         if (values===undefined) return;
 
@@ -72,6 +81,7 @@ export  const  AddCreditsModal:FunctionComponent<AddCreditsModalProps> = ({ visi
                 Message.success("Add credit successfully");
                 PubSub.publish("updateCreditsData", { message: "" });
             }
+            setIsHandling(false);
         });
     }
 
@@ -87,9 +97,10 @@ export  const  AddCreditsModal:FunctionComponent<AddCreditsModalProps> = ({ visi
             //console.log(res);
             if(res.status){
                 setVisible(false);
-                Message.success("Add credit successfully");
+                Message.success( `${isUpdate ? "Update" : "Add"} Credit Successfully` );
                 PubSub.publish("updateCreditsData", { message: "" });
             }
+            setIsHandling(false);
         });
     }
 

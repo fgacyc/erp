@@ -5,6 +5,7 @@ import {AddNameAndDescModal} from "@/pages/FaithFlix/Modals/addNameAndDescModal.
 import {deleteRoleGenreTag, getRoleGenreTag, VideoRole} from "@/pages/FaithFlix/data.ts";
 import PubSub from "pubsub-js";
 import UI_ConfirmModal from "@/components/UI_Modal/UI_ConfirmModal";
+import {useAddRoleModalStore} from "@/pages/FaithFlix/Modals/addNameAndDescStore.ts";
 
 
 export  default function FaithRoles() {
@@ -34,7 +35,10 @@ export  default function FaithRoles() {
             render: (_, record) => (
                 <div className="flex flex-row">
                     <Button type="secondary" size="small" className="mr-2" icon={<IconEdit
-                        onClick={() => setModalVisible(true)}
+                        onClick={() => {
+                            setModalVisible(true);
+                            setRoleData(record);
+                        }}
                     />}></Button>
                     <Button type="secondary" size="small" className="mr-2" icon={<IconDelete
                         onClick={() => {
@@ -48,11 +52,15 @@ export  default function FaithRoles() {
 
     const [modalVisible, setModalVisible] = useState(false);
     const [allData, setAllData] = useState<VideoRole[]>([]);
+    const [loadingVisible, setLoadingVisible] = useState(false);
+    const setRoleData = useAddRoleModalStore((state) => state.setRoleData);
 
     function updateData(){
+        setLoadingVisible(true);
         getRoleGenreTag("roles").then((res) => {
             if(res.status){
                 setAllData(res.data);
+                setLoadingVisible(false);
             }
         });
     }
@@ -94,7 +102,7 @@ export  default function FaithRoles() {
                     >Add Video Roles</Button>
                 </div>
                 <Table columns={columns} data={allData}
-                       //loading={loadingVisible}
+                       loading={loadingVisible}
                 />
             </div>
             <AddNameAndDescModal visible={modalVisible} setVisible={setModalVisible} modalTitle="Roles"  />
