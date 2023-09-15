@@ -15,6 +15,10 @@ export default function VideoManagement() {
 
     const columns: TableColumnProps[] = [
         {
+            title: "Video ID",
+            dataIndex: "video_id",
+        },
+        {
             title: "Title",
             dataIndex: "title",
         },
@@ -98,36 +102,25 @@ export default function VideoManagement() {
     useEffect(() => {
         async function fetchData() {
             setLoadingVisible(true);
-            const res = await getReq("video-data-by-limit?limit=100");
+            const res = await getReq("video-data-by-limit?limit=300");
             if (res.status) {
-                // console.log(videoDataToMap(res.data));
                 const allVideoData: VideoData[] = videoDataToMap(res.data);
-                // console.log(allVideoData);
                 setAllVideoData(allVideoData);
             } else {
                 console.log(res.error);
             }
             setLoadingVisible(false);
         }
-
         fetchData();
+        const subscription = PubSub.subscribe("showVideoCover", (_, data) => {
+            setCurrentVideoCoverURL(data.message);
+            setVisible(true);
+        });
+        return () => {
+            PubSub.unsubscribe(subscription);
+        };
     }, []);
 
-    // function updateDBData() {
-    //     const update = () => {
-    //         setLoadingVisible(true);
-    //
-    //         setTimeout(() => {
-    //             setLoadingVisible(false);
-    //         }, 2000);
-    //     };
-    //
-    //     UI_ConfirmModal(
-    //         "Confirm",
-    //         "Are you sure to update the new data from YouTube?",
-    //         update,
-    //     );
-    // }
 
     return (
         <>
@@ -168,6 +161,7 @@ export default function VideoManagement() {
             />
         </>
     );
+
 
 
 //     https://www.youtube.com/oembed?url=http://www.youtube.com/watch?v=rATHaPSaejE&format=json

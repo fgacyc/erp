@@ -37,6 +37,8 @@ export  const  AddCreditsModal:FunctionComponent<AddCreditsModalProps> = ({ visi
 
     useEffect(() => {
         if (visible && isUpdate) {
+
+
             formRef.current?.setFieldsValue(creditsData);
         }else{
             reset();

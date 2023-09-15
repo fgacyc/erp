@@ -8,7 +8,7 @@ const RadioGroup = Radio.Group;
 const FormItem = Form.Item;
 const TextArea = Input.TextArea;
 import "./style.css";
-import {formatDuration, getYoutubeVideoId} from "@/pages/FaithFlix/data.ts";
+import {formatDuration, getSubtitle, getVideoGenreTag, getYoutubeVideoId} from "@/pages/FaithFlix/data.ts";
 import {getReq} from "@/tools/requests.ts";
 // import {useAddCreditsModalStore} from "@/components/UI_Modal/UI_FaithFlixModals/stores/addCreditsModalStore.ts";
 import {useAddVideoModalStore} from "@/components/UI_Modal/UI_FaithFlixModals/stores/addVideoStore.ts";
@@ -27,9 +27,30 @@ export default function AddVideoModal(props: AddVideoModalProps) {
     const [currentVideoData,isUpdate,resetVideoData] = useAddVideoModalStore((state) => [state.currentVideoData,state.isUpdate,state.resetVideoData]);
 
     useEffect(() => {
+        async function getVideoData(){
+            if(!currentVideoData) return;
+            const subtitlePromise = getSubtitle(currentVideoData.video_id);
+            const genreTagPromise = getVideoGenreTag(currentVideoData.video_id);
+
+            Promise.all([subtitlePromise, genreTagPromise])
+                .then(([subtitleRes, genreTagRes]) => {
+                    if (subtitleRes.status && genreTagRes.status){
+                        formRef.current?.setFieldsValue({
+                            ...currentVideoData,
+                            subtitles: [subtitleRes.data.language],
+                            genres: genreTagRes.data.genres,
+                            tags: genreTagRes.data.tags,
+                        });
+                    }
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+
+        }
+
         if (visible && isUpdate) {
-            // console.log(currentVideoData);
-            formRef.current?.setFieldsValue(currentVideoData);
+            getVideoData();
         }else{
             resetVideoData();
             formRef.current?.resetFields();
@@ -140,8 +161,10 @@ export default function AddVideoModal(props: AddVideoModalProps) {
                             return <div className={`w-full flex flex-row justify-end mb-4 ${value.cover_url?"":"hidden"}`}>
                                 <div className={"w-[28%]"}></div>
                                 <div className={"w-[80%]"}>
-                                    <img className={"w-32"}
-                                         src={value.cover_url} alt="cover "/>
+                                    <img className={"w-32 cursor-pointer"}
+                                         src={value.cover_url} alt="cover"
+                                        onClick={()=> PubSub.publish("showVideoCover", { message: value.cover_url })}
+                                    />
                                 </div>
                             </div>;
                         }}

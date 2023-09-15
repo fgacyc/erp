@@ -221,3 +221,11 @@ export async function updateRoleGenreTag(type:string,id:number, data:Partial<Vid
     const router:string = getRouter(type);
     return await putReq(`${router}?id=${id}`, data);
 }
+
+export async function getVideoGenreTag(videoId:number){
+    return await getReq(`video-tags?video_id=${videoId}`);
+}
+
+export async function getSubtitle(videoId:number){
+    return await getReq(`subtitle?video_id=${videoId}`);
+}
