@@ -60,11 +60,12 @@ export default function AddVideoModal(props: AddVideoModalProps) {
     }, [visible]);
 
 
-    function submitHandle(values: FormData): void {
-        console.log(values);
+    function submitHandle(): void {
+        console.log(formRef.current?.getFieldsValue());
     }
 
     function errorHandle(errors: { [key: string]: FieldError }): void {
+        Message.warning("Please check the form");
         console.log(errors);
     }
 
@@ -92,14 +93,6 @@ export default function AddVideoModal(props: AddVideoModalProps) {
             }
         });
 
-    }
-
-    interface FormData {
-        credits: {
-            position: string;
-            names: string;
-        }[];
-        // 其他属性
     }
 
 
