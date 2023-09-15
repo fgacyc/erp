@@ -41,7 +41,7 @@ export  default function FaithUsers() {
     useEffect(() => {
         getReq("users").then((res)=>{
             if(res.status){
-                console.log(res.data);
+                // console.log(res.data);
                 setAllData(res.data);
             }
         });

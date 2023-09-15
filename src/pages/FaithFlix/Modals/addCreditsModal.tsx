@@ -1,8 +1,8 @@
-import {FormInstance, Modal} from "@arco-design/web-react";
+import {FormInstance, Message, Modal} from "@arco-design/web-react";
 import { Form, Input} from "@arco-design/web-react";
 import {FunctionComponent, useEffect, useRef} from "react";
-// import { postReq, putReq} from "@/tools/requests.ts";
 import {useAddCreditsModalStore} from "@/pages/FaithFlix/Modals/addCreditsModalStore.ts";
+import {postReq, putReq} from "@/tools/requests.ts";
 const FormItem = Form.Item;
 const TextArea = Input.TextArea;
 
@@ -11,12 +11,21 @@ interface AddCreditsModalProps {
     setVisible: (visible: boolean) => void;
 }
 
-// interface CreditFormData extends FormData {
-//     name_zh: string;
-//     name_en: string;
-//     oauth2_id: string;
-//     description: string;
-// }
+interface CreditFormData  {
+    name_zh: string;
+    name_en: string;
+    oauth2_id: string;
+    description: string;
+}
+
+interface CreditFormDBData  {
+    name_zh: string;
+    name_en: string;
+    oauth2_id: string;
+    description: string;
+    credit_id: number;
+}
+
 
 export  const  AddCreditsModal:FunctionComponent<AddCreditsModalProps> = ({ visible, setVisible}) => {
     const formRef = useRef<FormInstance | null>(null);
@@ -31,44 +40,57 @@ export  const  AddCreditsModal:FunctionComponent<AddCreditsModalProps> = ({ visi
             reset();
             formRef.current?.resetFields();
         }
-
-    }, [creditsData, isUpdate, reset, visible]);
+    }, [visible,isUpdate,creditsData,reset]);
 
     async  function handleOk() {
-        // // console.log(formRef.current?.());
-        // const values:CreditFormData = formRef.current?.getFieldsValue();
-        // //console.log(values);
-        // if(values?.name_en ==="") {
-        //     Message.warning("Please enter the English name of the credit");
-        //     return;
-        // }
-        // if(values?.name_zh ===""){
-        //     Message.warning("Please enter the Chinese name of the credit");
-        //     return;
-        // }
-        // if(!isUpdate){ // create
-        //     postReq("credits",values).then((res)=>{
-        //         //console.log(res);
-        //         if(res.status){
-        //             setVisible(false);
-        //             Message.success("Add credit successfully");
-        //             PubSub.publish("updateCreditsData", { message: "" });
-        //         }
-        //     });
-        // }else{
-        //     values.credit_id = creditsData!.credit_id;
-        //     console.log(values);
-        //     putReq("credits",values).then((res)=>{
-        //         //console.log(res);
-        //         if(res.status){
-        //             setVisible(false);
-        //             Message.success("Add credit successfully");
-        //             PubSub.publish("updateCreditsData", { message: "" });
-        //         }
-        //     });
-        // }
+        const values: Partial<CreditFormData> | undefined = formRef.current?.getFieldsValue();
+        if (values===undefined) return;
 
+        if(values?.name_en ==="") {
+            Message.warning("Please enter the English name of the credit");
+            return;
+        }
+        if(values?.name_zh ===""){
+            Message.warning("Please enter the Chinese name of the credit");
+            return;
+        }
 
+        if(!isUpdate){ // create
+            createCredit();
+
+        }else{
+            updateCredit();
+        }
+    }
+    function  createCredit(){
+        const values: Partial<CreditFormData> | undefined = formRef.current?.getFieldsValue();
+        if (values===undefined) return;
+        postReq("credits",values).then((res)=>{
+            //console.log(res);
+            if(res.status){
+                setVisible(false);
+                Message.success("Add credit successfully");
+                PubSub.publish("updateCreditsData", { message: "" });
+            }
+        });
+    }
+
+    function updateCredit(){
+        const values: Partial<CreditFormData> | undefined = formRef.current?.getFieldsValue();
+        if (values===undefined) return;
+        const newValues: Partial<CreditFormDBData> = {
+            credit_id: creditsData!.credit_id,
+            ...values
+        };
+
+        putReq("credits",newValues).then((res)=>{
+            //console.log(res);
+            if(res.status){
+                setVisible(false);
+                Message.success("Add credit successfully");
+                PubSub.publish("updateCreditsData", { message: "" });
+            }
+        });
     }
 
 
