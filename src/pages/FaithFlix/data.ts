@@ -70,6 +70,7 @@ interface VideoDBData {
     has_video_tags: boolean;
 }
 
+
 export  const  videoDataToMap = (data: VideoDBData[] ) => {
     //console.log(data);
 
@@ -82,8 +83,8 @@ export  const  videoDataToMap = (data: VideoDBData[] ) => {
            title: video.title,
            cover_url: video.cover_url,
            description: video.description,
-           duration: video.duration,
-           release_date: video.release_date,
+           duration: convertTime(video.duration),
+           release_date: video.release_date.replace("T", " ").replace("Z", ""),
            channel_id: video.channel_id,
            average_rating: video.average_rating,
            definition: video.definition,
@@ -120,7 +121,20 @@ export  function getYoutubeVideoId(url:string)   {
         return null;
     }
 }
+function convertTime(timeString:string):string {
+    // 使用正则表达式提取小时、分钟和秒
+    const matches = timeString.match(/PT(\d+H)?(\d+M)?(\d+S)?/);
 
+    if (matches) {
+        const hours = matches[1] ? parseInt(matches[1]) : 0;
+        const minutes = matches[2] ? parseInt(matches[2]) : 0;
+        const seconds = matches[3] ? parseInt(matches[3]) : 0;
+
+        return `${hours}:${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+    } else {
+        return "Invalid time format";
+    }
+}
 
 export  function formatDuration(duration:string):string {
     const match = duration.match(/PT(\d+)M(\d+)S/);
@@ -135,7 +149,9 @@ export  function formatDuration(duration:string):string {
     const hours = Math.floor(minutes / 60);
     const remainingMinutes = minutes % 60;
 
-    return `${padZero(hours)}:${padZero(remainingMinutes)}:${padZero(seconds)}`;
+    const res =  `${padZero(hours)}:${padZero(remainingMinutes)}:${padZero(seconds)}`;
+    console.log(res);
+    return res;
 }
 
 function padZero(num:number):string {

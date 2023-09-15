@@ -46,6 +46,7 @@ import SeriesManagement from "@/pages/FaithFlix/SeriesManagement.tsx";
 import FaithCredits from "@/pages/FaithFlix/FaithCredits.tsx";
 import FaithRoles from "@/pages/FaithFlix/FaithRoles.tsx";
 import FaithGenres from "@/pages/FaithFlix/FaithGenres.tsx";
+import FaithTags from "@/pages/FaithFlix/FaithTags.tsx";
 
 
 function App() {
@@ -160,9 +161,9 @@ function App() {
                             <Route path="/faithflix/section-management" element={<SectionManagement /> } />
                             <Route path="/faithflix/users" element={<FaithUsers /> } />
                             <Route path="/faithflix/credits" element={<FaithCredits /> } />
-                            <Route path="/faithflix/roles" element={<FaithCredits /> } />
+                            <Route path="/faithflix/roles" element={<FaithRoles /> } />
                             <Route path="/faithflix/genres" element={<FaithGenres/> } />
-                            <Route path="/faithflix/tags" element={<FaithRoles/> } />
+                            <Route path="/faithflix/tags" element={<FaithTags/> } />
 
 
 						</Route>
