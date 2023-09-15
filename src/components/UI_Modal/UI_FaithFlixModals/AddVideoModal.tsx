@@ -1,6 +1,6 @@
 import {Button, DatePicker, Divider, FormInstance, Input, Message, Modal, Select, Space} from "@arco-design/web-react";
 import {Form, TimePicker, Radio, InputTag} from "@arco-design/web-react";
-import React, {useRef} from "react";
+import React, {useEffect, useRef} from "react";
 import {IconDelete, IconPlus, IconSearch} from "@arco-design/web-react/icon";
 import {FieldError} from "@arco-design/web-react/es/Form/interface";
 
@@ -10,6 +10,8 @@ const TextArea = Input.TextArea;
 import "./style.css";
 import {formatDuration, getYoutubeVideoId} from "@/pages/FaithFlix/data.ts";
 import {getReq} from "@/tools/requests.ts";
+// import {useAddCreditsModalStore} from "@/components/UI_Modal/UI_FaithFlixModals/stores/addCreditsModalStore.ts";
+import {useAddVideoModalStore} from "@/components/UI_Modal/UI_FaithFlixModals/stores/addVideoStore.ts";
 
 
 interface AddVideoModalProps {
@@ -22,6 +24,19 @@ export default function AddVideoModal(props: AddVideoModalProps) {
     // const formRef = useRef();
     const formRef = useRef<FormInstance | null>(null);
     const [videoURL, setVideoURL] = React.useState("");
+    const [currentVideoData,isUpdate,resetVideoData] = useAddVideoModalStore((state) => [state.currentVideoData,state.isUpdate,state.resetVideoData]);
+
+    useEffect(() => {
+        if (visible && isUpdate) {
+            // console.log(currentVideoData);
+            formRef.current?.setFieldsValue(currentVideoData);
+        }else{
+            resetVideoData();
+            formRef.current?.resetFields();
+        }
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [visible]);
 
 
     function submitHandle(values: FormData): void {
@@ -122,7 +137,7 @@ export default function AddVideoModal(props: AddVideoModalProps) {
 
                     <FormItem shouldUpdate>
                         {(value) => {
-                            return <div className={"w-full flex flex-row justify-end mb-4"}>
+                            return <div className={`w-full flex flex-row justify-end mb-4 ${value.cover_url?"":"hidden"}`}>
                                 <div className={"w-[28%]"}></div>
                                 <div className={"w-[80%]"}>
                                     <img className={"w-32"}

@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import {type  CreditData} from "@/pages/FaithFlix/data";
+import {type  CreditData} from "@/pages/FaithFlix/data.ts";
 
 export interface AddCreditsModalState {
     creditsData: CreditData | null;

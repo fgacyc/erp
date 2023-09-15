@@ -3,10 +3,10 @@ import {Button, Message, Table, TableColumnProps} from "@arco-design/web-react";
 import {useEffect, useState} from "react";
 import UI_ConfirmModal from "@/components/UI_Modal/UI_ConfirmModal";
 import {IconDelete, IconEdit, IconPlus} from "@arco-design/web-react/icon";
-import {AddCreditsModal} from "@/pages/FaithFlix/Modals/addCreditsModal.tsx";
+import {AddCreditsModal} from "@/components/UI_Modal/UI_FaithFlixModals/addCreditsModal.tsx";
 import {deleteReq, getReq} from "@/tools/requests.ts";
 import {creditDataToMap, type CreditData} from "@/pages/FaithFlix/data.ts";
-import {useAddCreditsModalStore, type AddCreditsModalState} from "@/pages/FaithFlix/Modals/addCreditsModalStore.ts";
+import {useAddCreditsModalStore, type AddCreditsModalState} from "@/components/UI_Modal/UI_FaithFlixModals/stores/addCreditsModalStore.ts";
 
 
 export default function FaithCredits() {

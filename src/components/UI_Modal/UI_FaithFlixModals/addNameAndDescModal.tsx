@@ -1,7 +1,7 @@
 import {Form, FormInstance, Input, Modal} from "@arco-design/web-react";
 import {FunctionComponent, useEffect, useRef} from "react";
 import {addRoleGenreTag, GenreTag, updateRoleGenreTag, VideoRole} from "@/pages/FaithFlix/data.ts";
-import {useAddGenreTagModalStore, useAddRoleModalStore} from "@/pages/FaithFlix/Modals/addNameAndDescStore.ts";
+import {useAddGenreTagModalStore, useAddRoleModalStore} from "@/components/UI_Modal/UI_FaithFlixModals/stores/addNameAndDescStore.ts";
 
 const FormItem = Form.Item;
 const TextArea = Input.TextArea;

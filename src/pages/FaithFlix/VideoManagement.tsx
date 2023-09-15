@@ -1,18 +1,17 @@
-
 import {Button, Image, Progress} from "@arco-design/web-react";
 import {IconArchive, IconEdit, IconPlus} from "@arco-design/web-react/icon";
-import { Table, TableColumnProps } from "@arco-design/web-react";
-import AddVideoModal from "@/components/UI_Modal/UI_AddVideoModal/AddVideoModal.tsx";
+import {Table, TableColumnProps} from "@arco-design/web-react";
+import AddVideoModal from "@/components/UI_Modal/UI_FaithFlixModals/AddVideoModal.tsx";
 import React, {useEffect, useState} from "react";
-import AddSeriesModal from "@/components/UI_Modal/UI_AddVideoModal/AddSeriesModal.tsx";
-import {AiOutlineYoutube} from "react-icons/ai";
-import UI_ConfirmModal from "@/components/UI_Modal/UI_ConfirmModal";
+import AddSeriesModal from "@/components/UI_Modal/UI_FaithFlixModals/AddSeriesModal.tsx";
+
+// import UI_ConfirmModal from "@/components/UI_Modal/UI_ConfirmModal";
 import {getReq} from "@/tools/requests.ts";
 import {getNumOfTrue, videoDataToMap, type VideoData} from "@/pages/FaithFlix/data.js";
+import {useAddVideoModalStore} from "@/components/UI_Modal/UI_FaithFlixModals/stores/addVideoStore.ts";
 
 
-
-export  default function VideoManagement() {
+export default function VideoManagement() {
 
     const columns: TableColumnProps[] = [
         {
@@ -20,61 +19,68 @@ export  default function VideoManagement() {
             dataIndex: "title",
         },
         {
-            title:"Completeness",
+            title: "Completeness",
             render: (_, record) => {
                 return (
-                   <span>
-                        {getNumOfTrue([record.has_subtitles, record.has_video_credits, record.has_video_tags]) ===0 &&
-                            <Progress type='circle' percent={25} size={"small"} className={"whitespace-nowrap flex flex-row justify-center"} />
+                    <span>
+                        {getNumOfTrue([record.has_subtitles, record.has_video_credits, record.has_video_tags]) === 0 &&
+                            <Progress type='circle' percent={25} size={"small"}
+                                      className={"whitespace-nowrap flex flex-row justify-center"}/>
                         }
-                       {getNumOfTrue([record.has_subtitles, record.has_video_credits, record.has_video_tags]) ===1 &&
-                           <Progress type='circle' percent={50} size={"small"} className={"whitespace-nowrap flex flex-row justify-center"} />
-                       }
-                       {getNumOfTrue([record.has_subtitles, record.has_video_credits, record.has_video_tags]) ===2 &&
-                           <Progress type='circle' percent={75} size={"small"} className={"whitespace-nowrap flex flex-row justify-center"} />
-                       }
-                       {getNumOfTrue([record.has_subtitles, record.has_video_credits, record.has_video_tags]) ===3 &&
-                           <Progress type='circle' percent={100}   status='success' size={"small"}
-                                     className={"whitespace-nowrap  flex flex-row justify-center"} />
-                       }
+                        {getNumOfTrue([record.has_subtitles, record.has_video_credits, record.has_video_tags]) === 1 &&
+                            <Progress type='circle' percent={50} size={"small"}
+                                      className={"whitespace-nowrap flex flex-row justify-center"}/>
+                        }
+                        {getNumOfTrue([record.has_subtitles, record.has_video_credits, record.has_video_tags]) === 2 &&
+                            <Progress type='circle' percent={75} size={"small"}
+                                      className={"whitespace-nowrap flex flex-row justify-center"}/>
+                        }
+                        {getNumOfTrue([record.has_subtitles, record.has_video_credits, record.has_video_tags]) === 3 &&
+                            <Progress type='circle' percent={100} status='success' size={"small"}
+                                      className={"whitespace-nowrap  flex flex-row justify-center"}/>
+                        }
                    </span>
                 );
             },
         },
         {
-            title: "cover",
+            title: "Cover",
             dataIndex: "cover_url",
             render: (text, record) => {
                 return (
                     <img src={text} alt={record.title} className={"w-20 h-12 object-cover cursor-pointer"}
-                        onClick={() =>{
-                            setCurrentVideoCoverURL(text);
-                            setVisible(true);
-                        }}
+                         onClick={() => {
+                             setCurrentVideoCoverURL(text);
+                             setVisible(true);
+                         }}
                     />
                 );
             },
         },
         {
-            title: "duration",
+            title: "Duration",
             dataIndex: "duration",
         },
         {
-            title: "release_date",
+            title: "Release Date",
             dataIndex: "release_date",
         },
         {
-            title: "viewCount",
+            title: "View Count",
             dataIndex: "viewCount",
-        },{
+        }, {
             title: "Options",
             render: (_, record) => {
                 return (
-                    <div className={"flex flex-row justify-around"}>
-                        <Button type="secondary" icon={<IconEdit
-                            onClick={() =>  console.log(record)}
-                        />}></Button>
-                        {/*<Button type="secondary" icon={<IconArchive />}>Archive</Button>*/}
+                    <div className={"flex flex-row justify-around "}>
+                        <Button type="secondary" className="mr-2"
+                                icon={<IconEdit
+                                    onClick={() => {
+                                        setVideoData(record);
+                                        setAddVideoModalVisible(true);
+                                    }}
+                                />}></Button>
+                        <Button type="secondary" icon={<IconArchive/>}></Button>
                     </div>
                 );
             },
@@ -84,44 +90,44 @@ export  default function VideoManagement() {
     const [AddVideoModalVisible, setAddVideoModalVisible] = useState(false);
     const [AddSeriesModalVisible, setAddSeriesModalVisible] = useState(false);
     const [loadingVisible, setLoadingVisible] = useState(false);
-    const [tableLoading, setTableLoading] = useState(false);
     const [allVideoData, setAllVideoData] = useState<VideoData[]>([]);
     const [currentVideoCoverURL, setCurrentVideoCoverURL] = useState<string>("");
     const [visible, setVisible] = React.useState(false);
+    const setVideoData = useAddVideoModalStore((state) => state.setVideoData);
 
     useEffect(() => {
         async function fetchData() {
-            setTableLoading(true);
-            const res = await  getReq("video-data-by-limit?limit=100");
-            if(res.status){
+            setLoadingVisible(true);
+            const res = await getReq("video-data-by-limit?limit=100");
+            if (res.status) {
                 // console.log(videoDataToMap(res.data));
-                const allVideoData:VideoData[] = videoDataToMap(res.data);
+                const allVideoData: VideoData[] = videoDataToMap(res.data);
                 // console.log(allVideoData);
                 setAllVideoData(allVideoData);
-            }
-            else{
+            } else {
                 console.log(res.error);
             }
-            setTableLoading(false);
+            setLoadingVisible(false);
         }
+
         fetchData();
     }, []);
 
-    function updateDBData() {
-        const update = () => {
-            setLoadingVisible(true);
-
-            setTimeout(() => {
-                setLoadingVisible(false);
-            }, 2000);
-        };
-
-        UI_ConfirmModal(
-            "Confirm",
-            "Are you sure to update the new data from YouTube?",
-            update,
-        );
-    }
+    // function updateDBData() {
+    //     const update = () => {
+    //         setLoadingVisible(true);
+    //
+    //         setTimeout(() => {
+    //             setLoadingVisible(false);
+    //         }, 2000);
+    //     };
+    //
+    //     UI_ConfirmModal(
+    //         "Confirm",
+    //         "Are you sure to update the new data from YouTube?",
+    //         update,
+    //     );
+    // }
 
     return (
         <>
@@ -129,32 +135,32 @@ export  default function VideoManagement() {
             <div className="app-component full-screen-app-component p-5">
                 <div className={"flex flex-row justify-between mb-3"}>
                     <div>
-                        <Button type="secondary" icon={<IconPlus />}
+                        <Button type="secondary" icon={<IconPlus/>}
                                 onClick={() => setAddVideoModalVisible(true)}
                                 className={"mr-3"}
                         >Add Video</Button>
-                        <Button type="secondary" icon={<IconPlus />}
-                                onClick={() => setAddSeriesModalVisible(true)}
-                                className={"mr-3"}
-                        >Add Series</Button>
-                        <Button onClick={updateDBData} icon={<AiOutlineYoutube
-                            className={"inline-block"} />}
-                            loading={loadingVisible}
-                        >
-                            Update data
-                        </Button>
+                        {/*<Button type="secondary" icon={<IconPlus />}*/}
+                        {/*        onClick={() => setAddSeriesModalVisible(true)}*/}
+                        {/*        className={"mr-3"}*/}
+                        {/*>Add Series</Button>*/}
+                        {/*<Button onClick={updateDBData} icon={<AiOutlineYoutube*/}
+                        {/*    className={"inline-block"} />}*/}
+                        {/*    loading={loadingVisible}*/}
+                        {/*>*/}
+                        {/*    Update data*/}
+                        {/*</Button>*/}
                     </div>
                     <div>
-                        <Button type='secondary' icon={<IconArchive />}  />
+                        <Button type='secondary' icon={<IconArchive/>}/>
                         {/*<Button type="secondary" icon={<IconDownload />}>*/}
                         {/*    Export Data*/}
                         {/*</Button>*/}
                     </div>
                 </div>
-                <Table columns={columns} data={allVideoData} loading={tableLoading} />
+                <Table columns={columns} data={allVideoData} loading={loadingVisible}/>
             </div>
-            <AddVideoModal visible={AddVideoModalVisible} setVisible={setAddVideoModalVisible} />
-            <AddSeriesModal visible={AddSeriesModalVisible} setVisible={setAddSeriesModalVisible} />
+            <AddVideoModal visible={AddVideoModalVisible} setVisible={setAddVideoModalVisible}/>
+            <AddSeriesModal visible={AddSeriesModalVisible} setVisible={setAddSeriesModalVisible}/>
             <Image.Preview
                 src={currentVideoCoverURL}
                 visible={visible}

@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import {type VideoRole,GenreTag} from "@/pages/FaithFlix/data";
+import {type VideoRole,GenreTag} from "@/pages/FaithFlix/data.ts";
 
 export interface AddRoleModalState {
     roleData: VideoRole | null;

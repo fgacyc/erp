@@ -1,11 +1,11 @@
 import {Button, Message, Table, TableColumnProps} from "@arco-design/web-react";
 import {useEffect, useState} from "react";
 import {IconDelete, IconEdit, IconPlus} from "@arco-design/web-react/icon";
-import {AddNameAndDescModal} from "@/pages/FaithFlix/Modals/addNameAndDescModal.tsx";
+import {AddNameAndDescModal} from "@/components/UI_Modal/UI_FaithFlixModals/addNameAndDescModal.tsx";
 import {deleteRoleGenreTag, GenreTag, getRoleGenreTag} from "@/pages/FaithFlix/data.ts";
 import PubSub from "pubsub-js";
 import UI_ConfirmModal from "@/components/UI_Modal/UI_ConfirmModal";
-import {useAddGenreTagModalStore} from "@/pages/FaithFlix/Modals/addNameAndDescStore.ts";
+import {useAddGenreTagModalStore} from "@/components/UI_Modal/UI_FaithFlixModals/stores/addNameAndDescStore.ts";
 
 
 export  default function FaithGenres() {

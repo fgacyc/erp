@@ -2,9 +2,9 @@
 import { Button } from "@arco-design/web-react";
 import {IconDownload, IconPlus} from "@arco-design/web-react/icon";
 import { Table, TableColumnProps } from "@arco-design/web-react";
-import AddVideoModal from "@/components/UI_Modal/UI_AddVideoModal/AddVideoModal.tsx";
+import AddVideoModal from "@/components/UI_Modal/UI_FaithFlixModals/AddVideoModal.tsx";
 import { useState} from "react";
-import AddSeriesModal from "@/components/UI_Modal/UI_AddVideoModal/AddSeriesModal.tsx";
+import AddSeriesModal from "@/components/UI_Modal/UI_FaithFlixModals/AddSeriesModal.tsx";
 import {AiOutlineYoutube} from "react-icons/ai";
 import UI_ConfirmModal from "@/components/UI_Modal/UI_ConfirmModal";
 

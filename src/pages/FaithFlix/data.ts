@@ -25,7 +25,7 @@ export interface VideoData {
 }
 
 
-interface VideoDBData {
+export interface VideoDBData {
     video_id: number;
     youtube_video_id: string;
     video_url: string;

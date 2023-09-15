@@ -1,19 +1,15 @@
 import {Button, Message, Table, TableColumnProps} from "@arco-design/web-react";
 import {useEffect, useState} from "react";
 import {IconDelete, IconEdit, IconPlus} from "@arco-design/web-react/icon";
-import {AddNameAndDescModal} from "@/pages/FaithFlix/Modals/addNameAndDescModal.tsx";
+import {AddNameAndDescModal} from "@/components/UI_Modal/UI_FaithFlixModals/addNameAndDescModal.tsx";
 import {deleteRoleGenreTag, getRoleGenreTag, VideoRole} from "@/pages/FaithFlix/data.ts";
 import PubSub from "pubsub-js";
 import UI_ConfirmModal from "@/components/UI_Modal/UI_ConfirmModal";
-import {useAddRoleModalStore} from "@/pages/FaithFlix/Modals/addNameAndDescStore.ts";
+import {useAddRoleModalStore} from "@/components/UI_Modal/UI_FaithFlixModals/stores/addNameAndDescStore.ts";
 
 
 export  default function FaithRoles() {
     const columns: TableColumnProps[] = [
-        {
-            title: "ID",
-            dataIndex: "role_id",
-        },
         {
             title: "Name",
             dataIndex: "role_name",

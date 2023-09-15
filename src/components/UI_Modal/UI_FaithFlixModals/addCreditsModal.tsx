@@ -1,7 +1,7 @@
 import {FormInstance, Message, Modal} from "@arco-design/web-react";
 import { Form, Input} from "@arco-design/web-react";
 import {FunctionComponent, useEffect, useRef, useState} from "react";
-import {useAddCreditsModalStore} from "@/pages/FaithFlix/Modals/addCreditsModalStore.ts";
+import {useAddCreditsModalStore} from "@/components/UI_Modal/UI_FaithFlixModals/stores/addCreditsModalStore.ts";
 import {postReq, putReq} from "@/tools/requests.ts";
 const FormItem = Form.Item;
 const TextArea = Input.TextArea;
