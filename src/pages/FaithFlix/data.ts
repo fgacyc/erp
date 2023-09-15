@@ -193,6 +193,7 @@ export function creditDataToMap(data:CreditDBData[]){
 }
 
 function getRouter(type:string):string{
+    console.log("type1",type);
     let router = "";
     if (type.toLowerCase() === "roles") {
         router = "roles";
@@ -208,6 +209,7 @@ export async function getRoleGenreTag(type:string){
 }
 
 export async function addRoleGenreTag(type:string,data:Partial<VideoRole> | Partial<GenreTag> ){
+    console.log("type2",type);
     const router:string = getRouter(type);
     return await postReq(`${router}`, data);
 }

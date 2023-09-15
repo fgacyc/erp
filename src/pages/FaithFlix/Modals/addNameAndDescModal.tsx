@@ -27,6 +27,7 @@ export const AddNameAndDescModal: FunctionComponent<AddNameAndDescModalProps> = 
             };
             addRoleGenreTag("Roles",newRoles).then((res) => {
                 console.log(res);
+                if(res.status) PubSub.publish("updateRoles");
             });
         }
         else if (modalTitle === "Genres") {
@@ -40,6 +41,7 @@ export const AddNameAndDescModal: FunctionComponent<AddNameAndDescModalProps> = 
             };
             addRoleGenreTag("Genres",newRoles).then((res) => {
                 console.log(res);
+                if(res.status) PubSub.publish("updateGenres");
             });
         } else if (modalTitle === "Tags") {
             const newRoles: GenreTag = {
@@ -52,6 +54,7 @@ export const AddNameAndDescModal: FunctionComponent<AddNameAndDescModalProps> = 
             };
             addRoleGenreTag("Tags",newRoles).then((res) => {
                 console.log(res);
+                if(res.status) PubSub.publish("updateTags");
             });
         }
         setVisible(false);

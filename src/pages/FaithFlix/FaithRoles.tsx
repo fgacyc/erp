@@ -1,27 +1,34 @@
 import {Button, Table, TableColumnProps} from "@arco-design/web-react";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {IconDelete, IconEdit, IconPlus} from "@arco-design/web-react/icon";
 import {AddNameAndDescModal} from "@/pages/FaithFlix/Modals/addNameAndDescModal.tsx";
+import { getRoleGenreTag, VideoRole} from "@/pages/FaithFlix/data.ts";
+import PubSub from "pubsub-js";
 
 
 export  default function FaithRoles() {
     const columns: TableColumnProps[] = [
         {
+            title: "ID",
+            dataIndex: "role_id",
+        },
+        {
             title: "Name",
-            dataIndex: "name",
+            dataIndex: "role_name",
         },
         {
-            title: "Salary",
-            dataIndex: "salary",
+            title: "Description",
+            dataIndex: "description",
         },
+        // {
+        //     title: "Created At",
+        //     dataIndex: "created_at",
+        // },
+        // {
+        //     title: "Updated At",
+        //     dataIndex: "updated_at",
+        // },
         {
-            title: "Address",
-            dataIndex: "address",
-        },
-        {
-            title: "Email",
-            dataIndex: "email",
-        },{
             title: "Operation",
             render: (_, record) => (
                 <div className="flex flex-row">
@@ -38,45 +45,26 @@ export  default function FaithRoles() {
         }
     ];
 
-    const data = [
-        {
-            key: "1",
-            name: "Jane Doe",
-            salary: 23000,
-            address: "32 Park Road, London",
-            email: "jane.doe@example.com",
-        },
-        {
-            key: "2",
-            name: "Alisa Ross",
-            salary: 25000,
-            address: "35 Park Road, London",
-            email: "alisa.ross@example.com",
-        },
-        {
-            key: "3",
-            name: "Kevin Sandra",
-            salary: 22000,
-            address: "31 Park Road, London",
-            email: "kevin.sandra@example.com",
-        },
-        {
-            key: "4",
-            name: "Ed Hellen",
-            salary: 17000,
-            address: "42 Park Road, London",
-            email: "ed.hellen@example.com",
-        },
-        {
-            key: "5",
-            name: "William Smith",
-            salary: 27000,
-            address: "62 Park Road, London",
-            email: "william.smith@example.com",
-        },
-    ];
-
     const [modalVisible, setModalVisible] = useState(false);
+    const [allData, setAllData] = useState<VideoRole[]>([]);
+
+    function updateData(){
+        getRoleGenreTag("roles").then((res) => {
+            if(res.status){
+                setAllData(res.data);
+            }
+        });
+    }
+
+    useEffect(() => {
+        updateData();
+        const subscription = PubSub.subscribe("updateRoles", () => {
+            updateData();
+        });
+        return () => {
+            PubSub.unsubscribe(subscription);
+        };
+    }, []);
 
     return (
         <>
@@ -86,9 +74,9 @@ export  default function FaithRoles() {
                     <Button type="secondary" icon={<IconPlus />}
                             onClick={() => setModalVisible(true)}
                             className={"mr-3"}
-                    >Add Video roles</Button>
+                    >Add Video Roles</Button>
                 </div>
-                <Table columns={columns} data={data}
+                <Table columns={columns} data={allData}
                        //loading={loadingVisible}
                 />
             </div>
