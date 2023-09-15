@@ -102,7 +102,7 @@ export default function VideoManagement() {
     useEffect(() => {
         async function fetchData() {
             setLoadingVisible(true);
-            const res = await getReq("video-data-by-limit?limit=300");
+            const res = await getReq("video-data-by-limit?limit=100");
             if (res.status) {
                 const allVideoData: VideoData[] = videoDataToMap(res.data);
                 setAllVideoData(allVideoData);

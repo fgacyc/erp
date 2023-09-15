@@ -115,24 +115,30 @@ export  const  AddCreditsModal:FunctionComponent<AddCreditsModalProps> = ({ visi
             onCancel={() => setVisible(false)}
             autoFocus={false}
             focusLock={true}
+            style={{ width: 650}}
         >
             <div>
                 <Form  autoComplete='off'
                        layout="horizontal"
                        ref={formRef}
                        form={form}
+                       style={{ width: 800} }
                        className={"modal-form-style-fix"}>
-                    <FormItem label='Name(CN)' field="name_zh" className={"flex-nowrap"} required>
-                        <Input placeholder="please enter Credit's Chinese name..."  className={"w-[300px]"}  />
+                    <FormItem label='Name(CN)/IC Name' field="name_zh" className={"flex-nowrap"}
+                              labelCol={{span: 6}} required>
+                        <Input placeholder="please enter Credit's Chinese name..."  className={"w-[400px]"}  />
                     </FormItem>
-                    <FormItem label='Name(EN)' field="name_en" className={"flex-nowrap"} required>
-                        <Input placeholder="please enter Credit's English name..." className={"w-[300px]"}  />
+                    <FormItem label='Name(EN)/Nick Name' field="name_en" className={"flex-nowrap"}
+                              labelCol={{span: 6}} required>
+                        <Input placeholder="please enter Credit's English name..." className={"w-[400px]"}  />
                     </FormItem>
-                    <FormItem label='Oauth2 ID' field="oauth2_id" className={"flex-nowrap"} >
-                        <Input placeholder="please enter Credit's Oauth2 ID..." className={"w-[300px]"}  />
+                    <FormItem label='Oauth2 ID' field="oauth2_id" className={"flex-nowrap"}
+                              labelCol={{span: 6}} required>
+                        <Input placeholder="please enter Credit's Oauth2 ID..." className={"w-[400px]"}  />
                     </FormItem>
-                    <FormItem label='Description' field="description" className={"flex-nowrap"} >
-                        <TextArea placeholder="please enter Credit's description..." className={"w-[300px] resize-none"}  />
+                    <FormItem label='Description' field="description" className={"flex-nowrap"}
+                              labelCol={{span: 6}} required>
+                        <TextArea placeholder="please enter Credit's description..." className={"w-[400px] resize-none"}  />
                     </FormItem>
                 </Form>
             </div>
