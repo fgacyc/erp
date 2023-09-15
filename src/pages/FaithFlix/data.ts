@@ -193,7 +193,6 @@ export function creditDataToMap(data:CreditDBData[]){
 }
 
 function getRouter(type:string):string{
-    console.log("type1",type);
     let router = "";
     if (type.toLowerCase() === "roles") {
         router = "roles";
@@ -209,17 +208,16 @@ export async function getRoleGenreTag(type:string){
 }
 
 export async function addRoleGenreTag(type:string,data:Partial<VideoRole> | Partial<GenreTag> ){
-    console.log("type2",type);
     const router:string = getRouter(type);
     return await postReq(`${router}`, data);
 }
 
-export async function deleteRoleGenreTag(id:number,type:string){
+export async function deleteRoleGenreTag(type:string,id:number){
     const router:string = getRouter(type);
     return await deleteReq(`${router}?id=${id}`);
 }
 
-export async function updateRoleGenreTag(id:number, type:string, data:Partial<VideoRole> | Partial<GenreTag> ){
+export async function updateRoleGenreTag(type:string,id:number, data:Partial<VideoRole> | Partial<GenreTag> ){
     const router:string = getRouter(type);
     return await putReq(`${router}?id=${id}`, data);
 }

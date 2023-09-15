@@ -1,9 +1,10 @@
-import {Button, Table, TableColumnProps} from "@arco-design/web-react";
+import {Button, Message, Table, TableColumnProps} from "@arco-design/web-react";
 import {useEffect, useState} from "react";
 import {IconDelete, IconEdit, IconPlus} from "@arco-design/web-react/icon";
 import {AddNameAndDescModal} from "@/pages/FaithFlix/Modals/addNameAndDescModal.tsx";
-import {GenreTag, getRoleGenreTag} from "@/pages/FaithFlix/data.ts";
+import {deleteRoleGenreTag, GenreTag, getRoleGenreTag} from "@/pages/FaithFlix/data.ts";
 import PubSub from "pubsub-js";
+import UI_ConfirmModal from "@/components/UI_Modal/UI_ConfirmModal";
 
 
 export  default function FaithTags() {
@@ -25,7 +26,7 @@ export  default function FaithTags() {
                     />}></Button>
                     <Button type="secondary" size="small" className="mr-2" icon={<IconDelete
                         onClick={() => {
-                            console.log(record.credit_id);
+                            deleteData(record.tag_id);
                         }}
                     />}></Button>
                 </div>
@@ -44,6 +45,23 @@ export  default function FaithTags() {
                 setAllData(genresData);
             }
         });
+    }
+
+    function deleteData(id:number){
+        const deleteTag = async () => {
+            const res = await  deleteRoleGenreTag("tags",id);
+            console.log(res);
+            if(res.status) {
+                updateData();
+                Message.success("Delete tag Success");
+            }
+        };
+
+        UI_ConfirmModal(
+            "Delete tag",
+            "Are you sure you want to delete this tag?",
+            deleteTag
+        );
     }
 
     useEffect(() => {
