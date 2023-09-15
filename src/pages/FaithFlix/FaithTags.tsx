@@ -50,7 +50,7 @@ export  default function FaithTags() {
     function deleteData(id:number){
         const deleteTag = async () => {
             const res = await  deleteRoleGenreTag("tags",id);
-            console.log(res);
+            // console.log(res);
             if(res.status) {
                 updateData();
                 Message.success("Delete tag Success");

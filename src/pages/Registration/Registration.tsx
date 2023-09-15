@@ -63,7 +63,7 @@ export default function Registration() {
 
 					postReq("/interviewer", registration_data).then((res) => {
 						if (res.status) {
-							console.log(res.data);
+							//console.log(res.data);
 							Message.success("success");
 							alert(
 								`Your CYC ID is ${res.data.CYC_ID}. Your password is ${res.data.password}. Please take a screenshot of your credentials and keep them safe.`,

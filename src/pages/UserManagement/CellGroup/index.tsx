@@ -20,7 +20,7 @@ const CellGroupPage = () => {
 			if (!res.data) return;
 			setCGs(addKeys<CG>(res.data.map((d) => transformCGFromAPI(d))));
 			setLoading(false);
-			console.log(res.data);
+			//console.log(res.data);
 		});
 	};
 

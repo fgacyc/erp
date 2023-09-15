@@ -96,7 +96,7 @@ export  const  AddCreditsModal:FunctionComponent<AddCreditsModalProps> = ({ visi
 
     return (
         <Modal
-            title="Add Credit"
+            title={`${isUpdate ? "Update" : "Add"} Credit`}
             visible={visible}
             onOk={handleOk}
             onCancel={() => setVisible(false)}

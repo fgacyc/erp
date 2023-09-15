@@ -64,7 +64,7 @@ export default function FaithCredits() {
         setLoadingVisible(true);
         getReq("credits").then((res) => {
             if (res.status) {
-                console.log(res.data);
+                //console.log(res.data);
                 const tableData = creditDataToMap(res.data);
                 setAllData(tableData);
                 setLoadingVisible(false);
