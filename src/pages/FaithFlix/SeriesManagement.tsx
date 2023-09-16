@@ -1,12 +1,13 @@
 
 import { Button } from "@arco-design/web-react";
-import { IconDelete, IconEdit, IconPlus} from "@arco-design/web-react/icon";
+import {IconDelete, IconEdit, IconPlus, IconSort} from "@arco-design/web-react/icon";
 import { Table, TableColumnProps } from "@arco-design/web-react";
 import React, {useEffect, useState} from "react";
 import AddSeriesModal from "@/components/UI_Modal/UI_FaithFlixModals/AddSeriesModal.tsx";
 import PubSub from "pubsub-js";
 import {deleteReq, getReq} from "@/tools/requests.ts";
 import {useAddSeriesModalStore} from "@/components/UI_Modal/UI_FaithFlixModals/stores/addSeriesModalStore.ts";
+import {SortEpisodesModal} from "@/components/UI_Modal/UI_FaithFlixModals/SortEpisodesModal.tsx";
 
 export  function ExpandedRowRender(videos:EpisodeData[]) {
 
@@ -63,15 +64,20 @@ export  default function SeriesManagement() {
                                     }}
                                 />}></Button>
                         <Button type="secondary" icon={<IconDelete />}
+                                className="mr-2"
                                 onClick={() =>deleteSeries(record.series_id)}
                         ></Button>
 
+                        <Button type="secondary" icon={ <IconSort />}
+                                onClick={() =>handleSort(record)}
+                        ></Button>
                     </div>
                 );
             },
         }
     ];
     const [AddSeriesModalVisible, setAddSeriesModalVisible] = useState(false);
+    const [SortEpisodesModalVisible, setSortEpisodesModalVisible] = useState(false);
     const [allData, setAllData] = useState<SeriesData[]>([]);
     const setEpisodeData = useAddSeriesModalStore((state) => state.setEpisodeData);
 
@@ -98,6 +104,12 @@ export  default function SeriesManagement() {
         // console.log(record);
         setEpisodeData(record);
         setAddSeriesModalVisible(true);
+    }
+
+    function handleSort(record: SeriesData){
+        // console.log(record);
+        setEpisodeData(record);
+        setSortEpisodesModalVisible(true);
     }
 
     function deleteSeries(series_id:number){
@@ -137,6 +149,8 @@ export  default function SeriesManagement() {
                 visible={AddSeriesModalVisible}
                 setVisible={setAddSeriesModalVisible}
             />
+            <SortEpisodesModal visible={SortEpisodesModalVisible}
+                               setVisible={setSortEpisodesModalVisible} />
         </>
     );
 

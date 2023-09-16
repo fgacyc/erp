@@ -1,113 +1,95 @@
-// import { useState } from 'react';
-// import { Table } from '@arco-design/web-react';
-// import { IconDragDotVertical } from '@arco-design/web-react/icon';
-// import { SortableContainer, SortableElement, SortableHandle } from 'react-sortable-hoc';
+// import {useEffect, useState} from "react";
+// import {Table, TableColumnProps} from "@arco-design/web-react";
+// import {SortableContainer, SortableElement, SortableHandle} from "react-sortable-hoc";
+// import {useAddSeriesModalStore} from "@/components/UI_Modal/UI_FaithFlixModals/stores/addSeriesModalStore.ts";
+// import {IconDragDotVertical} from "@arco-design/web-react/icon";
+// import {EpisodeData} from "@/pages/FaithFlix/SeriesManagement.tsx";
 //
-// const arrayMoveMutate = (array, from, to) => {
+// const arrayMoveMutate = (array:EpisodeData[], from:number, to:number) => {
 //     const startIndex = to < 0 ? array.length + to : to;
 //
 //     if (startIndex >= 0 && startIndex < array.length) {
 //         const item = array.splice(from, 1)[0];
+//         if(!item) return;
 //         array.splice(startIndex, 0, item);
 //     }
 // };
 //
-// const arrayMove = (array, from, to) => {
+// const arrayMove = (array:EpisodeData[], from:number, to:number) => {
 //     array = [...array];
 //     arrayMoveMutate(array, from, to);
 //     return array;
 // };
 //
-// const columns = [
+//
+// const columns: TableColumnProps[] =[
+//     // {
+//     //     title: "Episode Number",
+//     //     dataIndex: "episode_number",
+//     // },
 //     {
-//         title: 'Name',
-//         dataIndex: 'name',
-//     },
-//     {
-//         title: 'Salary',
-//         dataIndex: 'salary',
-//     },
-//     {
-//         title: 'Address',
-//         dataIndex: 'address',
-//     },
-//     {
-//         title: 'Email',
-//         dataIndex: 'email',
+//         title: "Video Title",
+//         dataIndex: "video_title",
 //     },
 // ];
-// const initialData = [
-//     {
-//         key: '1',
-//         name: 'Jane Doe',
-//         salary: 23000,
-//         address: '32 Park Road, London',
-//         email: 'jane.doe@example.com',
-//     },
-//     {
-//         key: '2',
-//         name: 'Alisa Ross',
-//         salary: 25000,
-//         address: '35 Park Road, London',
-//         email: 'alisa.ross@example.com',
-//     },
-//     {
-//         key: '3',
-//         name: 'Kevin Sandra',
-//         salary: 22000,
-//         address: '31 Park Road, London',
-//         email: 'kevin.sandra@example.com',
-//     },
-//     {
-//         key: '4',
-//         name: 'Ed Hellen',
-//         salary: 17000,
-//         address: '42 Park Road, London',
-//         email: 'ed.hellen@example.com',
-//     },
-//     {
-//         key: '5',
-//         name: 'William Smith',
-//         salary: 27000,
-//         address: '62 Park Road, London',
-//         email: 'william.smith@example.com',
-//     },
-// ];
+//
 // const DragHandle = SortableHandle(() => (
 //     <IconDragDotVertical
 //         style={{
-//             cursor: 'move',
-//             color: '#555',
+//             cursor: "move",
+//             color: "#555",
 //         }}
 //     />
 // ));
+//
+//
 // const SortableWrapper = SortableContainer((props) => {
 //     return <tbody {...props} />;
 // });
 // const SortableItem = SortableElement((props) => {
-//     return <tr {...props} />;
+//     return (
+//         <tr
+//             style={{
+//                 cursor: "move",
+//             }}
+//             {...props}
+//         />
+//     );
 // });
 //
-// export  default  function ExpandedRowRender1() {
-//     const [data, setData] = useState(initialData);
+// interface OnsortEndData{
+//     oldIndex: number;
+//     newIndex: number;
+// }
 //
-//     function onSortEnd({ oldIndex, newIndex }) {
+// function ExpandedRowRender1() {
+//     const [episodeData, isUpdate] = useAddSeriesModalStore((state) => [state.episodeData, state.isUpdate]);
+//     const [data, setData] = useState<EpisodeData[]>(episodeData!.videos);
+//
+//     useEffect(() => {
+//         if(!isUpdate) return;
+//         setData(episodeData!.videos);
+//         // eslint-disable-next-line react-hooks/exhaustive-deps
+//     }, [isUpdate]);
+//
+//     function onSortEnd(sortEndData:OnsortEndData) {
+//         const { oldIndex, newIndex } = sortEndData;
 //         if (oldIndex !== newIndex) {
+//             // eslint-disable-next-line react-hooks/exhaustive-deps
 //             const newData = arrayMove([].concat(data), oldIndex, newIndex).filter((el) => !!el);
-//             console.log('New Data: ', newData);
+//             console.log("New Data: ", newData);
 //             setData(newData);
 //         }
 //     }
 //
 //     const DraggableContainer = (props) => (
 //         <SortableWrapper
-//             useDragHandle
 //             onSortEnd={onSortEnd}
-//             helperContainer={() => document.querySelector('.arco-drag-table-container-2 table tbody')}
+//             helperContainer={() => document.querySelector(".arco-drag-table-container table tbody")}
 //             updateBeforeSortStart={({ node }) => {
-//                 const tds = node.querySelectorAll('td');
+//                 const tds = node.querySelectorAll("td");
 //                 tds.forEach((td) => {
-//                     td.style.width = td.clientWidth + 'px';
+//                     td.style.width = td.clientWidth + "px";
 //                 });
 //             }}
 //             {...props}
@@ -127,17 +109,17 @@
 //                     width: 40,
 //                 },
 //                 {
-//                     name: 'expandNode',
+//                     name: "expandNode",
 //                     node: expandNode,
 //                 },
 //                 {
-//                     name: 'selectionNode',
+//                     name: "selectionNode",
 //                     node: selectionNode,
 //                 },
 //             ],
 //         },
 //         body: {
-//             operations: ({ selectionNode, expandNode }) => [
+//             operations: ({ selectionNode }) => [
 //                 {
 //                     node: (
 //                         <td>
@@ -149,11 +131,7 @@
 //                     width: 40,
 //                 },
 //                 {
-//                     name: 'expandNode',
-//                     node: expandNode,
-//                 },
-//                 {
-//                     name: 'selectionNode',
+//                     name: "selectionNode",
 //                     node: selectionNode,
 //                 },
 //             ],
@@ -163,14 +141,12 @@
 //     };
 //     return (
 //         <Table
-//             className='arco-drag-table-container-2'
+//             className='arco-drag-table-container'
 //             components={components}
 //             columns={columns}
 //             data={data}
-//             rowSelection={{
-//                 type: 'checkbox',
-//             }}
 //         />
 //     );
 // }
 //
+// export default ExpandedRowRender1;
