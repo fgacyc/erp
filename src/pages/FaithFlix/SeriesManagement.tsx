@@ -7,21 +7,7 @@ import AddSeriesModal from "@/components/UI_Modal/UI_FaithFlixModals/AddSeriesMo
 import PubSub from "pubsub-js";
 import {deleteReq, getReq} from "@/tools/requests.ts";
 
-interface  episodeData{
-    key: number;
-    episode_number: number;
-    video_id: number;
-    video_title: string;
-}
-
-interface SeriesData{
-    series_name: string;
-    series_description: string;
-    videos: episodeData[];
-}
-
-
-function expandedRowRender(videos:episodeData[]) {
+export  function ExpandedRowRender(videos:episodeData[]) {
 
 
     const columns: TableColumnProps[] =[
@@ -39,6 +25,22 @@ function expandedRowRender(videos:episodeData[]) {
 
     return <Table columns={columns} data={videos} pagination={false} />;
 }
+
+export interface  episodeData{
+    key: number;
+    episode_number: number;
+    video_id: number;
+    video_title: string;
+}
+
+interface SeriesData{
+    series_name: string;
+    series_description: string;
+    videos: episodeData[];
+}
+
+
+
 
 export  default function SeriesManagement() {
 
@@ -128,7 +130,7 @@ export  default function SeriesManagement() {
                 <Table columns={columns}
                        data={allData}
                        expandedRowRender={
-                            (record) => expandedRowRender(record.videos)
+                            (record) => ExpandedRowRender(record.videos)
                        }
                 />
             </div>
