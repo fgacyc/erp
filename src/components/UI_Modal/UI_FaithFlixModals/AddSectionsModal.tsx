@@ -115,7 +115,7 @@ export const AddSectionsModal: FunctionComponent<AddSectionsModalProps> = ({visi
             if(res.status){
                 setVisible(false);
                 Message.success("Add billboard successfully");
-                //PubSub.publish("updateBillboardsData", { message: "" });
+                PubSub.publish("updateBillboardsData", { message: "" });
             }
         });
     }

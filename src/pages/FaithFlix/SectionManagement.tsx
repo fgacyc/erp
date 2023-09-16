@@ -1,11 +1,26 @@
 import React, {useEffect, useState} from "react";
-import { Button, Image, Table, TableColumnProps} from "@arco-design/web-react";
-import {getReq} from "@/tools/requests.ts";
+import {Button, Image, Message, Table, TableColumnProps} from "@arco-design/web-react";
+import {deleteReq, getReq} from "@/tools/requests.ts";
 import {IconDelete, IconEdit, IconEye, IconPlus} from "@arco-design/web-react/icon";
 import {AddSectionsModal} from "@/components/UI_Modal/UI_FaithFlixModals/AddSectionsModal.tsx";
+import UI_ConfirmModal from "@/components/UI_Modal/UI_ConfirmModal";
+
+
+interface  BillboardData {
+    key: string;
+    billboard_id: number;
+    genre_tag_id: number;
+    title: string;
+    description: string;
+    cover_url: string;
+    video_id: number;
+    sync_mode: boolean;
+    created_at: string;
+    updated_at: string;
+}
 
 export  default function SectionManagement() {
-    const [allData, setAllData] = useState([]);
+    const [allData, setAllData] = useState<BillboardData[]>([]);
     const [showModal, setShowModal] = useState(false);
     const [currentVideoCoverURL, setCurrentVideoCoverURL] = useState<string>("");
     const [visible, setVisible] = React.useState(false);
@@ -60,7 +75,7 @@ export  default function SectionManagement() {
                         <Button type="secondary" className="mr-2"
                                 icon={<IconDelete
                                     onClick={() => {
-                                        //setShowModal(true);
+                                        handleDelete(record.billboard_id);
                                     }}
                                 />}
                         ></Button>
@@ -69,29 +84,47 @@ export  default function SectionManagement() {
             },
         }
     ];
-    function  sectionData(){
+    function  updateSectionData(){
         getReq("billboards").then((res)=>{
             if(res.status){
-                // console.log(res.data);
                 setAllData(res.data);
             }
         });
     }
 
     useEffect(() => {
-        sectionData();
+        updateSectionData();
         const subscription = PubSub.subscribe("showBillBoardVideoCover", (_, data) => {
             setCurrentVideoCoverURL(data.message);
             setVisible(true);
         });
         const subscription1 = PubSub.subscribe("updateBillboardsData", () => {
-            sectionData();
+            updateSectionData();
         });
         return ()=>{
             PubSub.unsubscribe(subscription);
             PubSub.unsubscribe(subscription1);
         };
     }, []);
+
+    function  handleDelete(id:number){
+        const deleteSec = ()=>{
+            deleteReq(`billboards?billboard_id=${id}`).then((res)=>{
+                if(res.status){
+                    Message.success("Delete successfully");
+                    updateSectionData();
+                }else {
+                    Message.warning("Delete failed");
+                }
+            });
+        };
+
+        UI_ConfirmModal(
+            "Delete",
+            "Are you sure you want to delete this section?",
+            deleteSec
+        );
+    }
 
 
     return (
