@@ -6,8 +6,9 @@ import React, {useEffect, useState} from "react";
 import AddSeriesModal from "@/components/UI_Modal/UI_FaithFlixModals/AddSeriesModal.tsx";
 import PubSub from "pubsub-js";
 import {deleteReq, getReq} from "@/tools/requests.ts";
+import {useAddSeriesModalStore} from "@/components/UI_Modal/UI_FaithFlixModals/stores/addSeriesModalStore.ts";
 
-export  function ExpandedRowRender(videos:episodeData[]) {
+export  function ExpandedRowRender(videos:EpisodeData[]) {
 
 
     const columns: TableColumnProps[] =[
@@ -26,25 +27,21 @@ export  function ExpandedRowRender(videos:episodeData[]) {
     return <Table columns={columns} data={videos} pagination={false} />;
 }
 
-export interface  episodeData{
+export interface EpisodeData {
     key: number;
     episode_number: number;
     video_id: number;
     video_title: string;
 }
 
-interface SeriesData{
+export interface SeriesData{
     series_name: string;
     series_description: string;
-    videos: episodeData[];
+    videos: EpisodeData[];
 }
 
 
-
-
 export  default function SeriesManagement() {
-
-
     const columns: TableColumnProps[] = [
         {
             title: "Series Name",
@@ -76,6 +73,7 @@ export  default function SeriesManagement() {
     ];
     const [AddSeriesModalVisible, setAddSeriesModalVisible] = useState(false);
     const [allData, setAllData] = useState<SeriesData[]>([]);
+    const setEpisodeData = useAddSeriesModalStore((state) => state.setEpisodeData);
 
     useEffect(() => {
         updateSeriesData();
@@ -97,8 +95,9 @@ export  default function SeriesManagement() {
     }
 
     function handleEdit(record: SeriesData){
-                console.log(record);
-        // setAddSeriesModalVisible(true);
+        // console.log(record);
+        setEpisodeData(record);
+        setAddSeriesModalVisible(true);
     }
 
     function deleteSeries(series_id:number){

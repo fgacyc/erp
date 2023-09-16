@@ -5,6 +5,7 @@ import {Transfer} from "@arco-design/web-react";
 import {getReq, postReq} from "@/tools/requests.ts";
 import {TransferItem} from "@arco-design/web-react/es/Transfer/interface";
 import PubSub from "pubsub-js";
+import {useAddSeriesModalStore} from "@/components/UI_Modal/UI_FaithFlixModals/stores/addSeriesModalStore.ts";
 const FormItem = Form.Item;
 
 const TextArea = Input.TextArea;
@@ -23,6 +24,7 @@ export default function AddSeriesModal(props: AddVideoModalProps) {
     const [loading, setLoading] = React.useState(false);
     const formRef = useRef<FormInstance | null>(null);
     const [form] = Form.useForm();
+    const [currentEpisodeData, isUpdate,resetEpisodeData] = useAddSeriesModalStore((state) => [state.episodeData, state.isUpdate,state.resetEpisodeData]);
 
 
 
@@ -35,8 +37,6 @@ export default function AddSeriesModal(props: AddVideoModalProps) {
             }
             setLoading(false);
         });
-
-
     }, []);
 
 
@@ -45,8 +45,12 @@ export default function AddSeriesModal(props: AddVideoModalProps) {
         if(!visible){
             setEpisodeData([]);
             formRef.current?.resetFields();
-        }else{
-            console.log(episodeData);
+        }
+        else if(visible && isUpdate){
+            if(!currentEpisodeData) return;
+            // console.log(currentEpisodeData);
+            formRef.current?.setFieldsValue(currentEpisodeData);
+            setEpisodeData(currentEpisodeData.videos.map((item)=>item.video_id.toString()));
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [visible]);
@@ -79,7 +83,7 @@ export default function AddSeriesModal(props: AddVideoModalProps) {
             series_description: formRef.current?.getFieldValue("series_description"),
             episodes: episodeData
         };
-        console.log(data);
+        //console.log(data);
 
         setLoading(true);
         postReq("video-series", data).then((res) => {
@@ -88,6 +92,7 @@ export default function AddSeriesModal(props: AddVideoModalProps) {
                 Message.success("Add series successfully");
                 setVisible(false);
                 PubSub.publish("updateSeriesData");
+                resetEpisodeData();
             }
             setLoading(false);
         });
