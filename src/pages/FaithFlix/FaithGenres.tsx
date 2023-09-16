@@ -30,7 +30,7 @@ export  default function FaithGenres() {
                     />}></Button>
                     <Button type="secondary" size="small" className="mr-2" icon={<IconDelete
                         onClick={() => {
-                            deleteData(record.tag_id);
+                            deleteData(record);
                         }}
                     />}></Button>
                 </div>
@@ -53,12 +53,21 @@ export  default function FaithGenres() {
         });
     }
 
-    function deleteData(id:number){
+    function deleteData(genreTag:GenreTag){
+        console.log(genreTag);
+        if(genreTag.tag_name === "Worship"|| genreTag.tag_name === "Sermon"){
+            Message.warning("Cannot delete Music or Sermon");
+            return;
+        }
+
+        const id = genreTag?.tag_id;
+        const name = genreTag?.tag_name;
         const deleteGenre = async () => {
             const res = await  deleteRoleGenreTag("genres",id);
+            console.log(res);
             if(res.status) {
                 updateData();
-                Message.success("Delete Genre Success");
+                Message.success(`Delete Genre: ${name} Success`);
             }
         };
 
