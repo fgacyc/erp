@@ -4,6 +4,7 @@ import "./style.css";
 import {Transfer} from "@arco-design/web-react";
 import {getReq, postReq} from "@/tools/requests.ts";
 import {TransferItem} from "@arco-design/web-react/es/Transfer/interface";
+import PubSub from "pubsub-js";
 const FormItem = Form.Item;
 
 const TextArea = Input.TextArea;
@@ -34,7 +35,11 @@ export default function AddSeriesModal(props: AddVideoModalProps) {
             }
             setLoading(false);
         });
+
+
     }, []);
+
+
 
     useEffect(() => {
         if(!visible){
@@ -76,12 +81,15 @@ export default function AddSeriesModal(props: AddVideoModalProps) {
         };
         console.log(data);
 
+        setLoading(true);
         postReq("video-series", data).then((res) => {
             console.log(res);
             if (res.status) {
                 Message.success("Add series successfully");
                 setVisible(false);
+                PubSub.publish("updateSeriesData");
             }
+            setLoading(false);
         });
     }
 
@@ -118,6 +126,7 @@ export default function AddSeriesModal(props: AddVideoModalProps) {
                             placeholder='Please enter series description'
                             className={"resize-none mb-2"}
                             autoSize={{minRows: 2, maxRows: 5}}
+                            allowClear
                         />
                     </FormItem>
 

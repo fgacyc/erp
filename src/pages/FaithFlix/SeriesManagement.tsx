@@ -1,88 +1,113 @@
 
 import { Button } from "@arco-design/web-react";
-import { IconPlus} from "@arco-design/web-react/icon";
+import { IconDelete, IconEdit, IconPlus} from "@arco-design/web-react/icon";
 import { Table, TableColumnProps } from "@arco-design/web-react";
-import { useState} from "react";
+import React, {useEffect, useState} from "react";
 import AddSeriesModal from "@/components/UI_Modal/UI_FaithFlixModals/AddSeriesModal.tsx";
+import PubSub from "pubsub-js";
+import {deleteReq, getReq} from "@/tools/requests.ts";
 
+interface  episodeData{
+    key: number;
+    episode_number: number;
+    video_id: number;
+    video_title: string;
+}
+
+interface SeriesData{
+    series_name: string;
+    series_description: string;
+    videos: episodeData[];
+}
+
+
+function expandedRowRender(videos:episodeData[]) {
+
+
+    const columns: TableColumnProps[] =[
+        {
+            title: "Episode Number",
+            dataIndex: "episode_number",
+        },
+        {
+            title: "Video Title",
+            dataIndex: "video_title",
+        },
+    ];
+
+
+
+    return <Table columns={columns} data={videos} pagination={false} />;
+}
 
 export  default function SeriesManagement() {
 
 
     const columns: TableColumnProps[] = [
         {
-            title: "Name",
-            dataIndex: "name",
+            title: "Series Name",
+            dataIndex: "series_name",
         },
         {
-            title: "Salary",
-            dataIndex: "salary",
+            title: "Series Description",
+            dataIndex: "series_description",
         },
         {
-            title: "Address",
-            dataIndex: "address",
-        },
-        {
-            title: "Email",
-            dataIndex: "email",
-        },
-    ];
+            title: "Options",
+            render: (_, record) => {
+                return (
+                    <div className={"flex flex-row justify-start "}>
+                        <Button type="secondary" className="mr-2"
+                                icon={<IconEdit
+                                    onClick={() => {
+                                        handleEdit(record);
+                                    }}
+                                />}></Button>
+                        <Button type="secondary" icon={<IconDelete />}
+                                onClick={() =>deleteSeries(record.series_id)}
+                        ></Button>
 
-    const data = [
-        {
-            key: "1",
-            name: "Jane Doe",
-            salary: 23000,
-            address: "32 Park Road, London",
-            email: "jane.doe@example.com",
-        },
-        {
-            key: "2",
-            name: "Alisa Ross",
-            salary: 25000,
-            address: "35 Park Road, London",
-            email: "alisa.ross@example.com",
-        },
-        {
-            key: "3",
-            name: "Kevin Sandra",
-            salary: 22000,
-            address: "31 Park Road, London",
-            email: "kevin.sandra@example.com",
-        },
-        {
-            key: "4",
-            name: "Ed Hellen",
-            salary: 17000,
-            address: "42 Park Road, London",
-            email: "ed.hellen@example.com",
-        },
-        {
-            key: "5",
-            name: "William Smith",
-            salary: 27000,
-            address: "62 Park Road, London",
-            email: "william.smith@example.com",
-        },
+                    </div>
+                );
+            },
+        }
     ];
-
     const [AddSeriesModalVisible, setAddSeriesModalVisible] = useState(false);
+    const [allData, setAllData] = useState<SeriesData[]>([]);
 
-    // function updateDBData() {
-    //     const update = () => {
-    //         setLoadingVisible(true);
-    //
-    //         setTimeout(() => {
-    //             setLoadingVisible(false);
-    //         }, 2000);
-    //     };
-    //
-    //     UI_ConfirmModal(
-    //         "Confirm",
-    //         "Are you sure to update the new data from YouTube?",
-    //         update,
-    //     );
-    // }
+    useEffect(() => {
+        updateSeriesData();
+        const subscription = PubSub.subscribe("updateSeriesData", () => {
+            updateSeriesData();
+        });
+        return () => {
+            PubSub.unsubscribe(subscription);
+        };
+    }, []);
+
+    function updateSeriesData(){
+        getReq("video-series").then((res) => {
+            if(res.status){
+                console.log(res.data);
+                setAllData(res.data);
+            }
+        });
+    }
+
+    function handleEdit(record: SeriesData){
+                console.log(record);
+        // setAddSeriesModalVisible(true);
+    }
+
+    function deleteSeries(series_id:number){
+        deleteReq(`video-series?series_id=${series_id}`).then((res) => {
+            console.log(res);
+            if(res.status){
+                updateSeriesData();
+            }
+        });
+    }
+
 
     return (
         <>
@@ -94,11 +119,23 @@ export  default function SeriesManagement() {
                                 onClick={() => setAddSeriesModalVisible(true)}
                                 className={"mr-3"}
                         >Add Series</Button>
+                        <Button type="secondary" icon={<IconPlus />}
+                                onClick={() => updateSeriesData()}
+                                className={"mr-3"}
+                        >update</Button>
                     </div>
                 </div>
-                <Table columns={columns} data={data} />
+                <Table columns={columns}
+                       data={allData}
+                       expandedRowRender={
+                            (record) => expandedRowRender(record.videos)
+                       }
+                />
             </div>
-            <AddSeriesModal visible={AddSeriesModalVisible} setVisible={setAddSeriesModalVisible} />
+            <AddSeriesModal
+                visible={AddSeriesModalVisible}
+                setVisible={setAddSeriesModalVisible}
+            />
         </>
     );
 
