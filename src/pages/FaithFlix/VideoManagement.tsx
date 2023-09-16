@@ -8,7 +8,7 @@ import AddSeriesModal from "@/components/UI_Modal/UI_FaithFlixModals/AddSeriesMo
 // import UI_ConfirmModal from "@/components/UI_Modal/UI_ConfirmModal";
 import {getReq, putReq} from "@/tools/requests.ts";
 import {videoDataToMap, type VideoData, VideoDBData, culVideoProcess} from "@/pages/FaithFlix/data.js";
-import {useAddVideoModalStore} from "@/components/UI_Modal/UI_FaithFlixModals/stores/addVideoStore.ts";
+import {useAddVideoModalStore, VideoFormData} from "@/components/UI_Modal/UI_FaithFlixModals/stores/addVideoStore.ts";
 
 
 export default function VideoManagement() {
@@ -142,9 +142,15 @@ export default function VideoManagement() {
             setCurrentVideoCoverURL(data.message);
             setVisible(true);
         });
+
+        const subscription1 = PubSub.subscribe("updateProcess", (_, data) => {
+            updateTableItemProcess(data.message);
+        });
         return () => {
             PubSub.unsubscribe(subscription);
+            PubSub.unsubscribe(subscription1);
         };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     function handleEdit(record: VideoDBData) {
@@ -174,6 +180,31 @@ export default function VideoManagement() {
         }
     }
 
+    useEffect(() => {
+        if (currentDisplay === "available") {
+            setCurrentDisplayData(allVideoAvailableData);
+        }else{
+            setCurrentDisplayData(allVideoArchivedData);
+        }
+
+    }, [allVideoArchivedData, allVideoAvailableData, currentDisplay]);
+
+    function updateTableItemProcess(data:VideoFormData){
+        const newAllVideoArchivedData :VideoData[] = allVideoArchivedData.map((video:VideoData) => {
+            const videoObj:VideoFormData = data;
+            if (video.video_id === videoObj.video_id) {
+                video.has_video_credits = !!videoObj.credits;
+                video.has_subtitles = !!videoObj.subtitles;
+                video.has_video_tags = !!videoObj.tags;
+                video.description = videoObj.description;
+                console.log(video);
+            }
+
+            return video;
+        });
+        setAllVideoArchivedData(newAllVideoArchivedData);
+    }
+
     function updateArchivedStatus(record: VideoData, archived: boolean) {
             if(culVideoProcess(record) !== 4 && !archived){
                 Message.warning("video is not completed yet");
@@ -188,12 +219,10 @@ export default function VideoManagement() {
                         const newAllVideoAvailableData = allVideoAvailableData.filter((video) => video.video_id !== video_id);
                         setAllVideoAvailableData(newAllVideoAvailableData);
                         setAllVideoArchivedData([...allVideoArchivedData, ...allVideoAvailableData.filter((video) => video.video_id === video_id)]);
-                        setCurrentDisplayData(newAllVideoAvailableData);
                     }else{
                         const newAllVideoArchivedData = allVideoArchivedData.filter((video) => video.video_id !== video_id);
                         setAllVideoArchivedData(newAllVideoArchivedData);
                         setAllVideoAvailableData([...allVideoAvailableData, ...allVideoArchivedData.filter((video) => video.video_id === video_id)]);
-                        setCurrentDisplayData(newAllVideoArchivedData);
                     }
                 } else {
                     Message.warning("update archived status failed");

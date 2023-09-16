@@ -6,7 +6,7 @@ interface CreditsData {
     role_id: number;
 }
 
-interface VideoFormData {
+export interface VideoFormData {
     cover_url: string;
     credits: CreditsData[];
     definition: "hd" | "sd";
@@ -14,7 +14,7 @@ interface VideoFormData {
     duration: string;
     genres: number[];
     release_date: string;
-    subtitle: string[];
+    subtitles: string[];
     tags: number[];
     title: string;
     video_id: number;
@@ -48,7 +48,7 @@ export const useAddVideoModalStore = create<AddVideoModalState>((set) => ({
                 duration: videoTableData.duration,
                 genres: [],
                 release_date: videoTableData.release_date,
-                subtitle: [],
+                subtitles: [],
                 tags: [],
                 title: videoTableData.title,
                 video_id: videoTableData.video_id,
@@ -60,7 +60,7 @@ export const useAddVideoModalStore = create<AddVideoModalState>((set) => ({
     setVideoData: (videoData: VideoFormData) => {
         set({currentVideoData: videoData});
         set({isUpdate: false});
-        console.log("currentVideoData in store", videoData);
+        //console.log("currentVideoData in store", videoData);
     },
     resetVideoData: () => {
         set({currentVideoData: null});

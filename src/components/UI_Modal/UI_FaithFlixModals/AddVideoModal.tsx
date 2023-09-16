@@ -143,7 +143,7 @@ export default function AddVideoModal(props: AddVideoModalProps) {
                 setIsLoading(false);
                 Message.success("Video data updated successfully");
                 setVisible(false);
-
+                PubSub.publish("updateProcess", {message: res.data});
             }
         });
     }
