@@ -1,5 +1,5 @@
 import {Button, DatePicker, Divider, FormInstance, Input, Message, Modal, Select, Space} from "@arco-design/web-react";
-import {Form, TimePicker, Radio, InputTag} from "@arco-design/web-react";
+import {Form, TimePicker, Radio} from "@arco-design/web-react";
 import React, {useEffect, useRef} from "react";
 import {IconDelete, IconPlus, IconSearch} from "@arco-design/web-react/icon";
 import {FieldError} from "@arco-design/web-react/es/Form/interface";
@@ -8,10 +8,18 @@ const RadioGroup = Radio.Group;
 const FormItem = Form.Item;
 const TextArea = Input.TextArea;
 import "./style.css";
-import {formatDuration, getSubtitle, getVideoGenreTag, getYoutubeVideoId} from "@/pages/FaithFlix/data.ts";
-import {getReq} from "@/tools/requests.ts";
-// import {useAddCreditsModalStore} from "@/components/UI_Modal/UI_FaithFlixModals/stores/addCreditsModalStore.ts";
+import {
+    formatDuration,
+    getSubtitle,
+    getVideoCreditSelect,
+    getVideoGenreTag,
+    getYoutubeVideoId,
+    VideoDBData
+} from "@/pages/FaithFlix/data.ts";
+import {getReq, putReq} from "@/tools/requests.ts";
 import {useAddVideoModalStore} from "@/components/UI_Modal/UI_FaithFlixModals/stores/addVideoStore.ts";
+
+const Option = Select.Option;
 
 
 interface AddVideoModalProps {
@@ -19,27 +27,55 @@ interface AddVideoModalProps {
     setVisible: (visible: boolean) => void;
 }
 
+interface RoleSelectOption {
+    label: string;
+    value: number;
+}
+
+interface CreditsSelectOption {
+    label: string;
+    value: number;
+}
+
+interface GenreTagSelectOption {
+    label: string;
+    value: number;
+}
+
 export default function AddVideoModal(props: AddVideoModalProps) {
     const {visible, setVisible} = props;
     // const formRef = useRef();
     const formRef = useRef<FormInstance | null>(null);
     const [videoURL, setVideoURL] = React.useState("");
-    const [currentVideoData,isUpdate,resetVideoData] = useAddVideoModalStore((state) => [state.currentVideoData,state.isUpdate,state.resetVideoData]);
+    const [currentVideoData, isUpdate] =
+        useAddVideoModalStore((state) =>
+            [state.currentVideoData, state.isUpdate]);
+
+    const  setVideoData = useAddVideoModalStore((state) => state.setVideoData);
+    const [roles, setRoles] = React.useState<RoleSelectOption[]>([]);
+    const [credits, setCredits] = React.useState<CreditsSelectOption[]>([]);
+    const [genres, setGenres] = React.useState<GenreTagSelectOption[]>([]);
+    const [tags, setTags] = React.useState<GenreTagSelectOption[]>([]);
+    const [isLoading, setIsLoading] = React.useState(false);
+    const isUseCachedData = useAddVideoModalStore((state) => state.isUseCachedData);
+
 
     useEffect(() => {
-        async function getVideoData(){
-            if(!currentVideoData) return;
+        async function getVideoData() {
+            if (!currentVideoData) return;
             const subtitlePromise = getSubtitle(currentVideoData.video_id);
             const genreTagPromise = getVideoGenreTag(currentVideoData.video_id);
+            const videoCreditPromise = getVideoCreditSelect(currentVideoData.video_id);
 
-            Promise.all([subtitlePromise, genreTagPromise])
-                .then(([subtitleRes, genreTagRes]) => {
-                    if (subtitleRes.status && genreTagRes.status){
+            Promise.all([subtitlePromise, genreTagPromise, videoCreditPromise])
+                .then(([subtitleRes, genreTagRes, videoCreditRes]) => {
+                    if (subtitleRes.status && genreTagRes.status) {
                         formRef.current?.setFieldsValue({
                             ...currentVideoData,
                             subtitles: [subtitleRes.data.language],
                             genres: genreTagRes.data.genres,
                             tags: genreTagRes.data.tags,
+                            credits: videoCreditRes.data,
                         });
                     }
                 })
@@ -48,20 +84,65 @@ export default function AddVideoModal(props: AddVideoModalProps) {
                 });
 
         }
+        console.log({
+            isUpdate: isUpdate,
+            isUseCachedData: isUseCachedData,
+        });
 
         if (visible && isUpdate) {
-            getVideoData();
-        }else{
-            resetVideoData();
+            if(isUseCachedData){
+                formRef.current?.setFieldsValue(currentVideoData);
+            }else{
+                getVideoData();
+            }
+        } else {
             formRef.current?.resetFields();
         }
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [visible]);
 
+    useEffect(() => {
+        getReq("roles-select").then((res) => {
+            //console.log(res);
+            if (res.status) {
+                setRoles(res.data);
+            }
+        });
+        getReq("credits-select").then((res) => {
+            //console.log(res);
+            if (res.status) {
+                setCredits(res.data);
+            }
+        });
+        getReq("genre-tags-select").then((res) => {
+            //console.log(res);
+            if (res.status) {
+                setGenres(res.data.genres);
+                setTags(res.data.tags);
+            }
+        });
+
+
+    }, []);
 
     function submitHandle(): void {
-        console.log(formRef.current?.getFieldsValue());
+        setIsLoading(true);
+        const values: Partial<VideoDBData> | undefined = formRef.current?.getFieldsValue();
+        if (!values) return;
+        const video_id = currentVideoData?.video_id;
+        values.video_id = video_id;
+        console.log(values);
+        putReq(`video-data?video_id=${video_id}`, values).then((res) => {
+            console.log(res);
+            if (res.status) {
+                setVideoData(res.data);
+                setIsLoading(false);
+                Message.success("Video data updated successfully");
+                setVisible(false);
+
+            }
+        });
     }
 
     function errorHandle(errors: { [key: string]: FieldError }): void {
@@ -79,7 +160,6 @@ export default function AddVideoModal(props: AddVideoModalProps) {
         getReq(`video-data-from-youtube?videoId=${videoId}`).then((res) => {
             if (res.status) {
                 const data = res.data;
-                console.log(data);
                 formRef.current?.setFieldsValue({
                     title: data.snippet.title,
                     description: data.snippet.description,
@@ -120,8 +200,8 @@ export default function AddVideoModal(props: AddVideoModalProps) {
                     initialValues={{
                         credits: [
                             {
-                                position: "",
-                                names: "",
+                                role_id: "",
+                                credits_ids: "",
                             },
                         ],
                     }}
@@ -151,12 +231,13 @@ export default function AddVideoModal(props: AddVideoModalProps) {
 
                     <FormItem shouldUpdate>
                         {(value) => {
-                            return <div className={`w-full flex flex-row justify-end mb-4 ${value.cover_url?"":"hidden"}`}>
+                            return <div
+                                className={`w-full flex flex-row justify-end mb-4 ${value.cover_url ? "" : "hidden"}`}>
                                 <div className={"w-[28%]"}></div>
                                 <div className={"w-[80%]"}>
                                     <img className={"w-32 cursor-pointer"}
                                          src={value.cover_url} alt="cover"
-                                        onClick={()=> PubSub.publish("showVideoCover", { message: value.cover_url })}
+                                         onClick={() => PubSub.publish("showVideoCover", {message: value.cover_url})}
                                     />
                                 </div>
                             </div>;
@@ -172,10 +253,6 @@ export default function AddVideoModal(props: AddVideoModalProps) {
                         />
                     </FormItem>
                     <FormItem label='Release Date' field="release_date" required>
-                        {/*<DatePicker*/}
-                        {/*    placeholder='Please Select Release Date'*/}
-                        {/*    style={{width: 250}}*/}
-                        {/*/>*/}
                         <DatePicker
                             format='YYYY-MM-DD HH:mm:ss'
                             placeholder='Please Select Release Date time'
@@ -183,17 +260,35 @@ export default function AddVideoModal(props: AddVideoModalProps) {
                     </FormItem>
 
                     <FormItem label='Genres' field="genres" required>
-                        <InputTag
+                        <Select
+                            // style={{ width: 200 }}
+                            showSearch
                             allowClear
-                            placeholder='Input and press Enter'
-                        />
+                            mode='multiple'
+                            placeholder='Select Genres'
+                        >
+                            {genres && genres.map((option) => (
+                                <Option key={option.value} value={option.value}>
+                                    {option.label}
+                                </Option>
+                            ))}
+                        </Select>
                     </FormItem>
 
                     <FormItem label='Video Tags' field="tags" required>
-                        <InputTag
+                        <Select
+                            // style={{ width: 200 }}
+                            mode='multiple'
+                            showSearch
                             allowClear
-                            placeholder='Input and press Enter'
-                        />
+                            placeholder='Select Tags'
+                        >
+                            {tags && tags.map((option) => (
+                                <Option key={option.value} value={option.value}>
+                                    {option.label}
+                                </Option>
+                            ))}
+                        </Select>
                     </FormItem>
 
                     <Form.Item field='subtitles' label='Subtitle Language'>
@@ -204,14 +299,6 @@ export default function AddVideoModal(props: AddVideoModalProps) {
                             options={["zh", "en"]}
                             placeholder='Please Subtitle Language'/>
                     </Form.Item>
-
-                    {/*<Form.Item field='series' label='Series'>*/}
-                    {/*    <Select*/}
-                    {/*        allowCreate*/}
-                    {/*        allowClear*/}
-                    {/*        options={[]}*/}
-                    {/*        placeholder='Please Subtitle Language' />*/}
-                    {/*</Form.Item>*/}
 
                     <FormItem label='High Definition' field="definition" required>
                         <RadioGroup defaultValue='y'>
@@ -232,26 +319,43 @@ export default function AddVideoModal(props: AddVideoModalProps) {
                                                 <Form.Item label={`Credit ${index + 1}`}>
                                                     <Space>
                                                         <Form.Item
-                                                            field={item.field + ".position"}
+                                                            field={item.field + ".role_id"}
                                                             rules={[{required: true}]}
                                                             noStyle
                                                             required
                                                         >
-                                                            <Input
-                                                                placeholder='Input Position'
-                                                            />
+                                                            <Select
+                                                                style={{width: 200}}
+                                                                showSearch
+                                                                allowClear
+                                                                placeholder='Select role'
+                                                            >
+                                                                {roles && roles.map((option) => (
+                                                                    <Option key={option.value} value={option.value}>
+                                                                        {option.label}
+                                                                    </Option>
+                                                                ))}
+                                                            </Select>
                                                         </Form.Item>
                                                         <Form.Item
-                                                            field={item.field + ".names"}
+                                                            field={item.field + ".credits_ids"}
                                                             rules={[{required: true}]}
                                                             noStyle
                                                             required
                                                         >
-                                                            <InputTag
+                                                            <Select
+                                                                style={{width: 300}}
+                                                                showSearch
                                                                 allowClear
-                                                                placeholder='Input name and press Enter'
-                                                                className={"w-80"}
-                                                            />
+                                                                mode='multiple'
+                                                                placeholder="Select names"
+                                                            >
+                                                                {credits && credits.map((option) => (
+                                                                    <Option key={option.value} value={option.value}>
+                                                                        {option.label}
+                                                                    </Option>
+                                                                ))}
+                                                            </Select>
                                                         </Form.Item>
                                                         <Button
                                                             icon={<IconDelete/>}
@@ -283,7 +387,7 @@ export default function AddVideoModal(props: AddVideoModalProps) {
 
                     <Form.Item label=' '>
                         <Space size={24} className={"float-right"}>
-                            <Button type='primary' htmlType='submit'>
+                            <Button type='primary' htmlType='submit' loading={isLoading}>
                                 Submit
                             </Button>
                             <Button

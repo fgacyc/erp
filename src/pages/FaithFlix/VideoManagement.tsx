@@ -7,7 +7,7 @@ import AddSeriesModal from "@/components/UI_Modal/UI_FaithFlixModals/AddSeriesMo
 
 // import UI_ConfirmModal from "@/components/UI_Modal/UI_ConfirmModal";
 import {getReq} from "@/tools/requests.ts";
-import {getNumOfTrue, videoDataToMap, type VideoData} from "@/pages/FaithFlix/data.js";
+import {getNumOfTrue, videoDataToMap, type VideoData, VideoDBData} from "@/pages/FaithFlix/data.js";
 import {useAddVideoModalStore} from "@/components/UI_Modal/UI_FaithFlixModals/stores/addVideoStore.ts";
 
 
@@ -15,7 +15,7 @@ export default function VideoManagement() {
 
     const columns: TableColumnProps[] = [
         {
-            title: "Video ID",
+            title: "ID",
             dataIndex: "video_id",
         },
         {
@@ -80,8 +80,7 @@ export default function VideoManagement() {
                         <Button type="secondary" className="mr-2"
                                 icon={<IconEdit
                                     onClick={() => {
-                                        setVideoData(record);
-                                        setAddVideoModalVisible(true);
+                                        handleEdit(record);
                                     }}
                                 />}></Button>
                         <Button type="secondary" icon={<IconArchive/>}></Button>
@@ -97,7 +96,12 @@ export default function VideoManagement() {
     const [allVideoData, setAllVideoData] = useState<VideoData[]>([]);
     const [currentVideoCoverURL, setCurrentVideoCoverURL] = useState<string>("");
     const [visible, setVisible] = React.useState(false);
-    const setVideoData = useAddVideoModalStore((state) => state.setVideoData);
+    const [currentVideoData, setVideoData] = useAddVideoModalStore((state) => [
+        state.currentVideoData, state.setVideoTableData
+    ]);
+    const setCachedData = useAddVideoModalStore((state) => state.setCachedData);
+    const resetVideoData = useAddVideoModalStore((state) => state.resetVideoData);
+    const setIsUpdate = useAddVideoModalStore((state) => state.setIsUpdate);
 
     useEffect(() => {
         async function fetchData() {
@@ -111,6 +115,7 @@ export default function VideoManagement() {
             }
             setLoadingVisible(false);
         }
+
         fetchData();
         const subscription = PubSub.subscribe("showVideoCover", (_, data) => {
             setCurrentVideoCoverURL(data.message);
@@ -121,6 +126,23 @@ export default function VideoManagement() {
         };
     }, []);
 
+    function handleEdit(record: VideoDBData) {
+        setIsUpdate(true);
+        if (currentVideoData !== null) {
+            if (currentVideoData.video_id === record.video_id) {
+                // console.log("use cached data");
+                setCachedData(true);
+            } else {
+                setCachedData(false);
+                setVideoData(record);
+            }
+        } else {
+            setCachedData(false);
+            setVideoData(record);
+        }
+        setAddVideoModalVisible(true);
+    }
+
 
     return (
         <>
@@ -129,7 +151,11 @@ export default function VideoManagement() {
                 <div className={"flex flex-row justify-between mb-3"}>
                     <div>
                         <Button type="secondary" icon={<IconPlus/>}
-                                onClick={() => setAddVideoModalVisible(true)}
+                                onClick={() => {
+                                    setIsUpdate(false);
+                                    resetVideoData();
+                                    setAddVideoModalVisible(true);
+                                }}
                                 className={"mr-3"}
                         >Add Video</Button>
                         {/*<Button type="secondary" icon={<IconPlus />}*/}
@@ -161,7 +187,6 @@ export default function VideoManagement() {
             />
         </>
     );
-
 
 
 //     https://www.youtube.com/oembed?url=http://www.youtube.com/watch?v=rATHaPSaejE&format=json

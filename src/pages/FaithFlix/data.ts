@@ -229,3 +229,7 @@ export async function getVideoGenreTag(videoId:number){
 export async function getSubtitle(videoId:number){
     return await getReq(`subtitle?video_id=${videoId}`);
 }
+
+export async function getVideoCreditSelect(videoId:number){
+    return await getReq(`video-credits-select?video_id=${videoId}`);
+}

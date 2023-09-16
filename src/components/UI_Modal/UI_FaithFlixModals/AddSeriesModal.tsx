@@ -153,7 +153,7 @@ export default function AddSeriesModal(props: AddVideoModalProps) {
                                                         required
                                                     >
                                                         <Input
-                                                            placeholder='Input Position'
+                                                            placeholder='Input Roles'
                                                         />
                                                     </Form.Item>
                                                     <Form.Item
