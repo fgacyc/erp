@@ -1,219 +1,155 @@
-import {Button, DatePicker, Divider, FormInstance, Input, Modal, Select, Space} from "@arco-design/web-react";
-import { Form,TimePicker,Radio ,InputTag } from "@arco-design/web-react";
-import React, {useRef} from "react";
-import {IconDelete, IconPlus} from "@arco-design/web-react/icon";
-import {FieldError} from "@arco-design/web-react/es/Form/interface";
-const RadioGroup = Radio.Group;
-const FormItem = Form.Item;
-const TextArea = Input.TextArea;
+import {Input, Message, Modal, Spin, Form, FormInstance} from "@arco-design/web-react";
+import React, {useEffect, useRef} from "react";
 import "./style.css";
+import {Transfer} from "@arco-design/web-react";
+import {getReq, postReq} from "@/tools/requests.ts";
+import {TransferItem} from "@arco-design/web-react/es/Transfer/interface";
+const FormItem = Form.Item;
+
+const TextArea = Input.TextArea;
 
 
 interface AddVideoModalProps {
     visible: boolean;
     setVisible: (visible: boolean) => void;
 }
+
+
 export default function AddSeriesModal(props: AddVideoModalProps) {
-    const { visible, setVisible } = props;
-    // const formRef = useRef();
+    const {visible, setVisible} = props;
+    const [transferData, setTransferData] = React.useState<TransferItem[]>([]);
+    const [episodeData, setEpisodeData] = React.useState<string[]>([]);
+    const [loading, setLoading] = React.useState(false);
     const formRef = useRef<FormInstance | null>(null);
+    const [form] = Form.useForm();
 
 
-    function submitHandle(values: FormData):void{
-        console.log(values);
+
+    useEffect(() => {
+        setLoading(true);
+        getReq("video-data/transfer").then((res) => {
+            // console.log(res);
+            if (res.status) {
+                setTransferData(res.data);
+            }
+            setLoading(false);
+        });
+    }, []);
+
+    useEffect(() => {
+        if(!visible){
+            setEpisodeData([]);
+            formRef.current?.resetFields();
+        }else{
+            console.log(episodeData);
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [visible]);
+
+    function handlerChange(_targetKeys: string[], direction: string, moveKeys: string[]) {
+        // console.log(direction, moveKeys);
+        if (direction === "target") {
+            setEpisodeData([...episodeData, ...moveKeys]);
+        } else if (direction === "source") {
+            setEpisodeData(episodeData.filter((item) => !moveKeys.includes(item)));
+        }
+        //console.log(episodeData);
     }
 
-    function errorHandle(errors: { [key: string]: FieldError }):void{
-        console.log(errors);
-    }
+    async function  handleSubmit() {
+        try {
+            await form.validate();
+        } catch (errorInfo) {
+            console.log("Failed:", errorInfo);
+            return;
+        }
 
-    interface FormData {
-        credits: {
-            position: string;
-            names: string;
-        }[];
-        // 其他属性
-    }
+        if (episodeData.length <= 1) {
+            Message.warning("Please select at least two video");
+            return;
+        }
 
+        const data = {
+            series_name: formRef.current?.getFieldValue("series_name"),
+            series_description: formRef.current?.getFieldValue("series_description"),
+            episodes: episodeData
+        };
+        console.log(data);
+
+        postReq("video-series", data).then((res) => {
+            console.log(res);
+            if (res.status) {
+                Message.success("Add series successfully");
+                setVisible(false);
+            }
+        });
+    }
 
     return (
         <Modal
-            title="Add Video"
+            title="Add Series"
             visible={visible}
-            onOk={() => setVisible(false)}
+            onOk={handleSubmit}
             onCancel={() => setVisible(false)}
             autoFocus={false}
             focusLock={true}
-            style={{ width: 800, height: 750, borderRadius: 5 }}
-            footer={null}
+            style={{width: 840, height: 700, borderRadius: 5}}
         >
-            <div className={"h-[660px]  overflow-y-auto overflow-x-hidden "}>
-            <Form
-                    ref={formRef}
-                    autoComplete='off'
-                    onSubmit={submitHandle}
-                    onSubmitFailed={errorHandle}
-                    scrollToFirstError={true}
-                    // labelAlign='right'
-                    // layout='vertical'
-                    initialValues={{
-                        credits: [
-                            {
-                                position: "",
-                                names: "",
-                            },
-                        ],
-                    }}
-            >
-                <FormItem
-                    label='Series Title' field='videoTitle' required >
-                    <Input allowClear />
-                </FormItem>
-                <FormItem label='Description' field={"description"} required>
-                    <TextArea
-                        maxLength={160}
-                        showWordLimit
-                        allowClear className={"resize-none"} />
-                </FormItem>
-                <FormItem label='Video URL' required>
-                    <Input  allowClear />
-                </FormItem>
+            <div className={"modal-form-style-fix"} >
+                <Form  autoComplete='off' layout="horizontal"
+                       ref={formRef}
+                       form={form}
+                >
+                    <FormItem label='Series Name' field="series_name"
+                        rules={[{
+                            required: true,
+                            message: "Please enter series name"
+                        }]}
+                    >
+                        <Input
+                            allowClear placeholder='Please Enter something'
+                        />
+                    </FormItem>
+                    <FormItem label='Description' field="series_description" rules={[{
+                        required: true,
+                        message: "Please enter series description"
+                    }]}>
+                        <TextArea
+                            placeholder='Please enter series description'
+                            className={"resize-none mb-2"}
+                            autoSize={{minRows: 2, maxRows: 5}}
+                        />
+                    </FormItem>
 
-                <FormItem label='Cover URL' required>
-                    <Input  allowClear />
-                </FormItem>
-
-                <FormItem label='Duration' required>
-                    <TimePicker
-                        placeholder='Please Select Duration'
-                        style={{ width: 250 }}
-                        showNowBtn={false}
-                    />
-                </FormItem>
-                <FormItem label='Release Date' required>
-                    <DatePicker
-                        placeholder='Please Select Release Date'
-                        style={{ width: 250 }}
-                    />
-                </FormItem>
-
-                <FormItem label='Genres' required>
-                    <InputTag
-                        allowClear
-                        placeholder='Input and press Enter'
-                    />
-                </FormItem>
-
-                <FormItem label='Video Tags' required>
-                    <InputTag
-                        allowClear
-                        placeholder='Input and press Enter'
-                    />
-                </FormItem>
-
-                <Form.Item field='subtitles' label='Subtitle Language'>
-                    <Select
-                        allowCreate
-                        allowClear
-                        mode='multiple'
-                        options={["Chinese", "English"]}
-                        placeholder='Please Subtitle Language' />
-                </Form.Item>
-
-                {/*<Form.Item field='series' label='Series'>*/}
-                {/*    <Select*/}
-                {/*        allowCreate*/}
-                {/*        allowClear*/}
-                {/*        options={[]}*/}
-                {/*        placeholder='Please Subtitle Language' />*/}
-                {/*</Form.Item>*/}
-
-                <FormItem label='High Definition' required>
-                    <RadioGroup defaultValue='y' >
-                        <Radio value='y'>YES</Radio>
-                        <Radio value='n'>NO</Radio>
-                    </RadioGroup>
-                </FormItem>
-
-                <Divider className={"m-0 mb-6"} />
-
-                <Form.List field='credits'>
-                    {(fields, { add, remove }) => {
-                        return (
-                            <div>
-                                {fields.map((item, index) => {
-                                    return (
-                                        <div key={item.key}>
-                                            <Form.Item label={`Credit ${index +1}`}>
-                                                <Space>
-                                                    <Form.Item
-                                                        field={item.field + ".position"}
-                                                        rules={[{ required: true }]}
-                                                        noStyle
-                                                        required
-                                                    >
-                                                        <Input
-                                                            placeholder='Input Roles'
-                                                        />
-                                                    </Form.Item>
-                                                    <Form.Item
-                                                        field={item.field + ".names"}
-                                                        rules={[{ required: true }]}
-                                                        noStyle
-                                                        required
-                                                    >
-                                                        <InputTag
-                                                            allowClear
-                                                            placeholder='Input name and press Enter'
-                                                            className={"w-80"}
-                                                        />
-                                                    </Form.Item>
-                                                    <Button
-                                                        icon={<IconDelete />}
-                                                        shape='circle'
-                                                        status='danger'
-                                                        onClick={() => remove(index)}
-                                                    ></Button>
-                                                </Space>
-                                            </Form.Item>
-                                        </div>
-                                    );
-                                })}
-                                <Form.Item wrapperCol={{ offset: 5 }}>
-                                    <Button
-                                        icon={<IconPlus />}
-                                        onClick={() => {
-                                            add();
-                                        }}
-                                    >
-                                        Add Position
-                                    </Button>
-                                </Form.Item>
-                            </div>
-                        );
-                    }}
-                </Form.List>
-
-                <Divider className={"m-0 mb-6"} />
-
-                <Form.Item label=' '>
-                    <Space size={24} className={"float-right"}>
-                        <Button type='primary' htmlType='submit'>
-                            Submit
-                        </Button>
-                        <Button
-                            onClick={() => {
-                                if (formRef?.current) {
-                                    formRef.current.resetFields();
-                                }
-                            }}
-                        >
-                            Reset
-                        </Button>
-                    </Space>
-                </Form.Item>
-            </Form>
+                </Form>
             </div>
+
+            <Spin className={"w-full h-full"} loading={loading}>
+                <Transfer
+                    pagination
+                    showSearch
+                    oneWay
+                    dataSource={transferData}
+                    searchPlaceholder='Please select'
+                    targetKeys={episodeData}
+                    titleTexts={["Available Videos", "Selected Videos"]}
+                    onResetData={() => setEpisodeData([])}
+                    simple={true}
+                    onChange={
+                        (targetKeys, direction, moveKeys) => handlerChange(targetKeys, direction, moveKeys)
+                    }
+                    listStyle={[
+                        {
+                            width: 400,
+                            height: 400,
+                        },
+                        {
+                            width: 400,
+                            height: 400,
+                        }
+                    ]}
+                />
+            </Spin>
         </Modal>
     );
 }

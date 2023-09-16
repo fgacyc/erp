@@ -1,12 +1,9 @@
 
 import { Button } from "@arco-design/web-react";
-import {IconDownload, IconPlus} from "@arco-design/web-react/icon";
+import { IconPlus} from "@arco-design/web-react/icon";
 import { Table, TableColumnProps } from "@arco-design/web-react";
-import AddVideoModal from "@/components/UI_Modal/UI_FaithFlixModals/AddVideoModal.tsx";
 import { useState} from "react";
 import AddSeriesModal from "@/components/UI_Modal/UI_FaithFlixModals/AddSeriesModal.tsx";
-import {AiOutlineYoutube} from "react-icons/ai";
-import UI_ConfirmModal from "@/components/UI_Modal/UI_ConfirmModal";
 
 
 export  default function SeriesManagement() {
@@ -69,25 +66,23 @@ export  default function SeriesManagement() {
         },
     ];
 
-    const [AddVideoModalVisible, setAddVideoModalVisible] = useState(false);
     const [AddSeriesModalVisible, setAddSeriesModalVisible] = useState(false);
-    const [loadingVisible, setLoadingVisible] = useState(false);
 
-    function updateDBData() {
-        const update = () => {
-            setLoadingVisible(true);
-
-            setTimeout(() => {
-                setLoadingVisible(false);
-            }, 2000);
-        };
-
-        UI_ConfirmModal(
-            "Confirm",
-            "Are you sure to update the new data from YouTube?",
-            update,
-        );
-    }
+    // function updateDBData() {
+    //     const update = () => {
+    //         setLoadingVisible(true);
+    //
+    //         setTimeout(() => {
+    //             setLoadingVisible(false);
+    //         }, 2000);
+    //     };
+    //
+    //     UI_ConfirmModal(
+    //         "Confirm",
+    //         "Are you sure to update the new data from YouTube?",
+    //         update,
+    //     );
+    // }
 
     return (
         <>
@@ -96,28 +91,13 @@ export  default function SeriesManagement() {
                 <div className={"flex flex-row justify-between mb-3"}>
                     <div>
                         <Button type="secondary" icon={<IconPlus />}
-                                onClick={() => setAddVideoModalVisible(true)}
-                                className={"mr-3"}
-                        >Add Video</Button>
-                        <Button type="secondary" icon={<IconPlus />}
                                 onClick={() => setAddSeriesModalVisible(true)}
                                 className={"mr-3"}
                         >Add Series</Button>
-                        <Button onClick={updateDBData} icon={<AiOutlineYoutube
-                            className={"inline-block"} />}
-                            loading={loadingVisible}
-                        >
-                            Update data
-                        </Button>
                     </div>
-
-                    <Button type="secondary" icon={<IconDownload />}>
-                        Export Data
-                    </Button>
                 </div>
                 <Table columns={columns} data={data} />
             </div>
-            <AddVideoModal visible={AddVideoModalVisible} setVisible={setAddVideoModalVisible} />
             <AddSeriesModal visible={AddSeriesModalVisible} setVisible={setAddSeriesModalVisible} />
         </>
     );
