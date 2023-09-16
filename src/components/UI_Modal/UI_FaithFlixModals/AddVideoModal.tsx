@@ -51,7 +51,7 @@ export default function AddVideoModal(props: AddVideoModalProps) {
         useAddVideoModalStore((state) =>
             [state.currentVideoData, state.isUpdate]);
 
-    const  setVideoData = useAddVideoModalStore((state) => state.setVideoData);
+    const setVideoData = useAddVideoModalStore((state) => state.setVideoData);
     const [roles, setRoles] = React.useState<RoleSelectOption[]>([]);
     const [credits, setCredits] = React.useState<CreditsSelectOption[]>([]);
     const [genres, setGenres] = React.useState<GenreTagSelectOption[]>([]);
@@ -84,15 +84,11 @@ export default function AddVideoModal(props: AddVideoModalProps) {
                 });
 
         }
-        console.log({
-            isUpdate: isUpdate,
-            isUseCachedData: isUseCachedData,
-        });
 
         if (visible && isUpdate) {
-            if(isUseCachedData){
+            if (isUseCachedData) {
                 formRef.current?.setFieldsValue(currentVideoData);
-            }else{
+            } else {
                 getVideoData();
             }
         } else {
@@ -103,26 +99,33 @@ export default function AddVideoModal(props: AddVideoModalProps) {
     }, [visible]);
 
     useEffect(() => {
-        getReq("roles-select").then((res) => {
-            //console.log(res);
-            if (res.status) {
-                setRoles(res.data);
-            }
-        });
-        getReq("credits-select").then((res) => {
-            //console.log(res);
-            if (res.status) {
-                setCredits(res.data);
-            }
-        });
-        getReq("genre-tags-select").then((res) => {
-            //console.log(res);
-            if (res.status) {
-                setGenres(res.data.genres);
-                setTags(res.data.tags);
-            }
-        });
+        const promises = [
+            getReq("roles-select"),
+            getReq("credits-select"),
+            getReq("genre-tags-select")
+        ];
+        Promise.all(promises)
+            .then(responses => {
+                const rolesResponse = responses[0];
+                const creditsResponse = responses[1];
+                const genresTagsResponse = responses[2];
 
+                if (rolesResponse.status) {
+                    setRoles(rolesResponse.data);
+                }
+
+                if (creditsResponse.status) {
+                    setCredits(creditsResponse.data);
+                }
+
+                if (genresTagsResponse.status) {
+                    setGenres(genresTagsResponse.data.genres);
+                    setTags(genresTagsResponse.data.tags);
+                }
+            })
+            .catch(error => {
+                console.error("An error occurred:", error);
+            });
 
     }, []);
 

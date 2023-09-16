@@ -129,6 +129,12 @@ export  function  getNumOfTrue(arr:boolean[]){
     }, 0);
 }
 
+export function culVideoProcess(record:VideoData){
+    let num = getNumOfTrue([record.has_video_credits, record.has_subtitles, record.has_video_tags]);
+    record.description !== "" ? num++ : num;
+    return num;
+}
+
 export  function getYoutubeVideoId(url:string)   {
     const regex = /[?&]v=([^?&]+)/;
     const match = url.match(regex);

@@ -1,13 +1,13 @@
-import {Button, Image, Progress} from "@arco-design/web-react";
-import {IconArchive, IconEdit, IconPlus} from "@arco-design/web-react/icon";
+import {Button, Image, Message, Progress} from "@arco-design/web-react";
+import {IconArchive, IconCheckSquare, IconEdit, IconPlus} from "@arco-design/web-react/icon";
 import {Table, TableColumnProps} from "@arco-design/web-react";
 import AddVideoModal from "@/components/UI_Modal/UI_FaithFlixModals/AddVideoModal.tsx";
 import React, {useEffect, useState} from "react";
 import AddSeriesModal from "@/components/UI_Modal/UI_FaithFlixModals/AddSeriesModal.tsx";
 
 // import UI_ConfirmModal from "@/components/UI_Modal/UI_ConfirmModal";
-import {getReq} from "@/tools/requests.ts";
-import {getNumOfTrue, videoDataToMap, type VideoData, VideoDBData} from "@/pages/FaithFlix/data.js";
+import {getReq, putReq} from "@/tools/requests.ts";
+import {videoDataToMap, type VideoData, VideoDBData, culVideoProcess} from "@/pages/FaithFlix/data.js";
 import {useAddVideoModalStore} from "@/components/UI_Modal/UI_FaithFlixModals/stores/addVideoStore.ts";
 
 
@@ -27,19 +27,23 @@ export default function VideoManagement() {
             render: (_, record) => {
                 return (
                     <span>
-                        {getNumOfTrue([record.has_subtitles, record.has_video_credits, record.has_video_tags]) === 0 &&
-                            <Progress type='circle' percent={25} size={"small"}
+                        {culVideoProcess(record) === 0 &&
+                            <Progress type='circle' percent={20} size={"small"}
                                       className={"whitespace-nowrap flex flex-row justify-center"}/>
                         }
-                        {getNumOfTrue([record.has_subtitles, record.has_video_credits, record.has_video_tags]) === 1 &&
-                            <Progress type='circle' percent={50} size={"small"}
+                        {culVideoProcess(record) === 1 &&
+                            <Progress type='circle' percent={40} size={"small"}
                                       className={"whitespace-nowrap flex flex-row justify-center"}/>
                         }
-                        {getNumOfTrue([record.has_subtitles, record.has_video_credits, record.has_video_tags]) === 2 &&
-                            <Progress type='circle' percent={75} size={"small"}
+                        {culVideoProcess(record) === 2 &&
+                            <Progress type='circle' percent={60} size={"small"}
                                       className={"whitespace-nowrap flex flex-row justify-center"}/>
                         }
-                        {getNumOfTrue([record.has_subtitles, record.has_video_credits, record.has_video_tags]) === 3 &&
+                        {culVideoProcess(record) === 3 &&
+                            <Progress type='circle' percent={80} status='success' size={"small"}
+                                      className={"whitespace-nowrap  flex flex-row justify-center"}/>
+                        }
+                        {culVideoProcess(record) === 4 &&
                             <Progress type='circle' percent={100} status='success' size={"small"}
                                       className={"whitespace-nowrap  flex flex-row justify-center"}/>
                         }
@@ -83,7 +87,16 @@ export default function VideoManagement() {
                                         handleEdit(record);
                                     }}
                                 />}></Button>
-                        <Button type="secondary" icon={<IconArchive/>}></Button>
+                        {
+                            record.archived
+                                ? <Button type="secondary" icon={<IconCheckSquare/>}
+                                            onClick={() => updateArchivedStatus(record, false)}
+                                ></Button>
+                                : <Button type="secondary" icon={<IconArchive/>}
+                                            onClick={() => updateArchivedStatus(record, true)}
+                                ></Button>
+                        }
+
                     </div>
                 );
             },
@@ -93,7 +106,8 @@ export default function VideoManagement() {
     const [AddVideoModalVisible, setAddVideoModalVisible] = useState(false);
     const [AddSeriesModalVisible, setAddSeriesModalVisible] = useState(false);
     const [loadingVisible, setLoadingVisible] = useState(false);
-    const [allVideoData, setAllVideoData] = useState<VideoData[]>([]);
+    const [allVideoArchivedData, setAllVideoArchivedData] = useState<VideoData[]>([]);
+    const [allVideoAvailableData, setAllVideoAvailableData] = useState<VideoData[]>([]);
     const [currentVideoCoverURL, setCurrentVideoCoverURL] = useState<string>("");
     const [visible, setVisible] = React.useState(false);
     const [currentVideoData, setVideoData] = useAddVideoModalStore((state) => [
@@ -102,14 +116,21 @@ export default function VideoManagement() {
     const setCachedData = useAddVideoModalStore((state) => state.setCachedData);
     const resetVideoData = useAddVideoModalStore((state) => state.resetVideoData);
     const setIsUpdate = useAddVideoModalStore((state) => state.setIsUpdate);
+    const [currentDisplay, setCurrentDisplay] = useState("available");
+    const [currentDisplayData, setCurrentDisplayData] = useState<VideoData[]>(allVideoAvailableData);
 
     useEffect(() => {
         async function fetchData() {
             setLoadingVisible(true);
             const res = await getReq("video-data-by-limit?limit=100");
             if (res.status) {
+                // console.log(res.data);
                 const allVideoData: VideoData[] = videoDataToMap(res.data);
-                setAllVideoData(allVideoData);
+                const allVideoArchivedData = allVideoData.filter((video) => video.archived);
+                const allVideoAvailableData = allVideoData.filter((video) => !video.archived);
+                setAllVideoArchivedData(allVideoArchivedData);
+                setAllVideoAvailableData(allVideoAvailableData);
+                setCurrentDisplayData(allVideoAvailableData);
             } else {
                 console.log(res.error);
             }
@@ -143,6 +164,42 @@ export default function VideoManagement() {
         setAddVideoModalVisible(true);
     }
 
+    function handleShowArchived() {
+        if (currentDisplay === "available") {
+            setCurrentDisplay("archived");
+            setCurrentDisplayData(allVideoArchivedData);
+        } else {
+            setCurrentDisplay("available");
+            setCurrentDisplayData(allVideoAvailableData);
+        }
+    }
+
+    function updateArchivedStatus(record: VideoData, archived: boolean) {
+            if(culVideoProcess(record) !== 4 && !archived){
+                Message.warning("video is not completed yet");
+                return;
+            }
+
+            const  video_id = record.video_id;
+            putReq(`video-data/update-archive-status?video_id=${video_id}`, {status:archived}).then((res) => {
+                if (res.status) {
+                    Message.success("update archived status successfully");
+                    if(archived){ // hide
+                        const newAllVideoAvailableData = allVideoAvailableData.filter((video) => video.video_id !== video_id);
+                        setAllVideoAvailableData(newAllVideoAvailableData);
+                        setAllVideoArchivedData([...allVideoArchivedData, ...allVideoAvailableData.filter((video) => video.video_id === video_id)]);
+                        setCurrentDisplayData(newAllVideoAvailableData);
+                    }else{
+                        const newAllVideoArchivedData = allVideoArchivedData.filter((video) => video.video_id !== video_id);
+                        setAllVideoArchivedData(newAllVideoArchivedData);
+                        setAllVideoAvailableData([...allVideoAvailableData, ...allVideoArchivedData.filter((video) => video.video_id === video_id)]);
+                        setCurrentDisplayData(newAllVideoArchivedData);
+                    }
+                } else {
+                    Message.warning("update archived status failed");
+                }
+            });
+    }
 
     return (
         <>
@@ -169,14 +226,24 @@ export default function VideoManagement() {
                         {/*    Update data*/}
                         {/*</Button>*/}
                     </div>
-                    <div>
-                        <Button type='secondary' icon={<IconArchive/>}/>
+                    <div className={"flex flex-row items-center"}>
+                        <div className={"mr-2"}>{currentDisplay.toUpperCase()}</div>
+                        {
+                            currentDisplay === "available"
+                            ? <Button type='secondary' icon={<IconArchive/>}
+                                      onClick={handleShowArchived}
+                            />
+                            : <Button type='secondary' icon={<IconCheckSquare/>}
+                                      onClick={handleShowArchived}
+                            />
+                        }
+
                         {/*<Button type="secondary" icon={<IconDownload />}>*/}
                         {/*    Export Data*/}
                         {/*</Button>*/}
                     </div>
                 </div>
-                <Table columns={columns} data={allVideoData} loading={loadingVisible}/>
+                <Table columns={columns} data={currentDisplayData} loading={loadingVisible}/>
             </div>
             <AddVideoModal visible={AddVideoModalVisible} setVisible={setAddVideoModalVisible}/>
             <AddSeriesModal visible={AddSeriesModalVisible} setVisible={setAddSeriesModalVisible}/>
