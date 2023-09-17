@@ -182,6 +182,12 @@ const Frame = () => {
 						>
 							<MenuItem key="education/dashboard">Dashboard</MenuItem>
 							<MenuItem key="education/students">Students</MenuItem>
+                            <SubMenu key={"4-1"} title={"Classes"}>
+                                <MenuItem key="education/modules">Modules</MenuItem>
+                                <MenuItem key="education/courses">Courses</MenuItem>
+                                <MenuItem key="education/quizzes">Quizzes</MenuItem>
+                                <MenuItem key="education/reviews">Reviews</MenuItem>
+                            </SubMenu>
 						</SubMenu>
 						<SubMenu
 							key="5"
