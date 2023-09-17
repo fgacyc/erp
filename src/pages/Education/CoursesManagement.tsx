@@ -1,5 +1,7 @@
-import React from "react";
-import { Table, TableColumnProps } from "@arco-design/web-react";
+import React, {useEffect} from "react";
+import {Button, Table,Image, TableColumnProps} from "@arco-design/web-react";
+import {IconPlus} from "@arco-design/web-react/icon";
+import {AddCoursesModal} from "@/components/UI_Modal/UI_Education/AddCoursesModal.tsx";
 const CoursesManagement = () => {
 
     const columns: TableColumnProps[] = [
@@ -57,22 +59,42 @@ const CoursesManagement = () => {
             email: "william.smith@example.com",
         },
     ];
+    const [showModal, setShowModal] = React.useState(false);
+    const [visible, setVisible] = React.useState(false);
+    const [currentVideoCoverURL, setCurrentVideoCoverURL] = React.useState("");
+
+    useEffect(() => {
+        const subscription = PubSub.subscribe("showBillBoardVideoCover", (_, data) => {
+            setCurrentVideoCoverURL(data.message);
+            setVisible(true);
+        });
+        return () => {
+            PubSub.unsubscribe(subscription);
+        };
+    }, []);
 
 
     return (
         <>
-            <div className="app-component full-screen-app-component">
-                <div
-                    style={{
-                        margin: "20px 20px 0 20px",
-                        fontSize: 26,
-                        fontWeight: "bold",
-                    }}
-                >
-                    CoursesManagement
+            <div className="app-component full-screen-app-component p-5">
+                <div className={"flex flex-row justify-between mb-3"}>
+                    <div>
+                        <Button type="secondary" icon={<IconPlus />}
+                                onClick={() => setShowModal(true)}
+                                className={"mr-3"}
+                        >Add Courses</Button>
+                    </div>
                 </div>
-                <Table columns={columns} data={data} />
+                <Table columns={columns} data={data}
+                    //loading={loadingVisible}
+                />
+                <AddCoursesModal visible={showModal} setVisible={setShowModal} />
             </div>
+            <Image.Preview
+                src={currentVideoCoverURL}
+                visible={visible}
+                onVisibleChange={setVisible}
+            />
         </>
     );
 };
