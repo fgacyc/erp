@@ -228,6 +228,7 @@ const Frame = () => {
                                 <MenuItem key="faithflix/tags">Tags</MenuItem>
                             </SubMenu>
 							<MenuItem key="faithflix/series-management">Series</MenuItem>
+							<MenuItem key="faithflix/billboard-management">Billboard</MenuItem>
                             <MenuItem key="faithflix/section-management">Sections</MenuItem>
                             <MenuItem key="faithflix/users">Users</MenuItem>
 

@@ -7,7 +7,7 @@ const TextArea = Input.TextArea;
 const Option = Select.Option;
 
 
-interface AddSectionsModalProps {
+interface AddBillboardsModalProps {
     visible: boolean;
     setVisible: (visible: boolean) => void;
 }
@@ -31,7 +31,7 @@ interface SectionFormData  {
     cover_url: string;
 }
 
-export const AddSectionsModal: FunctionComponent<AddSectionsModalProps> = ({visible, setVisible}) => {
+export const AddBillboardsModal: FunctionComponent<AddBillboardsModalProps> = ({visible, setVisible}) => {
     const formRef = useRef<FormInstance | null>(null);
     const [form] = Form.useForm();
     const [genres, setGenres] = React.useState<GenreTagSelectOption[]>([]);
@@ -123,7 +123,7 @@ export const AddSectionsModal: FunctionComponent<AddSectionsModalProps> = ({visi
 
     return (
         <Modal
-            title={"Add Sections"}
+            title={"Add Billboards"}
             visible={visible}
             onOk={handleOk}
             onCancel={() => setVisible(false)}

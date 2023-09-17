@@ -47,6 +47,7 @@ import FaithCredits from "@/pages/FaithFlix/FaithCredits.tsx";
 import FaithRoles from "@/pages/FaithFlix/FaithRoles.tsx";
 import FaithGenres from "@/pages/FaithFlix/FaithGenres.tsx";
 import FaithTags from "@/pages/FaithFlix/FaithTags.tsx";
+import BillboardManagement from "@/pages/FaithFlix/BillboardManagement.tsx";
 
 
 function App() {
@@ -159,6 +160,7 @@ function App() {
                             <Route path="/faithflix/video-management" element={<VideoManagement />}/>
                             <Route path="/faithflix/series-management" element={<SeriesManagement /> } />
                             <Route path="/faithflix/section-management" element={<SectionManagement /> } />
+							<Route path="/faithflix/billboard-management" element={<BillboardManagement /> } />
                             <Route path="/faithflix/users" element={<FaithUsers /> } />
                             <Route path="/faithflix/credits" element={<FaithCredits /> } />
                             <Route path="/faithflix/roles" element={<FaithRoles /> } />

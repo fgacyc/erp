@@ -19,7 +19,7 @@ interface  BillboardData {
     updated_at: string;
 }
 
-export  default function SectionManagement() {
+export  default function BillboardManagement() {
     const [allData, setAllData] = useState<BillboardData[]>([]);
     const [showModal, setShowModal] = useState(false);
     const [currentVideoCoverURL, setCurrentVideoCoverURL] = useState<string>("");
@@ -29,7 +29,7 @@ export  default function SectionManagement() {
     const columns: TableColumnProps[] = [
         {
             title: "Genre",
-            dataIndex: "genre_tag_id",
+            dataIndex: "tag_name",
         },
         {
             title: "Title",
@@ -84,7 +84,7 @@ export  default function SectionManagement() {
             },
         }
     ];
-    function  updateSectionData(){
+    function  updateBillboardData(){
         getReq("billboards").then((res)=>{
             if(res.status){
                 setAllData(res.data);
@@ -93,13 +93,13 @@ export  default function SectionManagement() {
     }
 
     useEffect(() => {
-        updateSectionData();
+        updateBillboardData();
         const subscription = PubSub.subscribe("showBillBoardVideoCover", (_, data) => {
             setCurrentVideoCoverURL(data.message);
             setVisible(true);
         });
         const subscription1 = PubSub.subscribe("updateBillboardsData", () => {
-            updateSectionData();
+            updateBillboardData();
         });
         return ()=>{
             PubSub.unsubscribe(subscription);
@@ -112,7 +112,7 @@ export  default function SectionManagement() {
             deleteReq(`billboards?billboard_id=${id}`).then((res)=>{
                 if(res.status){
                     Message.success("Delete successfully");
-                    updateSectionData();
+                    updateBillboardData();
                 }else {
                     Message.warning("Delete failed");
                 }
@@ -121,7 +121,7 @@ export  default function SectionManagement() {
 
         UI_ConfirmModal(
             "Delete",
-            "Are you sure you want to delete this section?",
+            "Are you sure you want to delete this billboard?",
             deleteSec
         );
     }
@@ -136,7 +136,7 @@ export  default function SectionManagement() {
                         <Button type="secondary" icon={<IconPlus />}
                                 onClick={() => setShowModal(true)}
                                 className={"mr-3"}
-                        >Add Sections</Button>
+                        >Add Billboard</Button>
                     </div>
                 </div>
                 <Table columns={columns} data={allData}
