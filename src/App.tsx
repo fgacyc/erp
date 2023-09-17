@@ -38,7 +38,7 @@ import "@arco-design/web-react/dist/css/arco.css";
 import PastoralRolesPage from "./pages/UserManagement/Role";
 import SatellitePage from "./pages/UserManagement/Satellite";
 import CellGroupPage from "./pages/UserManagement/CellGroup";
-import ModulesManagement from "@/pages/Education/ModulesManagement.tsx";
+// import ModulesManagement from "@/pages/Education/ModulesManagement.tsx";
 import CoursesManagement from "@/pages/Education/CoursesManagement.tsx";
 import QuizzesManagement from "@/pages/Education/QuizzesManagement.tsx";
 import ReviewsManagement from "@/pages/Education/ReviewsManagement.tsx";
@@ -134,10 +134,10 @@ function App() {
 								path="/education/students"
 								element={<EducationStudents />}
 							/>
-                            <Route
-                                path="/education/modules"
-                                element={<ModulesManagement />}
-                            />
+                            {/*<Route*/}
+                            {/*    path="/education/modules"*/}
+                            {/*    element={<ModulesManagement />}*/}
+                            {/*/>*/}
                             <Route
                                 path="/education/courses"
                                 element={<CoursesManagement />}
