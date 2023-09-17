@@ -18,6 +18,19 @@ export  function ExpandedRowRender(videos:EpisodeData[]) {
             dataIndex: "episode_number",
         },
         {
+            title: "Cover",
+            render: (_, record) => {
+                return (
+                    <img src={record.cover_url} alt={record.title} className={"w-20 h-12 object-cover cursor-pointer"}
+                         onClick={() => {
+                             // setCurrentVideoCoverURL(text);
+                             // setVisible(true);
+                         }}
+                    />
+                );
+            },
+        },
+        {
             title: "Video Title",
             dataIndex: "video_title",
         },

@@ -41,13 +41,12 @@ export  default function BillboardManagement() {
         },
         {
             title: "Cover",
-            dataIndex: "cover_url",
-            render: (text, record) => {
+            render: (_, record) => {
                 return (
-                    <img src={text} alt={record.title} className={"w-20 h-12 object-cover cursor-pointer"}
+                    <img src={record.cover_url} alt={record.title} className={"w-20 h-12 object-cover cursor-pointer"}
                          onClick={() => {
-                             setCurrentVideoCoverURL(text);
-                             setVisible(true);
+                             // setCurrentVideoCoverURL(text);
+                             // setVisible(true);
                          }}
                     />
                 );

@@ -91,8 +91,8 @@ export default function AddSeriesModal(props: AddVideoModalProps) {
         }
         else if (type === "Sections") {
             data = {
-                section_name: formRef.current?.getFieldValue("section_name"),
-                section_description: formRef.current?.getFieldValue("section_description"),
+                section_name: formRef.current?.getFieldValue("series_name"),
+                section_description: formRef.current?.getFieldValue("series_description"),
                 videos: episodeData
             };
             router = "video-sections";
@@ -100,6 +100,8 @@ export default function AddSeriesModal(props: AddVideoModalProps) {
 
         setLoading(true);
         postReq(router, data).then((res) => {
+            // console.log(router, data);
+            // return;
             console.log(res);
             if (res.status) {
                 Message.success(`Add ${type} successfully`);
