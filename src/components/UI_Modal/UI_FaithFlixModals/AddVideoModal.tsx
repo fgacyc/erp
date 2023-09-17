@@ -390,9 +390,6 @@ export default function AddVideoModal(props: AddVideoModalProps) {
 
                     <Form.Item label=' '>
                         <Space size={24} className={"float-right"}>
-                            <Button type='primary' htmlType='submit' loading={isLoading}>
-                                Submit
-                            </Button>
                             <Button
                                 onClick={() => {
                                     if (formRef?.current) {
@@ -401,6 +398,9 @@ export default function AddVideoModal(props: AddVideoModalProps) {
                                 }}
                             >
                                 Reset
+                            </Button>
+                            <Button type='primary' htmlType='submit' loading={isLoading}>
+                                Submit
                             </Button>
                         </Space>
                     </Form.Item>
