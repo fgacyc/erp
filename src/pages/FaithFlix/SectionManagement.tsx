@@ -2,8 +2,8 @@ import React, {useEffect, useState} from "react";
 import {Button, Image, Message, Table, TableColumnProps} from "@arco-design/web-react";
 import {deleteReq, getReq} from "@/tools/requests.ts";
 import {IconDelete, IconEdit, IconEye, IconPlus} from "@arco-design/web-react/icon";
-import {AddBillboardsModal} from "@/components/UI_Modal/UI_FaithFlixModals/AddBillboardsModal.tsx";
 import UI_ConfirmModal from "@/components/UI_Modal/UI_ConfirmModal";
+import AddSeriesModal from "@/components/UI_Modal/UI_FaithFlixModals/AddSeriesModal.tsx";
 
 
 interface  BillboardData {
@@ -142,7 +142,7 @@ export  default function SectionManagement() {
                 <Table columns={columns} data={allData}
                     //loading={loadingVisible}
                 />
-                <AddBillboardsModal visible={showModal} setVisible={setShowModal} />
+                <AddSeriesModal visible={showModal} setVisible={setShowModal} type={"Sections"} />
             </div>
             <Image.Preview
                 src={currentVideoCoverURL}

@@ -14,11 +14,12 @@ const TextArea = Input.TextArea;
 interface AddVideoModalProps {
     visible: boolean;
     setVisible: (visible: boolean) => void;
+    type: "Series" | "Sections"
 }
 
 
 export default function AddSeriesModal(props: AddVideoModalProps) {
-    const {visible, setVisible} = props;
+    const {visible, setVisible,type} = props;
     const [transferData, setTransferData] = React.useState<TransferItem[]>([]);
     const [episodeData, setEpisodeData] = React.useState<string[]>([]);
     const [loading, setLoading] = React.useState(false);
@@ -77,21 +78,33 @@ export default function AddSeriesModal(props: AddVideoModalProps) {
             Message.warning("Please select at least two video");
             return;
         }
+        let data = {};
+        let router = "";
 
-        const data = {
-            series_name: formRef.current?.getFieldValue("series_name"),
-            series_description: formRef.current?.getFieldValue("series_description"),
-            episodes: episodeData
-        };
-        //console.log(data);
+        if (type === "Series") {
+            data = {
+                series_name: formRef.current?.getFieldValue("series_name"),
+                series_description: formRef.current?.getFieldValue("series_description"),
+                episodes: episodeData
+            };
+            router = "video-series";
+        }
+        else if (type === "Sections") {
+            data = {
+                section_name: formRef.current?.getFieldValue("section_name"),
+                section_description: formRef.current?.getFieldValue("section_description"),
+                videos: episodeData
+            };
+            router = "video-sections";
+        }
 
         setLoading(true);
-        postReq("video-series", data).then((res) => {
+        postReq(router, data).then((res) => {
             console.log(res);
             if (res.status) {
-                Message.success("Add series successfully");
+                Message.success(`Add ${type} successfully`);
                 setVisible(false);
-                PubSub.publish("updateSeriesData");
+                PubSub.publish(`update${type}Data`);
                 resetEpisodeData();
             }
             setLoading(false);
@@ -100,7 +113,7 @@ export default function AddSeriesModal(props: AddVideoModalProps) {
 
     return (
         <Modal
-            title="Add Series"
+            title={`Add ${type}`}
             visible={visible}
             onOk={handleSubmit}
             onCancel={() => setVisible(false)}
@@ -113,7 +126,7 @@ export default function AddSeriesModal(props: AddVideoModalProps) {
                        ref={formRef}
                        form={form}
                 >
-                    <FormItem label='Series Name' field="series_name"
+                    <FormItem label={`${type} Name`} field="series_name"
                         rules={[{
                             required: true,
                             message: "Please enter series name"

@@ -132,10 +132,10 @@ export  default function SeriesManagement() {
                                 onClick={() => setAddSeriesModalVisible(true)}
                                 className={"mr-3"}
                         >Add Series</Button>
-                        <Button type="secondary" icon={<IconPlus />}
-                                onClick={() => updateSeriesData()}
-                                className={"mr-3"}
-                        >update</Button>
+                        {/*<Button type="secondary" icon={<IconPlus />}*/}
+                        {/*        onClick={() => updateSeriesData()}*/}
+                        {/*        className={"mr-3"}*/}
+                        {/*>update</Button>*/}
                     </div>
                 </div>
                 <Table columns={columns}
@@ -148,6 +148,7 @@ export  default function SeriesManagement() {
             <AddSeriesModal
                 visible={AddSeriesModalVisible}
                 setVisible={setAddSeriesModalVisible}
+                type={"Series"}
             />
             <SortEpisodesModal visible={SortEpisodesModalVisible}
                                setVisible={setSortEpisodesModalVisible} />

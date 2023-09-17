@@ -3,7 +3,6 @@ import {IconArchive, IconCheckSquare, IconEdit, IconPlus} from "@arco-design/web
 import {Table, TableColumnProps} from "@arco-design/web-react";
 import AddVideoModal from "@/components/UI_Modal/UI_FaithFlixModals/AddVideoModal.tsx";
 import React, {useEffect, useState} from "react";
-import AddSeriesModal from "@/components/UI_Modal/UI_FaithFlixModals/AddSeriesModal.tsx";
 
 // import UI_ConfirmModal from "@/components/UI_Modal/UI_ConfirmModal";
 import {getReq, putReq} from "@/tools/requests.ts";
@@ -104,7 +103,6 @@ export default function VideoManagement() {
     ];
 
     const [AddVideoModalVisible, setAddVideoModalVisible] = useState(false);
-    const [AddSeriesModalVisible, setAddSeriesModalVisible] = useState(false);
     const [loadingVisible, setLoadingVisible] = useState(false);
     const [allVideoArchivedData, setAllVideoArchivedData] = useState<VideoData[]>([]);
     const [allVideoAvailableData, setAllVideoAvailableData] = useState<VideoData[]>([]);
@@ -275,7 +273,6 @@ export default function VideoManagement() {
                 <Table columns={columns} data={currentDisplayData} loading={loadingVisible}/>
             </div>
             <AddVideoModal visible={AddVideoModalVisible} setVisible={setAddVideoModalVisible}/>
-            <AddSeriesModal visible={AddSeriesModalVisible} setVisible={setAddSeriesModalVisible}/>
             <Image.Preview
                 src={currentVideoCoverURL}
                 visible={visible}
