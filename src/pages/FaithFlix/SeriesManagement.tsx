@@ -10,7 +10,7 @@ import {useAddSeriesModalStore} from "@/components/UI_Modal/UI_FaithFlixModals/s
 import {SortEpisodesModal} from "@/components/UI_Modal/UI_FaithFlixModals/SortEpisodesModal.tsx";
 
 export  function ExpandedRowRender(videos:EpisodeData[]) {
-
+    console.log(videos);
 
     const columns: TableColumnProps[] =[
         {
