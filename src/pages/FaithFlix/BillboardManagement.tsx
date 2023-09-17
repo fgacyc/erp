@@ -45,8 +45,8 @@ export  default function BillboardManagement() {
                 return (
                     <img src={record.cover_url} alt={record.title} className={"w-20 h-12 object-cover cursor-pointer"}
                          onClick={() => {
-                             // setCurrentVideoCoverURL(text);
-                             // setVisible(true);
+                             setCurrentVideoCoverURL(record.cover_url);
+                             setVisible(true);
                          }}
                     />
                 );

@@ -71,7 +71,7 @@ export  default function SectionManagement() {
 
     useEffect(() => {
         updateSectionData();
-        const subscription = PubSub.subscribe("showBillBoardVideoCover", (_, data) => {
+        const subscription = PubSub.subscribe("showVideoCover", (_, data) => {
             setCurrentVideoCoverURL(data.message);
             setVisible(true);
         });

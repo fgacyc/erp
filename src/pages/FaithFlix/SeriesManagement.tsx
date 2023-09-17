@@ -1,5 +1,5 @@
 
-import { Button } from "@arco-design/web-react";
+import {Button, Image} from "@arco-design/web-react";
 import {IconDelete, IconEdit, IconPlus, IconSort} from "@arco-design/web-react/icon";
 import { Table, TableColumnProps } from "@arco-design/web-react";
 import React, {useEffect, useState} from "react";
@@ -23,8 +23,7 @@ export  function ExpandedRowRender(videos:EpisodeData[]) {
                 return (
                     <img src={record.cover_url} alt={record.title} className={"w-20 h-12 object-cover cursor-pointer"}
                          onClick={() => {
-                             // setCurrentVideoCoverURL(text);
-                             // setVisible(true);
+                            PubSub.publish("showVideoCover", {message: record.cover_url});
                          }}
                     />
                 );
@@ -93,14 +92,21 @@ export  default function SeriesManagement() {
     const [SortEpisodesModalVisible, setSortEpisodesModalVisible] = useState(false);
     const [allData, setAllData] = useState<SeriesData[]>([]);
     const setEpisodeData = useAddSeriesModalStore((state) => state.setEpisodeData);
+    const [currentVideoCoverURL, setCurrentVideoCoverURL] = useState<string>("");
+    const [visible, setVisible] = React.useState(false);
 
     useEffect(() => {
         updateSeriesData();
         const subscription = PubSub.subscribe("updateSeriesData", () => {
             updateSeriesData();
         });
+        const subscription1 = PubSub.subscribe("showVideoCover", (_, data) => {
+            setCurrentVideoCoverURL(data.message);
+            setVisible(true);
+        });
         return () => {
             PubSub.unsubscribe(subscription);
+            PubSub.unsubscribe(subscription1);
         };
     }, []);
 
@@ -165,6 +171,11 @@ export  default function SeriesManagement() {
             />
             <SortEpisodesModal visible={SortEpisodesModalVisible}
                                setVisible={setSortEpisodesModalVisible} />
+            <Image.Preview
+                src={currentVideoCoverURL}
+                visible={visible}
+                onVisibleChange={setVisible}
+            />
         </>
     );
 

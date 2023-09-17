@@ -167,6 +167,9 @@ export default function AddSeriesModal(props: AddVideoModalProps) {
                     onChange={
                         (targetKeys, direction, moveKeys) => handlerChange(targetKeys, direction, moveKeys)
                     }
+                    // onSearch={(value, direction) => {
+                    //     console.log(value, direction);
+                    // }}
                     listStyle={[
                         {
                             width: 400,
