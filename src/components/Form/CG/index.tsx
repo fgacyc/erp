@@ -1,4 +1,3 @@
-import { useIdentityAPI } from "@/lib/openapi";
 import { Modal, Select, Spin } from "@arco-design/web-react";
 import {
 	Formik,
@@ -20,6 +19,7 @@ import * as Yup from "yup";
 import { CustomField } from "../Field";
 import { transformSatelliteFromAPI } from "@/utils/transform";
 import { cgVariants } from "@/utils/constants";
+import { useOpenApi } from "@/lib/openapi/context";
 
 interface CGFormType extends FormikValues {
 	no: number;
@@ -54,17 +54,18 @@ export const CGForm: FunctionComponent<CGFormProps> = ({
 		setEditable(!checkDetails);
 	}, [checkDetails]);
 
-	const api = useIdentityAPI();
+	const { identity, ready } = useOpenApi();
 
 	useEffect(() => {
+		if (!ready) return;
 		setLoading(true);
-		api.GET("/satellites", {}).then(({ data }) => {
+		identity.GET("/satellites", {}).then(({ data }) => {
 			setAvailableSatellites(data?.map((d) => transformSatelliteFromAPI(d)));
 			setLoading(false);
 		});
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [ready]);
 
 	return (
 		<Modal
@@ -114,8 +115,9 @@ export const CGForm: FunctionComponent<CGFormProps> = ({
 					})}
 					onSubmit={(values, action) => {
 						action.setSubmitting(true);
+						if (!ready) return;
 						if (checkDetails) {
-							api
+							identity
 								.PATCH("/connect-groups/{id}", {
 									params: {
 										path: {
@@ -139,7 +141,7 @@ export const CGForm: FunctionComponent<CGFormProps> = ({
 									}
 								});
 						} else
-							api
+							identity
 								.POST("/connect-groups", {
 									body: {
 										name: values.name,

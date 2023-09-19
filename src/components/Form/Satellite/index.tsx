@@ -1,4 +1,3 @@
-import { useIdentityAPI } from "@/lib/openapi";
 import { Modal } from "@arco-design/web-react";
 import {
 	Formik,
@@ -18,6 +17,7 @@ import {
 } from "react";
 import * as Yup from "yup";
 import { AddressField, CustomField } from "../Field";
+import { useOpenApi } from "@/lib/openapi/context";
 
 interface SatelliteFormType extends FormikValues {
 	name: string;
@@ -52,7 +52,7 @@ export const SatelliteForm: FunctionComponent<SatelliteFormProps> = ({
 	useEffect(() => {
 		setEditable(!checkDetails);
 	}, [checkDetails]);
-	const api = useIdentityAPI();
+	const { identity, ready } = useOpenApi();
 
 	return (
 		<Modal
@@ -109,9 +109,9 @@ export const SatelliteForm: FunctionComponent<SatelliteFormProps> = ({
 				})}
 				onSubmit={(values, action) => {
 					action.setSubmitting(true);
-
+					if (!ready) return;
 					if (checkDetails) {
-						api
+						identity
 							.PATCH("/satellites/{id}", {
 								params: {
 									path: {
@@ -141,7 +141,7 @@ export const SatelliteForm: FunctionComponent<SatelliteFormProps> = ({
 								}
 							});
 					} else
-						api
+						identity
 							.POST("/satellites", {
 								body: {
 									name: values.name,

@@ -1,5 +1,5 @@
 import { SatelliteForm } from "@/components/Form/Satellite";
-import { useIdentityAPI } from "@/lib/openapi";
+import { useOpenApi } from "@/lib/openapi/context";
 import { addKeys } from "@/tools/tableTools";
 import { transformSatelliteFromAPI } from "@/utils/transform";
 import { Button, Input, Space, Table } from "@arco-design/web-react";
@@ -7,15 +7,16 @@ import { IconPlus, IconSearch } from "@arco-design/web-react/icon";
 import { useEffect, useState } from "react";
 
 const PastoralRolesPage = () => {
-	const api = useIdentityAPI();
+	const { identity, ready } = useOpenApi();
 	const [satellites, setSatellites] = useState<Satellite[]>();
 	const [selectedSatellite, setSelectedSatellite] = useState<Satellite>();
 	const [modalVisible, setModalVisible] = useState(false);
 	const [loading, setLoading] = useState(true);
 
 	const getSatellites = () => {
+		if (!ready) return;
 		setLoading(true);
-		api.GET("/satellites", {}).then((res) => {
+		identity.GET("/satellites", {}).then((res) => {
 			if (!res.data) return;
 			setSatellites(
 				addKeys<Satellite>(res.data.map((d) => transformSatelliteFromAPI(d))),
@@ -27,7 +28,7 @@ const PastoralRolesPage = () => {
 	useEffect(() => {
 		getSatellites();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [modalVisible]);
+	}, [modalVisible, ready]);
 
 	return (
 		<>
@@ -95,8 +96,9 @@ const PastoralRolesPage = () => {
 											type="secondary"
 											icon={<IconSearch />}
 											onClick={async () => {
+												if (!ready) return;
 												setLoading(true);
-												api
+												identity
 													.GET("/satellites/{id}", {
 														params: {
 															path: {

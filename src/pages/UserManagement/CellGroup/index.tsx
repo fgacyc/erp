@@ -1,5 +1,5 @@
 import { CGForm } from "@/components/Form/CG";
-import { useIdentityAPI } from "@/lib/openapi";
+import { useOpenApi } from "@/lib/openapi/context";
 import { addKeys } from "@/tools/tableTools";
 import { cgVariants } from "@/utils/constants";
 import { transformCGFromAPI } from "@/utils/transform";
@@ -8,15 +8,16 @@ import { IconPlus, IconSearch } from "@arco-design/web-react/icon";
 import { FunctionComponent, useEffect, useState } from "react";
 
 const CellGroupPage = () => {
-	const api = useIdentityAPI();
+	const { identity, ready } = useOpenApi();
 	const [cgs, setCGs] = useState<CG[]>();
 	const [selectedCG, setSelectedCG] = useState<CG>();
 	const [modalVisible, setModalVisible] = useState(false);
 	const [loading, setLoading] = useState(true);
 
 	const getCGs = () => {
+		if (!ready) return;
 		setLoading(true);
-		api.GET("/connect-groups", {}).then((res) => {
+		identity.GET("/connect-groups", {}).then((res) => {
 			if (!res.data) return;
 			setCGs(addKeys<CG>(res.data.map((d) => transformCGFromAPI(d))));
 			setLoading(false);
@@ -27,7 +28,7 @@ const CellGroupPage = () => {
 	useEffect(() => {
 		getCGs();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [modalVisible]);
+	}, [modalVisible, ready]);
 
 	return (
 		<>
@@ -100,8 +101,9 @@ const CellGroupPage = () => {
 											type="secondary"
 											icon={<IconSearch />}
 											onClick={async () => {
+												if (!ready) return;
 												setLoading(true);
-												api
+												identity
 													.GET("/connect-groups/{id}", {
 														params: {
 															path: {
@@ -130,23 +132,24 @@ const CellGroupPage = () => {
 export default CellGroupPage;
 
 const Satellite: FunctionComponent<{ id: string }> = ({ id }) => {
-	const api = useIdentityAPI();
+	const { identity, ready } = useOpenApi();
 
 	const [sat, setSat] = useState("Loading...");
 
 	useEffect(() => {
+		if (!ready) return;
 		setSat("Loading...");
 		if (!id) {
 			setSat("No Assigned Satellites.");
 			return;
 		}
-		api
+		identity
 			.GET("/satellites/{id}", {
 				params: { path: { id: id } },
 			})
 			.then(({ data }) => setSat(String(data?.name)))
 			.catch(() => setSat("Error."));
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [id]);
+	}, [id, ready]);
 	return <>{sat}</>;
 };

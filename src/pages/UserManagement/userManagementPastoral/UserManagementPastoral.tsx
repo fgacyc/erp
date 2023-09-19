@@ -1,11 +1,11 @@
 import { Button, Input, Space, Table } from "@arco-design/web-react";
 import { IconSearch } from "@arco-design/web-react/icon";
 import { useEffect, useState } from "react";
-import { useIdentityAPI } from "@/lib/openapi";
 import { operations } from "@/@types/identity";
 import { addKeys } from "@/tools/tableTools";
 import { ProfileForm } from "@/components/Form/Profile";
 import { transformUserFromAPI } from "@/utils/transform";
+import { useOpenApi } from "@/lib/openapi/context";
 
 const UserManagementPastoral = () => {
 	const [data, setData] =
@@ -17,10 +17,11 @@ const UserManagementPastoral = () => {
 	const [selectedUser, setSelectedUser] = useState<User2>();
 	const [firstLoad, setFirstLoad] = useState(true);
 
-	const api = useIdentityAPI();
+	const { identity, ready } = useOpenApi();
 
 	useEffect(() => {
-		api
+		if (!ready) return;
+		identity
 			.GET("/users", {})
 			.then((res) => {
 				if (!res.error) {
@@ -34,7 +35,7 @@ const UserManagementPastoral = () => {
 			.finally(() => setFirstLoad(false));
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [visible]);
+	}, [visible, ready]);
 
 	useEffect(() => {
 		if (selectedUser) setVisible(true);
@@ -189,8 +190,8 @@ const UserManagementPastoral = () => {
 											icon={<IconSearch />}
 											onClick={async () => {
 												setVisible(true);
-
-												api
+												if (!ready) return;
+												identity
 													.GET("/users/{id}", {
 														params: {
 															path: {

@@ -38,121 +38,130 @@ import "@arco-design/web-react/dist/css/arco.css";
 import PastoralRolesPage from "./pages/UserManagement/Role";
 import SatellitePage from "./pages/UserManagement/Satellite";
 import CellGroupPage from "./pages/UserManagement/CellGroup";
+import { OpenApiProvider } from "./lib/openapi/context";
 
 function App() {
 	return (
-		<Auth0Provider
-			domain={import.meta.env["VITE_AUTH0_DOMAIN_ID"]}
-			clientId={import.meta.env["VITE_AUTH0_CLIENT_ID"]}
-			authorizationParams={{
-				audience: import.meta.env["VITE_IDENTITY_API_URL"],
-				scope: import.meta.env["VITE_IDENTITY_API_SCOPE"],
-				redirect_uri: window.location.origin,
-			}}
-			cacheLocation="localstorage"
-		>
-			<FirebaseAppProvider firebaseConfig={firebaseConfig}>
-				<Router>
-					<Routes>
-						<Route path="/login" element={<Login />} />
-						<Route
-							path="/"
-							element={
-								<RequireAuth>
-									<Frame />
-								</RequireAuth>
-							}
-						>
+		<OpenApiProvider>
+			<Auth0Provider
+				domain={import.meta.env["VITE_AUTH0_DOMAIN_ID"]}
+				clientId={import.meta.env["VITE_AUTH0_CLIENT_ID"]}
+				authorizationParams={{
+					audience: import.meta.env["VITE_IDENTITY_API_URL"],
+					scope: import.meta.env["VITE_IDENTITY_API_SCOPE"],
+					redirect_uri: window.location.origin,
+				}}
+				cacheLocation="localstorage"
+			>
+				<FirebaseAppProvider firebaseConfig={firebaseConfig}>
+					<Router>
+						<Routes>
+							<Route path="/login" element={<Login />} />
 							<Route
-								path="/recruitment_dashboard"
-								element={<Recruitment_Dashboard />}
-							/>
-							<Route
-								path="/recruitment_add_candidate"
-								element={<Recruitment_Submission />}
-							/>
-							<Route
-								path="/recruitment_pre_screening"
-								element={<PreScreening_table />}
-							/>
-							<Route
-								path="/recruitment_pre_screening/:RID"
-								element={<PreScreening />}
-							/>
-							<Route
-								path="/recruitment_interview"
-								element={<Interview_table />}
-							/>
-							<Route
-								path="/recruitment_interview/form/:RID/:partID"
-								element={<InterviewForm />}
-							/>
-							<Route
-								path="/recruitment_evaluation"
-								element={<Recruitment_Evaluation_Table />}
-							/>
-							<Route
-								path="/recruitment_evaluation/form/:RID"
-								element={<Evaluation_Page />}
-							/>
+								path="/"
+								element={
+									<RequireAuth>
+										<Frame />
+									</RequireAuth>
+								}
+							>
+								<Route
+									path="/recruitment_dashboard"
+									element={<Recruitment_Dashboard />}
+								/>
+								<Route
+									path="/recruitment_add_candidate"
+									element={<Recruitment_Submission />}
+								/>
+								<Route
+									path="/recruitment_pre_screening"
+									element={<PreScreening_table />}
+								/>
+								<Route
+									path="/recruitment_pre_screening/:RID"
+									element={<PreScreening />}
+								/>
+								<Route
+									path="/recruitment_interview"
+									element={<Interview_table />}
+								/>
+								<Route
+									path="/recruitment_interview/form/:RID/:partID"
+									element={<InterviewForm />}
+								/>
+								<Route
+									path="/recruitment_evaluation"
+									element={<Recruitment_Evaluation_Table />}
+								/>
+								<Route
+									path="/recruitment_evaluation/form/:RID"
+									element={<Evaluation_Page />}
+								/>
 
-							<Route
-								path="/users/dashboard"
-								element={<UserManagementDashboard />}
-							/>
-							<Route path="/users/satellites" element={<SatellitePage />} />
-							<Route path="/users/pastoral/cg" element={<CellGroupPage />} />
-							<Route
-								path="/users/ministry"
-								element={<UserManagementMinistry />}
-							/>
-							<Route
-								path="/users/pastoral"
-								element={<UserManagementPastoral />}
-							/>
-							<Route
-								path="/users/pastoral/roles"
-								element={<PastoralRolesPage />}
-							/>
-							<Route path="/events/camp" element={<CampPage />} />
-							<Route path="/events/conference" element={<ConferencePage />} />
-							<Route path="/events/evangelism" element={<EvangelismPage />} />
-							<Route
-								path="/events/camp/leader_retreat"
-								element={<LeaderRetreat />}
-							/>
+								<Route
+									path="/users/dashboard"
+									element={<UserManagementDashboard />}
+								/>
+								<Route path="/users/satellites" element={<SatellitePage />} />
+								<Route path="/users/pastoral/cg" element={<CellGroupPage />} />
+								<Route
+									path="/users/ministry"
+									element={<UserManagementMinistry />}
+								/>
+								<Route
+									path="/users/pastoral"
+									element={<UserManagementPastoral />}
+								/>
+								<Route
+									path="/users/pastoral/roles"
+									element={<PastoralRolesPage />}
+								/>
+								<Route path="/events/camp" element={<CampPage />} />
+								<Route path="/events/conference" element={<ConferencePage />} />
+								<Route path="/events/evangelism" element={<EvangelismPage />} />
+								<Route
+									path="/events/camp/leader_retreat"
+									element={<LeaderRetreat />}
+								/>
 
-							<Route
-								path="/education/dashboard"
-								element={<EducationDashboard />}
-							/>
-							<Route
-								path="/education/students"
-								element={<EducationStudents />}
-							/>
+								<Route
+									path="/education/dashboard"
+									element={<EducationDashboard />}
+								/>
+								<Route
+									path="/education/students"
+									element={<EducationStudents />}
+								/>
 
-							<Route
-								path="/ushering/dashboard"
-								element={<UsheringDashboard />}
-							/>
-							<Route path="/ushering/seats" element={<SeatsPage />} />
+								<Route
+									path="/ushering/dashboard"
+									element={<UsheringDashboard />}
+								/>
+								<Route path="/ushering/seats" element={<SeatsPage />} />
 
-							<Route path="/group/dashboard" element={<MyGroupDashboard />} />
-							<Route path="/group/members" element={<MyGroupMembers />} />
-							<Route path="/group/attendance" element={<MyGroupAttendance />} />
-							<Route path="/group/pastoring" element={<MyGroupPastoring />} />
+								<Route path="/group/dashboard" element={<MyGroupDashboard />} />
+								<Route path="/group/members" element={<MyGroupMembers />} />
+								<Route
+									path="/group/attendance"
+									element={<MyGroupAttendance />}
+								/>
+								<Route path="/group/pastoring" element={<MyGroupPastoring />} />
 
-							<Route path="/services" element={<ServicesPage />} />
-							<Route path="/services/room_booking" element={<RoomBooking />} />
-						</Route>
-						<Route path="/registration" element={<Registration />} />
-						<Route path="/profile" element={<Profile />} />
-						{/* <Route path="/testing" element={<Testing />} /> */}
-						<Route path="*" element={<Login />} />
-					</Routes>
-				</Router>
-			</FirebaseAppProvider>
-		</Auth0Provider>
+								<Route path="/services" element={<ServicesPage />} />
+								<Route
+									path="/services/room_booking"
+									element={<RoomBooking />}
+								/>
+							</Route>
+							<Route path="/registration" element={<Registration />} />
+							<Route path="/profile" element={<Profile />} />
+							{/* <Route path="/testing" element={<Testing />} /> */}
+							<Route path="*" element={<Login />} />
+						</Routes>
+					</Router>
+				</FirebaseAppProvider>
+			</Auth0Provider>
+		</OpenApiProvider>
 	);
 }
 
