@@ -42,17 +42,17 @@ import { OpenApiProvider } from "./lib/openapi/context";
 
 function App() {
 	return (
-		<OpenApiProvider>
-			<Auth0Provider
-				domain={import.meta.env["VITE_AUTH0_DOMAIN_ID"]}
-				clientId={import.meta.env["VITE_AUTH0_CLIENT_ID"]}
-				authorizationParams={{
-					audience: import.meta.env["VITE_IDENTITY_API_URL"],
-					scope: import.meta.env["VITE_IDENTITY_API_SCOPE"],
-					redirect_uri: window.location.origin,
-				}}
-				cacheLocation="localstorage"
-			>
+		<Auth0Provider
+			domain={import.meta.env["VITE_AUTH0_DOMAIN_ID"]}
+			clientId={import.meta.env["VITE_AUTH0_CLIENT_ID"]}
+			authorizationParams={{
+				audience: import.meta.env["VITE_IDENTITY_API_URL"],
+				scope: import.meta.env["VITE_IDENTITY_API_SCOPE"],
+				redirect_uri: window.location.origin,
+			}}
+			cacheLocation="localstorage"
+		>
+			<OpenApiProvider>
 				<FirebaseAppProvider firebaseConfig={firebaseConfig}>
 					<Router>
 						<Routes>
@@ -160,8 +160,8 @@ function App() {
 						</Routes>
 					</Router>
 				</FirebaseAppProvider>
-			</Auth0Provider>
-		</OpenApiProvider>
+			</OpenApiProvider>
+		</Auth0Provider>
 	);
 }
 

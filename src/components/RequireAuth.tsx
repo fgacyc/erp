@@ -19,9 +19,9 @@ export const RequireAuth: FunctionComponent<{ children: JSX.Element }> = ({
 	useEffect(() => {
 		(async () => {
 			console.log("Finding");
+			console.log("Ready", ready);
 			if (!ready) return;
 			if (isLoading) return;
-			console.log("Ready");
 			identity
 				.GET("/users/{id}", {
 					params: {
