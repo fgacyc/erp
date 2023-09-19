@@ -1,6 +1,6 @@
 import { CustomField } from "@/components/Form/Field";
 import UIConfirmModal from "@/components/UI_Modal/UI_ConfirmModal";
-import { useIdentityAPI } from "@/lib/openapi";
+import { useOpenApi } from "@/lib/openapi/context";
 import { addKeys } from "@/tools/tableTools";
 import { Button, Input, Modal, Space, Table } from "@arco-design/web-react";
 import { IconDelete, IconPlus } from "@arco-design/web-react/icon";
@@ -9,15 +9,15 @@ import { ChangeEvent, useEffect, useRef, useState } from "react";
 import * as Yup from "yup";
 
 const PastoralRolesPage = () => {
-
-	const api = useIdentityAPI();
+	const { identity, ready } = useOpenApi();
 	const [roles, setRoles] = useState<Role[]>();
 	const [modalVisible, setModalVisible] = useState(false);
 	const [loading, setLoading] = useState(true);
 
 	const getRoles = () => {
+		if (!ready) return;
 		setLoading(true);
-		api.GET("/pastoral-roles", {}).then((res) => {
+		identity.GET("/pastoral-roles", {}).then((res) => {
 			if (!res.data) return;
 			setRoles(addKeys<Role>(res.data));
 			setLoading(false);
@@ -27,7 +27,7 @@ const PastoralRolesPage = () => {
 	useEffect(() => {
 		getRoles();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [ready]);
 
 	const formRef = useRef<FormikProps<Omit<Role, "id">>>(null);
 
@@ -53,7 +53,8 @@ const PastoralRolesPage = () => {
 					})}
 					onSubmit={(values, action) => {
 						action.setSubmitting(true);
-						api
+						if (!ready) return;
+						identity
 							.POST("/pastoral-roles", {
 								body: {
 									description: values.description,
@@ -224,8 +225,9 @@ const PastoralRolesPage = () => {
 															/>
 														</div>
 													</div>,
-													() =>
-														api
+													() => {
+														if (!ready) return;
+														identity
 															.DELETE("/pastoral-roles/{id}", {
 																params: {
 																	path: {
@@ -235,7 +237,8 @@ const PastoralRolesPage = () => {
 															})
 															.then(() => {
 																getRoles();
-															}),
+															});
+													},
 												),
 													setLoading(false);
 											}}

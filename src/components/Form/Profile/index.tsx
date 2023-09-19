@@ -1,12 +1,4 @@
-
-import {
-	Button,
-	Cascader,
-	Modal,
-	Radio,
-	Spin,
-} from "@arco-design/web-react";
-
+import { Button, Cascader, Modal, Radio, Spin } from "@arco-design/web-react";
 
 import * as Yup from "yup";
 import { type FormikValues, Formik, type FormikProps, Form } from "formik";
@@ -18,10 +10,10 @@ import {
 	useRef,
 	useState,
 } from "react";
-import { useIdentityAPI } from "@/lib/openapi";
 import { AddressField, CustomField } from "../Field";
 import { addRolesToCGField, transformCGFromAPI } from "@/utils/transform";
 import { hasDuplicatesInData } from "@/utils/helpers";
+import { useOpenApi } from "@/lib/openapi/context";
 
 interface ProfileFormType extends FormikValues {
 	name: string;
@@ -53,7 +45,7 @@ export const ProfileForm: FunctionComponent<ProfileFormProps> = ({
 	checkDetails,
 	onClose,
 }) => {
-	const api = useIdentityAPI();
+	const { identity, ready } = useOpenApi();
 
 	const formRef = useRef<FormikProps<ProfileFormType>>(null);
 
@@ -69,11 +61,12 @@ export const ProfileForm: FunctionComponent<ProfileFormProps> = ({
 	const [cgs, setCGs] = useState<CG[]>();
 
 	const getRolesAndCGs = async () => {
+		if (!ready) return;
 		setLoading(true);
-		const res = await api.GET("/pastoral-roles", {});
+		const res = await identity.GET("/pastoral-roles", {});
 		setRoles(res.data);
 
-		const res2 = await api.GET("/connect-groups", {});
+		const res2 = await identity.GET("/connect-groups", {});
 		setCGs(res2.data?.map((d) => transformCGFromAPI(d)));
 
 		// const res3 = await api.GET("/users/{id}/pastoral-roles");
@@ -156,13 +149,14 @@ export const ProfileForm: FunctionComponent<ProfileFormProps> = ({
 					})}
 					onSubmit={async (values, actions) => {
 						actions.setSubmitting(true);
+						if (!ready) return;
 
 						if (hasDuplicatesInData(values.cg)) {
 							actions.setFieldError("cg", "Only 1 role allowed per CG.");
 							throw new Error("Only 1 role allowed per CG.");
 						} else
 							try {
-								const res = await api.PATCH("/users/{id}", {
+								const res = await identity.PATCH("/users/{id}", {
 									params: {
 										path: {
 											id: user.id,
@@ -187,7 +181,7 @@ export const ProfileForm: FunctionComponent<ProfileFormProps> = ({
 
 								values.cg.forEach((cg) => {
 									if (Array.isArray(cg)) {
-										api.POST("/connect-groups/{id}/users", {
+										identity.POST("/connect-groups/{id}/users", {
 											params: {
 												path: { id: cg[0] as string },
 											},
@@ -201,7 +195,7 @@ export const ProfileForm: FunctionComponent<ProfileFormProps> = ({
 											},
 										});
 									} else {
-										api.POST("/connect-groups/{id}/users", {
+										identity.POST("/connect-groups/{id}/users", {
 											params: {
 												path: { id: cg[0] as string },
 											},
