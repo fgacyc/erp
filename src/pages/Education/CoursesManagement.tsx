@@ -3,6 +3,8 @@ import {Button, Table,Image, TableColumnProps} from "@arco-design/web-react";
 import {IconDelete, IconEdit, IconPlus, IconSort} from "@arco-design/web-react/icon";
 import {AddCoursesModal} from "@/components/UI_Modal/UI_Education/AddCoursesModal.tsx";
 import {deleteReq, getReq} from "@/tools/requests.ts";
+import {useAddCoursesStore} from "@/components/UI_Modal/UI_Education/store/AddCoursesStore.ts";
+import UI_ConfirmModal from "@/components/UI_Modal/UI_ConfirmModal";
 
 interface ClassDB{
     key: number;
@@ -14,7 +16,7 @@ interface ClassDB{
 }
 
 
-interface CourseDB{
+export interface CourseDB{
     key: number;
     course_id: number;
     course_name: string;
@@ -79,7 +81,7 @@ const CoursesManagement = () => {
                         <Button type="secondary" className="mr-2"
                                 icon={<IconEdit
                                     onClick={() => {
-                                        // handleEdit(record);
+                                        handleEdit(record);
                                     }}
                                 />}></Button>
                         <Button type="secondary" icon={<IconDelete />}
@@ -100,8 +102,10 @@ const CoursesManagement = () => {
     const [visible, setVisible] = React.useState(false);
     const [currentVideoCoverURL, setCurrentVideoCoverURL] = React.useState("");
     const [allCourses, setAllCourses] = useState<CourseDB[]>([]);
+    const setCourseData =   useAddCoursesStore((state) => state.setCourseData);
 
     useEffect(() => {
+        updateCoursesData();
         const subscription = PubSub.subscribe("showCourseCover", (_, data) => {
             setCurrentVideoCoverURL(data.message);
             setVisible(true);
@@ -112,20 +116,41 @@ const CoursesManagement = () => {
     }, []);
 
     useEffect(() => {
+        if(visible===false){
+            updateCoursesData();
+        }
+
+    }, [visible]);
+
+    function  updateCoursesData(){
         getReq("classes-courses").then((res)=>{
             console.log(res);
             if (res.status){
                 setAllCourses(res.data);
             }
         });
-    }, []);
+    }
+
+
     function handleDelete(course_id: number){
-        deleteReq(`classes-courses?course_id=${course_id}`).then((res)=>{
-            console.log(res);
-            // if(res.status){
-            //     setAllCourses(res.data);
-            // }
-        });
+        function deleteCourse(){
+            deleteReq(`classes-courses?course_id=${course_id}`).then((res)=>{
+                if(res.status){
+                    updateCoursesData();
+                }
+            });
+        }
+
+        UI_ConfirmModal(
+            "Delete Course",
+            "Are you sure to delete this course?",
+            deleteCourse
+        );
+    }
+
+    function  handleEdit(record: CourseDB){
+        setCourseData(record);
+        setShowModal(true);
     }
 
     return (

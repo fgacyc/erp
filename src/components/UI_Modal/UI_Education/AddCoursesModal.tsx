@@ -5,58 +5,80 @@ const TextArea = Input.TextArea;
 import "./style.css";
 
 
-import {FunctionComponent, useRef} from "react";
+import {FunctionComponent, useEffect, useRef} from "react";
 import {IconDelete} from "@arco-design/web-react/icon";
-import { postReq} from "@/tools/requests.ts";
+import {postReq, putReq} from "@/tools/requests.ts";
+import {useAddCoursesStore} from "@/components/UI_Modal/UI_Education/store/AddCoursesStore.ts";
 
 interface AddCoursesModalProps {
     visible: boolean;
     setVisible: (visible: boolean) => void;
 }
-
-// interface Class{
-//     class_name: string;
-//     class_url: string;
-//     class_description: string;
-// }
-//
-// interface ClassDB{
-//     key: number;
-//     class_id: number;
-//     class_name: string;
-//     class_url: string;
-//     class_description: string;
-// }
-//
-// interface Course{
-//     course_name: string;
-//     course_description: string;
-//     classes: Class[];
-// }
-//
-// interface CourseDB{
-//     key: number;
-//     course_id: number;
-//     course_name: string;
-//     course_description: string;
-//     classes: Class[];
-// }
-
 export const AddCoursesModal: FunctionComponent<AddCoursesModalProps> = ({visible, setVisible}) => {
     const formRef = useRef<FormInstance | null>(null);
     const [form] = Form.useForm();
+    const [courseData, isUpdate] = useAddCoursesStore((state) => [state.courseData, state.isUpdate]);
+    const reset =   useAddCoursesStore((state) => state.resetCourseData);
 
+    useEffect(() => {
+        if (visible && isUpdate) {
+            console.log(courseData);
+            formRef.current?.setFieldsValue(courseData);
+        }else{
+            reset();
+            formRef.current?.resetFields();
+        }
+
+    //     eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [visible]);
 
 
 
     async  function handleSubmit(){
+        // setIsHandling(true);
+        if(isUpdate){
+            await updateCourseData();
+        }else{
+            await  createCourseData();
+        }
+    }
+
+    async function createCourseData(){
+        // setTimeout(() => {
+        // }, 2000);
+        // return;
+
         try {
             const values = await form.validate();
             postReq("classes-courses",values).then((res)=>{
                 console.log(res);
                 if(res.status){
                     setVisible(false);
+                    reset();
                 }
+                return;
+            });
+        } catch (errorInfo) {
+            console.log("Failed:", errorInfo);
+            return;
+        }
+    }
+
+    async function updateCourseData(){
+        // setTimeout(() => {
+        // }, 2000);
+        // return;
+
+        try {
+            const values = await form.validate();
+            const course_id = courseData?.course_id;
+            putReq(`classes-courses?course_id=${course_id}`,values).then((res)=>{
+                console.log(res);
+                if(res.status){
+                    setVisible(false);
+                    reset();
+                }
+                return;
             });
         } catch (errorInfo) {
             console.log("Failed:", errorInfo);
@@ -86,6 +108,7 @@ export const AddCoursesModal: FunctionComponent<AddCoursesModalProps> = ({visibl
                           {
                               class_name: "",
                               class_url: "",
+                              cover_url: "",
                               class_description: "",
                           },
                       ],
@@ -97,6 +120,16 @@ export const AddCoursesModal: FunctionComponent<AddCoursesModalProps> = ({visibl
                 }]}>
                     <Input placeholder="please enter Credit's Chinese name..." className={"w-[510px]"}/>
                 </FormItem>
+                <Form.Item
+                    label={"Cover URL"}
+                    field={"cover_url"}
+                    rules={[{required: true,
+                        message: "Please enter course cover url"
+                    }]}
+                >
+                    <Input placeholder={"Class Cover URL..."}
+                           className={"w-[510px]"}/>
+                </Form.Item>
                 <FormItem label='Description' field="course_description" className={"flex-nowrap"} rules={[{
                     required: true, message: "Please enter class description"
                 }]}>
@@ -119,7 +152,7 @@ export const AddCoursesModal: FunctionComponent<AddCoursesModalProps> = ({visibl
                                                         <Form.Item
                                                             field={item.field + ".class_name"}
                                                             rules={[{required: true
-                                                            , message: "Please enter class title"
+                                                                , message: "Please enter class title"
                                                             }]}
                                                             noStyle
 
@@ -131,7 +164,7 @@ export const AddCoursesModal: FunctionComponent<AddCoursesModalProps> = ({visibl
                                                         <Form.Item
                                                             field={item.field + ".class_url"}
                                                             rules={[{required: true,
-                                                            message: "Please enter class video url"
+                                                                message: "Please enter class video url"
                                                             }]}
                                                             noStyle
                                                         >
@@ -139,14 +172,24 @@ export const AddCoursesModal: FunctionComponent<AddCoursesModalProps> = ({visibl
                                                                    className={"my-2 w-[510px]"}/>
                                                         </Form.Item>
                                                         <Form.Item
+                                                            field={item.field + ".cover_url"}
+                                                            rules={[{required: true,
+                                                                message: "Please enter class cover url"
+                                                            }]}
+                                                            noStyle
+                                                        >
+                                                            <Input placeholder={"Class Cover URL..."}
+                                                                   className={"my-2 w-[510px]"}/>
+                                                        </Form.Item>
+                                                        <Form.Item
                                                             field={item.field + ".class_description"}
                                                             rules={[{required: true,
-                                                            message: "Please enter class description"
+                                                                message: "Please enter class description"
                                                             }]}
                                                             noStyle
                                                         >
                                                             <TextArea placeholder={"Class Description..."}
-                                                                   className={"my-2 w-[510px]"}/>
+                                                                      className={"my-2 w-[510px]"}/>
                                                         </Form.Item>
 
                                                     </Space>
