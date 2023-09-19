@@ -186,7 +186,7 @@ const Frame = () => {
                                 {/*<MenuItem key="education/modules">Modules</MenuItem>*/}
                                 <MenuItem key="education/courses">Courses</MenuItem>
                                 <MenuItem key="education/quizzes">Quizzes</MenuItem>
-                                <MenuItem key="education/reviews">Reviews</MenuItem>
+                                <MenuItem key="education/conclusion">Reviews</MenuItem>
                             </SubMenu>
 						</SubMenu>
 						<SubMenu

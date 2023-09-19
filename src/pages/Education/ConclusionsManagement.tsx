@@ -2,7 +2,7 @@ import React, {useEffect} from "react";
 import {Button, Image, Table, TableColumnProps} from "@arco-design/web-react";
 import {IconPlus} from "@arco-design/web-react/icon";
 import {AddReviewsModalModal} from "@/components/UI_Modal/UI_Education/AddReviewsModal.tsx";
-const ReviewsManagement = () => {
+const ConclusionsManagement = () => {
 
     const columns: TableColumnProps[] = [
         {
@@ -99,4 +99,4 @@ const ReviewsManagement = () => {
     );
 };
 
-export default ReviewsManagement;
+export default ConclusionsManagement;

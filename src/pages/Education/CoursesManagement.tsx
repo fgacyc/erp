@@ -115,14 +115,9 @@ const CoursesManagement = () => {
         };
     }, []);
 
-    useEffect(() => {
-        if(visible===false){
-            updateCoursesData();
-        }
-
-    }, [visible]);
 
     function  updateCoursesData(){
+        console.log("updateCoursesData");
         getReq("classes-courses").then((res)=>{
             console.log(res);
             if (res.status){
@@ -170,7 +165,10 @@ const CoursesManagement = () => {
                        }
                     //loading={loadingVisible}
                 />
-                <AddCoursesModal visible={showModal} setVisible={setShowModal} />
+                <AddCoursesModal visible={showModal}
+                                 setVisible={setShowModal}
+                                    updateCoursesData={updateCoursesData}
+                />
             </div>
             <Image.Preview
                 src={currentVideoCoverURL}

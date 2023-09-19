@@ -13,8 +13,9 @@ import {useAddCoursesStore} from "@/components/UI_Modal/UI_Education/store/AddCo
 interface AddCoursesModalProps {
     visible: boolean;
     setVisible: (visible: boolean) => void;
+    updateCoursesData?: () => void;
 }
-export const AddCoursesModal: FunctionComponent<AddCoursesModalProps> = ({visible, setVisible}) => {
+export const AddCoursesModal: FunctionComponent<AddCoursesModalProps> = ({visible, setVisible,updateCoursesData}) => {
     const formRef = useRef<FormInstance | null>(null);
     const [form] = Form.useForm();
     const [courseData, isUpdate] = useAddCoursesStore((state) => [state.courseData, state.isUpdate]);
@@ -22,13 +23,11 @@ export const AddCoursesModal: FunctionComponent<AddCoursesModalProps> = ({visibl
 
     useEffect(() => {
         if (visible && isUpdate) {
-            console.log(courseData);
             formRef.current?.setFieldsValue(courseData);
         }else{
             reset();
             formRef.current?.resetFields();
         }
-
     //     eslint-disable-next-line react-hooks/exhaustive-deps
     }, [visible]);
 
@@ -44,17 +43,16 @@ export const AddCoursesModal: FunctionComponent<AddCoursesModalProps> = ({visibl
     }
 
     async function createCourseData(){
-        // setTimeout(() => {
-        // }, 2000);
-        // return;
-
         try {
             const values = await form.validate();
+            // console.log("create",values);
+            // return;
             postReq("classes-courses",values).then((res)=>{
                 console.log(res);
                 if(res.status){
-                    setVisible(false);
+                    updateCoursesData?.();
                     reset();
+                    setVisible(false);
                 }
                 return;
             });
@@ -65,18 +63,18 @@ export const AddCoursesModal: FunctionComponent<AddCoursesModalProps> = ({visibl
     }
 
     async function updateCourseData(){
-        // setTimeout(() => {
-        // }, 2000);
-        // return;
-
         try {
             const values = await form.validate();
+            // console.log("update",values);
+            // return;
             const course_id = courseData?.course_id;
             putReq(`classes-courses?course_id=${course_id}`,values).then((res)=>{
                 console.log(res);
                 if(res.status){
-                    setVisible(false);
+                    updateCoursesData?.();
                     reset();
+                    setVisible(false);
+
                 }
                 return;
             });

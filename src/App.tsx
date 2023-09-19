@@ -41,7 +41,7 @@ import CellGroupPage from "./pages/UserManagement/CellGroup";
 // import ModulesManagement from "@/pages/Education/ModulesManagement.tsx";
 import CoursesManagement from "@/pages/Education/CoursesManagement.tsx";
 import QuizzesManagement from "@/pages/Education/QuizzesManagement.tsx";
-import ReviewsManagement from "@/pages/Education/ReviewsManagement.tsx";
+import ConclusionsManagement from "@/pages/Education/ConclusionsManagement.tsx";
 
 function App() {
 	return (
@@ -147,8 +147,8 @@ function App() {
                                 element={<QuizzesManagement />}
                             />
                             <Route
-                                path="/education/reviews"
-                                element={<ReviewsManagement />}
+                                path="/education/conclusion"
+                                element={<ConclusionsManagement />}
                             />
 
 
