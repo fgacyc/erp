@@ -1,67 +1,46 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {Button, Table,Image, TableColumnProps} from "@arco-design/web-react";
 import {IconPlus} from "@arco-design/web-react/icon";
 import {AddCoursesModal} from "@/components/UI_Modal/UI_Education/AddCoursesModal.tsx";
+import {getReq} from "@/tools/requests.ts";
+
+interface ClassDB{
+    key: number;
+    class_id: number;
+    class_name: string;
+    class_url: string;
+    class_description: string;
+}
+
+
+interface CourseDB{
+    key: number;
+    course_id: number;
+    course_name: string;
+    course_description: string;
+    classes: ClassDB[];
+}
 const CoursesManagement = () => {
 
     const columns: TableColumnProps[] = [
         {
-            title: "Name",
-            dataIndex: "name",
+            title: "Course Name",
+            dataIndex: "course_name",
         },
         {
-            title: "Salary",
-            dataIndex: "salary",
+            title: "Description",
+            dataIndex: "description",
         },
         {
-            title: "Address",
-            dataIndex: "address",
-        },
-        {
-            title: "Email",
-            dataIndex: "email",
-        },
+            title: "Operation",
+            dataIndex: "operation",
+        }
     ];
-    const data = [
-        {
-            key: "1",
-            name: "Jane Doe",
-            salary: 23000,
-            address: "32 Park Road, London",
-            email: "jane.doe@example.com",
-        },
-        {
-            key: "2",
-            name: "Alisa Ross",
-            salary: 25000,
-            address: "35 Park Road, London",
-            email: "alisa.ross@example.com",
-        },
-        {
-            key: "3",
-            name: "Kevin Sandra",
-            salary: 22000,
-            address: "31 Park Road, London",
-            email: "kevin.sandra@example.com",
-        },
-        {
-            key: "4",
-            name: "Ed Hellen",
-            salary: 17000,
-            address: "42 Park Road, London",
-            email: "ed.hellen@example.com",
-        },
-        {
-            key: "5",
-            name: "William Smith",
-            salary: 27000,
-            address: "62 Park Road, London",
-            email: "william.smith@example.com",
-        },
-    ];
+
     const [showModal, setShowModal] = React.useState(false);
     const [visible, setVisible] = React.useState(false);
     const [currentVideoCoverURL, setCurrentVideoCoverURL] = React.useState("");
+    const [allCourses, setAllCourses] = useState<CourseDB[]>([]);
 
     useEffect(() => {
         const subscription = PubSub.subscribe("showBillBoardVideoCover", (_, data) => {
@@ -71,6 +50,15 @@ const CoursesManagement = () => {
         return () => {
             PubSub.unsubscribe(subscription);
         };
+    }, []);
+
+    useEffect(() => {
+        getReq("classes-courses").then((res)=>{
+            //console.log(res);
+            if (res.status){
+                setAllCourses(res.data);
+            }
+        });
     }, []);
 
 
@@ -85,7 +73,7 @@ const CoursesManagement = () => {
                         >Add Courses</Button>
                     </div>
                 </div>
-                <Table columns={columns} data={data}
+                <Table columns={columns} data={allCourses}
                     //loading={loadingVisible}
                 />
                 <AddCoursesModal visible={showModal} setVisible={setShowModal} />
