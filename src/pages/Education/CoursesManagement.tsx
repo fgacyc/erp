@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from "react";
 import {Button, Table,Image, TableColumnProps} from "@arco-design/web-react";
-import {IconPlus} from "@arco-design/web-react/icon";
+import {IconDelete, IconEdit, IconPlus, IconSort} from "@arco-design/web-react/icon";
 import {AddCoursesModal} from "@/components/UI_Modal/UI_Education/AddCoursesModal.tsx";
-import {getReq} from "@/tools/requests.ts";
+import {deleteReq, getReq} from "@/tools/requests.ts";
 
 interface ClassDB{
     key: number;
@@ -10,6 +10,7 @@ interface ClassDB{
     class_name: string;
     class_url: string;
     class_description: string;
+    cover_url: string;
 }
 
 
@@ -18,14 +19,53 @@ interface CourseDB{
     course_id: number;
     course_name: string;
     course_description: string;
+    cover_url: string;
     classes: ClassDB[];
 }
+function courseExpandedRowRender(data:ClassDB[]) {
+    const columns: TableColumnProps[] = [
+        {
+            title: "Class Name",
+            dataIndex: "class_name",
+        },
+        {
+            title: "Cover",
+            render: (_, record) => {
+                return (
+                    <img src={record.cover_url} alt={record.title} className={"w-20 h-12 object-cover cursor-pointer"}
+                         onClick={() => {
+                             PubSub.publish("showCourseCover", {message: record.cover_url});
+                         }}
+                    />
+                );
+            }
+        },
+        {
+            title: "Description",
+            dataIndex: "description",
+        }];
+
+    return <Table columns={columns} data={data} pagination={false} />;
+}
+
+
 const CoursesManagement = () => {
 
     const columns: TableColumnProps[] = [
         {
             title: "Course Name",
             dataIndex: "course_name",
+        },{
+            title: "Cover",
+            render: (_, record) => {
+                return (
+                    <img src={record.cover_url} alt={record.title} className={"w-20 h-12 object-cover cursor-pointer"}
+                         onClick={() => {
+                             PubSub.publish("showCourseCover", {message: record.cover_url});
+                         }}
+                    />
+                );
+            }
         },
         {
             title: "Description",
@@ -33,9 +73,28 @@ const CoursesManagement = () => {
         },
         {
             title: "Operation",
-            dataIndex: "operation",
+            render: (_, record) => {
+                return (
+                    <div className={"flex flex-row justify-start "}>
+                        <Button type="secondary" className="mr-2"
+                                icon={<IconEdit
+                                    onClick={() => {
+                                        // handleEdit(record);
+                                    }}
+                                />}></Button>
+                        <Button type="secondary" icon={<IconDelete />}
+                                className="mr-2"
+                                onClick={() =>handleDelete(record.course_id)}
+                        ></Button>
+                        <Button type="secondary" icon={ <IconSort />}
+                                //onClick={() =>handleSort(record)}
+                        ></Button>
+                    </div>
+                );
+            },
         }
     ];
+
 
     const [showModal, setShowModal] = React.useState(false);
     const [visible, setVisible] = React.useState(false);
@@ -43,7 +102,7 @@ const CoursesManagement = () => {
     const [allCourses, setAllCourses] = useState<CourseDB[]>([]);
 
     useEffect(() => {
-        const subscription = PubSub.subscribe("showBillBoardVideoCover", (_, data) => {
+        const subscription = PubSub.subscribe("showCourseCover", (_, data) => {
             setCurrentVideoCoverURL(data.message);
             setVisible(true);
         });
@@ -54,13 +113,20 @@ const CoursesManagement = () => {
 
     useEffect(() => {
         getReq("classes-courses").then((res)=>{
-            //console.log(res);
+            console.log(res);
             if (res.status){
                 setAllCourses(res.data);
             }
         });
     }, []);
-
+    function handleDelete(course_id: number){
+        deleteReq(`classes-courses?course_id=${course_id}`).then((res)=>{
+            console.log(res);
+            // if(res.status){
+            //     setAllCourses(res.data);
+            // }
+        });
+    }
 
     return (
         <>
@@ -74,6 +140,9 @@ const CoursesManagement = () => {
                     </div>
                 </div>
                 <Table columns={columns} data={allCourses}
+                       expandedRowRender={
+                           (record)=>courseExpandedRowRender(record.classes)
+                       }
                     //loading={loadingVisible}
                 />
                 <AddCoursesModal visible={showModal} setVisible={setShowModal} />
