@@ -1,0 +1,6 @@
+.modal-form-style-fix .arco-form-label-item label{
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: flex-end !important;
+    align-items: center !important;
+}
