@@ -21,9 +21,11 @@ const UserManagementPastoral = () => {
 
 	useEffect(() => {
 		if (!ready) return;
+
 		identity
 			.GET("/users", {})
 			.then((res) => {
+				console.log(res.data);
 				if (!res.error) {
 					setData(
 						addKeys<

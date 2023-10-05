@@ -75,9 +75,10 @@ export const ProfileForm: FunctionComponent<ProfileFormProps> = ({
 	};
 
 	useEffect(() => {
+		if (!ready) return;
 		getRolesAndCGs();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [ready]);
 
 	return (
 		<Modal

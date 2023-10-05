@@ -24,13 +24,18 @@ const context = createContext<Context>({
 	ready: false,
 });
 
+type Auth0SilentAuthError = {
+	error: string;
+	error_description: string;
+};
+
 export const OpenApiProvider: React.FC<{ children: React.ReactNode }> = ({
 	// eslint-disable-next-line react/prop-types
 	children,
 }) => {
 	const [identity, setIdentity] = useState<IdentityClient | null>(null);
 	const [event, setEvent] = useState<EventClient | null>(null);
-	const { getAccessTokenSilently } = useAuth0();
+	const { getAccessTokenSilently, loginWithRedirect } = useAuth0();
 	const [ready, setReady] = useState(false);
 
 	useEffect(() => {
@@ -59,10 +64,18 @@ export const OpenApiProvider: React.FC<{ children: React.ReactNode }> = ({
 				console.log("Ready!");
 			} catch (e) {
 				// Handle errors such as `login_required` and `consent_required` by re-prompting for a login
-				console.error(`Failed to acquire access token for ${audience}: ${e}`);
+				const error = e as Auth0SilentAuthError;
+				console.error(
+					`Failed to acquire access token for ${audience}: ${error.error}`,
+				);
+
+				if (error.error === "login_required") {
+					localStorage.clear();
+					loginWithRedirect();
+				}
 			}
 		})();
-	}, [getAccessTokenSilently]);
+	}, [getAccessTokenSilently, loginWithRedirect]);
 
 	return (
 		//@ts-ignore
