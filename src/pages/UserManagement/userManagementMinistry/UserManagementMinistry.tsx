@@ -5,6 +5,7 @@ import {
 	Table,
 	TableColumnProps,
 } from "@arco-design/web-react";
+import UIConfirmModal from "@/components/UI_Modal/UI_ConfirmModal";
 import { IconDelete, IconPlus, IconSearch } from "@arco-design/web-react/icon";
 import { useEffect, useRef, useState } from "react";
 import { addKeys } from "@/tools/tableTools";
@@ -59,6 +60,7 @@ const UserManagementMinistry = () => {
 										email: user.email,
 										role: ministryData.role.name,
 										ministry: ministryData.ministry.name,
+										ministry_id: ministryData.ministry.id
 									};
 
 									ministryAccounts.push(ministryAccount);
@@ -243,7 +245,71 @@ const UserManagementMinistry = () => {
 						<Button
 							type="secondary"
 							icon={<IconDelete />}
-							onClick={() => console.log(record)}
+							onClick={async () => {
+								setLoading(true);
+								UIConfirmModal(
+									"Confirm Deletion?",
+									<div className="flex flex-col gap-5">
+										<div className="flex flex-row items-center justify-between gap-3">
+											<label
+												htmlFor="name"
+												className="text-sm capitalize"
+											>
+												Name
+											</label>
+											<Input
+												className="arco-input w-[250px]"
+												value={record.name}
+												readOnly
+											/>
+										</div>
+										<div className="flex flex-row items-center justify-between gap-3">
+											<label
+												htmlFor="ministry"
+												className="text-sm capitalize"
+											>
+												Ministry
+											</label>
+											<Input
+												className="arco-input w-[250px]"
+												value={record.ministry}
+												readOnly
+											/>
+										</div>
+										<div className="flex flex-row items-center justify-between gap-3">
+											<label
+												htmlFor="role"
+												className="text-sm capitalize"
+											>
+												Role
+											</label>
+											<Input
+												className="arco-input w-[250px]"
+												value={String(record.role)}
+												readOnly
+											/>
+										</div>
+									</div>,
+									() => {
+										if (!ready) return;
+										identity
+											.DELETE("/ministries/{id}/users", {
+												params: {
+													path: {
+														id: record.ministry_id,
+													},
+												},
+												body: {
+													users: [`${record._id}`]
+												}
+											})
+											.then(() => {
+												getUsersAndMinistries();
+											});
+									},
+								);
+								setLoading(false);
+							}}
 						></Button>
 					}
 				</Space>
