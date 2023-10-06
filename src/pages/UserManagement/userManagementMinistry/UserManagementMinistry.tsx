@@ -7,20 +7,13 @@ import {
 } from "@arco-design/web-react";
 import { IconDelete, IconPlus, IconSearch } from "@arco-design/web-react/icon";
 import { useEffect, useRef, useState } from "react";
-import { getReq } from "@/tools/requests";
-import { changeNameKeyAndID } from "@/pages/Events/Camp/LeaderRetreat/data";
+import { addKeys } from "@/tools/tableTools";
+import { useOpenApi } from "@/lib/openapi/context";
 import { RefInputType } from "@arco-design/web-react/es/Input/interface";
-
-const addKeys = (
-	array: MinistryAccount[],
-): (MinistryAccount & { key: number })[] => {
-	return array.map((item, index) => ({
-		...item,
-		key: index,
-	}));
-};
+import { AssociateUsersWithMinistryForm } from "@/components/Form/UserMinistry/AssociateUsersWithMinistryForm";
 
 const UserManagementMinistry = () => {
+	const [modalVisible, setModalVisible] = useState(false);
 	const [data, setData] = useState<(MinistryAccount & { key: number })[]>([]);
 	const inputRef = useRef<RefInputType>(null);
 	// const [type, setType] = useState<'checkbox' | 'radio'>('checkbox');
@@ -28,18 +21,76 @@ const UserManagementMinistry = () => {
 	const [selectedRowKeys, setSelectedRowKeys] = useState<(string | number)[]>(
 		[],
 	);
+	const [loading, setLoading] = useState(true);
+	const { identity, ready } = useOpenApi();
+
+	// Function to get ministries for a user
+	const getUserMinistries = async (userId: string) => {
+		return identity.GET("/users/{id}/ministries", {
+			params: { path: { id: userId } },
+		});
+	};
+
+	// Function to get ministries for all users
+	const getUsersAndMinistries = async () => {
+		if (!ready) return;
+
+		try {
+			const usersResponse = await identity.GET("/users", {});
+
+			if (!usersResponse.error) {
+				const users = usersResponse.data; // Directly access users data
+
+				if (users) {
+					const ministryAccountsArray = [];
+
+					for (const user of users) {
+						try {
+							const ministriesRes = await getUserMinistries(user.id);
+							const ministryAccounts = [];
+
+							if (ministriesRes.data) {
+								for (const ministryData of ministriesRes.data) {
+									const ministryAccount = {
+										name: user.name,
+										_id: user.id,
+										CYC_ID: user.no,
+										username: user.username,
+										email: user.email,
+										role: ministryData.role.name,
+										ministry: ministryData.ministry.name,
+									};
+
+									ministryAccounts.push(ministryAccount);
+								}
+							}
+
+							ministryAccountsArray.push(...ministryAccounts);
+						} catch (ministriesError) {
+							console.error(
+								`Error fetching ministries for user ${user.id}:`,
+								ministriesError,
+							);
+							throw ministriesError;
+						}
+					}
+
+					// Now you have an array of MinistryAccount objects with role and ministry properties set
+					console.log(ministryAccountsArray);
+					setData(addKeys(ministryAccountsArray));
+				}
+			}
+		} catch (error) {
+			console.error("Error fetching users:", error);
+		} finally {
+			setLoading(false);
+		}
+	};
 
 	useEffect(() => {
-		getReq("/ministries").then(
-			(res: { status: boolean; data: MinistryAccount[] }) => {
-				if (res.status) {
-					const data = changeNameKeyAndID(res.data);
-					setData(addKeys(data));
-					//console.log(data)
-				}
-			},
-		);
-	}, []);
+		getUsersAndMinistries();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [modalVisible, ready]); // Include 'ready' in the dependency array
 
 	const columns: TableColumnProps[] = [
 		{
@@ -202,11 +253,24 @@ const UserManagementMinistry = () => {
 
 	return (
 		<>
+			<AssociateUsersWithMinistryForm
+				visible={modalVisible}
+				setVisible={setModalVisible}
+				title="Add New"
+				onClose={() => {}}
+			/>
 			<div className="app-component full-screen-app-component">
-				<Button type="primary" icon={<IconPlus />} style={{ margin: "10px 0" }}>
-					Register new
+				<Button
+					type="primary"
+					icon={<IconPlus />}
+					onClick={() => setModalVisible(true)}
+					className="mt-5 mx-5"
+				>
+					Add new
 				</Button>
 				<Table
+					loading={loading}
+					className="m-3"
 					columns={columns}
 					data={data}
 					renderPagination={(paginationNode) => (
