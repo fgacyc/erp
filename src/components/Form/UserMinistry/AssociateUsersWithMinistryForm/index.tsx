@@ -43,6 +43,7 @@ export const AssociateUsersWithMinistryForm: FunctionComponent<
 	AssociateUsersWithMinistryFormProps
 > = ({ visible, setVisible, title, onClose }) => {
 	const formRef = useRef<FormikProps<AssociateUsersWithMinistryFormType>>(null);
+	const [errorMessage, setErrorMessage] = useState("");
 	const { ready, identity } = useOpenApi();
 	const [ministries, setMinistries] =
 		useState<components["schemas"]["Ministry"][]>();
@@ -96,8 +97,9 @@ export const AssociateUsersWithMinistryForm: FunctionComponent<
 			action.setSubmitting(false);
 
 			if (res.error) {
-				throw new Error(res.error.message);
+				setErrorMessage(res.error.message); // Set the error message in state
 			} else {
+				setErrorMessage(""); // Clear the error message
 				setVisible(false);
 				action.resetForm();
 			}
@@ -141,6 +143,7 @@ export const AssociateUsersWithMinistryForm: FunctionComponent<
 			>
 				{(formikProps) => (
 					<Form className="px-5 mx-auto gap-5 flex flex-col">
+						{errorMessage && <div className="text-red-500">{errorMessage}</div>}
 						<div className="flex flex-row items-center justify-between gap-3">
 							<label htmlFor={"ministry_id"} className="text-sm capitalize">
 								Ministry
