@@ -52,6 +52,7 @@ export const AssociateUsersWithMinistryForm: FunctionComponent<
 		useState<components["schemas"]["MinistryRole"][]>();
 
 	const getMinistriesAndRoles = async () => {
+		if (!ready) return;
 		try {
 			const res = await identity.GET("/users", {});
 			if (res?.data) {
@@ -81,10 +82,10 @@ export const AssociateUsersWithMinistryForm: FunctionComponent<
 		values: AssociateUsersWithMinistryFormType,
 		action: FormikHelpers<AssociateUsersWithMinistryFormType>,
 	) => {
+		action.setSubmitting(true);
 		if (!ready) return;
 		try {
 			console.log(values);
-			action.setSubmitting(true);
 			const res = await identity.POST("/ministries/{id}/users", {
 				params: {
 					path: { id: values.ministry_id },
@@ -111,9 +112,10 @@ export const AssociateUsersWithMinistryForm: FunctionComponent<
 	};
 
 	useEffect(() => {
+		if (!ready) return;
 		getMinistriesAndRoles();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [ready]);
 
 	return (
 		<Modal
