@@ -1,4 +1,11 @@
-import { Button, Cascader, Modal, Radio, Spin } from "@arco-design/web-react";
+import {
+	Button,
+	Cascader,
+	Message,
+	Modal,
+	Radio,
+	Spin,
+} from "@arco-design/web-react";
 
 import * as Yup from "yup";
 import { type FormikValues, Formik, type FormikProps, Form } from "formik";
@@ -59,10 +66,22 @@ export const ProfileForm: FunctionComponent<ProfileFormProps> = ({
 	const [loading, setLoading] = useState(false);
 	const [roles, setRoles] = useState<Role[]>();
 	const [cgs, setCGs] = useState<CG[]>();
+	const [defaultCG, setDefaultCG] = useState<(string | string[])[]>([]);
+
+	const getDefaultCG = async () => {
+		setLoading(true);
+		const res = await identity.GET("/users/{id}/connect-groups", {
+			params: {
+				path: { id: user.id },
+			},
+		});
+
+		const resData = res.data?.map((dcg) => [dcg.cg.id, dcg.role.id]);
+
+		setDefaultCG(resData!);
+	};
 
 	const getRolesAndCGs = async () => {
-		if (!ready) return;
-		setLoading(true);
 		const res = await identity.GET("/pastoral-roles", {});
 		setRoles(res.data);
 
@@ -76,9 +95,17 @@ export const ProfileForm: FunctionComponent<ProfileFormProps> = ({
 
 	useEffect(() => {
 		if (!ready) return;
+
 		getRolesAndCGs();
+		getDefaultCG();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [ready]);
+
+	useEffect(() => {
+		if (!hasDuplicatesInData(defaultCG)) return;
+
+		Message.error("Only 1 Role per CG allowed.");
+	}, [defaultCG]);
 
 	return (
 		<Modal
@@ -152,8 +179,9 @@ export const ProfileForm: FunctionComponent<ProfileFormProps> = ({
 						actions.setSubmitting(true);
 						if (!ready) return;
 
-						if (hasDuplicatesInData(values.cg)) {
+						if (hasDuplicatesInData(defaultCG)) {
 							actions.setFieldError("cg", "Only 1 role allowed per CG.");
+							actions.setSubmitting(false);
 							throw new Error("Only 1 role allowed per CG.");
 						} else
 							try {
@@ -180,7 +208,7 @@ export const ProfileForm: FunctionComponent<ProfileFormProps> = ({
 									},
 								});
 
-								values.cg.forEach((cg) => {
+								defaultCG?.forEach((cg) => {
 									if (Array.isArray(cg)) {
 										identity.POST("/connect-groups/{id}/users", {
 											params: {
@@ -260,29 +288,34 @@ export const ProfileForm: FunctionComponent<ProfileFormProps> = ({
 								editable={editable}
 							/>
 							{checkDetails && (
-								<div className="flex flex-row items-center justify-between gap-3">
-									<label htmlFor={"cg"} className="text-sm capitalize">
-										CG
-									</label>
-									<Cascader
-										className="w-[350px]"
-										mode="multiple"
-										disabled={!editable}
-										placeholder="None."
-										onChange={(item) => {
-											// setValues({ ...values, role: item });
-											console.log(item);
-										}}
-										changeOnSelect
-										options={addRolesToCGField(cgs, roles)}
-									>
-										{/* {cgs?.map((cg) => (
+								<>
+									<div className="flex flex-row items-center justify-between gap-3">
+										<label htmlFor={"cg"} className="text-sm capitalize">
+											CG
+										</label>
+										<Cascader
+											className="w-[350px]"
+											mode="multiple"
+											disabled={!editable}
+											placeholder="None."
+											onChange={(item) => {
+												setDefaultCG(item);
+											}}
+											value={defaultCG}
+											changeOnSelect
+											options={addRolesToCGField(cgs, roles)}
+										>
+											{/* {cgs?.map((cg) => (
 											<Select.Option value={cg.id} key={cg.id}>
 												{cg.name}
 											</Select.Option>
 										))} */}
-									</Cascader>
-								</div>
+										</Cascader>
+									</div>
+									{errors.cg && (
+										<p className="text-red-600 text-right">{errors.cg}</p>
+									)}
+								</>
 							)}
 
 							{/* {checkDetails && (

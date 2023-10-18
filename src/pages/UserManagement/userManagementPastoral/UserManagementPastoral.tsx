@@ -25,7 +25,6 @@ const UserManagementPastoral = () => {
 		identity
 			.GET("/users", {})
 			.then((res) => {
-				console.log(res.data);
 				if (!res.error) {
 					setData(
 						addKeys<

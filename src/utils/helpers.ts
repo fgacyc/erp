@@ -17,3 +17,17 @@ export const hasDuplicatesInData = (data: (string | string[])[]): boolean => {
 		.filter(Boolean);
 	return hasDuplicates(elementsToCheck);
 };
+
+// export const hasDuplicates(array) {
+// 	const seen = new Set();
+
+// 	for (const subArray of array) {
+// 	  const element = subArray[0];
+// 	  if (seen.has(element)) {
+// 		return true; // Found a duplicate
+// 	  }
+// 	  seen.add(element);
+// 	}
+
+// 	return false; // No duplicates found
+//   }
