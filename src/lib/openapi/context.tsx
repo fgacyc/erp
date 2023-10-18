@@ -41,7 +41,6 @@ export const OpenApiProvider: React.FC<{ children: React.ReactNode }> = ({
 	useEffect(() => {
 		const audience = import.meta.env["VITE_IDENTITY_API_URL"];
 		const scope = import.meta.env["VITE_IDENTITY_API_SCOPE"];
-		console.log("init");
 		(async () => {
 			try {
 				const token = await getAccessTokenSilently({
@@ -61,7 +60,6 @@ export const OpenApiProvider: React.FC<{ children: React.ReactNode }> = ({
 					}),
 				);
 				setReady(true);
-				console.log("Ready!");
 			} catch (e) {
 				// Handle errors such as `login_required` and `consent_required` by re-prompting for a login
 				const error = e as Auth0SilentAuthError;
