@@ -198,16 +198,16 @@ declare global {
 	type MinistryAccount = {
 		name?: string;
 		_id: string;
-		CYC_ID: number;
+		CYC_ID?: number;
 		full_name?: string;
-		username: string;
-		email: string;
-		password: string;
+		username?: string | undefined;
+		email?: string;
+		password?: string;
 		role: string;
 		ministry: MinistryTeam[] | string;
-		position: Position;
-		recent_login: EpochTimeStamp;
-		education:
+		position?: Position;
+		recent_login?: EpochTimeStamp;
+		education?:
 			| {
 					msj1: {
 						created?: EpochTimeStamp;
@@ -233,7 +233,7 @@ declare global {
 			email: string;
 			pastoral_team: string[];
 		};
-		leader_retreat: {
+		leader_retreat?: {
 			year: string;
 			status: string;
 			paid: {
