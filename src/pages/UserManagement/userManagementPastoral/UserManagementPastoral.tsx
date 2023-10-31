@@ -21,6 +21,7 @@ const UserManagementPastoral = () => {
 
 	useEffect(() => {
 		if (!ready) return;
+
 		identity
 			.GET("/users", {})
 			.then((res) => {

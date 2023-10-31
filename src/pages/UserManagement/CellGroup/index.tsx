@@ -3,8 +3,15 @@ import { useOpenApi } from "@/lib/openapi/context";
 import { addKeys } from "@/tools/tableTools";
 import { cgVariants } from "@/utils/constants";
 import { transformCGFromAPI } from "@/utils/transform";
-import { Button, Input, Space, Table } from "@arco-design/web-react";
-import { IconPlus, IconSearch } from "@arco-design/web-react/icon";
+import {
+	Button,
+	Input,
+	Message,
+	Modal,
+	Space,
+	Table,
+} from "@arco-design/web-react";
+import { IconDelete, IconPlus, IconSearch } from "@arco-design/web-react/icon";
 import { FunctionComponent, useEffect, useState } from "react";
 
 const CellGroupPage = () => {
@@ -21,7 +28,6 @@ const CellGroupPage = () => {
 			if (!res.data) return;
 			setCGs(addKeys<CG>(res.data.map((d) => transformCGFromAPI(d))));
 			setLoading(false);
-			console.log(res.data);
 		});
 	};
 
@@ -96,29 +102,106 @@ const CellGroupPage = () => {
 							title: "Details",
 							render: (_, record) => (
 								<Space>
-									{
-										<Button
-											type="secondary"
-											icon={<IconSearch />}
-											onClick={async () => {
-												if (!ready) return;
-												setLoading(true);
-												identity
-													.GET("/connect-groups/{id}", {
-														params: {
-															path: {
-																id: record.id,
-															},
+									<Button
+										type="secondary"
+										icon={<IconSearch />}
+										onClick={async () => {
+											if (!ready) return;
+											setLoading(true);
+											identity
+												.GET("/connect-groups/{id}", {
+													params: {
+														path: {
+															id: record.id,
 														},
-													})
-													.then((res) => {
-														if (!res.data) return;
-														setSelectedCG(transformCGFromAPI(res.data));
-														setModalVisible(true);
-													});
-											}}
-										/>
-									}
+													},
+												})
+												.then((res) => {
+													if (!res.data) return;
+													setSelectedCG(transformCGFromAPI(res.data));
+													setModalVisible(true);
+												});
+										}}
+									/>
+									<Button
+										type="secondary"
+										className="bg-red-100"
+										icon={<IconDelete className="text-red-600" />}
+										onClick={async () => {
+											Modal.confirm({
+												title: "Confirm Deletion",
+												content: (
+													<div className="flex flex-col justify-center gap-2 p-3">
+														<div className="self-center">
+															Are you sure you want to delete?
+														</div>
+														<div className="flex flex-row items-center justify-between gap-3">
+															<label className="text-sm capitalize">Name</label>
+															<input
+																value={record.name}
+																className="arco-input w-[250px]"
+																disabled
+															/>
+														</div>
+														<div className="flex flex-row items-center justify-between gap-3">
+															<label className="text-sm capitalize">
+																Variant
+															</label>
+															<input
+																value={
+																	cgVariants.find(
+																		(a) => a.value === record.variant?.trim(),
+																	)?.label
+																}
+																className="arco-input w-[250px]"
+																disabled
+															/>
+														</div>
+
+														<div className="self-center mt-3 text-red-500">
+															You can&apos;t undo this action.
+														</div>
+													</div>
+												),
+												okButtonProps: {
+													status: "danger",
+												},
+												okText: "Delete",
+												closable: false,
+												cancelText: "Cancel",
+												onOk: () => {
+													if (!ready) return;
+													identity
+														.DELETE("/connect-groups/{id}", {
+															params: {
+																path: {
+																	id: record.id,
+																},
+															},
+														})
+														.then((res) => {
+															if (res.data) Message.success("Deleted!");
+															if (res.error)
+																Message.error("Unknown error occured.");
+														})
+														.catch((e) => Message.error(e));
+												},
+											});
+											// if (!ready) return;
+											// identity
+											// 	.GET("/users/{id}", {
+											// 		params: {
+											// 			path: {
+											// 				id: record.id,
+											// 			},
+											// 		},
+											// 	})
+											// 	.then((res) => {
+											// 		if (!res.data) return;
+											// 		setSelectedUser(transformUserFromAPI(res.data));
+											// 	});
+										}}
+									/>
 								</Space>
 							),
 						},
